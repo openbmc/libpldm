@@ -1160,6 +1160,36 @@ int decode_pldm_base_negotiate_transfer_params_resp(
 	return pldm_msgbuf_complete_consumed(buf);
 }
 
+LIBPLDM_ABI_TESTING
+int decode_pldm_base_get_tid_resp(const struct pldm_msg *msg,
+				  size_t payload_length,
+				  struct pldm_base_get_tid_resp *resp)
+{
+	PLDM_MSGBUF_RO_DEFINE_P(buf);
+	int rc;
+
+	if (!msg || !resp) {
+		return -EINVAL;
+	}
+
+	rc = pldm_msg_has_error(msg, payload_length);
+	if (rc) {
+		resp->completion_code = rc;
+		return 0;
+	}
+
+	rc = pldm_msgbuf_init_errno(buf, PLDM_BASE_GET_TID_RESP_BYTES,
+				    msg->payload, payload_length);
+	if (rc) {
+		return rc;
+	}
+
+	pldm_msgbuf_extract(buf, resp->completion_code);
+	pldm_msgbuf_extract(buf, resp->tid);
+
+	return pldm_msgbuf_complete_consumed(buf);
+}
+
 LIBPLDM_ABI_STABLE
 int encode_pldm_base_get_pldm_types_resp(
 	uint8_t instance_id, const struct pldm_base_get_pldm_types_resp *resp,

@@ -19,6 +19,8 @@ Change categories:
 
 ### Added
 
+- dsp: base: Introduce `decode_pldm_base_get_tid_resp()`
+
 ### Changed
 
 ### Deprecated

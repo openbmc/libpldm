@@ -521,6 +521,60 @@ TEST(GetTID, testDecodeResponse)
     EXPECT_EQ(tid, 1);
 }
 
+#if HAVE_LIBPLDM_API_TESTING
+TEST(DecodePldmBaseGetTidResp, InvalidParameters)
+{
+    pldm_base_get_tid_resp resp{};
+    PLDM_MSG_DEFINE_P(msg, PLDM_BASE_GET_TID_RESP_BYTES + 1);
+    int rc;
+
+    memset(msg, 0, PLDM_MSG_SIZE(PLDM_BASE_GET_TID_RESP_BYTES + 1));
+
+    EXPECT_EQ(-EINVAL, decode_pldm_base_get_tid_resp(
+                           NULL, PLDM_BASE_GET_TID_RESP_BYTES, &resp));
+    EXPECT_EQ(-EINVAL, decode_pldm_base_get_tid_resp(
+                           msg, PLDM_BASE_GET_TID_RESP_BYTES, NULL));
+    EXPECT_EQ(-EOVERFLOW, decode_pldm_base_get_tid_resp(msg, 0, &resp));
+    EXPECT_EQ(-EOVERFLOW, decode_pldm_base_get_tid_resp(
+                              msg, PLDM_BASE_GET_TID_RESP_BYTES - 1, &resp));
+
+    rc = decode_pldm_base_get_tid_resp(msg, PLDM_BASE_GET_TID_RESP_BYTES + 1,
+                                       &resp);
+    ASSERT_EQ(-EBADMSG, rc);
+}
+#endif
+
+#if HAVE_LIBPLDM_API_TESTING
+TEST(DecodePldmBaseGetTidResp, ErrorResponse)
+{
+    pldm_base_get_tid_resp resp{};
+    PLDM_MSG_DEFINE_P(msg, 1);
+    int rc;
+
+    msg->payload[0] = PLDM_ERROR;
+    rc = decode_pldm_base_get_tid_resp(msg, 1, &resp);
+    EXPECT_EQ(0, rc);
+    ASSERT_EQ(PLDM_ERROR, resp.completion_code);
+}
+#endif
+
+#if HAVE_LIBPLDM_API_TESTING
+TEST(DecodePldmBaseGetTidResp, GoodResponse)
+{
+    PLDM_MSG_DEFINE_P(msg, PLDM_BASE_GET_TID_RESP_BYTES);
+    pldm_base_get_tid_resp resp{};
+    int rc;
+
+    msg->payload[0] = PLDM_SUCCESS;
+    msg->payload[1] = 1;
+    rc =
+        decode_pldm_base_get_tid_resp(msg, PLDM_BASE_GET_TID_RESP_BYTES, &resp);
+    ASSERT_EQ(0, rc);
+    ASSERT_EQ(PLDM_SUCCESS, resp.completion_code);
+    ASSERT_EQ(1, resp.tid);
+}
+#endif
+
 TEST(DecodeMultipartReceiveRequest, testDecodeRequestPass)
 {
     constexpr uint8_t kPldmType = PLDM_BASE;
