@@ -966,6 +966,21 @@ struct pldm_base_get_tid_resp {
 };
 #define PLDM_BASE_GET_TID_RESP_BYTES 2
 
+/** @brief Create a PLDM response message for GetTID
+ *
+ *  @param[in] instance_id - Message's instance id
+ *  @param[in] resp - The response struct to encode
+ *  @param[out] msg - The buffer to which the response struct will be encoded
+ *  @param[in,out] payload_length - The length of the buffer on input, the length
+ *                                  of the encoded message on output
+ *  @return 0 on success
+ *          -EINVAL if the input parameters are invalid
+ *          -EOVERFLOW if the input message buffer is too small
+ */
+int encode_pldm_base_get_tid_resp(uint8_t instance_id,
+				  const struct pldm_base_get_tid_resp *resp,
+				  struct pldm_msg *msg, size_t *payload_length);
+
 /** @brief Decode a GetTID response message
  *
  *  @param[in] msg - The response message structure

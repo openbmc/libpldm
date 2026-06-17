@@ -1161,6 +1161,52 @@ int decode_pldm_base_negotiate_transfer_params_resp(
 }
 
 LIBPLDM_ABI_TESTING
+int encode_pldm_base_get_tid_resp(uint8_t instance_id,
+				  const struct pldm_base_get_tid_resp *resp,
+				  struct pldm_msg *msg, size_t *payload_length)
+{
+	struct pldm_header_info header = { 0 };
+	PLDM_MSGBUF_RW_DEFINE_P(buf);
+	int rc;
+
+	if (!resp || !msg || !payload_length) {
+		return -EINVAL;
+	}
+
+	if (*payload_length < 1) {
+		return -EOVERFLOW;
+	}
+
+	header.instance = instance_id;
+	header.msg_type = PLDM_RESPONSE;
+	header.pldm_type = PLDM_BASE;
+	header.command = PLDM_GET_TID;
+
+	rc = pack_pldm_header_errno(&header, &msg->hdr);
+	if (rc) {
+		return rc;
+	}
+
+	if (resp->completion_code != PLDM_SUCCESS) {
+		msg->payload[0] = resp->completion_code;
+		*payload_length = 1;
+		return 0;
+	}
+
+	rc = pldm_msgbuf_init_errno(buf, PLDM_BASE_GET_TID_RESP_BYTES,
+				    msg->payload, *payload_length);
+	if (rc) {
+		return rc;
+	}
+
+	assert(resp->completion_code == PLDM_SUCCESS);
+	pldm_msgbuf_insert(buf, resp->completion_code);
+	pldm_msgbuf_insert(buf, resp->tid);
+
+	return pldm_msgbuf_complete_used(buf, *payload_length, payload_length);
+}
+
+LIBPLDM_ABI_TESTING
 int decode_pldm_base_get_tid_resp(const struct pldm_msg *msg,
 				  size_t payload_length,
 				  struct pldm_base_get_tid_resp *resp)
