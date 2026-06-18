@@ -28,6 +28,8 @@ Change categories:
 
 ### Changed
 
+- dsp: base: Stabilise `decode_pldm_base_get_tid_resp()`
+- dsp: base: Stabilise `encode_pldm_base_get_tid_resp()`
 - dsp: base: Stabilise `decode_pldm_platform_redfish_resource_pdr*()` functions
 - dsp: base: Stabilise `decode_pldm_platform_redfish_action_pdr*()` functions
 - libpldm: Improve application of the IWYU principle
