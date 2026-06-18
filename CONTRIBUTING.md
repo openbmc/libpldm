@@ -59,6 +59,17 @@
 
 [debian-releases]: https://www.debian.org/releases/index.en.html
 
+## Fixing Implementation Defects
+
+- [ ] A [Fixes tag][linux-kernel-fixes-tag] is present, identifying the change
+      introducing the defect.
+
+[linux-kernel-fixes-tag]:
+  https://docs.kernel.org/process/submitting-patches.html#describe-your-changes
+
+- [ ] The change fixing the bug includes test cases demonstrating that the bug
+      is fixed.
+
 ## Adding a new API
 
 ### Organising declarations and definitions
@@ -342,17 +353,6 @@ actions:
 [coccinelle]: https://coccinelle.gitlabpages.inria.fr/website/
 
 - [ ] The ABI dump has been updated accordingly.
-
-## Fixing Implementation Defects
-
-- [ ] A [Fixes tag][linux-kernel-fixes-tag] is present, identifying the change
-      introducing the defect.
-
-[linux-kernel-fixes-tag]:
-  https://docs.kernel.org/process/submitting-patches.html#describe-your-changes
-
-- [ ] The change fixing the bug includes test cases demonstrating that the bug
-      is fixed.
 
 ## Background
 
