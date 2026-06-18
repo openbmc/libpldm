@@ -50,6 +50,8 @@ Change categories:
 
 ### Removed
 
+- dsp: base: Remove `{en,de}code_pldm_base_get_tid_resp()` and associated types
+
 ### Fixed
 
 - dsp: pdr: Enforce minimum size as a precondition for pldm_pdr_add()
