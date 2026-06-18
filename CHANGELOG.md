@@ -26,6 +26,9 @@ Change categories:
 
 ### Changed
 
+- dsp: base: Stabilise `decode_pldm_base_get_tid_resp()`
+- dsp: base: Stabilise `encode_pldm_base_get_tid_resp()`
+
 ### Deprecated
 
 ### Removed

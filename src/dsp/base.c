@@ -1160,7 +1160,7 @@ int decode_pldm_base_negotiate_transfer_params_resp(
 	return pldm_msgbuf_complete_consumed(buf);
 }
 
-LIBPLDM_ABI_TESTING
+LIBPLDM_ABI_STABLE
 int encode_pldm_base_get_tid_resp(uint8_t instance_id,
 				  const struct pldm_base_get_tid_resp *resp,
 				  struct pldm_msg *msg, size_t *payload_length)
@@ -1206,7 +1206,7 @@ int encode_pldm_base_get_tid_resp(uint8_t instance_id,
 	return pldm_msgbuf_complete_used(buf, *payload_length, payload_length);
 }
 
-LIBPLDM_ABI_TESTING
+LIBPLDM_ABI_STABLE
 int decode_pldm_base_get_tid_resp(const struct pldm_msg *msg,
 				  size_t payload_length,
 				  struct pldm_base_get_tid_resp *resp)
