@@ -7,10 +7,11 @@
 extern "C" {
 #endif
 
+#include <libpldm/base.h>
+
 #include <stddef.h>
 #include <stdint.h>
 
-struct pldm_msg;
 /** @brief PLDM Commands in OEM META type
  */
 

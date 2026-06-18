@@ -5,6 +5,9 @@
 extern "C" {
 #endif
 
+#include <libpldm/base.h>
+#include <libpldm/pldm_types.h>
+
 #include <stddef.h>
 #include <stdint.h>
 
@@ -49,9 +52,6 @@ enum pldm_bios_table_types {
 	PLDM_BIOS_ATTR_TABLE,
 	PLDM_BIOS_ATTR_VAL_TABLE,
 };
-
-struct pldm_msg;
-struct variable_field;
 
 struct pldm_bios_string_table_entry {
 	uint16_t string_handle;
