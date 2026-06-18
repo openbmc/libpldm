@@ -25,6 +25,7 @@ Change categories:
 
 ### Removed
 
+- dsp: base: Remove `{en,de}code_get_tid_resp()` and associated types
 - dsp: base: Remove `decode_multipart_receive_req()`
 
 ### Fixed
