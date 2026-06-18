@@ -5,6 +5,7 @@
 extern "C" {
 #endif
 
+#include <libpldm/base.h>
 #include <libpldm/pldm_types.h>
 
 #include <stddef.h>

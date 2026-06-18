@@ -24,6 +24,8 @@ Change categories:
 
 ### Changed
 
+- libpldm: Improve application of the IWYU principle
+
 ### Deprecated
 
 ### Removed
