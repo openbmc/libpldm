@@ -150,7 +150,6 @@ typedef enum {
 /* Response lengths are inclusive of completion code */
 #define PLDM_GET_TYPES_REQ_BYTES     0
 #define PLDM_GET_TID_REQ_BYTES	     0
-#define PLDM_GET_TID_RESP_BYTES	     2
 #define PLDM_SET_TID_REQ_BYTES	     1
 #define PLDM_SET_TID_RESP_BYTES	     1
 #define PLDM_GET_COMMANDS_RESP_BYTES 33
@@ -353,16 +352,6 @@ struct pldm_set_tid_req {
 	uint8_t tid; //!< PLDM SetTID TID field
 } __attribute__((packed));
 
-/** @struct pldm_get_tid_resp
- *
- *  Structure representing PLDM get tid response.
- */
-
-struct pldm_get_tid_resp {
-	uint8_t completion_code; //!< completion code
-	uint8_t tid;		 //!< PLDM GetTID TID field
-} __attribute__((packed));
-
 #define PLDM_BASE_MULTIPART_SEND_REQ_MIN_BYTES 26
 
 /** @struct pldm_base_multipart_send_req
@@ -560,25 +549,6 @@ int decode_get_version_resp(const struct pldm_msg *msg, size_t payload_length,
 			    uint32_t *next_transfer_handle,
 			    uint8_t *transfer_flag, ver32_t *version);
 
-/* GetTID */
-
-/** @brief Decode a GetTID response message
- *
- *  Note:
- *  * If the return value is not PLDM_SUCCESS, it represents a
- * transport layer error.
- *  * If the completion_code value is not PLDM_SUCCESS, it represents a
- * protocol layer error and all the out-parameters are invalid.
- *
- *  @param[in] msg - Response message
- *  @param[in] payload_length - Length of response message payload
- *  @param[out] completion_code - Pointer to response msg's PLDM completion code
- *  @param[out] tid - Pointer to the terminus id
- *  @return pldm_completion_codes
- */
-int decode_get_tid_resp(const struct pldm_msg *msg, size_t payload_length,
-			uint8_t *completion_code, uint8_t *tid);
-
 /* Responder */
 
 /* GetPLDMCommands */
@@ -655,19 +625,6 @@ int decode_get_version_req(const struct pldm_msg *msg, size_t payload_length,
  *         'msg.payload'
  */
 int encode_get_tid_req(uint8_t instance_id, struct pldm_msg *msg);
-
-/** @brief Create a PLDM response message for GetTID
- *
- *  @param[in] instance_id - Message's instance id
- *  @param[in] completion_code - PLDM completion code
- *  @param[in] tid - Terminus ID
- *  @param[in,out] msg - Message will be written to this
- *  @return pldm_completion_codes
- *  @note  Caller is responsible for memory alloc and dealloc of param
- *         'msg.payload'
- */
-int encode_get_tid_resp(uint8_t instance_id, uint8_t completion_code,
-			uint8_t tid, struct pldm_msg *msg);
 
 /** @brief Create a PLDM request message for SetTID
  *

@@ -51,23 +51,18 @@ static int pldm_control_get_tid(const struct pldm_header_info *hdr,
 				size_t req_payload_len, struct pldm_msg *resp,
 				size_t *resp_payload_len)
 {
+	struct pldm_base_get_tid_resp body = {
+		.completion_code = PLDM_SUCCESS,
+		.tid = PLDM_TID_UNASSIGNED,
+	};
+
 	if (req_payload_len != PLDM_GET_TID_REQ_BYTES) {
 		return pldm_control_reply_error(PLDM_ERROR_INVALID_LENGTH, hdr,
 						resp, resp_payload_len);
 	}
 
-	if (*resp_payload_len <= PLDM_GET_TID_RESP_BYTES) {
-		return -EOVERFLOW;
-	}
-	*resp_payload_len = PLDM_GET_TID_RESP_BYTES;
-
-	uint8_t cc = encode_get_tid_resp(hdr->instance, PLDM_SUCCESS,
-					 PLDM_TID_UNASSIGNED, resp);
-	if (cc) {
-		return pldm_control_reply_error(cc, hdr, resp,
-						resp_payload_len);
-	}
-	return 0;
+	return encode_pldm_base_get_tid_resp(hdr->instance, &body, resp,
+					     resp_payload_len);
 }
 
 static int pldm_control_get_version(struct pldm_control *control,

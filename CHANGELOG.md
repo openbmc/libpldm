@@ -41,6 +41,8 @@ Change categories:
 
 ### Removed
 
+- dsp: base: Remove `{en,de}code_pldm_base_get_tid_resp()` and associated types
+
 ### Fixed
 
 ### Security

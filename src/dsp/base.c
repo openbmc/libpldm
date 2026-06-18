@@ -427,57 +427,6 @@ int encode_get_tid_req(uint8_t instance_id, struct pldm_msg *msg)
 	return pack_pldm_header(&header, &(msg->hdr));
 }
 
-LIBPLDM_ABI_DEPRECATED_UNSAFE
-int encode_get_tid_resp(uint8_t instance_id, uint8_t completion_code,
-			uint8_t tid, struct pldm_msg *msg)
-{
-	if (msg == NULL) {
-		return PLDM_ERROR_INVALID_DATA;
-	}
-
-	struct pldm_header_info header = { 0 };
-	header.instance = instance_id;
-	header.msg_type = PLDM_RESPONSE;
-	header.command = PLDM_GET_TID;
-
-	uint8_t rc = pack_pldm_header(&header, &(msg->hdr));
-	if (rc != PLDM_SUCCESS) {
-		return rc;
-	}
-
-	struct pldm_get_tid_resp *response =
-		(struct pldm_get_tid_resp *)msg->payload;
-	response->completion_code = completion_code;
-	response->tid = tid;
-
-	return PLDM_SUCCESS;
-}
-
-LIBPLDM_ABI_DEPRECATED_UNSAFE
-int decode_get_tid_resp(const struct pldm_msg *msg, size_t payload_length,
-			uint8_t *completion_code, uint8_t *tid)
-{
-	if (msg == NULL || tid == NULL || completion_code == NULL) {
-		return PLDM_ERROR_INVALID_DATA;
-	}
-
-	*completion_code = msg->payload[0];
-	if (PLDM_SUCCESS != *completion_code) {
-		return PLDM_SUCCESS;
-	}
-
-	if (payload_length != PLDM_GET_TID_RESP_BYTES) {
-		return PLDM_ERROR_INVALID_LENGTH;
-	}
-
-	struct pldm_get_tid_resp *response =
-		(struct pldm_get_tid_resp *)msg->payload;
-
-	*tid = response->tid;
-
-	return PLDM_SUCCESS;
-}
-
 LIBPLDM_ABI_STABLE
 int encode_set_tid_req(uint8_t instance_id, uint8_t tid, struct pldm_msg *msg)
 {
