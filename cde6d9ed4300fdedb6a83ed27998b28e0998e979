@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "39c2eae0_ad4740de",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2026-06-18T13:36:24Z",
+      "side": 1,
+      "message": "Sure, removed it and re-wrote the thing as a shell script which gets rid of the nested Makefile templates and IMO overall simpler and easier to understand.\n\nAlso more in line with the existing `scripts/` which AFAIK do not make use of makefiles.",
+      "parentUuid": "5649c163_db546ae9",
+      "revId": "cde6d9ed4300fdedb6a83ed27998b28e0998e979",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d69dee1e_0860b714",
@@ -31,6 +49,30 @@
       "writtenOn": "2026-06-17T02:16:28Z",
       "side": 1,
       "message": "This is a bit shouty and pretty verbose. Can we just call this `crater`?",
+      "range": {
+        "startLine": 14,
+        "startChar": 7,
+        "endLine": 15,
+        "endChar": 1
+      },
+      "revId": "cde6d9ed4300fdedb6a83ed27998b28e0998e979",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cb1af36d_82baed50",
+        "filename": "scripts/crater",
+        "patchSetId": 2
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2026-06-18T13:36:24Z",
+      "side": 1,
+      "message": "re-wrote our crater as a shell script, IMO it is simpler that way.",
+      "parentUuid": "d69dee1e_0860b714",
       "range": {
         "startLine": 14,
         "startChar": 7,
@@ -87,6 +129,54 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f3e3622a_69fdf099",
+        "filename": "scripts/crater",
+        "patchSetId": 2
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2026-06-18T13:36:24Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "2b6e6d88_ab6ad978",
+      "range": {
+        "startLine": 43,
+        "startChar": 81,
+        "endLine": 43,
+        "endChar": 85
+      },
+      "revId": "cde6d9ed4300fdedb6a83ed27998b28e0998e979",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d0577d49_f2469b4d",
+        "filename": "scripts/crater",
+        "patchSetId": 2
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2026-06-18T13:36:24Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "e2364e6f_246fc7c7",
+      "range": {
+        "startLine": 43,
+        "startChar": 34,
+        "endLine": 43,
+        "endChar": 38
+      },
+      "revId": "cde6d9ed4300fdedb6a83ed27998b28e0998e979",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e8c64397_ca083d7a",
@@ -100,6 +190,24 @@
       "writtenOn": "2026-06-17T02:16:28Z",
       "side": 1,
       "message": "See comments above.",
+      "revId": "cde6d9ed4300fdedb6a83ed27998b28e0998e979",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "85b9437d_94eb8ebc",
+        "filename": "scripts/crater",
+        "patchSetId": 2
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2026-06-18T13:36:24Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "e8c64397_ca083d7a",
       "revId": "cde6d9ed4300fdedb6a83ed27998b28e0998e979",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
