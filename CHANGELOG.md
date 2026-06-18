@@ -40,6 +40,14 @@ Change categories:
 
   Users should switch to `decode_pldm_base_multipart_receive_req()`
 
+- dsp: base: Deprecate `encode_get_tid_resp()`
+
+  Users should switch to `encode_pldm_base_get_tid_resp()`
+
+- dsp: base: Deprecate `decode_get_tid_resp()`
+
+  Users should switch to `decode_pldm_base_get_tid_resp()`
+
 ### Removed
 
 ### Fixed

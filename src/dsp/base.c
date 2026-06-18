@@ -427,7 +427,7 @@ int encode_get_tid_req(uint8_t instance_id, struct pldm_msg *msg)
 	return pack_pldm_header(&header, &(msg->hdr));
 }
 
-LIBPLDM_ABI_STABLE
+LIBPLDM_ABI_DEPRECATED_UNSAFE
 int encode_get_tid_resp(uint8_t instance_id, uint8_t completion_code,
 			uint8_t tid, struct pldm_msg *msg)
 {
@@ -453,7 +453,7 @@ int encode_get_tid_resp(uint8_t instance_id, uint8_t completion_code,
 	return PLDM_SUCCESS;
 }
 
-LIBPLDM_ABI_STABLE
+LIBPLDM_ABI_DEPRECATED_UNSAFE
 int decode_get_tid_resp(const struct pldm_msg *msg, size_t payload_length,
 			uint8_t *completion_code, uint8_t *tid)
 {
