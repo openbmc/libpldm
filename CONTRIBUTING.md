@@ -95,8 +95,15 @@
 - [ ] All publicly exposed macros, types and functions relating to the PLDM
       specifications must be prefixed with either `pldm_` or `PLDM_` as
       appropriate
-  - The only (temporary) exception are the `encode_*()` and `decode_*()`
-    function symbols
+  - The only exceptions are the `encode_*()` and `decode_*()` function symbols
+    as they embed the `pldm_` string through the related struct name.
+
+- [ ] `encode_*()` and `decode_*()` functions are named after their
+      corresponding message struct type, where applicable
+  - For example, given `struct pldm_platform_cper_event`, the associated
+    functions should be named:
+    - `encode_pldm_platform_cper_event()`
+    - `decode_pldm_platform_cper_event()`
 
 - [ ] All `pldm_`-prefixed symbols must also name the related specification. For
       example, for DSP0248 Platform Monitoring and Control, the symbol prefix
@@ -111,13 +118,6 @@
     - Application of abbreviation tends to be haphazard, which makes it harder
       than necessary to map library identifiers back to those in the
       specification
-
-- [ ] `encode_*()` and `decode_*()` functions are named after their
-      corresponding message struct type, where applicable
-  - For example, given `struct pldm_platform_cper_event`, the associated
-    functions should be named:
-    - `encode_pldm_platform_cper_event()`
-    - `decode_pldm_platform_cper_event()`
 
 - [ ] All publicly exposed macros, types and functions relating to the library
       implementation must be prefixed with `libpldm_` or `LIBPLDM_`
