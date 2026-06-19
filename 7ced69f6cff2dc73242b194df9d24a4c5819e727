@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "6642bdd0_e8224b19",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2026-06-19T14:42:08Z",
+      "side": 1,
+      "message": "will do.",
+      "parentUuid": "fd57df4d_8f6604b0",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 31
+      },
+      "revId": "7ced69f6cff2dc73242b194df9d24a4c5819e727",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "d5bde14d_420c6bf9",
@@ -60,6 +84,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "bf60efa0_52307ba8",
+        "filename": "include/libpldm/base.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 729,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2026-06-19T14:42:08Z",
+      "side": 1,
+      "message": "it is not.  will remove.",
+      "parentUuid": "fce7a2a6_800f6996",
+      "revId": "7ced69f6cff2dc73242b194df9d24a4c5819e727",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c55dab41_9d1114a6",
         "filename": "include/libpldm/base.h",
         "patchSetId": 2
@@ -77,6 +119,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "59204f7a_bada4395",
+        "filename": "include/libpldm/base.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 734,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2026-06-19T14:42:08Z",
+      "side": 1,
+      "message": "FWIW I don\u0027t see any users of the old API on Github.  I do plan to eventually add an in-library user of the new one - would stabilizing it then break the rules?  I wouldn\u0027t think this new API is going to require lots of iterating to get right.",
+      "parentUuid": "c55dab41_9d1114a6",
+      "revId": "7ced69f6cff2dc73242b194df9d24a4c5819e727",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cbf8a3ea_8fda46d2",
         "filename": "src/dsp/base.c",
         "patchSetId": 2
@@ -88,6 +148,30 @@
       "writtenOn": "2026-06-17T03:15:34Z",
       "side": 1,
       "message": "You can re-arrange this so the complete comes first and then you can skip the `pldm_msgbuf_discard()` calls:\n\n```suggestion\n\trc \u003d pldm_msgbuf_complete_consumed(buf);\n\tif (rc) {\n\t\treturn rc;\n\t}\n\n\tif (req-\u003etransfer_opflag \u003e PLDM_XFER_CURRENT_PART) {\n\t\treturn -EPROTO;\n\t}\n\n\t// DSP0240 v1.2.0 §9.6.5 Table 17: transfer_handle must be non-zero\n\t// only when operation is PLDM_XFER_NEXT_PART.\n\tif (req-\u003etransfer_handle \u003d\u003d 0 \u0026\u0026\n\t    req-\u003etransfer_opflag \u003d\u003d PLDM_XFER_NEXT_PART) {\n\t\treturn -EPROTO;\n\t}\n\n\treturn 0;\n}\n```",
+      "range": {
+        "startLine": 614,
+        "startChar": 1,
+        "endLine": 627,
+        "endChar": 1
+      },
+      "revId": "7ced69f6cff2dc73242b194df9d24a4c5819e727",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c273d20c_e14615ac",
+        "filename": "src/dsp/base.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 627,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2026-06-19T14:42:08Z",
+      "side": 1,
+      "message": "Nice, will do.",
+      "parentUuid": "cbf8a3ea_8fda46d2",
       "range": {
         "startLine": 614,
         "startChar": 1,
