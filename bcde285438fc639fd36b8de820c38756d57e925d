@@ -37,6 +37,42 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c8c832af_91071a2e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2026-06-19T12:44:54Z",
+      "side": 1,
+      "message": "will do.",
+      "parentUuid": "8018947a_f6bdab2b",
+      "revId": "bcde285438fc639fd36b8de820c38756d57e925d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a8c35da7_70553705",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2026-06-19T12:44:54Z",
+      "side": 1,
+      "message": "I\u0027ll investigate.",
+      "parentUuid": "dd025412_15d20ce5",
+      "revId": "bcde285438fc639fd36b8de820c38756d57e925d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9864dfdd_f36a4cd8",
         "filename": "include/libpldm/meson.build",
         "patchSetId": 8
@@ -48,6 +84,24 @@
       "writtenOn": "2026-06-19T01:20:13Z",
       "side": 1,
       "message": "`platform_pd.h` for consistency with `firmware_fd.h`? I realise `fd` is a defined concept in DSP0267 while `pd` is not in DSP0248, but I think we might as well follow.",
+      "revId": "bcde285438fc639fd36b8de820c38756d57e925d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4e10a6cb_6a689508",
+        "filename": "include/libpldm/meson.build",
+        "patchSetId": 8
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2026-06-19T12:44:54Z",
+      "side": 1,
+      "message": "ok.  just to make sure we are on the same page - pd \u003d platform device?",
+      "parentUuid": "9864dfdd_f36a4cd8",
       "revId": "bcde285438fc639fd36b8de820c38756d57e925d",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -71,6 +125,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "48a55521_8ebd165b",
+        "filename": "include/libpldm/platform_device.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2026-06-19T12:44:54Z",
+      "side": 1,
+      "message": "It does.  will update the comment.",
+      "parentUuid": "1ed134eb_7defc3f9",
+      "revId": "bcde285438fc639fd36b8de820c38756d57e925d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "efcb7a7a_03b9836a",
         "filename": "include/libpldm/platform_device.h",
         "patchSetId": 8
@@ -82,6 +154,30 @@
       "writtenOn": "2026-06-19T01:20:13Z",
       "side": 1,
       "message": "Perhaps this should be incorporated in the setup phase. That way the instance is either initialised properly or not?\n\nIf we use an ops struct instead we can make it an extensible struct, which allows for future expansion of handled ops.",
+      "range": {
+        "startLine": 95,
+        "startChar": 1,
+        "endLine": 98,
+        "endChar": 47
+      },
+      "revId": "bcde285438fc639fd36b8de820c38756d57e925d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fd8baa05_42e1cfa0",
+        "filename": "include/libpldm/platform_device.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2026-06-19T12:44:54Z",
+      "side": 1,
+      "message": "An ops struct is how I started.  I switched to this approach because I was concerned about our ability to ever stabilize the API.  Maybe that isn\u0027t a real concern?\n\n\u003e If we use an ops struct instead we can make it an extensible struct, which allows for future expansion of handled ops.\n\nIs there a pattern for doing this without breaking clients (assuming that is a concern) ?",
+      "parentUuid": "efcb7a7a_03b9836a",
       "range": {
         "startLine": 95,
         "startChar": 1,
