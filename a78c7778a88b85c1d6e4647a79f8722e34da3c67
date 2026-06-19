@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a0b61652_1b35825b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2026-06-19T12:57:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3923bb5c_b3efb0ed",
+      "revId": "a78c7778a88b85c1d6e4647a79f8722e34da3c67",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "66f2509e_ffbe84b2",
@@ -35,6 +53,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "91b403e9_8df0b166",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2026-06-19T12:57:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "66f2509e_ffbe84b2",
+      "revId": "a78c7778a88b85c1d6e4647a79f8722e34da3c67",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "188c1058_ec5ceaf7",
@@ -48,6 +84,24 @@
       "writtenOn": "2026-06-18T01:20:59Z",
       "side": 1,
       "message": "Can you please add a `Fixes:` tag?",
+      "revId": "a78c7778a88b85c1d6e4647a79f8722e34da3c67",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "33d087bc_ab3aad70",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2026-06-19T12:57:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "188c1058_ec5ceaf7",
       "revId": "a78c7778a88b85c1d6e4647a79f8722e34da3c67",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
