@@ -186,6 +186,30 @@
       },
       "revId": "bcde285438fc639fd36b8de820c38756d57e925d",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5296ae09_2983d038",
+        "filename": "include/libpldm/platform_device.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2026-06-19T14:34:01Z",
+      "side": 1,
+      "message": "\u003e Is there a pattern for doing this without breaking clients (assuming that is a concern) ?\n\nI think I answered my own question.  It would just be the same pattern as pldm_platform_pd.",
+      "parentUuid": "fd8baa05_42e1cfa0",
+      "range": {
+        "startLine": 95,
+        "startChar": 1,
+        "endLine": 98,
+        "endChar": 47
+      },
+      "revId": "bcde285438fc639fd36b8de820c38756d57e925d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
