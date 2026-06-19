@@ -90,7 +90,12 @@
   - Macros using structs or functions should be declared following those structs
     or functions, so the context is clear
 
-### Naming macros, functions and types
+### Naming files, macros, functions and types
+
+- [ ] New files are named using [kebab-case][mozilla-glossary-kebab-case]
+
+[mozilla-glossary-kebab-case]:
+  https://developer.mozilla.org/en-US/docs/Glossary/Kebab_case
 
 - [ ] All publicly exposed macros, types and functions relating to the PLDM
       specifications must be prefixed with either `pldm_` or `PLDM_` as
