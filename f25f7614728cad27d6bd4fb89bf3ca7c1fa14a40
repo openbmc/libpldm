@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cf1b3bce_c8b5c122",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1002885
+      },
+      "writtenOn": "2026-06-22T06:44:07Z",
+      "side": 1,
+      "message": "Noted. \nI have modified the commit message and the function names is now carrying the trailing `()`.",
+      "parentUuid": "2dbfebe7_fc73ba1b",
+      "range": {
+        "startLine": 7,
+        "startChar": 19,
+        "endLine": 7,
+        "endChar": 47
+      },
+      "revId": "f25f7614728cad27d6bd4fb89bf3ca7c1fa14a40",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c1cb0d04_326c2074",
@@ -37,6 +61,24 @@
       "writtenOn": "2026-06-17T00:57:28Z",
       "side": 1,
       "message": "This is expected so isn\u0027t necessary to mention. Please remove it.",
+      "revId": "f25f7614728cad27d6bd4fb89bf3ca7c1fa14a40",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "055f0784_515dbd7d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1002885
+      },
+      "writtenOn": "2026-06-22T06:44:07Z",
+      "side": 1,
+      "message": "Understood, I have removed the line.\nThanks for acknowledging!",
+      "parentUuid": "c1cb0d04_326c2074",
       "revId": "f25f7614728cad27d6bd4fb89bf3ca7c1fa14a40",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -64,6 +106,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "84ab5459_9ed57da0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1002885
+      },
+      "writtenOn": "2026-06-22T06:44:07Z",
+      "side": 1,
+      "message": "Apologize for the mistake.\nI have modified the implementation and the decoder is now returning  negative `errno` instead of PLDM completion code.",
+      "parentUuid": "bd002f78_2e1bf6b0",
+      "range": {
+        "startLine": 22,
+        "startChar": 59,
+        "endLine": 24,
+        "endChar": 38
+      },
+      "revId": "f25f7614728cad27d6bd4fb89bf3ca7c1fa14a40",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3f674294_d4fee108",
@@ -77,6 +143,24 @@
       "writtenOn": "2026-06-17T00:57:28Z",
       "side": 1,
       "message": "The current preference is that new changelog entries go at the top of their section:\n\n\nhttps://github.com/openbmc/libpldm/blob/76f6997a9c85556fbc01f8553bb0fa986d4d79a6/CONTRIBUTING.md#L49\n\nThis also needs to be moved due to the release of v0.16.0.",
+      "revId": "f25f7614728cad27d6bd4fb89bf3ca7c1fa14a40",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d8192b6f_244b9779",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1002885
+      },
+      "writtenOn": "2026-06-22T06:44:07Z",
+      "side": 1,
+      "message": "Thanks for acknowledging, I have moved the entry to the top of the document.",
+      "parentUuid": "3f674294_d4fee108",
       "revId": "f25f7614728cad27d6bd4fb89bf3ca7c1fa14a40",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }

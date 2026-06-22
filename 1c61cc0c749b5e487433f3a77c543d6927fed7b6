@@ -16,6 +16,24 @@
       "message": "I rather we take a longer path here and avoid introducing more uses of `struct pldm_state_sensor_pdr`. Instead I prefer we deprecate it and introduce `struct pldm_platform_state_sensor_pdr` as its replacement. `struct pldm_platform_state_sensor_pdr` should meet current expectations outlined in `CONTRIBUTING.md`.\n\nAre you happy to work through that process?",
       "revId": "1c61cc0c749b5e487433f3a77c543d6927fed7b6",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "afba3cef_01f91f9d",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 2338,
+      "author": {
+        "id": 1002885
+      },
+      "writtenOn": "2026-06-22T06:44:07Z",
+      "side": 1,
+      "message": "Sure! I have modified the implementation in PS6 to introduce `struct pldm_platform_state_sensor_pdr` as the new decode target, and has refined the decode function to `decode_pldm_platform_state_sensor_pdr()`.\n\nIn addition, I kept this commit purely additive and deferred the deprecation of `pldm_state_sensor_pdr` and the migration of its existing readers to a focused follow-up.\n\nIf you\u0027d prefer the deprecation marker to land in this commit anyway, I\u0027m happy to add it, thanks!",
+      "parentUuid": "3bec90eb_4c3da2b6",
+      "revId": "1c61cc0c749b5e487433f3a77c543d6927fed7b6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
