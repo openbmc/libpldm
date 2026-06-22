@@ -901,7 +901,8 @@ struct pldm_platform_state_sensor_pdr {
  *  Structure representing the fixed fields of one possible_states entry of the
  *  State Sensor PDR defined in `Table 81 - State Sensor PDR` of DSP0248 v1.3.0,
  *  up to and including possibleStatesSize. The trailing variable-length states[]
- *  bitfield array is handled by the caller and is not represented here.
+ *  bitfield array is iterated with
+ *  foreach_pldm_platform_state_sensor_pdr_states() and is not represented here.
  */
 struct pldm_platform_state_sensor_possible_states {
 	uint16_t state_set_id;
@@ -3700,6 +3701,236 @@ int decode_pldm_platform_state_effecter_pdr_possible_states_from_iter(
 	     !((rc) = decode_pldm_platform_state_effecter_pdr_from_iter(       \
 		       &states##_iter, &(states)));                            \
 	     pldm_platform_state_effecter_pdr_iter_next(&states##_iter))
+
+/**
+ * @struct pldm_platform_state_sensor_pdr_possible_states_iter
+ * @brief Iterator context for traversing the possible_states array of a
+ *        PLDM State Sensor PDR
+ *
+ * This iterator provides safe traversal of the variable-length possible_states[]
+ * region that follows compositeSensorCount in a State Sensor PDR
+ * (DSP0248 v1.3.0 Table 81).
+ *
+ * The iterator tracks:
+ * - Current position and remaining bytes in the buffer (field)
+ * - The total number of possible_states entries (total_count)
+ * - The current iteration index
+ */
+struct pldm_platform_state_sensor_pdr_possible_states_iter {
+	struct variable_field field;
+	struct variable_field current_states;
+	uint8_t total_count;
+	uint8_t current_index;
+};
+
+/**
+ * @brief Initialize iterator for State Sensor PDR possible_states array
+ *
+ * Decodes the fixed portion of the PDR with
+ * decode_pldm_platform_state_sensor_pdr() to obtain compositeSensorCount and
+ * the offset of the first possible_states entry.
+ *
+ * @param[in]  pdr_data        - Pointer to the State Sensor PDR wire data
+ * @param[in]  pdr_data_length - Length in bytes of @p pdr_data
+ * @param[out] rc              - Pointer to receive return code
+ *
+ * @retval  0         - Success
+ * @retval -EINVAL    - Invalid input
+ * @retval -EOVERFLOW - Buffer too small
+ */
+struct pldm_platform_state_sensor_pdr_possible_states_iter
+pldm_platform_state_sensor_pdr_possible_states_iter_init(const void *pdr_data,
+							 size_t pdr_data_length,
+							 int *rc);
+
+LIBPLDM_ITERATOR
+bool pldm_platform_state_sensor_pdr_possible_states_iter_end(
+	const struct pldm_platform_state_sensor_pdr_possible_states_iter *iter)
+{
+	return iter->current_index >= iter->total_count;
+}
+
+LIBPLDM_ITERATOR
+bool pldm_platform_state_sensor_pdr_possible_states_iter_next(
+	struct pldm_platform_state_sensor_pdr_possible_states_iter *iter)
+{
+	if (iter->current_index >= iter->total_count) {
+		return false;
+	}
+	iter->current_index++;
+	return true;
+}
+
+/**
+ * @brief Decode a possible_states entry from the iterator
+ *
+ * @param[in,out] iter   - Iterator previously initialized with
+ *                         pldm_platform_state_sensor_pdr_possible_states_iter_init().
+ * @param[out]    states - Caller-provided storage to receive decoded entry.
+ *
+ * @retval  0          - Success.
+ * @retval -EINVAL     - Invalid input pointers.
+ * @retval -EOVERFLOW  - Buffer too small for entry.
+ */
+int decode_pldm_platform_state_sensor_pdr_possible_states_from_iter(
+	struct pldm_platform_state_sensor_pdr_possible_states_iter *iter,
+	struct pldm_platform_state_sensor_possible_states *states);
+
+/**
+ * @struct pldm_platform_state_sensor_pdr_states_iter
+ * @brief Iterator context for traversing the bitfield8_t states array within
+ *        a possible_states entry of a State Sensor PDR
+ *
+ * This iterator provides safe traversal of the variable-length states[] array
+ * contained within a single possible_states entry. Each bitfield8_t element
+ * represents the possible state values (bits 0-7) for the corresponding State
+ * Set, where a set bit indicates that state value is supported by the sensor.
+ *
+ * The iterator tracks:
+ * - Current position and remaining bytes in the buffer (field)
+ * - The total number of bitfield entries (total_count)
+ * - The current iteration index
+ */
+struct pldm_platform_state_sensor_pdr_states_iter {
+	struct variable_field field;
+	uint8_t total_count;
+	uint8_t current_index;
+};
+
+/**
+ * @brief Initialize iterator over bitfield8_t states within a single
+ *        possible_states entry of a State Sensor PDR.
+ *
+ * @param[in]  outer_iter - Outer iterator with current_states set by
+ *                          decode_pldm_platform_state_sensor_pdr_possible_states_from_iter().
+ * @param[out] rc         - Pointer to receive return code.
+ *
+ * @return Initialized iterator. On error, returns zeroed iterator and sets *rc:
+ * @retval -EINVAL   - outer_iter is NULL.
+ */
+struct pldm_platform_state_sensor_pdr_states_iter
+pldm_platform_state_sensor_pdr_states_iter_init(
+	const struct pldm_platform_state_sensor_pdr_possible_states_iter
+		*outer_iter,
+	int *rc);
+
+LIBPLDM_ITERATOR
+bool pldm_platform_state_sensor_pdr_states_iter_end(
+	const struct pldm_platform_state_sensor_pdr_states_iter *iter)
+{
+	return iter->current_index >= iter->total_count;
+}
+
+LIBPLDM_ITERATOR
+bool pldm_platform_state_sensor_pdr_states_iter_next(
+	struct pldm_platform_state_sensor_pdr_states_iter *iter)
+{
+	if (iter->current_index >= iter->total_count) {
+		return false;
+	}
+	iter->current_index++;
+	return true;
+}
+
+/**
+ * @brief Decode next bitfield8_t entry from the states iterator
+ *
+ * @param[in,out] iter  - Iterator previously initialized with
+ *                       pldm_platform_state_sensor_pdr_states_iter_init().
+ * @param[out]    state - Caller-provided storage to receive current
+ *                       bitfield8_t entry.
+ *
+ * @retval  0          - Success.
+ * @retval -EINVAL     - Invalid input pointers.
+ * @retval -EOVERFLOW  - Buffer too small for entry.
+ */
+int decode_pldm_platform_state_sensor_pdr_states_from_iter(
+	struct pldm_platform_state_sensor_pdr_states_iter *iter,
+	bitfield8_t *state);
+
+/**
+ * @brief Iterate over the bitfield8_t states within a possible_states entry
+ *        of a State Sensor PDR
+ *
+ * @param[in] states A pointer to the possible_states entry
+ * @param[out] bitfield An lvalue of type @ref "bitfield8_t" that receives the
+ *                      current bitfield element
+ * @param[out] rc An lvalue of type int that holds the status result of iteration
+ *
+ * @p rc is set to 0 on successful iteration. Otherwise, on error, @p rc is set to:
+ * - -EINVAL if parameter values are invalid
+ * - -EOVERFLOW if buffer bounds are exceeded
+ *
+ * The loop body is not executed if iterator initialization fails. After the loop
+ * completes, check @p rc to determine if iteration was successful or if an error
+ * occurred during traversal.
+ */
+#define foreach_pldm_platform_state_sensor_pdr_states(states, bitfield, rc)      \
+	for (struct pldm_platform_state_sensor_pdr_states_iter bitfield##_iter = \
+		     pldm_platform_state_sensor_pdr_states_iter_init(            \
+			     &states##_iter, &(rc));                             \
+	     !(rc) &&                                                            \
+	     !pldm_platform_state_sensor_pdr_states_iter_end(                    \
+		     &bitfield##_iter) &&                                        \
+	     !((rc) = decode_pldm_platform_state_sensor_pdr_states_from_iter(    \
+		       &bitfield##_iter, &(bitfield)));                          \
+	     pldm_platform_state_sensor_pdr_states_iter_next(                    \
+		     &bitfield##_iter))
+
+/**
+ * @brief Iterate over the possible_states entries in a State Sensor PDR
+ *
+ * @param[in] pdr Pointer to the State Sensor PDR wire data (const void *)
+ * @param[in] pdr_size Total size in bytes of the PDR buffer pointed to by
+ *                     @p pdr. Must be at least
+ *                     PLDM_PLATFORM_STATE_SENSOR_PDR_MIN_LENGTH.
+ * @param[out] states A pointer to possible_states entry
+ * @param[out] rc An lvalue of type int that holds the status result of iteration
+ *
+ * @p rc is set to 0 on successful iteration. Otherwise, on error, @p rc is set to:
+ * - -EINVAL if parameter values are invalid
+ * - -EOVERFLOW if the PDR buffer is too small or buffer bounds are exceeded
+ *
+ * The loop body is not executed if iterator initialization fails. After the loop
+ * completes, check @p rc to determine if iteration was successful or if an error
+ * occurred during traversal.
+ *
+ * Example use of the macro is as follows:
+ *
+ * @code
+ * struct pldm_platform_state_sensor_possible_states states;
+ * int rc;
+ *
+ * foreach_pldm_platform_state_sensor_pdr_possible_states(pdr, pdr_size,
+ *                                                        states, rc) {
+ *     // Process states.state_set_id, states.possible_states_size
+ *
+ *     bitfield8_t bitfield;
+ *     foreach_pldm_platform_state_sensor_pdr_states(states, bitfield, rc) {
+ *         // Process bitfield.byte
+ *     }
+ *     if (rc) {
+ *         return rc;
+ *     }
+ * }
+ * if (rc) {
+ *     return rc;
+ * }
+ * @endcode
+ */
+#define foreach_pldm_platform_state_sensor_pdr_possible_states(pdr, pdr_size,          \
+							       states, rc)             \
+	for (struct pldm_platform_state_sensor_pdr_possible_states_iter                \
+		     states##_iter =                                                   \
+			     pldm_platform_state_sensor_pdr_possible_states_iter_init( \
+				     (pdr), (pdr_size), &(rc));                        \
+	     !(rc) &&                                                                  \
+	     !pldm_platform_state_sensor_pdr_possible_states_iter_end(                 \
+		     &states##_iter) &&                                                \
+	     !((rc) = decode_pldm_platform_state_sensor_pdr_possible_states_from_iter( \
+		       &states##_iter, &(states)));                                    \
+	     pldm_platform_state_sensor_pdr_possible_states_iter_next(                 \
+		     &states##_iter))
 
 #ifdef __cplusplus
 }
