@@ -53,6 +53,9 @@ Change categories:
 - dsp: base: Expose `PLDM_BASE_MIN_PART_SIZE` in the public header
 - dsp: platform: Add `decode_pldm_platform_state_sensor_pdr()` and
   `struct pldm_platform_state_sensor_pdr` (DSP0248 v1.3.0)
+- dsp: platform: Add `possible_states` iterator for the State Sensor PDR
+  - `foreach_pldm_platform_state_sensor_pdr_possible_states()`
+  - `foreach_pldm_platform_state_sensor_pdr_states()`
 - dsp: file: Introduce `decode_pldm_file_df_heartbeat_req()`
 - dsp: file: Introduce `encode_pldm_file_df_heartbeat_resp()`
 
