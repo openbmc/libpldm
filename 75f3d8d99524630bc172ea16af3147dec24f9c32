@@ -16,6 +16,24 @@
       "message": "i am wondering if it makes more sense to split up this 670 line checklist into things like\n\n```\n- checklist-fixes.md\n- checklist-changelog.md\n- checklist-abi.md\n- influences.md\n```\n\nand put that into a folder like `CONTRIBUTING/`\nwhich would enable folks to skip over things not relevant for their contribution \n\n(e.g. when they are not making a fix, they can skip the docs for creating fixes)",
       "revId": "75f3d8d99524630bc172ea16af3147dec24f9c32",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5cfd2ab5_f3caad31",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-06-22T00:56:24Z",
+      "side": 1,
+      "message": "I had been considering something like that too. I think we\u0027re getting to the point that it\u0027s necessary, but not in this change.",
+      "parentUuid": "b556ad0b_45b1653d",
+      "revId": "75f3d8d99524630bc172ea16af3147dec24f9c32",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
