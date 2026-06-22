@@ -19,6 +19,8 @@ Change categories:
 
 ### Added
 
+- dsp: platform: Add `possible_states` iterator for the State Sensor PDR
+  (`foreach_pldm_platform_state_sensor_pdr_possible_states()`)
 - dsp: platform: Add `decode_pldm_platform_state_sensor_pdr()` and
   `struct pldm_platform_state_sensor_pdr` (DSP0248 v1.3.0)
 - dsp: file: Introduce `decode_pldm_file_df_heartbeat_req()`
