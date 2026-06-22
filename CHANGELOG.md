@@ -19,6 +19,8 @@ Change categories:
 
 ### Added
 
+- dsp: platform: Add `possible_states` iterator for the State Sensor PDR
+  (`foreach_pldm_platform_state_sensor_pdr_possible_states()`)
 - dsp: platform: Add `decode_pldm_platform_state_sensor_pdr()` and
   `struct pldm_platform_state_sensor_pdr` (DSP0248 v1.3.0)
 - dsp: file: Introduce `decode_pldm_file_df_heartbeat_req()`
@@ -29,6 +31,10 @@ Change categories:
 - libpldm: Improve application of the IWYU principle
 
 ### Deprecated
+
+- dsp: platform: `struct pldm_state_sensor_pdr` for read use; decode with
+  `decode_pldm_platform_state_sensor_pdr()` and iterate possible_states with
+  `foreach_pldm_platform_state_sensor_pdr_possible_states()`
 
 ### Removed
 
