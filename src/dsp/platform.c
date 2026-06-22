@@ -4167,3 +4167,118 @@ int decode_pldm_platform_state_effecter_pdr_possible_states_from_iter(
 
 	return pldm_msgbuf_complete_consumed(ctx);
 }
+
+LIBPLDM_ABI_TESTING
+struct pldm_platform_state_sensor_pdr_iter
+pldm_platform_state_sensor_pdr_iter_init(const void *pdr_data,
+					 size_t pdr_data_length, int *rc)
+{
+	struct pldm_platform_state_sensor_pdr_iter iter = { 0 };
+	struct pldm_platform_state_sensor_pdr pdr;
+
+	/*
+	 * Decode the fixed portion to validate the buffer and obtain
+	 * compositeSensorCount. possible_states begins immediately after the
+	 * fixed portion, at offset PLDM_PLATFORM_STATE_SENSOR_PDR_MIN_LENGTH.
+	 */
+	*rc = decode_pldm_platform_state_sensor_pdr(pdr_data, pdr_data_length,
+						    &pdr);
+	if (*rc) {
+		return iter;
+	}
+
+	iter.field.ptr = (const uint8_t *)pdr_data +
+			 PLDM_PLATFORM_STATE_SENSOR_PDR_MIN_LENGTH;
+	iter.field.length =
+		pdr_data_length - PLDM_PLATFORM_STATE_SENSOR_PDR_MIN_LENGTH;
+	iter.total_count = pdr.composite_sensor_count;
+	iter.current_index = 0;
+	return iter;
+}
+
+LIBPLDM_ABI_TESTING
+int decode_pldm_platform_state_sensor_pdr_from_iter(
+	struct pldm_platform_state_sensor_pdr_iter *iter,
+	struct state_sensor_possible_states *states)
+{
+	PLDM_MSGBUF_RO_DEFINE_P(ctx);
+	int rc;
+
+	if (!iter || !iter->field.ptr || !states) {
+		return -EINVAL;
+	}
+
+	rc = pldm_msgbuf_init_errno(ctx, 0, iter->field.ptr,
+				    iter->field.length);
+	if (rc) {
+		return rc;
+	}
+
+	pldm_msgbuf_extract(ctx, states->state_set_id);
+	rc = pldm_msgbuf_extract(ctx, states->possible_states_size);
+	if (rc) {
+		return pldm_msgbuf_discard(ctx, rc);
+	}
+
+	rc = pldm_msgbuf_span_required(
+		ctx, states->possible_states_size,
+		(const void **)&iter->current_states.ptr);
+	if (rc) {
+		return pldm_msgbuf_discard(ctx, rc);
+	}
+
+	iter->current_states.length = states->possible_states_size;
+	pldm_msgbuf_span_remaining(ctx, (const void **)&iter->field.ptr,
+				   &iter->field.length);
+
+	return pldm_msgbuf_complete_consumed(ctx);
+}
+
+LIBPLDM_ABI_TESTING
+struct pldm_platform_state_sensor_pdr_possible_states_iter
+pldm_platform_state_sensor_pdr_possible_states_iter_init(
+	const struct pldm_platform_state_sensor_pdr_iter *outer_iter, int *rc)
+{
+	struct pldm_platform_state_sensor_pdr_possible_states_iter iter = { 0 };
+
+	if (!outer_iter || !outer_iter->current_states.ptr) {
+		*rc = -EINVAL;
+		return iter;
+	}
+
+	iter.field.ptr = outer_iter->current_states.ptr;
+	iter.field.length = outer_iter->current_states.length;
+	iter.total_count = outer_iter->current_states.length;
+	iter.current_index = 0;
+	*rc = 0;
+	return iter;
+}
+
+LIBPLDM_ABI_TESTING
+int decode_pldm_platform_state_sensor_pdr_possible_states_from_iter(
+	struct pldm_platform_state_sensor_pdr_possible_states_iter *iter,
+	bitfield8_t *state)
+{
+	PLDM_MSGBUF_RO_DEFINE_P(ctx);
+	int rc;
+
+	if (!iter || !state) {
+		return -EINVAL;
+	}
+
+	if (!iter->field.ptr) {
+		return -EINVAL;
+	}
+
+	rc = pldm_msgbuf_init_errno(ctx, 0, iter->field.ptr,
+				    iter->field.length);
+	if (rc) {
+		return rc;
+	}
+
+	pldm_msgbuf_extract(ctx, state->byte);
+	pldm_msgbuf_span_remaining(ctx, (const void **)&iter->field.ptr,
+				   &iter->field.length);
+
+	return pldm_msgbuf_complete_consumed(ctx);
+}
