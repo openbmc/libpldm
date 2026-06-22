@@ -7497,3 +7497,258 @@ TEST(StateEffecterPDR, testZeroPossibleStatesSize)
     EXPECT_EQ(entryCount, 1);
 }
 #endif
+
+#if HAVE_LIBPLDM_API_TESTING
+namespace
+{
+/*
+ * Build a State Sensor PDR (DSP0248 v1.3.0 Table 81) with the given
+ * compositeSensorCount and possible_states tail, patching dataLength so the
+ * fixed-portion decode succeeds.
+ */
+std::vector<uint8_t> makeStateSensorPdr(uint8_t compositeSensorCount,
+                                        const std::vector<uint8_t>& tail)
+{
+    std::vector<uint8_t> pdr{
+        0x1,
+        0x0,
+        0x0,
+        0x0,                   // recordHandle = 1
+        0x1,                   // PDRHeaderVersion
+        PLDM_STATE_SENSOR_PDR, // PDRType
+        0x0,
+        0x0, // recordChangeNumber
+        0x0,
+        0x0, // dataLength (patched below)
+        0x2,
+        0x0, // PLDMTerminusHandle = 2
+        0x3,
+        0x0, // sensorID = 3
+        PLDM_ENTITY_POWER_SUPPLY,
+        0x0, // entityType = Power Supply(120)
+        0x1,
+        0x0, // entityInstanceNumber = 1
+        0x4,
+        0x0,                  // containerID = 4
+        PLDM_NO_INIT,         // sensorInit
+        false,                // sensorAuxiliaryNamesPDR
+        compositeSensorCount, // compositeSensorCount
+    };
+    pdr.insert(pdr.end(), tail.begin(), tail.end());
+
+    auto dataLength = static_cast<uint16_t>(pdr.size() - sizeof(pldm_pdr_hdr));
+    pdr[8] = dataLength & 0xff;
+    pdr[9] = (dataLength >> 8) & 0xff;
+    return pdr;
+}
+} // namespace
+#endif
+
+#if HAVE_LIBPLDM_API_TESTING
+TEST(StateSensorPDR, testMultipleEntries)
+{
+    // possible_states[0]: state_set_id=100, size=1, bits=0x0F
+    // possible_states[1]: state_set_id=200, size=2, bits={0xAA, 0x55}
+    auto pdr = makeStateSensorPdr(
+        2, {0x64, 0x0, 0x1, 0x0F, 0xC8, 0x0, 0x2, 0xAA, 0x55});
+
+    std::vector<uint16_t> ids;
+    std::vector<uint8_t> sizes;
+    std::vector<std::vector<uint8_t>> bitLists;
+
+    state_sensor_possible_states states{};
+    int rc;
+
+    foreach_pldm_platform_state_sensor_pdr_possible_states(
+        pdr.data(), pdr.size(), states, rc)
+    {
+        ids.push_back(states.state_set_id);
+        sizes.push_back(states.possible_states_size);
+
+        std::vector<uint8_t> bytes;
+        bitfield8_t bf{};
+
+        foreach_pldm_platform_state_sensor_pdr_states(states, bf, rc)
+        {
+            bytes.push_back(bf.byte);
+        }
+
+        if (rc)
+        {
+            break;
+        }
+
+        bitLists.push_back(std::move(bytes));
+    }
+
+    EXPECT_EQ(rc, 0) << "Iterator failed with rc=" << rc;
+
+    ASSERT_EQ(ids.size(), 2);
+    ASSERT_EQ(bitLists.size(), 2);
+
+    EXPECT_EQ(le16toh(ids[0]), 100);
+    EXPECT_EQ(le16toh(ids[1]), 200);
+
+    EXPECT_EQ(sizes[0], 1);
+    ASSERT_EQ(bitLists[0].size(), 1);
+    EXPECT_EQ(bitLists[0][0], 0x0F);
+
+    EXPECT_EQ(sizes[1], 2);
+    ASSERT_EQ(bitLists[1].size(), 2);
+    EXPECT_EQ(bitLists[1][0], 0xAA);
+    EXPECT_EQ(bitLists[1][1], 0x55);
+}
+#endif
+
+#if HAVE_LIBPLDM_API_TESTING
+TEST(StateSensorPDR, testInvalidBufferTooSmall)
+{
+    std::vector<uint8_t> pdr(PLDM_PLATFORM_STATE_SENSOR_PDR_MIN_LENGTH - 1, 0);
+
+    int rc;
+    state_sensor_possible_states states{};
+
+    foreach_pldm_platform_state_sensor_pdr_possible_states(
+        pdr.data(), pdr.size(), states, rc)
+    {
+        FAIL() << "Should not iterate with invalid buffer";
+    }
+
+    EXPECT_EQ(rc, -EOVERFLOW) << "Expected EOVERFLOW for small buffer";
+}
+#endif
+
+#if HAVE_LIBPLDM_API_TESTING
+TEST(StateSensorPDR, testNullPointer)
+{
+    int rc;
+    state_sensor_possible_states states{};
+
+    foreach_pldm_platform_state_sensor_pdr_possible_states(nullptr, 100, states,
+                                                           rc)
+    {
+        FAIL() << "Should not iterate with null pointer";
+    }
+
+    EXPECT_EQ(rc, -EINVAL) << "Expected EINVAL for null pointer";
+}
+#endif
+
+#if HAVE_LIBPLDM_API_TESTING
+TEST(StateSensorPDR, testZeroCount)
+{
+    auto pdr = makeStateSensorPdr(0, {});
+
+    int rc;
+    state_sensor_possible_states states{};
+    size_t count = 0;
+
+    foreach_pldm_platform_state_sensor_pdr_possible_states(
+        pdr.data(), pdr.size(), states, rc)
+    {
+        count++;
+    }
+
+    EXPECT_EQ(count, 0) << "Should not iterate when count is 0";
+    EXPECT_EQ(rc, 0) << "Expected success (rc=0), got rc=" << rc;
+}
+#endif
+
+#if HAVE_LIBPLDM_API_TESTING
+TEST(StateSensorPDR, testSingleEntry)
+{
+    // Single entry: state_set_id=42, size=3, bits={0x01, 0x02, 0x04}
+    auto pdr = makeStateSensorPdr(1, {0x2A, 0x0, 0x3, 0x01, 0x02, 0x04});
+
+    int rc;
+    state_sensor_possible_states states{};
+    size_t entryCount = 0;
+
+    foreach_pldm_platform_state_sensor_pdr_possible_states(
+        pdr.data(), pdr.size(), states, rc)
+    {
+        entryCount++;
+        EXPECT_EQ(le16toh(states.state_set_id), 42);
+        EXPECT_EQ(states.possible_states_size, 3);
+
+        std::vector<uint8_t> bytes;
+        bitfield8_t bf{};
+
+        foreach_pldm_platform_state_sensor_pdr_states(states, bf, rc)
+        {
+            bytes.push_back(bf.byte);
+        }
+
+        if (rc)
+        {
+            break;
+        }
+
+        ASSERT_EQ(bytes.size(), 3);
+        EXPECT_EQ(bytes[0], 0x01);
+        EXPECT_EQ(bytes[1], 0x02);
+        EXPECT_EQ(bytes[2], 0x04);
+    }
+
+    EXPECT_EQ(rc, 0);
+    EXPECT_EQ(entryCount, 1);
+}
+#endif
+
+#if HAVE_LIBPLDM_API_TESTING
+TEST(StateSensorPDR, testTruncatedEntry)
+{
+    // Entry claims size=5 but buffer only has room for 2 state bytes.
+    auto pdr = makeStateSensorPdr(1, {0x64, 0x0, 0x5, 0xFF, 0xFF});
+
+    int rc;
+    state_sensor_possible_states states{};
+
+    foreach_pldm_platform_state_sensor_pdr_possible_states(
+        pdr.data(), pdr.size(), states, rc)
+    {
+        FAIL() << "Should not successfully iterate truncated entry";
+    }
+
+    EXPECT_EQ(rc, -EOVERFLOW) << "Expected EOVERFLOW for truncated entry";
+}
+#endif
+
+#if HAVE_LIBPLDM_API_TESTING
+TEST(StateSensorPDR, testZeroPossibleStatesSize)
+{
+    // Entry with state_set_id=100, size=0, no state bytes.
+    auto pdr = makeStateSensorPdr(1, {0x64, 0x0, 0x0});
+
+    int rc;
+    state_sensor_possible_states states{};
+    size_t entryCount = 0;
+
+    foreach_pldm_platform_state_sensor_pdr_possible_states(
+        pdr.data(), pdr.size(), states, rc)
+    {
+        entryCount++;
+        EXPECT_EQ(le16toh(states.state_set_id), 100);
+        EXPECT_EQ(states.possible_states_size, 0);
+
+        size_t bfCount = 0;
+        bitfield8_t bf{};
+
+        foreach_pldm_platform_state_sensor_pdr_states(states, bf, rc)
+        {
+            bfCount++;
+        }
+
+        EXPECT_EQ(bfCount, 0)
+            << "Should not iterate when possible_states_size is 0";
+
+        if (rc)
+        {
+            break;
+        }
+    }
+
+    EXPECT_EQ(rc, 0);
+    EXPECT_EQ(entryCount, 1);
+}
+#endif
