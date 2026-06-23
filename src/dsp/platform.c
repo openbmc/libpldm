@@ -3695,7 +3695,7 @@ int encode_pldm_platform_file_descriptor_pdr(
 	return pldm_msgbuf_complete_used(buf, *data_len, data_len);
 }
 
-LIBPLDM_ABI_TESTING
+LIBPLDM_ABI_STABLE
 int decode_pldm_platform_redfish_resource_pdr(
 	const void *data, size_t data_length,
 	struct pldm_platform_redfish_resource_pdr *pdr)
@@ -3799,7 +3799,7 @@ int decode_pldm_platform_redfish_resource_pdr(
 	return pldm_msgbuf_complete_consumed(buf);
 }
 
-LIBPLDM_ABI_TESTING
+LIBPLDM_ABI_STABLE
 int decode_pldm_platform_redfish_resource_pdr_additional_resource_from_iter(
 	struct pldm_platform_redfish_resource_pdr_additional_resource_iter *iter,
 	struct pldm_platform_redfish_resource_pdr_additional_resource
@@ -3837,7 +3837,7 @@ int decode_pldm_platform_redfish_resource_pdr_additional_resource_from_iter(
 	return pldm_msgbuf_complete_consumed(buf);
 }
 
-LIBPLDM_ABI_TESTING
+LIBPLDM_ABI_STABLE
 int decode_pldm_platform_redfish_resource_pdr_oem_name_from_iter(
 	struct pldm_platform_redfish_resource_pdr_oem_name_iter *iter,
 	struct pldm_platform_redfish_resource_pdr_oem_name *oem_name)
@@ -3869,7 +3869,7 @@ int decode_pldm_platform_redfish_resource_pdr_oem_name_from_iter(
 	return pldm_msgbuf_complete_consumed(buf);
 }
 
-LIBPLDM_ABI_TESTING
+LIBPLDM_ABI_STABLE
 int decode_pldm_platform_redfish_action_pdr(
 	const void *data, size_t data_length,
 	struct pldm_platform_redfish_action_pdr *pdr)
@@ -3941,7 +3941,7 @@ int decode_pldm_platform_redfish_action_pdr(
 	return pldm_msgbuf_complete_consumed(buf);
 }
 
-LIBPLDM_ABI_TESTING
+LIBPLDM_ABI_STABLE
 int decode_pldm_platform_redfish_action_pdr_related_resource_id_from_iter(
 	struct pldm_platform_redfish_action_pdr_related_resource_id_iter *iter,
 	uint32_t *res)
@@ -3967,7 +3967,7 @@ int decode_pldm_platform_redfish_action_pdr_related_resource_id_from_iter(
 	return pldm_msgbuf_complete_consumed(buf);
 }
 
-LIBPLDM_ABI_TESTING
+LIBPLDM_ABI_STABLE
 int decode_pldm_platform_redfish_action_pdr_action_from_iter(
 	struct pldm_platform_redfish_action_pdr_action_iter *iter,
 	struct pldm_platform_redfish_action_pdr_action *action)
