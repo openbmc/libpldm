@@ -6835,7 +6835,6 @@ TEST(EncodePldmFileDescriptorPdr, BadParamBufferTooSmall)
 }
 #endif
 
-#if HAVE_LIBPLDM_API_TESTING
 TEST(decodeRedfishResourcePdr, GoodTest)
 {
     std::vector<uint8_t> pdr1{
@@ -6980,9 +6979,7 @@ TEST(decodeRedfishResourcePdr, GoodTest)
     EXPECT_EQ(OEMNameIndex, 2);
     EXPECT_EQ(PLDM_SUCCESS, rc);
 }
-#endif
 
-#if HAVE_LIBPLDM_API_TESTING
 TEST(decodeRedfishActionPdr, GoodTest)
 {
     std::vector<uint8_t> pdr1{
@@ -7082,7 +7079,6 @@ TEST(decodeRedfishActionPdr, GoodTest)
     EXPECT_EQ(actionIndex, 2);
     EXPECT_EQ(PLDM_SUCCESS, rc);
 }
-#endif
 
 #if HAVE_LIBPLDM_API_TESTING
 TEST(StateEffecterPDR, testExtractPossibleStates)

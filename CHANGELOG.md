@@ -25,6 +25,8 @@ Change categories:
 ### Changed
 
 - libpldm: Improve application of the IWYU principle
+- dsp: base: Stabilise `decode_pldm_platform_redfish_resource_pdr*()` functions
+- dsp: base: Stabilise `decode_pldm_platform_redfish_action_pdr*()` functions
 
 ### Deprecated
 
