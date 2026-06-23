@@ -466,6 +466,10 @@ decode_pldm_package_header_info_errno(const void *data, size_t length,
 	if (rc) {
 		return pldm_msgbuf_discard(buf, rc);
 	}
+	if (hdr->package_header_format_revision <
+	    PLDM_PACKAGE_HEADER_FORMAT_REVISION_FR01H) {
+		return pldm_msgbuf_discard(buf, -EPROTO);
+	}
 	if (hdr->package_header_format_revision > pin->format.revision) {
 		return pldm_msgbuf_discard(buf, -ENOTSUP);
 	}
