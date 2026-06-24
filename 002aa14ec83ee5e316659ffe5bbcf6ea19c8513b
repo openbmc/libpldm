@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5ec3ad47_e197694a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-06-24T02:13:34Z",
+      "side": 1,
+      "message": "@alexander.hansen@9elements.com I\u0027ve fixed and merged the fuzzing support for the C firmware update package parsing APIs. I\u0027d like to see fuzzing support for the C++ APIs also.",
+      "revId": "002aa14ec83ee5e316659ffe5bbcf6ea19c8513b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
