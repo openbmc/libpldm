@@ -16,6 +16,24 @@
       "message": "@alexander.hansen@9elements.com I\u0027ve fixed and merged the fuzzing support for the C firmware update package parsing APIs. I\u0027d like to see fuzzing support for the C++ APIs also.",
       "revId": "002aa14ec83ee5e316659ffe5bbcf6ea19c8513b",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "046ced94_c0be6216",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2026-06-24T16:06:58Z",
+      "side": 1,
+      "message": "pushed the patch to add some basic fuzzing. Sorry for taking so long.\n\nhttps://gerrit.openbmc.org/c/openbmc/libpldm/+/91683",
+      "parentUuid": "5ec3ad47_e197694a",
+      "revId": "002aa14ec83ee5e316659ffe5bbcf6ea19c8513b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
