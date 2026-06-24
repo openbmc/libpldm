@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7e3e822c_23f04f16",
+        "filename": "tests/fuzz/meson.build",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1002504
+      },
+      "writtenOn": "2026-06-24T18:36:17Z",
+      "side": 1,
+      "message": "stupid question, does this work in tandem with asan? can it?",
+      "revId": "deab3764dbdc6a1084e3829e586bdfb0802e80c2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
