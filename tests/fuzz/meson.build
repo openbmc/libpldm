@@ -12,6 +12,16 @@ fuzz = executable(
     build_by_default: get_option('test-methods').contains('fuzz'),
 )
 
+fuzz_cpp = executable(
+    'fuzz_cpp',
+    'fuzz_cpp.cpp',
+    link_args: ['-fsanitize=fuzzer'],
+    implicit_include_directories: false,
+    include_directories: test_include_dirs,
+    dependencies: [libpldm_dep, libpldmpp_dep],
+    build_by_default: get_option('test-methods').contains('fuzz'),
+)
+
 if get_option('test-methods').contains('fuzz')
     jobs = run_command(
         find_program('nproc', required: true),
@@ -27,6 +37,19 @@ if get_option('test-methods').contains('fuzz')
             '-workers=@0@'.format(jobs),
         ],
         env: {'LLVM_PROFILE_FILE': 'fuzz.%p.profraw'},
+        is_parallel: false,
+        timeout: 0,
+    )
+
+    test(
+        'fuzz_cpp',
+        fuzz_cpp,
+        args: [
+            '-max_total_time=30',
+            '-jobs=@0@'.format(jobs),
+            '-workers=@0@'.format(jobs),
+        ],
+        env: {'LLVM_PROFILE_FILE': 'fuzz_cpp.%p.profraw'},
         is_parallel: false,
         timeout: 0,
     )
