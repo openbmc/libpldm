@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a7bec031_91de5d11",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-06-24T02:35:18Z",
+      "side": 1,
+      "message": "This isn\u0027t true, as you could set necessary variable on the command-line along with the appropriate target. I don\u0027t think this is a strong or accurate point.",
+      "range": {
+        "startLine": 12,
+        "startChar": 40,
+        "endLine": 13,
+        "endChar": 58
+      },
+      "revId": "56c701cf7595268086616ec9d5466225b8c9b869",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "86736d25_229ed00f",
+        "filename": "scripts/crater",
+        "patchSetId": 5
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-06-24T02:35:18Z",
+      "side": 1,
+      "message": "Make these `local`.",
+      "range": {
+        "startLine": 25,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 17
+      },
+      "revId": "56c701cf7595268086616ec9d5466225b8c9b869",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "970ce265_d10fbb4e",
+        "filename": "scripts/crater",
+        "patchSetId": 5
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-06-24T02:35:18Z",
+      "side": 1,
+      "message": "Use `--tempdir` instead, and drop the assignment to `TMPDIR` above on line 11.",
+      "range": {
+        "startLine": 28,
+        "startChar": 25,
+        "endLine": 28,
+        "endChar": 35
+      },
+      "revId": "56c701cf7595268086616ec9d5466225b8c9b869",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}

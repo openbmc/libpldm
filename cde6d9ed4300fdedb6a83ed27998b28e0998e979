@@ -36,6 +36,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "85163777_08df1837",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-06-24T02:35:18Z",
+      "side": 1,
+      "message": "I see `make` as a domain-specific scripting language. I don\u0027t feel it\u0027s necessary to constrain ourselves to one scripting language in `scripts/`.\n\n\nIn the future I ask that you discuss concerns and develop consensus before proposing patches that take a much different direction to what we have (this current patchset being an example, but not a particularly critical one).\n\nThe alternative was becoming comfortable with `make` as a language.",
+      "parentUuid": "39c2eae0_ad4740de",
+      "revId": "cde6d9ed4300fdedb6a83ed27998b28e0998e979",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d69dee1e_0860b714",
