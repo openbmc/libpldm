@@ -34,6 +34,23 @@
       "parentUuid": "5ec3ad47_e197694a",
       "revId": "002aa14ec83ee5e316659ffe5bbcf6ea19c8513b",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "506f14a9_1804fdb5",
+        "filename": "tests/unit/bindings/cpp/firmware-update-test-v1-1-0.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 1002504
+      },
+      "writtenOn": "2026-06-24T18:33:35Z",
+      "side": 1,
+      "message": "what about a negative test that v1.0 pin parse function fails on a v1.1 package?",
+      "revId": "002aa14ec83ee5e316659ffe5bbcf6ea19c8513b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
