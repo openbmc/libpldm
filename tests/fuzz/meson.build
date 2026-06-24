@@ -27,3 +27,25 @@ test(
     is_parallel: false,
     timeout: 0,
 )
+
+fuzzpp = executable(
+    'fuzz++',
+    'fuzz++.cpp',
+    link_args: ['-fsanitize=fuzzer'],
+    implicit_include_directories: false,
+    include_directories: test_include_dirs,
+    dependencies: [libpldmpp_dep],
+)
+
+test(
+    'fuzz++',
+    fuzzpp,
+    args: [
+        '-max_total_time=30',
+        '-jobs=@0@'.format(jobs),
+        '-workers=@0@'.format(jobs),
+    ],
+    env: {'LLVM_PROFILE_FILE': 'fuzz++.%p.profraw'},
+    is_parallel: false,
+    timeout: 0,
+)
