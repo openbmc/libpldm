@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "aab7c11d_0aad7701",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2026-06-24T09:54:42Z",
+      "side": 1,
+      "message": "okay, i did not consider that possibility. I thought it was a script one could just run without having to customize anything.\n\nAnyways i changed the reasoning in the commit message to be more about reducing the amount of tools and languages being used when a shell script can do the job as well.",
+      "parentUuid": "a7bec031_91de5d11",
+      "range": {
+        "startLine": 12,
+        "startChar": 40,
+        "endLine": 13,
+        "endChar": 58
+      },
+      "revId": "56c701cf7595268086616ec9d5466225b8c9b869",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "86736d25_229ed00f",
@@ -47,6 +71,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "891049cf_83c73ec2",
+        "filename": "scripts/crater",
+        "patchSetId": 5
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2026-06-24T09:54:42Z",
+      "side": 1,
+      "message": "Done. Had to change it to a bash script, otherwise\n\n```\n    Running shellcheck (0.11.0)\n\nIn scripts/crater line 24:\n    local name\u003d\"$1\"\n    ^--------^ SC3043 (warning): In POSIX sh, \u0027local\u0027 is undefined.\n\n\nIn scripts/crater line 25:\n    local repo_url\u003d\"$2\"\n    ^------------^ SC3043 (warning): In POSIX sh, \u0027local\u0027 is undefined.\n```",
+      "parentUuid": "86736d25_229ed00f",
+      "range": {
+        "startLine": 25,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 17
+      },
+      "revId": "56c701cf7595268086616ec9d5466225b8c9b869",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "970ce265_d10fbb4e",
@@ -60,6 +108,30 @@
       "writtenOn": "2026-06-24T02:35:18Z",
       "side": 1,
       "message": "Use `--tempdir` instead, and drop the assignment to `TMPDIR` above on line 11.",
+      "range": {
+        "startLine": 28,
+        "startChar": 25,
+        "endLine": 28,
+        "endChar": 35
+      },
+      "revId": "56c701cf7595268086616ec9d5466225b8c9b869",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "48267766_366fcefa",
+        "filename": "scripts/crater",
+        "patchSetId": 5
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2026-06-24T09:54:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "970ce265_d10fbb4e",
       "range": {
         "startLine": 28,
         "startChar": 25,

@@ -54,6 +54,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7d4d78fc_1150c0af",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2026-06-24T09:54:42Z",
+      "side": 1,
+      "message": "\u003e I see make as a domain-specific scripting language. I don\u0027t feel it\u0027s necessary to constrain ourselves to one scripting language in scripts/.\n\nSure but we already have shell, awk, perl, C, C++, meson, ninja, ...\nat some point we have to stop. I am not saying this is the point but if we can achieve the same goal with a tool we are already using, it is simpler for folks to contribute without having to learn a new thing.\n\n\u003e In the future I ask that you discuss concerns and develop consensus \nbefore proposing patches that take a much different direction to what we\n have\n\nSure, i will try to keep it in mind.",
+      "parentUuid": "85163777_08df1837",
+      "revId": "cde6d9ed4300fdedb6a83ed27998b28e0998e979",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d69dee1e_0860b714",
