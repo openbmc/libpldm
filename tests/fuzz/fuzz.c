@@ -270,7 +270,6 @@ static int fuzz_decode_pldm_platform_set_numeric_sensor_enable_resp(
     return 0;
 }
 
-#if HAVE_LIBPLDM_API_TESTING
 static int fuzz_decode_pldm_file_df_heartbeat_req(const struct pldm_msg* msg,
                                                   size_t payload_length)
 {
@@ -280,14 +279,11 @@ static int fuzz_decode_pldm_file_df_heartbeat_req(const struct pldm_msg* msg,
 
     return 0;
 }
-#endif
 
 static int (*const decode_pldm_msg_tests[])(const struct pldm_msg*, size_t) = {
     fuzz_decode_pldm_base_get_pldm_types_resp,
     fuzz_decode_pldm_platform_set_numeric_sensor_enable_resp,
-#if HAVE_LIBPLDM_API_TESTING
     fuzz_decode_pldm_file_df_heartbeat_req,
-#endif
 };
 
 static int libpldm_decode_one_pldm_msg(const uint8_t* data, size_t size)
@@ -376,7 +372,6 @@ static int fuzz_encode_pldm_platform_set_numeric_sensor_enable_req(
     return 0;
 }
 
-#if HAVE_LIBPLDM_API_TESTING
 static int fuzz_encode_pldm_file_df_heartbeat_resp(struct pldm_msg* msg,
                                                    size_t payload_length,
                                                    const uint8_t* data,
@@ -408,15 +403,12 @@ static int fuzz_encode_pldm_file_df_heartbeat_resp(struct pldm_msg* msg,
 
     return 0;
 }
-#endif
 
 static int (*const encode_pldm_msg_tests[])(struct pldm_msg*, size_t,
                                             const uint8_t*, size_t) = {
     fuzz_encode_pldm_base_get_pldm_types_resp,
     fuzz_encode_pldm_platform_set_numeric_sensor_enable_req,
-#if HAVE_LIBPLDM_API_TESTING
     fuzz_encode_pldm_file_df_heartbeat_resp,
-#endif
 };
 
 static int libpldm_encode_one_pldm_msg(const uint8_t* data, size_t size)

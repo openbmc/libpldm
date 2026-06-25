@@ -8,5 +8,9 @@ if get_option('test-methods').contains('unit')
 endif
 
 if get_option('test-methods').contains('fuzz')
-    subdir('fuzz')
+    if get_option('abi').contains('testing')
+        subdir('fuzz')
+    else
+        error('Configure build with testing ABI to enable fuzz targets')
+    endif
 endif
