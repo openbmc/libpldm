@@ -36,6 +36,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e7d214c1_cc57994a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2026-06-26T16:26:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "046ced94_c0be6216",
+      "revId": "002aa14ec83ee5e316659ffe5bbcf6ea19c8513b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "506f14a9_1804fdb5",
@@ -49,6 +67,24 @@
       "writtenOn": "2026-06-24T18:33:35Z",
       "side": 1,
       "message": "what about a negative test that v1.0 pin parse function fails on a v1.1 package?",
+      "revId": "002aa14ec83ee5e316659ffe5bbcf6ea19c8513b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c4d9999f_c56cc212",
+        "filename": "tests/unit/bindings/cpp/firmware-update-test-v1-1-0.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2026-06-26T16:26:33Z",
+      "side": 1,
+      "message": "Interesting point, It does not fail to parse it with the patchset you commented on.\n\nlibpldm rejects packages with format revision higher than the pin parameter.\n\n```\n  |       if (hdr-\u003epackage_header_format_revision \u003c\n  |           PLDM_PACKAGE_HEADER_FORMAT_REVISION_FR01H) {\n  |       |       return pldm_msgbuf_discard(buf, -EPROTO);\n  |       }\n  |       if (hdr-\u003epackage_header_format_revision \u003e pin-\u003eformat.revision) {\n  |       |       return pldm_msgbuf_discard(buf, -ENOTSUP);\n  |       }\n  \n```\n\nIf we need this restriction or not, it depends on if the meaning of certain fields in the package changes in the future or any small details like that.\n\nI changed the behavior to do the conservative thing (as libpldm does) and simply reject the package if the actual format revision is higher than what the user code asked for.\n\nAlso implemented the test you asked for.\n\nthanks for your review ❤️",
+      "parentUuid": "506f14a9_1804fdb5",
       "revId": "002aa14ec83ee5e316659ffe5bbcf6ea19c8513b",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
