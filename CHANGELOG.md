@@ -32,6 +32,7 @@ Change categories:
 
 ### Fixed
 
+- edac: Expose pldm_edac_crc32_validate() symbol in the shared library ABI
 - dsp: fwup: Reject reserved package format revision
 - control: fix typos in control API documentation
 
