@@ -102,8 +102,8 @@ uint32_t pldm_edac_crc32_extend(const void *data, size_t size, uint32_t crc)
 	return crc ^ ~0U;
 }
 
-LIBPLDM_CC_WEAK
-int pldm_edac_crc32_validate(uint32_t expected, const void *data, size_t size)
+LIBPLDM_ABI_TESTING LIBPLDM_CC_WEAK int
+pldm_edac_crc32_validate(uint32_t expected, const void *data, size_t size)
 {
 	if (!data && size) { /* data is NULL but size is not zero */
 		return -EINVAL;
