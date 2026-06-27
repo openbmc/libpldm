@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c75f3ad1_f00ddcee",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-06-27T02:11:15Z",
+      "side": 1,
+      "message": "Hmm, that wasn\u0027t meant to be the case. I\u0027ve fixed it here:\n\n\n[edac: Expose pldm_edac_crc32_validate() symbol in the shared library ABI](https://gerrit.openbmc.org/c/openbmc/libpldm/+/91779)\n\nCan you review that so we can get it merged, then you can rebase this change and adjust the commit message?",
+      "range": {
+        "startLine": 16,
+        "startChar": 39,
+        "endLine": 17,
+        "endChar": 10
+      },
+      "revId": "832804412628546b6837feaa861152f880cd92ed",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
