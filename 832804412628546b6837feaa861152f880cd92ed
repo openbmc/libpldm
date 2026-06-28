@@ -22,6 +22,30 @@
       },
       "revId": "832804412628546b6837feaa861152f880cd92ed",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "61e7f27a_c2204ec7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2026-06-28T13:32:24Z",
+      "side": 1,
+      "message": "reviewed and rebased, message adjusted ✔\n\nThings look to be working as expected\n\n\n```\n[alexander@alexanderarchlinux libpldm]$ ldd build-fuzz/tests/fuzz/fuzz_cpp\n\tlinux-vdso.so.1 (0x00007fda4dc3f000)\n\tlibstdc++.so.6 \u003d\u003e /usr/lib/libstdc++.so.6 (0x00007fda4ca00000)\n\tlibpldm++.so.0 \u003d\u003e /home/alexander/upstreaming/libpldm/build-fuzz/tests/fuzz/../../bindings/cpp/libpldm++.so.0 (0x00007fda4dbda000)\n\tlibm.so.6 \u003d\u003e /usr/lib/libm.so.6 (0x00007fda4c8cd000)\n\tlibresolv.so.2 \u003d\u003e /usr/lib/libresolv.so.2 (0x00007fda4dbc6000)\n\tlibgcc_s.so.1 \u003d\u003e /usr/lib/libgcc_s.so.1 (0x00007fda4db99000)\n\tlibc.so.6 \u003d\u003e /usr/lib/libc.so.6 (0x00007fda4c600000)\n\t/lib64/ld-linux-x86-64.so.2 \u003d\u003e /usr/lib64/ld-linux-x86-64.so.2 (0x00007fda4dc41000)\n\tlibpldm.so.0 \u003d\u003e /home/alexander/upstreaming/libpldm/build-fuzz/tests/fuzz/../../bindings/cpp/../../src/libpldm.so.0 (0x00007fda4c200000)\n```\n```\n[alexander@alexanderarchlinux libpldm]$ nm --line-numbers build-fuzz/tests/fuzz/fuzz_cpp | grep crc32\n00000000002dbd88 T pldm_edac_crc32_validate\t/home/alexander/upstreaming/libpldm/build-fuzz/../tests/fuzz/fuzz_cpp.cpp:10\n```\n\nSomewhat related, i also tried to find coverage information\n\n```\nLLVM_PROFILE_FILE\u003ddefault.profraw ./build-fuzz/tests/fuzz/fuzz_cpp -max_total_time\u003d5 -max_len\u003d150 ~/upstreaming/libpldm-fuzz/\n\nllvm-profdata merge -sparse default.profraw -o default.profdata\n\nllvm-cov show ./build-fuzz/tests/fuzz/fuzz_cpp -instr-profile\u003ddefault.profdata      -format\u003dtext \u003e fuzz-coverage.txt\n```\n\nand there it says it did not hit my override\n\n```\n   10|       |extern \"C\" int pldm_edac_crc32_validate(uint32_t expected\n   11|       |                                        __attribute__((unused)),\n   12|       |                                        const void* data\n   13|       |                                        __attribute__((unused)),\n   14|       |                                        size_t size __attribute__((unused)))\n   15|      0|{\n   16|      0|    return 0;\n   17|      0|} \n   18|       |  \n```\n\nmeanwhile the consumePackage was run quite often\n```\n  130|   952k|    std::expected\u003cstd::unique_ptr\u003cpldm::fw_update::Package\u003e,\n  131|   952k|                  pldm::fw_update::PackageParserError\u003e\n  132|   952k|        res \u003d pldm::fw_update::PackageParser::parse(\n  133|   952k|            p, pldm::fw_update::PackagePin::v1);\n  134|       |\n  135|   952k|    if (!res.has_value())\n  136|   949k|    {   \n  137|   949k|        free(package);\n  138|   949k|        return 0;\n  139|   949k|    }       \n  140|       |\n  141|  2.78k|    consumePackage(res.value());\n```\n\nso i assume i did some user error or hit a bug with the llvm tooling (not sure if the coverage tooling can deal with symbols that have more than one definition).",
+      "parentUuid": "c75f3ad1_f00ddcee",
+      "range": {
+        "startLine": 16,
+        "startChar": 39,
+        "endLine": 17,
+        "endChar": 10
+      },
+      "revId": "832804412628546b6837feaa861152f880cd92ed",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
