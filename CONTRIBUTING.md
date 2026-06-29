@@ -566,8 +566,8 @@ Changelog entries broadly fall into one of two cases
   >   - `decode_numeric_sensor_data()`
   >   - `decode_sensor_op_data()`
   >
-  >   No new error values will be returned, but existing error values may be
-  >   returned under new conditions.
+  > No new error values will be returned, but existing error values may be
+  > returned under new conditions.
 
 ### Constants and Enumerations
 
