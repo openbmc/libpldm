@@ -16,6 +16,24 @@
       "message": "Given the changelog entry is under `### Fixed`, can you please add a `Fixes:` tag here?",
       "revId": "d77eb084e2e2ab836e0337ef8876804d9eacadef",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c8a6ccad_aba8e50f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2026-06-29T19:45:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "617b316e_6e1930ec",
+      "revId": "d77eb084e2e2ab836e0337ef8876804d9eacadef",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
