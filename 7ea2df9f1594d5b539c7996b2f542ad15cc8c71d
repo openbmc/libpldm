@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "51211a2f_3e3b40a0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000926
+      },
+      "writtenOn": "2026-06-29T10:31:31Z",
+      "side": 1,
+      "message": "It looks like gcc.dump files get in conflict pretty quick. Should I keep rebasing patchset or wait for the review?",
+      "revId": "7ea2df9f1594d5b539c7996b2f542ad15cc8c71d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
