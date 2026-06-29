@@ -557,7 +557,9 @@ Changelog entries broadly fall into one of two cases
   For example:
 
   > - Returned error values for the following stable APIs have changed their
-  >   semantics:
+  >   semantics. No new error values will be returned, but existing error values
+  >   may be returned under new conditions:
+  >
   >   - `decode_descriptor_type_length_value()`
   >   - `decode_event_message_buffer_size_resp()`
   >   - `decode_get_numeric_effecter_value_resp()`
@@ -565,9 +567,6 @@ Changelog entries broadly fall into one of two cases
   >   - `decode_get_state_sensor_readings_resp()`
   >   - `decode_numeric_sensor_data()`
   >   - `decode_sensor_op_data()`
-  >
-  >   No new error values will be returned, but existing error values may be
-  >   returned under new conditions.
 
 ### Constants and Enumerations
 
