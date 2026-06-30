@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "931add30_119f088a",
+        "filename": "CONTRIBUTING.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 570,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-06-30T00:04:31Z",
+      "side": 1,
+      "message": "This isn\u0027t the right change as the explanatory text is now no-longer tied to the bullet-point.\n\nCI suggests the expected change, e.g. in: https://jenkins.openbmc.org/job/ci-repository/138777/console\n\nYou can apply that diff directly as discussed in:\n\nhttps://amboar.github.io/notes/2023/05/03/fixing-formatting-CI-failures-in-openbmc.html",
+      "range": {
+        "startLine": 569,
+        "startChar": 0,
+        "endLine": 570,
+        "endChar": 34
+      },
+      "revId": "f8f32972fe457181d2ae92180be928777dcf833e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
