@@ -46,6 +46,30 @@
       },
       "revId": "f8f32972fe457181d2ae92180be928777dcf833e",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "20873a61_56e7854d",
+        "filename": "CONTRIBUTING.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 570,
+      "author": {
+        "id": 1002885
+      },
+      "writtenOn": "2026-06-30T02:00:06Z",
+      "side": 1,
+      "message": "oic, thanks for the catching and acknowledging!\nWill keep track of this in the future!",
+      "parentUuid": "efb10e2d_caf35aaa",
+      "range": {
+        "startLine": 569,
+        "startChar": 0,
+        "endLine": 570,
+        "endChar": 34
+      },
+      "revId": "f8f32972fe457181d2ae92180be928777dcf833e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
