@@ -50,6 +50,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "ac7815da_73d36ee9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2026-07-01T15:55:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6642bdd0_e8224b19",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 31
+      },
+      "revId": "7ced69f6cff2dc73242b194df9d24a4c5819e727",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "d5bde14d_420c6bf9",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 2
@@ -96,6 +120,24 @@
       "side": 1,
       "message": "it is not.  will remove.",
       "parentUuid": "fce7a2a6_800f6996",
+      "revId": "7ced69f6cff2dc73242b194df9d24a4c5819e727",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "946c8619_611c9eff",
+        "filename": "include/libpldm/base.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 729,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2026-07-01T15:55:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bf60efa0_52307ba8",
       "revId": "7ced69f6cff2dc73242b194df9d24a4c5819e727",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -149,6 +191,24 @@
       "side": 1,
       "message": "Skiboot and hostboot?\n\nhttps://github.com/search?q\u003ddecode_multipart_receive_req\u0026type\u003dcode\u0026p\u003d1",
       "parentUuid": "59204f7a_bada4395",
+      "revId": "7ced69f6cff2dc73242b194df9d24a4c5819e727",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "317c27d0_30dd2d35",
+        "filename": "include/libpldm/base.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 734,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2026-07-01T15:55:05Z",
+      "side": 1,
+      "message": "Right I saw those, but I thought they were just embedded/vendored libpldm forks, and I didn\u0027t see any actual users.  Did I miss it?",
+      "parentUuid": "0b5d38ff_f72fb349",
       "revId": "7ced69f6cff2dc73242b194df9d24a4c5819e727",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -214,6 +274,30 @@
       "side": 1,
       "message": "The other thing to note with the msgbuf APIs is that if you use an extracted value, you should test the result of its specific extraction to ensure you won\u0027t read uninitialised memory. The compiler will optimise away the unnecessary checks, so my preference is to just test everything you need to use.",
       "parentUuid": "c273d20c_e14615ac",
+      "range": {
+        "startLine": 614,
+        "startChar": 1,
+        "endLine": 627,
+        "endChar": 1
+      },
+      "revId": "7ced69f6cff2dc73242b194df9d24a4c5819e727",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "29cbca0b_60791169",
+        "filename": "src/dsp/base.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 627,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2026-07-01T15:55:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "06f4993d_5c9e6575",
       "range": {
         "startLine": 614,
         "startChar": 1,
