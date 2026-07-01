@@ -1298,7 +1298,7 @@ int encode_poll_for_platform_event_message_resp(
 		}
 	}
 
-	if (transfer_flag == PLDM_END || transfer_flag == PLDM_START_AND_END) {
+	if (transfer_flag == PLDM_END) {
 		pldm_msgbuf_insert(buf, checksum);
 	}
 
