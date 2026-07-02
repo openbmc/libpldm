@@ -29,6 +29,8 @@ Change categories:
 
 ### Fixed
 
+- dsp: pdr: Bound children read in `pldm_entity_association_pdr_extract()`
+
 ### Security
 
 ## [v0.17.0] - 2026-07-05
