@@ -9,6 +9,7 @@
 #include <assert.h>
 #include <endian.h>
 #include <limits.h>
+#include <stddef.h>
 #include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
@@ -1586,7 +1587,17 @@ void pldm_entity_association_pdr_extract(const uint8_t *pdr, uint16_t pdr_len,
 		return;
 	}
 
-	if ((pdr_len - sizeof(struct pldm_pdr_hdr)) / sizeof(pldm_entity) <
+	/*
+	 * children[] begins after the fixed entity-association prefix (PDR
+	 * header plus container_id, association_type, container and
+	 * num_children), not immediately after the PDR header. Bound
+	 * num_children against the space actually remaining in the buffer so
+	 * the copy loop below cannot read past its end.
+	 */
+	if ((pdr_len -
+	     (sizeof(struct pldm_pdr_hdr) +
+	      offsetof(struct pldm_pdr_entity_association, children))) /
+		    sizeof(pldm_entity) <
 	    l_num_entities) {
 		return;
 	}
