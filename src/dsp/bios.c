@@ -1,4 +1,5 @@
 /* SPDX-License-Identifier: Apache-2.0 OR GPL-2.0-or-later */
+#include "api.h"
 #include "utils.h"
 
 #include <libpldm/base.h>
@@ -57,6 +58,41 @@ int encode_get_date_time_resp(uint8_t instance_id, uint8_t completion_code,
 		response->year = htole16(year);
 	}
 	return PLDM_SUCCESS;
+}
+
+LIBPLDM_ABI_TESTING
+int encode_pldm_bios_get_date_time_resp(
+	uint8_t instance_id, const struct pldm_get_date_time_resp *resp,
+	struct pldm_msg *msg, size_t *payload_length)
+{
+	int rc;
+
+	if (msg == NULL || resp == NULL || payload_length == NULL) {
+		return -EINVAL;
+	}
+
+	if (*payload_length < PLDM_GET_DATE_TIME_RESP_BYTES) {
+		return -EOVERFLOW;
+	}
+
+	struct pldm_header_info header = { 0 };
+	header.msg_type = PLDM_RESPONSE;
+	header.instance = instance_id;
+	header.pldm_type = PLDM_BIOS;
+	header.command = PLDM_GET_DATE_TIME;
+
+	rc = pack_pldm_header(&header, &(msg->hdr));
+	if (rc) {
+		return rc;
+	}
+
+	struct pldm_get_date_time_resp *response =
+		(struct pldm_get_date_time_resp *)msg->payload;
+	memcpy(response, resp, sizeof(struct pldm_get_date_time_resp));
+	response->year = htole16(resp->year);
+
+	*payload_length = PLDM_GET_DATE_TIME_RESP_BYTES;
+	return 0;
 }
 
 LIBPLDM_ABI_STABLE
