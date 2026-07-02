@@ -26,6 +26,7 @@ Change categories:
 
 ### Changed
 
+- dsp: base: Stabilise `decode_pldm_base_multipart_receive_req()`
 - dsp: base: Stabilise `decode_pldm_platform_redfish_resource_pdr*()` functions
 - dsp: base: Stabilise `decode_pldm_platform_redfish_action_pdr*()` functions
 - libpldm: Improve application of the IWYU principle

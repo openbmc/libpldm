@@ -587,7 +587,7 @@ int decode_multipart_receive_req(const struct pldm_msg *msg,
 	return PLDM_SUCCESS;
 }
 
-LIBPLDM_ABI_TESTING
+LIBPLDM_ABI_STABLE
 int decode_pldm_base_multipart_receive_req(
 	const struct pldm_msg *msg, size_t payload_length,
 	struct pldm_base_multipart_receive_req *req)

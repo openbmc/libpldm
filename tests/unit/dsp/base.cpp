@@ -770,7 +770,6 @@ TEST(EncodeMultipartReceiveRequest, BadTestInvalidExpectedOutputMsgLength)
 }
 #endif
 
-#if HAVE_LIBPLDM_API_TESTING
 TEST(DecodeMultipartReceiveReq, GoodTest)
 {
     constexpr uint8_t kPldmType = PLDM_BASE;
@@ -806,9 +805,7 @@ TEST(DecodeMultipartReceiveReq, GoodTest)
     EXPECT_EQ(req.section_offset, kSectionOffset);
     EXPECT_EQ(req.section_length, kSectionLength);
 }
-#endif
 
-#if HAVE_LIBPLDM_API_TESTING
 TEST(DecodeMultipartReceiveReq, NullMsg)
 {
     struct pldm_base_multipart_receive_req req = {};
@@ -816,9 +813,7 @@ TEST(DecodeMultipartReceiveReq, NullMsg)
                   nullptr, PLDM_MULTIPART_RECEIVE_REQ_BYTES, &req),
               -EINVAL);
 }
-#endif
 
-#if HAVE_LIBPLDM_API_TESTING
 TEST(DecodeMultipartReceiveReq, NullReq)
 {
     PLDM_MSG_DEFINE_P(msg, PLDM_MULTIPART_RECEIVE_REQ_BYTES);
@@ -827,9 +822,7 @@ TEST(DecodeMultipartReceiveReq, NullReq)
                   msg, PLDM_MULTIPART_RECEIVE_REQ_BYTES, nullptr),
               -EINVAL);
 }
-#endif
 
-#if HAVE_LIBPLDM_API_TESTING
 TEST(DecodeMultipartReceiveReq, ShortPayload)
 {
     PLDM_MSG_DEFINE_P(msg, PLDM_MULTIPART_RECEIVE_REQ_BYTES);
@@ -839,9 +832,7 @@ TEST(DecodeMultipartReceiveReq, ShortPayload)
                   msg, PLDM_MULTIPART_RECEIVE_REQ_BYTES - 1, &req),
               -EOVERFLOW);
 }
-#endif
 
-#if HAVE_LIBPLDM_API_TESTING
 TEST(DecodeMultipartReceiveReq, LongPayload)
 {
     PLDM_MSG_DEFINE_P(msg, PLDM_MULTIPART_RECEIVE_REQ_BYTES + 1);
@@ -851,9 +842,7 @@ TEST(DecodeMultipartReceiveReq, LongPayload)
                   msg, PLDM_MULTIPART_RECEIVE_REQ_BYTES + 1, &req),
               -EBADMSG);
 }
-#endif
 
-#if HAVE_LIBPLDM_API_TESTING
 TEST(DecodeMultipartReceiveReq, BadTransferOpflag)
 {
     constexpr uint8_t kPldmType = PLDM_BASE;
@@ -875,9 +864,7 @@ TEST(DecodeMultipartReceiveReq, BadTransferOpflag)
                   msg, PLDM_MULTIPART_RECEIVE_REQ_BYTES, &req),
               -EPROTO);
 }
-#endif
 
-#if HAVE_LIBPLDM_API_TESTING
 TEST(DecodeMultipartReceiveReq, ZeroHandleNextPart)
 {
     constexpr uint8_t kPldmType = PLDM_BASE;
@@ -907,9 +894,7 @@ TEST(DecodeMultipartReceiveReq, ZeroHandleNextPart)
                   msg, PLDM_MULTIPART_RECEIVE_REQ_BYTES, &req),
               -EPROTO);
 }
-#endif
 
-#if HAVE_LIBPLDM_API_TESTING
 TEST(DecodeMultipartReceiveReq, ZeroHandleFirstPart)
 {
     constexpr uint8_t kPldmType = PLDM_BASE;
@@ -939,9 +924,7 @@ TEST(DecodeMultipartReceiveReq, ZeroHandleFirstPart)
                   msg, PLDM_MULTIPART_RECEIVE_REQ_BYTES, &req),
               0);
 }
-#endif
 
-#if HAVE_LIBPLDM_API_TESTING
 TEST(MultipartReceiveReqRoundTrip, FirstPart)
 {
     const struct pldm_base_multipart_receive_req req_in = {
@@ -965,9 +948,7 @@ TEST(MultipartReceiveReqRoundTrip, FirstPart)
     EXPECT_EQ(req_out.section_offset, req_in.section_offset);
     EXPECT_EQ(req_out.section_length, req_in.section_length);
 }
-#endif
 
-#if HAVE_LIBPLDM_API_TESTING
 TEST(MultipartReceiveReqRoundTrip, NextPart)
 {
     const struct pldm_base_multipart_receive_req req_in = {
@@ -991,9 +972,7 @@ TEST(MultipartReceiveReqRoundTrip, NextPart)
     EXPECT_EQ(req_out.section_offset, req_in.section_offset);
     EXPECT_EQ(req_out.section_length, req_in.section_length);
 }
-#endif
 
-#if HAVE_LIBPLDM_API_TESTING
 TEST(MultipartReceiveReqRoundTrip, CurrentPart)
 {
     const struct pldm_base_multipart_receive_req req_in = {
@@ -1017,9 +996,7 @@ TEST(MultipartReceiveReqRoundTrip, CurrentPart)
     EXPECT_EQ(req_out.section_offset, req_in.section_offset);
     EXPECT_EQ(req_out.section_length, req_in.section_length);
 }
-#endif
 
-#if HAVE_LIBPLDM_API_TESTING
 TEST(MultipartReceiveReqRoundTrip, MatchesLegacyDecoder)
 {
     const struct pldm_base_multipart_receive_req req_in = {
@@ -1055,7 +1032,6 @@ TEST(MultipartReceiveReqRoundTrip, MatchesLegacyDecoder)
     EXPECT_EQ(req_new.section_offset, section_offset);
     EXPECT_EQ(req_new.section_length, section_length);
 }
-#endif
 
 #if HAVE_LIBPLDM_API_TESTING
 TEST(DecodeMultipartReceiveResponse, GoodTest)
