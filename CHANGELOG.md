@@ -32,6 +32,10 @@ Change categories:
 
 ### Deprecated
 
+- dsp: base: Deprecate `decode_multipart_receive_req()`
+
+  Users should switch to `decode_pldm_base_multipart_receive_req()`
+
 ### Removed
 
 ### Fixed
