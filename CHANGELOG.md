@@ -22,6 +22,7 @@ Change categories:
 - dsp: file: Introduce `decode_pldm_file_df_heartbeat_req()`
 - dsp: file: Introduce `encode_pldm_file_df_heartbeat_resp()`
 - dsp: base: Add `decode_pldm_base_multipart_receive_req()`
+- dsp: bios: Add `encode_pldm_bios_get_date_time_resp()`
 
 ### Changed
 

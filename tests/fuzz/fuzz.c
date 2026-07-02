@@ -292,12 +292,27 @@ static int
 }
 #endif
 
+#if HAVE_LIBPLDM_API_TESTING
+static int fuzz_decode_pldm_bios_get_date_time_resp(const struct pldm_msg* msg,
+                                                    size_t payload_length)
+{
+    struct pldm_get_date_time_resp resp;
+
+    decode_get_date_time_resp(msg, payload_length, &resp.completion_code,
+                              &resp.seconds, &resp.minutes, &resp.hours,
+                              &resp.day, &resp.month, &resp.year);
+
+    return 0;
+}
+#endif
+
 static int (*const decode_pldm_msg_tests[])(const struct pldm_msg*, size_t) = {
     fuzz_decode_pldm_base_get_pldm_types_resp,
     fuzz_decode_pldm_platform_set_numeric_sensor_enable_resp,
     fuzz_decode_pldm_file_df_heartbeat_req,
 #if HAVE_LIBPLDM_API_TESTING
     fuzz_decode_pldm_base_multipart_receive_req,
+    fuzz_decode_pldm_bios_get_date_time_resp,
 #endif
 };
 
