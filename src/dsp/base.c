@@ -528,7 +528,7 @@ int decode_set_tid_req(const struct pldm_msg *msg, size_t payload_length,
 	return pldm_msgbuf_complete_consumed(buf);
 }
 
-LIBPLDM_ABI_STABLE
+LIBPLDM_ABI_DEPRECATED
 int decode_multipart_receive_req(const struct pldm_msg *msg,
 				 size_t payload_length, uint8_t *pldm_type,
 				 uint8_t *transfer_opflag,

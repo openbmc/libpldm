@@ -701,6 +701,8 @@ int decode_set_tid_req(const struct pldm_msg *msg, size_t payload_length,
 
 /** @brief Decode a PLDM MultipartReceive request message
  *
+ *  @deprecated Use decode_pldm_base_multipart_receive_req() instead.
+ *
  *  @param[in] msg - Request message
  *  @param[in] payload_length - length of request message payload
  *  @param[out] pldm_type - PLDM type for which version is requested
