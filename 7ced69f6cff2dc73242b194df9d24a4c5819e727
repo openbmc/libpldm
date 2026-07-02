@@ -231,6 +231,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "54fbe41d_77133a95",
+        "filename": "include/libpldm/base.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 734,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2026-07-02T16:22:48Z",
+      "side": 1,
+      "message": "\u003e Are you happy to do that?\n\nyes.  I took a crack at those:\n\nhttps://gerrit.openbmc.org/c/openbmc/libpldm/+/91952/1\nhttps://gerrit.openbmc.org/c/openbmc/libpldm/+/91953/1",
+      "parentUuid": "ef0ec38f_8aab8318",
+      "revId": "7ced69f6cff2dc73242b194df9d24a4c5819e727",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cbf8a3ea_8fda46d2",
