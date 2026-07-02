@@ -1,4 +1,6 @@
 /* SPDX-License-Identifier: Apache-2.0 OR GPL-2.0-or-later */
+#include "api.h"
+#include "msgbuf.h"
 #include "utils.h"
 
 #include <libpldm/base.h>
@@ -57,6 +59,52 @@ int encode_get_date_time_resp(uint8_t instance_id, uint8_t completion_code,
 		response->year = htole16(year);
 	}
 	return PLDM_SUCCESS;
+}
+
+LIBPLDM_ABI_TESTING
+int encode_pldm_bios_get_date_time_resp(
+	uint8_t instance_id, const struct pldm_get_date_time_resp *resp,
+	struct pldm_msg *msg, size_t *payload_length)
+{
+	PLDM_MSGBUF_RW_DEFINE_P(buf);
+	int rc;
+
+	if (msg == NULL || resp == NULL || payload_length == NULL) {
+		return -EINVAL;
+	}
+
+	if (*payload_length < PLDM_GET_DATE_TIME_RESP_BYTES) {
+		return -EOVERFLOW;
+	}
+
+	struct pldm_header_info header = { 0 };
+	header.msg_type = PLDM_RESPONSE;
+	header.instance = instance_id;
+	header.pldm_type = PLDM_BIOS;
+	header.command = PLDM_GET_DATE_TIME;
+
+	rc = pack_pldm_header(&header, &(msg->hdr));
+	if (rc) {
+		return rc;
+	}
+
+	rc = pldm_msgbuf_init_errno(buf, PLDM_GET_DATE_TIME_RESP_BYTES,
+					        msg->payload, *payload_length);
+	if (rc) {
+		return rc;
+	}
+
+	pldm_msgbuf_insert_uint8(buf, resp->completion_code);
+	pldm_msgbuf_insert_uint8(buf, resp->seconds);
+	pldm_msgbuf_insert_uint8(buf, resp->minutes);
+	pldm_msgbuf_insert_uint8(buf, resp->hours);
+	pldm_msgbuf_insert_uint8(buf, resp->day);
+	pldm_msgbuf_insert_uint8(buf, resp->month);
+	pldm_msgbuf_insert_uint16(buf, resp->year);
+
+	*payload_length = PLDM_GET_DATE_TIME_RESP_BYTES;
+
+	return pldm_msgbuf_complete_consumed(buf);
 }
 
 LIBPLDM_ABI_STABLE

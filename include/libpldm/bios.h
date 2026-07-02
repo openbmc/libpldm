@@ -338,6 +338,20 @@ int decode_set_bios_table_resp(const struct pldm_msg *msg,
 /** @brief Create a PLDM response message for GetDateTime
  *
  *  @param[in] instance_id - Message's instance id
+ *  @param[in] resp - The response struct to encode
+ *  @param[out] msg - The buffer to which the response struct will be encoded
+ *  @param[in,out] payload_length - The length of the buffer on input, the length of the encoded message on output
+ *  @return 0 on success
+ *          -EINVAL if the input parameters are invalid
+ *          -EOVERFLOW if the input message buffer is too small
+ */
+int encode_pldm_bios_get_date_time_resp(
+	uint8_t instance_id, const struct pldm_get_date_time_resp *resp,
+	struct pldm_msg *msg, size_t *payload_length);
+
+/** @brief Create a PLDM response message for GetDateTime
+ *
+ *  @param[in] instance_id - Message's instance id
  *  @param[in] completion_code - PLDM completion code
  *  @param[in] seconds - seconds in BCD format
  *  @param[in] minutes - minutes in BCD format
