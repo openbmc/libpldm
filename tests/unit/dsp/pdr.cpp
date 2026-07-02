@@ -2027,6 +2027,91 @@ TEST(EntityAssociationPDR, testExtract)
     free(out);
 }
 
+TEST(EntityAssociationPDR, testExtractRejectsOverlongChildren)
+{
+    // A malicious entity-association PDR: the buffer is only 28 bytes, leaving
+    // room for a single child at offset 20, but num_children claims 3. Before
+    // the fix the bound check subtracted only the 10-byte PDR header rather
+    // than the full 20-byte prefix (header plus container_id, association_type,
+    // container and num_children), so the copy loop read a pldm_entity past the
+    // end of the buffer. The extract must now reject it fail-closed: no
+    // allocation, out untouched.
+    std::vector<uint8_t> pdr{};
+    pdr.resize(28);
+    auto* hdr = new (pdr.data()) pldm_pdr_hdr;
+    hdr->type = PLDM_PDR_ENTITY_ASSOCIATION;
+    hdr->length = htole16(pdr.size() - sizeof(pldm_pdr_hdr));
+
+    auto* e =
+        new (pdr.data() + sizeof(pldm_pdr_hdr)) pldm_pdr_entity_association;
+    e->container_id = htole16(1);
+    e->num_children = 3;
+    e->container.entity_type = htole16(1);
+    e->container.entity_instance_num = htole16(1);
+    e->container.entity_container_id = htole16(0);
+    // Only one child fits in-bounds (offset 20..25).
+    e->children[0].entity_type = htole16(2);
+    e->children[0].entity_instance_num = htole16(1);
+    e->children[0].entity_container_id = htole16(1);
+
+    size_t num = 0xdead;
+    pldm_entity* out = nullptr;
+    pldm_entity_association_pdr_extract(pdr.data(), pdr.size(), &num, &out);
+    EXPECT_EQ(out, nullptr);
+}
+
+// Non-regression: a correctly sized PDR carrying n children (children[] begins
+// at offset 20, 6 bytes each) must still decode to n + 1 entities (the
+// container plus each child).
+static void checkExtractValidChildren(uint8_t n)
+{
+    SCOPED_TRACE("num_children=" + std::to_string(n));
+
+    std::vector<uint8_t> pdr{};
+    pdr.resize(20u + static_cast<size_t>(n) * sizeof(pldm_entity));
+    auto* hdr = new (pdr.data()) pldm_pdr_hdr;
+    hdr->type = PLDM_PDR_ENTITY_ASSOCIATION;
+    hdr->length = htole16(pdr.size() - sizeof(pldm_pdr_hdr));
+
+    auto* e =
+        new (pdr.data() + sizeof(pldm_pdr_hdr)) pldm_pdr_entity_association;
+    e->container_id = htole16(1);
+    e->num_children = n;
+    e->container.entity_type = htole16(1);
+    e->container.entity_instance_num = htole16(1);
+    e->container.entity_container_id = htole16(0);
+    for (uint8_t i = 0; i < n; ++i)
+    {
+        e->children[i].entity_type = htole16(2 + i);
+        e->children[i].entity_instance_num = htole16(1);
+        e->children[i].entity_container_id = htole16(1);
+    }
+
+    size_t num = 0;
+    pldm_entity* out = nullptr;
+    pldm_entity_association_pdr_extract(pdr.data(), pdr.size(), &num, &out);
+    ASSERT_NE(out, nullptr);
+    EXPECT_EQ(num, static_cast<size_t>(n) + 1);
+    EXPECT_EQ(out[0].entity_type, 1u);
+    EXPECT_EQ(out[0].entity_instance_num, 1u);
+    EXPECT_EQ(out[0].entity_container_id, 0u);
+    for (uint8_t i = 0; i < n; ++i)
+    {
+        EXPECT_EQ(out[i + 1].entity_type, 2u + i);
+        EXPECT_EQ(out[i + 1].entity_instance_num, 1u);
+        EXPECT_EQ(out[i + 1].entity_container_id, 1u);
+    }
+    free(out);
+}
+
+TEST(EntityAssociationPDR, testExtractValidChildren)
+{
+    // Two representative counts: a small odd count, and a larger one that needs
+    // a bigger allocation -- both exercise the multi-child copy loop.
+    checkExtractValidChildren(3);
+    checkExtractValidChildren(5);
+}
+
 TEST(EntityAssociationPDR, testGetChildren)
 {
     pldm_entity entities[4]{};

@@ -44,6 +44,7 @@ Change categories:
 - control: Use the correct type in error responses
 - dsp: fwup: Reject reserved package format revision
 - control: fix typos in control API documentation
+- dsp: pdr: Bound children read in `pldm_entity_association_pdr_extract()`
 
 ### Security
 
