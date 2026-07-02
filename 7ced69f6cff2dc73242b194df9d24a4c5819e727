@@ -215,6 +215,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ef0ec38f_8aab8318",
+        "filename": "include/libpldm/base.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 734,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-07-02T00:31:06Z",
+      "side": 1,
+      "message": "In my mind that doesn\u0027t disqualify them from consideration. Perhaps there are circumstances around those projects where they won\u0027t see a lot of activity, but I don\u0027t think that means we should ignore them. We should offer them the usual upgrade path.\n\nFor replacing APIs, I think I\u0027ve landed on asking for the deprecation/removal patches to be pushed on top of the patch adding the new API, but marked as WIP. That way we\u0027ve always got a reference for what needs to be done.\n\nAre you happy to do that?\n\nFWIW, I\u0027ll tag a release whenever we want to remove something. I don\u0027t have any requirements around minimum time or amount of change between tags.",
+      "parentUuid": "317c27d0_30dd2d35",
+      "revId": "7ced69f6cff2dc73242b194df9d24a4c5819e727",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cbf8a3ea_8fda46d2",
         "filename": "src/dsp/base.c",
         "patchSetId": 2
