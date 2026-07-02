@@ -41,6 +41,7 @@ Change categories:
 - dsp: base: Expose `PLDM_BASE_MIN_PART_SIZE` in the public header
 - dsp: file: Introduce `decode_pldm_file_df_heartbeat_req()`
 - dsp: file: Introduce `encode_pldm_file_df_heartbeat_resp()`
+- dsp: bios: Add `encode_pldm_bios_get_date_time_resp()`
 
 ### Changed
 
