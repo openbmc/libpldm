@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "53229a71_5016bde2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-07-02T23:39:28Z",
+      "side": 1,
+      "message": "Can you please add unit tests to demonstrate the fix and prevent regressions, as well as integrate the API into the fuzz harness in `tests/fuzz/`?",
+      "range": {
+        "startLine": 18,
+        "startChar": 50,
+        "endLine": 20,
+        "endChar": 1
+      },
+      "revId": "0f6b2e18db71e61363e464ea5d69ae7d6e991269",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e40d134b_fa9df65b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-07-02T23:39:28Z",
+      "side": 1,
+      "message": "Hi Gary, can you please add a unit",
+      "revId": "0f6b2e18db71e61363e464ea5d69ae7d6e991269",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
