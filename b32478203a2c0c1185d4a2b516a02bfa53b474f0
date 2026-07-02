@@ -16,6 +16,24 @@
       "message": "This is work in similar areas to https://gerrit.openbmc.org/c/openbmc/libpldm/+/90952 - can you please review that and provide your input on my comment there?",
       "revId": "b32478203a2c0c1185d4a2b516a02bfa53b474f0",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ea1340b4_6d8dffa7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2026-07-02T14:59:03Z",
+      "side": 1,
+      "message": "I tried to follow the guidelines and your \u0027longer path\u0027 suggestions.  Happy to work through whatever.",
+      "parentUuid": "c1f2a181_a2bd1d0d",
+      "revId": "b32478203a2c0c1185d4a2b516a02bfa53b474f0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
