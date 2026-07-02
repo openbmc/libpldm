@@ -5,6 +5,7 @@
 #include <libpldm/fru.h>
 #include <libpldm/pdr.h>
 #include <libpldm/platform.h>
+#include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
 
@@ -509,10 +510,30 @@ static int fuzz_pldm_pdr_add(const uint8_t* data, size_t size)
     return 0;
 }
 
+static int fuzz_pldm_entity_association_pdr_extract(const uint8_t* data,
+                                                    size_t size)
+{
+    pldm_entity* entities = NULL;
+    size_t num_entities = 0;
+
+    if (size > UINT16_MAX)
+    {
+        return -1;
+    }
+
+    pldm_entity_association_pdr_extract(data, (uint16_t)size, &num_entities,
+                                        &entities);
+
+    free(entities);
+
+    return 0;
+}
+
 static int (*const fuzz_tests[])(const uint8_t*, size_t) = {
     fuzz_decode_pldm_firmware_update_package,
     fuzz_get_fru_record_by_option,
     fuzz_pldm_pdr_add,
+    fuzz_pldm_entity_association_pdr_extract,
     fuzz_pldm_state_effecter_pdr,
     libpldm_decode_one_pldm_msg,
     libpldm_encode_one_pldm_msg,
