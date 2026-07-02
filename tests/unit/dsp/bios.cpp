@@ -120,6 +120,88 @@ TEST(GetDateTime, testDecodeResponse)
     EXPECT_EQ(year, retYear);
 }
 
+#if HAVE_LIBPLDM_API_TESTING
+TEST(GetDateTime, testGoodEncodeResponseStruct)
+{
+    uint8_t instanceId = 0;
+    uint8_t completionCode = PLDM_SUCCESS;
+    uint8_t seconds = 50;
+    uint8_t minutes = 20;
+    uint8_t hours = 5;
+    uint8_t day = 23;
+    uint8_t month = 11;
+    uint16_t year = 2019;
+
+    std::array<uint8_t, sizeof(pldm_msg_hdr) + PLDM_GET_DATE_TIME_RESP_BYTES>
+        responseMsg{};
+    struct pldm_msg* response =
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+        reinterpret_cast<struct pldm_msg*>(responseMsg.data());
+
+    struct pldm_get_date_time_resp resp = {
+        .completion_code = completionCode,
+        .seconds = seconds,
+        .minutes = minutes,
+        .hours = hours,
+        .day = day,
+        .month = month,
+        .year = year,
+    };
+
+    size_t payload_length = responseMsg.size() - sizeof(pldm_msg_hdr);
+    auto rc = encode_pldm_bios_get_date_time_resp(instanceId, &resp, response,
+                                                  &payload_length);
+
+    EXPECT_EQ(rc, 0);
+    EXPECT_EQ(payload_length, PLDM_GET_DATE_TIME_RESP_BYTES);
+
+    struct pldm_get_date_time_resp* resp_ptr =
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+        reinterpret_cast<struct pldm_get_date_time_resp*>(response->payload);
+
+    EXPECT_EQ(completionCode, resp_ptr->completion_code);
+    EXPECT_EQ(seconds, resp_ptr->seconds);
+    EXPECT_EQ(minutes, resp_ptr->minutes);
+    EXPECT_EQ(hours, resp_ptr->hours);
+    EXPECT_EQ(day, resp_ptr->day);
+    EXPECT_EQ(month, resp_ptr->month);
+    EXPECT_EQ(htole16(year), resp_ptr->year);
+}
+
+TEST(GetDateTime, testBadEncodeResponseStruct)
+{
+    uint8_t instanceId = 0;
+    struct pldm_get_date_time_resp resp = {};
+    std::array<uint8_t, sizeof(pldm_msg_hdr) + PLDM_GET_DATE_TIME_RESP_BYTES>
+        responseMsg{};
+    struct pldm_msg* response =
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+        reinterpret_cast<struct pldm_msg*>(responseMsg.data());
+    size_t payload_length = responseMsg.size() - sizeof(pldm_msg_hdr);
+
+    // Test with NULL response struct
+    auto rc = encode_pldm_bios_get_date_time_resp(instanceId, nullptr, response,
+                                                  &payload_length);
+    EXPECT_EQ(rc, -EINVAL);
+
+    // Test with NULL message
+    rc = encode_pldm_bios_get_date_time_resp(instanceId, &resp, nullptr,
+                                             &payload_length);
+    EXPECT_EQ(rc, -EINVAL);
+
+    // Test with NULL payload_length
+    rc = encode_pldm_bios_get_date_time_resp(instanceId, &resp, response,
+                                             nullptr);
+    EXPECT_EQ(rc, -EINVAL);
+
+    // Test with insufficient buffer
+    payload_length = PLDM_GET_DATE_TIME_RESP_BYTES - 1;
+    rc = encode_pldm_bios_get_date_time_resp(instanceId, &resp, response,
+                                             &payload_length);
+    EXPECT_EQ(rc, -EOVERFLOW);
+}
+#endif
+
 TEST(SetDateTime, testGoodEncodeResponse)
 {
     uint8_t instanceId = 0;
