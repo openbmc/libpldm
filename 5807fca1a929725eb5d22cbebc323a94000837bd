@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bfb04dfc_30789294",
+        "filename": "src/dsp/base.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 612,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-07-03T01:26:29Z",
+      "side": 1,
+      "message": "Because we moved the use of e.g. `req-\u003etransfer_opflag` beyond the call to `pldm_msgbuf_complete_consumed()` it\u0027s now no-longer necessary to independently test whether these extractions completed successfully. That test is now bundled up in the early return on error from `pldm_msgbuf_complete_consumed()`.",
+      "range": {
+        "startLine": 609,
+        "startChar": 1,
+        "endLine": 612,
+        "endChar": 2
+      },
+      "revId": "5807fca1a929725eb5d22cbebc323a94000837bd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "757e0979_a79775cd",
+        "filename": "src/dsp/base.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 617,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-07-03T01:26:29Z",
+      "side": 1,
+      "message": "As above.",
+      "range": {
+        "startLine": 614,
+        "startChar": 1,
+        "endLine": 617,
+        "endChar": 2
+      },
+      "revId": "5807fca1a929725eb5d22cbebc323a94000837bd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
