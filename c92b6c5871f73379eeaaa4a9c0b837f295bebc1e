@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f3985a4a_9d215a22",
+        "filename": "src/dsp/bios.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-07-03T01:10:30Z",
+      "side": 1,
+      "message": "This cast is the reason for the CI failure. You can\u0027t approach the problem this way. Please use the `msgbuf` APIs to extract the data into the struct:\n\nhttps://github.com/openbmc/libpldm/blob/f1a05b3f1b2dfab4481b5ce67f3c1a1c943d4023/CONTRIBUTING.md#L261-L263",
+      "range": {
+        "startLine": 88,
+        "startChar": 1,
+        "endLine": 90,
+        "endChar": 49
+      },
+      "revId": "c92b6c5871f73379eeaaa4a9c0b837f295bebc1e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
