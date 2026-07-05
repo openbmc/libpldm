@@ -699,28 +699,6 @@ int decode_set_tid_req(const struct pldm_msg *msg, size_t payload_length,
 
 /* MultipartRecieve */
 
-/** @brief Decode a PLDM MultipartReceive request message
- *
- *  @deprecated Use decode_pldm_base_multipart_receive_req() instead.
- *
- *  @param[in] msg - Request message
- *  @param[in] payload_length - length of request message payload
- *  @param[out] pldm_type - PLDM type for which version is requested
- *  @param[out] transfer_opflag - Transfer Flag
- *  @param[out] transfer_ctx - The context of the packet
- *  @param[out] transfer_handle - The handle of data
- *  @param[out] section_offset - The start of the requested section
- *  @param[out] section_length - The length of the requested section
- *  @return pldm_completion_codes
- */
-int decode_multipart_receive_req(const struct pldm_msg *msg,
-				 size_t payload_length, uint8_t *pldm_type,
-				 uint8_t *transfer_opflag,
-				 uint32_t *transfer_ctx,
-				 uint32_t *transfer_handle,
-				 uint32_t *section_offset,
-				 uint32_t *section_length);
-
 /** @brief Encode a PLDM MultipartReceive request message
  *
  *  @param[in] instance_id - Message's instance id

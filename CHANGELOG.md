@@ -40,6 +40,8 @@ Change categories:
 
 ### Removed
 
+- dsp: base: Remove `decode_multipart_receive_req()`
+
 ### Fixed
 
 - dsp: pdr: Enforce minimum size as a precondition for pldm_pdr_add()
