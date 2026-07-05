@@ -528,65 +528,6 @@ int decode_set_tid_req(const struct pldm_msg *msg, size_t payload_length,
 	return pldm_msgbuf_complete_consumed(buf);
 }
 
-LIBPLDM_ABI_DEPRECATED
-int decode_multipart_receive_req(const struct pldm_msg *msg,
-				 size_t payload_length, uint8_t *pldm_type,
-				 uint8_t *transfer_opflag,
-				 uint32_t *transfer_ctx,
-				 uint32_t *transfer_handle,
-				 uint32_t *section_offset,
-				 uint32_t *section_length)
-{
-	PLDM_MSGBUF_RO_DEFINE_P(buf);
-	int rc;
-
-	if (msg == NULL || pldm_type == NULL || transfer_opflag == NULL ||
-	    transfer_ctx == NULL || transfer_handle == NULL ||
-	    section_offset == NULL || section_length == NULL) {
-		return PLDM_ERROR_INVALID_DATA;
-	}
-
-	rc = pldm_msgbuf_init_errno(buf, PLDM_MULTIPART_RECEIVE_REQ_BYTES,
-				    msg->payload, payload_length);
-	if (rc) {
-		return pldm_xlate_errno(rc);
-	}
-
-	pldm_msgbuf_extract_p(buf, pldm_type);
-	pldm_msgbuf_extract_p(buf, transfer_opflag);
-	pldm_msgbuf_extract_p(buf, transfer_ctx);
-	pldm_msgbuf_extract_p(buf, transfer_handle);
-	pldm_msgbuf_extract_p(buf, section_offset);
-	pldm_msgbuf_extract_p(buf, section_length);
-
-	rc = pldm_msgbuf_complete_consumed(buf);
-	if (rc) {
-		return pldm_xlate_errno(rc);
-	}
-
-	if (*pldm_type != PLDM_BASE && *pldm_type != PLDM_FILE) {
-		return PLDM_ERROR_INVALID_PLDM_TYPE;
-	}
-
-	// Any enum value above PLDM_XFER_CURRENT_PART is invalid.
-	if (*transfer_opflag > PLDM_XFER_CURRENT_PART) {
-		return PLDM_ERROR_UNEXPECTED_TRANSFER_FLAG_OPERATION;
-	}
-
-	// By DSP0240 v1.2.0, section 9.6.5, Table 17, transfer handle can be 0 only
-	// if the transfer flag is one of XFER_FIRST_PART, XFER_COMPLETE or
-	// XFER_ABORT. In addition, it must be allowed in PLDM_XFER_CURRENT_PART as
-	// this may be used to retry the first part, in which case the transfer handle
-	// must again be 0. Therefore, the only operation for which it cannot be 0 is
-	// PLDM_XFER_NEXT_PART.
-	if ((*transfer_handle == 0) &&
-	    (*transfer_opflag == PLDM_XFER_NEXT_PART)) {
-		return PLDM_ERROR_INVALID_DATA;
-	}
-
-	return PLDM_SUCCESS;
-}
-
 LIBPLDM_ABI_TESTING
 int decode_pldm_base_multipart_receive_req(
 	const struct pldm_msg *msg, size_t payload_length,
@@ -630,7 +571,6 @@ int decode_pldm_base_multipart_receive_req(
 
 	return 0;
 }
-
 LIBPLDM_ABI_STABLE
 int encode_pldm_base_multipart_receive_req(
 	uint8_t instance_id, const struct pldm_base_multipart_receive_req *req,

@@ -25,6 +25,8 @@ Change categories:
 
 ### Removed
 
+- dsp: base: Remove `decode_multipart_receive_req()`
+
 ### Fixed
 
 ### Security

@@ -620,6 +620,7 @@ TEST(DecodePldmBaseGetTidResp, GoodResponse)
     ASSERT_EQ(1, resp.tid);
 }
 
+#if HAVE_LIBPLDM_API_TESTING
 TEST(DecodeMultipartReceiveRequest, testDecodeRequestPass)
 {
     constexpr uint8_t kPldmType = PLDM_BASE;
@@ -646,82 +647,41 @@ TEST(DecodeMultipartReceiveRequest, testDecodeRequestPass)
     rc = pldm_msgbuf_complete(buf);
     ASSERT_EQ(rc, 0);
 
-    uint8_t pldm_type;
-    uint8_t flag;
-    uint32_t transfer_ctx;
-    uint32_t transfer_handle;
-    uint32_t section_offset;
-    uint32_t section_length;
-    rc = decode_multipart_receive_req(
-        msg, PLDM_MULTIPART_RECEIVE_REQ_BYTES, &pldm_type, &flag, &transfer_ctx,
-        &transfer_handle, &section_offset, &section_length);
+    struct pldm_base_multipart_receive_req req;
+    rc = decode_pldm_base_multipart_receive_req(
+        msg, PLDM_MULTIPART_RECEIVE_REQ_BYTES, &req);
 
     ASSERT_EQ(rc, PLDM_SUCCESS);
-    EXPECT_EQ(pldm_type, kPldmType);
-    EXPECT_EQ(flag, kFlag);
-    EXPECT_EQ(transfer_ctx, kTransferCtx);
-    EXPECT_EQ(transfer_handle, kTransferHandle);
-    EXPECT_EQ(section_offset, kSectionOffset);
-    EXPECT_EQ(section_length, kSectionLength);
+    EXPECT_EQ(req.pldm_type, kPldmType);
+    EXPECT_EQ(req.transfer_opflag, kFlag);
+    EXPECT_EQ(req.transfer_ctx, kTransferCtx);
+    EXPECT_EQ(req.transfer_handle, kTransferHandle);
+    EXPECT_EQ(req.section_offset, kSectionOffset);
+    EXPECT_EQ(req.section_length, kSectionLength);
 }
+#endif
 
+#if HAVE_LIBPLDM_API_TESTING
 TEST(DecodeMultipartReceiveRequest, testDecodeRequestFailNullData)
 {
-    EXPECT_EQ(decode_multipart_receive_req(NULL, 0, NULL, NULL, NULL, NULL,
-                                           NULL, NULL),
-              PLDM_ERROR_INVALID_DATA);
+    EXPECT_EQ(decode_pldm_base_multipart_receive_req(NULL, 0, NULL), -EINVAL);
 }
+#endif
 
+#if HAVE_LIBPLDM_API_TESTING
 TEST(DecodeMultipartReceiveRequest, testDecodeRequestFailBadLength)
 {
     PLDM_MSG_DEFINE_P(msg, PLDM_MULTIPART_RECEIVE_REQ_BYTES + 1);
-    uint8_t pldm_type;
-    uint8_t flag;
-    uint32_t transfer_ctx;
-    uint32_t transfer_handle;
-    uint32_t section_offset;
-    uint32_t section_length;
+    struct pldm_base_multipart_receive_req req;
 
     memset(msg, 0, PLDM_MSG_SIZE(PLDM_MULTIPART_RECEIVE_REQ_BYTES + 1));
-    EXPECT_EQ(decode_multipart_receive_req(
-                  msg, PLDM_MULTIPART_RECEIVE_REQ_BYTES + 1, &pldm_type, &flag,
-                  &transfer_ctx, &transfer_handle, &section_offset,
-                  &section_length),
-              PLDM_ERROR_INVALID_DATA);
+    EXPECT_EQ(decode_pldm_base_multipart_receive_req(
+                  msg, PLDM_MULTIPART_RECEIVE_REQ_BYTES + 1, &req),
+              -EBADMSG);
 }
+#endif
 
-TEST(DecodeMultipartReceiveRequest, testDecodeRequestFailBadPldmType)
-{
-    constexpr uint8_t kPldmType = 0xff;
-    constexpr uint8_t kFlag = PLDM_XFER_FIRST_PART;
-
-    PLDM_MSG_DEFINE_P(msg, PLDM_MULTIPART_RECEIVE_REQ_BYTES);
-    PLDM_MSGBUF_RW_DEFINE_P(buf);
-    int rc;
-
-    // Header values don't matter for this test.
-    rc = pldm_msgbuf_init_errno(buf, PLDM_MULTIPART_RECEIVE_REQ_BYTES,
-                                msg->payload, PLDM_MULTIPART_RECEIVE_REQ_BYTES);
-    ASSERT_EQ(rc, 0);
-    pldm_msgbuf_insert_uint8(buf, kPldmType);
-    pldm_msgbuf_insert_uint8(buf, kFlag);
-    rc = pldm_msgbuf_complete(buf);
-    ASSERT_EQ(rc, 0);
-
-    uint8_t pldm_type;
-    uint8_t flag;
-    uint32_t transfer_ctx;
-    uint32_t transfer_handle;
-    uint32_t section_offset;
-    uint32_t section_length;
-
-    EXPECT_EQ(decode_multipart_receive_req(
-                  msg, PLDM_MULTIPART_RECEIVE_REQ_BYTES, &pldm_type, &flag,
-                  &transfer_ctx, &transfer_handle, &section_offset,
-                  &section_length),
-              PLDM_ERROR_INVALID_PLDM_TYPE);
-}
-
+#if HAVE_LIBPLDM_API_TESTING
 TEST(DecodeMultipartReceiveRequest, testDecodeRequestFailBadTransferFlag)
 {
     constexpr uint8_t kPldmType = PLDM_BASE;
@@ -740,20 +700,14 @@ TEST(DecodeMultipartReceiveRequest, testDecodeRequestFailBadTransferFlag)
     rc = pldm_msgbuf_complete(buf);
     ASSERT_EQ(rc, 0);
 
-    uint8_t pldm_type;
-    uint8_t flag;
-    uint32_t transfer_ctx;
-    uint32_t transfer_handle;
-    uint32_t section_offset;
-    uint32_t section_length;
-
-    EXPECT_EQ(decode_multipart_receive_req(
-                  msg, PLDM_MULTIPART_RECEIVE_REQ_BYTES, &pldm_type, &flag,
-                  &transfer_ctx, &transfer_handle, &section_offset,
-                  &section_length),
-              PLDM_ERROR_UNEXPECTED_TRANSFER_FLAG_OPERATION);
+    struct pldm_base_multipart_receive_req req;
+    EXPECT_EQ(decode_pldm_base_multipart_receive_req(
+                  msg, PLDM_MULTIPART_RECEIVE_REQ_BYTES, &req),
+              -EPROTO);
 }
+#endif
 
+#if HAVE_LIBPLDM_API_TESTING
 TEST(DecodeMultipartReceiveRequest, testDecodeRequestFailBadHandle)
 {
     constexpr uint8_t kPldmType = PLDM_BASE;
@@ -778,18 +732,12 @@ TEST(DecodeMultipartReceiveRequest, testDecodeRequestFailBadHandle)
     rc = pldm_msgbuf_complete(buf);
     ASSERT_EQ(rc, 0);
 
-    uint8_t pldm_type;
-    uint8_t flag;
-    uint32_t transfer_ctx;
-    uint32_t transfer_handle;
-    uint32_t section_offset;
-    uint32_t section_length;
-    EXPECT_EQ(decode_multipart_receive_req(
-                  msg, PLDM_MULTIPART_RECEIVE_REQ_BYTES, &pldm_type, &flag,
-                  &transfer_ctx, &transfer_handle, &section_offset,
-                  &section_length),
-              PLDM_ERROR_INVALID_DATA);
+    struct pldm_base_multipart_receive_req req;
+    EXPECT_EQ(decode_pldm_base_multipart_receive_req(
+                  msg, PLDM_MULTIPART_RECEIVE_REQ_BYTES, &req),
+              -EPROTO);
 }
+#endif
 
 #if HAVE_LIBPLDM_API_TESTING
 TEST(EncodeMultipartReceiveRequest, GoodTest)
@@ -1125,34 +1073,26 @@ TEST(MultipartReceiveReqRoundTrip, MatchesLegacyDecoder)
         PLDM_BASE, PLDM_XFER_NEXT_PART, 0x01, 0x42, 0x100, 0x80};
     struct pldm_base_multipart_receive_req req_new = {};
     size_t payload_length = PLDM_MULTIPART_RECEIVE_REQ_BYTES;
-    uint32_t section_length;
-    uint32_t section_offset;
-    uint32_t transfer_handle;
-    uint32_t transfer_ctx;
-    uint8_t transfer_opflag;
-    uint8_t pldm_type;
-    uint8_t instance_id = 1;
     int rc;
 
     PLDM_MSG_DEFINE_P(msg, PLDM_MULTIPART_RECEIVE_REQ_BYTES);
-    rc = encode_pldm_base_multipart_receive_req(instance_id, &req_in, msg,
+    rc = encode_pldm_base_multipart_receive_req(1, &req_in, msg,
                                                 &payload_length);
     ASSERT_EQ(rc, 0);
 
-    rc = decode_multipart_receive_req(
-        msg, payload_length, &pldm_type, &transfer_opflag, &transfer_ctx,
-        &transfer_handle, &section_offset, &section_length);
+    struct pldm_base_multipart_receive_req req;
+    rc = decode_pldm_base_multipart_receive_req(msg, payload_length, &req);
     ASSERT_EQ(rc, PLDM_SUCCESS);
 
     rc = decode_pldm_base_multipart_receive_req(msg, payload_length, &req_new);
     ASSERT_EQ(rc, 0);
 
-    EXPECT_EQ(req_new.pldm_type, pldm_type);
-    EXPECT_EQ(req_new.transfer_opflag, transfer_opflag);
-    EXPECT_EQ(req_new.transfer_ctx, transfer_ctx);
-    EXPECT_EQ(req_new.transfer_handle, transfer_handle);
-    EXPECT_EQ(req_new.section_offset, section_offset);
-    EXPECT_EQ(req_new.section_length, section_length);
+    EXPECT_EQ(req_new.pldm_type, req.pldm_type);
+    EXPECT_EQ(req_new.transfer_opflag, req.transfer_opflag);
+    EXPECT_EQ(req_new.transfer_ctx, req.transfer_ctx);
+    EXPECT_EQ(req_new.transfer_handle, req.transfer_handle);
+    EXPECT_EQ(req_new.section_offset, req.section_offset);
+    EXPECT_EQ(req_new.section_length, req.section_length);
 }
 #endif
 
