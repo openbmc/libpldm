@@ -19,6 +19,20 @@ Change categories:
 
 ### Added
 
+### Changed
+
+### Deprecated
+
+### Removed
+
+### Fixed
+
+### Security
+
+## [v0.17.0] - 2026-07-05
+
+### Added
+
 - dsp: base: Introduce `encode_pldm_base_get_tid_resp()`
 - dsp: base: Introduce `decode_pldm_base_get_tid_resp()`
 - dsp: base: Add `decode_pldm_base_multipart_receive_req()`
@@ -48,16 +62,12 @@ Change categories:
 
   Users should switch to `decode_pldm_base_get_tid_resp()`
 
-### Removed
-
 ### Fixed
 
 - dsp: pdr: Enforce minimum size as a precondition for pldm_pdr_add()
 - control: Use the correct type in error responses
 - dsp: fwup: Reject reserved package format revision
 - control: fix typos in control API documentation
-
-### Security
 
 ## [v0.16.0] - 2026-06-13
 

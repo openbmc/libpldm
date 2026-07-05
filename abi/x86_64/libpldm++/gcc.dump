@@ -8,8 +8,8 @@ $VAR1 = {
     'types.hpp' => 1
   },
   'Language' => 'C++',
-  'LibraryName' => 'libpldm++.so.0.16.0',
-  'LibraryVersion' => '0.16.0',
+  'LibraryName' => 'libpldm++.so.0.17.0',
+  'LibraryVersion' => '0.17.0',
   'NameSpaces' => {
     '__gnu_cxx' => 1,
     'libpldm' => 1,
@@ -302,7 +302,7 @@ $VAR1 = {
   },
   'SymbolVersion' => {},
   'Symbols' => {
-    'libpldm++.so.0.16.0' => {
+    'libpldm++.so.0.17.0' => {
       '_ZN4pldm9fw_update13PackageParser5parseERKSt4spanIKhLm18446744073709551615EENS0_10PackagePinE' => 1,
       '_ZN4pldm9fw_update7PackageD1Ev' => 1,
       '_ZN4pldm9fw_update7PackageD2Ev' => 1,
@@ -3682,7 +3682,7 @@ $VAR1 = {
     }
   },
   'UndefinedSymbols' => {
-    'libpldm++.so.0.16.0' => {
+    'libpldm++.so.0.17.0' => {
       '_ITM_deregisterTMCloneTable' => 0,
       '_ITM_registerTMCloneTable' => 0,
       '_Unwind_Resume@GCC_3.0' => 0,

@@ -24,8 +24,8 @@ $VAR1 = {
     'transport.h' => 1
   },
   'Language' => 'C',
-  'LibraryName' => 'libpldm.so.0.16.0',
-  'LibraryVersion' => '0.16.0',
+  'LibraryName' => 'libpldm.so.0.17.0',
+  'LibraryVersion' => '0.17.0',
   'NameSpaces' => {},
   'Needed' => {
     'libc.so.6' => 1
@@ -10108,7 +10108,7 @@ $VAR1 = {
   },
   'SymbolVersion' => {},
   'Symbols' => {
-    'libpldm.so.0.16.0' => {
+    'libpldm.so.0.17.0' => {
       'decode_activate_firmware_resp' => 1,
       'decode_apply_complete_req' => 1,
       'decode_cancel_update_component_resp' => 1,
@@ -15725,7 +15725,7 @@ $VAR1 = {
     }
   },
   'UndefinedSymbols' => {
-    'libpldm.so.0.16.0' => {
+    'libpldm.so.0.17.0' => {
       '_ITM_deregisterTMCloneTable' => 0,
       '_ITM_registerTMCloneTable' => 0,
       '__assert_fail@GLIBC_2.2.5' => 0,
