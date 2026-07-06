@@ -46,6 +46,30 @@
       },
       "revId": "c92b6c5871f73379eeaaa4a9c0b837f295bebc1e",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "af6e8a3a_16b0f1b1",
+        "filename": "src/dsp/bios.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1000845
+      },
+      "writtenOn": "2026-07-06T11:33:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "69d2f10a_b00a3fe4",
+      "range": {
+        "startLine": 88,
+        "startChar": 1,
+        "endLine": 90,
+        "endChar": 49
+      },
+      "revId": "c92b6c5871f73379eeaaa4a9c0b837f295bebc1e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }

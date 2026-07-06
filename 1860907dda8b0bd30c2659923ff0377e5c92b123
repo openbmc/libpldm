@@ -16,6 +16,24 @@
       "message": "It\u0027s probably worth running CI locally before pushing. There\u0027s some documentation here:\n\nhttps://github.com/openbmc/docs/blob/master/testing/local-ci-build.md",
       "revId": "1860907dda8b0bd30c2659923ff0377e5c92b123",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9839ce00_76877b63",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000845
+      },
+      "writtenOn": "2026-07-06T11:33:56Z",
+      "side": 1,
+      "message": "Thanks for pointing this out @andrew@codeconstruct.com.au",
+      "parentUuid": "4decd4fc_db53ede5",
+      "revId": "1860907dda8b0bd30c2659923ff0377e5c92b123",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
