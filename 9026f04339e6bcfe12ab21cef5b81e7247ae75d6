@@ -16,6 +16,24 @@
       "message": "wondering if the `PLDMFWPackagePayloadChecksum` should be added here as well since validating the payload checksum during parsing could be expensive with large component images.",
       "revId": "9026f04339e6bcfe12ab21cef5b81e7247ae75d6",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6c541ec4_e7095626",
+        "filename": "include/libpldm++/firmware_update.hpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 290,
+      "author": {
+        "id": 1002135
+      },
+      "writtenOn": "2026-07-07T02:15:03Z",
+      "side": 1,
+      "message": "The dicision of whether to validate the checksum or not while parsing, could be left to the consumer (e.g. a meson option in obmc/pldm).\nSome of the use case might want to use the newer version of the package, but dosen\u0027t need that validation.\nAlso, it\u0027s hard to find a case that have to do the validation more than one time.",
+      "parentUuid": "9b3ad58a_a349d5f1",
+      "revId": "9026f04339e6bcfe12ab21cef5b81e7247ae75d6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
