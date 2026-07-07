@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0f9b0bad_f9b23553",
+        "filename": "bindings/cpp/firmware_update.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 1002504
+      },
+      "writtenOn": "2026-07-07T22:34:27Z",
+      "side": 1,
+      "message": "does this need to be a vector? seems like an extra copy/malloc?",
+      "revId": "d713471899620228ad17766b7746d83476fd14be",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "56d5a40e_e137464e",
+        "filename": "bindings/cpp/firmware_update.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 1002504
+      },
+      "writtenOn": "2026-07-07T22:34:27Z",
+      "side": 1,
+      "message": "bounds checking here and below. also should this be ssize_t\u003e?? why would it be signed? is that per pldm spec? seems like this should be a uint8_t?",
+      "revId": "d713471899620228ad17766b7746d83476fd14be",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e2ba5b7c_3c8d027a",
+        "filename": "bindings/cpp/firmware_update.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 1002504
+      },
+      "writtenOn": "2026-07-07T22:34:27Z",
+      "side": 1,
+      "message": "Taking this by l-value and then constructing a (malloc\u0027d) temporary into seems odd.\n\nThe data flow here is:\n1. malloc from a non owning view refManifestDataRaw\n2. make two non-owning views of the malloc\u0027d and copy\u0027d data\n3. malloc again for each\n4. deep copy that malloc\u0027d version into another malloc\u0027d version inside of ReferenceManifestData.\n\nWhy not\n```\nif (reference_manifest.length \u003c 2)\n{\n    return std::nullopt;\n}\n\nstd::span\u003cuint8_t\u003e byteView \u003d {reference_manifest_data.ptr, reference_manifest_data.length};\nconst uint8_t length \u003d byteView[1];\nif (length \u003e reference_manifest_data.length) { /* freak out */ }\n\nstd::span\u003cuint8_t\u003e vendorID \u003d byteView.subspan(2, length);\nstd::span\u003cuint8_t\u003e data \u003d byteView.subspan(2 + length, reference_manifest_data.length - 2 - length);\n\nreturn ReferenceManifestData {byteView[0], vendorID, data};\n```\n\nand then change ReferenceManifestData to take random access iterators to uint8_t like data.",
+      "revId": "d713471899620228ad17766b7746d83476fd14be",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
