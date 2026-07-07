@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1c281f1e_9cbb5873",
+        "filename": "include/libpldm++/firmware_update.hpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2026-07-07T15:35:03Z",
+      "side": 0,
+      "message": "nice, looks like it can detect unnecessary qualification.",
+      "range": {
+        "startLine": 40,
+        "startChar": 15,
+        "endLine": 40,
+        "endChar": 24
+      },
+      "revId": "57210be530945005890f25d656d378f8c1955fa6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
