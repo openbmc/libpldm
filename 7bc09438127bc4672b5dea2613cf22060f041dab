@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "09f5d866_009d4b31",
+        "filename": "CONTRIBUTING.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 366,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-07-07T23:53:25Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "a254d22e_88a83208",
+      "revId": "7bc09438127bc4672b5dea2613cf22060f041dab",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "99e1c064_ce3133d1",
@@ -31,6 +49,24 @@
       "writtenOn": "2026-07-07T15:55:26Z",
       "side": 1,
       "message": "This sounds like saying that if deprecation happens at release N, removal waits at least for release N+1 - maybe add an example to make it clearer?",
+      "revId": "7bc09438127bc4672b5dea2613cf22060f041dab",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f6097040_ea801796",
+        "filename": "CONTRIBUTING.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 374,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-07-07T23:53:25Z",
+      "side": 1,
+      "message": "If it helps it\u0027s stated explicitly in the \"Removing an API\" section above on lines 332-336  (you may need to expand the patch view in the Gerrit UI).",
+      "parentUuid": "99e1c064_ce3133d1",
       "revId": "7bc09438127bc4672b5dea2613cf22060f041dab",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
