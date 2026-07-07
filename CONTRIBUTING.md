@@ -359,6 +359,25 @@ actions:
 
 - [ ] The ABI dump has been updated accordingly.
 
+## Replacing an API
+
+Replacing an existing API must be done over the course of several changes.
+Please submit _all_ of the necessary patches together for review. The expected
+list of commits are in order as follows:
+
+- [ ] Introduce the new API
+- [ ] Stabilise the new API, including necessary justification
+- [ ] Deprecate the old API
+- [ ] Remove the old API
+
+The change to remove the old API will not be applied before a release is tagged
+after the change deprecating the old API has been applied.
+
+Please mark the pending changes as Work-in-Progress until the prior change has
+been submitted. For example, the patch to stabilise the new API (and all
+subsequent patches) should be marked as Work-in-Progress until the change
+introducing the new API has been submitted.
+
 ## Background
 
 ### Definitions
