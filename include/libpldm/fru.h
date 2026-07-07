@@ -195,7 +195,7 @@ int encode_get_fru_record_table_metadata_req(uint8_t instance_id,
  *  @param[out] fru_data_minor_version - Minor version of the FRU Record
  *  @param[out] fru_table_maximum_size - Size of the largest FRU Record data
  *  @param[out] fru_table_length - Total length of the FRU Record Table
- *  @param[out] total_Record_Set_Identifiers - Total number of FRU Record Data
+ *  @param[out] total_record_set_identifiers - Total number of FRU Record Data
  * structures
  *  @param[out] total_table_records - Total number of records in the table
  *  @param[out] checksum - integrity checksum on the FRU Record Table data
@@ -220,7 +220,7 @@ int decode_get_fru_record_table_metadata_resp(
  *  @param[in] fru_data_minor_version - Minor version of the FRU Record
  *  @param[in] fru_table_maximum_size - Size of the largest FRU Record data
  *  @param[in] fru_table_length - Total length of the FRU Record Table
- *  @param[in] total_Record_Set_Identifiers - Total number of FRU Record Data
+ *  @param[in] total_record_set_identifiers - Total number of FRU Record Data
  * structures
  *  @param[in] total_table_records - Total number of records in the table
  *  @param[in] checksum - integrity checksum on the FRU Record Table data
@@ -229,7 +229,6 @@ int decode_get_fru_record_table_metadata_resp(
  *  @note  Caller is responsible for memory alloc and dealloc of param
  *         'msg.payload'
  */
-
 int encode_get_fru_record_table_metadata_resp(
 	uint8_t instance_id, uint8_t completion_code,
 	uint8_t fru_data_major_version, uint8_t fru_data_minor_version,
@@ -307,6 +306,7 @@ int decode_get_fru_record_by_option_req(
  *  @param[in] fru_structure_data - FRU Structure Data
  *  @param[in] data_size - Size of FRU Structure Data
  *  @param[in,out] msg - Message will be written to this
+ *  @param[in] payload_length - Length of response message payload
  *  @return pldm_completion_codes
  *  @note  Caller is responsible for memory alloc and dealloc of param 'msg',
  *         and for appending the FRU table to the msg.
@@ -336,7 +336,6 @@ int encode_get_fru_record_by_option_resp(uint8_t instance_id,
  *  @note  Caller is responsible for memory alloc and dealloc of param
  *         'msg.payload'
  */
-
 int encode_get_fru_record_table_req(uint8_t instance_id,
 				    uint32_t data_transfer_handle,
 				    uint8_t transfer_operation_flag,
@@ -357,7 +356,6 @@ int encode_get_fru_record_table_req(uint8_t instance_id,
  *  @param[out] fru_record_table_length - Length of the FRU record table data
  *  @return pldm_completion_codes
  */
-
 int decode_get_fru_record_table_resp(const struct pldm_msg *msg,
 				     size_t payload_length,
 				     uint8_t *completion_code,
@@ -373,18 +371,17 @@ int decode_get_fru_record_table_resp(const struct pldm_msg *msg,
  *  @param[in] payload_length - Length of response message payload
  *  @param[out] completion_code - Pointer to response msg's PLDM completion code
  *  @param[out] next_data_transfer_handle - A handle used to identify the next
- *  portion of the transfer
+ *              portion of the transfer
  *  @param[out] transfer_flag - The transfer flag that indicates what part of
- * the transfer this response represents
+ *              the transfer this response represents
  *  @param[out] fru_record_table_data - This data is a portion of the overall
- * FRU Record Table
+ *              FRU Record Table
  *  @param[out] fru_record_table_length - Length of the FRU record table data
  *  @param[in] max_fru_record_table_length - Maximum length of the FRU record
- * table data. If the response contains more data than this,
- * return PLDM_ERROR_INVALID_LENGTH.
+ *             table data. If the response contains more data than this,
+ *             return PLDM_ERROR_INVALID_LENGTH.
  *  @return pldm_completion_codes
  */
-
 int decode_get_fru_record_table_resp_safe(
 	const struct pldm_msg *msg, size_t payload_length,
 	uint8_t *completion_code, uint32_t *next_data_transfer_handle,
@@ -393,10 +390,10 @@ int decode_get_fru_record_table_resp_safe(
 
 /** @brief Encode the FRU record in the FRU table
  *
- *  @param[in/out] fru_table - Pointer to the FRU table
+ *  @param[in,out] fru_table - Pointer to the FRU table
  *  @param[in] total_size - The size of the table,including the size of FRU
  *                          record to be added to the table.
- *  @param[in/out] curr_size - The size of the table, excluding the size of FRU
+ *  @param[in,out] curr_size - The size of the table, excluding the size of FRU
  *                          record to be added to the table.
  *  @param[in] record_set_id - FRU record set identifier
  *  @param[in] record_type - FRU record type
@@ -442,7 +439,7 @@ int encode_get_fru_record_by_option_req(
  *  @param[in] msg - Response message
  *  @param[in] payload_length - Length of response message payload
  *  @param[out] completion_code - Pointer to response msg's PLDM completion code
- *  @param[out] next_data_transfer_handle - A handle used to identify the next
+ *  @param[out] next_transfer_handle - A handle used to identify the next
  *              portion of the transfer
  *  @param[out] transfer_flag - The transfer flag that indicates what part of
  *              the transfer this response represents
@@ -458,7 +455,7 @@ int decode_get_fru_record_by_option_resp(
  *  @param[in] table - The source fru record table
  *  @param[in] table_size - Size of the source fru record table
  *  @param[out] record_table - Fru table fetched based on the input option
- *  @param[in/out] record_size - Size of the table fetched by fru record option
+ *  @param[in,out] record_size - Size of the table fetched by fru record option
  *  @param[in] rsi - FRU record set identifier
  *  @param[in] rt - FRU record type
  *  @param[in] ft - FRU field type
@@ -495,8 +492,8 @@ int decode_set_fru_record_table_req(const struct pldm_msg *msg,
  *
  *  @param[in] instance_id - Message's instance id
  *  @param[in] completion_code - PLDM completion code
- *  @param[in] next_transfer_handle - handle to identify the next portion of the
- *                                    transfer
+ *  @param[in] next_data_transfer_handle - handle to identify the next portion
+ *                                    of the transfer
  *  @param[in] payload_length - Length of payload message
  *  @param[out] msg - Argument to capture the Message
  */

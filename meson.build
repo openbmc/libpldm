@@ -118,7 +118,7 @@ endif
 
 subdir('tools')
 
-doxygen = find_program('doxygen', required: false)
+doxygen = find_program('doxygen', required: get_option('documentation'))
 if doxygen.found()
     doxydata = configuration_data()
     doxydata.set('description', meson.project_name())
@@ -142,7 +142,9 @@ if doxygen.found()
         'docs',
         input: doxyfile,
         output: 'doxygen',
-        command: [doxygen, doxyfile],
+        command: [doxygen, '-q', doxyfile],
+        build_always_stale: true,
+        build_by_default: get_option('documentation').allowed(),
     )
 endif
 

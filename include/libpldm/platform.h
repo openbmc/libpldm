@@ -733,7 +733,7 @@ struct pldm_compact_numeric_sensor_pdr {
 
 /** @brief Encode PLDM state sensor PDR
  *
- * @param[in/out] sensor                 Structure to encode. All members of
+ * @param[in,out] sensor                 Structure to encode. All members of
  * sensor, except those mentioned in the @note below, should be initialized by
  * the caller.
  * @param[in]     allocation_size        Size of sensor allocation in bytes
@@ -992,7 +992,7 @@ struct pldm_platform_file_descriptor_pdr {
 
 /** @brief Encode PLDM state effecter PDR
  *
- * @param[in/out] effecter               Structure to encode. All members of
+ * @param[in,out] effecter               Structure to encode. All members of
  *                                       effecter, except those mentioned in
  *                                       the @note below, should be initialized
  *                                       by the caller.
@@ -1925,7 +1925,7 @@ int decode_set_numeric_effecter_value_resp(const struct pldm_msg *msg,
  *  @param[in] instance_id - Message's instance id
  *  @param[in] sensor_id - used to identify and access the simple or composite
  *         sensor
- *  @param[in] sensorRearm - Each bit location in this field corresponds to a
+ *  @param[in] sensor_rearm - Each bit location in this field corresponds to a
  *         particular sensor within the state sensor, where bit [0] corresponds
  *         to the first state sensor (sensor offset 0) and bit [7] corresponds
  *         to the eighth sensor (sensor offset 7), sequentially
@@ -2487,7 +2487,7 @@ int decode_pldm_pdr_repository_change_record_data(
  *  @param[in] instance_id - Message's instance id
  *  @param[in] req - Request parameters
  *  @param[out] msg - Request message
- *  @param[in/out] payload_length - Size of the buffer on input; set to the
+ *  @param[in,out] payload_length - Size of the buffer on input; set to the
  *                                  actual encoded length on output
  *
  *  @return error code: 0 on success
@@ -2597,7 +2597,7 @@ int decode_get_event_receiver_resp(const struct pldm_msg *msg,
  *  except those mentioned in the @note below, should be initialized by
  * the caller.
  *  @param[out] msg - Argument to capture the Message
- *  @param[in/out] payload_lenght - The length of the supplied buffer for
+ *  @param[in,out] payload_length - The length of the supplied buffer for
  payload
  * @return 0 on success
  *         -EINVAL if the input parameters' memory are not allocated,
@@ -2741,7 +2741,6 @@ int decode_entity_auxiliary_names_pdr(
  *       call that API first.
  *
  *  @param[out] pdr_value - Entity auxiliary names pdr struct
- *  @param[in] names_size - Size of names data
  *  @return error code
  */
 int decode_pldm_entity_auxiliary_names_pdr_index(
@@ -2762,7 +2761,7 @@ int decode_pldm_platform_cper_event(const void *event_data,
 
 /** @brief Helper function to response CPER event event data
  *
- *  @param[in] cper_event - the decoded pldm_platform_cper_event struct
+ *  @param[in] event - the decoded pldm_platform_cper_event struct
  *  @return cper event event data array pointer
  */
 uint8_t *
@@ -2772,7 +2771,7 @@ pldm_platform_cper_event_event_data(struct pldm_platform_cper_event *event);
  *
  *  @param[in] pdr - Populated pldm_platform_file_descriptor_pdr struct
  *  @param[out] data - Pointer to a buffer to save encoded PDR data
- *  @param[in/out] data_len - Length of the response PDR buffer (data)
+ *  @param[in,out] data_len - Length of the response PDR buffer (data)
  *
  *  @return error code: 0 on success
  *          -EINVAL if the input values are invalid
@@ -2966,10 +2965,10 @@ int decode_pldm_platform_redfish_resource_pdr_additional_resource_from_iter(
 
 /** @brief Iterator for Additional Resources from the Redfish Resource PDR
  *
- * @param pdr The @ref "struct pldm_platform_redfish_resource_pdr" lvalue
- *                           used as the out-value from the corresponding call to @ref
- *                           decode_pldm_platform_redfish_resource_pdr
- * @param additional_resource The @ref "struct pldm_platform_redfish_resource_pdr_additional_resource"
+ * @param pdr The struct pldm_platform_redfish_resource_pdr lvalue
+ *                           used as the out-value from the corresponding call to
+ *                           decode_pldm_platform_redfish_resource_pdr()
+ * @param additional_resource The struct pldm_platform_redfish_resource_pdr_additional_resource
  *                            lvalue into which the next parameter table entry should be decoded
  * @param rc An lvalue of type int into which the return code from the decoding
  *           will be placed
@@ -3063,10 +3062,10 @@ int decode_pldm_platform_redfish_resource_pdr_oem_name_from_iter(
 
 /** @brief Iterator for OEM Names from the Redfish Resource PDR
  *
- * @param pdr The @ref "struct pldm_platform_redfish_resource_pdr" lvalue
- *                           used as the out-value from the corresponding call to @ref
- *                           decode_pldm_platform_redfish_resource_pdr
- * @param oem_name The @ref "struct pldm_platform_redfish_resource_pdr_oem_name" lvalue
+ * @param pdr The struct pldm_platform_redfish_resource_pdr lvalue
+ *                           used as the out-value from the corresponding call to
+ *                           decode_pldm_platform_redfish_resource_pdr()
+ * @param oem_name The struct pldm_platform_redfish_resource_pdr_oem_name lvalue
  *                 into which the next parameter table entry should be decoded
  * @param rc An lvalue of type int into which the return code from the decoding
  *           will be placed
@@ -3214,9 +3213,9 @@ int decode_pldm_platform_redfish_action_pdr_related_resource_id_from_iter(
 
 /** @brief Iterator for related resources from the Redfish Action PDR
  *
- * @param pdr The @ref "struct pldm_platform_redfish_action_pdr" lvalue
- *                           used as the out-value from the corresponding call to @ref
- *                           decode_pldm_platform_redfish_action_pdr
+ * @param pdr The struct pldm_platform_redfish_action_pdr lvalue
+ *                           used as the out-value from the corresponding call to
+ *                           decode_pldm_platform_redfish_action_pdr()
  * @param res The "uint32_t res" lvalue into which the next parameter table entry should be decoded
  * @param rc An lvalue of type int into which the return code from the decoding
  *           will be placed
@@ -3310,10 +3309,10 @@ int decode_pldm_platform_redfish_action_pdr_action_from_iter(
 
 /** @brief Iterator for actions from the Redfish Action PDR
  *
- * @param pdr The @ref "struct pldm_platform_redfish_action_pdr" lvalue
- *                           used as the out-value from the corresponding call to @ref
- *                           decode_pldm_platform_redfish_action_pdr
- * @param action The @ref "pldm_platform_redfish_action_pdr_action" lvalue
+ * @param pdr The struct pldm_platform_redfish_action_pdr lvalue
+ *                           used as the out-value from the corresponding call to
+ *                           decode_pldm_platform_redfish_action_pdr()
+ * @param action The pldm_platform_redfish_action_pdr_action lvalue
  *               into which the next parameter table entry should be decoded
  * @param rc An lvalue of type int into which the return code from the decoding
  *           will be placed
@@ -3426,10 +3425,10 @@ int decode_pldm_platform_state_effecter_pdr_from_iter(
  * @brief Iterate over the bitfield8_t states within a
  *        state_effecter_possible_states entry
  *
- * @param states[in] A pointer to the possible_states entry
- * @param bitfield[out] An lvalue of type @ref "bitfield8_t" that receives the
+ * @param states A pointer to the possible_states entry
+ * @param bitfield An lvalue of type bitfield8_t that receives the
  *                      current bitfield element
- * @param rc[out] An lvalue of type int that holds the status result of iteration
+ * @param rc An lvalue of type int that holds the status result of iteration
  *
  * @p rc is set to 0 on successful iteration. Otherwise, on error, @p rc is set to:
  * - -EINVAL if parameter values are invalid
@@ -3527,13 +3526,13 @@ int decode_pldm_platform_state_effecter_pdr_possible_states_from_iter(
 /**
  * @brief Iterate over the possible_states entries in a State Effecter PDR
  *
- * @param pdr[in] Pointer to the State Effecter PDR
+ * @param pdr Pointer to the State Effecter PDR
  *                (struct pldm_state_effecter_pdr *)
- * @param pdr_size[in] Total size in bytes of the PDR buffer pointed to by
+ * @param pdr_size Total size in bytes of the PDR buffer pointed to by
  *                     @p pdr. Must be at least
  *                     sizeof(struct pldm_state_effecter_pdr).
- * @param states[out] A pointer to possible_states entry
- * @param rc[out] An lvalue of type int that holds the status result of iteration
+ * @param states A pointer to possible_states entry
+ * @param rc An lvalue of type int that holds the status result of iteration
  *
  * @p rc is set to 0 on successful iteration. Otherwise, on error, @p rc is set to:
  * - -EINVAL if parameter values are invalid

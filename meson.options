@@ -25,6 +25,11 @@ option(
     value: ['cpp'],
 )
 option(
+    'documentation',
+    type: 'feature',
+    description: 'Build Doxygen documentation',
+)
+option(
     'oem',
     type: 'array',
     description: 'Enable OEM PLDM extensions',

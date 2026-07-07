@@ -8,11 +8,11 @@ struct pollfd;
 /**
  * @brief Generic PLDM transport struct
  *
- * @var name - name of the transport
- * @var version - version of transport to use
- * @var recv - pointer to the transport specific function to receive a message
- * @var send - pointer to the transport specific function to send a message
- * @var init_pollfd - pointer to the transport specific init_pollfd function
+ * @param name - name of the transport
+ * @param version - version of transport to use
+ * @param recv - pointer to the transport specific function to receive a message
+ * @param send - pointer to the transport specific function to send a message
+ * @param init_pollfd - pointer to the transport specific init_pollfd function
  */
 struct pldm_transport {
 	const char *name;

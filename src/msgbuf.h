@@ -175,7 +175,7 @@
 /**
  * Insert an array of data into the msgbuf instance
  *
- * @param ctx - The msgbuf instance into which the array of data should be
+ * @param dst - The msgbuf instance into which the array of data should be
  *              inserted
  * @param count - The number of array elements to insert
  * @param src - The array object from which elements should be inserted into

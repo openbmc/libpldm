@@ -221,7 +221,6 @@ struct pldm_set_bios_table_resp {
  *  @note  Caller is responsible for memory alloc and dealloc of param
  *         'msg.body.payload'
  */
-
 int encode_get_date_time_req(uint8_t instance_id, struct pldm_msg *msg);
 
 /** @brief Decode a GetDateTime response message

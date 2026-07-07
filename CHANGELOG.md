@@ -21,6 +21,11 @@ Change categories:
 
 ### Changed
 
+- doxygen: Enable warnings as errors
+
+  Many header files were modified to fix issues identified in the documentation.
+  There is no change in behaviour.
+
 ### Deprecated
 
 ### Removed

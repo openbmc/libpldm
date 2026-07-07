@@ -203,13 +203,11 @@ pldm_msgbuf_ro_init_errno(struct pldm_msgbuf_ro *ctx, size_t minsize,
 /**
  * @brief Validate buffer overflow state
  *
- * @param[in] ctx - msgbuf context for extractor
+ * @param[in] remaining - The tracked remaining count
  *
- * @return PLDM_SUCCESS if there are zero or more bytes of data that remain
- * unread from the buffer. Otherwise, PLDM_ERROR_INVALID_LENGTH indicates that a
- * prior accesses would have occurred beyond the bounds of the buffer, and
- * PLDM_ERROR_INVALID_DATA indicates that the provided context was not a valid
- * pointer.
+ * @return 0 if there are zero or more bytes of data that remain unread from
+ * the buffer. Otherwise -EOVERFLOW, which indicates that a prior accesses would
+ * have occurred beyond the bounds of the buffer.
  */
 LIBPLDM_CC_NONNULL
 LIBPLDM_CC_ALWAYS_INLINE
@@ -243,7 +241,7 @@ int pldm_msgbuf_rw_validate(struct pldm_msgbuf_rw *ctx)
 /**
  * @brief Test whether a message buffer has been exactly consumed
  *
- * @param[in] ctx - pldm_msgbuf context for extractor
+ * @param[in] remaining - The tracked remaining count
  *
  * @return 0 iff there are zero bytes of data that remain unread from the buffer
  * and no overflow has occurred. Otherwise, -EBADMSG if the buffer has not been
@@ -286,15 +284,16 @@ int pldm_msgbuf_rw_consumed(struct pldm_msgbuf_rw *ctx)
 /**
  * @brief End use of a msgbuf under error conditions
  *
- * @param[in] ctx - The msgbuf instance to discard
+ * @param[in,out] cursor - A pointer to the tracked cursor value
+ * @param[in,out] remaining - A pointer to the tracked remaining value
  * @param[in] error - The error value to propagate
  *
- * Under normal conditions use of a msgbuf instance must be ended using @ref
- * pldm_msgbuf_complete or one of its related APIs. Under error conditions, @ref
- * pldm_msgbuf_discard should be used instead, as it makes it straight-forward
+ * Under normal conditions use of a msgbuf instance must be ended using
+ * pldm_msgbuf_complete() or one of its related APIs. Under error conditions,
+ * pldm_msgbuf_discard() should be used instead, as it makes it straight-forward
  * to finalise the msgbuf while propagating the existing error code.
  *
- * @return The value provided in @param error
+ * @return The value provided in @p error
  */
 LIBPLDM_CC_NONNULL
 LIBPLDM_CC_ALWAYS_INLINE
@@ -1422,12 +1421,10 @@ int pldm_msgbuf_complete_used(struct pldm_msgbuf_rw *ctx, size_t orig_len,
  *
  * @param[in,out] src - pldm_msgbuf for source from where value should be copied
  * @param[in,out] dst - destination of copy from source
- * @param[in] size - size of data to be copied
- * @param[in] description - description of data copied
+ * @param[in] type - type of data to be copied
+ * @param[in] name - description of data copied
  *
- * @return PLDM_SUCCESS if buffer accesses were in-bounds,
- * PLDM_ERROR_INVALID_LENGTH otherwise.
- * PLDM_ERROR_INVALID_DATA if input is invalid
+ * @return 0 if buffer accesses were in-bounds, -EOVERFLOW otherwise
  */
 #define pldm_msgbuf_copy(dst, src, type, name)                                 \
 	pldm__msgbuf_copy(dst, src, sizeof(type), #name)
@@ -1603,12 +1600,11 @@ pldm__msgbuf_extract_uint32_to_size(struct pldm_msgbuf_ro *ctx, size_t *dst)
 /**
  * @brief Begin `struct variable_field` fill
  *
- * @param[in] cursor - The pointer from the relevant @ref
- *                     "struct pldm_msgbuf_ro" or @ref "struct pldm_msgbuf_rw"
+ * @param[in] cursor - The pointer from the relevant
+ *                     struct pldm_msgbuf_ro or struct pldm_msgbuf_rw
  *                     context
- * @param[in] remaining - The length remaining from the relevant @ref
- *                        "struct pldm_msgbuf_ro" or @ref
- *                        "struct pldm_msgbuf_rw" context
+ * @param[in] remaining - The length remaining from the relevant struct
+ *                        pldm_msgbuf_ro or struct pldm_msgbuf_rw context
  * @param[out] field - `struct variable_field` to fill
  *
  * @return 0 if all buffer accesses were in-bounds, -EOVERFLOW otherwise.
@@ -1638,12 +1634,10 @@ int pldm__msgbuf_field_begin(const void *cursor, intmax_t remaining,
 /**
  * @brief End `struct variable_field` fill from the pldm_msgbuf_ro instance
  *
- * @param[in] cursor - The pointer from the relevant @ref
- *                     "struct pldm_msgbuf_ro" or @ref "struct pldm_msgbuf_rw"
- *                     context
- * @param[in] remaining - The length remaining from the relevant @ref
- *                        "struct pldm_msgbuf_ro" or @ref
- *                        "struct pldm_msgbuf_rw" context
+ * @param[in] cursor - The pointer from the relevant struct pldm_msgbuf_ro or
+ *                     struct pldm_msgbuf_rw context
+ * @param[in] remaining - The length remaining from the relevant struct
+ *                        pldm_msgbuf_ro or struct pldm_msgbuf_rw context
  * @param[out] field - `struct variable_field` to fill
  *
  * @return 0 if all buffer accesses were in-bounds, -EOVERFLOW otherwise.
@@ -1652,9 +1646,11 @@ LIBPLDM_CC_NONNULL
 LIBPLDM_CC_ALWAYS_INLINE
 LIBPLDM_CC_WARN_UNUSED_RESULT
 // NOLINTNEXTLINE(bugprone-reserved-identifier,cert-dcl37-c,cert-dcl51-cpp)
-int pldm__msgbuf_field_end(const void *cursor LIBPLDM_CC_UNUSED,
-			   intmax_t remaining, struct variable_field *field)
+int pldm__msgbuf_field_end(const void *cursor, intmax_t remaining,
+			   struct variable_field *field)
 {
+	(void)cursor;
+
 	if (!field->ptr) {
 		return -EINVAL;
 	}

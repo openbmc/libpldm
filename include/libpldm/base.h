@@ -226,7 +226,7 @@ struct pldm_msg {
  * @note Providing an expression for @p size that is not an integer constant
  *       expression will force a compilation failure.
  *
- * @param size The desired size of the @struct pldm_msg payload
+ * @param size The desired size of the @ref pldm_msg payload
  */
 #define PLDM_MSG_SIZE(size)                                                    \
 	(sizeof(char[(__builtin_constant_p(size)) ? 1 : -1])) *                \
@@ -246,8 +246,8 @@ struct pldm_msg {
 
 /** @brief Create a pointer to a stack-allocated @struct pldm_msg
  *
- * Define a pointer named @p name of type @struct pldm_msg to an object on the
- * stack of appropriate alignment and length to hold a @struct pldm_msg with a
+ * Define a pointer named @p name of type @ref pldm_msg to an object on the
+ * stack of appropriate alignment and length to hold a @ref pldm_msg with a
  * payload of @p size.
  *
  * @param name - The variable name for pointer
@@ -544,6 +544,7 @@ int encode_get_version_req(uint8_t instance_id, uint32_t transfer_handle,
  *  @param[out] completion_code - Pointer to response msg's PLDM completion code
  *  @param[out] next_transfer_handle - the next handle for the next part of data
  *  @param[out] transfer_flag - flag to indicate the part of data
+ *  @param[out] version - The version indicated in the response
  *  @return pldm_completion_codes
  */
 int decode_get_version_resp(const struct pldm_msg *msg, size_t payload_length,

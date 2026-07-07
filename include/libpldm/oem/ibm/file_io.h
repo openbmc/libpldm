@@ -219,7 +219,7 @@ struct pldm_file_attr_table_entry {
  *
  *  @param[in] msg - Pointer to PLDM request message
  *  @param[in] payload_length - Length of request payload
- *  @param[out] trasnfer_handle - the handle of data
+ *  @param[out] transfer_handle - the handle of data
  *  @param[out] transfer_opflag - Transfer operation flag
  *  @param[out] table_type - the type of file table
  *  @return pldm_completion_codes

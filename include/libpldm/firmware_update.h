@@ -677,10 +677,10 @@ int decode_pldm_downstream_device_from_iter(
 
 /** @brief Iterate downstream devices in QueryDownstreamIdentifiers response
  *
- * @param devs The @ref "struct pldm_downstream_device_iter" lvalue used as the
- *                  out-value from the corresponding call to @ref
+ * @param devs The struct pldm_downstream_device_iter lvalue used as the
+ *                  out-value from the corresponding call to
  *                  decode_query_downstream_identifiers_resp
- * @param dev The @ref "struct pldm_downstream_device" lvalue into which the
+ * @param dev The struct pldm_downstream_device lvalue into which the
  *            next device instance should be decoded.
  * @param rc An lvalue of type int into which the return code from the decoding
  *           will be placed.
@@ -766,12 +766,12 @@ int decode_pldm_descriptor_from_iter(struct pldm_descriptor_iter *iter,
 /** @brief Iterate a downstream device's descriptors in a
  *         QueryDownstreamIdentifiers response
  *
- * @param devs The @ref "struct pldm_downstream_device_iter" lvalue used as the
- *                  out-value from the corresponding call to @ref
- *                  decode_query_downstream_identifiers_resp
- * @param dev The @ref "struct pldm_downstream_device" lvalue over whose
+ * @param devs The struct pldm_downstream_device_iter lvalue used as the
+ *                  out-value from the corresponding call to
+ *                  decode_query_downstream_identifiers_resp()
+ * @param dev The struct pldm_downstream_device lvalue over whose
  *            descriptors to iterate
- * @param desc The @ref "struct pldm_descriptor" lvalue into which the next
+ * @param desc The struct pldm_descriptor lvalue into which the next
  *             descriptor instance should be decoded
  * @param rc An lvalue of type int into which the return code from the decoding
  *           will be placed
@@ -1199,7 +1199,7 @@ int encode_query_device_identifiers_req(uint8_t instance_id,
  *
  *  @param[in] instance_id - Message's instance id
  *  @param[in] descriptor_count - Number of descriptors
- *  @param[in] descriptor - Array of descriptors
+ *  @param[in] descriptors - Array of descriptors
  *  @param[in,out] msg - Message will be written to this
  *  @param[in,out] payload_length - Size of the response message payload, updated
  *				    with used length.
@@ -1349,8 +1349,7 @@ int decode_query_downstream_devices_resp(
  * @brief Encodes a request message for Query Downstream Identifiers.
  *
  * @param[in] instance_id The instance ID of the PLDM entity.
- * @param[in] data_transfer_handle The handle for the data transfer.
- * @param[in] transfer_operation_flag The flag indicating the transfer operation.
+ * @param[in] params_req A pointer to the downstream parameters request struct
  * @param[out] msg Pointer to the PLDM message structure to store the encoded message.
  * @param[in] payload_length The length of the payload.
  * @return 0 on success, otherwise -EINVAL if the input parameters' memory
@@ -1386,8 +1385,7 @@ int decode_query_downstream_identifiers_resp(
  * @brief Encodes request message for Get Downstream Firmware Parameters.
  *
  * @param[in] instance_id - The instance ID of the PLDM entity.
- * @param[in] data_transfer_handle - The handle for the data transfer.
- * @param[in] transfer_operation_flag - The flag indicating the transfer operation.
+ * @param[in] params_req - A pointer to the downstream firmware parameters request
  * @param[in,out] msg - A pointer to the PLDM message structure to store the encoded message.
  * @param[in] payload_length - The length of the payload.
  *
@@ -1414,9 +1412,7 @@ struct pldm_downstream_device_parameters_iter {
  * @param[in] msg - The PLDM message to decode
  * @param[in] payload_length - The length of the message payload
  * @param[out] resp_data - Pointer to the structure to store the decoded response data
- * @param[out] downstream_device_param_table - Pointer to the variable field structure
- *                                           to store the decoded downstream device
- *                                           parameter table
+ * @param[out] iter - Pointer to the iterator struct to initialise
  * @return 0 on success, otherwise -EINVAL if the input parameters' memory
  *         are not allocated, -EOVERFLOW if the payload length is not enough
  *         to decode the message, -EBADMSG if the message is not valid.
@@ -1432,19 +1428,13 @@ int decode_get_downstream_firmware_parameters_resp(
 /**
  * @brief Decode the next downstream device parameter table entry
  *
- * @param[in,out] data - A variable field covering the table entries in the
+ * @param[in,out] iter - A variable field covering the table entries in the
  *                       response message data. @p data is updated to point to
  *                       the remaining entries once the current entry has been
  *                       decoded.
 
  * @param[out] entry - The struct object into which the current table entry will
  *                     be decoded
-
- * @param[out] versions - A variable field covering the active and
- *                        pending component version strings in the
- *                        response message data. The component version
- *                        strings can be decoded into @p entry using
- *                        decode_downstream_device_parameter_table_entry_versions()
  *
  * @return 0 on success, otherwise -EINVAL if the input parameters' memory
  *         are not allocated, -EOVERFLOW if the payload length is not enough
@@ -1479,10 +1469,10 @@ bool pldm_downstream_device_parameters_iter_next(
 /** @brief Iterator downstream device parameter entries in Get Downstream
  *         Firmware Parameters response
  *
- * @param params The @ref "struct pldm_downstream_device_parameters_iter" lvalue
- *               used as the out-value from the corresponding call to @ref
- *               decode_get_downstream_firmware_parameters_resp
- * @param entry The @ref "struct pldm_downstream_device_parameters_entry" lvalue
+ * @param params The struct pldm_downstream_device_parameters_iter lvalue
+ *               used as the out-value from the corresponding call to
+ *               decode_get_downstream_firmware_parameters_resp()
+ * @param entry The struct pldm_downstream_device_parameters_entry lvalue
  *              into which the next parameter table entry should be decoded
  * @param rc An lvalue of type int into which the return code from the decoding
  *           will be placed
@@ -1842,7 +1832,6 @@ int decode_request_firmware_data_req(const struct pldm_msg *msg,
  *
  *  @param[in] instance_id - PLDM Instance ID
  *  @param[in] req_params - Request parameters
- *  @param[in] length - firmware data length to request
  *  @param[out] msg - Response message
  *  @param[inout] payload_length - Length of msg payload buffer,
  *				   will be updated with the written
@@ -2270,10 +2259,10 @@ int decode_pldm_fwup_update_security_revision_resp(const struct pldm_msg *msg,
  * application should not be open-coded. Instead, users should call on of the
  * following macros:
  *
- * - @ref DEFINE_PLDM_PACKAGE_FORMAT_PIN_FR01H
- * - @ref DEFINE_PLDM_PACKAGE_FORMAT_PIN_FR02H
- * - @ref DEFINE_PLDM_PACKAGE_FORMAT_PIN_FR03H
- * - @ref DEFINE_PLDM_PACKAGE_FORMAT_PIN_FR04H
+ * - DEFINE_PLDM_PACKAGE_FORMAT_PIN_FR01H
+ * - DEFINE_PLDM_PACKAGE_FORMAT_PIN_FR02H
+ * - DEFINE_PLDM_PACKAGE_FORMAT_PIN_FR03H
+ * - DEFINE_PLDM_PACKAGE_FORMAT_PIN_FR04H
  *
  * The package pinning operates by providing versioning over multiple structs
  * required to perform the package parsing. See [Conventions for extensible
@@ -2289,7 +2278,7 @@ struct pldm_package_format_pin {
 		/**
 		 * A value that communicates information about object sizes to the implementation.
 		 *
-		 * For magic version 0, the sum must be calculated using @ref LIBPLDM_SIZEAT for
+		 * For magic version 0, the sum must be calculated using LIBPLDM_SIZEAT for
 		 * the final relevant member of each relevant struct for the format revision
 		 * represented by the pin.
 		 */
@@ -2360,8 +2349,8 @@ struct pldm_package_component_bitmap {
  *
  * See Table 4, DSP0267 v1.3.0.
  *
- * The provided package data must out-live the @ref "struct
- * pldm_package_firmware_device_id_record" instance.
+ * The provided package data must out-live the struct
+ * pldm_package_firmware_device_id_record instance.
  */
 struct pldm_package_firmware_device_id_record {
 	uint8_t descriptor_count;
@@ -2375,14 +2364,14 @@ struct pldm_package_firmware_device_id_record {
 	struct variable_field component_image_set_version_string;
 
 	/**
-	 * A field pointing to the to a bitmap of length @ref
+	 * A field pointing to the to a bitmap of length
 	 * component_bitmap_bit_length in the provided package data..
 	 */
 	struct pldm_package_component_bitmap applicable_components;
 
 	/**
 	 * A field pointing to record descriptors for the
-	 * firmware device. Iterate over the entries using @ref
+	 * firmware device. Iterate over the entries using
 	 * foreach_pldm_package_firmware_device_id_record_descriptor
 	 *
 	 * See Table 7, DSP0267 v1.3.0
@@ -2411,8 +2400,8 @@ struct pldm_package_firmware_device_id_record {
  *
  * See Table 5, DSP0267 v1.3.0.
  *
- * The provided package data must out-live the @ref "struct
- * pldm_package_downstream_device_id_record" instance.
+ * The provided package data must out-live the struct
+ * pldm_package_downstream_device_id_record instance.
  */
 struct pldm_package_downstream_device_id_record {
 	uint8_t descriptor_count;
@@ -2427,14 +2416,14 @@ struct pldm_package_downstream_device_id_record {
 	uint32_t self_contained_activation_min_version_comparison_stamp;
 
 	/**
-	 * A field pointing to a bitmap of length @ref component_bitmap_bit_length in
+	 * A field pointing to a bitmap of length component_bitmap_bit_length in
 	 * the provided package data.
 	 */
 	struct pldm_package_component_bitmap applicable_components;
 
 	/**
 	 * A field pointing to record descriptors for the
-	 * downstream device. Iterate over the entries using @ref
+	 * downstream device. Iterate over the entries using
 	 * foreach_pldm_package_downstream_device_id_record_descriptor
 	 *
 	 * See Table 7, DSP0267 v1.3.0
@@ -2461,8 +2450,8 @@ struct pldm_package_downstream_device_id_record {
  *
  * See Table 6, DSP0267 v1.3.0
  *
- * The provided package data must out-live the @ref "struct
- * pldm_package_component_image_information" instance.
+ * The provided package data must out-live the struct
+ * pldm_package_component_image_information instance.
  */
 struct pldm_package_component_image_information {
 	uint16_t component_classification;
@@ -2494,16 +2483,16 @@ struct pldm_package_component_image_information {
 /**
  * @brief State tracking for firmware update package iteration
  *
- * Declare an instance on the stack to be initialised by @ref
+ * Declare an instance on the stack to be initialised by
  * decode_pldm_firmware_update_package
  *
  * The state is consumed by the following macros:
  *
- * - @ref foreach_pldm_package_firmware_device_id_record
- * - @ref foreach_pldm_package_firmware_device_id_record_descriptor
- * - @ref foreach_pldm_package_downstream_device_id_record
- * - @ref foreach_pldm_package_downstream_device_id_record_descriptor
- * - @ref foreach_pldm_package_component_image_information
+ * - foreach_pldm_package_firmware_device_id_record
+ * - foreach_pldm_package_firmware_device_id_record_descriptor
+ * - foreach_pldm_package_downstream_device_id_record
+ * - foreach_pldm_package_downstream_device_id_record_descriptor
+ * - foreach_pldm_package_component_image_information
  */
 struct pldm_package {
 	const struct pldm_package_format_pin *pin;
@@ -2532,10 +2521,10 @@ struct pldm_package {
  * package records and components.
  *
  * @note @p flags must be zero
- * @note @p data is stored in @iter for later reference, and therefore must
- *       out-live @p iter
- * @note @p hdr is stored in @iter for later reference, and therefore must
- *       out-live @p iter
+ * @note @p data is stored in @p pkg for later reference, and therefore must
+ *       out-live @p pkg
+ * @note @p hdr is stored in @p pkg for later reference, and therefore must
+ *       out-live @p pkg
  *
  * @return 0 on success. Otherwise, a negative errno value:
  * - -EBADMSG if the package fails to meet minimum required length for a valid
@@ -2583,10 +2572,10 @@ int decode_pldm_package_firmware_device_id_record_from_iter(
 /**
  * @brief Iterate over a package's firmware device ID records
  *
- * @param pkg[in,out] The lvalue for the instance of @ref "struct pldm_package"
- *             initialised by @ref decode_pldm_firmware_update_package
- * @param rec[out] An lvalue of type @ref "struct pldm_package_firmware_device_id_record"
- * @param rc[out] An lvalue of type int that holds the status result of parsing the
+ * @param pkg The lvalue for the instance of struct pldm_package
+ *             initialised by decode_pldm_firmware_update_package()
+ * @param rec An lvalue of type struct pldm_package_firmware_device_id_record
+ * @param rc An lvalue of type int that holds the status result of parsing the
  *                firmware device ID record
  *
  * @p rc is set to 0 on successful decode. Otherwise, on error, @p rc is set to:
@@ -2640,12 +2629,12 @@ pldm_package_firmware_device_id_record_descriptor_iter_init(
 /**
  * @brief Iterate over the descriptors in a package's firmware device ID record
  *
- * @param pkg[in,out] The lvalue for the instance of @ref "struct pldm_package"
- *             initialised by @ref decode_pldm_firmware_update_package
- * @param rec[in] An lvalue of type @ref "struct pldm_package_firmware_device_id_record"
- * @param desc[out] An lvalue of type @ref "struct pldm_descriptor" that holds
+ * @param pkg The lvalue for the instance of struct pldm_package
+ *             initialised by decode_pldm_firmware_update_package()
+ * @param rec An lvalue of type struct pldm_package_firmware_device_id_record
+ * @param desc An lvalue of type struct pldm_descriptor that holds
  *                  the parsed descriptor
- * @param rc[out] An lvalue of type int that holds the status result of parsing the
+ * @param rc An lvalue of type int that holds the status result of parsing the
  *                firmware device ID record
  *
  * @p rc is set to 0 on successful decode. Otherwise, on error, @p rc is set to:
@@ -2722,10 +2711,10 @@ int decode_pldm_package_downstream_device_id_record_from_iter(
 /**
  * @brief Iterate over a package's downstream device ID records
  *
- * @param pkg[in,out] The lvalue for the instance of @ref "struct pldm_package"
- *             initialised by @ref decode_pldm_firmware_update_package
- * @param rec[out] An lvalue of type @ref "struct pldm_package_downstream_device_id_record"
- * @param rc[out] An lvalue of type int that holds the status result of parsing the
+ * @param pkg The lvalue for the instance of struct pldm_package
+ *             initialised by decode_pldm_firmware_update_package()
+ * @param rec An lvalue of type struct pldm_package_downstream_device_id_record
+ * @param rc An lvalue of type int that holds the status result of parsing the
  *                firmware device ID record
  *
  * @p rc is set to 0 on successful decode. Otherwise, on error, @p rc is set to:
@@ -2790,12 +2779,12 @@ pldm_package_downstream_device_id_record_descriptor_iter_init(
 /**
  * @brief Iterate over the descriptors in a package's downstream device ID record
  *
- * @param pkg[in,out] The lvalue for the instance of @ref "struct pldm_package"
- *             initialised by @ref decode_pldm_firmware_update_package
- * @param rec[in] An lvalue of type @ref "struct pldm_package_downstream_device_id_record"
- * @param desc[out] An lvalue of type @ref "struct pldm_descriptor" that holds
+ * @param pkg The lvalue for the instance of struct pldm_package
+ *             initialised by decode_pldm_firmware_update_package()
+ * @param rec An lvalue of type struct pldm_package_downstream_device_id_record
+ * @param desc An lvalue of type struct pldm_descriptor that holds
  *                  the parsed descriptor
- * @param rc[out] An lvalue of type int that holds the status result of parsing the
+ * @param rc An lvalue of type int that holds the status result of parsing the
  *                downstream device ID record
  *
  * @p rc is set to 0 on successful decode. Otherwise, on error, @p rc is set to:
@@ -2894,12 +2883,11 @@ int decode_pldm_package_component_image_information_from_iter(
 /**
  * @brief Iterate over the component image information contained in the package
  *
- * @param pkg[in,out] The lvalue for the instance of @ref "struct pldm_package"
- *             initialised by @ref decode_pldm_firmware_update_package
- * @param rec[in] An lvalue of type @ref "struct pldm_package_downstream_device_id_record"
- * @param desc[out] An lvalue of type @ref "struct pldm_descriptor" that holds
- *                  the parsed descriptor
- * @param rc[out] An lvalue of type int that holds the status result of parsing the
+ * @param pkg The lvalue for the instance of struct pldm_package
+ *             initialised by decode_pldm_firmware_update_package()
+ * @param info An lvalue of type struct pldm_package_component_image_information
+ *                  that holds the parsed image metadata
+ * @param rc An lvalue of type int that holds the status result of parsing the
  *                downstream device ID record
  *
  * @p rc is set to 0 on successful decode. Otherwise, on error, @p rc is set to:
@@ -2968,7 +2956,7 @@ int decode_pldm_package_component_image_information_from_iter(
  *
  * @param name The name for the pin object
  *
- * The pin object must be provided to @ref decode_pldm_firmware_update_package
+ * The pin object must be provided to decode_pldm_firmware_update_package()
  */
 #define DEFINE_PLDM_PACKAGE_FORMAT_PIN_FR01H(name)                             \
 	struct pldm_package_format_pin name = { \
@@ -2994,7 +2982,7 @@ int decode_pldm_package_component_image_information_from_iter(
  *
  * @param name The name for the pin object
  *
- * The pin object must be provided to @ref decode_pldm_firmware_update_package
+ * The pin object must be provided to decode_pldm_firmware_update_package()
  */
 #define DEFINE_PLDM_PACKAGE_FORMAT_PIN_FR02H(name)                             \
 	struct pldm_package_format_pin name = { \
@@ -3021,7 +3009,7 @@ int decode_pldm_package_component_image_information_from_iter(
  *
  * @param name The name for the pin object
  *
- * The pin object must be provided to @ref decode_pldm_firmware_update_package
+ * The pin object must be provided to decode_pldm_firmware_update_package()
  */
 #define DEFINE_PLDM_PACKAGE_FORMAT_PIN_FR03H(name)                             \
 	struct pldm_package_format_pin name = { \
@@ -3048,7 +3036,7 @@ int decode_pldm_package_component_image_information_from_iter(
  *
  * @param name The name for the pin object
  *
- * The pin object must be provided to @ref decode_pldm_firmware_update_package
+ * The pin object must be provided to decode_pldm_firmware_update_package()
  */
 #define DEFINE_PLDM_PACKAGE_FORMAT_PIN_FR04H(name)                             \
 	struct pldm_package_format_pin name = { \

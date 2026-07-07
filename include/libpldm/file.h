@@ -137,7 +137,7 @@ int decode_pldm_file_df_open_req(const struct pldm_msg *msg,
  *  @param[in] instance_id - Message's instance id
  *  @param[in] resp - The pointer to the response message to be encoded
  *  @param[in,out] msg - Message will be written to this
- *  @param[in, out] payload_length - Length of the request message payload
+ *  @param[in,out] payload_length - Length of the request message payload
  *  @return 0 on success
  *          -EINVAL if argument values are invalid for the invocation
  *          -ENOMSG if the PLDM type in the request header is invalid

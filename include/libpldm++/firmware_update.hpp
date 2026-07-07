@@ -37,11 +37,11 @@ namespace fw_update
 	struct DescriptorData : libpldm::GrowableStruct<struct DescriptorData>,
 				private libpldm::NonCopyableNonMoveable {
 	    private:
-		friend pldm::fw_update::PackageParser;
+		friend PackageParser;
 
 		// since it is holding a map of descriptors, it needs to construct
 		// for the private copy constructor
-		friend struct pldm::fw_update::FirmwareDeviceIDRecord;
+		friend struct FirmwareDeviceIDRecord;
 
 		DescriptorData(const struct DescriptorData &ref);
 		DescriptorData(const std::vector<uint8_t> &data);
@@ -64,7 +64,7 @@ namespace fw_update
 		: libpldm::GrowableStruct<struct ComponentImageInfo>,
 		  private libpldm::NonCopyableNonMoveable {
 	    private:
-		friend pldm::fw_update::PackageParser;
+		friend PackageParser;
 
 		ComponentImageInfo(
 			uint16_t componentClassification,
@@ -110,7 +110,7 @@ namespace fw_update
 		: libpldm::GrowableStruct<struct FirmwareDeviceIDRecord>,
 		  private libpldm::NonCopyableNonMoveable {
 	    private:
-		friend pldm::fw_update::PackageParser;
+		friend PackageParser;
 
 		FirmwareDeviceIDRecord(
 			const std::bitset<32> &deviceUpdateOptionFlags,
@@ -158,7 +158,7 @@ namespace fw_update
 	struct Package : libpldm::GrowableStruct<struct Package>,
 			 private libpldm::NonCopyableNonMoveable {
 	    private:
-		friend pldm::fw_update::PackageParser;
+		friend PackageParser;
 
 		Package(const std::vector<FirmwareDeviceIDRecord>
 				&firmwareDeviceIdRecords,

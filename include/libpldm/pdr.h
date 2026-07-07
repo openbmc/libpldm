@@ -36,7 +36,7 @@ pldm_pdr *pldm_pdr_init(void);
 
 /** @brief Destroy a PDR repository (and free up associated resources)
  *
- *  @param[in/out] repo - pointer to opaque pointer acting as a PDR repo handle
+ *  @param[in,out] repo - pointer to opaque pointer acting as a PDR repo handle
  */
 void pldm_pdr_destroy(pldm_pdr *repo);
 
@@ -62,7 +62,7 @@ uint32_t pldm_pdr_get_repo_size(const pldm_pdr *repo);
 
 /** @brief Add a PDR record to a PDR repository, or return an error
  *
- *  @param[in/out] repo - opaque pointer acting as a PDR repo handle
+ *  @param[in,out] repo - opaque pointer acting as a PDR repo handle
  *  @param[in] data - pointer to a PDR record, pointing to a PDR definition as
  *  per DSP0248. This data is memcpy'd.
  *  @param[in] size - size of input PDR record in bytes
@@ -99,7 +99,7 @@ uint32_t pldm_pdr_get_record_handle(const pldm_pdr *repo,
  *  @pre record must point to a valid object
  *
  *  @param[in] repo - opaque pointer acting as a PDR repo handle
- *  @param[in] reocrd - opaque pointer acting as a PDR record handle
+ *  @param[in] record - opaque pointer acting as a PDR record handle
  *
  *  @return uint16_t - terminus handle assigned to PDR record
  */
@@ -110,7 +110,7 @@ uint16_t pldm_pdr_get_terminus_handle(const pldm_pdr *repo,
  *
  *  @param[in] repo - opaque pointer acting as a PDR repo handle
  *  @param[in] record_handle - input record handle
- *  @param[in/out] data - will point to PDR record data (as per DSP0248) on
+ *  @param[in,out] data - will point to PDR record data (as per DSP0248) on
  *                        return
  *  @param[out] size - *size will be size of PDR record
  *  @param[out] next_record_handle - *next_record_handle will be the record
@@ -128,7 +128,7 @@ const pldm_pdr_record *pldm_pdr_find_record(const pldm_pdr *repo,
  *
  *  @param[in] repo - opaque pointer acting as a PDR repo handle
  *  @param[in] curr_record - opaque pointer acting as a PDR record handle
- *  @param[in/out] data - will point to PDR record data (as per DSP0248) on
+ *  @param[in,out] data - will point to PDR record data (as per DSP0248) on
  *                        return
  *  @param[out] size - *size will be size of PDR record
  *  @param[out] next_record_handle - *next_record_handle will be the record
@@ -148,7 +148,7 @@ pldm_pdr_get_next_record(const pldm_pdr *repo,
  *  @param[in] pdr_type - PDR type number as per DSP0248
  *  @param[in] curr_record - opaque pointer acting as a PDR record handle; if
  *  not NULL, then search will begin from this record's next record
- *  @param[in/out] data - will point to PDR record data (as per DSP0248) on
+ *  @param[in,out] data - will point to PDR record data (as per DSP0248) on
  *                        return, if input is not NULL
  *  @param[out] size - *size will be size of PDR record, if input is not NULL
  *
@@ -263,7 +263,7 @@ int pldm_pdr_delete_by_effecter_id(pldm_pdr *repo, uint16_t effecter_id,
 
 /** @brief Add a FRU record set PDR record to a PDR repository, or return an error
  *
- *  @param[in/out] repo - opaque pointer acting as a PDR repo handle
+ *  @param[in,out] repo - opaque pointer acting as a PDR repo handle
  *  @param[in] terminus_handle - PLDM terminus handle of terminus owning the PDR
  *  record
  *  @param[in] fru_rsi - FRU record set identifier
@@ -353,8 +353,8 @@ pldm_entity_association_tree *pldm_entity_association_tree_init(void);
 
 /** @brief Add a local entity into the entity association tree
  *
- *  @param[in/out] tree - opaque pointer acting as a handle to the tree
- *  @param[in/out] entity - pointer to the entity to be added. Input has the
+ *  @param[in,out] tree - opaque pointer acting as a handle to the tree
+ *  @param[in,out] entity - pointer to the entity to be added. Input has the
  *                          entity type. On output, instance number and the
  *                          container id are populated.
  *  @param[in] entity_instance_number - entity instance number, we can use the
@@ -374,8 +374,8 @@ pldm_entity_node *pldm_entity_association_tree_add(
 /** @brief Add an entity into the entity association tree based on remote field
  *  set or unset.
  *
- *  @param[in/out] tree - opaque pointer acting as a handle to the tree
- *  @param[in/out] entity - pointer to the entity to be added. Input has the
+ *  @param[in,out] tree - opaque pointer acting as a handle to the tree
+ *  @param[in,out] entity - pointer to the entity to be added. Input has the
  *                          entity type. On output, instance number and the
  *                          container id are populated.
  *  @param[in] entity_instance_number - entity instance number, we can use the
@@ -386,7 +386,7 @@ pldm_entity_node *pldm_entity_association_tree_add(
  *  @param[in] association_type - relation with the parent : logical or physical
  *  @param[in] is_remote - used to denote whether we are adding a BMC entity to
  *                         the tree or a host entity
- *  @param[in] is_update_contanier_id - Used to determine whether need to update
+ *  @param[in] is_update_container_id - Used to determine whether need to update
  *                                      contanier id.
  *                                      true: should be changed
  *                                      false: should not be changed
@@ -402,14 +402,15 @@ pldm_entity_node *pldm_entity_association_tree_add_entity(
 
 /** @brief Visit and note each entity in the entity association tree
  *
- *  @pre `*entities == NULL` and `*size == 0` must hold at the time of invocation.
+ *  @pre `*entities == NULL` and `*size == 0` must hold at the time of
+ *       invocation.
  *
- *  Callers must inspect the values of `*entities` and `*size` post-invocation to determine if the
- *  invocation was a success or failure.
+ *  Callers must inspect the values of `*entities` and `*size` post-invocation
+ *  to determine if the invocation was a success or failure.
  *
  *  @param[in] tree - opaque pointer acting as a handle to the tree
- *  @param[out] entities - pointer to list of pldm_entity's. To be free()'d by
- *                         the caller
+ *  @param[out] entities - pointer to list of pldm_entity instances. To be
+ *                         free()ed by the caller
  *  @param[out] size - number of pldm_entity's
  */
 void pldm_entity_association_tree_visit(pldm_entity_association_tree *tree,
@@ -514,7 +515,7 @@ int pldm_entity_association_pdr_add_contained_entity_to_remote_pdr(
  *  entity has to be added
  *  @param[in] parent - the container entity
  *  @param[in] entity - the contained entity to be added
- *  @param[in-out] entity_record_handle - record handle of a container entity added to the
+ *  @param[in,out] entity_record_handle - record handle of a container entity added to the
  *  entity association PDR
  *
  *  @return 0 on success, -EINVAL if the arguments are invalid, -ENOMEM if an internal memory
@@ -594,7 +595,7 @@ bool pldm_is_current_parent_child(pldm_entity_node *parent, pldm_entity *node);
 /** @brief Find an entity in the entity association tree
  *
  *  @param[in] tree - pointer to entity association tree
- *  @param[in/out] entity - entity type and instance id set on input, container
+ *  @param[in,out] entity - entity type and instance id set on input, container
  *                 id set on output
  *  @return pldm_entity_node* pointer to entity if found, NULL otherwise
  *
@@ -609,7 +610,7 @@ pldm_entity_association_tree_find(pldm_entity_association_tree *tree,
  *         ie - remote entity or local entity
  *
  *  @param[in] tree - pointer to entity association tree
- *  @param[in/out] entity - entity type and instance id set on input, container
+ *  @param[in,out] entity - entity type and instance id set on input, container
  *                          id set on output
  *  @param[in] is_remote - variable to denote whether we are finding a remote
  *                         entity or a local entity
@@ -626,7 +627,7 @@ pldm_entity_node *pldm_entity_association_tree_find_with_locality(
  *  @pre new_tree must point to a valid object
  *
  *  @param[in] org_tree - pointer to source tree
- *  @param[in/out] new_tree - pointer to destination tree
+ *  @param[in,out] new_tree - pointer to destination tree
  */
 void pldm_entity_association_tree_copy_root(
 	pldm_entity_association_tree *org_tree,
@@ -635,7 +636,7 @@ void pldm_entity_association_tree_copy_root(
 /** @brief Create a copy of an existing entity association tree
  *
  *  @param[in] org_tree - pointer to source tree
- *  @param[in/out] new_tree - pointer to destination tree
+ *  @param[in,out] new_tree - pointer to destination tree
  *
  *  @return 0 if the entity association tree was copied, -EINVAL if the argument
  *          values are invalid, or -ENOMEM if memory required for the copy
@@ -683,7 +684,7 @@ void pldm_entity_association_pdr_extract(const uint8_t *pdr, uint16_t pdr_len,
  *  @param[in] entity - the pldm entity to be deleted. Data inside the entity struct must be
  *  			host-endianess format
  *  @param[in] is_remote - indicates which PDR to remove, local or remote
- *  @param[in-out] pdr_record_handle - record handle of the container entity which has to be removed.
+ *  @param[in,out] pdr_record_handle - record handle of the container entity which has to be removed.
  *                                     PLDM will use this record handle to updated the PDR repo so
  *                                     that entry corresponding to this entity is removed from PDR
  *                                     table.
@@ -701,8 +702,8 @@ int pldm_entity_association_pdr_remove_contained_entity(
  *  Note - The values passed in entity must be in host-endianness.
  *
  *  @return 0 on success, returns -EINVAL if the arguments are invalid and if
- *  the entity passed is invalid or NULL, or -ENOENT if the @param entity is
- *  not found in @param tree.
+ *  the entity passed is invalid or NULL, or -ENOENT if the @p entity is
+ *  not found in @p tree.
  */
 int pldm_entity_association_tree_delete_node(pldm_entity_association_tree *tree,
 					     const pldm_entity *entity);

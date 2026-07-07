@@ -366,6 +366,7 @@ uint16_t pldm_bios_table_attr_entry_string_decode_min_length(
 	const struct pldm_bios_attr_table_entry *entry);
 
 /** @brief Get the default string from a bios attribute table entry
+ *  @param[in] entry - The BIOS attribute table entry of interest
  *  @param[out] buffer - Pointer to a buffer to store the string
  *  @param[in] size - Size of the buffer to store the string
  *  @return Length of the string decoded
@@ -478,7 +479,7 @@ uint8_t pldm_bios_table_attr_value_entry_enum_decode_handles(
  *  @param[in] attr_type - Type of this attribute in the BIOS Attribute Value
  * Table
  *  @param[in] count - Total number of current values for this enum attribute
- *  @param[in] handle_indexes - Index into the array(provided in the BIOS
+ *  @param[in] handles - Index into the array(provided in the BIOS
  * Attribute Table) of the possible values of string handles for this attribute.
  *  @return PLDM_SUCCESS on success. PLDM_ERROR_INVALID_DATA if entry or handles are NULL, or if
  *          attr_type is not a PLDM_BIOS_ENUMERATION. PLDM_ERROR_INVALID_LENGTH if entry_length
@@ -522,7 +523,7 @@ void pldm_bios_table_attr_value_entry_string_decode_string(
  *  BIOS Attribute Value Table.
  *  @param[in] attr_type - Type of this attribute in the BIOS Attribute Value
  * Table
- *  @param[in] string_length - Length of current string in bytes. 0 indicates
+ *  @param[in] str_length - Length of current string in bytes. 0 indicates
  * that the current string value is not set.
  *  @param[in] string - The current string itself
  *  @return PLDM_SUCCESS on success. PLDM_ERROR_INVALID_DATA if entry is NULL, str is NULL while

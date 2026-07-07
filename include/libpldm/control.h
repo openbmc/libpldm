@@ -45,7 +45,7 @@ int pldm_control_setup(struct pldm_control *control, size_t pldm_control_size);
 /** @brief Add a PLDM type to report.
  *
  * @param[in] control
- * @param[in] type - PLDM type, enum pldm_supported_types
+ * @param[in] pldm_type - PLDM type, enum pldm_supported_types
  * @param[in] versions - list of versions for GetPLDMVersion response.
  *			 This is an array of 32-bit version values, followed by
  *			 a CRC32 over the version values. The size of this buffer
