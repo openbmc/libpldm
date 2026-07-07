@@ -34,6 +34,24 @@
       "parentUuid": "9b3ad58a_a349d5f1",
       "revId": "9026f04339e6bcfe12ab21cef5b81e7247ae75d6",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fb5a545b_632871a8",
+        "filename": "include/libpldm++/firmware_update.hpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 290,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2026-07-07T12:29:54Z",
+      "side": 1,
+      "message": "\u003e The dicision of whether to validate the checksum or not while parsing, \ncould be left to the consumer (e.g. a meson option in obmc/pldm).\nSome of the use case might want to use the newer version of the package, but dosen\u0027t need that validation.\n\nAgree, it has not been there before and code has been working fine without it.\n\nok, looks like the C library is already checking it in `src/dsp/firmware_update.c `\n\n```\n|       if (hdr-\u003epackage_header_format_revision \u003e\u003d\n|           PLDM_PACKAGE_HEADER_FORMAT_REVISION_FR04H) {\n|       |       rc \u003d pldm_edac_crc32_validate(package_payload_checksum,\n|       |       |       |       |             package_payload_offset,\n|       |       |       |       |             package_payload_size);\n```\n\nso user code need not check it.\n\nI was wondering if it might be nice to have the checksums be part of the struct for debug or display purposes. But i do not have a real use-case right now.\n\nThanks for looking into this :)",
+      "parentUuid": "6c541ec4_e7095626",
+      "revId": "9026f04339e6bcfe12ab21cef5b81e7247ae75d6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
