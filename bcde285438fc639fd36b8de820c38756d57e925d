@@ -71,6 +71,42 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "259beedc_fa3c0ce4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2026-07-07T02:42:30Z",
+      "side": 1,
+      "message": "Added an example.",
+      "parentUuid": "c8c832af_91071a2e",
+      "revId": "bcde285438fc639fd36b8de820c38756d57e925d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0192ec3e_0cd24482",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2026-07-07T02:42:30Z",
+      "side": 1,
+      "message": "I added a libfuzzer test.  I might need a hint on how to fuzz with the example.  Matt had said something in the fuzz readme about afl-fuzz needing a gui?",
+      "parentUuid": "a8c35da7_70553705",
+      "revId": "bcde285438fc639fd36b8de820c38756d57e925d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9864dfdd_f36a4cd8",
@@ -124,6 +160,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6f19b551_28eecbf6",
+        "filename": "include/libpldm/meson.build",
+        "patchSetId": 8
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2026-07-07T02:42:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d9b470c3_b9b2794e",
+      "revId": "bcde285438fc639fd36b8de820c38756d57e925d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1ed134eb_7defc3f9",
@@ -155,6 +209,24 @@
       "side": 1,
       "message": "It does.  will update the comment.",
       "parentUuid": "1ed134eb_7defc3f9",
+      "revId": "bcde285438fc639fd36b8de820c38756d57e925d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "313b80f2_8f574b07",
+        "filename": "include/libpldm/platform_device.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2026-07-07T02:42:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "48a55521_8ebd165b",
       "revId": "bcde285438fc639fd36b8de820c38756d57e925d",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -244,6 +316,30 @@
       "side": 1,
       "message": "There\u0027s some discussion of techniques here that I think is instructive:\n\nhttps://lwn.net/Articles/830666/\n\nWe\u0027ve used similar for the firmware update package parser structs.",
       "parentUuid": "5296ae09_2983d038",
+      "range": {
+        "startLine": 95,
+        "startChar": 1,
+        "endLine": 98,
+        "endChar": 47
+      },
+      "revId": "bcde285438fc639fd36b8de820c38756d57e925d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7934e9a9_1576cf5e",
+        "filename": "include/libpldm/platform_device.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2026-07-07T02:42:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5bcf20c4_3590007d",
       "range": {
         "startLine": 95,
         "startChar": 1,
