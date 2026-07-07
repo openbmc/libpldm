@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a254d22e_88a83208",
+        "filename": "CONTRIBUTING.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 366,
+      "author": {
+        "id": 1002877
+      },
+      "writtenOn": "2026-07-07T15:55:26Z",
+      "side": 1,
+      "message": "So the patches go together, but are applied slowly over time - github can\u0027t do that (one would need several PRs...). Nice!",
+      "revId": "7bc09438127bc4672b5dea2613cf22060f041dab",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "99e1c064_ce3133d1",
+        "filename": "CONTRIBUTING.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 374,
+      "author": {
+        "id": 1002877
+      },
+      "writtenOn": "2026-07-07T15:55:26Z",
+      "side": 1,
+      "message": "This sounds like saying that if deprecation happens at release N, removal waits at least for release N+1 - maybe add an example to make it clearer?",
+      "revId": "7bc09438127bc4672b5dea2613cf22060f041dab",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
