@@ -1,0 +1,352 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c6e8d1d_b090368c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-07-07T01:18:42Z",
+      "side": 1,
+      "message": "The change impacts the `bios` subsystem of the library. Please update the commit subject.",
+      "range": {
+        "startLine": 7,
+        "startChar": 5,
+        "endLine": 7,
+        "endChar": 9
+      },
+      "revId": "2b472ea27be9b3fa5d6aea93711b424b1f0863da",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "42f7bf47_0369a74d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-07-07T01:18:42Z",
+      "side": 1,
+      "message": "Is this an effort to replace `encode_get_date_time_resp()`? If so, can you please review [CONTRIBUTING: Document process for replacing an API](https://gerrit.openbmc.org/c/openbmc/libpldm/+/92046) ?\n\nAlso, can you please outline the motivation?",
+      "revId": "2b472ea27be9b3fa5d6aea93711b424b1f0863da",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "61b8276e_1d603b33",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-07-07T01:18:42Z",
+      "side": 1,
+      "message": "Hi Sagar, now that this is passing CI I\u0027ve had a more thorough look. Please find comments inline.",
+      "revId": "2b472ea27be9b3fa5d6aea93711b424b1f0863da",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f0318f36_958ffc10",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 7
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-07-07T01:18:42Z",
+      "side": 1,
+      "message": "Can you please add new entries at the top of the list?\n\nhttps://github.com/openbmc/libpldm/blob/df0a2219c0f3a3f6aeeed2b9f3dabbe37911e36e/CONTRIBUTING.md#L49",
+      "revId": "2b472ea27be9b3fa5d6aea93711b424b1f0863da",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "edd6dc79_04c106ae",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 7
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-07-07T01:18:42Z",
+      "side": 1,
+      "message": "Please move this to the `## Unreleased` section.",
+      "revId": "2b472ea27be9b3fa5d6aea93711b424b1f0863da",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "13103575_f7d23e09",
+        "filename": "include/libpldm/bios.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 343,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-07-07T01:18:42Z",
+      "side": 1,
+      "message": "I\u0027m a bit surprised the formatter hasn\u0027t wrapped this.",
+      "revId": "2b472ea27be9b3fa5d6aea93711b424b1f0863da",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "99dd47ff_d1819f29",
+        "filename": "include/libpldm/bios.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 349,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-07-07T01:18:42Z",
+      "side": 1,
+      "message": "The function name doesn\u0027t align with the struct name. It\u0027s expected the two align:\n\nhttps://github.com/openbmc/libpldm/blob/main/CONTRIBUTING.md?plain\u003d1#L106-L111\n\nThis suggests some more work needs to be done. See the comment on line 66 in the implementation.",
+      "range": {
+        "startLine": 348,
+        "startChar": 4,
+        "endLine": 349,
+        "endChar": 59
+      },
+      "revId": "2b472ea27be9b3fa5d6aea93711b424b1f0863da",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0cfd9c95_fe1cfb38",
+        "filename": "src/dsp/bios.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-07-07T01:18:42Z",
+      "side": 1,
+      "message": "If we\u0027re going to replace the API, let\u0027s please put in the work to define a new struct that is not marked `__attribute__((packed))`:\n\nhttps://github.com/openbmc/libpldm/blob/df0a2219c0f3a3f6aeeed2b9f3dabbe37911e36e/CONTRIBUTING.md#L181",
+      "range": {
+        "startLine": 66,
+        "startChar": 28,
+        "endLine": 66,
+        "endChar": 58
+      },
+      "revId": "2b472ea27be9b3fa5d6aea93711b424b1f0863da",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9c6a2e7b_93f1022f",
+        "filename": "src/dsp/bios.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-07-07T01:18:42Z",
+      "side": 1,
+      "message": "This is redundant with the test integrated into `pldm_msgbuf_init_errno()` (used below), and should be removed.",
+      "range": {
+        "startLine": 77,
+        "startChar": 1,
+        "endLine": 80,
+        "endChar": 2
+      },
+      "revId": "2b472ea27be9b3fa5d6aea93711b424b1f0863da",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1dab0aec_1fe5c6a1",
+        "filename": "src/dsp/bios.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-07-07T01:18:42Z",
+      "side": 1,
+      "message": "Please use `pldm_pack_header_errno()`, because ...",
+      "range": {
+        "startLine": 88,
+        "startChar": 11,
+        "endLine": 88,
+        "endChar": 27
+      },
+      "revId": "2b472ea27be9b3fa5d6aea93711b424b1f0863da",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4b97f782_c94a9ff9",
+        "filename": "src/dsp/bios.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-07-07T01:18:42Z",
+      "side": 1,
+      "message": "... this now combines two different return value semantics.\n\nAll new APIs must return a negative errno value on error:\n\nhttps://github.com/openbmc/libpldm/blob/df0a2219c0f3a3f6aeeed2b9f3dabbe37911e36e/CONTRIBUTING.md#L254",
+      "revId": "2b472ea27be9b3fa5d6aea93711b424b1f0863da",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1468e4f8_485fa08e",
+        "filename": "src/dsp/bios.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-07-07T01:18:42Z",
+      "side": 1,
+      "message": "The memcpy is unnecessary. Due to the struct being defined as `__attribute__((packed))` the compiler has enough information to perform a direct load despite potential misalignment:\n\n```\nyear \u003d resp-\u003eyear;\n```\n\nHowever, we should avoid all of that: see the comment on line 66 above.",
+      "range": {
+        "startLine": 98,
+        "startChar": 1,
+        "endLine": 100,
+        "endChar": 42
+      },
+      "revId": "2b472ea27be9b3fa5d6aea93711b424b1f0863da",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6992a02f_d74d9f8b",
+        "filename": "src/dsp/bios.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-07-07T01:18:42Z",
+      "side": 1,
+      "message": "There\u0027s no need to use the type-suffixed APIs here. We have a `_Generic()` wrapper that means all of these can be `pldm_msgbuf_insert()`.",
+      "range": {
+        "startLine": 102,
+        "startChar": 1,
+        "endLine": 109,
+        "endChar": 1
+      },
+      "revId": "2b472ea27be9b3fa5d6aea93711b424b1f0863da",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8ddb4446_3d3b2190",
+        "filename": "tests/fuzz/fuzz.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 306,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-07-07T01:18:42Z",
+      "side": 1,
+      "message": "Please remove this, see: [tests: meson: Require testing ABI for fuzz targets](https://gerrit.openbmc.org/c/openbmc/libpldm/+/91696)",
+      "revId": "2b472ea27be9b3fa5d6aea93711b424b1f0863da",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "88a59f02_1626ef41",
+        "filename": "tests/fuzz/fuzz.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 509,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-07-07T01:18:42Z",
+      "side": 1,
+      "message": "Remove this also (see comment above).",
+      "revId": "2b472ea27be9b3fa5d6aea93711b424b1f0863da",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "19cfd1e2_8daaac4f",
+        "filename": "tests/unit/dsp/bios.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-07-07T01:18:42Z",
+      "side": 1,
+      "message": "```\n#endif\n```",
+      "revId": "2b472ea27be9b3fa5d6aea93711b424b1f0863da",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c2f64753_5dc7cfaa",
+        "filename": "tests/unit/dsp/bios.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-07-07T01:18:42Z",
+      "side": 1,
+      "message": "```\n#if HAVE_LIBPLDM_API_TESTING\n```",
+      "revId": "2b472ea27be9b3fa5d6aea93711b424b1f0863da",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "98a19c0b_95553d2b",
+        "filename": "tests/unit/dsp/bios.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-07-07T01:18:42Z",
+      "side": 1,
+      "message": "Please guard each test function individually so we avoid overlapping guard ranges in the test files.",
+      "revId": "2b472ea27be9b3fa5d6aea93711b424b1f0863da",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
