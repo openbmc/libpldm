@@ -2386,6 +2386,8 @@ int decode_numeric_sensor_data(const uint8_t *sensor_data,
 
 /** @brief Decode Numeric Sensor Pdr data
  *
+ *  @deprecated Use decode_pldm_platform_numeric_sensor_pdr() instead.
+ *
  *  @param[in] pdr_data - pdr data for numeric sensor
  *  @param[in] pdr_data_length - Length of pdr data
  *  @param[out] pdr_value - unpacked numeric sensor PDR struct

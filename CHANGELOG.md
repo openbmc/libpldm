@@ -33,6 +33,10 @@ Change categories:
 
 ### Deprecated
 
+- dsp: platform: Deprecate `decode_numeric_sensor_pdr_data()`
+
+  Users should switch to `decode_pldm_platform_numeric_sensor_pdr()`
+
 ### Removed
 
 - dsp: base: Remove `{en,de}code_get_tid_resp()` and associated types
