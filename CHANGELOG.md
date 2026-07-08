@@ -19,6 +19,8 @@ Change categories:
 
 ### Added
 
+- dsp: platform: Introduce `encode_pldm_platform_compact_numeric_sensor_pdr()`
+- dsp: platform: Introduce `decode_pldm_platform_compact_numeric_sensor_pdr()`
 - dsp: platform: Introduce `encode_pldm_platform_numeric_sensor_pdr()`
 - dsp: platform: Introduce `decode_pldm_platform_numeric_sensor_pdr()`
 - libpldm++ support for fw update pkg v1.1.0

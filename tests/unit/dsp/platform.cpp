@@ -7948,6 +7948,209 @@ TEST(decodeNumericSensorPdrDataNew, ConsistentWithLegacyDecoder)
 #endif
 
 #if HAVE_LIBPLDM_API_TESTING
+TEST(encodeCompactNumericSensorPdrData, RoundtripWithName)
+{
+    struct pldm_platform_compact_numeric_sensor_pdr pdr{};
+    const char name[] = "sensor";
+
+    constexpr size_t name_len = sizeof(name) - 1;
+    constexpr size_t pdr_len =
+        PLDM_PLATFORM_COMPACT_NUMERIC_SENSOR_PDR_MIN_LENGTH + name_len;
+
+    pdr.hdr.record_handle = 1;
+    pdr.hdr.version = 1;
+    pdr.hdr.type = PLDM_COMPACT_NUMERIC_SENSOR_PDR;
+    pdr.hdr.length =
+        static_cast<uint16_t>(pdr_len - sizeof(struct pldm_pdr_hdr));
+
+    pdr.pldm_terminus_handle = 5;
+    pdr.sensor_id = 1;
+    pdr.entity_type = PLDM_ENTITY_POWER_SUPPLY;
+    pdr.entity_instance_number = 2;
+    pdr.container_id = 3;
+    pdr.base_unit = 0x05;
+    pdr.unit_modifier = -2;
+    pdr.rate_unit = PLDM_RATE_UNIT_NONE;
+    pdr.range_field_support.byte = 0x3f;
+    pdr.warning_high = 70;
+    pdr.warning_low = 30;
+    pdr.critical_high = 80;
+    pdr.critical_low = 20;
+    pdr.fatal_high = 90;
+    pdr.fatal_low = 10;
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+    pdr.sensor_name.ptr = reinterpret_cast<const uint8_t*>(name);
+    pdr.sensor_name.length = name_len;
+
+    std::vector<uint8_t> buf(pdr_len);
+    size_t buf_len = buf.size();
+    auto rc = encode_pldm_platform_compact_numeric_sensor_pdr(&pdr, buf.data(),
+                                                              &buf_len);
+    ASSERT_EQ(rc, 0);
+    EXPECT_EQ(buf_len, pdr_len);
+
+    struct pldm_platform_compact_numeric_sensor_pdr decoded{};
+    rc = decode_pldm_platform_compact_numeric_sensor_pdr(buf.data(), buf_len,
+                                                         &decoded);
+    ASSERT_EQ(rc, 0);
+
+    EXPECT_EQ(decoded.hdr.record_handle, pdr.hdr.record_handle);
+    EXPECT_EQ(decoded.hdr.version, pdr.hdr.version);
+    EXPECT_EQ(decoded.hdr.type, pdr.hdr.type);
+    EXPECT_EQ(decoded.hdr.record_change_num, pdr.hdr.record_change_num);
+    EXPECT_EQ(decoded.hdr.length, pdr.hdr.length);
+    EXPECT_EQ(decoded.pldm_terminus_handle, pdr.pldm_terminus_handle);
+    EXPECT_EQ(decoded.sensor_id, pdr.sensor_id);
+    EXPECT_EQ(decoded.entity_type, pdr.entity_type);
+    EXPECT_EQ(decoded.entity_instance_number, pdr.entity_instance_number);
+    EXPECT_EQ(decoded.container_id, pdr.container_id);
+    EXPECT_EQ(decoded.base_unit, pdr.base_unit);
+    EXPECT_EQ(decoded.unit_modifier, pdr.unit_modifier);
+    EXPECT_EQ(decoded.rate_unit, pdr.rate_unit);
+    EXPECT_EQ(decoded.range_field_support.byte, pdr.range_field_support.byte);
+    EXPECT_EQ(decoded.warning_high, pdr.warning_high);
+    EXPECT_EQ(decoded.warning_low, pdr.warning_low);
+    EXPECT_EQ(decoded.critical_high, pdr.critical_high);
+    EXPECT_EQ(decoded.critical_low, pdr.critical_low);
+    EXPECT_EQ(decoded.fatal_high, pdr.fatal_high);
+    EXPECT_EQ(decoded.fatal_low, pdr.fatal_low);
+    ASSERT_EQ(decoded.sensor_name.length, pdr.sensor_name.length);
+    EXPECT_EQ(memcmp(decoded.sensor_name.ptr, pdr.sensor_name.ptr,
+                     pdr.sensor_name.length),
+              0);
+}
+#endif
+
+#if HAVE_LIBPLDM_API_TESTING
+TEST(encodeCompactNumericSensorPdrData, RoundtripWithoutName)
+{
+    struct pldm_platform_compact_numeric_sensor_pdr pdr{};
+
+    constexpr size_t pdr_len =
+        PLDM_PLATFORM_COMPACT_NUMERIC_SENSOR_PDR_MIN_LENGTH;
+
+    pdr.hdr.record_handle = 2;
+    pdr.hdr.version = 1;
+    pdr.hdr.type = PLDM_COMPACT_NUMERIC_SENSOR_PDR;
+    pdr.hdr.length =
+        static_cast<uint16_t>(pdr_len - sizeof(struct pldm_pdr_hdr));
+
+    pdr.sensor_id = 2;
+    pdr.entity_type = PLDM_ENTITY_POWER_SUPPLY;
+    pdr.entity_instance_number = 1;
+    pdr.container_id = 1;
+    pdr.rate_unit = PLDM_RATE_UNIT_PER_SECOND;
+    pdr.warning_high = 1;
+    pdr.warning_low = -1;
+    pdr.critical_high = 2;
+    pdr.critical_low = -2;
+    pdr.fatal_high = 3;
+    pdr.fatal_low = -3;
+
+    std::vector<uint8_t> buf(pdr_len);
+    size_t buf_len = buf.size();
+    auto rc = encode_pldm_platform_compact_numeric_sensor_pdr(&pdr, buf.data(),
+                                                              &buf_len);
+    ASSERT_EQ(rc, 0);
+    EXPECT_EQ(buf_len, pdr_len);
+
+    struct pldm_platform_compact_numeric_sensor_pdr decoded{};
+    rc = decode_pldm_platform_compact_numeric_sensor_pdr(buf.data(), buf_len,
+                                                         &decoded);
+    ASSERT_EQ(rc, 0);
+
+    EXPECT_EQ(decoded.rate_unit, pdr.rate_unit);
+    EXPECT_EQ(decoded.warning_high, pdr.warning_high);
+    EXPECT_EQ(decoded.warning_low, pdr.warning_low);
+    EXPECT_EQ(decoded.critical_high, pdr.critical_high);
+    EXPECT_EQ(decoded.critical_low, pdr.critical_low);
+    EXPECT_EQ(decoded.fatal_high, pdr.fatal_high);
+    EXPECT_EQ(decoded.fatal_low, pdr.fatal_low);
+    EXPECT_EQ(decoded.sensor_name.length, 0);
+}
+#endif
+
+#if HAVE_LIBPLDM_API_TESTING
+TEST(encodeCompactNumericSensorPdrData, NullArgs)
+{
+    struct pldm_platform_compact_numeric_sensor_pdr pdr{};
+    std::vector<uint8_t> buf(128);
+    size_t buf_len = buf.size();
+
+    EXPECT_EQ(encode_pldm_platform_compact_numeric_sensor_pdr(
+                  nullptr, buf.data(), &buf_len),
+              -EINVAL);
+    EXPECT_EQ(encode_pldm_platform_compact_numeric_sensor_pdr(&pdr, nullptr,
+                                                              &buf_len),
+              -EINVAL);
+    EXPECT_EQ(encode_pldm_platform_compact_numeric_sensor_pdr(&pdr, buf.data(),
+                                                              nullptr),
+              -EINVAL);
+}
+#endif
+
+#if HAVE_LIBPLDM_API_TESTING
+TEST(encodeCompactNumericSensorPdrData, BufTooSmall)
+{
+    struct pldm_platform_compact_numeric_sensor_pdr pdr{};
+
+    constexpr size_t pdr_len =
+        PLDM_PLATFORM_COMPACT_NUMERIC_SENSOR_PDR_MIN_LENGTH;
+
+    pdr.hdr.length =
+        static_cast<uint16_t>(pdr_len - sizeof(struct pldm_pdr_hdr));
+
+    std::vector<uint8_t> buf(pdr_len - 1);
+    size_t buf_len = buf.size();
+    EXPECT_EQ(encode_pldm_platform_compact_numeric_sensor_pdr(&pdr, buf.data(),
+                                                              &buf_len),
+              -EOVERFLOW);
+}
+#endif
+
+#if HAVE_LIBPLDM_API_TESTING
+TEST(encodeCompactNumericSensorPdrData, InconsistentHdrLength)
+{
+    struct pldm_platform_compact_numeric_sensor_pdr pdr{};
+    pdr.hdr.length = 0; /* wrong: should be 39 for a name-less PDR */
+
+    std::vector<uint8_t> buf(128);
+    size_t buf_len = buf.size();
+    EXPECT_EQ(encode_pldm_platform_compact_numeric_sensor_pdr(&pdr, buf.data(),
+                                                              &buf_len),
+              -EINVAL);
+}
+#endif
+
+#if HAVE_LIBPLDM_API_TESTING
+TEST(decodeCompactNumericSensorPdrData, NullArgs)
+{
+    std::vector<uint8_t> buf(128);
+    struct pldm_platform_compact_numeric_sensor_pdr pdr{};
+
+    EXPECT_EQ(decode_pldm_platform_compact_numeric_sensor_pdr(nullptr,
+                                                              buf.size(), &pdr),
+              -EINVAL);
+    EXPECT_EQ(decode_pldm_platform_compact_numeric_sensor_pdr(
+                  buf.data(), buf.size(), nullptr),
+              -EINVAL);
+}
+#endif
+
+#if HAVE_LIBPLDM_API_TESTING
+TEST(decodeCompactNumericSensorPdrData, BufTooSmall)
+{
+    struct pldm_platform_compact_numeric_sensor_pdr pdr{};
+    std::vector<uint8_t> buf(
+        PLDM_PLATFORM_COMPACT_NUMERIC_SENSOR_PDR_MIN_LENGTH - 1, 0);
+
+    EXPECT_EQ(decode_pldm_platform_compact_numeric_sensor_pdr(buf.data(),
+                                                              buf.size(), &pdr),
+              -EOVERFLOW);
+}
+#endif
+
+#if HAVE_LIBPLDM_API_TESTING
 TEST(StateEffecterPDR, testTruncatedEntry)
 {
     /* Entry claims size=5 but buffer only has room for 2 state bytes */
