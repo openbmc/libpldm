@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1e1c2648_162dcff1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2026-07-08T15:25:47Z",
+      "side": 1,
+      "message": "kebab-case is documented requirement\n\nhttps://github.com/openbmc/libpldm/blob/1df0b7b5a79aead6bd5214d99629ca003cae6555/CONTRIBUTING.md?plain\u003d1#L95\n\nRaised a patch to cleanup this local inconsistency and avoid confusing people in the future..\n\nhttps://gerrit.openbmc.org/c/openbmc/libpldm/+/92168",
+      "parentUuid": "a90a984c_4f6fc483",
+      "revId": "f22701fb696daa329d45b6adf9acd90c10931de4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9073fc3a_a0f7aab8",
@@ -31,6 +49,30 @@
       "writtenOn": "2026-07-07T17:39:22Z",
       "side": 1,
       "message": "Not sure if we need to follow this approach to make comparison in the new implementation.",
+      "range": {
+        "startLine": 199,
+        "startChar": 1,
+        "endLine": 210,
+        "endChar": 2
+      },
+      "revId": "f22701fb696daa329d45b6adf9acd90c10931de4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e65195e8_51ea4031",
+        "filename": "bindings/cpp/types.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2026-07-08T15:25:47Z",
+      "side": 1,
+      "message": "yes, i followed the same approach for the code section you pointed out.",
+      "parentUuid": "9073fc3a_a0f7aab8",
       "range": {
         "startLine": 199,
         "startChar": 1,
@@ -64,6 +106,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4b6698fd_360b01be",
+        "filename": "bindings/cpp/types.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2026-07-08T15:25:47Z",
+      "side": 1,
+      "message": "yes. done 👍",
+      "parentUuid": "578de9f3_87f55ef1",
+      "range": {
+        "startLine": 212,
+        "startChar": 1,
+        "endLine": 216,
+        "endChar": 0
+      },
+      "revId": "f22701fb696daa329d45b6adf9acd90c10931de4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4bb4f541_c51595d6",
@@ -77,6 +143,24 @@
       "writtenOn": "2026-07-07T17:39:22Z",
       "side": 1,
       "message": "Do we have to compare the key index for them as well?",
+      "revId": "f22701fb696daa329d45b6adf9acd90c10931de4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "98a8e379_6e5f7ae0",
+        "filename": "bindings/cpp/types.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 305,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2026-07-08T15:25:47Z",
+      "side": 1,
+      "message": "yes... the current code fails if the map from \u0027other\u0027 is a strict subset of the map in the instance.\n\ngood catch, thanks for finding it 😊\n\nChanged it to compare for existence of member, then compare the sizes of the maps, then compare the entries.",
+      "parentUuid": "4bb4f541_c51595d6",
       "revId": "f22701fb696daa329d45b6adf9acd90c10931de4",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
