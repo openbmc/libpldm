@@ -97,7 +97,14 @@ meson compile -C "$BUILD"
 )
 
 # Reproducible builds
-meson reprotest
+#
+# Disable documentation as doxygen builds may contain inconsistent link fragment
+# values:
+#
+# [I] 0 andrew@heihei ~/s/o/o/l/origin (main)> diff -u buildrepro{.1st,}/html/functions_vars_f.html
+# -<li>format&#160;:&#160;<a class="el" href="structpldm__package__format__pin.html#afcbfbfb5d71c14393797bb33d5c675f5">pldm_package_format_pin</a></li>
+# +<li>format&#160;:&#160;<a class="el" href="structpldm__package__format__pin.html#ab601f651b45d5cf415a9da4a4c58c7bc">pldm_package_format_pin</a></li>
+meson reprotest -- -Ddocumentation=disabled
 
 # Clang sanitizer build
 (
