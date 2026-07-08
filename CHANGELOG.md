@@ -41,6 +41,7 @@ Change categories:
 
 - dsp: base: Remove `{en,de}code_get_tid_resp()` and associated types
 - dsp: base: Remove `decode_multipart_receive_req()`
+- dsp: platform: Remove `decode_numeric_sensor_pdr_data()` and associated types
 
 ### Fixed
 
