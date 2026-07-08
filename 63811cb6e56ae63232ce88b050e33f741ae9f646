@@ -16,6 +16,23 @@
       "message": "Thank you",
       "revId": "63811cb6e56ae63232ce88b050e33f741ae9f646",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "65b1fd23_1b41755f",
+        "filename": "bindings/cpp/firmware_update.cpp",
+        "patchSetId": 21
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 1002504
+      },
+      "writtenOn": "2026-07-08T20:06:56Z",
+      "side": 1,
+      "message": "anotha one!\n\nCan we make a constexpr size_t to the tune of manifest_header_length \u003d 2?\n\nall of the arithmatricks below are a bit hard to parse.",
+      "revId": "63811cb6e56ae63232ce88b050e33f741ae9f646",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
