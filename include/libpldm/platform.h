@@ -908,6 +908,65 @@ struct pldm_numeric_sensor_value_pdr {
 	union_range_field_format fatal_low;
 };
 
+/** @struct pldm_platform_compact_numeric_sensor_pdr
+ *
+ *  Structure representing PLDM Compact Numeric Sensor PDR for unpacked value
+ *  Refer to: DSP0248_1.3.0: 28.25 Table 103
+ */
+struct pldm_platform_compact_numeric_sensor_pdr {
+	struct pldm_value_pdr_hdr hdr;
+	uint16_t pldm_terminus_handle;
+	uint16_t sensor_id;
+	uint16_t entity_type;
+	uint16_t entity_instance_number;
+	uint16_t container_id;
+	uint8_t base_unit;
+	int8_t unit_modifier;
+	uint8_t rate_unit;
+	bitfield8_t range_field_support;
+	int32_t warning_high;
+	int32_t warning_low;
+	int32_t critical_high;
+	int32_t critical_low;
+	int32_t fatal_high;
+	int32_t fatal_low;
+	struct variable_field sensor_name;
+};
+
+/* Minimum length of compact numeric sensor PDR */
+#define PLDM_PLATFORM_COMPACT_NUMERIC_SENSOR_PDR_MIN_LENGTH 49
+
+/** @brief Decode Compact Numeric Sensor PDR data into struct
+ *         pldm_platform_compact_numeric_sensor_pdr
+ *
+ *  @param[in] pdr_data - pdr data for compact numeric sensor
+ *  @param[in] pdr_data_length - Length of pdr data
+ *  @param[out] pdr - unpacked compact numeric sensor PDR struct
+ *
+ *  @return 0 on success
+ *  @return -EINVAL if pdr_data or pdr is NULL
+ *  @return -EOVERFLOW if pdr_data_length is too small
+ */
+int decode_pldm_platform_compact_numeric_sensor_pdr(
+	const void *pdr_data, size_t pdr_data_length,
+	struct pldm_platform_compact_numeric_sensor_pdr *pdr);
+
+/** @brief Encode Compact Numeric Sensor PDR data
+ *
+ *  @param[in] pdr - unpacked compact numeric sensor PDR struct to encode
+ *  @param[out] data - output buffer for the encoded PDR
+ *  @param[in,out] data_len - in: size of data; out: bytes written
+ *
+ *  @return 0 on success
+ *  @return -EINVAL if pdr, data, or data_len is NULL, if
+ *          pdr->sensor_name.length is inconsistent with pdr->sensor_name.ptr,
+ *          or if pdr->hdr.length is inconsistent with the sensor name length
+ *  @return -EOVERFLOW if data_len is too small for the encoded PDR
+ */
+int encode_pldm_platform_compact_numeric_sensor_pdr(
+	const struct pldm_platform_compact_numeric_sensor_pdr *pdr, void *data,
+	size_t *data_len);
+
 typedef char16_t pldm_utf16be;
 
 struct pldm_entity_auxiliary_name {

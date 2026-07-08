@@ -1914,6 +1914,132 @@ int decode_numeric_sensor_pdr_data(
 	return PLDM_SUCCESS;
 }
 
+LIBPLDM_ABI_TESTING
+int encode_pldm_platform_compact_numeric_sensor_pdr(
+	const struct pldm_platform_compact_numeric_sensor_pdr *pdr, void *data,
+	size_t *data_len)
+{
+	PLDM_MSGBUF_RW_DEFINE_P(buf);
+	size_t pdr_len;
+	int rc;
+
+	if (!pdr || !data || !data_len) {
+		return -EINVAL;
+	}
+
+	if (pdr->sensor_name.length && !pdr->sensor_name.ptr) {
+		return -EINVAL;
+	}
+
+	if (pdr->sensor_name.length > UINT8_MAX) {
+		return -EINVAL;
+	}
+
+	pdr_len = PLDM_PLATFORM_COMPACT_NUMERIC_SENSOR_PDR_MIN_LENGTH +
+		  pdr->sensor_name.length;
+
+	if (pdr->hdr.length != pdr_len - sizeof(struct pldm_pdr_hdr)) {
+		return -EINVAL;
+	}
+
+	rc = pldm_msgbuf_init_errno(buf, pdr_len, data, *data_len);
+	if (rc) {
+		return rc;
+	}
+
+	pldm_msgbuf_insert(buf, pdr->hdr.record_handle);
+	pldm_msgbuf_insert(buf, pdr->hdr.version);
+	pldm_msgbuf_insert(buf, pdr->hdr.type);
+	pldm_msgbuf_insert(buf, pdr->hdr.record_change_num);
+	pldm_msgbuf_insert(buf, pdr->hdr.length);
+
+	pldm_msgbuf_insert(buf, pdr->pldm_terminus_handle);
+	pldm_msgbuf_insert(buf, pdr->sensor_id);
+	pldm_msgbuf_insert(buf, pdr->entity_type);
+	pldm_msgbuf_insert(buf, pdr->entity_instance_number);
+	pldm_msgbuf_insert(buf, pdr->container_id);
+	pldm_msgbuf_insert(buf, (uint8_t)pdr->sensor_name.length);
+	pldm_msgbuf_insert(buf, pdr->base_unit);
+	pldm_msgbuf_insert(buf, pdr->unit_modifier);
+	pldm_msgbuf_insert(buf, pdr->rate_unit);
+	pldm_msgbuf_insert(buf, pdr->range_field_support.byte);
+	pldm_msgbuf_insert(buf, pdr->warning_high);
+	pldm_msgbuf_insert(buf, pdr->warning_low);
+	pldm_msgbuf_insert(buf, pdr->critical_high);
+	pldm_msgbuf_insert(buf, pdr->critical_low);
+	pldm_msgbuf_insert(buf, pdr->fatal_high);
+	pldm_msgbuf_insert(buf, pdr->fatal_low);
+
+	if (pdr->sensor_name.length) {
+		rc = pldm_msgbuf_insert_array(buf, pdr->sensor_name.length,
+					      pdr->sensor_name.ptr,
+					      pdr->sensor_name.length);
+		if (rc) {
+			return pldm_msgbuf_discard(buf, rc);
+		}
+	}
+
+	return pldm_msgbuf_complete_used(buf, *data_len, data_len);
+}
+
+LIBPLDM_ABI_TESTING
+int decode_pldm_platform_compact_numeric_sensor_pdr(
+	const void *pdr_data, size_t pdr_data_length,
+	struct pldm_platform_compact_numeric_sensor_pdr *pdr)
+{
+	PLDM_MSGBUF_RO_DEFINE_P(buf);
+	int rc;
+
+	if (!pdr_data || !pdr) {
+		return -EINVAL;
+	}
+
+	rc = pldm_msgbuf_init_errno(
+		buf, PLDM_PLATFORM_COMPACT_NUMERIC_SENSOR_PDR_MIN_LENGTH,
+		pdr_data, pdr_data_length);
+	if (rc) {
+		return rc;
+	}
+
+	rc = pldm_msgbuf_extract_value_pdr_hdr(
+		buf, &pdr->hdr,
+		PLDM_PLATFORM_COMPACT_NUMERIC_SENSOR_PDR_MIN_LENGTH,
+		pdr_data_length);
+	if (rc) {
+		return pldm_msgbuf_discard(buf, rc);
+	}
+
+	pldm_msgbuf_extract(buf, pdr->pldm_terminus_handle);
+	pldm_msgbuf_extract(buf, pdr->sensor_id);
+	pldm_msgbuf_extract(buf, pdr->entity_type);
+	pldm_msgbuf_extract(buf, pdr->entity_instance_number);
+	pldm_msgbuf_extract(buf, pdr->container_id);
+
+	rc = pldm_msgbuf_extract_uint8_to_size(buf, pdr->sensor_name.length);
+	if (rc) {
+		return pldm_msgbuf_discard(buf, rc);
+	}
+
+	pldm_msgbuf_extract(buf, pdr->base_unit);
+	pldm_msgbuf_extract(buf, pdr->unit_modifier);
+	pldm_msgbuf_extract(buf, pdr->rate_unit);
+	pldm_msgbuf_extract(buf, pdr->range_field_support.byte);
+	pldm_msgbuf_extract(buf, pdr->warning_high);
+	pldm_msgbuf_extract(buf, pdr->warning_low);
+	pldm_msgbuf_extract(buf, pdr->critical_high);
+	pldm_msgbuf_extract(buf, pdr->critical_low);
+	pldm_msgbuf_extract(buf, pdr->fatal_high);
+	pldm_msgbuf_extract(buf, pdr->fatal_low);
+
+	pdr->sensor_name.ptr = NULL;
+	if (pdr->sensor_name.length) {
+		pldm_msgbuf_span_required(buf, pdr->sensor_name.length,
+					  (const void **)&pdr->sensor_name.ptr);
+	}
+
+	return pldm_msgbuf_complete_consumed(buf);
+}
+
 LIBPLDM_ABI_STABLE
 int encode_get_numeric_effecter_value_req(uint8_t instance_id,
 					  uint16_t effecter_id,
