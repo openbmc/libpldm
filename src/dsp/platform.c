@@ -1914,7 +1914,7 @@ int decode_numeric_sensor_pdr_data(
 	return PLDM_SUCCESS;
 }
 
-LIBPLDM_ABI_TESTING
+LIBPLDM_ABI_STABLE
 int encode_pldm_platform_numeric_sensor_pdr(
 	const struct pldm_platform_numeric_sensor_pdr *pdr, void *data,
 	size_t *data_len)
@@ -2102,7 +2102,7 @@ int encode_pldm_platform_numeric_sensor_pdr(
 	return pldm_msgbuf_complete_used(buf, *data_len, data_len);
 }
 
-LIBPLDM_ABI_TESTING
+LIBPLDM_ABI_STABLE
 int decode_pldm_platform_numeric_sensor_pdr(
 	const void *pdr_data, size_t pdr_data_length,
 	struct pldm_platform_numeric_sensor_pdr *pdr)

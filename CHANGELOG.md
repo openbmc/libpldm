@@ -24,6 +24,8 @@ Change categories:
 
 ### Changed
 
+- dsp: platform: Stabilise `encode_pldm_platform_numeric_sensor_pdr()`
+- dsp: platform: Stabilise `decode_pldm_platform_numeric_sensor_pdr()`
 - doxygen: Enable warnings as errors
 
   Many header files were modified to fix issues identified in the documentation.

@@ -7280,7 +7280,6 @@ TEST(StateEffecterPDR, testSingleEntry)
 }
 #endif
 
-#if HAVE_LIBPLDM_API_TESTING
 TEST(encodeNumericSensorPdrData, RoundtripUint8)
 {
     /* build a valid uint8 sensor PDR with uint8 range fields */
@@ -7362,9 +7361,7 @@ TEST(encodeNumericSensorPdrData, RoundtripUint8)
     EXPECT_EQ(decoded.fatal_high.value_u8, pdr.fatal_high.value_u8);
     EXPECT_EQ(decoded.fatal_low.value_u8, pdr.fatal_low.value_u8);
 }
-#endif
 
-#if HAVE_LIBPLDM_API_TESTING
 TEST(encodeNumericSensorPdrData, RoundtripSint32Real32)
 {
     /* sint32 sensor data with real32 range fields — different sizes */
@@ -7431,9 +7428,7 @@ TEST(encodeNumericSensorPdrData, RoundtripSint32Real32)
     EXPECT_FLOAT_EQ(decoded.fatal_high.value_f32, pdr.fatal_high.value_f32);
     EXPECT_FLOAT_EQ(decoded.fatal_low.value_f32, pdr.fatal_low.value_f32);
 }
-#endif
 
-#if HAVE_LIBPLDM_API_TESTING
 TEST(encodeNumericSensorPdrData, NullArgs)
 {
     struct pldm_platform_numeric_sensor_pdr pdr{};
@@ -7449,9 +7444,7 @@ TEST(encodeNumericSensorPdrData, NullArgs)
         encode_pldm_platform_numeric_sensor_pdr(&pdr, buf.data(), nullptr),
         -EINVAL);
 }
-#endif
 
-#if HAVE_LIBPLDM_API_TESTING
 TEST(encodeNumericSensorPdrData, BufTooSmall)
 {
     struct pldm_platform_numeric_sensor_pdr pdr{};
@@ -7475,9 +7468,7 @@ TEST(encodeNumericSensorPdrData, BufTooSmall)
         encode_pldm_platform_numeric_sensor_pdr(&pdr, buf.data(), &buf_len),
         -EOVERFLOW);
 }
-#endif
 
-#if HAVE_LIBPLDM_API_TESTING
 TEST(encodeNumericSensorPdrData, InvalidSensorDataSize)
 {
     struct pldm_platform_numeric_sensor_pdr pdr{};
@@ -7489,9 +7480,7 @@ TEST(encodeNumericSensorPdrData, InvalidSensorDataSize)
         encode_pldm_platform_numeric_sensor_pdr(&pdr, buf.data(), &buf_len),
         -EINVAL);
 }
-#endif
 
-#if HAVE_LIBPLDM_API_TESTING
 TEST(encodeNumericSensorPdrData, InvalidRangeFieldFormat)
 {
     struct pldm_platform_numeric_sensor_pdr pdr{};
@@ -7504,9 +7493,7 @@ TEST(encodeNumericSensorPdrData, InvalidRangeFieldFormat)
         encode_pldm_platform_numeric_sensor_pdr(&pdr, buf.data(), &buf_len),
         -EINVAL);
 }
-#endif
 
-#if HAVE_LIBPLDM_API_TESTING
 TEST(encodeNumericSensorPdrData, InconsistentHdrLength)
 {
     struct pldm_platform_numeric_sensor_pdr pdr{};
@@ -7520,9 +7507,7 @@ TEST(encodeNumericSensorPdrData, InconsistentHdrLength)
         encode_pldm_platform_numeric_sensor_pdr(&pdr, buf.data(), &buf_len),
         -EINVAL);
 }
-#endif
 
-#if HAVE_LIBPLDM_API_TESTING
 TEST(decodeNumericSensorPdrDataNew, RoundtripUint8)
 {
     struct pldm_platform_numeric_sensor_pdr pdr{};
@@ -7640,9 +7625,7 @@ TEST(decodeNumericSensorPdrDataNew, RoundtripUint8)
     EXPECT_EQ(decoded.fatal_high.value_u8, pdr.fatal_high.value_u8);
     EXPECT_EQ(decoded.fatal_low.value_u8, pdr.fatal_low.value_u8);
 }
-#endif
 
-#if HAVE_LIBPLDM_API_TESTING
 TEST(decodeNumericSensorPdrDataNew, RoundtripSint32Real32)
 {
     struct pldm_platform_numeric_sensor_pdr pdr{};
@@ -7707,9 +7690,7 @@ TEST(decodeNumericSensorPdrDataNew, RoundtripSint32Real32)
     EXPECT_FLOAT_EQ(decoded.fatal_high.value_f32, pdr.fatal_high.value_f32);
     EXPECT_FLOAT_EQ(decoded.fatal_low.value_f32, pdr.fatal_low.value_f32);
 }
-#endif
 
-#if HAVE_LIBPLDM_API_TESTING
 TEST(decodeNumericSensorPdrDataNew, NullArgs)
 {
     std::vector<uint8_t> buf(128);
@@ -7722,9 +7703,7 @@ TEST(decodeNumericSensorPdrDataNew, NullArgs)
                                                       nullptr),
               -EINVAL);
 }
-#endif
 
-#if HAVE_LIBPLDM_API_TESTING
 TEST(decodeNumericSensorPdrDataNew, BufTooSmall)
 {
     struct pldm_platform_numeric_sensor_pdr pdr{};
@@ -7734,9 +7713,7 @@ TEST(decodeNumericSensorPdrDataNew, BufTooSmall)
         decode_pldm_platform_numeric_sensor_pdr(buf.data(), buf.size(), &pdr),
         -EOVERFLOW);
 }
-#endif
 
-#if HAVE_LIBPLDM_API_TESTING
 TEST(decodeNumericSensorPdrDataNew, InvalidSensorDataSize)
 {
     /* Build a valid uint8 PDR, then corrupt sensor_data_size */
@@ -7768,9 +7745,7 @@ TEST(decodeNumericSensorPdrDataNew, InvalidSensorDataSize)
         decode_pldm_platform_numeric_sensor_pdr(buf.data(), buf_len, &decoded),
         -EBADMSG);
 }
-#endif
 
-#if HAVE_LIBPLDM_API_TESTING
 TEST(decodeNumericSensorPdrDataNew, InvalidRangeFieldFormat)
 {
     /* Build a valid uint8 PDR, then corrupt range_field_format */
@@ -7802,9 +7777,7 @@ TEST(decodeNumericSensorPdrDataNew, InvalidRangeFieldFormat)
         decode_pldm_platform_numeric_sensor_pdr(buf.data(), buf_len, &decoded),
         -EBADMSG);
 }
-#endif
 
-#if HAVE_LIBPLDM_API_TESTING
 TEST(decodeNumericSensorPdrDataNew, ConsistentWithLegacyDecoder)
 {
     /* Verify both decoders produce identical results from the same wire data */
@@ -7945,7 +7918,6 @@ TEST(decodeNumericSensorPdrDataNew, ConsistentWithLegacyDecoder)
     EXPECT_FLOAT_EQ(new_decoded.fatal_low.value_f32,
                     old_decoded.fatal_low.value_f32);
 }
-#endif
 
 #if HAVE_LIBPLDM_API_TESTING
 TEST(StateEffecterPDR, testTruncatedEntry)
