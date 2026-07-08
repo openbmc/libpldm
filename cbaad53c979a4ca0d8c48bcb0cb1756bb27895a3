@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "08c5abf6_27822f52",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 2366,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2026-07-08T17:24:13Z",
+      "side": 1,
+      "message": "these should be moved to be in proximity to the new struct.",
+      "revId": "cbaad53c979a4ca0d8c48bcb0cb1756bb27895a3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
