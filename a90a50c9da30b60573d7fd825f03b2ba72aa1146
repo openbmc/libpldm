@@ -1,0 +1,204 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6fe2a3ef_65bf9e96",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 17
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-07-10T06:22:31Z",
+      "side": 1,
+      "message": "I don\u0027t feel this adds a lot of value, it\u0027s evident from the patch.",
+      "revId": "a90a50c9da30b60573d7fd825f03b2ba72aa1146",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4a2eef69_9af3f147",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 17
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-07-10T06:22:31Z",
+      "side": 1,
+      "message": "I have some minor comments",
+      "revId": "a90a50c9da30b60573d7fd825f03b2ba72aa1146",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f167c59_f46bcba2",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 17
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-07-10T06:22:31Z",
+      "side": 1,
+      "message": "This doesn\u0027t match the commit subject. Either it should, or you should elaborate on what\u0027s going on here: Which part of DSP0267?",
+      "revId": "a90a50c9da30b60573d7fd825f03b2ba72aa1146",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0e75e73d_ba513224",
+        "filename": "bindings/cpp/firmware_update.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-07-10T06:22:31Z",
+      "side": 1,
+      "message": "Note: The unit test coverage report suggests this isn\u0027t covered.",
+      "range": {
+        "startLine": 158,
+        "startChar": 1,
+        "endLine": 159,
+        "endChar": 40
+      },
+      "revId": "a90a50c9da30b60573d7fd825f03b2ba72aa1146",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "45ef3d1d_357ee209",
+        "filename": "bindings/cpp/firmware_update.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-07-10T06:22:31Z",
+      "side": 1,
+      "message": "Note: The unit test coverage report suggests this isn\u0027t covered.",
+      "range": {
+        "startLine": 164,
+        "startChar": 2,
+        "endLine": 166,
+        "endChar": 8
+      },
+      "revId": "a90a50c9da30b60573d7fd825f03b2ba72aa1146",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6ccc8317_65371159",
+        "filename": "bindings/cpp/firmware_update.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 309,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-07-10T06:22:31Z",
+      "side": 1,
+      "message": "Note: The unit test coverage report suggests this isn\u0027t covered.",
+      "range": {
+        "startLine": 308,
+        "startChar": 1,
+        "endLine": 309,
+        "endChar": 40
+      },
+      "revId": "a90a50c9da30b60573d7fd825f03b2ba72aa1146",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fa2a1d4a_a8fb9a12",
+        "filename": "bindings/cpp/firmware_update.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 315,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-07-10T06:22:31Z",
+      "side": 1,
+      "message": "Note: The unit test coverage report suggests this isn\u0027t covered.",
+      "range": {
+        "startLine": 314,
+        "startChar": 1,
+        "endLine": 315,
+        "endChar": 59
+      },
+      "revId": "a90a50c9da30b60573d7fd825f03b2ba72aa1146",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c43974d8_56174492",
+        "filename": "include/libpldm++/firmware_update.hpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-07-10T06:22:31Z",
+      "side": 1,
+      "message": "The grammar should be fixed in this comment, doubly so in the context of multiple friends (\"it is\" to \"they are\", and the consequences).",
+      "range": {
+        "startLine": 44,
+        "startChar": 1,
+        "endLine": 45,
+        "endChar": 37
+      },
+      "revId": "a90a50c9da30b60573d7fd825f03b2ba72aa1146",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "446469cc_80051781",
+        "filename": "tests/unit/bindings/cpp/firmware-update-test-v1-1-0.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-07-10T06:22:31Z",
+      "side": 1,
+      "message": "Bit of a nit, but can we avoid blank lines between the guard macros as the test function definition here and throughout the file?",
+      "revId": "a90a50c9da30b60573d7fd825f03b2ba72aa1146",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a2676060_350d0fb2",
+        "filename": "tests/unit/bindings/cpp/firmware-update-test-v1-1-0.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-07-10T06:22:31Z",
+      "side": 1,
+      "message": "Also remove the blank line here and throughout before the `#endif`.",
+      "revId": "a90a50c9da30b60573d7fd825f03b2ba72aa1146",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
