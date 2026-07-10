@@ -1,0 +1,78 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c10075d0_7a34e85d",
+        "filename": "bindings/cpp/firmware_update.cpp",
+        "patchSetId": 24
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-07-10T07:18:28Z",
+      "side": 1,
+      "message": "Note: No unit test coverage of this yet, which would be nice.",
+      "range": {
+        "startLine": 217,
+        "startChar": 1,
+        "endLine": 218,
+        "endChar": 22
+      },
+      "revId": "a0f7fce601bff62fca8a7d84f0bf66edd446d8c7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9dc37e77_d6d1efb6",
+        "filename": "tests/unit/bindings/cpp/firmware-update-test-v1-3-0.cpp",
+        "patchSetId": 24
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-07-10T07:18:28Z",
+      "side": 1,
+      "message": "Nit: The blanks in this file also.",
+      "revId": "a0f7fce601bff62fca8a7d84f0bf66edd446d8c7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "91e89832_670f8875",
+        "filename": "tests/unit/bindings/cpp/firmware-update-test-v1-3-0.cpp",
+        "patchSetId": 24
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-07-10T07:18:28Z",
+      "side": 1,
+      "message": "Can you add a comment why this is necessary by contrast to the v1.1.0 case?",
+      "revId": "a0f7fce601bff62fca8a7d84f0bf66edd446d8c7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "860fd9ef_c39d1152",
+        "filename": "tests/unit/bindings/cpp/firmware-update-test-v1-3-0.cpp",
+        "patchSetId": 24
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-07-10T07:18:28Z",
+      "side": 1,
+      "message": "`std::vector::append_range()` is only available from libstdc++ 15.1 onwards:\n\nhttps://gcc.gnu.org/git/?p\u003dgcc.git;a\u003dcommit;h\u003db281e13ecad12d07209924a7282c53be3a1c3774\n\nCurrent Debian stable (trixie) ships libstdc++ 14.2.",
+      "revId": "a0f7fce601bff62fca8a7d84f0bf66edd446d8c7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
