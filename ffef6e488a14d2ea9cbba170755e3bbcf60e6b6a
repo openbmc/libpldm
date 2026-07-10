@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "85230dd1_2b475e4b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-07-10T06:33:50Z",
+      "side": 1,
+      "message": "No unit test with component opaque data?",
+      "revId": "ffef6e488a14d2ea9cbba170755e3bbcf60e6b6a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bad5f3e7_8348bf9e",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 12
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-07-10T06:33:50Z",
+      "side": 1,
+      "message": "See comment for v1.1.0",
+      "revId": "ffef6e488a14d2ea9cbba170755e3bbcf60e6b6a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c2a34318_73b0542f",
+        "filename": "bindings/cpp/firmware_update.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 344,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-07-10T06:33:50Z",
+      "side": 1,
+      "message": "Nit: A blank line following this would be nice :)",
+      "revId": "ffef6e488a14d2ea9cbba170755e3bbcf60e6b6a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
