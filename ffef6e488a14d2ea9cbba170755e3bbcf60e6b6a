@@ -70,6 +70,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "993afc3e_46f564e1",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 12
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2026-07-10T08:25:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bad5f3e7_8348bf9e",
+      "revId": "ffef6e488a14d2ea9cbba170755e3bbcf60e6b6a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c2a34318_73b0542f",
@@ -83,6 +101,24 @@
       "writtenOn": "2026-07-10T06:33:50Z",
       "side": 1,
       "message": "Nit: A blank line following this would be nice :)",
+      "revId": "ffef6e488a14d2ea9cbba170755e3bbcf60e6b6a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "62abd4d0_c634789c",
+        "filename": "bindings/cpp/firmware_update.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 344,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2026-07-10T08:25:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c2a34318_73b0542f",
       "revId": "ffef6e488a14d2ea9cbba170755e3bbcf60e6b6a",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
