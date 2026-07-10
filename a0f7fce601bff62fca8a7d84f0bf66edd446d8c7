@@ -41,6 +41,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "10fead52_9aab418a",
+        "filename": "tests/unit/bindings/cpp/firmware-update-test-v1-3-0.cpp",
+        "patchSetId": 24
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2026-07-10T08:26:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9dc37e77_d6d1efb6",
+      "revId": "a0f7fce601bff62fca8a7d84f0bf66edd446d8c7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "91e89832_670f8875",
@@ -58,6 +76,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "552e3a76_2126df72",
+        "filename": "tests/unit/bindings/cpp/firmware-update-test-v1-3-0.cpp",
+        "patchSetId": 24
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2026-07-10T08:26:10Z",
+      "side": 1,
+      "message": "It was a workaround for a CI failure. Full story on the patch for v1.1.0. I removed it since with `insert(...)` the failure does not happen.",
+      "parentUuid": "91e89832_670f8875",
+      "revId": "a0f7fce601bff62fca8a7d84f0bf66edd446d8c7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "860fd9ef_c39d1152",
@@ -71,6 +107,24 @@
       "writtenOn": "2026-07-10T07:18:28Z",
       "side": 1,
       "message": "`std::vector::append_range()` is only available from libstdc++ 15.1 onwards:\n\nhttps://gcc.gnu.org/git/?p\u003dgcc.git;a\u003dcommit;h\u003db281e13ecad12d07209924a7282c53be3a1c3774\n\nCurrent Debian stable (trixie) ships libstdc++ 14.2.",
+      "revId": "a0f7fce601bff62fca8a7d84f0bf66edd446d8c7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b584d1ef_9f1e7f06",
+        "filename": "tests/unit/bindings/cpp/firmware-update-test-v1-3-0.cpp",
+        "patchSetId": 24
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2026-07-10T08:26:10Z",
+      "side": 1,
+      "message": "alright, changed it to use `insert(...)`\n\nThanks for checking!",
+      "parentUuid": "860fd9ef_c39d1152",
       "revId": "a0f7fce601bff62fca8a7d84f0bf66edd446d8c7",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
