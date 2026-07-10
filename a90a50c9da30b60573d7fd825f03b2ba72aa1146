@@ -20,6 +20,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "6e226256_98e6ad29",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 17
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2026-07-10T08:25:35Z",
+      "side": 1,
+      "message": "removed it 👍",
+      "parentUuid": "6fe2a3ef_65bf9e96",
+      "revId": "a90a50c9da30b60573d7fd825f03b2ba72aa1146",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "4a2eef69_9af3f147",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 17
@@ -48,6 +66,24 @@
       "writtenOn": "2026-07-10T06:22:31Z",
       "side": 1,
       "message": "This doesn\u0027t match the commit subject. Either it should, or you should elaborate on what\u0027s going on here: Which part of DSP0267?",
+      "revId": "a90a50c9da30b60573d7fd825f03b2ba72aa1146",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1f368b49_c29696d5",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 17
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2026-07-10T08:25:35Z",
+      "side": 1,
+      "message": "sorry, i mixed up spec version and package version..\n\nThe support is only for the fw update package and the spec version contains many more things.\n\nChanged it to be more similar to the commit subject.",
+      "parentUuid": "6f167c59_f46bcba2",
       "revId": "a90a50c9da30b60573d7fd825f03b2ba72aa1146",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -167,6 +203,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cb50cb36_b18b24da",
+        "filename": "include/libpldm++/firmware_update.hpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2026-07-10T08:25:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c43974d8_56174492",
+      "range": {
+        "startLine": 44,
+        "startChar": 1,
+        "endLine": 45,
+        "endChar": 37
+      },
+      "revId": "a90a50c9da30b60573d7fd825f03b2ba72aa1146",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "446469cc_80051781",
@@ -180,6 +240,24 @@
       "writtenOn": "2026-07-10T06:22:31Z",
       "side": 1,
       "message": "Bit of a nit, but can we avoid blank lines between the guard macros as the test function definition here and throughout the file?",
+      "revId": "a90a50c9da30b60573d7fd825f03b2ba72aa1146",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "79a60a4a_eea9e085",
+        "filename": "tests/unit/bindings/cpp/firmware-update-test-v1-1-0.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2026-07-10T08:25:35Z",
+      "side": 1,
+      "message": "makes sense, it will become more clear the guard is attached to the function 👍. done.",
+      "parentUuid": "446469cc_80051781",
       "revId": "a90a50c9da30b60573d7fd825f03b2ba72aa1146",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -201,6 +279,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "55416cd4_d940fdf1",
+        "filename": "tests/unit/bindings/cpp/firmware-update-test-v1-1-0.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2026-07-10T08:25:35Z",
+      "side": 1,
+      "message": "I used `append_range` there which caused a CI run to fail\n\nhttps://jenkins.openbmc.org/job/ci-repository/140030/console\n```\nchar; _Alloc \u003d std::allocator\u003cunsigned char\u003e]’ at /usr/include/c++/15/bits/stl_vector.h:1690:27,\n    inlined from ‘std::vector\u003cunsigned char\u003e pldm::fw_update::makePkgV1_3_0()’ at ../tests/unit/bindings/cpp/firmware-update-test-v1-3-0.cpp:172:21:\n/usr/include/c++/15/bits/stl_uninitialized.h:273:31: error: ‘void* __builtin_memcpy(void*, const void*, long unsigned int)’ offset [50, 108] is out of the bounds [0, 50] [-Werror\u003darray-bounds\u003d]\n  273 |               __builtin_memcpy(std::__niter_base(__result),\n      |               ~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n  274 |                                std::__niter_base(__first),\n      |                                ~~~~~~~~~~~~~~~~~~~~~~~~~~~\n  275 |                                __n * sizeof(_ValT));\n      |                                ~~~~~~~~~~~~~~~~~~~~\ncc1plus: all warnings being treated as errors\n```\n\nsince the failure was related to out-of-bounds access, reserving the capacity fixed it. Since it was part of a test code path i did not investigate further, i only needed the package and `append_range` is a more compact way to write it.\n\nBut since we won\u0027t be using that function anyways, i don\u0027t think it would make much of a difference to reserve capacity given the small size of the package here.\n\nIt would just be another constant needing adjustment if someone decides to make changes to the package contents.",
+      "parentUuid": "09a7df1f_b6b2c0fe",
+      "revId": "a90a50c9da30b60573d7fd825f03b2ba72aa1146",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a2676060_350d0fb2",
@@ -214,6 +310,24 @@
       "writtenOn": "2026-07-10T06:22:31Z",
       "side": 1,
       "message": "Also remove the blank line here and throughout before the `#endif`.",
+      "revId": "a90a50c9da30b60573d7fd825f03b2ba72aa1146",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cab3251c_e282d775",
+        "filename": "tests/unit/bindings/cpp/firmware-update-test-v1-1-0.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2026-07-10T08:25:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a2676060_350d0fb2",
       "revId": "a90a50c9da30b60573d7fd825f03b2ba72aa1146",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
