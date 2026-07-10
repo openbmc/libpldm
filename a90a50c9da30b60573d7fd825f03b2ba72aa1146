@@ -186,6 +186,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "09a7df1f_b6b2c0fe",
+        "filename": "tests/unit/bindings/cpp/firmware-update-test-v1-1-0.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-07-10T07:18:38Z",
+      "side": 1,
+      "message": "In the v1.3.0 patch you call `pkg.reserve(...)`. Why is this case different?",
+      "revId": "a90a50c9da30b60573d7fd825f03b2ba72aa1146",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a2676060_350d0fb2",
         "filename": "tests/unit/bindings/cpp/firmware-update-test-v1-1-0.cpp",
         "patchSetId": 17
