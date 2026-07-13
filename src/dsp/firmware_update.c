@@ -3775,3 +3775,141 @@ int decode_pldm_package_component_image_information_from_iter(
 
 	return 0;
 }
+
+static int
+encode_fd_data_resp_common(uint8_t instance_id, uint8_t command,
+			   const struct pldm_get_fd_data_resp_fixed *resp_fixed,
+			   const struct variable_field *data,
+			   struct pldm_msg *msg, size_t *payload_length)
+{
+	PLDM_MSGBUF_RW_DEFINE_P(buf);
+	int rc;
+
+	if (msg == NULL || resp_fixed == NULL || payload_length == NULL) {
+		return -EINVAL;
+	}
+
+	/* An error response carries only the completion code (DSP0267
+	 * sections 12.2 and 12.10); emit it and stop so a spec-strict
+	 * requester does not read trailing fixed-header bytes it does not
+	 * expect.
+	 */
+	if (resp_fixed->completion_code != PLDM_SUCCESS) {
+		rc = encode_pldm_header_only_errno(PLDM_RESPONSE, instance_id,
+						   PLDM_FWUP, command, msg);
+		if (rc) {
+			return rc;
+		}
+		rc = pldm_msgbuf_init_errno(buf,
+					    sizeof(resp_fixed->completion_code),
+					    msg->payload, *payload_length);
+		if (rc) {
+			return rc;
+		}
+		pldm_msgbuf_insert(buf, resp_fixed->completion_code);
+		return pldm_msgbuf_complete_used(buf, *payload_length,
+						 payload_length);
+	}
+
+	if (data == NULL) {
+		return -EINVAL;
+	}
+	if (data->length > 0 && data->ptr == NULL) {
+		return -EINVAL;
+	}
+	/* Reject an overflowing total size before any cast. Without this an
+	 * attacker-controlled data->length close to SIZE_MAX would underflow
+	 * the payload size check below and let the copy walk past the
+	 * caller's buffer.
+	 */
+	if (data->length >
+	    SIZE_MAX - (size_t)PLDM_GET_FD_DATA_RESP_FIXED_BYTES) {
+		return -EOVERFLOW;
+	}
+	const size_t needed =
+		(size_t)PLDM_GET_FD_DATA_RESP_FIXED_BYTES + data->length;
+	if (*payload_length < needed) {
+		return -EOVERFLOW;
+	}
+	if (!is_transfer_flag_valid(resp_fixed->transfer_flag)) {
+		return -EINVAL;
+	}
+
+	rc = encode_pldm_header_only_errno(PLDM_RESPONSE, instance_id,
+					   PLDM_FWUP, command, msg);
+	if (rc) {
+		return rc;
+	}
+
+	rc = pldm_msgbuf_init_errno(buf, PLDM_GET_FD_DATA_RESP_FIXED_BYTES,
+				    msg->payload, *payload_length);
+	if (rc) {
+		return rc;
+	}
+	pldm_msgbuf_insert(buf, resp_fixed->completion_code);
+	pldm_msgbuf_insert(buf, resp_fixed->next_data_transfer_handle);
+	pldm_msgbuf_insert(buf, resp_fixed->transfer_flag);
+
+	if (data->length > 0) {
+		rc = pldm_msgbuf_insert_array_uint8(buf, data->length,
+						    data->ptr, data->length);
+		if (rc) {
+			return pldm_msgbuf_discard(buf, rc);
+		}
+	}
+
+	return pldm_msgbuf_complete_used(buf, *payload_length, payload_length);
+}
+
+static int decode_fd_data_req_common(const struct pldm_msg *msg,
+				     size_t payload_length,
+				     struct pldm_get_fd_data_req *req)
+{
+	PLDM_MSGBUF_RO_DEFINE_P(buf);
+	int rc;
+
+	if (msg == NULL || req == NULL) {
+		return -EINVAL;
+	}
+
+	rc = pldm_msgbuf_init_errno(buf, PLDM_GET_FD_DATA_REQ_BYTES,
+				    msg->payload, payload_length);
+	if (rc) {
+		return rc;
+	}
+	pldm_msgbuf_extract(buf, req->data_transfer_handle);
+	pldm_msgbuf_extract(buf, req->transfer_operation_flag);
+
+	rc = pldm_msgbuf_complete_consumed(buf);
+	if (rc) {
+		return rc;
+	}
+
+	/* Reject anything but PLDM_GET_FIRSTPART / PLDM_GET_NEXTPART here so
+	 * the caller doesn't have to repeat the check.
+	 */
+	if (!is_transfer_operation_flag_valid(req->transfer_operation_flag)) {
+		return -EBADMSG;
+	}
+	return 0;
+}
+
+LIBPLDM_ABI_TESTING
+int encode_get_package_data_resp(
+	uint8_t instance_id,
+	const struct pldm_get_fd_data_resp_fixed *resp_fixed,
+	const struct variable_field *data, struct pldm_msg *msg,
+	size_t *payload_length)
+{
+	return encode_fd_data_resp_common(instance_id, PLDM_GET_PACKAGE_DATA,
+					  resp_fixed, data, msg,
+					  payload_length);
+}
+
+LIBPLDM_ABI_TESTING
+int decode_get_package_data_req(const struct pldm_msg *msg,
+				size_t payload_length,
+				struct pldm_get_fd_data_req *req)
+{
+	return decode_fd_data_req_common(msg, payload_length, req);
+}
