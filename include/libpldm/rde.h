@@ -1,4 +1,12 @@
+/* SPDX-License-Identifier: Apache-2.0 OR GPL-2.0-or-later */
 #pragma once
+
+#include <libpldm/api.h>
+#include <libpldm/base.h>
+#include <libpldm/pldm_types.h>
+
+#include <stddef.h>
+#include <stdint.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -47,6 +55,104 @@ enum pldm_rde_commands {
 	PLDM_RDE_CMD_RDE_MULTIPART_SEND = 0x30,
 	PLDM_RDE_CMD_RDE_MULTIPART_RECEIVE = 0x31,
 };
+
+/* NegotiateRedfishParameters (0x01) */
+
+#define PLDM_RDE_NEGOTIATE_REDFISH_PARAMETERS_REQ_BYTES 3
+
+/* completion_code(1) + device_concurrency_support(1) +
+ * device_capabilities_flags(1) + device_feature_support(2) +
+ * device_configuration_signature(4) + provider_name_format(1) +
+ * provider_name_length(1)
+ */
+#define PLDM_RDE_NEGOTIATE_REDFISH_PARAMETERS_RESP_MIN_BYTES 11
+
+/** @struct pldm_rde_negotiate_redfish_parameters_req
+ *
+ *  Decoded NegotiateRedfishParameters request.
+ */
+struct pldm_rde_negotiate_redfish_parameters_req {
+	uint8_t mc_concurrency_support;
+	bitfield16_t mc_feature_support;
+};
+
+/** @struct pldm_rde_negotiate_redfish_parameters_resp
+ *
+ *  Decoded NegotiateRedfishParameters response. On decode provider_name is a
+ *  span into the message buffer; the caller copies it if it must outlive the
+ *  message.
+ */
+struct pldm_rde_negotiate_redfish_parameters_resp {
+	uint8_t completion_code;
+	uint8_t device_concurrency_support;
+	bitfield8_t device_capabilities_flags;
+	bitfield16_t device_feature_support;
+	uint32_t device_configuration_signature;
+	uint8_t provider_name_format;
+	struct variable_field provider_name;
+};
+
+/** @brief Encode NegotiateRedfishParameters request.
+ *
+ *  @param[in]  instance_id    - Message's instance id.
+ *  @param[in]  req            - Request to encode. mc_concurrency_support
+ *                               must be non-zero.
+ *  @param[out] msg            - Request message.
+ *  @param[in,out] payload_length - On entry the caller-allocated buffer size;
+ *                               must be >=
+ *                               PLDM_RDE_NEGOTIATE_REDFISH_PARAMETERS_REQ_BYTES.
+ *                               On exit the encoded message length.
+ *  @return 0 on success, a negative errno value on failure.
+ */
+int encode_pldm_rde_negotiate_redfish_parameters_req(
+	uint8_t instance_id,
+	const struct pldm_rde_negotiate_redfish_parameters_req *req,
+	struct pldm_msg *msg, size_t *payload_length);
+
+/** @brief Decode NegotiateRedfishParameters request.
+ *
+ *  @param[in]  msg            - Request message.
+ *  @param[in]  payload_length - Length of request payload.
+ *  @param[out] req            - Decoded request. mc_concurrency_support is
+ *                               validated to be non-zero.
+ *  @return 0 on success, a negative errno value on failure.
+ */
+int decode_pldm_rde_negotiate_redfish_parameters_req(
+	const struct pldm_msg *msg, size_t payload_length,
+	struct pldm_rde_negotiate_redfish_parameters_req *req);
+
+/** @brief Encode NegotiateRedfishParameters response.
+ *
+ *  On a non-SUCCESS completion_code only the completion code is emitted.
+ *
+ *  @param[in]  instance_id    - Message's instance id.
+ *  @param[in]  resp           - Response to encode. On success
+ *                               device_concurrency_support must be non-zero
+ *                               and provider_name.length must fit in a uint8.
+ *  @param[out] msg            - Response message.
+ *  @param[in,out] payload_length - On entry the caller-allocated buffer size;
+ *                               on exit the encoded message length.
+ *  @return 0 on success, a negative errno value on failure.
+ */
+int encode_pldm_rde_negotiate_redfish_parameters_resp(
+	uint8_t instance_id,
+	const struct pldm_rde_negotiate_redfish_parameters_resp *resp,
+	struct pldm_msg *msg, size_t *payload_length);
+
+/** @brief Decode NegotiateRedfishParameters response.
+ *
+ *  On a non-SUCCESS completion code only resp->completion_code is populated.
+ *  On success provider_name is a span into @p msg's buffer.
+ *
+ *  @param[in]  msg            - Response message.
+ *  @param[in]  payload_length - Length of response payload.
+ *  @param[out] resp           - Decoded response. Output member values are
+ *                               host-endian.
+ *  @return 0 on success, a negative errno value on failure.
+ */
+int decode_pldm_rde_negotiate_redfish_parameters_resp(
+	const struct pldm_msg *msg, size_t payload_length,
+	struct pldm_rde_negotiate_redfish_parameters_resp *resp);
 
 #ifdef __cplusplus
 }
