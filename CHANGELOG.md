@@ -22,6 +22,9 @@ Change categories:
 - libpldm++ support for fw update pkg v1.1.0
 - libpldm++ support for fw update pkg v1.2.0
 - libpldm++ support for fw update pkg v1.3.0
+- platform: Add GetPDRRepositorySignature command
+  - Add `encode_get_pdr_repository_signature_req()`
+  - Add `decode_get_pdr_repository_signature_resp()`
 
 ### Changed
 
