@@ -25,6 +25,9 @@ Change categories:
 - platform: Add GetPDRRepositorySignature command
   - Add `encode_get_pdr_repository_signature_req()`
   - Add `decode_get_pdr_repository_signature_resp()`
+- firmware_update: Add GetPackageData command
+  - Add `encode_get_package_data_resp()`
+  - Add `decode_get_package_data_req()`
 
 ### Changed
 
