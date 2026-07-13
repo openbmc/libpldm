@@ -154,6 +154,99 @@ int decode_pldm_rde_negotiate_redfish_parameters_resp(
 	const struct pldm_msg *msg, size_t payload_length,
 	struct pldm_rde_negotiate_redfish_parameters_resp *resp);
 
+/* NegotiateMediumParameters (0x02) */
+
+/* All MC and RDE Device implementations shall support a transfer size of at
+ * least 64 bytes per DSP0218 Table 53.
+ */
+#define PLDM_RDE_MIN_TRANSFER_SIZE_BYTES 64
+
+#define PLDM_RDE_NEGOTIATE_MEDIUM_PARAMETERS_REQ_BYTES 4
+
+/* completion_code(1) + device_maximum_transfer_chunk_size_bytes(4) */
+#define PLDM_RDE_NEGOTIATE_MEDIUM_PARAMETERS_RESP_BYTES 5
+
+/** @struct pldm_rde_negotiate_medium_parameters_req
+ *
+ *  Decoded NegotiateMediumParameters request.
+ */
+struct pldm_rde_negotiate_medium_parameters_req {
+	uint32_t mc_maximum_transfer_chunk_size_bytes;
+};
+
+/** @struct pldm_rde_negotiate_medium_parameters_resp
+ *
+ *  Decoded NegotiateMediumParameters response.
+ */
+struct pldm_rde_negotiate_medium_parameters_resp {
+	uint8_t completion_code;
+	uint32_t device_maximum_transfer_chunk_size_bytes;
+};
+
+/** @brief Encode NegotiateMediumParameters request.
+ *
+ *  @param[in]  instance_id    - Message's instance id.
+ *  @param[in]  req            - Request to encode.
+ *                               mc_maximum_transfer_chunk_size_bytes must be
+ *                               at least PLDM_RDE_MIN_TRANSFER_SIZE_BYTES.
+ *  @param[out] msg            - Request message.
+ *  @param[in,out] payload_length - On entry the caller-allocated buffer size;
+ *                               must be >=
+ *                               PLDM_RDE_NEGOTIATE_MEDIUM_PARAMETERS_REQ_BYTES.
+ *                               On exit the encoded message length.
+ *  @return 0 on success, a negative errno value on failure.
+ */
+int encode_pldm_rde_negotiate_medium_parameters_req(
+	uint8_t instance_id,
+	const struct pldm_rde_negotiate_medium_parameters_req *req,
+	struct pldm_msg *msg, size_t *payload_length);
+
+/** @brief Decode NegotiateMediumParameters request.
+ *
+ *  @param[in]  msg            - Request message.
+ *  @param[in]  payload_length - Length of request payload.
+ *  @param[out] req            - Decoded request.
+ *                               mc_maximum_transfer_chunk_size_bytes is
+ *                               validated to be at least
+ *                               PLDM_RDE_MIN_TRANSFER_SIZE_BYTES.
+ *  @return 0 on success, a negative errno value on failure.
+ */
+int decode_pldm_rde_negotiate_medium_parameters_req(
+	const struct pldm_msg *msg, size_t payload_length,
+	struct pldm_rde_negotiate_medium_parameters_req *req);
+
+/** @brief Encode NegotiateMediumParameters response.
+ *
+ *  On a non-SUCCESS completion_code only the completion code is emitted.
+ *
+ *  @param[in]  instance_id    - Message's instance id.
+ *  @param[in]  resp           - Response to encode. On success
+ *                               device_maximum_transfer_chunk_size_bytes must
+ *                               be at least PLDM_RDE_MIN_TRANSFER_SIZE_BYTES.
+ *  @param[out] msg            - Response message.
+ *  @param[in,out] payload_length - On entry the caller-allocated buffer size;
+ *                               on exit the encoded message length.
+ *  @return 0 on success, a negative errno value on failure.
+ */
+int encode_pldm_rde_negotiate_medium_parameters_resp(
+	uint8_t instance_id,
+	const struct pldm_rde_negotiate_medium_parameters_resp *resp,
+	struct pldm_msg *msg, size_t *payload_length);
+
+/** @brief Decode NegotiateMediumParameters response.
+ *
+ *  On a non-SUCCESS completion code only resp->completion_code is populated.
+ *
+ *  @param[in]  msg            - Response message.
+ *  @param[in]  payload_length - Length of response payload.
+ *  @param[out] resp           - Decoded response. Output member values are
+ *                               host-endian.
+ *  @return 0 on success, a negative errno value on failure.
+ */
+int decode_pldm_rde_negotiate_medium_parameters_resp(
+	const struct pldm_msg *msg, size_t payload_length,
+	struct pldm_rde_negotiate_medium_parameters_resp *resp);
+
 #ifdef __cplusplus
 }
 #endif

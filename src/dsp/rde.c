@@ -208,3 +208,168 @@ int decode_pldm_rde_negotiate_redfish_parameters_resp(
 	}
 	return 0;
 }
+
+LIBPLDM_ABI_TESTING
+int encode_pldm_rde_negotiate_medium_parameters_req(
+	uint8_t instance_id,
+	const struct pldm_rde_negotiate_medium_parameters_req *req,
+	struct pldm_msg *msg, size_t *payload_length)
+{
+	PLDM_MSGBUF_RW_DEFINE_P(buf);
+	int rc;
+
+	if (msg == NULL || req == NULL || payload_length == NULL) {
+		return -EINVAL;
+	}
+	if (req->mc_maximum_transfer_chunk_size_bytes <
+	    PLDM_RDE_MIN_TRANSFER_SIZE_BYTES) {
+		return -EINVAL;
+	}
+
+	rc = encode_pldm_header_only_errno(
+		PLDM_REQUEST, instance_id, PLDM_RDE,
+		PLDM_RDE_CMD_NEGOTIATE_MEDIUM_PARAMETERS, msg);
+	if (rc) {
+		return rc;
+	}
+
+	rc = pldm_msgbuf_init_errno(
+		buf, PLDM_RDE_NEGOTIATE_MEDIUM_PARAMETERS_REQ_BYTES,
+		msg->payload, *payload_length);
+	if (rc) {
+		return rc;
+	}
+	pldm_msgbuf_insert(buf, req->mc_maximum_transfer_chunk_size_bytes);
+
+	return pldm_msgbuf_complete_used(buf, *payload_length, payload_length);
+}
+
+LIBPLDM_ABI_TESTING
+int decode_pldm_rde_negotiate_medium_parameters_req(
+	const struct pldm_msg *msg, size_t payload_length,
+	struct pldm_rde_negotiate_medium_parameters_req *req)
+{
+	PLDM_MSGBUF_RO_DEFINE_P(buf);
+	int rc;
+
+	if (msg == NULL || req == NULL) {
+		return -EINVAL;
+	}
+
+	rc = pldm_msgbuf_init_errno(
+		buf, PLDM_RDE_NEGOTIATE_MEDIUM_PARAMETERS_REQ_BYTES,
+		msg->payload, payload_length);
+	if (rc) {
+		return rc;
+	}
+	pldm_msgbuf_extract(buf, req->mc_maximum_transfer_chunk_size_bytes);
+
+	rc = pldm_msgbuf_complete_consumed(buf);
+	if (rc) {
+		return rc;
+	}
+
+	/* The MC must support a transfer size of at least 64 bytes per DSP0218
+	 * Table 53. */
+	if (req->mc_maximum_transfer_chunk_size_bytes <
+	    PLDM_RDE_MIN_TRANSFER_SIZE_BYTES) {
+		return -EBADMSG;
+	}
+	return 0;
+}
+
+LIBPLDM_ABI_TESTING
+int encode_pldm_rde_negotiate_medium_parameters_resp(
+	uint8_t instance_id,
+	const struct pldm_rde_negotiate_medium_parameters_resp *resp,
+	struct pldm_msg *msg, size_t *payload_length)
+{
+	PLDM_MSGBUF_RW_DEFINE_P(buf);
+	int rc;
+
+	if (msg == NULL || resp == NULL || payload_length == NULL) {
+		return -EINVAL;
+	}
+
+	rc = encode_pldm_header_only_errno(
+		PLDM_RESPONSE, instance_id, PLDM_RDE,
+		PLDM_RDE_CMD_NEGOTIATE_MEDIUM_PARAMETERS, msg);
+	if (rc) {
+		return rc;
+	}
+
+	/* An error response carries only the completion code. */
+	if (resp->completion_code != PLDM_SUCCESS) {
+		rc = pldm_msgbuf_init_errno(buf, sizeof(resp->completion_code),
+					    msg->payload, *payload_length);
+		if (rc) {
+			return rc;
+		}
+		pldm_msgbuf_insert(buf, resp->completion_code);
+		return pldm_msgbuf_complete_used(buf, *payload_length,
+						 payload_length);
+	}
+
+	if (resp->device_maximum_transfer_chunk_size_bytes <
+	    PLDM_RDE_MIN_TRANSFER_SIZE_BYTES) {
+		return -EINVAL;
+	}
+
+	rc = pldm_msgbuf_init_errno(
+		buf, PLDM_RDE_NEGOTIATE_MEDIUM_PARAMETERS_RESP_BYTES,
+		msg->payload, *payload_length);
+	if (rc) {
+		return rc;
+	}
+	pldm_msgbuf_insert(buf, resp->completion_code);
+	pldm_msgbuf_insert(buf, resp->device_maximum_transfer_chunk_size_bytes);
+
+	return pldm_msgbuf_complete_used(buf, *payload_length, payload_length);
+}
+
+LIBPLDM_ABI_TESTING
+int decode_pldm_rde_negotiate_medium_parameters_resp(
+	const struct pldm_msg *msg, size_t payload_length,
+	struct pldm_rde_negotiate_medium_parameters_resp *resp)
+{
+	PLDM_MSGBUF_RO_DEFINE_P(buf);
+	int rc;
+
+	if (msg == NULL || resp == NULL) {
+		return -EINVAL;
+	}
+
+	rc = pldm_msgbuf_init_errno(buf, sizeof(resp->completion_code),
+				    msg->payload, payload_length);
+	if (rc) {
+		return rc;
+	}
+
+	rc = pldm_msgbuf_extract(buf, resp->completion_code);
+	if (rc) {
+		return pldm_msgbuf_discard(buf, rc);
+	}
+	if (resp->completion_code != PLDM_SUCCESS) {
+		return pldm_msgbuf_discard(buf, 0);
+	}
+
+	if (payload_length <
+	    (size_t)PLDM_RDE_NEGOTIATE_MEDIUM_PARAMETERS_RESP_BYTES) {
+		return pldm_msgbuf_discard(buf, -EOVERFLOW);
+	}
+	pldm_msgbuf_extract(buf,
+			    resp->device_maximum_transfer_chunk_size_bytes);
+
+	rc = pldm_msgbuf_complete_consumed(buf);
+	if (rc) {
+		return rc;
+	}
+
+	/* The RDE Device must support a transfer size of at least 64 bytes per
+	 * DSP0218 Table 53. */
+	if (resp->device_maximum_transfer_chunk_size_bytes <
+	    PLDM_RDE_MIN_TRANSFER_SIZE_BYTES) {
+		return -EBADMSG;
+	}
+	return 0;
+}
