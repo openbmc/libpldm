@@ -19,6 +19,9 @@ Change categories:
 
 ### Added
 
+- platform: Add GetPDRRepositorySignature command
+  - Add `encode_pldm_platform_get_pdr_repository_signature_req()`
+  - Add `decode_pldm_platform_get_pdr_repository_signature_resp()`
 ### Changed
 
 - libpldm++: Preserve multiple descriptors of the same type
