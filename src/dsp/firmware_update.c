@@ -3957,3 +3957,88 @@ int decode_get_meta_data_req(const struct pldm_msg *msg, size_t payload_length,
 					 &req->data_transfer_handle,
 					 &req->transfer_operation_flag);
 }
+
+LIBPLDM_ABI_TESTING
+int encode_get_device_meta_data_req(
+	uint8_t instance_id, const struct pldm_get_device_meta_data_req *req,
+	struct pldm_msg *msg, size_t *payload_length)
+{
+	PLDM_MSGBUF_RW_DEFINE_P(buf);
+	int rc;
+
+	if (req == NULL || msg == NULL || payload_length == NULL) {
+		return -EINVAL;
+	}
+	if (*payload_length < (size_t)PLDM_GET_DEVICE_META_DATA_REQ_BYTES) {
+		return -EOVERFLOW;
+	}
+	if (!is_transfer_operation_flag_valid(req->transfer_operation_flag)) {
+		return -EBADMSG;
+	}
+
+	rc = encode_pldm_header_only_errno(PLDM_REQUEST, instance_id, PLDM_FWUP,
+					   PLDM_GET_DEVICE_META_DATA, msg);
+	if (rc) {
+		return rc;
+	}
+
+	rc = pldm_msgbuf_init_errno(buf, PLDM_GET_DEVICE_META_DATA_REQ_BYTES,
+				    msg->payload, *payload_length);
+	if (rc) {
+		return rc;
+	}
+	pldm_msgbuf_insert(buf, req->data_transfer_handle);
+	pldm_msgbuf_insert(buf, req->transfer_operation_flag);
+
+	return pldm_msgbuf_complete_used(buf, *payload_length, payload_length);
+}
+
+LIBPLDM_ABI_TESTING
+int decode_get_device_meta_data_resp(const struct pldm_msg *msg,
+				     size_t payload_length,
+				     struct pldm_get_device_meta_data_resp *resp)
+{
+	PLDM_MSGBUF_RO_DEFINE_P(buf);
+	int rc;
+
+	if (msg == NULL || resp == NULL) {
+		return -EINVAL;
+	}
+
+	rc = pldm_msgbuf_init_errno(buf, sizeof(resp->completion_code),
+				    msg->payload, payload_length);
+	if (rc) {
+		return rc;
+	}
+
+	rc = pldm_msgbuf_extract(buf, resp->completion_code);
+	if (rc) {
+		return pldm_msgbuf_discard(buf, rc);
+	}
+	if (PLDM_SUCCESS != resp->completion_code) {
+		/* Protocol error - caller checks completion_code. Other
+		 * outputs left untouched; transport-level rc is success.
+		 */
+		return pldm_msgbuf_discard(buf, 0);
+	}
+
+	if (payload_length <
+	    (size_t)PLDM_GET_DEVICE_META_DATA_RESP_FIXED_BYTES) {
+		return pldm_msgbuf_discard(buf, -EOVERFLOW);
+	}
+	pldm_msgbuf_extract(buf, resp->next_data_transfer_handle);
+	pldm_msgbuf_extract(buf, resp->transfer_flag);
+
+	if (!is_transfer_flag_valid(resp->transfer_flag)) {
+		return pldm_msgbuf_discard(buf, -EBADMSG);
+	}
+
+	/* Variable-length metadata blob - expose as a span into msg->payload.
+	 * Caller must copy if it needs to outlive msg.
+	 */
+	pldm_msgbuf_span_remaining(
+		buf, (const void **)&resp->portion_of_meta_data.ptr,
+		&resp->portion_of_meta_data.length);
+
+	return pldm_msgbuf_complete(buf);
+}
