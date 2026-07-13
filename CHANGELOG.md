@@ -19,6 +19,11 @@ Change categories:
 
 ### Added
 
+- rde: Add NegotiateRedfishParameters command
+  - Add `encode_pldm_rde_negotiate_redfish_parameters_req()`
+  - Add `decode_pldm_rde_negotiate_redfish_parameters_req()`
+  - Add `encode_pldm_rde_negotiate_redfish_parameters_resp()`
+  - Add `decode_pldm_rde_negotiate_redfish_parameters_resp()`
 - firmware_update: Add GetDeviceMetaData command
   - Add `encode_get_device_meta_data_req()`
   - Add `decode_get_device_meta_data_resp()`
