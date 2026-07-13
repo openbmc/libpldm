@@ -6818,3 +6818,39 @@ TEST(GetPackageData, decodeBadRequestRejectsNullArgs)
         -EINVAL);
 }
 #endif
+
+#if HAVE_LIBPLDM_API_TESTING
+TEST(GetMetaData, encodeAndDecodeUseSameWireFormat)
+{
+    // GetMetaData and GetPackageData share helpers; smoke-test that both
+    // paths reach the wire layer.
+    pldm_get_fd_data_resp_fixed fixed{};
+    fixed.completion_code = PLDM_SUCCESS;
+    fixed.next_data_transfer_handle = 0;
+    fixed.transfer_flag = PLDM_START_AND_END;
+    variable_field varField{nullptr, 0};
+
+    // Buffer must hold hdr + PLDM_GET_FD_DATA_RESP_FIXED_BYTES; a bare
+    // pldm_msg is only the header, so the encoder would walk past it onto
+    // adjacent stack memory.
+    std::array<uint8_t, hdrSize + PLDM_GET_FD_DATA_RESP_FIXED_BYTES>
+        responseMsg{};
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+    auto* response = reinterpret_cast<pldm_msg*>(responseMsg.data());
+
+    size_t len = PLDM_GET_FD_DATA_RESP_FIXED_BYTES;
+    EXPECT_EQ(encode_get_meta_data_resp(0, &fixed, &varField, response, &len),
+              0);
+    EXPECT_EQ(len, PLDM_GET_FD_DATA_RESP_FIXED_BYTES);
+
+    std::array<uint8_t, hdrSize + PLDM_GET_FD_DATA_REQ_BYTES> requestMsg{};
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+    auto* request = reinterpret_cast<pldm_msg*>(requestMsg.data());
+    request->payload[4] = PLDM_GET_NEXTPART;
+
+    pldm_get_fd_data_req req{};
+    EXPECT_EQ(
+        decode_get_meta_data_req(request, PLDM_GET_FD_DATA_REQ_BYTES, &req), 0);
+    EXPECT_EQ(req.transfer_operation_flag, PLDM_GET_NEXTPART);
+}
+#endif

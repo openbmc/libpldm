@@ -3121,6 +3121,23 @@ int decode_get_package_data_req(const struct pldm_msg *msg,
 				size_t payload_length,
 				struct pldm_get_fd_data_req *req);
 
+/* GetMetaData
+ *
+ * Identical wire format to GetPackageData; only the PLDM command code
+ * differs. See encode_get_package_data_resp and decode_get_package_data_req.
+ */
+
+/** @brief Encode GetMetaData response. See encode_get_package_data_resp. */
+int encode_get_meta_data_resp(
+	uint8_t instance_id,
+	const struct pldm_get_fd_data_resp_fixed *resp_fixed,
+	const struct variable_field *data, struct pldm_msg *msg,
+	size_t *payload_length);
+
+/** @brief Decode GetMetaData request. See decode_get_package_data_req. */
+int decode_get_meta_data_req(const struct pldm_msg *msg, size_t payload_length,
+			     struct pldm_get_fd_data_req *req);
+
 #ifdef __cplusplus
 }
 #endif
