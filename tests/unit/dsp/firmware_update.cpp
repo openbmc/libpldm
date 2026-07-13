@@ -6659,3 +6659,177 @@ TEST(DecodePldmFirmwareUpdatePackage,
     }
     EXPECT_NE(rc, 0);
 }
+
+#if HAVE_LIBPLDM_API_TESTING
+TEST(GetPackageData, encodeGoodResponse)
+{
+    constexpr uint32_t nextHandle = 0x100;
+    constexpr uint8_t transferFlag = PLDM_END;
+    const std::array<uint8_t, 4> data{0xDE, 0xAD, 0xBE, 0xEF};
+
+    constexpr size_t payloadLen =
+        PLDM_GET_PACKAGE_DATA_RESP_FIXED_BYTES + data.size();
+    std::array<uint8_t, hdrSize + payloadLen> responseMsg{};
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+    auto* response = reinterpret_cast<pldm_msg*>(responseMsg.data());
+
+    pldm_get_package_data_resp fixed{};
+    fixed.completion_code = PLDM_SUCCESS;
+    fixed.next_data_transfer_handle = nextHandle;
+    fixed.transfer_flag = transferFlag;
+
+    variable_field varField{data.data(), data.size()};
+
+    size_t encLen = payloadLen;
+    auto rc =
+        encode_get_package_data_resp(0, &fixed, &varField, response, &encLen);
+    EXPECT_EQ(rc, 0);
+    EXPECT_EQ(encLen, payloadLen);
+
+    // DSP0267 Table 59, LE: CompletionCode, NextDataTransferHandle(4),
+    // TransferFlag, PortionOfPackageData
+    EXPECT_THAT(
+        std::span<uint8_t>(response->payload, payloadLen),
+        ElementsAreArray<uint8_t>({PLDM_SUCCESS, 0x00, 0x01, 0x00, 0x00,
+                                   transferFlag, 0xDE, 0xAD, 0xBE, 0xEF}));
+}
+#endif
+
+#if HAVE_LIBPLDM_API_TESTING
+TEST(GetPackageData, encodeBadResponseRejectsNullArgs)
+{
+    pldm_get_package_data_resp fixed{};
+    fixed.transfer_flag = PLDM_START;
+    variable_field varField{nullptr, 0};
+    pldm_msg msg{};
+
+    size_t len = 64;
+    EXPECT_EQ(encode_get_package_data_resp(0, nullptr, &varField, &msg, &len),
+              -EINVAL);
+    EXPECT_EQ(encode_get_package_data_resp(0, &fixed, nullptr, &msg, &len),
+              -EINVAL);
+    EXPECT_EQ(encode_get_package_data_resp(0, &fixed, &varField, nullptr, &len),
+              -EINVAL);
+}
+#endif
+
+#if HAVE_LIBPLDM_API_TESTING
+TEST(GetPackageData, encodeBadResponseRejectsTooSmallBuffer)
+{
+    pldm_get_package_data_resp fixed{};
+    fixed.completion_code = PLDM_SUCCESS;
+    fixed.transfer_flag = PLDM_END;
+    const std::array<uint8_t, 8> data{};
+    variable_field varField{data.data(), data.size()};
+    pldm_msg msg{};
+
+    // One byte short of the fixed header plus the data portion is rejected.
+    size_t len = PLDM_GET_PACKAGE_DATA_RESP_FIXED_BYTES + data.size() - 1;
+    EXPECT_EQ(encode_get_package_data_resp(0, &fixed, &varField, &msg, &len),
+              -EOVERFLOW);
+}
+#endif
+
+#if HAVE_LIBPLDM_API_TESTING
+TEST(GetPackageData, encodeErrorResponseIsCompletionCodeOnly)
+{
+    pldm_get_package_data_resp fixed{};
+    fixed.completion_code = PLDM_ERROR;
+    // transfer_flag left unset (invalid): an error response must not require
+    // it, since only the completion code is emitted.
+    variable_field varField{nullptr, 0};
+
+    std::array<uint8_t, hdrSize + 1> responseMsg{};
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+    auto* response = reinterpret_cast<pldm_msg*>(responseMsg.data());
+
+    // A one-byte payload holds the whole error response.
+    size_t len = 1;
+    auto rc =
+        encode_get_package_data_resp(0, &fixed, &varField, response, &len);
+    EXPECT_EQ(rc, 0);
+    EXPECT_EQ(len, sizeof(fixed.completion_code));
+    EXPECT_EQ(response->payload[0], PLDM_ERROR);
+}
+#endif
+
+#if HAVE_LIBPLDM_API_TESTING
+TEST(GetPackageData, encodeBadResponseRejectsInvalidTransferFlag)
+{
+    pldm_get_package_data_resp fixed{};
+    fixed.transfer_flag = 0xFF; // invalid
+    variable_field varField{nullptr, 0};
+    pldm_msg msg{};
+
+    size_t len = 64;
+    EXPECT_EQ(encode_get_package_data_resp(0, &fixed, &varField, &msg, &len),
+              -EINVAL);
+}
+#endif
+
+#if HAVE_LIBPLDM_API_TESTING
+TEST(GetPackageData, decodeGoodRequest)
+{
+    constexpr uint32_t handle = 0xABCDEF01;
+    constexpr uint8_t opFlag = PLDM_GET_FIRSTPART;
+
+    std::array<uint8_t, hdrSize + PLDM_GET_PACKAGE_DATA_REQ_BYTES> requestMsg{};
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+    auto* request = reinterpret_cast<pldm_msg*>(requestMsg.data());
+    const uint32_t handleLE = htole32(handle);
+    memcpy(&request->payload[0], &handleLE, sizeof(handleLE));
+    request->payload[4] = opFlag;
+
+    pldm_get_package_data_req req{};
+    auto rc = decode_get_package_data_req(
+        request, PLDM_GET_PACKAGE_DATA_REQ_BYTES, &req);
+    EXPECT_EQ(rc, 0);
+    EXPECT_EQ(req.data_transfer_handle, handle);
+    EXPECT_EQ(req.transfer_operation_flag, opFlag);
+}
+#endif
+
+#if HAVE_LIBPLDM_API_TESTING
+TEST(GetPackageData, decodeBadRequestRejectsInvalidOpFlag)
+{
+    std::array<uint8_t, hdrSize + PLDM_GET_PACKAGE_DATA_REQ_BYTES> requestMsg{};
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+    auto* request = reinterpret_cast<pldm_msg*>(requestMsg.data());
+    request->payload[4] = 0x99; // not FIRSTPART or NEXTPART
+
+    pldm_get_package_data_req req{};
+    auto rc = decode_get_package_data_req(
+        request, PLDM_GET_PACKAGE_DATA_REQ_BYTES, &req);
+    EXPECT_EQ(rc, -EBADMSG);
+}
+#endif
+
+#if HAVE_LIBPLDM_API_TESTING
+TEST(GetPackageData, decodeBadRequestRejectsNullArgs)
+{
+    pldm_msg msg{};
+    pldm_get_package_data_req req{};
+    EXPECT_EQ(decode_get_package_data_req(
+                  nullptr, PLDM_GET_PACKAGE_DATA_REQ_BYTES, &req),
+              -EINVAL);
+    EXPECT_EQ(decode_get_package_data_req(&msg, PLDM_GET_PACKAGE_DATA_REQ_BYTES,
+                                          nullptr),
+              -EINVAL);
+}
+#endif
+
+#if HAVE_LIBPLDM_API_TESTING
+TEST(GetPackageData, decodeBadRequestRejectsTooSmallBuffer)
+{
+    std::array<uint8_t, hdrSize + PLDM_GET_PACKAGE_DATA_REQ_BYTES> requestMsg{};
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+    auto* request = reinterpret_cast<pldm_msg*>(requestMsg.data());
+
+    // One byte short of the fixed request is rejected before the op-flag
+    // check.
+    pldm_get_package_data_req req{};
+    auto rc = decode_get_package_data_req(
+        request, PLDM_GET_PACKAGE_DATA_REQ_BYTES - 1, &req);
+    EXPECT_EQ(rc, -EOVERFLOW);
+}
+#endif
