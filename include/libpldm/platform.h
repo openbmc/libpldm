@@ -77,6 +77,7 @@ enum pldm_platform_transfer_flag {
 #define PLDM_GET_SENSOR_READING_MIN_RESP_BYTES	       8
 #define PLDM_GET_STATE_SENSOR_READINGS_MIN_RESP_BYTES  2
 #define PLDM_GET_PDR_REPOSITORY_INFO_RESP_BYTES	       41
+#define PLDM_GET_PDR_REPOSITORY_SIGNATURE_RESP_BYTES   5
 
 /* Minimum length for PLDM PlatformEventMessage request */
 #define PLDM_PLATFORM_EVENT_MESSAGE_MIN_REQ_BYTES		 3
@@ -256,8 +257,8 @@ enum pldm_platform_commands {
 	PLDM_GET_PDR_REPOSITORY_INFO = 0x50,
 	PLDM_GET_PDR = 0x51,
 	PLDM_FIND_PDR = 0x52,
-	PLDM_RUN_INIT_AGENT = 0x58,
 	PLDM_GET_PDR_REPOSITORY_SIGNATURE = 0x53,
+	PLDM_RUN_INIT_AGENT = 0x58,
 };
 
 /** @brief PLDM PDR types defined in DSP0248_1.3.0 section 28.2
@@ -1763,6 +1764,42 @@ int decode_get_pdr_repository_info_resp(
 int decode_get_pdr_repository_info_resp_safe(
 	const struct pldm_msg *msg, size_t payload_length,
 	struct pldm_pdr_repository_info_resp *resp);
+
+/* GetPDRRepositorySignature */
+
+struct pldm_get_pdr_repository_signature_resp {
+	uint8_t completion_code;
+	uint32_t pdr_repository_signature;
+};
+
+/** @brief Encode GetPDRRepositorySignature request data.
+ *
+ *  The request has no payload; only the PLDM header is written.
+ *
+ *  @param[in]  instance_id - Message's instance id.
+ *  @param[out] msg         - Request message.
+ *  @return 0 on success, a negative errno value on failure.
+ *  @note Caller is responsible for memory alloc/dealloc of @p msg.
+ */
+int encode_get_pdr_repository_signature_req(uint8_t instance_id,
+					    struct pldm_msg *msg);
+
+/** @brief Decode GetPDRRepositorySignature response data.
+ *
+ *  A Management Controller uses the signature to detect whether a
+ *  Terminus's PDR Repository contents have changed without re-downloading
+ *  every PDR. An error response may carry only the completion code, in
+ *  which case pdr_repository_signature is left unmodified.
+ *
+ *  @param[in]  msg            - Response message.
+ *  @param[in]  payload_length - Length of response payload.
+ *  @param[out] resp           - Decoded response. Output member values are
+ *                               host-endian.
+ *  @return 0 on success, a negative errno value on failure.
+ */
+int decode_get_pdr_repository_signature_resp(
+	const struct pldm_msg *msg, size_t payload_length,
+	struct pldm_get_pdr_repository_signature_resp *resp);
 
 /* GetPDR */
 

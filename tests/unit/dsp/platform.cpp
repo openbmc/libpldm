@@ -807,6 +807,88 @@ TEST(GetPDRRepositoryInfo, testBadDecodeResponseSafeTrivial)
 }
 #endif
 
+#if HAVE_LIBPLDM_API_TESTING
+TEST(GetPDRRepositorySignature, testGoodEncodeRequest)
+{
+    pldm_msg request{};
+    auto rc = encode_get_pdr_repository_signature_req(0, &request);
+    EXPECT_EQ(rc, 0);
+}
+#endif
+
+#if HAVE_LIBPLDM_API_TESTING
+TEST(GetPDRRepositorySignature, testBadEncodeRequest)
+{
+    auto rc = encode_get_pdr_repository_signature_req(0, nullptr);
+    EXPECT_EQ(rc, -EINVAL);
+}
+#endif
+
+#if HAVE_LIBPLDM_API_TESTING
+TEST(GetPDRRepositorySignature, testGoodDecodeResponse)
+{
+    constexpr uint8_t completionCode = PLDM_SUCCESS;
+    constexpr uint32_t signature = 0x12345678;
+
+    std::array<uint8_t, hdrSize + PLDM_GET_PDR_REPOSITORY_SIGNATURE_RESP_BYTES>
+        responseMsg{};
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+    auto response = reinterpret_cast<pldm_msg*>(responseMsg.data());
+    response->payload[0] = completionCode;
+    const uint32_t signatureLE = htole32(signature);
+    memcpy(&response->payload[1], &signatureLE, sizeof(signatureLE));
+
+    struct pldm_get_pdr_repository_signature_resp resp{};
+    auto rc = decode_get_pdr_repository_signature_resp(
+        response, responseMsg.size() - hdrSize, &resp);
+
+    EXPECT_EQ(rc, 0);
+    EXPECT_EQ(resp.completion_code, completionCode);
+    EXPECT_EQ(resp.pdr_repository_signature, signature);
+}
+#endif
+
+#if HAVE_LIBPLDM_API_TESTING
+TEST(GetPDRRepositorySignature, testBadDecodeResponse)
+{
+    std::array<uint8_t, hdrSize + PLDM_GET_PDR_REPOSITORY_SIGNATURE_RESP_BYTES>
+        responseMsg{};
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+    auto response = reinterpret_cast<pldm_msg*>(responseMsg.data());
+
+    auto rc = decode_get_pdr_repository_signature_resp(
+        response, responseMsg.size() - hdrSize, nullptr);
+    EXPECT_EQ(rc, -EINVAL);
+
+    struct pldm_get_pdr_repository_signature_resp resp{};
+
+    // Truncated payload (smaller than fixed bytes) -> length error.
+    rc = decode_get_pdr_repository_signature_resp(
+        response, PLDM_GET_PDR_REPOSITORY_SIGNATURE_RESP_BYTES - 1, &resp);
+    EXPECT_LT(rc, 0);
+}
+#endif
+
+#if HAVE_LIBPLDM_API_TESTING
+TEST(GetPDRRepositorySignature, testDecodeErrorResponse)
+{
+    constexpr uint8_t errorCode = PLDM_ERROR;
+
+    std::array<uint8_t, hdrSize + 1> responseMsg{};
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+    auto response = reinterpret_cast<pldm_msg*>(responseMsg.data());
+    response->payload[0] = errorCode;
+
+    struct pldm_get_pdr_repository_signature_resp resp{};
+
+    // A 1-byte error response (completion code only) must decode and report
+    // the error, not be rejected for being shorter than the success payload.
+    auto rc = decode_get_pdr_repository_signature_resp(response, 1, &resp);
+    EXPECT_EQ(rc, 0);
+    EXPECT_EQ(resp.completion_code, errorCode);
+}
+#endif
+
 TEST(SetNumericEffecterValue, testGoodDecodeRequest)
 {
     std::array<uint8_t,

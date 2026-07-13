@@ -582,6 +582,58 @@ int decode_get_pdr_repository_info_resp_safe(
 	return pldm_msgbuf_complete_consumed(buf);
 }
 
+LIBPLDM_ABI_TESTING
+int encode_get_pdr_repository_signature_req(uint8_t instance_id,
+					    struct pldm_msg *msg)
+{
+	if (msg == NULL) {
+		return -EINVAL;
+	}
+
+	struct pldm_header_info header = { 0 };
+	header.msg_type = PLDM_REQUEST;
+	header.instance = instance_id;
+	header.pldm_type = PLDM_PLATFORM;
+	header.command = PLDM_GET_PDR_REPOSITORY_SIGNATURE;
+
+	return pack_pldm_header_errno(&header, &(msg->hdr));
+}
+
+LIBPLDM_ABI_TESTING
+int decode_get_pdr_repository_signature_resp(
+	const struct pldm_msg *msg, size_t payload_length,
+	struct pldm_get_pdr_repository_signature_resp *resp)
+{
+	PLDM_MSGBUF_RO_DEFINE_P(buf);
+	int rc;
+
+	if (msg == NULL || resp == NULL) {
+		return -EINVAL;
+	}
+
+	rc = pldm_msg_has_error(msg, payload_length);
+	if (rc) {
+		resp->completion_code = rc;
+		return 0;
+	}
+
+	rc = pldm_msgbuf_init_errno(
+		buf, PLDM_GET_PDR_REPOSITORY_SIGNATURE_RESP_BYTES, msg->payload,
+		payload_length);
+	if (rc) {
+		return rc;
+	}
+
+	rc = pldm_msgbuf_extract(buf, resp->completion_code);
+	if (rc) {
+		return pldm_msgbuf_discard(buf, rc);
+	}
+
+	pldm_msgbuf_extract(buf, resp->pdr_repository_signature);
+
+	return pldm_msgbuf_complete_consumed(buf);
+}
+
 LIBPLDM_ABI_STABLE
 int encode_get_pdr_req(uint8_t instance_id, uint32_t record_hndl,
 		       uint32_t data_transfer_hndl, uint8_t transfer_op_flag,

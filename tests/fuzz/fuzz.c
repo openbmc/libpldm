@@ -303,7 +303,19 @@ static int
     return 0;
 }
 
+static int
+    fuzz_decode_get_pdr_repository_signature_resp(const struct pldm_msg* msg,
+                                                  size_t payload_length)
+{
+    struct pldm_get_pdr_repository_signature_resp resp;
+
+    decode_get_pdr_repository_signature_resp(msg, payload_length, &resp);
+
+    return 0;
+}
+
 static int (*const decode_pldm_msg_tests[])(const struct pldm_msg*, size_t) = {
+    fuzz_decode_get_pdr_repository_signature_resp,
     fuzz_decode_pldm_base_get_tid_resp,
     fuzz_decode_pldm_base_get_pldm_types_resp,
     fuzz_decode_pldm_platform_set_numeric_sensor_enable_resp,
@@ -572,7 +584,29 @@ static int fuzz_pldm_entity_association_pdr_extract(const uint8_t* data,
     return 0;
 }
 
+static int fuzz_encode_get_pdr_repository_signature_req(const uint8_t* data,
+                                                        size_t size)
+{
+    struct pldm_msg* msg;
+    uint8_t instance_id;
+
+    instance_id = size ? data[0] : 0;
+
+    msg = malloc(sizeof(struct pldm_msg));
+    if (!msg)
+    {
+        return -1;
+    }
+
+    encode_get_pdr_repository_signature_req(instance_id, msg);
+
+    free(msg);
+
+    return 0;
+}
+
 static int (*const fuzz_tests[])(const uint8_t*, size_t) = {
+    fuzz_encode_get_pdr_repository_signature_req,
     fuzz_decode_pldm_firmware_update_package,
     fuzz_get_fru_record_by_option,
     fuzz_pldm_pdr_add,
