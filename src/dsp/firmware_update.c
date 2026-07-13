@@ -3912,3 +3912,22 @@ int decode_get_package_data_req(const struct pldm_msg *msg,
 {
 	return decode_fd_data_req_common(msg, payload_length, req);
 }
+
+LIBPLDM_ABI_TESTING
+int encode_get_meta_data_resp(
+	uint8_t instance_id,
+	const struct pldm_get_fd_data_resp_fixed *resp_fixed,
+	const struct variable_field *data, struct pldm_msg *msg,
+	size_t payload_length)
+{
+	return encode_fd_data_resp_common(instance_id, PLDM_GET_META_DATA,
+					  resp_fixed, data, msg,
+					  payload_length);
+}
+
+LIBPLDM_ABI_TESTING
+int decode_get_meta_data_req(const struct pldm_msg *msg, size_t payload_length,
+			     struct pldm_get_fd_data_req *req)
+{
+	return decode_fd_data_req_common(msg, payload_length, req);
+}
