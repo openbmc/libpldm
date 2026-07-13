@@ -2055,6 +2055,45 @@ int encode_apply_complete_req(uint8_t instance_id,
 int encode_apply_complete_resp(uint8_t instance_id, uint8_t completion_code,
 			       struct pldm_msg *msg, size_t payload_length);
 
+/* GetMetaData
+ *
+ * Identical wire format to GetPackageData; only the PLDM command code
+ * differs. See encode_get_package_data_resp and decode_get_package_data_req.
+ */
+
+#define PLDM_GET_META_DATA_REQ_BYTES	    5
+#define PLDM_GET_META_DATA_RESP_FIXED_BYTES 6
+
+/** @struct pldm_get_meta_data_req
+ *
+ *  Decoded GetMetaData request.
+ */
+struct pldm_get_meta_data_req {
+	uint32_t data_transfer_handle;
+	uint8_t transfer_operation_flag;
+};
+
+/** @struct pldm_get_meta_data_resp
+ *
+ *  Fixed-length header of a GetMetaData response. The data portion is
+ *  passed separately as a variable_field by the caller.
+ */
+struct pldm_get_meta_data_resp {
+	uint8_t completion_code;
+	uint32_t next_data_transfer_handle;
+	uint8_t transfer_flag;
+};
+
+/** @brief Encode GetMetaData response. See encode_get_package_data_resp. */
+int encode_get_meta_data_resp(uint8_t instance_id,
+			      const struct pldm_get_meta_data_resp *resp,
+			      const struct variable_field *data,
+			      struct pldm_msg *msg, size_t *payload_length);
+
+/** @brief Decode GetMetaData request. See decode_get_package_data_req. */
+int decode_get_meta_data_req(const struct pldm_msg *msg, size_t payload_length,
+			     struct pldm_get_meta_data_req *req);
+
 /** @brief Create PLDM request message for ActivateFirmware
  *
  *  @param[in] instance_id - Message's instance id
