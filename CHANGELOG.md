@@ -29,6 +29,10 @@ Change categories:
 
 ### Changed
 
+- dsp: platform: Stabilise `encode_pldm_platform_state_sensor_pdr()` and
+  `encode_pldm_platform_state_sensor_possible_states()`
+- dsp: platform: Stabilise `decode_pldm_platform_state_sensor_pdr()`
+- dsp: platform: Stabilise the State Sensor PDR possible_states iterators
 - libpldm++: Preserve multiple descriptors of the same type
 
   This breaks API and ABI compatibility; consumers must rebuild
