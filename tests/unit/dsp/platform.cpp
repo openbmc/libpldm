@@ -5170,7 +5170,6 @@ TEST(decodeNumericSensorPdrDataDeathTest, InvalidSizeTest)
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_LENGTH);
 }
 
-#if HAVE_LIBPLDM_API_TESTING
 TEST(decodePldmPlatformStateSensorPdr, GoodTest)
 {
     std::vector<uint8_t> pdr{
@@ -5227,9 +5226,7 @@ TEST(decodePldmPlatformStateSensorPdr, GoodTest)
     EXPECT_EQ(false, decodedPdr.sensor_auxiliary_names_pdr);
     EXPECT_EQ(2u, decodedPdr.composite_sensor_count);
 }
-#endif
 
-#if HAVE_LIBPLDM_API_TESTING
 TEST(decodePldmPlatformStateSensorPdr, InvalidArgTest)
 {
     std::vector<uint8_t> pdr(PLDM_PLATFORM_STATE_SENSOR_PDR_MIN_LENGTH, 0);
@@ -5240,9 +5237,7 @@ TEST(decodePldmPlatformStateSensorPdr, InvalidArgTest)
     EXPECT_EQ(-EINVAL, decode_pldm_platform_state_sensor_pdr(
                            pdr.data(), pdr.size(), nullptr));
 }
-#endif
 
-#if HAVE_LIBPLDM_API_TESTING
 TEST(decodePldmPlatformStateSensorPdr, ShortBufferTest)
 {
     std::vector<uint8_t> pdr(PLDM_PLATFORM_STATE_SENSOR_PDR_MIN_LENGTH - 1, 0);
@@ -5251,9 +5246,7 @@ TEST(decodePldmPlatformStateSensorPdr, ShortBufferTest)
     EXPECT_EQ(-EOVERFLOW, decode_pldm_platform_state_sensor_pdr(
                               pdr.data(), pdr.size(), &decodedPdr));
 }
-#endif
 
-#if HAVE_LIBPLDM_API_TESTING
 TEST(decodePldmPlatformStateSensorPdr, BadDataLengthTest)
 {
     // dataLength claims more bytes than the buffer holds.
@@ -5291,7 +5284,6 @@ TEST(decodePldmPlatformStateSensorPdr, BadDataLengthTest)
     EXPECT_EQ(-EOVERFLOW, decode_pldm_platform_state_sensor_pdr(
                               pdr.data(), pdr.size(), &decodedPdr));
 }
-#endif
 
 #if HAVE_LIBPLDM_API_TESTING
 TEST(encodePldmPlatformStateSensorPdr, GoodTest)
@@ -7709,7 +7701,6 @@ TEST(StateEffecterPDR, testZeroPossibleStatesSize)
 }
 #endif
 
-#if HAVE_LIBPLDM_API_TESTING
 namespace
 {
 /*
@@ -7753,9 +7744,7 @@ std::vector<uint8_t> makeStateSensorPdr(uint8_t compositeSensorCount,
     return pdr;
 }
 } // namespace
-#endif
 
-#if HAVE_LIBPLDM_API_TESTING
 TEST(StateSensorPDR, testMultipleEntries)
 {
     // possible_states[0]: state_set_id=100, size=1, bits=0x0F
@@ -7809,9 +7798,7 @@ TEST(StateSensorPDR, testMultipleEntries)
     EXPECT_EQ(bitLists[1][0], 0xAA);
     EXPECT_EQ(bitLists[1][1], 0x55);
 }
-#endif
 
-#if HAVE_LIBPLDM_API_TESTING
 TEST(StateSensorPDR, testInvalidBufferTooSmall)
 {
     std::vector<uint8_t> pdr(PLDM_PLATFORM_STATE_SENSOR_PDR_MIN_LENGTH - 1, 0);
@@ -7827,9 +7814,7 @@ TEST(StateSensorPDR, testInvalidBufferTooSmall)
 
     EXPECT_EQ(rc, -EOVERFLOW) << "Expected EOVERFLOW for small buffer";
 }
-#endif
 
-#if HAVE_LIBPLDM_API_TESTING
 TEST(StateSensorPDR, testNullPointer)
 {
     int rc;
@@ -7843,9 +7828,7 @@ TEST(StateSensorPDR, testNullPointer)
 
     EXPECT_EQ(rc, -EINVAL) << "Expected EINVAL for null pointer";
 }
-#endif
 
-#if HAVE_LIBPLDM_API_TESTING
 TEST(StateSensorPDR, testZeroCount)
 {
     auto pdr = makeStateSensorPdr(0, {});
@@ -7863,9 +7846,7 @@ TEST(StateSensorPDR, testZeroCount)
     EXPECT_EQ(count, 0) << "Should not iterate when count is 0";
     EXPECT_EQ(rc, 0) << "Expected success (rc=0), got rc=" << rc;
 }
-#endif
 
-#if HAVE_LIBPLDM_API_TESTING
 TEST(StateSensorPDR, testSingleEntry)
 {
     // Single entry: state_set_id=42, size=3, bits={0x01, 0x02, 0x04}
@@ -7904,9 +7885,7 @@ TEST(StateSensorPDR, testSingleEntry)
     EXPECT_EQ(rc, 0);
     EXPECT_EQ(entryCount, 1);
 }
-#endif
 
-#if HAVE_LIBPLDM_API_TESTING
 TEST(StateSensorPDR, testTruncatedEntry)
 {
     // Entry claims size=5 but buffer only has room for 2 state bytes.
@@ -7923,9 +7902,7 @@ TEST(StateSensorPDR, testTruncatedEntry)
 
     EXPECT_EQ(rc, -EOVERFLOW) << "Expected EOVERFLOW for truncated entry";
 }
-#endif
 
-#if HAVE_LIBPLDM_API_TESTING
 TEST(StateSensorPDR, testZeroPossibleStatesSize)
 {
     // Entry with state_set_id=100, size=0, no state bytes.
@@ -7962,4 +7939,3 @@ TEST(StateSensorPDR, testZeroPossibleStatesSize)
     EXPECT_EQ(rc, 0);
     EXPECT_EQ(entryCount, 1);
 }
-#endif

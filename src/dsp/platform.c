@@ -1914,7 +1914,7 @@ int decode_numeric_sensor_pdr_data(
 	return PLDM_SUCCESS;
 }
 
-LIBPLDM_ABI_TESTING
+LIBPLDM_ABI_STABLE
 int decode_pldm_platform_state_sensor_pdr(
 	const void *pdr_data, size_t pdr_data_length,
 	struct pldm_platform_state_sensor_pdr *pdr_value)
@@ -4244,7 +4244,7 @@ int decode_pldm_platform_state_effecter_pdr_possible_states_from_iter(
 	return pldm_msgbuf_complete_consumed(ctx);
 }
 
-LIBPLDM_ABI_TESTING
+LIBPLDM_ABI_STABLE
 struct pldm_platform_state_sensor_pdr_possible_states_iter
 pldm_platform_state_sensor_pdr_possible_states_iter_init(const void *pdr_data,
 							 size_t pdr_data_length,
@@ -4273,7 +4273,7 @@ pldm_platform_state_sensor_pdr_possible_states_iter_init(const void *pdr_data,
 	return iter;
 }
 
-LIBPLDM_ABI_TESTING
+LIBPLDM_ABI_STABLE
 int decode_pldm_platform_state_sensor_pdr_possible_states_from_iter(
 	struct pldm_platform_state_sensor_pdr_possible_states_iter *iter,
 	struct pldm_platform_state_sensor_possible_states *states)
@@ -4311,7 +4311,7 @@ int decode_pldm_platform_state_sensor_pdr_possible_states_from_iter(
 	return pldm_msgbuf_complete_consumed(ctx);
 }
 
-LIBPLDM_ABI_TESTING
+LIBPLDM_ABI_STABLE
 struct pldm_platform_state_sensor_pdr_states_iter
 pldm_platform_state_sensor_pdr_states_iter_init(
 	const struct pldm_platform_state_sensor_pdr_possible_states_iter
@@ -4333,7 +4333,7 @@ pldm_platform_state_sensor_pdr_states_iter_init(
 	return iter;
 }
 
-LIBPLDM_ABI_TESTING
+LIBPLDM_ABI_STABLE
 int decode_pldm_platform_state_sensor_pdr_states_from_iter(
 	struct pldm_platform_state_sensor_pdr_states_iter *iter,
 	bitfield8_t *state)
