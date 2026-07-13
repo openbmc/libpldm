@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ba7fdbb9_cdd191fa",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 24
+      },
+      "lineNbr": 2364,
+      "author": {
+        "id": 1002810
+      },
+      "writtenOn": "2026-07-13T08:36:54Z",
+      "side": 1,
+      "message": "Suggest dropping this line, as the described behaviour can\u0027t occur.This function uses pldm_msgbuf_complete() (not _consumed), so it never returns -EBADMSG\nfor unconsumed bytes",
+      "revId": "2a58b8d3347f21e1844a485815b216c02006b2e3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "155d00cb_e4a42d0e",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 24
+      },
+      "lineNbr": 433,
+      "author": {
+        "id": 1002810
+      },
+      "writtenOn": "2026-07-13T08:36:54Z",
+      "side": 1,
+      "message": "Question: A design question on the contract: the loop\nnow fully decodes every record and returns on any decode failure, so a malformed\nnon-target record aborts the whole delete (and blocks removing a valid target later).\nIs aborting the intended contract for pldm_pdr_delete_by_sensor_id, or should an\nundecodable record be skipped (continue)? Thanks.",
+      "revId": "2a58b8d3347f21e1844a485815b216c02006b2e3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8ec901b8_5ac6a410",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 24
+      },
+      "lineNbr": 1956,
+      "author": {
+        "id": 1002810
+      },
+      "writtenOn": "2026-07-13T08:36:54Z",
+      "side": 1,
+      "message": "This function uses pldm_msgbuf_complete() (not _consumed), so it never returns -EBADMSG\nfor unconsumed bytes",
+      "revId": "2a58b8d3347f21e1844a485815b216c02006b2e3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
