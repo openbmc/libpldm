@@ -19,6 +19,10 @@ Change categories:
 
 ### Added
 
+- platform: Add GetPDRRepositorySignature command
+  - Add `encode_get_pdr_repository_signature_req()`
+  - Add `decode_get_pdr_repository_signature_resp()`
+
 ### Changed
 
 - doxygen: Enable warnings as errors
