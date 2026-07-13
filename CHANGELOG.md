@@ -34,6 +34,11 @@ Change categories:
 - firmware_update: Add GetPackageData command
   - Add `encode_get_package_data_resp()`
   - Add `decode_get_package_data_req()`
+- rde: Add NegotiateMediumParameters command
+  - Add `encode_pldm_rde_negotiate_medium_parameters_req()`
+  - Add `decode_pldm_rde_negotiate_medium_parameters_req()`
+  - Add `encode_pldm_rde_negotiate_medium_parameters_resp()`
+  - Add `decode_pldm_rde_negotiate_medium_parameters_resp()`
 - rde: Add NegotiateRedfishParameters command
   - Add `encode_pldm_rde_negotiate_redfish_parameters_req()`
   - Add `decode_pldm_rde_negotiate_redfish_parameters_req()`
