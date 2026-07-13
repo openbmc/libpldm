@@ -21,6 +21,8 @@ Change categories:
 
 ### Changed
 
+- dsp: platform: Stabilise `decode_pldm_platform_state_sensor_pdr()`
+- dsp: platform: Stabilise the State Sensor PDR possible_states iterators
 - doxygen: Enable warnings as errors
 
   Many header files were modified to fix issues identified in the documentation.
