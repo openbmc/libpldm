@@ -2361,7 +2361,6 @@ int decode_numeric_sensor_pdr_data(
  *          -EINVAL - @p pdr_data or @p pdr_value is NULL
  *          -EOVERFLOW - @p pdr_data_length is shorter than the fixed portion,
  *                       or the decoded hdr.length exceeds the buffer
- *          -EBADMSG - the buffer was not fully consumed
  */
 int decode_pldm_platform_state_sensor_pdr(
 	const void *pdr_data, size_t pdr_data_length,
