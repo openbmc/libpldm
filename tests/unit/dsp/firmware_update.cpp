@@ -6854,3 +6854,129 @@ TEST(GetMetaData, encodeAndDecodeUseSameWireFormat)
     EXPECT_EQ(req.transfer_operation_flag, PLDM_GET_NEXTPART);
 }
 #endif
+
+#if HAVE_LIBPLDM_API_TESTING
+TEST(GetDeviceMetaData, goodPathEncodeRequest)
+{
+    constexpr uint8_t instanceId = 1;
+    constexpr uint32_t handle = 0x12345678;
+
+    std::array<uint8_t, hdrSize + PLDM_GET_DEVICE_META_DATA_REQ_BYTES>
+        requestMsg{};
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+    auto* request = reinterpret_cast<pldm_msg*>(requestMsg.data());
+
+    size_t len = PLDM_GET_DEVICE_META_DATA_REQ_BYTES;
+    auto rc = encode_get_device_meta_data_req(
+        instanceId, handle, PLDM_GET_FIRSTPART, request, &len);
+    EXPECT_EQ(rc, 0);
+    EXPECT_EQ(len, PLDM_GET_DEVICE_META_DATA_REQ_BYTES);
+
+    // Verify wire bytes: handle (4 LE) + flag (1)
+    uint32_t roundTripHandle = 0;
+    memcpy(&roundTripHandle, &request->payload[0], sizeof(roundTripHandle));
+    EXPECT_EQ(le32toh(roundTripHandle), handle);
+    EXPECT_EQ(request->payload[4], PLDM_GET_FIRSTPART);
+
+    len = PLDM_GET_DEVICE_META_DATA_REQ_BYTES;
+    rc = encode_get_device_meta_data_req(instanceId, handle, PLDM_GET_NEXTPART,
+                                         request, &len);
+    EXPECT_EQ(rc, 0);
+    EXPECT_EQ(request->payload[4], PLDM_GET_NEXTPART);
+}
+#endif
+
+#if HAVE_LIBPLDM_API_TESTING
+TEST(GetDeviceMetaData, errorPathEncodeRequest)
+{
+    std::array<uint8_t, hdrSize + PLDM_GET_DEVICE_META_DATA_REQ_BYTES>
+        requestMsg{};
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+    auto* request = reinterpret_cast<pldm_msg*>(requestMsg.data());
+
+    size_t len = PLDM_GET_DEVICE_META_DATA_REQ_BYTES;
+    EXPECT_EQ(encode_get_device_meta_data_req(0, 0, PLDM_GET_FIRSTPART, nullptr,
+                                              &len),
+              -EINVAL);
+
+    size_t shortLen = PLDM_GET_DEVICE_META_DATA_REQ_BYTES - 1;
+    EXPECT_EQ(encode_get_device_meta_data_req(0, 0, PLDM_GET_FIRSTPART, request,
+                                              &shortLen),
+              -EOVERFLOW);
+
+    EXPECT_EQ(encode_get_device_meta_data_req(0, 0, /*invalid op_flag*/ 0x99,
+                                              request, &len),
+              -EBADMSG);
+}
+#endif
+
+#if HAVE_LIBPLDM_API_TESTING
+TEST(GetDeviceMetaData, goodPathDecodeResponse)
+{
+    constexpr uint32_t nextHandle = 0xCAFEBABE;
+    constexpr uint8_t transferFlag = PLDM_START;
+    const std::array<uint8_t, 4> metadata{0x11, 0x22, 0x33, 0x44};
+
+    constexpr size_t payloadLen =
+        PLDM_GET_DEVICE_META_DATA_RESP_FIXED_BYTES + metadata.size();
+    std::array<uint8_t, hdrSize + payloadLen> responseMsg{};
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+    auto* response = reinterpret_cast<pldm_msg*>(responseMsg.data());
+
+    response->payload[0] = PLDM_SUCCESS;
+    const uint32_t handleLE = htole32(nextHandle);
+    memcpy(&response->payload[1], &handleLE, sizeof(handleLE));
+    response->payload[5] = transferFlag;
+    memcpy(&response->payload[6], metadata.data(), metadata.size());
+
+    pldm_get_device_meta_data_resp resp{};
+    auto rc = decode_get_device_meta_data_resp(response, payloadLen, &resp);
+    EXPECT_EQ(rc, 0);
+    EXPECT_EQ(resp.completion_code, PLDM_SUCCESS);
+    EXPECT_EQ(resp.next_data_transfer_handle, nextHandle);
+    EXPECT_EQ(resp.transfer_flag, transferFlag);
+    EXPECT_EQ(resp.portion_of_meta_data.length, metadata.size());
+    EXPECT_EQ(0, memcmp(resp.portion_of_meta_data.ptr, metadata.data(),
+                        metadata.size()));
+
+    // Non-success completion code: leaves other fields untouched, transport
+    // rc still 0 so the caller can inspect completion_code directly.
+    response->payload[0] = PLDM_ERROR;
+    resp = pldm_get_device_meta_data_resp{};
+    rc = decode_get_device_meta_data_resp(response, payloadLen, &resp);
+    EXPECT_EQ(rc, 0);
+    EXPECT_EQ(resp.completion_code, PLDM_ERROR);
+}
+#endif
+
+#if HAVE_LIBPLDM_API_TESTING
+TEST(GetDeviceMetaData, errorPathDecodeResponse)
+{
+    constexpr size_t payloadLen =
+        PLDM_GET_DEVICE_META_DATA_RESP_FIXED_BYTES + 4;
+    std::array<uint8_t, hdrSize + payloadLen> responseMsg{};
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+    auto* response = reinterpret_cast<pldm_msg*>(responseMsg.data());
+    response->payload[0] = PLDM_SUCCESS;
+    response->payload[5] = PLDM_START;
+
+    pldm_get_device_meta_data_resp resp{};
+
+    EXPECT_EQ(decode_get_device_meta_data_resp(nullptr, payloadLen, &resp),
+              -EINVAL);
+    EXPECT_EQ(decode_get_device_meta_data_resp(response, payloadLen, nullptr),
+              -EINVAL);
+
+    // Invalid transfer_flag rejected with -EBADMSG.
+    response->payload[5] = 0xFF;
+    EXPECT_EQ(decode_get_device_meta_data_resp(response, payloadLen, &resp),
+              -EBADMSG);
+
+    // Undersized payload (cc parsed, but FIXED_BYTES check fails).
+    response->payload[5] = PLDM_START;
+    EXPECT_EQ(
+        decode_get_device_meta_data_resp(
+            response, PLDM_GET_DEVICE_META_DATA_RESP_FIXED_BYTES - 1, &resp),
+        -EOVERFLOW);
+}
+#endif

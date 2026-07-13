@@ -3138,6 +3138,66 @@ int encode_get_meta_data_resp(
 int decode_get_meta_data_req(const struct pldm_msg *msg, size_t payload_length,
 			     struct pldm_get_fd_data_req *req);
 
+/* GetDeviceMetaData
+ *
+ * UA -> FD command: the Update Agent asks the FD for its stored device
+ * metadata. The wire format mirrors GetPackageData/GetMetaData but the
+ * direction is flipped; these helpers are the requester (UA) side.
+ */
+
+#define PLDM_GET_DEVICE_META_DATA_REQ_BYTES	   5
+#define PLDM_GET_DEVICE_META_DATA_RESP_FIXED_BYTES 6
+
+/** @struct pldm_get_device_meta_data_resp
+ *
+ *  Decoded GetDeviceMetaData response. On a non-SUCCESS completion_code
+ *  only that member is populated. On SUCCESS portion_of_meta_data is a
+ *  span pointing into the message buffer.
+ */
+struct pldm_get_device_meta_data_resp {
+	uint8_t completion_code;
+	uint32_t next_data_transfer_handle;
+	uint8_t transfer_flag;
+	struct variable_field portion_of_meta_data;
+};
+
+/** @brief Encode GetDeviceMetaData request.
+ *
+ *  @param[in]  instance_id             - Message's instance id.
+ *  @param[in]  data_transfer_handle    - Handle (host-endian).
+ *  @param[in]  transfer_operation_flag - PLDM_GET_FIRSTPART or
+ *                                        PLDM_GET_NEXTPART.
+ *  @param[out] msg                     - Request message.
+ *  @param[in,out] payload_length       - On entry the caller-allocated buffer
+ *                                        size; must be >=
+ *                                        PLDM_GET_DEVICE_META_DATA_REQ_BYTES.
+ *                                        On exit the encoded message length.
+ *  @return 0 on success, a negative errno value on failure.
+ */
+int encode_get_device_meta_data_req(uint8_t instance_id,
+				    uint32_t data_transfer_handle,
+				    uint8_t transfer_operation_flag,
+				    struct pldm_msg *msg,
+				    size_t *payload_length);
+
+/** @brief Decode GetDeviceMetaData response.
+ *
+ *  On a non-SUCCESS completion code only resp->completion_code is
+ *  populated, the remaining members are left untouched, and the function
+ *  still returns 0 (transport-level success). On SUCCESS the
+ *  variable-length metadata blob is exposed as a span pointing into @p
+ *  msg's buffer; the caller must copy it if it needs to outlive @p msg.
+ *
+ *  @param[in]  msg            - Response message.
+ *  @param[in]  payload_length - Length of response payload.
+ *  @param[out] resp           - Decoded response. Output member values are
+ *                               host-endian.
+ *  @return 0 on success, a negative errno value on failure.
+ */
+int decode_get_device_meta_data_resp(
+	const struct pldm_msg *msg, size_t payload_length,
+	struct pldm_get_device_meta_data_resp *resp);
+
 #ifdef __cplusplus
 }
 #endif
