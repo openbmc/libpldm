@@ -3775,3 +3775,157 @@ int decode_pldm_package_component_image_information_from_iter(
 
 	return 0;
 }
+
+static int encode_fd_data_resp_common(uint8_t instance_id, uint8_t command,
+				      uint8_t completion_code,
+				      uint32_t next_data_transfer_handle,
+				      uint8_t transfer_flag,
+				      const struct variable_field *data,
+				      struct pldm_msg *msg,
+				      size_t *payload_length)
+{
+	PLDM_MSGBUF_RW_DEFINE_P(buf);
+	int rc;
+
+	if (msg == NULL || payload_length == NULL) {
+		return -EINVAL;
+	}
+
+	/* An error response carries only the completion code (DSP0267
+	 * sections 12.2 and 12.10); emit it and stop so a spec-strict
+	 * requester does not read trailing fixed-header bytes it does not
+	 * expect.
+	 */
+	if (completion_code != PLDM_SUCCESS) {
+		rc = encode_pldm_header_only_errno(PLDM_RESPONSE, instance_id,
+						   PLDM_FWUP, command, msg);
+		if (rc) {
+			return rc;
+		}
+		rc = pldm_msgbuf_init_errno(buf, sizeof(completion_code),
+					    msg->payload, *payload_length);
+		if (rc) {
+			return rc;
+		}
+		pldm_msgbuf_insert(buf, completion_code);
+		return pldm_msgbuf_complete_used(buf, *payload_length,
+						 payload_length);
+	}
+
+	if (data == NULL) {
+		return -EINVAL;
+	}
+	if (data->length > 0 && data->ptr == NULL) {
+		return -EINVAL;
+	}
+	/* Reject an overflowing total size before any cast. Without this an
+	 * attacker-controlled data->length close to SIZE_MAX would underflow
+	 * the payload size check below and let the copy walk past the
+	 * caller's buffer.
+	 */
+	const size_t fixed_bytes = sizeof(completion_code) +
+				   sizeof(next_data_transfer_handle) +
+				   sizeof(transfer_flag);
+	if (data->length > SIZE_MAX - fixed_bytes) {
+		return -EOVERFLOW;
+	}
+	const size_t needed = fixed_bytes + data->length;
+	if (*payload_length < needed) {
+		return -EOVERFLOW;
+	}
+	if (!is_transfer_flag_valid(transfer_flag)) {
+		return -EINVAL;
+	}
+
+	rc = encode_pldm_header_only_errno(PLDM_RESPONSE, instance_id,
+					   PLDM_FWUP, command, msg);
+	if (rc) {
+		return rc;
+	}
+
+	rc = pldm_msgbuf_init_errno(buf, fixed_bytes, msg->payload,
+				    *payload_length);
+	if (rc) {
+		return rc;
+	}
+	pldm_msgbuf_insert(buf, completion_code);
+	pldm_msgbuf_insert(buf, next_data_transfer_handle);
+	pldm_msgbuf_insert(buf, transfer_flag);
+
+	if (data->length > 0) {
+		rc = pldm_msgbuf_insert_array_uint8(buf, data->length,
+						    data->ptr, data->length);
+		if (rc) {
+			return pldm_msgbuf_discard(buf, rc);
+		}
+	}
+
+	return pldm_msgbuf_complete_used(buf, *payload_length, payload_length);
+}
+
+static int decode_fd_data_req_common(const struct pldm_msg *msg,
+				     size_t payload_length,
+				     uint32_t *data_transfer_handle,
+				     uint8_t *transfer_operation_flag)
+{
+	PLDM_MSGBUF_RO_DEFINE_P(buf);
+	uint32_t handle = 0;
+	uint8_t flag = 0;
+	int rc;
+
+	if (msg == NULL) {
+		return -EINVAL;
+	}
+
+	rc = pldm_msgbuf_init_errno(buf, sizeof(handle) + sizeof(flag),
+				    msg->payload, payload_length);
+	if (rc) {
+		return rc;
+	}
+	pldm_msgbuf_extract(buf, handle);
+	pldm_msgbuf_extract(buf, flag);
+
+	rc = pldm_msgbuf_complete_consumed(buf);
+	if (rc) {
+		return rc;
+	}
+
+	/* Reject anything but PLDM_GET_FIRSTPART / PLDM_GET_NEXTPART here so
+	 * the caller doesn't have to repeat the check.
+	 */
+	if (!is_transfer_operation_flag_valid(flag)) {
+		return -EBADMSG;
+	}
+	*data_transfer_handle = handle;
+	*transfer_operation_flag = flag;
+	return 0;
+}
+
+LIBPLDM_ABI_TESTING
+int encode_get_package_data_resp(uint8_t instance_id,
+				 const struct pldm_get_package_data_resp *resp,
+				 const struct variable_field *data,
+				 struct pldm_msg *msg, size_t *payload_length)
+{
+	if (resp == NULL) {
+		return -EINVAL;
+	}
+	return encode_fd_data_resp_common(instance_id, PLDM_GET_PACKAGE_DATA,
+					  resp->completion_code,
+					  resp->next_data_transfer_handle,
+					  resp->transfer_flag, data, msg,
+					  payload_length);
+}
+
+LIBPLDM_ABI_TESTING
+int decode_get_package_data_req(const struct pldm_msg *msg,
+				size_t payload_length,
+				struct pldm_get_package_data_req *req)
+{
+	if (req == NULL) {
+		return -EINVAL;
+	}
+	return decode_fd_data_req_common(msg, payload_length,
+					 &req->data_transfer_handle,
+					 &req->transfer_operation_flag);
+}
