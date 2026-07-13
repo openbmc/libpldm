@@ -1662,6 +1662,134 @@ int decode_request_downstream_device_update_resp(
 	const struct pldm_msg *msg, size_t payload_length,
 	struct pldm_request_downstream_device_update_resp *resp_data);
 
+/* GetPackageData
+ *
+ * The FD requests the next chunk of the package data that the UA obtained
+ * from the firmware update package; the response carries the next-handle
+ * and transfer-flag plus the variable-length payload.
+ */
+
+#define PLDM_GET_PACKAGE_DATA_REQ_BYTES	       5
+#define PLDM_GET_PACKAGE_DATA_RESP_FIXED_BYTES 6
+
+/** @struct pldm_get_package_data_req
+ *
+ *  Decoded GetPackageData request.
+ */
+struct pldm_get_package_data_req {
+	uint32_t data_transfer_handle;
+	uint8_t transfer_operation_flag;
+};
+
+/** @struct pldm_get_package_data_resp
+ *
+ *  Fixed-length header of a GetPackageData response. The data portion is
+ *  passed separately as a variable_field by the caller.
+ */
+struct pldm_get_package_data_resp {
+	uint8_t completion_code;
+	uint32_t next_data_transfer_handle;
+	uint8_t transfer_flag;
+};
+
+/** @brief Encode GetPackageData response.
+ *
+ *  @param[in]  instance_id    - Message's instance id.
+ *  @param[in]  resp           - Fixed-length response header.
+ *  @param[in]  data           - Variable-length package data portion. May
+ *                               be empty (length 0); ptr must be non-NULL
+ *                               unless length is 0.
+ *  @param[out] msg            - Response message.
+ *  @param[in,out] payload_length - On entry the caller-allocated buffer size;
+ *                               must hold PLDM_GET_PACKAGE_DATA_RESP_FIXED_BYTES
+ *                               plus data->length. On exit the encoded message
+ *                               length.
+ *  @return 0 on success, a negative errno value on failure.
+ */
+int encode_get_package_data_resp(uint8_t instance_id,
+				 const struct pldm_get_package_data_resp *resp,
+				 const struct variable_field *data,
+				 struct pldm_msg *msg, size_t *payload_length);
+
+/** @brief Decode GetPackageData request.
+ *
+ *  @param[in]  msg            - Request message.
+ *  @param[in]  payload_length - Length of request payload.
+ *  @param[out] req            - Decoded request. transfer_operation_flag is
+ *                               validated to be PLDM_GET_FIRSTPART or
+ *                               PLDM_GET_NEXTPART.
+ *  @return 0 on success, a negative errno value on failure.
+ */
+int decode_get_package_data_req(const struct pldm_msg *msg,
+				size_t payload_length,
+				struct pldm_get_package_data_req *req);
+
+/* GetDeviceMetaData
+ *
+ * UA -> FD command: the Update Agent asks the FD for its stored device
+ * metadata. The wire format mirrors GetPackageData/GetMetaData but the
+ * direction is flipped; these helpers are the requester (UA) side.
+ */
+
+#define PLDM_GET_DEVICE_META_DATA_REQ_BYTES	   5
+#define PLDM_GET_DEVICE_META_DATA_RESP_FIXED_BYTES 6
+
+/** @struct pldm_get_device_meta_data_resp
+ *
+ *  Decoded GetDeviceMetaData response. On a non-SUCCESS completion_code
+ *  only that member is populated. On SUCCESS portion_of_meta_data is a
+ *  span pointing into the message buffer.
+ */
+struct pldm_get_device_meta_data_resp {
+	uint8_t completion_code;
+	uint32_t next_data_transfer_handle;
+	uint8_t transfer_flag;
+	struct variable_field portion_of_meta_data;
+};
+
+/** @struct pldm_get_device_meta_data_req
+ *
+ *  GetDeviceMetaData request.
+ */
+struct pldm_get_device_meta_data_req {
+	uint32_t data_transfer_handle;
+	uint8_t transfer_operation_flag;
+};
+
+/** @brief Encode GetDeviceMetaData request.
+ *
+ *  @param[in]  instance_id    - Message's instance id.
+ *  @param[in]  req            - Request to encode. transfer_operation_flag
+ *                               must be PLDM_GET_FIRSTPART or PLDM_GET_NEXTPART.
+ *  @param[out] msg            - Request message.
+ *  @param[in,out] payload_length - On entry the caller-allocated buffer size;
+ *                               must be >=
+ *                               PLDM_GET_DEVICE_META_DATA_REQ_BYTES.
+ *                               On exit the encoded message length.
+ *  @return 0 on success, a negative errno value on failure.
+ */
+int encode_get_device_meta_data_req(
+	uint8_t instance_id, const struct pldm_get_device_meta_data_req *req,
+	struct pldm_msg *msg, size_t *payload_length);
+
+/** @brief Decode GetDeviceMetaData response.
+ *
+ *  On a non-SUCCESS completion code only resp->completion_code is
+ *  populated, the remaining members are left untouched, and the function
+ *  still returns 0 (transport-level success). On SUCCESS the
+ *  variable-length metadata blob is exposed as a span pointing into @p
+ *  msg's buffer; the caller must copy it if it needs to outlive @p msg.
+ *
+ *  @param[in]  msg            - Response message.
+ *  @param[in]  payload_length - Length of response payload.
+ *  @param[out] resp           - Decoded response. Output member values are
+ *                               host-endian.
+ *  @return 0 on success, a negative errno value on failure.
+ */
+int decode_get_device_meta_data_resp(
+	const struct pldm_msg *msg, size_t payload_length,
+	struct pldm_get_device_meta_data_resp *resp);
+
 /** @brief Create PLDM request message for PassComponentTable
  *
  *  @param[in] instance_id - Message's instance id
@@ -1992,6 +2120,45 @@ int encode_apply_complete_req(uint8_t instance_id,
  */
 int encode_apply_complete_resp(uint8_t instance_id, uint8_t completion_code,
 			       struct pldm_msg *msg, size_t payload_length);
+
+/* GetMetaData
+ *
+ * Identical wire format to GetPackageData; only the PLDM command code
+ * differs. See encode_get_package_data_resp and decode_get_package_data_req.
+ */
+
+#define PLDM_GET_META_DATA_REQ_BYTES	    5
+#define PLDM_GET_META_DATA_RESP_FIXED_BYTES 6
+
+/** @struct pldm_get_meta_data_req
+ *
+ *  Decoded GetMetaData request.
+ */
+struct pldm_get_meta_data_req {
+	uint32_t data_transfer_handle;
+	uint8_t transfer_operation_flag;
+};
+
+/** @struct pldm_get_meta_data_resp
+ *
+ *  Fixed-length header of a GetMetaData response. The data portion is
+ *  passed separately as a variable_field by the caller.
+ */
+struct pldm_get_meta_data_resp {
+	uint8_t completion_code;
+	uint32_t next_data_transfer_handle;
+	uint8_t transfer_flag;
+};
+
+/** @brief Encode GetMetaData response. See encode_get_package_data_resp. */
+int encode_get_meta_data_resp(uint8_t instance_id,
+			      const struct pldm_get_meta_data_resp *resp,
+			      const struct variable_field *data,
+			      struct pldm_msg *msg, size_t *payload_length);
+
+/** @brief Decode GetMetaData request. See decode_get_package_data_req. */
+int decode_get_meta_data_req(const struct pldm_msg *msg, size_t payload_length,
+			     struct pldm_get_meta_data_req *req);
 
 /** @brief Create PLDM request message for ActivateFirmware
  *
