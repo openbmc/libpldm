@@ -1,0 +1,179 @@
+#include <libpldm/base.h>
+#include <libpldm/pldm_types.h>
+#include <libpldm/rde.h>
+
+#include <array>
+#include <cerrno>
+#include <cstring>
+#include <vector>
+
+#include <gtest/gtest.h>
+
+static constexpr auto hdrSize = sizeof(pldm_msg_hdr);
+
+#if HAVE_LIBPLDM_API_TESTING
+TEST(NegotiateRedfishParameters, encodeDecodeRequestRoundTrip)
+{
+    struct pldm_rde_negotiate_redfish_parameters_req req = {};
+    req.mc_concurrency_support = 3;
+    req.mc_feature_support.value = 0x00ab;
+
+    std::array<uint8_t,
+               hdrSize + PLDM_RDE_NEGOTIATE_REDFISH_PARAMETERS_REQ_BYTES>
+        reqMsg{};
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+    auto* msg = reinterpret_cast<pldm_msg*>(reqMsg.data());
+
+    ASSERT_EQ(
+        encode_pldm_rde_negotiate_redfish_parameters_req(
+            0, &req, msg, PLDM_RDE_NEGOTIATE_REDFISH_PARAMETERS_REQ_BYTES),
+        0);
+
+    struct pldm_rde_negotiate_redfish_parameters_req decoded = {};
+    ASSERT_EQ(
+        decode_pldm_rde_negotiate_redfish_parameters_req(
+            msg, PLDM_RDE_NEGOTIATE_REDFISH_PARAMETERS_REQ_BYTES, &decoded),
+        0);
+    EXPECT_EQ(decoded.mc_concurrency_support, req.mc_concurrency_support);
+    EXPECT_EQ(decoded.mc_feature_support.value, req.mc_feature_support.value);
+}
+#endif
+
+#if HAVE_LIBPLDM_API_TESTING
+TEST(NegotiateRedfishParameters, requestRejectsBadArgs)
+{
+    struct pldm_rde_negotiate_redfish_parameters_req req = {};
+    req.mc_concurrency_support = 0; // invalid: must be non-zero
+    pldm_msg msg{};
+
+    EXPECT_EQ(
+        encode_pldm_rde_negotiate_redfish_parameters_req(
+            0, &req, &msg, PLDM_RDE_NEGOTIATE_REDFISH_PARAMETERS_REQ_BYTES),
+        -EINVAL);
+    EXPECT_EQ(
+        encode_pldm_rde_negotiate_redfish_parameters_req(
+            0, nullptr, &msg, PLDM_RDE_NEGOTIATE_REDFISH_PARAMETERS_REQ_BYTES),
+        -EINVAL);
+
+    // A zero concurrency value on the wire is rejected on decode.
+    std::array<uint8_t,
+               hdrSize + PLDM_RDE_NEGOTIATE_REDFISH_PARAMETERS_REQ_BYTES>
+        reqMsg{};
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+    auto* wire = reinterpret_cast<pldm_msg*>(reqMsg.data());
+    struct pldm_rde_negotiate_redfish_parameters_req decoded = {};
+    EXPECT_EQ(
+        decode_pldm_rde_negotiate_redfish_parameters_req(
+            wire, PLDM_RDE_NEGOTIATE_REDFISH_PARAMETERS_REQ_BYTES, &decoded),
+        -EBADMSG);
+}
+#endif
+
+#if HAVE_LIBPLDM_API_TESTING
+TEST(NegotiateRedfishParameters, encodeDecodeResponseRoundTrip)
+{
+    const std::array<uint8_t, 4> providerName{'A', 'C', 'M', 'E'};
+
+    struct pldm_rde_negotiate_redfish_parameters_resp resp = {};
+    resp.completion_code = PLDM_SUCCESS;
+    resp.device_concurrency_support = 2;
+    resp.device_capabilities_flags.byte = 0x05;
+    resp.device_feature_support.value = 0x00c3;
+    resp.device_configuration_signature = 0xdeadbeef;
+    resp.provider_name_format = 1;
+    resp.provider_name.ptr = providerName.data();
+    resp.provider_name.length = providerName.size();
+
+    const size_t payloadLen =
+        PLDM_RDE_NEGOTIATE_REDFISH_PARAMETERS_RESP_MIN_BYTES +
+        providerName.size();
+    std::vector<uint8_t> respMsg(hdrSize + payloadLen, 0);
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+    auto* msg = reinterpret_cast<pldm_msg*>(respMsg.data());
+
+    ASSERT_EQ(encode_pldm_rde_negotiate_redfish_parameters_resp(0, &resp, msg,
+                                                                payloadLen),
+              0);
+
+    struct pldm_rde_negotiate_redfish_parameters_resp decoded = {};
+    ASSERT_EQ(decode_pldm_rde_negotiate_redfish_parameters_resp(msg, payloadLen,
+                                                                &decoded),
+              0);
+    EXPECT_EQ(decoded.completion_code, PLDM_SUCCESS);
+    EXPECT_EQ(decoded.device_concurrency_support,
+              resp.device_concurrency_support);
+    EXPECT_EQ(decoded.device_capabilities_flags.byte,
+              resp.device_capabilities_flags.byte);
+    EXPECT_EQ(decoded.device_feature_support.value,
+              resp.device_feature_support.value);
+    EXPECT_EQ(decoded.device_configuration_signature,
+              resp.device_configuration_signature);
+    EXPECT_EQ(decoded.provider_name_format, resp.provider_name_format);
+    ASSERT_EQ(decoded.provider_name.length, providerName.size());
+    EXPECT_EQ(0, memcmp(decoded.provider_name.ptr, providerName.data(),
+                        providerName.size()));
+}
+#endif
+
+#if HAVE_LIBPLDM_API_TESTING
+TEST(NegotiateRedfishParameters, responseErrorIsCompletionCodeOnly)
+{
+    struct pldm_rde_negotiate_redfish_parameters_resp resp = {};
+    resp.completion_code = PLDM_ERROR;
+    // device_concurrency_support left zero: an error response must not
+    // require it, since only the completion code is emitted.
+
+    std::array<uint8_t, hdrSize + 1> respMsg{};
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+    auto* msg = reinterpret_cast<pldm_msg*>(respMsg.data());
+
+    ASSERT_EQ(
+        encode_pldm_rde_negotiate_redfish_parameters_resp(0, &resp, msg, 1), 0);
+    EXPECT_EQ(msg->payload[0], PLDM_ERROR);
+
+    struct pldm_rde_negotiate_redfish_parameters_resp decoded = {};
+    ASSERT_EQ(
+        decode_pldm_rde_negotiate_redfish_parameters_resp(msg, 1, &decoded), 0);
+    EXPECT_EQ(decoded.completion_code, PLDM_ERROR);
+}
+#endif
+
+#if HAVE_LIBPLDM_API_TESTING
+TEST(NegotiateRedfishParameters, decodeResponseRejectsZeroConcurrency)
+{
+    // cc=SUCCESS, device_concurrency_support=0 (invalid), empty name.
+    std::array<uint8_t,
+               hdrSize + PLDM_RDE_NEGOTIATE_REDFISH_PARAMETERS_RESP_MIN_BYTES>
+        respMsg{};
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+    auto* msg = reinterpret_cast<pldm_msg*>(respMsg.data());
+    msg->payload[0] = PLDM_SUCCESS;
+    msg->payload[1] = 0; // device_concurrency_support
+
+    struct pldm_rde_negotiate_redfish_parameters_resp decoded = {};
+    EXPECT_EQ(decode_pldm_rde_negotiate_redfish_parameters_resp(
+                  msg, PLDM_RDE_NEGOTIATE_REDFISH_PARAMETERS_RESP_MIN_BYTES,
+                  &decoded),
+              -EBADMSG);
+}
+#endif
+
+#if HAVE_LIBPLDM_API_TESTING
+TEST(NegotiateRedfishParameters, responseRejectsNullAndOversizedName)
+{
+    struct pldm_rde_negotiate_redfish_parameters_resp resp = {};
+    resp.completion_code = PLDM_SUCCESS;
+    resp.device_concurrency_support = 1;
+    pldm_msg msg{};
+
+    EXPECT_EQ(
+        encode_pldm_rde_negotiate_redfish_parameters_resp(0, nullptr, &msg, 64),
+        -EINVAL);
+
+    // provider_name longer than a uint8 length field can express.
+    resp.provider_name.length = 256;
+    EXPECT_EQ(
+        encode_pldm_rde_negotiate_redfish_parameters_resp(0, &resp, &msg, 512),
+        -EINVAL);
+}
+#endif
