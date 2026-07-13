@@ -36,6 +36,10 @@ Change categories:
 - dsp: fru: additional bounds check for GetFRURecordByOption
 - dsp: fru: additional bounds check for GetFRURecordTable
 - update ABI dump for GCC16
+- dsp: platform: Stabilise `encode_pldm_platform_state_sensor_pdr()` and
+  `encode_pldm_platform_state_sensor_possible_states()`
+- dsp: platform: Stabilise `decode_pldm_platform_state_sensor_pdr()`
+- dsp: platform: Stabilise the State Sensor PDR possible_states iterators
 - doxygen: Enable warnings as errors
 
   Many header files were modified to fix issues identified in the documentation.
