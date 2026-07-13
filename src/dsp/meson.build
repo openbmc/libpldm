@@ -7,4 +7,5 @@ libpldm_sources += files(
     'fru.c',
     'pdr.c',
     'platform.c',
+    'rde.c',
 )
