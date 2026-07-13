@@ -7,6 +7,7 @@ tests += [
     'dsp/fru',
     'dsp/pdr',
     'dsp/platform',
+    'dsp/rde',
 ]
 
 test(
