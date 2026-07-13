@@ -22,6 +22,9 @@ Change categories:
 - libpldm++ support for fw update pkg v1.1.0
 - libpldm++ support for fw update pkg v1.2.0
 - libpldm++ support for fw update pkg v1.3.0
+- firmware_update: Add GetDeviceMetaData command
+  - Add `encode_get_device_meta_data_req()`
+  - Add `decode_get_device_meta_data_resp()`
 - firmware_update: Add GetMetaData command
   - Add `encode_get_meta_data_resp()`
   - Add `decode_get_meta_data_req()`
