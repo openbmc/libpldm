@@ -3929,3 +3929,31 @@ int decode_get_package_data_req(const struct pldm_msg *msg,
 					 &req->data_transfer_handle,
 					 &req->transfer_operation_flag);
 }
+
+LIBPLDM_ABI_TESTING
+int encode_get_meta_data_resp(uint8_t instance_id,
+			      const struct pldm_get_meta_data_resp *resp,
+			      const struct variable_field *data,
+			      struct pldm_msg *msg, size_t *payload_length)
+{
+	if (resp == NULL) {
+		return -EINVAL;
+	}
+	return encode_fd_data_resp_common(instance_id, PLDM_GET_META_DATA,
+					  resp->completion_code,
+					  resp->next_data_transfer_handle,
+					  resp->transfer_flag, data, msg,
+					  payload_length);
+}
+
+LIBPLDM_ABI_TESTING
+int decode_get_meta_data_req(const struct pldm_msg *msg, size_t payload_length,
+			     struct pldm_get_meta_data_req *req)
+{
+	if (req == NULL) {
+		return -EINVAL;
+	}
+	return decode_fd_data_req_common(msg, payload_length,
+					 &req->data_transfer_handle,
+					 &req->transfer_operation_flag);
+}
