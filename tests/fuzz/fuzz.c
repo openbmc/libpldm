@@ -323,7 +323,18 @@ static int fuzz_decode_get_meta_data_req(const struct pldm_msg* msg,
     return 0;
 }
 
+static int fuzz_decode_get_device_meta_data_resp(const struct pldm_msg* msg,
+                                                 size_t payload_length)
+{
+    struct pldm_get_device_meta_data_resp resp;
+
+    decode_get_device_meta_data_resp(msg, payload_length, &resp);
+
+    return 0;
+}
+
 static int (*const decode_pldm_msg_tests[])(const struct pldm_msg*, size_t) = {
+    fuzz_decode_get_device_meta_data_resp,
     fuzz_decode_get_meta_data_req,
     fuzz_decode_get_package_data_req,
     fuzz_decode_pldm_base_get_tid_resp,
@@ -558,8 +569,40 @@ static int fuzz_encode_get_meta_data_resp(struct pldm_msg* msg,
     return 0;
 }
 
+static int fuzz_encode_get_device_meta_data_req(struct pldm_msg* msg,
+                                                size_t payload_length,
+                                                const uint8_t* data,
+                                                size_t size)
+{
+    struct pldm_get_device_meta_data_req req;
+    PLDM_MSGBUF_RO_DEFINE_P(buf);
+    uint8_t instance_id;
+    int rc;
+
+    rc = pldm_msgbuf_init_errno(buf, 0, data, size);
+    if (rc)
+    {
+        return -1;
+    }
+
+    pldm_msgbuf_extract(buf, instance_id);
+    pldm_msgbuf_extract(buf, req.data_transfer_handle);
+    pldm_msgbuf_extract(buf, req.transfer_operation_flag);
+
+    rc = pldm_msgbuf_complete(buf);
+    if (rc)
+    {
+        return -1;
+    }
+
+    encode_get_device_meta_data_req(instance_id, &req, msg, &payload_length);
+
+    return 0;
+}
+
 static int (*const encode_pldm_msg_tests[])(struct pldm_msg*, size_t,
                                             const uint8_t*, size_t) = {
+    fuzz_encode_get_device_meta_data_req,
     fuzz_encode_get_meta_data_resp,
     fuzz_encode_get_package_data_resp,
     fuzz_encode_pldm_base_get_tid_resp,
