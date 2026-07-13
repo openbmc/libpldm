@@ -22,6 +22,11 @@ Change categories:
 - libpldm++ support for fw update pkg v1.1.0
 - libpldm++ support for fw update pkg v1.2.0
 - libpldm++ support for fw update pkg v1.3.0
+- rde: Add NegotiateMediumParameters command
+  - Add `encode_pldm_rde_negotiate_medium_parameters_req()`
+  - Add `decode_pldm_rde_negotiate_medium_parameters_req()`
+  - Add `encode_pldm_rde_negotiate_medium_parameters_resp()`
+  - Add `decode_pldm_rde_negotiate_medium_parameters_resp()`
 - rde: Add NegotiateRedfishParameters command
   - Add `encode_pldm_rde_negotiate_redfish_parameters_req()`
   - Add `decode_pldm_rde_negotiate_redfish_parameters_req()`
