@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "be2ce2d5_996df07a",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 20
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1002810
+      },
+      "writtenOn": "2026-07-13T09:06:09Z",
+      "side": 1,
+      "message": "Nit: this names only the outer macro, but the inner\nforeach_pldm_platform_state_sensor_pdr_states() is also new public API. The\nAdded section (e.g. the decode_.../struct entry right above, and the FQE entry\nunder v0.16.0) names every symbol it adds, so consider listing both:\n\n  - dsp: platform: Add `possible_states` iterator for the State Sensor PDR\n    - `foreach_pldm_platform_state_sensor_pdr_possible_states()`\n    - `foreach_pldm_platform_state_sensor_pdr_states()`",
+      "revId": "726fd196dd7195be74edc92f7b8e4df9e0b256a1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "05dafb9e_a1da3d26",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 20
+      },
+      "lineNbr": 3832,
+      "author": {
+        "id": 1002810
+      },
+      "writtenOn": "2026-07-13T09:06:09Z",
+      "side": 1,
+      "message": "Nit: the @code example passes `pdrData.size()` but the pointer arg is `pdr`.\nUse consistent names, e.g. `pdr` / `pdr.size()`.",
+      "revId": "726fd196dd7195be74edc92f7b8e4df9e0b256a1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "75a20a26_53ad59e9",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 20
+      },
+      "lineNbr": 4217,
+      "author": {
+        "id": 1002810
+      },
+      "writtenOn": "2026-07-13T09:06:09Z",
+      "side": 1,
+      "message": "Nit (not blocking): this extract already converts state_set_id from LE wire\nto host order, so it\u0027s a host-order value from here on.\n\nBecause of that, the le16toh() applied to states.state_set_id in the tests is\nredundant -- tests/unit/dsp/platform.cpp L7272, L7273, L7379, L7472. It\u0027s a\nno-op on little-endian (why CI passes) but would byte-swap and fail on a\nbig-endian host; those asserts could just be e.g.:\n\n    EXPECT_EQ(states.state_set_id, 42);\n\nThis mirrors the existing merged effecter tests, so possibly a repo-wide\ncleanup rather than a hold here -- could you confirm the intended convention?",
+      "revId": "726fd196dd7195be74edc92f7b8e4df9e0b256a1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
