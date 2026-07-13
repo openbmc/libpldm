@@ -183,3 +183,106 @@ TEST(NegotiateRedfishParameters, responseRejectsNullAndOversizedName)
               -EINVAL);
 }
 #endif
+
+#if HAVE_LIBPLDM_API_TESTING
+TEST(NegotiateMediumParameters, encodeDecodeRequestRoundTrip)
+{
+    struct pldm_rde_negotiate_medium_parameters_req req = {};
+    req.mc_maximum_transfer_chunk_size_bytes = 256;
+
+    std::array<uint8_t,
+               hdrSize + PLDM_RDE_NEGOTIATE_MEDIUM_PARAMETERS_REQ_BYTES>
+        reqMsg{};
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+    auto* msg = reinterpret_cast<pldm_msg*>(reqMsg.data());
+
+    size_t reqLen = PLDM_RDE_NEGOTIATE_MEDIUM_PARAMETERS_REQ_BYTES;
+    ASSERT_EQ(
+        encode_pldm_rde_negotiate_medium_parameters_req(0, &req, msg, &reqLen),
+        0);
+    EXPECT_EQ(reqLen, PLDM_RDE_NEGOTIATE_MEDIUM_PARAMETERS_REQ_BYTES);
+
+    struct pldm_rde_negotiate_medium_parameters_req decoded = {};
+    ASSERT_EQ(
+        decode_pldm_rde_negotiate_medium_parameters_req(
+            msg, PLDM_RDE_NEGOTIATE_MEDIUM_PARAMETERS_REQ_BYTES, &decoded),
+        0);
+    EXPECT_EQ(decoded.mc_maximum_transfer_chunk_size_bytes,
+              req.mc_maximum_transfer_chunk_size_bytes);
+}
+#endif
+
+#if HAVE_LIBPLDM_API_TESTING
+TEST(NegotiateMediumParameters, encodeDecodeResponseRoundTrip)
+{
+    struct pldm_rde_negotiate_medium_parameters_resp resp = {};
+    resp.completion_code = PLDM_SUCCESS;
+    resp.device_maximum_transfer_chunk_size_bytes = 512;
+
+    std::array<uint8_t,
+               hdrSize + PLDM_RDE_NEGOTIATE_MEDIUM_PARAMETERS_RESP_BYTES>
+        respMsg{};
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+    auto* msg = reinterpret_cast<pldm_msg*>(respMsg.data());
+
+    size_t respLen = PLDM_RDE_NEGOTIATE_MEDIUM_PARAMETERS_RESP_BYTES;
+    ASSERT_EQ(encode_pldm_rde_negotiate_medium_parameters_resp(0, &resp, msg,
+                                                               &respLen),
+              0);
+    EXPECT_EQ(respLen, PLDM_RDE_NEGOTIATE_MEDIUM_PARAMETERS_RESP_BYTES);
+
+    struct pldm_rde_negotiate_medium_parameters_resp decoded = {};
+    ASSERT_EQ(
+        decode_pldm_rde_negotiate_medium_parameters_resp(
+            msg, PLDM_RDE_NEGOTIATE_MEDIUM_PARAMETERS_RESP_BYTES, &decoded),
+        0);
+    EXPECT_EQ(decoded.completion_code, PLDM_SUCCESS);
+    EXPECT_EQ(decoded.device_maximum_transfer_chunk_size_bytes,
+              resp.device_maximum_transfer_chunk_size_bytes);
+}
+#endif
+
+#if HAVE_LIBPLDM_API_TESTING
+TEST(NegotiateMediumParameters, responseErrorIsCompletionCodeOnly)
+{
+    struct pldm_rde_negotiate_medium_parameters_resp resp = {};
+    resp.completion_code = PLDM_ERROR;
+    // device_maximum_transfer_chunk_size_bytes left zero: an error response
+    // must not require it, since only the completion code is emitted.
+
+    std::array<uint8_t, hdrSize + 1> respMsg{};
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+    auto* msg = reinterpret_cast<pldm_msg*>(respMsg.data());
+
+    size_t respLen = 1;
+    ASSERT_EQ(encode_pldm_rde_negotiate_medium_parameters_resp(0, &resp, msg,
+                                                               &respLen),
+              0);
+    EXPECT_EQ(respLen, sizeof(resp.completion_code));
+    EXPECT_EQ(msg->payload[0], PLDM_ERROR);
+
+    struct pldm_rde_negotiate_medium_parameters_resp decoded = {};
+    ASSERT_EQ(
+        decode_pldm_rde_negotiate_medium_parameters_resp(msg, 1, &decoded), 0);
+    EXPECT_EQ(decoded.completion_code, PLDM_ERROR);
+}
+#endif
+
+#if HAVE_LIBPLDM_API_TESTING
+TEST(NegotiateMediumParameters, requestRejectsBadArgs)
+{
+    struct pldm_rde_negotiate_medium_parameters_req req = {};
+    // invalid: below the 64-byte minimum transfer size.
+    req.mc_maximum_transfer_chunk_size_bytes =
+        PLDM_RDE_MIN_TRANSFER_SIZE_BYTES - 1;
+    pldm_msg msg{};
+
+    size_t reqLen = PLDM_RDE_NEGOTIATE_MEDIUM_PARAMETERS_REQ_BYTES;
+    EXPECT_EQ(
+        encode_pldm_rde_negotiate_medium_parameters_req(0, &req, &msg, &reqLen),
+        -EINVAL);
+    EXPECT_EQ(encode_pldm_rde_negotiate_medium_parameters_req(0, nullptr, &msg,
+                                                              &reqLen),
+              -EINVAL);
+}
+#endif
