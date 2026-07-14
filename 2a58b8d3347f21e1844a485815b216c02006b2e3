@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c4b908f6_f7a21f31",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 24
+      },
+      "lineNbr": 2364,
+      "author": {
+        "id": 1002885
+      },
+      "writtenOn": "2026-07-14T03:20:46Z",
+      "side": 1,
+      "message": "Thanks for the catching!\nI have removed the line in PS25.",
+      "parentUuid": "ba7fdbb9_cdd191fa",
+      "revId": "2a58b8d3347f21e1844a485815b216c02006b2e3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "155d00cb_e4a42d0e",
@@ -35,6 +53,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7d1adc32_6b593a79",
+        "filename": "src/dsp/pdr.c",
+        "patchSetId": 24
+      },
+      "lineNbr": 433,
+      "author": {
+        "id": 1002885
+      },
+      "writtenOn": "2026-07-14T03:20:46Z",
+      "side": 1,
+      "message": "Thanks for bringing this up here.\nI as well felt weird in this part during the implementation.\n\nHowever, this commit was intended to introduce the new decode function.\nAlso, aborting this behavior deeply affect the function consumer which needed this \"legacy\" implementation.\n\nI think we investigate this deeper and make some changes to this function in another patch if needed.",
+      "parentUuid": "155d00cb_e4a42d0e",
+      "revId": "2a58b8d3347f21e1844a485815b216c02006b2e3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8ec901b8_5ac6a410",
@@ -48,6 +84,24 @@
       "writtenOn": "2026-07-13T08:36:54Z",
       "side": 1,
       "message": "This function uses pldm_msgbuf_complete() (not _consumed), so it never returns -EBADMSG\nfor unconsumed bytes",
+      "revId": "2a58b8d3347f21e1844a485815b216c02006b2e3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d40012c6_96cc8a0b",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 24
+      },
+      "lineNbr": 1956,
+      "author": {
+        "id": 1002885
+      },
+      "writtenOn": "2026-07-14T03:20:46Z",
+      "side": 1,
+      "message": "Thanks for catching this.",
+      "parentUuid": "8ec901b8_5ac6a410",
       "revId": "2a58b8d3347f21e1844a485815b216c02006b2e3",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
