@@ -7080,7 +7080,6 @@ TEST(decodeRedfishActionPdr, GoodTest)
     EXPECT_EQ(PLDM_SUCCESS, rc);
 }
 
-#if HAVE_LIBPLDM_API_TESTING
 TEST(StateEffecterPDR, testExtractPossibleStates)
 {
     constexpr size_t pdrSize = sizeof(pldm_state_effecter_pdr) -
@@ -7158,9 +7157,7 @@ TEST(StateEffecterPDR, testExtractPossibleStates)
     EXPECT_EQ(bitLists[1][0], 0xAA);
     EXPECT_EQ(bitLists[1][1], 0x55);
 }
-#endif
 
-#if HAVE_LIBPLDM_API_TESTING
 TEST(StateEffecterPDR, testInvalidBufferTooSmall)
 {
     alignas(pldm_state_effecter_pdr) unsigned char
@@ -7178,9 +7175,7 @@ TEST(StateEffecterPDR, testInvalidBufferTooSmall)
 
     EXPECT_EQ(rc, -EOVERFLOW) << "Expected EOVERFLOW for small buffer";
 }
-#endif
 
-#if HAVE_LIBPLDM_API_TESTING
 TEST(StateEffecterPDR, testNullPointer)
 {
     int rc;
@@ -7194,9 +7189,7 @@ TEST(StateEffecterPDR, testNullPointer)
 
     EXPECT_EQ(rc, -EINVAL) << "Expected EINVAL for null pointer";
 }
-#endif
 
-#if HAVE_LIBPLDM_API_TESTING
 TEST(StateEffecterPDR, testZeroCount)
 {
     constexpr size_t pdrSize = sizeof(pldm_state_effecter_pdr);
@@ -7217,9 +7210,7 @@ TEST(StateEffecterPDR, testZeroCount)
     EXPECT_EQ(count, 0) << "Should not iterate when count is 0";
     EXPECT_EQ(rc, 0) << "Expected success (rc=0), got rc=" << rc;
 }
-#endif
 
-#if HAVE_LIBPLDM_API_TESTING
 TEST(StateEffecterPDR, testSingleEntry)
 {
     constexpr size_t pdrSize = sizeof(pldm_state_effecter_pdr) -
@@ -7278,9 +7269,7 @@ TEST(StateEffecterPDR, testSingleEntry)
     EXPECT_EQ(rc, 0);
     EXPECT_EQ(entryCount, 1);
 }
-#endif
 
-#if HAVE_LIBPLDM_API_TESTING
 TEST(StateEffecterPDR, testTruncatedEntry)
 {
     /* Entry claims size=5 but buffer only has room for 2 state bytes */
@@ -7315,9 +7304,7 @@ TEST(StateEffecterPDR, testTruncatedEntry)
 
     EXPECT_EQ(rc, -EOVERFLOW) << "Expected EOVERFLOW for truncated entry";
 }
-#endif
 
-#if HAVE_LIBPLDM_API_TESTING
 TEST(StateEffecterPDR, testZeroPossibleStatesSize)
 {
     constexpr size_t pdrSize =
@@ -7369,4 +7356,3 @@ TEST(StateEffecterPDR, testZeroPossibleStatesSize)
     EXPECT_EQ(rc, 0);
     EXPECT_EQ(entryCount, 1);
 }
-#endif

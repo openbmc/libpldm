@@ -2,7 +2,7 @@ $VAR1 = {
   'ABI_DUMPER_VERSION' => '1.4',
   'ABI_DUMP_VERSION' => '3.5',
   'Arch' => 'x86_64',
-  'GccVersion' => '15.2.0',
+  'GccVersion' => '14.2.0',
   'Headers' => {
     'firmware_update.hpp' => 1,
     'types.hpp' => 1
@@ -19,8 +19,8 @@ $VAR1 = {
     'std::__cxx11' => 1,
     'std::__detail' => 1,
     'std::__exception_ptr' => 1,
-    'std::__rb_tree' => 1,
-    'std::ranges' => 1
+    'std::__expected' => 1,
+    'std::__format' => 1
   },
   'Needed' => {
     'libc.so.6' => 1,
@@ -34,28 +34,28 @@ $VAR1 = {
     'types.cpp' => 1
   },
   'SymbolInfo' => {
-    '91047' => {
-      'Class' => '90977',
+    '98408' => {
+      'Class' => '98333',
       'Header' => 'firmware_update.hpp',
       'Line' => '209',
       'MnglName' => '_ZN4pldm9fw_update13PackageParser5parseERKSt4spanIKhLm18446744073709551615EENS0_10PackagePinE',
       'Param' => {
         '0' => {
           'name' => 'pkg',
-          'type' => '92868'
+          'type' => '100134'
         },
         '1' => {
           'name' => 'pin',
-          'type' => '89855'
+          'type' => '97186'
         }
       },
-      'Return' => '56372',
+      'Return' => '61222',
       'ShortName' => 'parse',
       'Source' => 'firmware_update.cpp',
       'SourceLine' => '104',
       'Static' => 1
     },
-    '94467' => {
+    '102048' => {
       'Destructor' => 1,
       'Header' => 'firmware_update.hpp',
       'Line' => '169',
@@ -63,13 +63,13 @@ $VAR1 = {
       'Param' => {
         '0' => {
           'name' => 'this',
-          'type' => '92693'
+          'type' => '99969'
         }
       }
     },
-    '136160' => {
+    '140220' => {
       'Artificial' => 1,
-      'Class' => '90814',
+      'Class' => '98165',
       'Constructor' => 1,
       'Header' => 'firmware_update.hpp',
       'InLine' => 1,
@@ -78,18 +78,18 @@ $VAR1 = {
       'Param' => {
         '0' => {
           'name' => 'this',
-          'type' => '92853'
+          'type' => '100119'
         },
         '1' => {
           'name' => 'p1',
-          'type' => '93677'
+          'type' => '100963'
         }
       },
       'ShortName' => 'PackageParserError'
     },
-    '136161' => {
+    '140221' => {
       'Artificial' => 1,
-      'Class' => '90814',
+      'Class' => '98165',
       'Constructor' => 1,
       'Header' => 'firmware_update.hpp',
       'InLine' => 1,
@@ -98,18 +98,18 @@ $VAR1 = {
       'Param' => {
         '0' => {
           'name' => 'this',
-          'type' => '92853'
+          'type' => '100119'
         },
         '1' => {
           'name' => 'p1',
-          'type' => '93677'
+          'type' => '100963'
         }
       },
       'ShortName' => 'PackageParserError'
     },
-    '161953' => {
+    '168680' => {
       'Artificial' => 1,
-      'Class' => '90814',
+      'Class' => '98165',
       'Destructor' => 1,
       'Header' => 'firmware_update.hpp',
       'InLine' => 1,
@@ -118,14 +118,14 @@ $VAR1 = {
       'Param' => {
         '0' => {
           'name' => 'this',
-          'type' => '92853'
+          'type' => '100119'
         }
       },
       'ShortName' => 'PackageParserError'
     },
-    '161954' => {
+    '168681' => {
       'Artificial' => 1,
-      'Class' => '90814',
+      'Class' => '98165',
       'Destructor' => 1,
       'Header' => 'firmware_update.hpp',
       'InLine' => 1,
@@ -134,13 +134,13 @@ $VAR1 = {
       'Param' => {
         '0' => {
           'name' => 'this',
-          'type' => '92853'
+          'type' => '100119'
         }
       },
       'ShortName' => 'PackageParserError'
     },
-    '327994' => {
-      'Class' => '90631',
+    '339233' => {
+      'Class' => '97977',
       'Destructor' => 1,
       'Header' => 'firmware_update.hpp',
       'Line' => '169',
@@ -148,16 +148,16 @@ $VAR1 = {
       'Param' => {
         '0' => {
           'name' => 'this',
-          'type' => '92693'
+          'type' => '99969'
         }
       },
       'ShortName' => 'Package',
       'Source' => 'types.cpp',
       'SourceLine' => '256'
     },
-    '328630' => {
+    '339869' => {
       'Artificial' => 1,
-      'Class' => '89710',
+      'Class' => '97056',
       'Constructor' => 1,
       'Header' => 'types.hpp',
       'InLine' => 1,
@@ -166,14 +166,14 @@ $VAR1 = {
       'Param' => {
         '0' => {
           'name' => 'this',
-          'type' => '328598'
+          'type' => '339837'
         }
       },
       'ShortName' => 'GrowableStruct'
     },
-    '328631' => {
+    '339870' => {
       'Artificial' => 1,
-      'Class' => '89710',
+      'Class' => '97056',
       'Constructor' => 1,
       'Header' => 'types.hpp',
       'InLine' => 1,
@@ -182,14 +182,14 @@ $VAR1 = {
       'Param' => {
         '0' => {
           'name' => 'this',
-          'type' => '328598'
+          'type' => '339837'
         }
       },
       'ShortName' => 'GrowableStruct'
     },
-    '341026' => {
+    '351747' => {
       'Artificial' => 1,
-      'Class' => '89625',
+      'Class' => '96971',
       'Constructor' => 1,
       'Header' => 'types.hpp',
       'InLine' => 1,
@@ -198,14 +198,14 @@ $VAR1 = {
       'Param' => {
         '0' => {
           'name' => 'this',
-          'type' => '340994'
+          'type' => '351715'
         }
       },
       'ShortName' => 'GrowableStruct'
     },
-    '341027' => {
+    '351748' => {
       'Artificial' => 1,
-      'Class' => '89625',
+      'Class' => '96971',
       'Constructor' => 1,
       'Header' => 'types.hpp',
       'InLine' => 1,
@@ -214,14 +214,14 @@ $VAR1 = {
       'Param' => {
         '0' => {
           'name' => 'this',
-          'type' => '340994'
+          'type' => '351715'
         }
       },
       'ShortName' => 'GrowableStruct'
     },
-    '344166' => {
+    '354754' => {
       'Artificial' => 1,
-      'Class' => '89540',
+      'Class' => '96886',
       'Constructor' => 1,
       'Header' => 'types.hpp',
       'InLine' => 1,
@@ -230,14 +230,14 @@ $VAR1 = {
       'Param' => {
         '0' => {
           'name' => 'this',
-          'type' => '344134'
+          'type' => '354722'
         }
       },
       'ShortName' => 'GrowableStruct'
     },
-    '344167' => {
+    '354755' => {
       'Artificial' => 1,
-      'Class' => '89540',
+      'Class' => '96886',
       'Constructor' => 1,
       'Header' => 'types.hpp',
       'InLine' => 1,
@@ -246,14 +246,14 @@ $VAR1 = {
       'Param' => {
         '0' => {
           'name' => 'this',
-          'type' => '344134'
+          'type' => '354722'
         }
       },
       'ShortName' => 'GrowableStruct'
     },
-    '348353' => {
+    '358802' => {
       'Artificial' => 1,
-      'Class' => '89455',
+      'Class' => '96801',
       'Constructor' => 1,
       'Header' => 'types.hpp',
       'InLine' => 1,
@@ -262,14 +262,14 @@ $VAR1 = {
       'Param' => {
         '0' => {
           'name' => 'this',
-          'type' => '348321'
+          'type' => '358770'
         }
       },
       'ShortName' => 'GrowableStruct'
     },
-    '348354' => {
+    '358803' => {
       'Artificial' => 1,
-      'Class' => '89455',
+      'Class' => '96801',
       'Constructor' => 1,
       'Header' => 'types.hpp',
       'InLine' => 1,
@@ -278,14 +278,14 @@ $VAR1 = {
       'Param' => {
         '0' => {
           'name' => 'this',
-          'type' => '348321'
+          'type' => '358770'
         }
       },
       'ShortName' => 'GrowableStruct'
     },
-    '379187' => {
+    '390819' => {
       'Artificial' => 1,
-      'Class' => '90814',
+      'Class' => '98165',
       'Destructor' => 1,
       'Header' => 'firmware_update.hpp',
       'InLine' => 1,
@@ -294,7 +294,7 @@ $VAR1 = {
       'Param' => {
         '0' => {
           'name' => 'this',
-          'type' => '92853'
+          'type' => '100119'
         }
       },
       'ShortName' => 'PackageParserError'
@@ -306,7 +306,7 @@ $VAR1 = {
       '_ZN4pldm9fw_update13PackageParser5parseERKSt4spanIKhLm18446744073709551615EENS0_10PackagePinE' => 1,
       '_ZN4pldm9fw_update7PackageD1Ev' => 1,
       '_ZN4pldm9fw_update7PackageD2Ev' => 1,
-      '_ZNKRSt8optionalINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEEdeEv' => 1,
+      '_ZNKSt19_Optional_base_implINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEESt14_Optional_baseIS5_Lb0ELb0EEE6_M_getEv' => 1,
       '_ZNKSt19bad_expected_accessIvE4whatEv' => 1,
       '_ZNKSt6vectorImSaImEE12_M_check_lenEmPKc' => 1,
       '_ZNKSt6vectorImSaImEE5emptyEv' => 1,
@@ -315,6 +315,8 @@ $VAR1 = {
       '_ZNRSt8expectedINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEES5_E5errorEv' => 1,
       '_ZNRSt8expectedINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEES5_E5valueEv' => 1,
       '_ZNRSt8expectedIvNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEE5errorEv' => 1,
+      '_ZNSt11__copy_moveILb0ELb1ESt26random_access_iterator_tagE8__copy_mIKhhEEPT0_PT_S7_S5_' => 1,
+      '_ZNSt11__copy_moveILb0ELb1ESt26random_access_iterator_tagE8__copy_mIKmmEEPT0_PT_S7_S5_' => 1,
       '_ZNSt12_Vector_baseIhSaIhEE11_M_allocateEm' => 1,
       '_ZNSt12_Vector_baseIhSaIhEE17_M_create_storageEm' => 1,
       '_ZNSt12_Vector_baseIhSaIhEE17_Vector_impl_data12_M_swap_dataERS2_' => 1,
@@ -325,6 +327,8 @@ $VAR1 = {
       '_ZNSt12_Vector_baseImSaImEED2Ev' => 1,
       '_ZNSt12_Vector_baseItSaItEED1Ev' => 1,
       '_ZNSt12_Vector_baseItSaItEED2Ev' => 1,
+      '_ZNSt14_Optional_baseINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEELb0ELb0EEC1ERKS6_' => 1,
+      '_ZNSt14_Optional_baseINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEELb0ELb0EEC2ERKS6_' => 1,
       '_ZNSt15__new_allocatorImE8allocateEmPKv' => 1,
       '_ZNSt15__new_allocatorItE8allocateEmPKv' => 1,
       '_ZNSt19bad_expected_accessINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEED0Ev' => 1,
@@ -334,31 +338,25 @@ $VAR1 = {
       '_ZNSt19bad_expected_accessIvED1Ev' => 1,
       '_ZNSt19bad_expected_accessIvED2Ev' => 1,
       '_ZNSt22_Optional_payload_baseINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEE8_M_resetEv' => 1,
-      '_ZNSt22_Optional_payload_baseINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEEC1EbRKS6_' => 1,
-      '_ZNSt22_Optional_payload_baseINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEEC2EbRKS6_' => 1,
       '_ZNSt6vectorIhSaIhEE14_M_move_assignEOS1_St17integral_constantIbLb1EE' => 1,
-      '_ZNSt6vectorIhSaIhEE21_M_range_initialize_nIPKhS4_EEvT_T0_m' => 1,
+      '_ZNSt6vectorIhSaIhEE19_M_range_initializeIPKhEEvT_S5_St20forward_iterator_tag' => 1,
       '_ZNSt6vectorIhSaIhEEC1ERKS1_' => 1,
       '_ZNSt6vectorIhSaIhEEC1IPKhvEET_S5_RKS0_' => 1,
       '_ZNSt6vectorIhSaIhEEC2ERKS1_' => 1,
       '_ZNSt6vectorIhSaIhEEC2IPKhvEET_S5_RKS0_' => 1,
-      '_ZNSt6vectorImSaImEE12_Guard_allocD1Ev' => 1,
-      '_ZNSt6vectorImSaImEE12_Guard_allocD2Ev' => 1,
       '_ZNSt6vectorImSaImEE12emplace_backIJRmEEES3_DpOT_' => 1,
       '_ZNSt6vectorImSaImEE17_M_realloc_appendIJRmEEEvDpOT_' => 1,
       '_ZNSt6vectorImSaImEE4backEv' => 1,
       '_ZNSt6vectorImSaImEEC1ERKS1_' => 1,
       '_ZNSt6vectorImSaImEEC2ERKS1_' => 1,
-      '_ZNSt6vectorItSaItEE12_Guard_allocD1Ev' => 1,
-      '_ZNSt6vectorItSaItEE12_Guard_allocD2Ev' => 1,
       '_ZNSt6vectorItSaItEE12emplace_backIJRKtEEERtDpOT_' => 1,
       '_ZNSt6vectorItSaItEE17_M_realloc_appendIJRKtEEEvDpOT_' => 1,
       '_ZNSt6vectorItSaItEE4backEv' => 1,
       '_ZNSt6vectorItSaItEE7reserveEm' => 1,
       '_ZNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEE10_M_disposeEv' => 1,
       '_ZNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEE12_M_constructEmc' => 1,
-      '_ZNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEE12_M_constructILb1EEEvPKcm' => 1,
       '_ZNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEE12_M_constructIPKcEEvT_S8_St20forward_iterator_tag' => 1,
+      '_ZNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEE12_M_constructIPcEEvT_S7_St20forward_iterator_tag' => 1,
       '_ZNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEE20resize_and_overwriteIRZNS_9to_stringEiEUlPcmE_EEvmT_' => 1,
       '_ZNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEE20resize_and_overwriteIRZNS_9to_stringEmEUlPcmE_EEvmT_' => 1,
       '_ZNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEE6appendEPKc' => 1,
@@ -370,8 +368,10 @@ $VAR1 = {
       '_ZNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEE9_M_mutateEmmPKcm' => 1,
       '_ZNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEE9_S_assignEPcmc' => 1,
       '_ZNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEC1EOS4_' => 1,
+      '_ZNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEC1ERKS4_' => 1,
       '_ZNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEC1IS3_EEPKcRKS3_' => 1,
       '_ZNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEC2EOS4_' => 1,
+      '_ZNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEC2ERKS4_' => 1,
       '_ZNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEC2IS3_EEPKcRKS3_' => 1,
       '_ZNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEixEm' => 1,
       '_ZNSt7__cxx119to_stringEi' => 1,
@@ -388,43 +388,51 @@ $VAR1 = {
       '_ZNSt8expectedINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEES5_ED1EvQoont27is_trivially_destructible_vIT_Ent27is_trivially_destructible_vIT0_E' => 1,
       '_ZNSt8expectedINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEES5_ED2Ev' => 1,
       '_ZNSt8expectedINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEES5_ED2EvQoont27is_trivially_destructible_vIT_Ent27is_trivially_destructible_vIT0_E' => 1,
+      '_ZSt11__equal_auxIN9__gnu_cxx17__normal_iteratorIPKhSt6vectorIhSaIhEEEES7_EbT_S8_T0_' => 1,
+      '_ZSt11__equal_auxIN9__gnu_cxx17__normal_iteratorIPKmSt6vectorImSaImEEEES7_EbT_S8_T0_' => 1,
+      '_ZSt13__copy_move_aILb0EN9__gnu_cxx17__normal_iteratorIPKhSt6vectorIhSaIhEEEEPhET1_T0_SA_S9_' => 1,
+      '_ZSt13__copy_move_aILb0EN9__gnu_cxx17__normal_iteratorIPKmSt6vectorImSaImEEEEPmET1_T0_SA_S9_' => 1,
       '_ZSt18uninitialized_copyIN9__gnu_cxx17__normal_iteratorIPKhSt6vectorIhSaIhEEEEPhET0_T_SA_S9_' => 1,
       '_ZSt18uninitialized_copyIN9__gnu_cxx17__normal_iteratorIPKmSt6vectorImSaImEEEEPmET0_T_SA_S9_' => 1,
-      '_ZSt5equalIN9__gnu_cxx17__normal_iteratorIPKhSt6vectorIhSaIhEEEES7_EbT_S8_T0_' => 1,
-      '_ZSt5equalIN9__gnu_cxx17__normal_iteratorIPKmSt6vectorImSaImEEEES7_EbT_S8_T0_' => 1,
+      '_ZSt4copyIN9__gnu_cxx17__normal_iteratorIPKhSt6vectorIhSaIhEEEEPhET0_T_SA_S9_' => 1,
+      '_ZSt4copyIN9__gnu_cxx17__normal_iteratorIPKmSt6vectorImSaImEEEEPmET0_T_SA_S9_' => 1,
       '_ZSteqIcSt11char_traitsIcESaIcEEbRKNSt7__cxx1112basic_stringIT_T0_T1_EESA_' => 1,
       '_ZSteqIhSaIhEEbRKSt6vectorIT_T0_ES6_' => 1,
       '_ZSteqImSaImEEbRKSt6vectorIT_T0_ES6_' => 1,
-      '_ZStneINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEES5_ENSt9enable_ifIX16is_convertible_vIDTnecl7declvalIRKT_EEcl7declvalIRKT0_EEEbEEbE4typeERKSt8optionalIS7_ERKSG_ISA_E' => 1,
+      '_ZStneINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEES5_ENSt9enable_ifIXsrSt14is_convertibleIDTnecl7declvalIRKT_EEcl7declvalIRKT0_EEEbE5valueEbE4typeERKSt8optionalIS8_ERKSI_ISB_E' => 1,
       '_ZTISt19bad_expected_accessINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEE' => -24,
       '_ZTISt19bad_expected_accessIvE' => -24,
       '_ZTSSt19bad_expected_accessINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEE' => -78,
       '_ZTSSt19bad_expected_accessIvE' => -27,
       '_ZTVSt19bad_expected_accessINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEE' => -40,
-      '_ZTVSt19bad_expected_accessIvE' => -40
+      '_ZTVSt19bad_expected_accessIvE' => -40,
+      '_ZZNSt6vectorImSaImEE17_M_realloc_appendIJRmEEEvDpOT_EN6_GuardD1Ev' => 1,
+      '_ZZNSt6vectorImSaImEE17_M_realloc_appendIJRmEEEvDpOT_EN6_GuardD2Ev' => 1,
+      '_ZZNSt6vectorItSaItEE17_M_realloc_appendIJRKtEEEvDpOT_EN6_GuardD1Ev' => 1,
+      '_ZZNSt6vectorItSaItEE17_M_realloc_appendIJRKtEEEvDpOT_EN6_GuardD2Ev' => 1
     }
   },
   'Target' => 'unix',
   'TypeInfo' => {
-    '282' => {
-      'BaseType' => '73248',
+    '315' => {
+      'BaseType' => '87846',
       'Header' => 'c++config.h',
-      'Line' => '338',
+      'Line' => '310',
       'Name' => 'std::size_t',
       'NameSpace' => 'std',
       'PrivateABI' => 1,
       'Size' => '8',
       'Type' => 'Typedef'
     },
-    '567' => {
+    '475' => {
       'Header' => 'span',
-      'Line' => '101',
+      'Line' => '84',
       'Memb' => {
         '0' => {
           'access' => 'private',
           'name' => '_M_extent_value',
           'offset' => '0',
-          'type' => '282'
+          'type' => '315'
         }
       },
       'Name' => 'std::__detail::__extent_storage<18446744073709551615ul>',
@@ -434,13 +442,13 @@ $VAR1 = {
       'TParam' => {
         '0' => {
           'key' => '_Extent',
-          'type' => '73248',
+          'type' => '87846',
           'val' => '18446744073709551615'
         }
       },
       'Type' => 'Class'
     },
-    '2242' => {
+    '3091' => {
       'Header' => 'new_allocator.h',
       'Line' => '63',
       'Name' => 'std::__new_allocator<char>',
@@ -450,19 +458,19 @@ $VAR1 = {
       'TParam' => {
         '0' => {
           'key' => '_Tp',
-          'type' => '81356'
+          'type' => '88221'
         }
       },
       'Type' => 'Class'
     },
-    '2486' => {
+    '3335' => {
       'Base' => {
-        '2242' => {
+        '3091' => {
           'pos' => '0'
         }
       },
       'Header' => 'allocator.h',
-      'Line' => '133',
+      'Line' => '128',
       'Name' => 'std::allocator<char>',
       'NameSpace' => 'std',
       'PrivateABI' => 1,
@@ -474,62 +482,62 @@ $VAR1 = {
       },
       'Type' => 'Class'
     },
-    '6004' => {
+    '6854' => {
       'Copied' => 1,
       'Header' => 'alloc_traits.h',
-      'Line' => '560',
+      'Line' => '461',
       'Name' => 'struct std::allocator_traits<std::allocator<char> >',
       'NameSpace' => 'std',
       'PrivateABI' => 1,
       'Size' => '1',
       'TParam' => {
         '0' => {
-          'type' => '2486'
+          'type' => '3335'
         }
       },
       'Type' => 'Struct'
     },
-    '6018' => {
-      'BaseType' => '82680',
+    '6868' => {
+      'BaseType' => '89524',
       'Header' => 'alloc_traits.h',
-      'Line' => '569',
+      'Line' => '470',
       'Name' => 'std::allocator_traits<std::allocator<char> >::pointer',
       'NameSpace' => 'std::allocator_traits<std::allocator<char> >',
       'PrivateABI' => 1,
       'Size' => '8',
       'Type' => 'Typedef'
     },
-    '6081' => {
-      'BaseType' => '282',
+    '6931' => {
+      'BaseType' => '315',
       'Header' => 'alloc_traits.h',
-      'Line' => '584',
+      'Line' => '485',
       'Name' => 'std::allocator_traits<std::allocator<char> >::size_type',
       'NameSpace' => 'std::allocator_traits<std::allocator<char> >',
       'PrivateABI' => 1,
       'Size' => '8',
       'Type' => 'Typedef'
     },
-    '6272' => {
+    '7122' => {
       'Header' => 'basic_string.h',
-      'Line' => '94',
+      'Line' => '86',
       'Memb' => {
         '0' => {
           'access' => 'private',
           'name' => '_M_dataplus',
           'offset' => '0',
-          'type' => '6285'
+          'type' => '7135'
         },
         '1' => {
           'access' => 'private',
           'name' => '_M_string_length',
           'offset' => '8',
-          'type' => '6480'
+          'type' => '7335'
         },
         '2' => {
           'access' => 'private',
           'name' => 'unnamed0',
           'offset' => '22',
-          'type' => '6445'
+          'type' => '7300'
         }
       },
       'Name' => 'std::__cxx11::basic_string<char>',
@@ -539,24 +547,24 @@ $VAR1 = {
       'TParam' => {
         '0' => {
           'key' => '_CharT',
-          'type' => '81356'
+          'type' => '88221'
         }
       },
       'Type' => 'Class'
     },
-    '6285' => {
+    '7135' => {
       'Base' => {
-        '2486' => {
+        '3335' => {
           'pos' => '0'
         }
       },
       'Header' => 'basic_string.h',
-      'Line' => '197',
+      'Line' => '186',
       'Memb' => {
         '0' => {
           'name' => '_M_p',
           'offset' => '0',
-          'type' => '6410'
+          'type' => '7265'
         }
       },
       'Name' => 'struct std::__cxx11::basic_string<char>::_Alloc_hider',
@@ -566,56 +574,56 @@ $VAR1 = {
       'Size' => '8',
       'Type' => 'Struct'
     },
-    '6410' => {
-      'BaseType' => '73714',
+    '7265' => {
+      'BaseType' => '79519',
       'Header' => 'basic_string.h',
-      'Line' => '119',
+      'Line' => '108',
       'Name' => 'std::__cxx11::basic_string<char>::pointer',
       'NameSpace' => 'std::__cxx11::basic_string<char>',
       'PrivateABI' => 1,
       'Size' => '8',
       'Type' => 'Typedef'
     },
-    '6445' => {
+    '7300' => {
       'Header' => 'basic_string.h',
-      'Line' => '221',
+      'Line' => '210',
       'Memb' => {
         '0' => {
           'name' => '_M_local_buf',
           'offset' => '0',
-          'type' => '86692'
+          'type' => '93618'
         },
         '1' => {
           'name' => '_M_allocated_capacity',
           'offset' => '0',
-          'type' => '6480'
+          'type' => '7335'
         }
       },
-      'Name' => 'std::__cxx11::basic_string<char>::anon-union-basic_string.h-221',
+      'Name' => 'std::__cxx11::basic_string<char>::anon-union-basic_string.h-210',
       'NameSpace' => 'std::__cxx11::basic_string<char>',
       'Private' => 1,
       'PrivateABI' => 1,
       'Size' => '16',
       'Type' => 'Union'
     },
-    '6480' => {
-      'BaseType' => '73738',
+    '7335' => {
+      'BaseType' => '79543',
       'Header' => 'basic_string.h',
-      'Line' => '115',
+      'Line' => '104',
       'Name' => 'std::__cxx11::basic_string<char>::size_type',
       'NameSpace' => 'std::__cxx11::basic_string<char>',
       'PrivateABI' => 1,
       'Size' => '8',
       'Type' => 'Typedef'
     },
-    '14467' => {
+    '15410' => {
       'Header' => 'bitset',
-      'Line' => '409',
+      'Line' => '401',
       'Memb' => {
         '0' => {
           'name' => '_M_w',
           'offset' => '0',
-          'type' => '14481'
+          'type' => '15424'
         }
       },
       'Name' => 'struct std::_Base_bitset<1ul>',
@@ -625,25 +633,25 @@ $VAR1 = {
       'TParam' => {
         '0' => {
           'key' => '_Nw',
-          'type' => '73248',
+          'type' => '87846',
           'val' => '1'
         }
       },
       'Type' => 'Struct'
     },
-    '14481' => {
-      'BaseType' => '73248',
+    '15424' => {
+      'BaseType' => '87846',
       'Header' => 'bitset',
-      'Line' => '411',
+      'Line' => '403',
       'Name' => 'std::_Base_bitset<1ul>::_WordT',
       'NameSpace' => 'std::_Base_bitset<1ul>',
       'PrivateABI' => 1,
       'Size' => '8',
       'Type' => 'Typedef'
     },
-    '15563' => {
+    '16506' => {
       'Header' => 'stl_tree.h',
-      'Line' => '105',
+      'Line' => '95',
       'Memb' => {
         '0' => {
           'name' => '_S_red',
@@ -660,30 +668,30 @@ $VAR1 = {
       'Size' => '4',
       'Type' => 'Enum'
     },
-    '15593' => {
+    '16536' => {
       'Copied' => 1,
       'Header' => 'stl_tree.h',
-      'Line' => '107',
+      'Line' => '97',
       'Memb' => {
         '0' => {
           'name' => '_M_color',
           'offset' => '0',
-          'type' => '15563'
+          'type' => '16506'
         },
         '1' => {
           'name' => '_M_parent',
           'offset' => '8',
-          'type' => '15619'
+          'type' => '16562'
         },
         '2' => {
           'name' => '_M_left',
           'offset' => '22',
-          'type' => '15619'
+          'type' => '16562'
         },
         '3' => {
           'name' => '_M_right',
           'offset' => '36',
-          'type' => '15619'
+          'type' => '16562'
         }
       },
       'Name' => 'struct std::_Rb_tree_node_base',
@@ -692,29 +700,29 @@ $VAR1 = {
       'Size' => '32',
       'Type' => 'Struct'
     },
-    '15619' => {
-      'BaseType' => '88978',
+    '16562' => {
+      'BaseType' => '95903',
       'Header' => 'stl_tree.h',
-      'Line' => '109',
+      'Line' => '99',
       'Name' => 'std::_Rb_tree_node_base::_Base_ptr',
       'NameSpace' => 'std::_Rb_tree_node_base',
       'PrivateABI' => 1,
       'Size' => '8',
       'Type' => 'Typedef'
     },
-    '15755' => {
+    '16732' => {
       'Header' => 'stl_tree.h',
-      'Line' => '166',
+      'Line' => '164',
       'Memb' => {
         '0' => {
           'name' => '_M_header',
           'offset' => '0',
-          'type' => '15593'
+          'type' => '16536'
         },
         '1' => {
           'name' => '_M_node_count',
           'offset' => '50',
-          'type' => '282'
+          'type' => '315'
         }
       },
       'Name' => 'struct std::_Rb_tree_header',
@@ -723,35 +731,55 @@ $VAR1 = {
       'Size' => '40',
       'Type' => 'Struct'
     },
-    '16459' => {
-      'BaseType' => '6272',
+    '18154' => {
+      'BaseType' => '7122',
       'Header' => 'stringfwd.h',
-      'Line' => '79',
+      'Line' => '77',
       'Name' => 'std::string',
       'NameSpace' => 'std',
       'PrivateABI' => 1,
       'Size' => '32',
       'Type' => 'Typedef'
     },
-    '16471' => {
-      'BaseType' => '16459',
+    '18166' => {
+      'BaseType' => '18154',
       'Name' => 'std::string const',
       'Size' => '32',
       'Type' => 'Const'
     },
-    '16693' => {
+    '23530' => {
+      'Copied' => 1,
       'Header' => 'optional',
-      'Line' => '115',
+      'Line' => '443',
+      'Name' => 'std::_Optional_base_impl<std::__cxx11::basic_string<char>, std::_Optional_base<std::__cxx11::basic_string<char> > >',
+      'NameSpace' => 'std',
+      'PrivateABI' => 1,
+      'Size' => '1',
+      'TParam' => {
+        '0' => {
+          'key' => '_Tp',
+          'type' => '7122'
+        },
+        '1' => {
+          'key' => '_Dp',
+          'type' => '24790'
+        }
+      },
+      'Type' => 'Class'
+    },
+    '23720' => {
+      'Header' => 'optional',
+      'Line' => '112',
       'Memb' => {
         '0' => {
           'name' => '_M_payload',
           'offset' => '0',
-          'type' => '16715'
+          'type' => '23742'
         },
         '1' => {
           'name' => '_M_engaged',
           'offset' => '50',
-          'type' => '73226'
+          'type' => '79157'
         }
       },
       'Name' => 'struct std::_Optional_payload_base<std::__cxx11::basic_string<char> >',
@@ -761,33 +789,33 @@ $VAR1 = {
       'TParam' => {
         '0' => {
           'key' => '_Tp',
-          'type' => '6272'
+          'type' => '7122'
         }
       },
       'Type' => 'Struct'
     },
-    '16706' => {
+    '23733' => {
       'Header' => 'optional',
-      'Line' => '203',
+      'Line' => '200',
       'Name' => 'struct std::_Optional_payload_base<std::__cxx11::basic_string<char> >::_Empty_byte',
       'NameSpace' => 'std::_Optional_payload_base<std::__cxx11::basic_string<char> >',
       'PrivateABI' => 1,
       'Size' => '1',
       'Type' => 'Struct'
     },
-    '16715' => {
+    '23742' => {
       'Header' => 'optional',
-      'Line' => '206',
+      'Line' => '233',
       'Memb' => {
         '0' => {
           'name' => '_M_empty',
           'offset' => '0',
-          'type' => '16706'
+          'type' => '23733'
         },
         '1' => {
           'name' => '_M_value',
           'offset' => '0',
-          'type' => '6272'
+          'type' => '7122'
         }
       },
       'Name' => 'union std::_Optional_payload_base<std::__cxx11::basic_string<char> >::_Storage<std::__cxx11::basic_string<char> >',
@@ -797,19 +825,19 @@ $VAR1 = {
       'TParam' => {
         '0' => {
           'key' => '_Up',
-          'type' => '6272'
+          'type' => '7122'
         }
       },
       'Type' => 'Union'
     },
-    '17453' => {
+    '24326' => {
       'Base' => {
-        '16693' => {
+        '23720' => {
           'pos' => '0'
         }
       },
       'Header' => 'optional',
-      'Line' => '416',
+      'Line' => '392',
       'Name' => 'struct std::_Optional_payload<std::__cxx11::basic_string<char> >',
       'NameSpace' => 'std',
       'PrivateABI' => 1,
@@ -817,19 +845,24 @@ $VAR1 = {
       'TParam' => {
         '0' => {
           'key' => '_Tp',
-          'type' => '6272'
+          'type' => '7122'
         }
       },
       'Type' => 'Struct'
     },
-    '17905' => {
+    '24790' => {
+      'Base' => {
+        '23530' => {
+          'pos' => '0'
+        }
+      },
       'Header' => 'optional',
-      'Line' => '485',
+      'Line' => '508',
       'Memb' => {
         '0' => {
           'name' => '_M_payload',
           'offset' => '0',
-          'type' => '17453'
+          'type' => '24326'
         }
       },
       'Name' => 'struct std::_Optional_base<std::__cxx11::basic_string<char> >',
@@ -839,14 +872,14 @@ $VAR1 = {
       'TParam' => {
         '0' => {
           'key' => '_Tp',
-          'type' => '6272'
+          'type' => '7122'
         }
       },
       'Type' => 'Struct'
     },
-    '18261' => {
+    '25002' => {
       'Header' => 'enable_special_members.h',
-      'Line' => '89',
+      'Line' => '87',
       'Name' => 'struct std::_Enable_copy_move<true, true, true, true, std::optional<std::__cxx11::basic_string<char> > >',
       'NameSpace' => 'std',
       'PrivateABI' => 1,
@@ -854,66 +887,42 @@ $VAR1 = {
       'TParam' => {
         '0' => {
           'key' => '_Copy',
-          'type' => '73226',
+          'type' => '79157',
           'val' => '1'
         },
         '1' => {
           'key' => '_CopyAssignment',
-          'type' => '73226',
+          'type' => '79157',
           'val' => '1'
         },
         '2' => {
           'key' => '_Move',
-          'type' => '73226',
+          'type' => '79157',
           'val' => '1'
         },
         '3' => {
           'key' => '_MoveAssignment',
-          'type' => '73226',
+          'type' => '79157',
           'val' => '1'
         },
         '4' => {
           'key' => '_Tag',
-          'type' => '18352'
+          'type' => '25065'
         }
       },
       'Type' => 'Struct'
     },
-    '18324' => {
-      'Header' => 'type_traits',
-      'Line' => '1706',
-      'Name' => 'struct std::remove_cv<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >',
-      'NameSpace' => 'std',
-      'PrivateABI' => 1,
-      'Size' => '1',
-      'TParam' => {
-        '0' => {
-          'name' => 'std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >'
-        }
-      },
-      'Type' => 'Struct'
-    },
-    '18338' => {
-      'BaseType' => '6272',
-      'Header' => 'type_traits',
-      'Line' => '1707',
-      'Name' => 'std::remove_cv<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >::type',
-      'NameSpace' => 'std::remove_cv<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >',
-      'PrivateABI' => 1,
-      'Size' => '32',
-      'Type' => 'Typedef'
-    },
-    '18352' => {
+    '25065' => {
       'Base' => {
-        '17905' => {
+        '24790' => {
           'pos' => '0'
         },
-        '18261' => {
+        '25002' => {
           'pos' => '1'
         }
       },
       'Header' => 'optional',
-      'Line' => '778',
+      'Line' => '703',
       'Name' => 'std::optional<std::__cxx11::basic_string<char> >',
       'NameSpace' => 'std',
       'PrivateABI' => 1,
@@ -921,18 +930,18 @@ $VAR1 = {
       'TParam' => {
         '0' => {
           'key' => '_Tp',
-          'type' => '6272'
+          'type' => '7122'
         }
       },
       'Type' => 'Class'
     },
-    '18932' => {
-      'BaseType' => '18352',
+    '25627' => {
+      'BaseType' => '25065',
       'Name' => 'std::optional<std::__cxx11::basic_string<char> >const',
       'Size' => '40',
       'Type' => 'Const'
     },
-    '18937' => {
+    '25632' => {
       'Header' => 'new_allocator.h',
       'Line' => '63',
       'Name' => 'std::__new_allocator<unsigned char>',
@@ -942,19 +951,19 @@ $VAR1 = {
       'TParam' => {
         '0' => {
           'key' => '_Tp',
-          'type' => '73260'
+          'type' => '87822'
         }
       },
       'Type' => 'Class'
     },
-    '19181' => {
+    '25876' => {
       'Base' => {
-        '18937' => {
+        '25632' => {
           'pos' => '0'
         }
       },
       'Header' => 'allocator.h',
-      'Line' => '133',
+      'Line' => '128',
       'Name' => 'std::allocator<unsigned char>',
       'NameSpace' => 'std',
       'PrivateABI' => 1,
@@ -966,39 +975,39 @@ $VAR1 = {
       },
       'Type' => 'Class'
     },
-    '19396' => {
+    '26096' => {
       'Copied' => 1,
       'Header' => 'alloc_traits.h',
-      'Line' => '560',
+      'Line' => '461',
       'Name' => 'struct std::allocator_traits<std::allocator<unsigned char> >',
       'NameSpace' => 'std',
       'PrivateABI' => 1,
       'Size' => '1',
       'TParam' => {
         '0' => {
-          'type' => '19181'
+          'type' => '25876'
         }
       },
       'Type' => 'Struct'
     },
-    '19410' => {
-      'BaseType' => '91303',
+    '26110' => {
+      'BaseType' => '98654',
       'Header' => 'alloc_traits.h',
-      'Line' => '569',
+      'Line' => '470',
       'Name' => 'std::allocator_traits<std::allocator<unsigned char> >::pointer',
       'NameSpace' => 'std::allocator_traits<std::allocator<unsigned char> >',
       'PrivateABI' => 1,
       'Size' => '8',
       'Type' => 'Typedef'
     },
-    '19650' => {
+    '26350' => {
       'Header' => 'stl_vector.h',
-      'Line' => '91',
+      'Line' => '84',
       'Memb' => {
         '0' => {
           'name' => '_M_impl',
           'offset' => '0',
-          'type' => '19848'
+          'type' => '26548'
         }
       },
       'Name' => 'struct std::_Vector_base<unsigned char, std::allocator<unsigned char> >',
@@ -1008,33 +1017,33 @@ $VAR1 = {
       'TParam' => {
         '0' => {
           'key' => '_Tp',
-          'type' => '73260'
+          'type' => '87822'
         },
         '1' => {
           'key' => '_Alloc',
-          'type' => '19181'
+          'type' => '25876'
         }
       },
       'Type' => 'Struct'
     },
-    '19663' => {
+    '26363' => {
       'Header' => 'stl_vector.h',
-      'Line' => '98',
+      'Line' => '91',
       'Memb' => {
         '0' => {
           'name' => '_M_start',
           'offset' => '0',
-          'type' => '19836'
+          'type' => '26536'
         },
         '1' => {
           'name' => '_M_finish',
           'offset' => '8',
-          'type' => '19836'
+          'type' => '26536'
         },
         '2' => {
           'name' => '_M_end_of_storage',
           'offset' => '22',
-          'type' => '19836'
+          'type' => '26536'
         }
       },
       'Name' => 'struct std::_Vector_base<unsigned char, std::allocator<unsigned char> >::_Vector_impl_data',
@@ -1043,68 +1052,67 @@ $VAR1 = {
       'Size' => '24',
       'Type' => 'Struct'
     },
-    '19836' => {
-      'BaseType' => '74622',
+    '26536' => {
+      'BaseType' => '81566',
       'Header' => 'stl_vector.h',
-      'Line' => '96',
+      'Line' => '89',
       'Name' => 'std::_Vector_base<unsigned char, std::allocator<unsigned char> >::pointer',
       'NameSpace' => 'std::_Vector_base<unsigned char, std::allocator<unsigned char> >',
       'PrivateABI' => 1,
       'Size' => '8',
       'Type' => 'Typedef'
     },
-    '19848' => {
+    '26548' => {
       'Base' => {
-        '19181' => {
+        '25876' => {
           'pos' => '0'
         },
-        '19663' => {
+        '26363' => {
           'pos' => '1'
         }
       },
       'Header' => 'stl_vector.h',
-      'Line' => '139',
+      'Line' => '132',
       'Name' => 'struct std::_Vector_base<unsigned char, std::allocator<unsigned char> >::_Vector_impl',
       'NameSpace' => 'std::_Vector_base<unsigned char, std::allocator<unsigned char> >',
       'PrivateABI' => 1,
       'Size' => '24',
       'Type' => 'Struct'
     },
-    '20649' => {
+    '27359' => {
       'Base' => {
-        '19650' => {
+        '26350' => {
           'access' => 'protected',
           'pos' => '0'
         }
       },
       'Header' => 'stl_vector.h',
-      'Line' => '458',
+      'Line' => '428',
       'Name' => 'std::vector<unsigned char>',
       'NameSpace' => 'std',
       'PrivateABI' => 1,
       'Size' => '24',
       'TParam' => {
         '0' => {
-          'key' => '_Tp',
-          'type' => '73260'
+          'name' => 'unsigned char'
         }
       },
       'Type' => 'Class'
     },
-    '23872' => {
-      'BaseType' => '20649',
+    '30524' => {
+      'BaseType' => '27359',
       'Name' => 'std::vector<unsigned char>const',
       'Size' => '24',
       'Type' => 'Const'
     },
-    '24151' => {
+    '30803' => {
       'Base' => {
-        '14467' => {
+        '15410' => {
           'pos' => '0'
         }
       },
       'Header' => 'bitset',
-      'Line' => '812',
+      'Line' => '804',
       'Name' => 'std::bitset<16ul>',
       'NameSpace' => 'std',
       'PrivateABI' => 1,
@@ -1112,26 +1120,26 @@ $VAR1 = {
       'TParam' => {
         '0' => {
           'key' => '_Nb',
-          'type' => '73248',
+          'type' => '87846',
           'val' => '16'
         }
       },
       'Type' => 'Class'
     },
-    '25512' => {
-      'BaseType' => '24151',
+    '32164' => {
+      'BaseType' => '30803',
       'Name' => 'std::bitset<16ul>const',
       'Size' => '8',
       'Type' => 'Const'
     },
-    '25517' => {
+    '32169' => {
       'Base' => {
-        '14467' => {
+        '15410' => {
           'pos' => '0'
         }
       },
       'Header' => 'bitset',
-      'Line' => '812',
+      'Line' => '804',
       'Name' => 'std::bitset<32ul>',
       'NameSpace' => 'std',
       'PrivateABI' => 1,
@@ -1139,19 +1147,19 @@ $VAR1 = {
       'TParam' => {
         '0' => {
           'key' => '_Nb',
-          'type' => '73248',
+          'type' => '87846',
           'val' => '32'
         }
       },
       'Type' => 'Class'
     },
-    '26878' => {
-      'BaseType' => '25517',
+    '33530' => {
+      'BaseType' => '32169',
       'Name' => 'std::bitset<32ul>const',
       'Size' => '8',
       'Type' => 'Const'
     },
-    '26883' => {
+    '33535' => {
       'Header' => 'new_allocator.h',
       'Line' => '63',
       'Name' => 'std::__new_allocator<unsigned long>',
@@ -1161,19 +1169,19 @@ $VAR1 = {
       'TParam' => {
         '0' => {
           'key' => '_Tp',
-          'type' => '73248'
+          'type' => '87846'
         }
       },
       'Type' => 'Class'
     },
-    '27127' => {
+    '33779' => {
       'Base' => {
-        '26883' => {
+        '33535' => {
           'pos' => '0'
         }
       },
       'Header' => 'allocator.h',
-      'Line' => '133',
+      'Line' => '128',
       'Name' => 'std::allocator<unsigned long>',
       'NameSpace' => 'std',
       'PrivateABI' => 1,
@@ -1185,39 +1193,39 @@ $VAR1 = {
       },
       'Type' => 'Class'
     },
-    '27342' => {
+    '33999' => {
       'Copied' => 1,
       'Header' => 'alloc_traits.h',
-      'Line' => '560',
+      'Line' => '461',
       'Name' => 'struct std::allocator_traits<std::allocator<unsigned long> >',
       'NameSpace' => 'std',
       'PrivateABI' => 1,
       'Size' => '1',
       'TParam' => {
         '0' => {
-          'type' => '27127'
+          'type' => '33779'
         }
       },
       'Type' => 'Struct'
     },
-    '27356' => {
-      'BaseType' => '91643',
+    '34013' => {
+      'BaseType' => '98989',
       'Header' => 'alloc_traits.h',
-      'Line' => '569',
+      'Line' => '470',
       'Name' => 'std::allocator_traits<std::allocator<unsigned long> >::pointer',
       'NameSpace' => 'std::allocator_traits<std::allocator<unsigned long> >',
       'PrivateABI' => 1,
       'Size' => '8',
       'Type' => 'Typedef'
     },
-    '27648' => {
+    '34305' => {
       'Header' => 'stl_vector.h',
-      'Line' => '91',
+      'Line' => '84',
       'Memb' => {
         '0' => {
           'name' => '_M_impl',
           'offset' => '0',
-          'type' => '27846'
+          'type' => '34503'
         }
       },
       'Name' => 'struct std::_Vector_base<unsigned long, std::allocator<unsigned long> >',
@@ -1227,33 +1235,33 @@ $VAR1 = {
       'TParam' => {
         '0' => {
           'key' => '_Tp',
-          'type' => '73248'
+          'type' => '87846'
         },
         '1' => {
           'key' => '_Alloc',
-          'type' => '27127'
+          'type' => '33779'
         }
       },
       'Type' => 'Struct'
     },
-    '27661' => {
+    '34318' => {
       'Header' => 'stl_vector.h',
-      'Line' => '98',
+      'Line' => '91',
       'Memb' => {
         '0' => {
           'name' => '_M_start',
           'offset' => '0',
-          'type' => '27834'
+          'type' => '34491'
         },
         '1' => {
           'name' => '_M_finish',
           'offset' => '8',
-          'type' => '27834'
+          'type' => '34491'
         },
         '2' => {
           'name' => '_M_end_of_storage',
           'offset' => '22',
-          'type' => '27834'
+          'type' => '34491'
         }
       },
       'Name' => 'struct std::_Vector_base<unsigned long, std::allocator<unsigned long> >::_Vector_impl_data',
@@ -1262,61 +1270,60 @@ $VAR1 = {
       'Size' => '24',
       'Type' => 'Struct'
     },
-    '27834' => {
-      'BaseType' => '74914',
+    '34491' => {
+      'BaseType' => '81858',
       'Header' => 'stl_vector.h',
-      'Line' => '96',
+      'Line' => '89',
       'Name' => 'std::_Vector_base<unsigned long, std::allocator<unsigned long> >::pointer',
       'NameSpace' => 'std::_Vector_base<unsigned long, std::allocator<unsigned long> >',
       'PrivateABI' => 1,
       'Size' => '8',
       'Type' => 'Typedef'
     },
-    '27846' => {
+    '34503' => {
       'Base' => {
-        '27127' => {
+        '33779' => {
           'pos' => '0'
         },
-        '27661' => {
+        '34318' => {
           'pos' => '1'
         }
       },
       'Header' => 'stl_vector.h',
-      'Line' => '139',
+      'Line' => '132',
       'Name' => 'struct std::_Vector_base<unsigned long, std::allocator<unsigned long> >::_Vector_impl',
       'NameSpace' => 'std::_Vector_base<unsigned long, std::allocator<unsigned long> >',
       'PrivateABI' => 1,
       'Size' => '24',
       'Type' => 'Struct'
     },
-    '28647' => {
+    '35314' => {
       'Base' => {
-        '27648' => {
+        '34305' => {
           'access' => 'protected',
           'pos' => '0'
         }
       },
       'Header' => 'stl_vector.h',
-      'Line' => '458',
+      'Line' => '428',
       'Name' => 'std::vector<unsigned long>',
       'NameSpace' => 'std',
       'PrivateABI' => 1,
       'Size' => '24',
       'TParam' => {
         '0' => {
-          'key' => '_Tp',
-          'type' => '73248'
+          'name' => 'unsigned long'
         }
       },
       'Type' => 'Class'
     },
-    '32061' => {
-      'BaseType' => '28647',
+    '38472' => {
+      'BaseType' => '35314',
       'Name' => 'std::vector<unsigned long>const',
       'Size' => '24',
       'Type' => 'Const'
     },
-    '32098' => {
+    '38509' => {
       'Header' => 'new_allocator.h',
       'Line' => '63',
       'Name' => 'std::__new_allocator<std::pair<unsigned short const, std::unique_ptr<pldm::fw_update::DescriptorData, std::default_delete<pldm::fw_update::DescriptorData> > > >',
@@ -1326,29 +1333,29 @@ $VAR1 = {
       'TParam' => {
         '0' => {
           'key' => '_Tp',
-          'type' => '32342'
+          'type' => '38753'
         }
       },
       'Type' => 'Class'
     },
-    '32342' => {
+    '38753' => {
       'Base' => {
-        '67943' => {
+        '73059' => {
           'pos' => '0'
         }
       },
       'Header' => 'stl_pair.h',
-      'Line' => '302',
+      'Line' => '284',
       'Memb' => {
         '0' => {
           'name' => 'first',
           'offset' => '0',
-          'type' => '73279'
+          'type' => '87841'
         },
         '1' => {
           'name' => 'second',
           'offset' => '8',
-          'type' => '42714'
+          'type' => '48233'
         }
       },
       'Name' => 'struct std::pair<unsigned short const, std::unique_ptr<pldm::fw_update::DescriptorData, std::default_delete<pldm::fw_update::DescriptorData> > >',
@@ -1358,82 +1365,54 @@ $VAR1 = {
       'TParam' => {
         '0' => {
           'key' => '_T1',
-          'type' => '73279'
+          'type' => '87841'
         },
         '1' => {
           'key' => '_T2',
-          'type' => '42714'
+          'type' => '48233'
         }
       },
       'Type' => 'Struct'
     },
-    '32878' => {
+    '39294' => {
       'Base' => {
-        '32098' => {
+        '38509' => {
           'pos' => '0'
         }
       },
       'Header' => 'allocator.h',
-      'Line' => '133',
+      'Line' => '128',
       'Name' => 'std::allocator<std::pair<unsigned short const, std::unique_ptr<pldm::fw_update::DescriptorData, std::default_delete<pldm::fw_update::DescriptorData> > > >',
       'NameSpace' => 'std',
       'PrivateABI' => 1,
       'Size' => '1',
       'TParam' => {
         '0' => {
-          'type' => '32342'
+          'type' => '38753'
         }
       },
       'Type' => 'Class'
     },
-    '33525' => {
+    '39755' => {
       'Base' => {
-        '15593' => {
-          'pos' => '0'
-        }
-      },
-      'Copied' => 1,
-      'Header' => 'stl_tree.h',
-      'Line' => '214',
-      'Memb' => {
-        '0' => {
-          'name' => '_M_storage',
-          'offset' => '50',
-          'type' => '79998'
-        }
-      },
-      'Name' => 'struct std::_Rb_tree_node<std::pair<unsigned short const, std::unique_ptr<pldm::fw_update::DescriptorData, std::default_delete<pldm::fw_update::DescriptorData> > > >',
-      'NameSpace' => 'std',
-      'PrivateABI' => 1,
-      'Size' => '48',
-      'TParam' => {
-        '0' => {
-          'key' => '_Val',
-          'type' => '32342'
-        }
-      },
-      'Type' => 'Struct'
-    },
-    '34400' => {
-      'Base' => {
-        '34615' => {
+        '39975' => {
           'pos' => '0'
         }
       },
       'Header' => 'allocator.h',
-      'Line' => '133',
+      'Line' => '128',
       'Name' => 'std::allocator<std::_Rb_tree_node<std::pair<unsigned short const, std::unique_ptr<pldm::fw_update::DescriptorData, std::default_delete<pldm::fw_update::DescriptorData> > > > >',
       'NameSpace' => 'std',
       'PrivateABI' => 1,
       'Size' => '1',
       'TParam' => {
         '0' => {
-          'type' => '33525'
+          'type' => '40219'
         }
       },
       'Type' => 'Class'
     },
-    '34615' => {
+    '39975' => {
       'Header' => 'new_allocator.h',
       'Line' => '63',
       'Name' => 'std::__new_allocator<std::_Rb_tree_node<std::pair<unsigned short const, std::unique_ptr<pldm::fw_update::DescriptorData, std::default_delete<pldm::fw_update::DescriptorData> > > > >',
@@ -1443,14 +1422,42 @@ $VAR1 = {
       'TParam' => {
         '0' => {
           'key' => '_Tp',
-          'type' => '33525'
+          'type' => '40219'
         }
       },
       'Type' => 'Class'
     },
-    '34859' => {
+    '40219' => {
+      'Base' => {
+        '16536' => {
+          'pos' => '0'
+        }
+      },
+      'Copied' => 1,
+      'Header' => 'stl_tree.h',
+      'Line' => '212',
+      'Memb' => {
+        '0' => {
+          'name' => '_M_storage',
+          'offset' => '50',
+          'type' => '86736'
+        }
+      },
+      'Name' => 'struct std::_Rb_tree_node<std::pair<unsigned short const, std::unique_ptr<pldm::fw_update::DescriptorData, std::default_delete<pldm::fw_update::DescriptorData> > > >',
+      'NameSpace' => 'std',
+      'PrivateABI' => 1,
+      'Size' => '48',
+      'TParam' => {
+        '0' => {
+          'key' => '_Val',
+          'type' => '38753'
+        }
+      },
+      'Type' => 'Struct'
+    },
+    '40327' => {
       'Header' => 'stl_function.h',
-      'Line' => '134',
+      'Line' => '131',
       'Name' => 'struct std::binary_function<unsigned short, unsigned short, bool>',
       'NameSpace' => 'std',
       'PrivateABI' => 1,
@@ -1458,28 +1465,28 @@ $VAR1 = {
       'TParam' => {
         '0' => {
           'key' => '_Arg1',
-          'type' => '73272'
+          'type' => '87834'
         },
         '1' => {
           'key' => '_Arg2',
-          'type' => '73272'
+          'type' => '87834'
         },
         '2' => {
           'key' => '_Result',
-          'type' => '73226'
+          'type' => '79157'
         }
       },
       'Type' => 'Struct'
     },
-    '34900' => {
+    '40368' => {
       'Base' => {
-        '34859' => {
+        '40327' => {
           'pos' => '0'
         }
       },
       'Copied' => 1,
       'Header' => 'stl_function.h',
-      'Line' => '403',
+      'Line' => '400',
       'Name' => 'struct std::less<unsigned short>',
       'NameSpace' => 'std',
       'PrivateABI' => 1,
@@ -1487,19 +1494,19 @@ $VAR1 = {
       'TParam' => {
         '0' => {
           'key' => '_Tp',
-          'type' => '73272'
+          'type' => '87834'
         }
       },
       'Type' => 'Struct'
     },
-    '34976' => {
+    '40444' => {
       'Header' => 'stl_tree.h',
-      'Line' => '140',
+      'Line' => '138',
       'Memb' => {
         '0' => {
           'name' => '_M_key_compare',
           'offset' => '0',
-          'type' => '34900'
+          'type' => '40368'
         }
       },
       'Name' => 'struct std::_Rb_tree_key_compare<std::less<unsigned short> >',
@@ -1509,20 +1516,20 @@ $VAR1 = {
       'TParam' => {
         '0' => {
           'key' => '_Key_compare',
-          'type' => '34900'
+          'type' => '40368'
         }
       },
       'Type' => 'Struct'
     },
-    '35136' => {
+    '40604' => {
       'Header' => 'stl_tree.h',
-      'Line' => '1020',
+      'Line' => '423',
       'Memb' => {
         '0' => {
           'access' => 'protected',
           'name' => '_M_impl',
           'offset' => '0',
-          'type' => '35150'
+          'type' => '40618'
         }
       },
       'Name' => 'std::_Rb_tree<unsigned short, std::pair<unsigned short const, std::unique_ptr<pldm::fw_update::DescriptorData, std::default_delete<pldm::fw_update::DescriptorData> > >, std::_Select1st<std::pair<unsigned short const, std::unique_ptr<pldm::fw_update::DescriptorData, std::default_delete<pldm::fw_update::DescriptorData> > > >, std::less<unsigned short>, std::allocator<std::pair<unsigned short const, std::unique_ptr<pldm::fw_update::DescriptorData, std::default_delete<pldm::fw_update::DescriptorData> > > > >',
@@ -1532,41 +1539,41 @@ $VAR1 = {
       'TParam' => {
         '0' => {
           'key' => '_Key',
-          'type' => '73272'
+          'type' => '87834'
         },
         '1' => {
           'key' => '_Val',
-          'type' => '32342'
+          'type' => '38753'
         },
         '2' => {
           'key' => '_KeyOfValue',
-          'type' => '68936'
+          'type' => '74138'
         },
         '3' => {
           'key' => '_Compare',
-          'type' => '34900'
+          'type' => '40368'
         },
         '4' => {
           'key' => '_Alloc',
-          'type' => '32878'
+          'type' => '39294'
         }
       },
       'Type' => 'Class'
     },
-    '35150' => {
+    '40618' => {
       'Base' => {
-        '15755' => {
+        '16732' => {
           'pos' => '2'
         },
-        '34400' => {
+        '39755' => {
           'pos' => '0'
         },
-        '34976' => {
+        '40444' => {
           'pos' => '1'
         }
       },
       'Header' => 'stl_tree.h',
-      'Line' => '1303',
+      'Line' => '658',
       'Name' => 'struct std::_Rb_tree<unsigned short, std::pair<unsigned short const, std::unique_ptr<pldm::fw_update::DescriptorData, std::default_delete<pldm::fw_update::DescriptorData> > >, std::_Select1st<std::pair<unsigned short const, std::unique_ptr<pldm::fw_update::DescriptorData, std::default_delete<pldm::fw_update::DescriptorData> > > >, std::less<unsigned short>, std::allocator<std::pair<unsigned short const, std::unique_ptr<pldm::fw_update::DescriptorData, std::default_delete<pldm::fw_update::DescriptorData> > > > >::_Rb_tree_impl<std::less<unsigned short> >',
       'NameSpace' => 'std::_Rb_tree<unsigned short, std::pair<unsigned short const, std::unique_ptr<pldm::fw_update::DescriptorData, std::default_delete<pldm::fw_update::DescriptorData> > >, std::_Select1st<std::pair<unsigned short const, std::unique_ptr<pldm::fw_update::DescriptorData, std::default_delete<pldm::fw_update::DescriptorData> > > >, std::less<unsigned short>, std::allocator<std::pair<unsigned short const, std::unique_ptr<pldm::fw_update::DescriptorData, std::default_delete<pldm::fw_update::DescriptorData> > > > >',
       'PrivateABI' => 1,
@@ -1575,20 +1582,20 @@ $VAR1 = {
       'TParam' => {
         '0' => {
           'key' => '_Key_compare',
-          'type' => '34900'
+          'type' => '40368'
         }
       },
       'Type' => 'Struct'
     },
-    '40225' => {
+    '45739' => {
       'Header' => 'stl_map.h',
-      'Line' => '105',
+      'Line' => '102',
       'Memb' => {
         '0' => {
           'access' => 'private',
           'name' => '_M_t',
           'offset' => '0',
-          'type' => '40238'
+          'type' => '45752'
         }
       },
       'Name' => 'std::map<unsigned short, std::unique_ptr<pldm::fw_update::DescriptorData, std::default_delete<pldm::fw_update::DescriptorData> > >',
@@ -1598,19 +1605,19 @@ $VAR1 = {
       'TParam' => {
         '0' => {
           'key' => '_Key',
-          'type' => '73272'
+          'type' => '87834'
         },
         '1' => {
           'key' => '_Tp',
-          'type' => '42714'
+          'type' => '48233'
         }
       },
       'Type' => 'Class'
     },
-    '40238' => {
-      'BaseType' => '35136',
+    '45752' => {
+      'BaseType' => '40604',
       'Header' => 'stl_map.h',
-      'Line' => '158',
+      'Line' => '155',
       'Name' => 'std::map<unsigned short, std::unique_ptr<pldm::fw_update::DescriptorData, std::default_delete<pldm::fw_update::DescriptorData> > >::_Rep_type',
       'NameSpace' => 'std::map<unsigned short, std::unique_ptr<pldm::fw_update::DescriptorData, std::default_delete<pldm::fw_update::DescriptorData> > >',
       'Private' => 1,
@@ -1618,21 +1625,21 @@ $VAR1 = {
       'Size' => '48',
       'Type' => 'Typedef'
     },
-    '42687' => {
-      'BaseType' => '40225',
+    '48206' => {
+      'BaseType' => '45739',
       'Name' => 'std::map<unsigned short, std::unique_ptr<pldm::fw_update::DescriptorData, std::default_delete<pldm::fw_update::DescriptorData> > >const',
       'Size' => '48',
       'Type' => 'Const'
     },
-    '42714' => {
+    '48233' => {
       'Header' => 'unique_ptr.h',
-      'Line' => '270',
+      'Line' => '271',
       'Memb' => {
         '0' => {
           'access' => 'private',
           'name' => '_M_t',
           'offset' => '0',
-          'type' => '61769'
+          'type' => '66656'
         }
       },
       'Name' => 'std::unique_ptr<pldm::fw_update::DescriptorData, std::default_delete<pldm::fw_update::DescriptorData> >',
@@ -1642,16 +1649,16 @@ $VAR1 = {
       'TParam' => {
         '0' => {
           'key' => '_Tp',
-          'type' => '89879'
+          'type' => '97210'
         },
         '1' => {
           'key' => '_Dp',
-          'type' => '59605'
+          'type' => '64454'
         }
       },
       'Type' => 'Class'
     },
-    '43839' => {
+    '49363' => {
       'Header' => 'new_allocator.h',
       'Line' => '63',
       'Name' => 'std::__new_allocator<pldm::fw_update::FirmwareDeviceIDRecord>',
@@ -1661,63 +1668,63 @@ $VAR1 = {
       'TParam' => {
         '0' => {
           'key' => '_Tp',
-          'type' => '90365'
+          'type' => '97706'
         }
       },
       'Type' => 'Class'
     },
-    '44083' => {
+    '49607' => {
       'Base' => {
-        '43839' => {
+        '49363' => {
           'pos' => '0'
         }
       },
       'Header' => 'allocator.h',
-      'Line' => '133',
+      'Line' => '128',
       'Name' => 'std::allocator<pldm::fw_update::FirmwareDeviceIDRecord>',
       'NameSpace' => 'std',
       'PrivateABI' => 1,
       'Size' => '1',
       'TParam' => {
         '0' => {
-          'type' => '90365'
+          'type' => '97706'
         }
       },
       'Type' => 'Class'
     },
-    '44298' => {
+    '49827' => {
       'Copied' => 1,
       'Header' => 'alloc_traits.h',
-      'Line' => '560',
+      'Line' => '461',
       'Name' => 'struct std::allocator_traits<std::allocator<pldm::fw_update::FirmwareDeviceIDRecord> >',
       'NameSpace' => 'std',
       'PrivateABI' => 1,
       'Size' => '1',
       'TParam' => {
         '0' => {
-          'type' => '44083'
+          'type' => '49607'
         }
       },
       'Type' => 'Struct'
     },
-    '44312' => {
-      'BaseType' => '92228',
+    '49841' => {
+      'BaseType' => '99524',
       'Header' => 'alloc_traits.h',
-      'Line' => '569',
+      'Line' => '470',
       'Name' => 'std::allocator_traits<std::allocator<pldm::fw_update::FirmwareDeviceIDRecord> >::pointer',
       'NameSpace' => 'std::allocator_traits<std::allocator<pldm::fw_update::FirmwareDeviceIDRecord> >',
       'PrivateABI' => 1,
       'Size' => '8',
       'Type' => 'Typedef'
     },
-    '44604' => {
+    '50133' => {
       'Header' => 'stl_vector.h',
-      'Line' => '91',
+      'Line' => '84',
       'Memb' => {
         '0' => {
           'name' => '_M_impl',
           'offset' => '0',
-          'type' => '44802'
+          'type' => '50331'
         }
       },
       'Name' => 'struct std::_Vector_base<pldm::fw_update::FirmwareDeviceIDRecord, std::allocator<pldm::fw_update::FirmwareDeviceIDRecord> >',
@@ -1727,33 +1734,33 @@ $VAR1 = {
       'TParam' => {
         '0' => {
           'key' => '_Tp',
-          'type' => '90365'
+          'type' => '97706'
         },
         '1' => {
           'key' => '_Alloc',
-          'type' => '44083'
+          'type' => '49607'
         }
       },
       'Type' => 'Struct'
     },
-    '44617' => {
+    '50146' => {
       'Header' => 'stl_vector.h',
-      'Line' => '98',
+      'Line' => '91',
       'Memb' => {
         '0' => {
           'name' => '_M_start',
           'offset' => '0',
-          'type' => '44790'
+          'type' => '50319'
         },
         '1' => {
           'name' => '_M_finish',
           'offset' => '8',
-          'type' => '44790'
+          'type' => '50319'
         },
         '2' => {
           'name' => '_M_end_of_storage',
           'offset' => '22',
-          'type' => '44790'
+          'type' => '50319'
         }
       },
       'Name' => 'struct std::_Vector_base<pldm::fw_update::FirmwareDeviceIDRecord, std::allocator<pldm::fw_update::FirmwareDeviceIDRecord> >::_Vector_impl_data',
@@ -1762,61 +1769,60 @@ $VAR1 = {
       'Size' => '24',
       'Type' => 'Struct'
     },
-    '44790' => {
-      'BaseType' => '76775',
+    '50319' => {
+      'BaseType' => '83513',
       'Header' => 'stl_vector.h',
-      'Line' => '96',
+      'Line' => '89',
       'Name' => 'std::_Vector_base<pldm::fw_update::FirmwareDeviceIDRecord, std::allocator<pldm::fw_update::FirmwareDeviceIDRecord> >::pointer',
       'NameSpace' => 'std::_Vector_base<pldm::fw_update::FirmwareDeviceIDRecord, std::allocator<pldm::fw_update::FirmwareDeviceIDRecord> >',
       'PrivateABI' => 1,
       'Size' => '8',
       'Type' => 'Typedef'
     },
-    '44802' => {
+    '50331' => {
       'Base' => {
-        '44083' => {
+        '49607' => {
           'pos' => '0'
         },
-        '44617' => {
+        '50146' => {
           'pos' => '1'
         }
       },
       'Header' => 'stl_vector.h',
-      'Line' => '139',
+      'Line' => '132',
       'Name' => 'struct std::_Vector_base<pldm::fw_update::FirmwareDeviceIDRecord, std::allocator<pldm::fw_update::FirmwareDeviceIDRecord> >::_Vector_impl',
       'NameSpace' => 'std::_Vector_base<pldm::fw_update::FirmwareDeviceIDRecord, std::allocator<pldm::fw_update::FirmwareDeviceIDRecord> >',
       'PrivateABI' => 1,
       'Size' => '24',
       'Type' => 'Struct'
     },
-    '45603' => {
+    '51142' => {
       'Base' => {
-        '44604' => {
+        '50133' => {
           'access' => 'protected',
           'pos' => '0'
         }
       },
       'Header' => 'stl_vector.h',
-      'Line' => '458',
+      'Line' => '428',
       'Name' => 'std::vector<pldm::fw_update::FirmwareDeviceIDRecord>',
       'NameSpace' => 'std',
       'PrivateABI' => 1,
       'Size' => '24',
       'TParam' => {
         '0' => {
-          'key' => '_Tp',
-          'type' => '90365'
+          'type' => '97706'
         }
       },
       'Type' => 'Class'
     },
-    '49017' => {
-      'BaseType' => '45603',
+    '54300' => {
+      'BaseType' => '51142',
       'Name' => 'std::vector<pldm::fw_update::FirmwareDeviceIDRecord>const',
       'Size' => '24',
       'Type' => 'Const'
     },
-    '49054' => {
+    '54337' => {
       'Header' => 'new_allocator.h',
       'Line' => '63',
       'Name' => 'std::__new_allocator<pldm::fw_update::ComponentImageInfo>',
@@ -1826,63 +1832,63 @@ $VAR1 = {
       'TParam' => {
         '0' => {
           'key' => '_Tp',
-          'type' => '90093'
+          'type' => '97429'
         }
       },
       'Type' => 'Class'
     },
-    '49298' => {
+    '54581' => {
       'Base' => {
-        '49054' => {
+        '54337' => {
           'pos' => '0'
         }
       },
       'Header' => 'allocator.h',
-      'Line' => '133',
+      'Line' => '128',
       'Name' => 'std::allocator<pldm::fw_update::ComponentImageInfo>',
       'NameSpace' => 'std',
       'PrivateABI' => 1,
       'Size' => '1',
       'TParam' => {
         '0' => {
-          'type' => '90093'
+          'type' => '97429'
         }
       },
       'Type' => 'Class'
     },
-    '49513' => {
+    '54801' => {
       'Copied' => 1,
       'Header' => 'alloc_traits.h',
-      'Line' => '560',
+      'Line' => '461',
       'Name' => 'struct std::allocator_traits<std::allocator<pldm::fw_update::ComponentImageInfo> >',
       'NameSpace' => 'std',
       'PrivateABI' => 1,
       'Size' => '1',
       'TParam' => {
         '0' => {
-          'type' => '49298'
+          'type' => '54581'
         }
       },
       'Type' => 'Struct'
     },
-    '49527' => {
-      'BaseType' => '91563',
+    '54815' => {
+      'BaseType' => '98909',
       'Header' => 'alloc_traits.h',
-      'Line' => '569',
+      'Line' => '470',
       'Name' => 'std::allocator_traits<std::allocator<pldm::fw_update::ComponentImageInfo> >::pointer',
       'NameSpace' => 'std::allocator_traits<std::allocator<pldm::fw_update::ComponentImageInfo> >',
       'PrivateABI' => 1,
       'Size' => '8',
       'Type' => 'Typedef'
     },
-    '49819' => {
+    '55107' => {
       'Header' => 'stl_vector.h',
-      'Line' => '91',
+      'Line' => '84',
       'Memb' => {
         '0' => {
           'name' => '_M_impl',
           'offset' => '0',
-          'type' => '50017'
+          'type' => '55305'
         }
       },
       'Name' => 'struct std::_Vector_base<pldm::fw_update::ComponentImageInfo, std::allocator<pldm::fw_update::ComponentImageInfo> >',
@@ -1892,33 +1898,33 @@ $VAR1 = {
       'TParam' => {
         '0' => {
           'key' => '_Tp',
-          'type' => '90093'
+          'type' => '97429'
         },
         '1' => {
           'key' => '_Alloc',
-          'type' => '49298'
+          'type' => '54581'
         }
       },
       'Type' => 'Struct'
     },
-    '49832' => {
+    '55120' => {
       'Header' => 'stl_vector.h',
-      'Line' => '98',
+      'Line' => '91',
       'Memb' => {
         '0' => {
           'name' => '_M_start',
           'offset' => '0',
-          'type' => '50005'
+          'type' => '55293'
         },
         '1' => {
           'name' => '_M_finish',
           'offset' => '8',
-          'type' => '50005'
+          'type' => '55293'
         },
         '2' => {
           'name' => '_M_end_of_storage',
           'offset' => '22',
-          'type' => '50005'
+          'type' => '55293'
         }
       },
       'Name' => 'struct std::_Vector_base<pldm::fw_update::ComponentImageInfo, std::allocator<pldm::fw_update::ComponentImageInfo> >::_Vector_impl_data',
@@ -1927,73 +1933,92 @@ $VAR1 = {
       'Size' => '24',
       'Type' => 'Struct'
     },
-    '50005' => {
-      'BaseType' => '78201',
+    '55293' => {
+      'BaseType' => '84939',
       'Header' => 'stl_vector.h',
-      'Line' => '96',
+      'Line' => '89',
       'Name' => 'std::_Vector_base<pldm::fw_update::ComponentImageInfo, std::allocator<pldm::fw_update::ComponentImageInfo> >::pointer',
       'NameSpace' => 'std::_Vector_base<pldm::fw_update::ComponentImageInfo, std::allocator<pldm::fw_update::ComponentImageInfo> >',
       'PrivateABI' => 1,
       'Size' => '8',
       'Type' => 'Typedef'
     },
-    '50017' => {
+    '55305' => {
       'Base' => {
-        '49298' => {
+        '54581' => {
           'pos' => '0'
         },
-        '49832' => {
+        '55120' => {
           'pos' => '1'
         }
       },
       'Header' => 'stl_vector.h',
-      'Line' => '139',
+      'Line' => '132',
       'Name' => 'struct std::_Vector_base<pldm::fw_update::ComponentImageInfo, std::allocator<pldm::fw_update::ComponentImageInfo> >::_Vector_impl',
       'NameSpace' => 'std::_Vector_base<pldm::fw_update::ComponentImageInfo, std::allocator<pldm::fw_update::ComponentImageInfo> >',
       'PrivateABI' => 1,
       'Size' => '24',
       'Type' => 'Struct'
     },
-    '50818' => {
+    '56116' => {
       'Base' => {
-        '49819' => {
+        '55107' => {
           'access' => 'protected',
           'pos' => '0'
         }
       },
       'Header' => 'stl_vector.h',
-      'Line' => '458',
+      'Line' => '428',
       'Name' => 'std::vector<pldm::fw_update::ComponentImageInfo>',
       'NameSpace' => 'std',
       'PrivateABI' => 1,
       'Size' => '24',
       'TParam' => {
         '0' => {
-          'key' => '_Tp',
-          'type' => '90093'
+          'type' => '97429'
         }
       },
       'Type' => 'Class'
     },
-    '54232' => {
-      'BaseType' => '50818',
+    '59274' => {
+      'BaseType' => '56116',
       'Name' => 'std::vector<pldm::fw_update::ComponentImageInfo>const',
       'Size' => '24',
       'Type' => 'Const'
     },
-    '54269' => {
+    '59311' => {
+      'Copied' => 1,
       'Header' => 'optional',
-      'Line' => '115',
+      'Line' => '443',
+      'Name' => 'std::_Optional_base_impl<int, std::_Optional_base<int> >',
+      'NameSpace' => 'std',
+      'PrivateABI' => 1,
+      'Size' => '1',
+      'TParam' => {
+        '0' => {
+          'key' => '_Tp',
+          'type' => '87879'
+        },
+        '1' => {
+          'key' => '_Dp',
+          'type' => '60286'
+        }
+      },
+      'Type' => 'Class'
+    },
+    '59501' => {
+      'Header' => 'optional',
+      'Line' => '112',
       'Memb' => {
         '0' => {
           'name' => '_M_payload',
           'offset' => '0',
-          'type' => '54291'
+          'type' => '59523'
         },
         '1' => {
           'name' => '_M_engaged',
           'offset' => '4',
-          'type' => '73226'
+          'type' => '79157'
         }
       },
       'Name' => 'struct std::_Optional_payload_base<int>',
@@ -2003,33 +2028,33 @@ $VAR1 = {
       'TParam' => {
         '0' => {
           'key' => '_Tp',
-          'type' => '73317'
+          'type' => '87879'
         }
       },
       'Type' => 'Struct'
     },
-    '54282' => {
+    '59514' => {
       'Header' => 'optional',
-      'Line' => '203',
+      'Line' => '200',
       'Name' => 'struct std::_Optional_payload_base<int>::_Empty_byte',
       'NameSpace' => 'std::_Optional_payload_base<int>',
       'PrivateABI' => 1,
       'Size' => '1',
       'Type' => 'Struct'
     },
-    '54291' => {
+    '59523' => {
       'Header' => 'optional',
-      'Line' => '206',
+      'Line' => '203',
       'Memb' => {
         '0' => {
           'name' => '_M_empty',
           'offset' => '0',
-          'type' => '54282'
+          'type' => '59514'
         },
         '1' => {
           'name' => '_M_value',
           'offset' => '0',
-          'type' => '73317'
+          'type' => '87879'
         }
       },
       'Name' => 'union std::_Optional_payload_base<int>::_Storage<int>',
@@ -2039,19 +2064,19 @@ $VAR1 = {
       'TParam' => {
         '0' => {
           'key' => '_Up',
-          'type' => '73317'
+          'type' => '87879'
         }
       },
       'Type' => 'Union'
     },
-    '55105' => {
+    '60181' => {
       'Base' => {
-        '54269' => {
+        '59501' => {
           'pos' => '0'
         }
       },
       'Header' => 'optional',
-      'Line' => '358',
+      'Line' => '334',
       'Name' => 'struct std::_Optional_payload<int>',
       'NameSpace' => 'std',
       'PrivateABI' => 1,
@@ -2059,19 +2084,24 @@ $VAR1 = {
       'TParam' => {
         '0' => {
           'key' => '_Tp',
-          'type' => '73317'
+          'type' => '87879'
         }
       },
       'Type' => 'Struct'
     },
-    '55210' => {
+    '60286' => {
+      'Base' => {
+        '59311' => {
+          'pos' => '0'
+        }
+      },
       'Header' => 'optional',
-      'Line' => '485',
+      'Line' => '637',
       'Memb' => {
         '0' => {
           'name' => '_M_payload',
           'offset' => '0',
-          'type' => '55105'
+          'type' => '60181'
         }
       },
       'Name' => 'struct std::_Optional_base<int>',
@@ -2081,14 +2111,14 @@ $VAR1 = {
       'TParam' => {
         '0' => {
           'key' => '_Tp',
-          'type' => '73317'
+          'type' => '87879'
         }
       },
       'Type' => 'Struct'
     },
-    '55682' => {
+    '60550' => {
       'Header' => 'enable_special_members.h',
-      'Line' => '89',
+      'Line' => '87',
       'Name' => 'struct std::_Enable_copy_move<true, true, true, true, std::optional<int> >',
       'NameSpace' => 'std',
       'PrivateABI' => 1,
@@ -2096,42 +2126,42 @@ $VAR1 = {
       'TParam' => {
         '0' => {
           'key' => '_Copy',
-          'type' => '73226',
+          'type' => '79157',
           'val' => '1'
         },
         '1' => {
           'key' => '_CopyAssignment',
-          'type' => '73226',
+          'type' => '79157',
           'val' => '1'
         },
         '2' => {
           'key' => '_Move',
-          'type' => '73226',
+          'type' => '79157',
           'val' => '1'
         },
         '3' => {
           'key' => '_MoveAssignment',
-          'type' => '73226',
+          'type' => '79157',
           'val' => '1'
         },
         '4' => {
           'key' => '_Tag',
-          'type' => '55745'
+          'type' => '60613'
         }
       },
       'Type' => 'Struct'
     },
-    '55745' => {
+    '60613' => {
       'Base' => {
-        '55210' => {
+        '60286' => {
           'pos' => '0'
         },
-        '55682' => {
+        '60550' => {
           'pos' => '1'
         }
       },
       'Header' => 'optional',
-      'Line' => '778',
+      'Line' => '703',
       'Name' => 'std::optional<int>',
       'NameSpace' => 'std',
       'PrivateABI' => 1,
@@ -2139,26 +2169,26 @@ $VAR1 = {
       'TParam' => {
         '0' => {
           'key' => '_Tp',
-          'type' => '73317'
+          'type' => '87879'
         }
       },
       'Type' => 'Class'
     },
-    '56372' => {
+    '61222' => {
       'Header' => 'expected',
-      'Line' => '335',
+      'Line' => '321',
       'Memb' => {
         '0' => {
           'access' => 'private',
           'name' => 'unnamed0',
           'offset' => '0',
-          'type' => '56386'
+          'type' => '61236'
         },
         '1' => {
           'access' => 'private',
           'name' => '_M_has_value',
           'offset' => '64',
-          'type' => '73226'
+          'type' => '79157'
         }
       },
       'Name' => 'std::expected<std::unique_ptr<pldm::fw_update::Package, std::default_delete<pldm::fw_update::Package> >, pldm::fw_update::PackageParserError>',
@@ -2168,52 +2198,52 @@ $VAR1 = {
       'TParam' => {
         '0' => {
           'key' => '_Tp',
-          'type' => '63045'
+          'type' => '67986'
         },
         '1' => {
           'key' => '_Er',
-          'type' => '90814'
+          'type' => '98165'
         }
       },
       'Type' => 'Class'
     },
-    '56386' => {
+    '61236' => {
       'Header' => 'expected',
-      'Line' => '1277',
+      'Line' => '1228',
       'Memb' => {
         '0' => {
           'name' => '_M_val',
           'offset' => '0',
-          'type' => '63004'
+          'type' => '67986'
         },
         '1' => {
           'name' => '_M_unex',
           'offset' => '0',
-          'type' => '90814'
+          'type' => '98165'
         }
       },
-      'Name' => 'std::expected<std::unique_ptr<pldm::fw_update::Package, std::default_delete<pldm::fw_update::Package> >, pldm::fw_update::PackageParserError>::anon-union-expected-1277',
+      'Name' => 'std::expected<std::unique_ptr<pldm::fw_update::Package, std::default_delete<pldm::fw_update::Package> >, pldm::fw_update::PackageParserError>::anon-union-expected-1228',
       'NameSpace' => 'std::expected<std::unique_ptr<pldm::fw_update::Package, std::default_delete<pldm::fw_update::Package> >, pldm::fw_update::PackageParserError>',
       'Private' => 1,
       'PrivateABI' => 1,
       'Size' => '40',
       'Type' => 'Union'
     },
-    '57388' => {
+    '62250' => {
       'Header' => 'span',
-      'Line' => '124',
+      'Line' => '102',
       'Memb' => {
         '0' => {
           'access' => 'private',
           'name' => '_M_ptr',
           'offset' => '0',
-          'type' => '57760'
+          'type' => '62648'
         },
         '1' => {
           'access' => 'private',
           'name' => '_M_extent',
           'offset' => '8',
-          'type' => '567'
+          'type' => '475'
         }
       },
       'Name' => 'std::span<unsigned char const, 18446744073709551615ul>',
@@ -2223,35 +2253,35 @@ $VAR1 = {
       'TParam' => {
         '0' => {
           'key' => '_Type',
-          'type' => '73267'
+          'type' => '87829'
         },
         '1' => {
           'key' => '_Extent',
-          'type' => '73248',
+          'type' => '87846',
           'val' => '18446744073709551615'
         }
       },
       'Type' => 'Class'
     },
-    '57760' => {
-      'BaseType' => '91348',
+    '62648' => {
+      'BaseType' => '98699',
       'Header' => 'span',
-      'Line' => '160',
+      'Line' => '132',
       'Name' => 'std::span<unsigned char const, 18446744073709551615ul>::pointer',
       'NameSpace' => 'std::span<unsigned char const, 18446744073709551615ul>',
       'PrivateABI' => 1,
       'Size' => '8',
       'Type' => 'Typedef'
     },
-    '58333' => {
-      'BaseType' => '57388',
+    '63171' => {
+      'BaseType' => '62250',
       'Name' => 'std::span<unsigned char const, 18446744073709551615ul>const',
       'Size' => '16',
       'Type' => 'Const'
     },
-    '59605' => {
+    '64454' => {
       'Header' => 'unique_ptr.h',
-      'Line' => '68',
+      'Line' => '69',
       'Name' => 'struct std::default_delete<pldm::fw_update::DescriptorData>',
       'NameSpace' => 'std',
       'PrivateABI' => 1,
@@ -2259,20 +2289,20 @@ $VAR1 = {
       'TParam' => {
         '0' => {
           'key' => '_Tp',
-          'type' => '89879'
+          'type' => '97210'
         }
       },
       'Type' => 'Struct'
     },
-    '59690' => {
+    '64539' => {
       'Header' => 'unique_ptr.h',
-      'Line' => '141',
+      'Line' => '142',
       'Memb' => {
         '0' => {
           'access' => 'private',
           'name' => '_M_t',
           'offset' => '0',
-          'type' => '61399'
+          'type' => '66248'
         }
       },
       'Name' => 'std::__uniq_ptr_impl<pldm::fw_update::DescriptorData, std::default_delete<pldm::fw_update::DescriptorData> >',
@@ -2282,23 +2312,23 @@ $VAR1 = {
       'TParam' => {
         '0' => {
           'key' => '_Tp',
-          'type' => '89879'
+          'type' => '97210'
         },
         '1' => {
           'key' => '_Dp',
-          'type' => '59605'
+          'type' => '64454'
         }
       },
       'Type' => 'Class'
     },
-    '60143' => {
+    '64992' => {
       'Header' => 'tuple',
-      'Line' => '91',
+      'Line' => '88',
       'Memb' => {
         '0' => {
           'name' => '_M_head_impl',
           'offset' => '0',
-          'type' => '59605'
+          'type' => '64454'
         }
       },
       'Name' => 'struct std::_Head_base<1ul, std::default_delete<pldm::fw_update::DescriptorData> >',
@@ -2308,25 +2338,25 @@ $VAR1 = {
       'TParam' => {
         '0' => {
           'key' => '_Idx',
-          'type' => '73248',
+          'type' => '87846',
           'val' => '1'
         },
         '1' => {
           'key' => '_Head',
-          'type' => '59605'
+          'type' => '64454'
         }
       },
       'Type' => 'Struct'
     },
-    '60401' => {
+    '65250' => {
       'Base' => {
-        '60143' => {
+        '64992' => {
           'access' => 'private',
           'pos' => '0'
         }
       },
       'Header' => 'tuple',
-      'Line' => '546',
+      'Line' => '549',
       'Name' => 'struct std::_Tuple_impl<1ul, std::default_delete<pldm::fw_update::DescriptorData> >',
       'NameSpace' => 'std',
       'PrivateABI' => 1,
@@ -2334,24 +2364,24 @@ $VAR1 = {
       'TParam' => {
         '0' => {
           'key' => '_Idx',
-          'type' => '73248',
+          'type' => '87846',
           'val' => '1'
         },
         '1' => {
           'key' => undef,
-          'type' => '59605'
+          'type' => '64454'
         }
       },
       'Type' => 'Struct'
     },
-    '60727' => {
+    '65576' => {
       'Header' => 'tuple',
-      'Line' => '200',
+      'Line' => '197',
       'Memb' => {
         '0' => {
           'name' => '_M_head_impl',
           'offset' => '0',
-          'type' => '91513'
+          'type' => '98859'
         }
       },
       'Name' => 'struct std::_Head_base<0ul, pldm::fw_update::DescriptorData*>',
@@ -2361,28 +2391,28 @@ $VAR1 = {
       'TParam' => {
         '0' => {
           'key' => '_Idx',
-          'type' => '73248',
+          'type' => '87846',
           'val' => '0'
         },
         '1' => {
           'key' => '_Head',
-          'type' => '91513'
+          'type' => '98859'
         }
       },
       'Type' => 'Struct'
     },
-    '60985' => {
+    '65834' => {
       'Base' => {
-        '60401' => {
+        '65250' => {
           'pos' => '0'
         },
-        '60727' => {
+        '65576' => {
           'access' => 'private',
           'pos' => '1'
         }
       },
       'Header' => 'tuple',
-      'Line' => '281',
+      'Line' => '284',
       'Name' => 'struct std::_Tuple_impl<0ul, pldm::fw_update::DescriptorData*>',
       'NameSpace' => 'std',
       'PrivateABI' => 1,
@@ -2390,24 +2420,24 @@ $VAR1 = {
       'TParam' => {
         '0' => {
           'key' => '_Idx',
-          'type' => '73248',
+          'type' => '87846',
           'val' => '0'
         },
         '1' => {
           'key' => undef,
-          'type' => '91513'
+          'type' => '98859'
         }
       },
       'Type' => 'Struct'
     },
-    '61399' => {
+    '66248' => {
       'Base' => {
-        '60985' => {
+        '65834' => {
           'pos' => '0'
         }
       },
       'Header' => 'tuple',
-      'Line' => '833',
+      'Line' => '836',
       'Name' => 'std::tuple<pldm::fw_update::DescriptorData*, std::default_delete<pldm::fw_update::DescriptorData> >',
       'NameSpace' => 'std',
       'PrivateABI' => 1,
@@ -2417,19 +2447,19 @@ $VAR1 = {
           'name' => 'pldm::fw_update::DescriptorData*'
         },
         '1' => {
-          'type' => '59605'
+          'type' => '64454'
         }
       },
       'Type' => 'Class'
     },
-    '61769' => {
+    '66656' => {
       'Base' => {
-        '59690' => {
+        '64539' => {
           'pos' => '0'
         }
       },
       'Header' => 'unique_ptr.h',
-      'Line' => '232',
+      'Line' => '233',
       'Name' => 'struct std::__uniq_ptr_data<pldm::fw_update::DescriptorData, std::default_delete<pldm::fw_update::DescriptorData> >',
       'NameSpace' => 'std',
       'PrivateABI' => 1,
@@ -2437,34 +2467,24 @@ $VAR1 = {
       'TParam' => {
         '0' => {
           'key' => '_Tp',
-          'type' => '89879'
+          'type' => '97210'
         },
         '1' => {
           'key' => '_Dp',
-          'type' => '59605'
+          'type' => '64454'
         }
       },
       'Type' => 'Struct'
     },
-    '63004' => {
-      'BaseType' => '18338',
-      'Header' => 'type_traits',
-      'Line' => '1752',
-      'Name' => 'std::remove_cv_t',
-      'NameSpace' => 'std',
-      'PrivateABI' => 1,
-      'Size' => '32',
-      'Type' => 'Typedef'
-    },
-    '63045' => {
+    '67986' => {
       'Header' => 'unique_ptr.h',
-      'Line' => '270',
+      'Line' => '271',
       'Memb' => {
         '0' => {
           'access' => 'private',
           'name' => '_M_t',
           'offset' => '0',
-          'type' => '65825'
+          'type' => '70809'
         }
       },
       'Name' => 'std::unique_ptr<pldm::fw_update::Package, std::default_delete<pldm::fw_update::Package> >',
@@ -2474,18 +2494,18 @@ $VAR1 = {
       'TParam' => {
         '0' => {
           'key' => '_Tp',
-          'type' => '90631'
+          'type' => '97977'
         },
         '1' => {
           'key' => '_Dp',
-          'type' => '63661'
+          'type' => '68607'
         }
       },
       'Type' => 'Class'
     },
-    '63661' => {
+    '68607' => {
       'Header' => 'unique_ptr.h',
-      'Line' => '68',
+      'Line' => '69',
       'Name' => 'struct std::default_delete<pldm::fw_update::Package>',
       'NameSpace' => 'std',
       'PrivateABI' => 1,
@@ -2493,20 +2513,20 @@ $VAR1 = {
       'TParam' => {
         '0' => {
           'key' => '_Tp',
-          'type' => '90631'
+          'type' => '97977'
         }
       },
       'Type' => 'Struct'
     },
-    '63746' => {
+    '68692' => {
       'Header' => 'unique_ptr.h',
-      'Line' => '141',
+      'Line' => '142',
       'Memb' => {
         '0' => {
           'access' => 'private',
           'name' => '_M_t',
           'offset' => '0',
-          'type' => '65455'
+          'type' => '70401'
         }
       },
       'Name' => 'std::__uniq_ptr_impl<pldm::fw_update::Package, std::default_delete<pldm::fw_update::Package> >',
@@ -2516,23 +2536,23 @@ $VAR1 = {
       'TParam' => {
         '0' => {
           'key' => '_Tp',
-          'type' => '90631'
+          'type' => '97977'
         },
         '1' => {
           'key' => '_Dp',
-          'type' => '63661'
+          'type' => '68607'
         }
       },
       'Type' => 'Class'
     },
-    '64199' => {
+    '69145' => {
       'Header' => 'tuple',
-      'Line' => '91',
+      'Line' => '88',
       'Memb' => {
         '0' => {
           'name' => '_M_head_impl',
           'offset' => '0',
-          'type' => '63661'
+          'type' => '68607'
         }
       },
       'Name' => 'struct std::_Head_base<1ul, std::default_delete<pldm::fw_update::Package> >',
@@ -2542,25 +2562,25 @@ $VAR1 = {
       'TParam' => {
         '0' => {
           'key' => '_Idx',
-          'type' => '73248',
+          'type' => '87846',
           'val' => '1'
         },
         '1' => {
           'key' => '_Head',
-          'type' => '63661'
+          'type' => '68607'
         }
       },
       'Type' => 'Struct'
     },
-    '64457' => {
+    '69403' => {
       'Base' => {
-        '64199' => {
+        '69145' => {
           'access' => 'private',
           'pos' => '0'
         }
       },
       'Header' => 'tuple',
-      'Line' => '546',
+      'Line' => '549',
       'Name' => 'struct std::_Tuple_impl<1ul, std::default_delete<pldm::fw_update::Package> >',
       'NameSpace' => 'std',
       'PrivateABI' => 1,
@@ -2568,24 +2588,24 @@ $VAR1 = {
       'TParam' => {
         '0' => {
           'key' => '_Idx',
-          'type' => '73248',
+          'type' => '87846',
           'val' => '1'
         },
         '1' => {
           'key' => undef,
-          'type' => '63661'
+          'type' => '68607'
         }
       },
       'Type' => 'Struct'
     },
-    '64783' => {
+    '69729' => {
       'Header' => 'tuple',
-      'Line' => '200',
+      'Line' => '197',
       'Memb' => {
         '0' => {
           'name' => '_M_head_impl',
           'offset' => '0',
-          'type' => '92688'
+          'type' => '99964'
         }
       },
       'Name' => 'struct std::_Head_base<0ul, pldm::fw_update::Package*>',
@@ -2595,28 +2615,28 @@ $VAR1 = {
       'TParam' => {
         '0' => {
           'key' => '_Idx',
-          'type' => '73248',
+          'type' => '87846',
           'val' => '0'
         },
         '1' => {
           'key' => '_Head',
-          'type' => '92688'
+          'type' => '99964'
         }
       },
       'Type' => 'Struct'
     },
-    '65041' => {
+    '69987' => {
       'Base' => {
-        '64457' => {
+        '69403' => {
           'pos' => '0'
         },
-        '64783' => {
+        '69729' => {
           'access' => 'private',
           'pos' => '1'
         }
       },
       'Header' => 'tuple',
-      'Line' => '281',
+      'Line' => '284',
       'Name' => 'struct std::_Tuple_impl<0ul, pldm::fw_update::Package*>',
       'NameSpace' => 'std',
       'PrivateABI' => 1,
@@ -2624,24 +2644,24 @@ $VAR1 = {
       'TParam' => {
         '0' => {
           'key' => '_Idx',
-          'type' => '73248',
+          'type' => '87846',
           'val' => '0'
         },
         '1' => {
           'key' => undef,
-          'type' => '92688'
+          'type' => '99964'
         }
       },
       'Type' => 'Struct'
     },
-    '65455' => {
+    '70401' => {
       'Base' => {
-        '65041' => {
+        '69987' => {
           'pos' => '0'
         }
       },
       'Header' => 'tuple',
-      'Line' => '833',
+      'Line' => '836',
       'Name' => 'std::tuple<pldm::fw_update::Package*, std::default_delete<pldm::fw_update::Package> >',
       'NameSpace' => 'std',
       'PrivateABI' => 1,
@@ -2651,19 +2671,19 @@ $VAR1 = {
           'name' => 'pldm::fw_update::Package*'
         },
         '1' => {
-          'type' => '63661'
+          'type' => '68607'
         }
       },
       'Type' => 'Class'
     },
-    '65825' => {
+    '70809' => {
       'Base' => {
-        '63746' => {
+        '68692' => {
           'pos' => '0'
         }
       },
       'Header' => 'unique_ptr.h',
-      'Line' => '232',
+      'Line' => '233',
       'Name' => 'struct std::__uniq_ptr_data<pldm::fw_update::Package, std::default_delete<pldm::fw_update::Package> >',
       'NameSpace' => 'std',
       'PrivateABI' => 1,
@@ -2671,19 +2691,19 @@ $VAR1 = {
       'TParam' => {
         '0' => {
           'key' => '_Tp',
-          'type' => '90631'
+          'type' => '97977'
         },
         '1' => {
           'key' => '_Dp',
-          'type' => '63661'
+          'type' => '68607'
         }
       },
       'Type' => 'Struct'
     },
-    '67943' => {
+    '73059' => {
       'Copied' => 1,
       'Header' => 'stl_pair.h',
-      'Line' => '278',
+      'Line' => '260',
       'Name' => 'std::__pair_base<unsigned short const, std::unique_ptr<pldm::fw_update::DescriptorData, std::default_delete<pldm::fw_update::DescriptorData> > >',
       'NameSpace' => 'std',
       'PrivateABI' => 1,
@@ -2691,18 +2711,18 @@ $VAR1 = {
       'TParam' => {
         '0' => {
           'key' => '_U1',
-          'type' => '73279'
+          'type' => '87841'
         },
         '1' => {
           'key' => '_U2',
-          'type' => '42714'
+          'type' => '48233'
         }
       },
       'Type' => 'Class'
     },
-    '68904' => {
+    '74106' => {
       'Header' => 'stl_function.h',
-      'Line' => '120',
+      'Line' => '117',
       'Name' => 'struct std::unary_function<std::pair<unsigned short const, std::unique_ptr<pldm::fw_update::DescriptorData, std::default_delete<pldm::fw_update::DescriptorData> > >, unsigned short const>',
       'NameSpace' => 'std',
       'PrivateABI' => 1,
@@ -2710,24 +2730,24 @@ $VAR1 = {
       'TParam' => {
         '0' => {
           'key' => '_Arg',
-          'type' => '32342'
+          'type' => '38753'
         },
         '1' => {
           'key' => '_Result',
-          'type' => '73279'
+          'type' => '87841'
         }
       },
       'Type' => 'Struct'
     },
-    '68936' => {
+    '74138' => {
       'Base' => {
-        '68904' => {
+        '74106' => {
           'pos' => '0'
         }
       },
       'Copied' => 1,
       'Header' => 'stl_function.h',
-      'Line' => '1210',
+      'Line' => '1171',
       'Name' => 'struct std::_Select1st<std::pair<unsigned short const, std::unique_ptr<pldm::fw_update::DescriptorData, std::default_delete<pldm::fw_update::DescriptorData> > > >',
       'NameSpace' => 'std',
       'PrivateABI' => 1,
@@ -2735,62 +2755,30 @@ $VAR1 = {
       'TParam' => {
         '0' => {
           'key' => '_Pair',
-          'type' => '32342'
+          'type' => '38753'
         }
       },
       'Type' => 'Struct'
     },
-    '73226' => {
-      'Name' => 'bool',
-      'Size' => '1',
-      'Type' => 'Intrinsic'
-    },
-    '73248' => {
-      'Name' => 'unsigned long',
-      'Size' => '8',
-      'Type' => 'Intrinsic'
-    },
-    '73260' => {
-      'Name' => 'unsigned char',
-      'Size' => '1',
-      'Type' => 'Intrinsic'
-    },
-    '73267' => {
-      'BaseType' => '73260',
-      'Name' => 'unsigned char const',
-      'Size' => '1',
-      'Type' => 'Const'
-    },
-    '73272' => {
-      'Name' => 'unsigned short',
-      'Size' => '2',
-      'Type' => 'Intrinsic'
-    },
-    '73279' => {
-      'BaseType' => '73272',
-      'Name' => 'unsigned short const',
-      'Size' => '2',
-      'Type' => 'Const'
-    },
-    '73284' => {
+    '79145' => {
       'Name' => 'unsigned int',
       'Size' => '4',
       'Type' => 'Intrinsic'
     },
-    '73317' => {
-      'Name' => 'int',
-      'Size' => '4',
+    '79157' => {
+      'Name' => 'bool',
+      'Size' => '1',
       'Type' => 'Intrinsic'
     },
-    '73513' => {
+    '79318' => {
       'Base' => {
-        '6004' => {
+        '6854' => {
           'pos' => '0'
         }
       },
       'Copied' => 1,
       'Header' => 'alloc_traits.h',
-      'Line' => '47',
+      'Line' => '45',
       'Name' => 'struct __gnu_cxx::__alloc_traits<std::allocator<char> >',
       'NameSpace' => '__gnu_cxx',
       'PrivateABI' => 1,
@@ -2798,40 +2786,40 @@ $VAR1 = {
       'TParam' => {
         '0' => {
           'key' => '_Alloc',
-          'type' => '2486'
+          'type' => '3335'
         }
       },
       'Type' => 'Struct'
     },
-    '73714' => {
-      'BaseType' => '6018',
+    '79519' => {
+      'BaseType' => '6868',
       'Header' => 'alloc_traits.h',
-      'Line' => '56',
+      'Line' => '54',
       'Name' => '__gnu_cxx::__alloc_traits<std::allocator<char> >::pointer',
       'NameSpace' => '__gnu_cxx::__alloc_traits<std::allocator<char> >',
       'PrivateABI' => 1,
       'Size' => '8',
       'Type' => 'Typedef'
     },
-    '73738' => {
-      'BaseType' => '6081',
+    '79543' => {
+      'BaseType' => '6931',
       'Header' => 'alloc_traits.h',
-      'Line' => '58',
+      'Line' => '56',
       'Name' => '__gnu_cxx::__alloc_traits<std::allocator<char> >::size_type',
       'NameSpace' => '__gnu_cxx::__alloc_traits<std::allocator<char> >',
       'PrivateABI' => 1,
       'Size' => '8',
       'Type' => 'Typedef'
     },
-    '74421' => {
+    '81365' => {
       'Base' => {
-        '19396' => {
+        '26096' => {
           'pos' => '0'
         }
       },
       'Copied' => 1,
       'Header' => 'alloc_traits.h',
-      'Line' => '47',
+      'Line' => '45',
       'Name' => 'struct __gnu_cxx::__alloc_traits<std::allocator<unsigned char> >',
       'NameSpace' => '__gnu_cxx',
       'PrivateABI' => 1,
@@ -2839,30 +2827,30 @@ $VAR1 = {
       'TParam' => {
         '0' => {
           'key' => '_Alloc',
-          'type' => '19181'
+          'type' => '25876'
         }
       },
       'Type' => 'Struct'
     },
-    '74622' => {
-      'BaseType' => '19410',
+    '81566' => {
+      'BaseType' => '26110',
       'Header' => 'alloc_traits.h',
-      'Line' => '56',
+      'Line' => '54',
       'Name' => '__gnu_cxx::__alloc_traits<std::allocator<unsigned char> >::pointer',
       'NameSpace' => '__gnu_cxx::__alloc_traits<std::allocator<unsigned char> >',
       'PrivateABI' => 1,
       'Size' => '8',
       'Type' => 'Typedef'
     },
-    '74713' => {
+    '81657' => {
       'Base' => {
-        '27342' => {
+        '33999' => {
           'pos' => '0'
         }
       },
       'Copied' => 1,
       'Header' => 'alloc_traits.h',
-      'Line' => '47',
+      'Line' => '45',
       'Name' => 'struct __gnu_cxx::__alloc_traits<std::allocator<unsigned long> >',
       'NameSpace' => '__gnu_cxx',
       'PrivateABI' => 1,
@@ -2870,30 +2858,30 @@ $VAR1 = {
       'TParam' => {
         '0' => {
           'key' => '_Alloc',
-          'type' => '27127'
+          'type' => '33779'
         }
       },
       'Type' => 'Struct'
     },
-    '74914' => {
-      'BaseType' => '27356',
+    '81858' => {
+      'BaseType' => '34013',
       'Header' => 'alloc_traits.h',
-      'Line' => '56',
+      'Line' => '54',
       'Name' => '__gnu_cxx::__alloc_traits<std::allocator<unsigned long> >::pointer',
       'NameSpace' => '__gnu_cxx::__alloc_traits<std::allocator<unsigned long> >',
       'PrivateABI' => 1,
       'Size' => '8',
       'Type' => 'Typedef'
     },
-    '76574' => {
+    '83312' => {
       'Base' => {
-        '44298' => {
+        '49827' => {
           'pos' => '0'
         }
       },
       'Copied' => 1,
       'Header' => 'alloc_traits.h',
-      'Line' => '47',
+      'Line' => '45',
       'Name' => 'struct __gnu_cxx::__alloc_traits<std::allocator<pldm::fw_update::FirmwareDeviceIDRecord> >',
       'NameSpace' => '__gnu_cxx',
       'PrivateABI' => 1,
@@ -2901,30 +2889,30 @@ $VAR1 = {
       'TParam' => {
         '0' => {
           'key' => '_Alloc',
-          'type' => '44083'
+          'type' => '49607'
         }
       },
       'Type' => 'Struct'
     },
-    '76775' => {
-      'BaseType' => '44312',
+    '83513' => {
+      'BaseType' => '49841',
       'Header' => 'alloc_traits.h',
-      'Line' => '56',
+      'Line' => '54',
       'Name' => '__gnu_cxx::__alloc_traits<std::allocator<pldm::fw_update::FirmwareDeviceIDRecord> >::pointer',
       'NameSpace' => '__gnu_cxx::__alloc_traits<std::allocator<pldm::fw_update::FirmwareDeviceIDRecord> >',
       'PrivateABI' => 1,
       'Size' => '8',
       'Type' => 'Typedef'
     },
-    '78000' => {
+    '84738' => {
       'Base' => {
-        '49513' => {
+        '54801' => {
           'pos' => '0'
         }
       },
       'Copied' => 1,
       'Header' => 'alloc_traits.h',
-      'Line' => '47',
+      'Line' => '45',
       'Name' => 'struct __gnu_cxx::__alloc_traits<std::allocator<pldm::fw_update::ComponentImageInfo> >',
       'NameSpace' => '__gnu_cxx',
       'PrivateABI' => 1,
@@ -2932,29 +2920,29 @@ $VAR1 = {
       'TParam' => {
         '0' => {
           'key' => '_Alloc',
-          'type' => '49298'
+          'type' => '54581'
         }
       },
       'Type' => 'Struct'
     },
-    '78201' => {
-      'BaseType' => '49527',
+    '84939' => {
+      'BaseType' => '54815',
       'Header' => 'alloc_traits.h',
-      'Line' => '56',
+      'Line' => '54',
       'Name' => '__gnu_cxx::__alloc_traits<std::allocator<pldm::fw_update::ComponentImageInfo> >::pointer',
       'NameSpace' => '__gnu_cxx::__alloc_traits<std::allocator<pldm::fw_update::ComponentImageInfo> >',
       'PrivateABI' => 1,
       'Size' => '8',
       'Type' => 'Typedef'
     },
-    '79998' => {
+    '86736' => {
       'Header' => 'aligned_buffer.h',
-      'Line' => '49',
+      'Line' => '47',
       'Memb' => {
         '0' => {
           'name' => '_M_storage',
           'offset' => '0',
-          'type' => '93897'
+          'type' => '101368'
         }
       },
       'Name' => 'struct __gnu_cxx::__aligned_membuf<std::pair<unsigned short const, std::unique_ptr<pldm::fw_update::DescriptorData, std::default_delete<pldm::fw_update::DescriptorData> > > >',
@@ -2964,39 +2952,71 @@ $VAR1 = {
       'TParam' => {
         '0' => {
           'key' => '_Tp',
-          'type' => '32342'
+          'type' => '38753'
         }
       },
       'Type' => 'Struct'
     },
-    '81174' => {
-      'BaseType' => '73248',
+    '87822' => {
+      'Name' => 'unsigned char',
+      'Size' => '1',
+      'Type' => 'Intrinsic'
+    },
+    '87829' => {
+      'BaseType' => '87822',
+      'Name' => 'unsigned char const',
+      'Size' => '1',
+      'Type' => 'Const'
+    },
+    '87834' => {
+      'Name' => 'unsigned short',
+      'Size' => '2',
+      'Type' => 'Intrinsic'
+    },
+    '87841' => {
+      'BaseType' => '87834',
+      'Name' => 'unsigned short const',
+      'Size' => '2',
+      'Type' => 'Const'
+    },
+    '87846' => {
+      'Name' => 'unsigned long',
+      'Size' => '8',
+      'Type' => 'Intrinsic'
+    },
+    '87879' => {
+      'Name' => 'int',
+      'Size' => '4',
+      'Type' => 'Intrinsic'
+    },
+    '88039' => {
+      'BaseType' => '87846',
       'Header' => 'stddef.h',
-      'Line' => '229',
+      'Line' => '214',
       'Name' => 'size_t',
       'PrivateABI' => 1,
       'Size' => '8',
       'Type' => 'Typedef'
     },
-    '81186' => {
-      'BaseType' => '81174',
+    '88051' => {
+      'BaseType' => '88039',
       'Name' => 'size_t const',
       'Size' => '8',
       'Type' => 'Const'
     },
-    '81356' => {
+    '88221' => {
       'Name' => 'char',
       'Size' => '1',
       'Type' => 'Intrinsic'
     },
-    '82680' => {
-      'BaseType' => '81356',
+    '89524' => {
+      'BaseType' => '88221',
       'Name' => 'char*',
       'Size' => '8',
       'Type' => 'Pointer'
     },
-    '84513' => {
-      'BaseType' => '73260',
+    '91350' => {
+      'BaseType' => '87822',
       'Header' => 'types.h',
       'Line' => '38',
       'Name' => '__uint8_t',
@@ -3004,8 +3024,8 @@ $VAR1 = {
       'Size' => '1',
       'Type' => 'Typedef'
     },
-    '84537' => {
-      'BaseType' => '73272',
+    '91374' => {
+      'BaseType' => '87834',
       'Header' => 'types.h',
       'Line' => '40',
       'Name' => '__uint16_t',
@@ -3013,8 +3033,8 @@ $VAR1 = {
       'Size' => '2',
       'Type' => 'Typedef'
     },
-    '84566' => {
-      'BaseType' => '73284',
+    '91403' => {
+      'BaseType' => '79145',
       'Header' => 'types.h',
       'Line' => '42',
       'Name' => '__uint32_t',
@@ -3022,8 +3042,8 @@ $VAR1 = {
       'Size' => '4',
       'Type' => 'Typedef'
     },
-    '84590' => {
-      'BaseType' => '73248',
+    '91427' => {
+      'BaseType' => '87846',
       'Header' => 'types.h',
       'Line' => '45',
       'Name' => '__uint64_t',
@@ -3031,14 +3051,14 @@ $VAR1 = {
       'Size' => '8',
       'Type' => 'Typedef'
     },
-    '86692' => {
-      'BaseType' => '81356',
+    '93618' => {
+      'BaseType' => '88221',
       'Name' => 'char[16]',
       'Size' => '16',
       'Type' => 'Array'
     },
-    '86890' => {
-      'BaseType' => '84513',
+    '93816' => {
+      'BaseType' => '91350',
       'Header' => 'stdint-uintn.h',
       'Line' => '24',
       'Name' => 'uint8_t',
@@ -3046,14 +3066,14 @@ $VAR1 = {
       'Size' => '1',
       'Type' => 'Typedef'
     },
-    '86902' => {
-      'BaseType' => '86890',
+    '93828' => {
+      'BaseType' => '93816',
       'Name' => 'uint8_t const',
       'Size' => '1',
       'Type' => 'Const'
     },
-    '86907' => {
-      'BaseType' => '84537',
+    '93833' => {
+      'BaseType' => '91374',
       'Header' => 'stdint-uintn.h',
       'Line' => '25',
       'Name' => 'uint16_t',
@@ -3061,14 +3081,14 @@ $VAR1 = {
       'Size' => '2',
       'Type' => 'Typedef'
     },
-    '86919' => {
-      'BaseType' => '86907',
+    '93845' => {
+      'BaseType' => '93833',
       'Name' => 'uint16_t const',
       'Size' => '2',
       'Type' => 'Const'
     },
-    '86924' => {
-      'BaseType' => '84566',
+    '93850' => {
+      'BaseType' => '91403',
       'Header' => 'stdint-uintn.h',
       'Line' => '26',
       'Name' => 'uint32_t',
@@ -3076,14 +3096,14 @@ $VAR1 = {
       'Size' => '4',
       'Type' => 'Typedef'
     },
-    '86936' => {
-      'BaseType' => '86924',
+    '93862' => {
+      'BaseType' => '93850',
       'Name' => 'uint32_t const',
       'Size' => '4',
       'Type' => 'Const'
     },
-    '86941' => {
-      'BaseType' => '84590',
+    '93867' => {
+      'BaseType' => '91427',
       'Header' => 'stdint-uintn.h',
       'Line' => '27',
       'Name' => 'uint64_t',
@@ -3091,19 +3111,19 @@ $VAR1 = {
       'Size' => '8',
       'Type' => 'Typedef'
     },
-    '87880' => {
+    '94806' => {
       'Header' => 'pldm_types.h',
       'Line' => '177',
       'Memb' => {
         '0' => {
           'name' => 'ptr',
           'offset' => '0',
-          'type' => '87926'
+          'type' => '94851'
         },
         '1' => {
           'name' => 'length',
           'offset' => '8',
-          'type' => '81174'
+          'type' => '88039'
         }
       },
       'Name' => 'struct variable_field',
@@ -3111,25 +3131,25 @@ $VAR1 = {
       'Size' => '16',
       'Type' => 'Struct'
     },
-    '87921' => {
-      'BaseType' => '87880',
+    '94846' => {
+      'BaseType' => '94806',
       'Name' => 'struct variable_field const',
       'Size' => '16',
       'Type' => 'Const'
     },
-    '87926' => {
-      'BaseType' => '86902',
+    '94851' => {
+      'BaseType' => '93828',
       'Name' => 'uint8_t const*',
       'Size' => '8',
       'Type' => 'Pointer'
     },
-    '88978' => {
-      'BaseType' => '15593',
+    '95903' => {
+      'BaseType' => '16536',
       'Name' => 'struct std::_Rb_tree_node_base*',
       'Size' => '8',
       'Type' => 'Pointer'
     },
-    '89255' => {
+    '96596' => {
       'Header' => 'types.hpp',
       'Line' => '18',
       'Name' => 'struct libpldm::NonCopyableNonMoveable',
@@ -3137,7 +3157,7 @@ $VAR1 = {
       'Size' => '1',
       'Type' => 'Struct'
     },
-    '89455' => {
+    '96801' => {
       'Header' => 'types.hpp',
       'Line' => '33',
       'Memb' => {
@@ -3145,13 +3165,13 @@ $VAR1 = {
           'access' => 'protected',
           'name' => 'struct_size',
           'offset' => '0',
-          'type' => '81186'
+          'type' => '88051'
         },
         '1' => {
           'access' => 'protected',
           'name' => 'reserved_1',
           'offset' => '8',
-          'type' => '86941'
+          'type' => '93867'
         }
       },
       'Name' => 'struct libpldm::GrowableStruct<pldm::fw_update::DescriptorData>',
@@ -3160,18 +3180,18 @@ $VAR1 = {
       'TParam' => {
         '0' => {
           'key' => 'Derived',
-          'type' => '89879'
+          'type' => '97210'
         }
       },
       'Type' => 'Struct'
     },
-    '89535' => {
-      'BaseType' => '89455',
+    '96881' => {
+      'BaseType' => '96801',
       'Name' => 'struct libpldm::GrowableStruct<pldm::fw_update::DescriptorData>const',
       'Size' => '16',
       'Type' => 'Const'
     },
-    '89540' => {
+    '96886' => {
       'Header' => 'types.hpp',
       'Line' => '33',
       'Memb' => {
@@ -3179,13 +3199,13 @@ $VAR1 = {
           'access' => 'protected',
           'name' => 'struct_size',
           'offset' => '0',
-          'type' => '81186'
+          'type' => '88051'
         },
         '1' => {
           'access' => 'protected',
           'name' => 'reserved_1',
           'offset' => '8',
-          'type' => '86941'
+          'type' => '93867'
         }
       },
       'Name' => 'struct libpldm::GrowableStruct<pldm::fw_update::ComponentImageInfo>',
@@ -3194,18 +3214,18 @@ $VAR1 = {
       'TParam' => {
         '0' => {
           'key' => 'Derived',
-          'type' => '90093'
+          'type' => '97429'
         }
       },
       'Type' => 'Struct'
     },
-    '89620' => {
-      'BaseType' => '89540',
+    '96966' => {
+      'BaseType' => '96886',
       'Name' => 'struct libpldm::GrowableStruct<pldm::fw_update::ComponentImageInfo>const',
       'Size' => '16',
       'Type' => 'Const'
     },
-    '89625' => {
+    '96971' => {
       'Header' => 'types.hpp',
       'Line' => '33',
       'Memb' => {
@@ -3213,13 +3233,13 @@ $VAR1 = {
           'access' => 'protected',
           'name' => 'struct_size',
           'offset' => '0',
-          'type' => '81186'
+          'type' => '88051'
         },
         '1' => {
           'access' => 'protected',
           'name' => 'reserved_1',
           'offset' => '8',
-          'type' => '86941'
+          'type' => '93867'
         }
       },
       'Name' => 'struct libpldm::GrowableStruct<pldm::fw_update::FirmwareDeviceIDRecord>',
@@ -3228,18 +3248,18 @@ $VAR1 = {
       'TParam' => {
         '0' => {
           'key' => 'Derived',
-          'type' => '90365'
+          'type' => '97706'
         }
       },
       'Type' => 'Struct'
     },
-    '89705' => {
-      'BaseType' => '89625',
+    '97051' => {
+      'BaseType' => '96971',
       'Name' => 'struct libpldm::GrowableStruct<pldm::fw_update::FirmwareDeviceIDRecord>const',
       'Size' => '16',
       'Type' => 'Const'
     },
-    '89710' => {
+    '97056' => {
       'Header' => 'types.hpp',
       'Line' => '33',
       'Memb' => {
@@ -3247,13 +3267,13 @@ $VAR1 = {
           'access' => 'protected',
           'name' => 'struct_size',
           'offset' => '0',
-          'type' => '81186'
+          'type' => '88051'
         },
         '1' => {
           'access' => 'protected',
           'name' => 'reserved_1',
           'offset' => '8',
-          'type' => '86941'
+          'type' => '93867'
         }
       },
       'Name' => 'struct libpldm::GrowableStruct<pldm::fw_update::Package>',
@@ -3262,18 +3282,18 @@ $VAR1 = {
       'TParam' => {
         '0' => {
           'key' => 'Derived',
-          'type' => '90631'
+          'type' => '97977'
         }
       },
       'Type' => 'Struct'
     },
-    '89790' => {
-      'BaseType' => '89710',
+    '97136' => {
+      'BaseType' => '97056',
       'Name' => 'struct libpldm::GrowableStruct<pldm::fw_update::Package>const',
       'Size' => '16',
       'Type' => 'Const'
     },
-    '89855' => {
+    '97186' => {
       'Header' => 'firmware_update.hpp',
       'Line' => '27',
       'Memb' => {
@@ -3287,13 +3307,13 @@ $VAR1 = {
       'Size' => '4',
       'Type' => 'Enum'
     },
-    '89879' => {
+    '97210' => {
       'Base' => {
-        '89255' => {
+        '96596' => {
           'access' => 'private',
           'pos' => '1'
         },
-        '89455' => {
+        '96801' => {
           'pos' => '0'
         }
       },
@@ -3303,12 +3323,12 @@ $VAR1 = {
         '0' => {
           'name' => 'vendorDefinedDescriptorTitle',
           'offset' => '22',
-          'type' => '18932'
+          'type' => '25627'
         },
         '1' => {
           'name' => 'data',
           'offset' => '86',
-          'type' => '23872'
+          'type' => '30524'
         }
       },
       'Name' => 'struct pldm::fw_update::DescriptorData',
@@ -3316,13 +3336,13 @@ $VAR1 = {
       'Size' => '80',
       'Type' => 'Struct'
     },
-    '90093' => {
+    '97429' => {
       'Base' => {
-        '89255' => {
+        '96596' => {
           'access' => 'private',
           'pos' => '1'
         },
-        '89540' => {
+        '96886' => {
           'pos' => '0'
         }
       },
@@ -3332,37 +3352,37 @@ $VAR1 = {
         '0' => {
           'name' => 'componentClassification',
           'offset' => '22',
-          'type' => '86919'
+          'type' => '93845'
         },
         '1' => {
           'name' => 'componentIdentifier',
           'offset' => '24',
-          'type' => '86919'
+          'type' => '93845'
         },
         '2' => {
           'name' => 'compComparisonStamp',
           'offset' => '32',
-          'type' => '86936'
+          'type' => '93862'
         },
         '3' => {
           'name' => 'componentOptions',
           'offset' => '36',
-          'type' => '25512'
+          'type' => '32164'
         },
         '4' => {
           'name' => 'requestedComponentActivationMethod',
           'offset' => '50',
-          'type' => '25512'
+          'type' => '32164'
         },
         '5' => {
           'name' => 'componentLocation',
           'offset' => '64',
-          'type' => '87921'
+          'type' => '94846'
         },
         '6' => {
           'name' => 'componentVersion',
           'offset' => '86',
-          'type' => '16471'
+          'type' => '18166'
         }
       },
       'Name' => 'struct pldm::fw_update::ComponentImageInfo',
@@ -3370,13 +3390,13 @@ $VAR1 = {
       'Size' => '88',
       'Type' => 'Struct'
     },
-    '90365' => {
+    '97706' => {
       'Base' => {
-        '89255' => {
+        '96596' => {
           'access' => 'private',
           'pos' => '1'
         },
-        '89625' => {
+        '96971' => {
           'pos' => '0'
         }
       },
@@ -3386,27 +3406,27 @@ $VAR1 = {
         '0' => {
           'name' => 'deviceUpdateOptionFlags',
           'offset' => '22',
-          'type' => '26878'
+          'type' => '33530'
         },
         '1' => {
           'name' => 'applicableComponents',
           'offset' => '36',
-          'type' => '32061'
+          'type' => '38472'
         },
         '2' => {
           'name' => 'componentImageSetVersionString',
           'offset' => '72',
-          'type' => '16471'
+          'type' => '18166'
         },
         '3' => {
           'name' => 'recordDescriptors',
           'offset' => '128',
-          'type' => '42687'
+          'type' => '48206'
         },
         '4' => {
           'name' => 'firmwareDevicePackageData',
           'offset' => '296',
-          'type' => '23872'
+          'type' => '30524'
         }
       },
       'Name' => 'struct pldm::fw_update::FirmwareDeviceIDRecord',
@@ -3414,13 +3434,13 @@ $VAR1 = {
       'Size' => '152',
       'Type' => 'Struct'
     },
-    '90631' => {
+    '97977' => {
       'Base' => {
-        '89255' => {
+        '96596' => {
           'access' => 'private',
           'pos' => '1'
         },
-        '89710' => {
+        '97056' => {
           'pos' => '0'
         }
       },
@@ -3430,12 +3450,12 @@ $VAR1 = {
         '0' => {
           'name' => 'firmwareDeviceIdRecords',
           'offset' => '22',
-          'type' => '49017'
+          'type' => '54300'
         },
         '1' => {
           'name' => 'componentImageInformation',
           'offset' => '64',
-          'type' => '54232'
+          'type' => '59274'
         }
       },
       'Name' => 'struct pldm::fw_update::Package',
@@ -3443,25 +3463,25 @@ $VAR1 = {
       'Size' => '64',
       'Type' => 'Struct'
     },
-    '90809' => {
-      'BaseType' => '90631',
+    '98160' => {
+      'BaseType' => '97977',
       'Name' => 'struct pldm::fw_update::Package const',
       'Size' => '64',
       'Type' => 'Const'
     },
-    '90814' => {
+    '98165' => {
       'Header' => 'firmware_update.hpp',
       'Line' => '183',
       'Memb' => {
         '0' => {
           'name' => 'msg',
           'offset' => '0',
-          'type' => '16459'
+          'type' => '18154'
         },
         '1' => {
           'name' => 'rc',
           'offset' => '50',
-          'type' => '55745'
+          'type' => '60613'
         }
       },
       'Name' => 'pldm::fw_update::PackageParserError',
@@ -3469,9 +3489,9 @@ $VAR1 = {
       'Size' => '40',
       'Type' => 'Class'
     },
-    '90977' => {
+    '98333' => {
       'Base' => {
-        '89255' => {
+        '96596' => {
           'pos' => '0'
         }
       },
@@ -3482,200 +3502,200 @@ $VAR1 = {
       'Size' => '1',
       'Type' => 'Class'
     },
-    '91148' => {
-      'BaseType' => '89535',
+    '98509' => {
+      'BaseType' => '96881',
       'Name' => 'struct libpldm::GrowableStruct<pldm::fw_update::DescriptorData>const*',
       'Size' => '8',
       'Type' => 'Pointer'
     },
-    '91303' => {
-      'BaseType' => '73260',
+    '98654' => {
+      'BaseType' => '87822',
       'Name' => 'unsigned char*',
       'Size' => '8',
       'Type' => 'Pointer'
     },
-    '91348' => {
-      'BaseType' => '73267',
+    '98699' => {
+      'BaseType' => '87829',
       'Name' => 'unsigned char const*',
       'Size' => '8',
       'Type' => 'Pointer'
     },
-    '91513' => {
-      'BaseType' => '89879',
+    '98859' => {
+      'BaseType' => '97210',
       'Name' => 'struct pldm::fw_update::DescriptorData*',
       'Size' => '8',
       'Type' => 'Pointer'
     },
-    '91533' => {
-      'BaseType' => '89620',
+    '98879' => {
+      'BaseType' => '96966',
       'Name' => 'struct libpldm::GrowableStruct<pldm::fw_update::ComponentImageInfo>const*',
       'Size' => '8',
       'Type' => 'Pointer'
     },
-    '91563' => {
-      'BaseType' => '90093',
+    '98909' => {
+      'BaseType' => '97429',
       'Name' => 'struct pldm::fw_update::ComponentImageInfo*',
       'Size' => '8',
       'Type' => 'Pointer'
     },
-    '91593' => {
-      'BaseType' => '89705',
+    '98939' => {
+      'BaseType' => '97051',
       'Name' => 'struct libpldm::GrowableStruct<pldm::fw_update::FirmwareDeviceIDRecord>const*',
       'Size' => '8',
       'Type' => 'Pointer'
     },
-    '91643' => {
-      'BaseType' => '73248',
+    '98989' => {
+      'BaseType' => '87846',
       'Name' => 'unsigned long*',
       'Size' => '8',
       'Type' => 'Pointer'
     },
-    '92228' => {
-      'BaseType' => '90365',
+    '99524' => {
+      'BaseType' => '97706',
       'Name' => 'struct pldm::fw_update::FirmwareDeviceIDRecord*',
       'Size' => '8',
       'Type' => 'Pointer'
     },
-    '92253' => {
-      'BaseType' => '89790',
+    '99549' => {
+      'BaseType' => '97136',
       'Name' => 'struct libpldm::GrowableStruct<pldm::fw_update::Package>const*',
       'Size' => '8',
       'Type' => 'Pointer'
     },
-    '92688' => {
-      'BaseType' => '90631',
+    '99964' => {
+      'BaseType' => '97977',
       'Name' => 'struct pldm::fw_update::Package*',
       'Size' => '8',
       'Type' => 'Pointer'
     },
-    '92693' => {
-      'BaseType' => '92688',
+    '99969' => {
+      'BaseType' => '99964',
       'Name' => 'struct pldm::fw_update::Package*const',
       'Size' => '8',
       'Type' => 'Const'
     },
-    '92703' => {
-      'BaseType' => '90809',
+    '99979' => {
+      'BaseType' => '98160',
       'Name' => 'struct pldm::fw_update::Package const*',
       'Size' => '8',
       'Type' => 'Pointer'
     },
-    '92848' => {
-      'BaseType' => '90814',
+    '100114' => {
+      'BaseType' => '98165',
       'Name' => 'pldm::fw_update::PackageParserError*',
       'Size' => '8',
       'Type' => 'Pointer'
     },
-    '92853' => {
-      'BaseType' => '92848',
+    '100119' => {
+      'BaseType' => '100114',
       'Name' => 'pldm::fw_update::PackageParserError*const',
       'Size' => '8',
       'Type' => 'Const'
     },
-    '92858' => {
-      'BaseType' => '90977',
+    '100124' => {
+      'BaseType' => '98333',
       'Name' => 'pldm::fw_update::PackageParser*',
       'Size' => '8',
       'Type' => 'Pointer'
     },
-    '92863' => {
-      'BaseType' => '92858',
+    '100129' => {
+      'BaseType' => '100124',
       'Name' => 'pldm::fw_update::PackageParser*const',
       'Size' => '8',
       'Type' => 'Const'
     },
-    '92868' => {
-      'BaseType' => '58333',
+    '100134' => {
+      'BaseType' => '63171',
       'Name' => 'std::span<unsigned char const, 18446744073709551615ul>const&',
       'Size' => '8',
       'Type' => 'Ref'
     },
-    '93677' => {
-      'BaseType' => '90814',
+    '100963' => {
+      'BaseType' => '98165',
       'Name' => 'pldm::fw_update::PackageParserError&&',
       'Size' => '8',
       'Type' => 'RvalueRef'
     },
-    '93897' => {
-      'BaseType' => '73260',
+    '101368' => {
+      'BaseType' => '87822',
       'Name' => 'unsigned char[16]',
       'Size' => '16',
       'Type' => 'Array'
     },
-    '265786' => {
-      'BaseType' => '91148',
+    '278311' => {
+      'BaseType' => '98509',
       'Name' => 'struct libpldm::GrowableStruct<pldm::fw_update::DescriptorData>const*const',
       'Size' => '8',
       'Type' => 'Const'
     },
-    '266231' => {
-      'BaseType' => '91533',
+    '278746' => {
+      'BaseType' => '98879',
       'Name' => 'struct libpldm::GrowableStruct<pldm::fw_update::ComponentImageInfo>const*const',
       'Size' => '8',
       'Type' => 'Const'
     },
-    '266296' => {
-      'BaseType' => '91593',
+    '278811' => {
+      'BaseType' => '98939',
       'Name' => 'struct libpldm::GrowableStruct<pldm::fw_update::FirmwareDeviceIDRecord>const*const',
       'Size' => '8',
       'Type' => 'Const'
     },
-    '266961' => {
-      'BaseType' => '92253',
+    '279436' => {
+      'BaseType' => '99549',
       'Name' => 'struct libpldm::GrowableStruct<pldm::fw_update::Package>const*const',
       'Size' => '8',
       'Type' => 'Const'
     },
-    '267426' => {
-      'BaseType' => '92703',
+    '279891' => {
+      'BaseType' => '99979',
       'Name' => 'struct pldm::fw_update::Package const*const',
       'Size' => '8',
       'Type' => 'Const'
     },
-    '328593' => {
-      'BaseType' => '89710',
+    '339832' => {
+      'BaseType' => '97056',
       'Name' => 'struct libpldm::GrowableStruct<pldm::fw_update::Package>*',
       'Size' => '8',
       'Type' => 'Pointer'
     },
-    '328598' => {
-      'BaseType' => '328593',
+    '339837' => {
+      'BaseType' => '339832',
       'Name' => 'struct libpldm::GrowableStruct<pldm::fw_update::Package>*const',
       'Size' => '8',
       'Type' => 'Const'
     },
-    '340989' => {
-      'BaseType' => '89625',
+    '351710' => {
+      'BaseType' => '96971',
       'Name' => 'struct libpldm::GrowableStruct<pldm::fw_update::FirmwareDeviceIDRecord>*',
       'Size' => '8',
       'Type' => 'Pointer'
     },
-    '340994' => {
-      'BaseType' => '340989',
+    '351715' => {
+      'BaseType' => '351710',
       'Name' => 'struct libpldm::GrowableStruct<pldm::fw_update::FirmwareDeviceIDRecord>*const',
       'Size' => '8',
       'Type' => 'Const'
     },
-    '344129' => {
-      'BaseType' => '89540',
+    '354717' => {
+      'BaseType' => '96886',
       'Name' => 'struct libpldm::GrowableStruct<pldm::fw_update::ComponentImageInfo>*',
       'Size' => '8',
       'Type' => 'Pointer'
     },
-    '344134' => {
-      'BaseType' => '344129',
+    '354722' => {
+      'BaseType' => '354717',
       'Name' => 'struct libpldm::GrowableStruct<pldm::fw_update::ComponentImageInfo>*const',
       'Size' => '8',
       'Type' => 'Const'
     },
-    '348316' => {
-      'BaseType' => '89455',
+    '358765' => {
+      'BaseType' => '96801',
       'Name' => 'struct libpldm::GrowableStruct<pldm::fw_update::DescriptorData>*',
       'Size' => '8',
       'Type' => 'Pointer'
     },
-    '348321' => {
-      'BaseType' => '348316',
+    '358770' => {
+      'BaseType' => '358765',
       'Name' => 'struct libpldm::GrowableStruct<pldm::fw_update::DescriptorData>*const',
       'Size' => '8',
       'Type' => 'Const'
@@ -3689,6 +3709,7 @@ $VAR1 = {
       '_ZNSt9exceptionD2Ev@GLIBCXX_3.4' => 0,
       '_ZSt17__throw_bad_allocv@GLIBCXX_3.4' => 0,
       '_ZSt18_Rb_tree_decrementPSt18_Rb_tree_node_base@GLIBCXX_3.4' => 0,
+      '_ZSt18_Rb_tree_incrementPKSt18_Rb_tree_node_base@GLIBCXX_3.4' => 0,
       '_ZSt18_Rb_tree_incrementPSt18_Rb_tree_node_base@GLIBCXX_3.4' => 0,
       '_ZSt19__throw_logic_errorPKc@GLIBCXX_3.4' => 0,
       '_ZSt20__throw_length_errorPKc@GLIBCXX_3.4' => 0,
@@ -3703,8 +3724,11 @@ $VAR1 = {
       '_Znwm@GLIBCXX_3.4' => 0,
       '__assert_fail@GLIBC_2.2.5' => 0,
       '__cxa_allocate_exception@CXXABI_1.3' => 0,
+      '__cxa_begin_catch@CXXABI_1.3' => 0,
+      '__cxa_end_catch@CXXABI_1.3' => 0,
       '__cxa_finalize@GLIBC_2.2.5' => 0,
       '__cxa_free_exception@CXXABI_1.3' => 0,
+      '__cxa_rethrow@CXXABI_1.3' => 0,
       '__cxa_throw@CXXABI_1.3' => 0,
       '__gmon_start__' => 0,
       '__gxx_personality_v0@CXXABI_1.3' => 0,
@@ -3716,6 +3740,7 @@ $VAR1 = {
       'decode_vendor_defined_descriptor_value' => 0,
       'memcmp@GLIBC_2.2.5' => 0,
       'memcpy@GLIBC_2.14' => 0,
+      'memmove@GLIBC_2.2.5' => 0,
       'memset@GLIBC_2.2.5' => 0,
       'pldm_package_component_image_information_iter_init' => 0,
       'pldm_package_firmware_device_id_record_iter_init' => 0,

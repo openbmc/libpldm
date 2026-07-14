@@ -4006,7 +4006,7 @@ int decode_pldm_platform_redfish_action_pdr_action_from_iter(
 	return pldm_msgbuf_complete_consumed(buf);
 }
 
-LIBPLDM_ABI_TESTING
+LIBPLDM_ABI_STABLE
 struct pldm_platform_state_effecter_pdr_iter
 pldm_platform_state_effecter_pdr_iter_init(
 	const struct pldm_state_effecter_pdr *pdr, size_t pdr_size, int *rc)
@@ -4037,7 +4037,7 @@ pldm_platform_state_effecter_pdr_iter_init(
 	return iter;
 }
 
-LIBPLDM_ABI_TESTING
+LIBPLDM_ABI_STABLE
 int decode_pldm_platform_state_effecter_pdr_from_iter(
 	struct pldm_platform_state_effecter_pdr_iter *iter,
 	struct state_effecter_possible_states *states)
@@ -4075,7 +4075,7 @@ int decode_pldm_platform_state_effecter_pdr_from_iter(
 	return pldm_msgbuf_complete_consumed(ctx);
 }
 
-LIBPLDM_ABI_TESTING
+LIBPLDM_ABI_STABLE
 struct pldm_platform_state_effecter_pdr_possible_states_iter
 pldm_platform_state_effecter_pdr_possible_states_iter_init(
 	const struct pldm_platform_state_effecter_pdr_iter *outer_iter, int *rc)
@@ -4097,7 +4097,7 @@ pldm_platform_state_effecter_pdr_possible_states_iter_init(
 	return iter;
 }
 
-LIBPLDM_ABI_TESTING
+LIBPLDM_ABI_STABLE
 int decode_pldm_platform_state_effecter_pdr_possible_states_from_iter(
 	struct pldm_platform_state_effecter_pdr_possible_states_iter *iter,
 	bitfield8_t *state)
