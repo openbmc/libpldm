@@ -1,10 +1,12 @@
 /* SPDX-License-Identifier: Apache-2.0 OR GPL-2.0-or-later */
 #pragma once
 
+#include "compiler.h"
 #include <libpldm/api.h>
 #include <libpldm/base.h>
 #include <libpldm/pldm_types.h>
 
+#include <stdbool.h>
 #include <stddef.h>
 #include <stdint.h>
 
@@ -343,6 +345,172 @@ int encode_pldm_rde_get_schema_dictionary_resp(
 int decode_pldm_rde_get_schema_dictionary_resp(
 	const struct pldm_msg *msg, size_t payload_length,
 	struct pldm_rde_get_schema_dictionary_resp *resp);
+
+/* GetSchemaURI (0x04) */
+
+/** @brief stringFormat enumeration per DSP0218 Table 2. */
+enum pldm_rde_varstring_format {
+	PLDM_RDE_VARSTRING_UNKNOWN = 0,
+	PLDM_RDE_VARSTRING_ASCII = 1,
+	PLDM_RDE_VARSTRING_UTF_8 = 2,
+	PLDM_RDE_VARSTRING_UTF_16 = 3,
+	PLDM_RDE_VARSTRING_UTF_16LE = 4,
+	PLDM_RDE_VARSTRING_UTF_16BE = 5,
+};
+
+/* string_format(1) + string_length_bytes(1) */
+#define PLDM_RDE_VARSTRING_HEADER_BYTES 2
+
+/** @struct pldm_rde_varstring
+ *
+ *  A varstring (DSP0218 Table 2). string_data.length includes the NUL
+ *  terminator, matching the on-wire stringLengthBytes, and must fit in a
+ *  uint8. On decode string_data spans the message buffer; the caller copies it
+ *  if it must outlive the message. On encode string_data points at the
+ *  caller's bytes.
+ */
+struct pldm_rde_varstring {
+	uint8_t string_format;
+	struct variable_field string_data;
+};
+
+/** @struct pldm_rde_varstring_iter
+ *
+ *  Iterator over a run of varstrings trailing a decoded message. Initialised
+ *  by the owning decode_*() function; walked with foreach_pldm_rde_varstring().
+ */
+struct pldm_rde_varstring_iter {
+	struct variable_field field;
+	size_t count;
+};
+
+/** @brief Test whether a varstring iterator is exhausted. */
+LIBPLDM_ITERATOR
+bool pldm_rde_varstring_iter_end(const struct pldm_rde_varstring_iter *iter)
+{
+	return !iter->count;
+}
+
+/** @brief Advance a varstring iterator by one entry. */
+LIBPLDM_ITERATOR
+bool pldm_rde_varstring_iter_next(struct pldm_rde_varstring_iter *iter)
+{
+	if (!iter->count) {
+		return false;
+	}
+	iter->count--;
+	return true;
+}
+
+/** @brief Decode the varstring at the iterator's cursor.
+ *
+ *  @param[in,out] iter      - Iterator; its span is advanced past the entry.
+ *  @param[out]    varstring - Decoded entry, spanning the message buffer.
+ *  @return 0 on success, a negative errno value on failure.
+ */
+int decode_pldm_rde_varstring_from_iter(struct pldm_rde_varstring_iter *iter,
+					struct pldm_rde_varstring *varstring);
+
+/** @brief Iterate the varstrings yielded by a decode_*() call.
+ *
+ *  @param iter      - The struct pldm_rde_varstring_iter lvalue set by decode.
+ *  @param varstring - The struct pldm_rde_varstring lvalue for each entry.
+ *  @param rc        - An int lvalue set non-zero if an entry fails to decode.
+ */
+#define foreach_pldm_rde_varstring(iter, varstring, rc)                        \
+	for ((rc) = 0; !pldm_rde_varstring_iter_end(&(iter)) &&                \
+		       !((rc) = decode_pldm_rde_varstring_from_iter(           \
+				 &(iter), &(varstring)));                      \
+	     pldm_rde_varstring_iter_next(&(iter)))
+
+/* resource_id(4) + requested_schema_class(1) + oem_extension_number(1) */
+#define PLDM_RDE_GET_SCHEMA_URI_REQ_BYTES 6
+
+/* completion_code(1) + string_fragment_count(1) */
+#define PLDM_RDE_GET_SCHEMA_URI_RESP_FIXED_BYTES 2
+
+/** @struct pldm_rde_get_schema_uri_req
+ *
+ *  Decoded GetSchemaURI request.
+ */
+struct pldm_rde_get_schema_uri_req {
+	uint32_t resource_id;
+	uint8_t requested_schema_class;
+	uint8_t oem_extension_number;
+};
+
+/** @struct pldm_rde_get_schema_uri_resp
+ *
+ *  Decoded GetSchemaURI response fixed fields. The URI fragments follow via a
+ *  separate struct pldm_rde_varstring_iter set by the decode function.
+ */
+struct pldm_rde_get_schema_uri_resp {
+	uint8_t completion_code;
+	uint8_t string_fragment_count;
+};
+
+/** @brief Encode GetSchemaURI request.
+ *
+ *  @param[in]  instance_id    - Message's instance id.
+ *  @param[in]  req            - Request to encode. requested_schema_class must
+ *                               be less than PLDM_RDE_SCHEMA_MAX.
+ *  @param[out] msg            - Request message.
+ *  @param[in,out] payload_length - On entry the caller-allocated buffer size;
+ *                               must be >= PLDM_RDE_GET_SCHEMA_URI_REQ_BYTES.
+ *                               On exit the encoded message length.
+ *  @return 0 on success, a negative errno value on failure.
+ */
+int encode_pldm_rde_get_schema_uri_req(
+	uint8_t instance_id, const struct pldm_rde_get_schema_uri_req *req,
+	struct pldm_msg *msg, size_t *payload_length);
+
+/** @brief Decode GetSchemaURI request.
+ *
+ *  @param[in]  msg            - Request message.
+ *  @param[in]  payload_length - Length of request payload.
+ *  @param[out] req            - Decoded request. requested_schema_class is
+ *                               validated to be less than PLDM_RDE_SCHEMA_MAX.
+ *  @return 0 on success, a negative errno value on failure.
+ */
+int decode_pldm_rde_get_schema_uri_req(const struct pldm_msg *msg,
+				       size_t payload_length,
+				       struct pldm_rde_get_schema_uri_req *req);
+
+/** @brief Encode GetSchemaURI response.
+ *
+ *  On a non-SUCCESS completion_code only the completion code is emitted.
+ *
+ *  @param[in]  instance_id    - Message's instance id.
+ *  @param[in]  resp           - Response fixed fields. On success
+ *                               string_fragment_count must be non-zero.
+ *  @param[in]  uris           - Array of resp->string_fragment_count
+ *                               varstrings.
+ *  @param[out] msg            - Response message.
+ *  @param[in,out] payload_length - On entry the caller-allocated buffer size;
+ *                               on exit the encoded message length.
+ *  @return 0 on success, a negative errno value on failure.
+ */
+int encode_pldm_rde_get_schema_uri_resp(
+	uint8_t instance_id, const struct pldm_rde_get_schema_uri_resp *resp,
+	const struct pldm_rde_varstring *uris, struct pldm_msg *msg,
+	size_t *payload_length);
+
+/** @brief Decode GetSchemaURI response.
+ *
+ *  On a non-SUCCESS completion code only resp->completion_code is populated and
+ *  the iterator is left empty.
+ *
+ *  @param[in]  msg            - Response message.
+ *  @param[in]  payload_length - Length of response payload.
+ *  @param[out] resp           - Decoded fixed fields.
+ *  @param[out] uris           - Iterator over the URI fragments; walk it with
+ *                               foreach_pldm_rde_varstring().
+ *  @return 0 on success, a negative errno value on failure.
+ */
+int decode_pldm_rde_get_schema_uri_resp(
+	const struct pldm_msg *msg, size_t payload_length,
+	struct pldm_rde_get_schema_uri_resp *resp,
+	struct pldm_rde_varstring_iter *uris);
 
 #ifdef __cplusplus
 }
