@@ -368,7 +368,41 @@ static int
     return 0;
 }
 
+static int fuzz_decode_pldm_rde_get_schema_uri_req(const struct pldm_msg* msg,
+                                                   size_t payload_length)
+{
+    struct pldm_rde_get_schema_uri_req req;
+
+    decode_pldm_rde_get_schema_uri_req(msg, payload_length, &req);
+
+    return 0;
+}
+
+static int fuzz_decode_pldm_rde_get_schema_uri_resp(const struct pldm_msg* msg,
+                                                    size_t payload_length)
+{
+    struct pldm_rde_get_schema_uri_resp resp;
+    struct pldm_rde_varstring_iter uris;
+    struct pldm_rde_varstring frag;
+    int rc;
+
+    if (decode_pldm_rde_get_schema_uri_resp(msg, payload_length, &resp, &uris))
+    {
+        return 0;
+    }
+
+    foreach_pldm_rde_varstring(uris, frag, rc)
+    {
+        (void)frag;
+    }
+    (void)rc;
+
+    return 0;
+}
+
 static int (*const decode_pldm_msg_tests[])(const struct pldm_msg*, size_t) = {
+    fuzz_decode_pldm_rde_get_schema_uri_req,
+    fuzz_decode_pldm_rde_get_schema_uri_resp,
     fuzz_decode_pldm_rde_get_schema_dictionary_req,
     fuzz_decode_pldm_rde_get_schema_dictionary_resp,
     fuzz_decode_pldm_rde_negotiate_medium_parameters_req,
@@ -727,8 +761,90 @@ static int fuzz_encode_pldm_rde_get_schema_dictionary_resp(
     return 0;
 }
 
+static int fuzz_encode_pldm_rde_get_schema_uri_req(struct pldm_msg* msg,
+                                                   size_t payload_length,
+                                                   const uint8_t* data,
+                                                   size_t size)
+{
+    struct pldm_rde_get_schema_uri_req req;
+    PLDM_MSGBUF_RO_DEFINE_P(buf);
+    uint8_t instance_id;
+    int rc;
+
+    rc = pldm_msgbuf_init_errno(buf, 0, data, size);
+    if (rc)
+    {
+        return -1;
+    }
+
+    pldm_msgbuf_extract(buf, instance_id);
+    pldm_msgbuf_extract(buf, req.resource_id);
+    pldm_msgbuf_extract(buf, req.requested_schema_class);
+    pldm_msgbuf_extract(buf, req.oem_extension_number);
+
+    rc = pldm_msgbuf_complete(buf);
+    if (rc)
+    {
+        return -1;
+    }
+
+    encode_pldm_rde_get_schema_uri_req(instance_id, &req, msg, &payload_length);
+
+    return 0;
+}
+
+static int fuzz_encode_pldm_rde_get_schema_uri_resp(struct pldm_msg* msg,
+                                                    size_t payload_length,
+                                                    const uint8_t* data,
+                                                    size_t size)
+{
+    struct pldm_rde_get_schema_uri_resp resp = {0};
+    struct pldm_rde_varstring uris[8];
+    PLDM_MSGBUF_RO_DEFINE_P(buf);
+    const uint8_t* frags;
+    size_t frags_len;
+    uint8_t instance_id;
+    uint8_t count;
+    int rc;
+
+    rc = pldm_msgbuf_init_errno(buf, 0, data, size);
+    if (rc)
+    {
+        return -1;
+    }
+
+    pldm_msgbuf_extract(buf, instance_id);
+    pldm_msgbuf_extract(buf, resp.completion_code);
+    pldm_msgbuf_extract(buf, count);
+    pldm_msgbuf_span_remaining(buf, (const void**)&frags, &frags_len);
+
+    rc = pldm_msgbuf_complete(buf);
+    if (rc)
+    {
+        return -1;
+    }
+
+    count %= (uint8_t)(ARRAY_SIZE(uris) + 1);
+    resp.string_fragment_count = count;
+    for (uint8_t i = 0; i < count; i++)
+    {
+        size_t off = frags_len ? (i % frags_len) : 0;
+
+        uris[i].string_format = frags_len ? frags[off] : 0;
+        uris[i].string_data.ptr = frags + off;
+        uris[i].string_data.length = frags_len - off;
+    }
+
+    encode_pldm_rde_get_schema_uri_resp(instance_id, &resp, uris, msg,
+                                        &payload_length);
+
+    return 0;
+}
+
 static int (*const encode_pldm_msg_tests[])(struct pldm_msg*, size_t,
                                             const uint8_t*, size_t) = {
+    fuzz_encode_pldm_rde_get_schema_uri_req,
+    fuzz_encode_pldm_rde_get_schema_uri_resp,
     fuzz_encode_pldm_rde_get_schema_dictionary_req,
     fuzz_encode_pldm_rde_get_schema_dictionary_resp,
     fuzz_encode_pldm_rde_negotiate_medium_parameters_req,
