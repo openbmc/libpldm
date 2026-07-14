@@ -302,3 +302,109 @@ TEST(NegotiateMediumParameters, requestRejectsBadArgs)
               -EINVAL);
 }
 #endif
+
+#if HAVE_LIBPLDM_API_TESTING
+TEST(GetSchemaDictionary, encodeDecodeRequestRoundTrip)
+{
+    struct pldm_rde_get_schema_dictionary_req req = {};
+    req.resource_id = 0xdeadbeef;
+    req.requested_schema_class = PLDM_RDE_SCHEMA_MAJOR;
+
+    std::array<uint8_t, hdrSize + PLDM_RDE_GET_SCHEMA_DICTIONARY_REQ_BYTES>
+        reqMsg{};
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+    auto* msg = reinterpret_cast<pldm_msg*>(reqMsg.data());
+
+    size_t reqLen = PLDM_RDE_GET_SCHEMA_DICTIONARY_REQ_BYTES;
+    ASSERT_EQ(encode_pldm_rde_get_schema_dictionary_req(0, &req, msg, &reqLen),
+              0);
+    EXPECT_EQ(reqLen, PLDM_RDE_GET_SCHEMA_DICTIONARY_REQ_BYTES);
+
+    struct pldm_rde_get_schema_dictionary_req decoded = {};
+    ASSERT_EQ(decode_pldm_rde_get_schema_dictionary_req(
+                  msg, PLDM_RDE_GET_SCHEMA_DICTIONARY_REQ_BYTES, &decoded),
+              0);
+    EXPECT_EQ(decoded.resource_id, req.resource_id);
+    EXPECT_EQ(decoded.requested_schema_class, req.requested_schema_class);
+}
+#endif
+
+#if HAVE_LIBPLDM_API_TESTING
+TEST(GetSchemaDictionary, encodeDecodeResponseRoundTrip)
+{
+    struct pldm_rde_get_schema_dictionary_resp resp = {};
+    resp.completion_code = PLDM_SUCCESS;
+    resp.dictionary_format = 1;
+    resp.transfer_handle = 0x12345678;
+
+    std::array<uint8_t, hdrSize + PLDM_RDE_GET_SCHEMA_DICTIONARY_RESP_BYTES>
+        respMsg{};
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+    auto* msg = reinterpret_cast<pldm_msg*>(respMsg.data());
+
+    size_t respLen = PLDM_RDE_GET_SCHEMA_DICTIONARY_RESP_BYTES;
+    ASSERT_EQ(
+        encode_pldm_rde_get_schema_dictionary_resp(0, &resp, msg, &respLen), 0);
+    EXPECT_EQ(respLen, PLDM_RDE_GET_SCHEMA_DICTIONARY_RESP_BYTES);
+
+    struct pldm_rde_get_schema_dictionary_resp decoded = {};
+    ASSERT_EQ(decode_pldm_rde_get_schema_dictionary_resp(
+                  msg, PLDM_RDE_GET_SCHEMA_DICTIONARY_RESP_BYTES, &decoded),
+              0);
+    EXPECT_EQ(decoded.completion_code, PLDM_SUCCESS);
+    EXPECT_EQ(decoded.dictionary_format, resp.dictionary_format);
+    EXPECT_EQ(decoded.transfer_handle, resp.transfer_handle);
+}
+#endif
+
+#if HAVE_LIBPLDM_API_TESTING
+TEST(GetSchemaDictionary, responseErrorIsCompletionCodeOnly)
+{
+    struct pldm_rde_get_schema_dictionary_resp resp = {};
+    resp.completion_code = PLDM_ERROR;
+    // dictionary_format and transfer_handle left zero: an error response must
+    // not require them, since only the completion code is emitted.
+
+    std::array<uint8_t, hdrSize + 1> respMsg{};
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+    auto* msg = reinterpret_cast<pldm_msg*>(respMsg.data());
+
+    size_t respLen = 1;
+    ASSERT_EQ(
+        encode_pldm_rde_get_schema_dictionary_resp(0, &resp, msg, &respLen), 0);
+    EXPECT_EQ(respLen, sizeof(resp.completion_code));
+    EXPECT_EQ(msg->payload[0], PLDM_ERROR);
+
+    struct pldm_rde_get_schema_dictionary_resp decoded = {};
+    ASSERT_EQ(decode_pldm_rde_get_schema_dictionary_resp(msg, 1, &decoded), 0);
+    EXPECT_EQ(decoded.completion_code, PLDM_ERROR);
+}
+#endif
+
+#if HAVE_LIBPLDM_API_TESTING
+TEST(GetSchemaDictionary, requestRejectsBadArgs)
+{
+    struct pldm_rde_get_schema_dictionary_req req = {};
+    // invalid: not a defined schemaClass.
+    req.requested_schema_class = PLDM_RDE_SCHEMA_MAX;
+    pldm_msg msg{};
+
+    size_t reqLen = PLDM_RDE_GET_SCHEMA_DICTIONARY_REQ_BYTES;
+    EXPECT_EQ(encode_pldm_rde_get_schema_dictionary_req(0, &req, &msg, &reqLen),
+              -EINVAL);
+    EXPECT_EQ(
+        encode_pldm_rde_get_schema_dictionary_req(0, nullptr, &msg, &reqLen),
+        -EINVAL);
+
+    // An out-of-range schemaClass on the wire is rejected on decode.
+    std::array<uint8_t, hdrSize + PLDM_RDE_GET_SCHEMA_DICTIONARY_REQ_BYTES>
+        wireMsg{};
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+    auto* wire = reinterpret_cast<pldm_msg*>(wireMsg.data());
+    wire->payload[4] = PLDM_RDE_SCHEMA_MAX;
+    struct pldm_rde_get_schema_dictionary_req decoded = {};
+    EXPECT_EQ(decode_pldm_rde_get_schema_dictionary_req(
+                  wire, PLDM_RDE_GET_SCHEMA_DICTIONARY_REQ_BYTES, &decoded),
+              -EBADMSG);
+}
+#endif
