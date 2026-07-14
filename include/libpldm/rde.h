@@ -572,6 +572,88 @@ int decode_pldm_rde_get_schema_uri_resp(
 	const struct pldm_msg *msg, size_t payload_length,
 	struct pldm_rde_get_schema_uri_resp *resp);
 
+/* GetResourceETag (0x05) */
+
+/* resource_id(4) */
+#define PLDM_RDE_GET_RESOURCE_ETAG_REQ_BYTES 4
+
+/* completion_code(1) + an etag varstring holding at least the mandatory NULL
+ * terminator (PLDM_RDE_VARSTRING_HEADER_BYTES + string_data NULL(1)) */
+#define PLDM_RDE_GET_RESOURCE_ETAG_RESP_MIN_BYTES 4
+
+/** @struct pldm_rde_get_resource_etag_req
+ *
+ *  Decoded GetResourceETag request.
+ */
+struct pldm_rde_get_resource_etag_req {
+	uint32_t resource_id;
+};
+
+/** @struct pldm_rde_get_resource_etag_resp
+ *
+ *  Decoded GetResourceETag response. On decode etag spans the message buffer.
+ */
+struct pldm_rde_get_resource_etag_resp {
+	uint8_t completion_code;
+	struct pldm_rde_varstring etag;
+};
+
+/** @brief Encode GetResourceETag request.
+ *
+ *  @param[in]  instance_id    - Message's instance id.
+ *  @param[in]  req            - Request to encode.
+ *  @param[out] msg            - Request message.
+ *  @param[in,out] payload_length - On entry the caller-allocated buffer size;
+ *                               must be >=
+ *                               PLDM_RDE_GET_RESOURCE_ETAG_REQ_BYTES.
+ *                               On exit the encoded message length.
+ *  @return 0 on success, a negative errno value on failure.
+ */
+int encode_pldm_rde_get_resource_etag_req(
+	uint8_t instance_id, const struct pldm_rde_get_resource_etag_req *req,
+	struct pldm_msg *msg, size_t *payload_length);
+
+/** @brief Decode GetResourceETag request.
+ *
+ *  @param[in]  msg            - Request message.
+ *  @param[in]  payload_length - Length of request payload.
+ *  @param[out] req            - Decoded request.
+ *  @return 0 on success, a negative errno value on failure.
+ */
+int decode_pldm_rde_get_resource_etag_req(
+	const struct pldm_msg *msg, size_t payload_length,
+	struct pldm_rde_get_resource_etag_req *req);
+
+/** @brief Encode GetResourceETag response.
+ *
+ *  On a non-SUCCESS completion_code only the completion code is emitted.
+ *
+ *  @param[in]  instance_id    - Message's instance id.
+ *  @param[in]  resp           - Response to encode. On success etag.string_data
+ *                               must be non-empty (it includes the NULL
+ *                               terminator) and fit in a uint8 length.
+ *  @param[out] msg            - Response message.
+ *  @param[in,out] payload_length - On entry the caller-allocated buffer size;
+ *                               on exit the encoded message length.
+ *  @return 0 on success, a negative errno value on failure.
+ */
+int encode_pldm_rde_get_resource_etag_resp(
+	uint8_t instance_id, const struct pldm_rde_get_resource_etag_resp *resp,
+	struct pldm_msg *msg, size_t *payload_length);
+
+/** @brief Decode GetResourceETag response.
+ *
+ *  On a non-SUCCESS completion code only resp->completion_code is populated.
+ *
+ *  @param[in]  msg            - Response message.
+ *  @param[in]  payload_length - Length of response payload.
+ *  @param[out] resp           - Decoded response. etag spans @p msg's buffer.
+ *  @return 0 on success, a negative errno value on failure.
+ */
+int decode_pldm_rde_get_resource_etag_resp(
+	const struct pldm_msg *msg, size_t payload_length,
+	struct pldm_rde_get_resource_etag_resp *resp);
+
 #ifdef __cplusplus
 }
 #endif
