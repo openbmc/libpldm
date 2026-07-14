@@ -26,6 +26,13 @@ Change categories:
   Many header files were modified to fix issues identified in the documentation.
   There is no change in behaviour.
 
+- dsp: platform: Stabilise `pldm_platform_state_effecter_pdr_iter_init()`
+- dsp: platform: Stabilise `decode_pldm_platform_state_effecter_pdr_from_iter()`
+- dsp: platform: Stabilise
+  `pldm_platform_state_effecter_pdr_possible_states_iter_init()`
+- dsp: platform: Stabilise
+  `decode_pldm_platform_state_effecter_pdr_possible_states_from_iter()`
+
 ### Deprecated
 
 ### Removed
