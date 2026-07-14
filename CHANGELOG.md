@@ -19,6 +19,13 @@ Change categories:
 
 ### Added
 
+- rde: Add GetSchemaURI command
+  - Add `encode_pldm_rde_get_schema_uri_req()`
+  - Add `decode_pldm_rde_get_schema_uri_req()`
+  - Add `encode_pldm_rde_get_schema_uri_resp()`
+  - Add `decode_pldm_rde_get_schema_uri_resp()`
+  - Add `decode_pldm_rde_varstring_from_iter()` and
+    `foreach_pldm_rde_varstring()`
 - rde: Add GetSchemaDictionary command
   - Add `encode_pldm_rde_get_schema_dictionary_req()`
   - Add `decode_pldm_rde_get_schema_dictionary_req()`
