@@ -273,6 +273,103 @@ int decode_pldm_rde_negotiate_medium_parameters_resp(
 	const struct pldm_msg *msg, size_t payload_length,
 	struct pldm_rde_negotiate_medium_parameters_resp *resp);
 
+/* GetSchemaDictionary (0x03) */
+
+/** @brief schemaClass enumeration per DSP0218 Table 3. */
+enum pldm_rde_schema_class {
+	PLDM_RDE_SCHEMA_MAJOR = 0,
+	PLDM_RDE_SCHEMA_EVENT = 1,
+	PLDM_RDE_SCHEMA_ANNOTATION = 2,
+	PLDM_RDE_SCHEMA_COLLECTION_MEMBER_TYPE = 3,
+	PLDM_RDE_SCHEMA_CLASS_ERROR = 4,
+	PLDM_RDE_SCHEMA_REGISTRY = 5,
+	PLDM_RDE_SCHEMA_MAX,
+};
+
+/* resource_id(4) + requested_schema_class(1) */
+#define PLDM_RDE_GET_SCHEMA_DICTIONARY_REQ_BYTES 5
+
+/* completion_code(1) + dictionary_format(1) + transfer_handle(4) */
+#define PLDM_RDE_GET_SCHEMA_DICTIONARY_RESP_BYTES 6
+
+/** @struct pldm_rde_get_schema_dictionary_req
+ *
+ *  Decoded GetSchemaDictionary request.
+ */
+struct pldm_rde_get_schema_dictionary_req {
+	uint32_t resource_id;
+	uint8_t requested_schema_class;
+};
+
+/** @struct pldm_rde_get_schema_dictionary_resp
+ *
+ *  Decoded GetSchemaDictionary response.
+ */
+struct pldm_rde_get_schema_dictionary_resp {
+	uint8_t completion_code;
+	uint8_t dictionary_format;
+	uint32_t transfer_handle;
+};
+
+/** @brief Encode GetSchemaDictionary request.
+ *
+ *  @param[in]  instance_id    - Message's instance id.
+ *  @param[in]  req            - Request to encode. requested_schema_class must
+ *                               be less than PLDM_RDE_SCHEMA_MAX.
+ *  @param[out] msg            - Request message.
+ *  @param[in,out] payload_length - On entry the caller-allocated buffer size;
+ *                               must be >=
+ *                               PLDM_RDE_GET_SCHEMA_DICTIONARY_REQ_BYTES.
+ *                               On exit the encoded message length.
+ *  @return 0 on success, a negative errno value on failure.
+ */
+int encode_pldm_rde_get_schema_dictionary_req(
+	uint8_t instance_id,
+	const struct pldm_rde_get_schema_dictionary_req *req,
+	struct pldm_msg *msg, size_t *payload_length);
+
+/** @brief Decode GetSchemaDictionary request.
+ *
+ *  @param[in]  msg            - Request message.
+ *  @param[in]  payload_length - Length of request payload.
+ *  @param[out] req            - Decoded request. requested_schema_class is
+ *                               validated to be less than PLDM_RDE_SCHEMA_MAX.
+ *  @return 0 on success, a negative errno value on failure.
+ */
+int decode_pldm_rde_get_schema_dictionary_req(
+	const struct pldm_msg *msg, size_t payload_length,
+	struct pldm_rde_get_schema_dictionary_req *req);
+
+/** @brief Encode GetSchemaDictionary response.
+ *
+ *  On a non-SUCCESS completion_code only the completion code is emitted.
+ *
+ *  @param[in]  instance_id    - Message's instance id.
+ *  @param[in]  resp           - Response to encode.
+ *  @param[out] msg            - Response message.
+ *  @param[in,out] payload_length - On entry the caller-allocated buffer size;
+ *                               on exit the encoded message length.
+ *  @return 0 on success, a negative errno value on failure.
+ */
+int encode_pldm_rde_get_schema_dictionary_resp(
+	uint8_t instance_id,
+	const struct pldm_rde_get_schema_dictionary_resp *resp,
+	struct pldm_msg *msg, size_t *payload_length);
+
+/** @brief Decode GetSchemaDictionary response.
+ *
+ *  On a non-SUCCESS completion code only resp->completion_code is populated.
+ *
+ *  @param[in]  msg            - Response message.
+ *  @param[in]  payload_length - Length of response payload.
+ *  @param[out] resp           - Decoded response. Output member values are
+ *                               host-endian.
+ *  @return 0 on success, a negative errno value on failure.
+ */
+int decode_pldm_rde_get_schema_dictionary_resp(
+	const struct pldm_msg *msg, size_t payload_length,
+	struct pldm_rde_get_schema_dictionary_resp *resp);
+
 #ifdef __cplusplus
 }
 #endif
