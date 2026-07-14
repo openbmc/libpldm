@@ -34,6 +34,11 @@ Change categories:
 - firmware_update: Add GetPackageData command
   - Add `encode_get_package_data_resp()`
   - Add `decode_get_package_data_req()`
+- rde: Add GetResourceETag command
+  - Add `encode_pldm_rde_get_resource_etag_req()`
+  - Add `decode_pldm_rde_get_resource_etag_req()`
+  - Add `encode_pldm_rde_get_resource_etag_resp()`
+  - Add `decode_pldm_rde_get_resource_etag_resp()`
 - rde: Add GetSchemaURI command
   - Add `encode_pldm_rde_get_schema_uri_req()`
   - Add `decode_pldm_rde_get_schema_uri_req()`
