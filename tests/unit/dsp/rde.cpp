@@ -530,3 +530,108 @@ TEST(GetSchemaURI, requestRejectsBadArgs)
         -EINVAL);
 }
 #endif
+
+#if HAVE_LIBPLDM_API_TESTING
+TEST(GetResourceETag, encodeDecodeRequestRoundTrip)
+{
+    struct pldm_rde_get_resource_etag_req req = {};
+    req.resource_id = 0xffffffff;
+
+    std::array<uint8_t, hdrSize + PLDM_RDE_GET_RESOURCE_ETAG_REQ_BYTES>
+        reqMsg{};
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+    auto* msg = reinterpret_cast<pldm_msg*>(reqMsg.data());
+
+    size_t reqLen = PLDM_RDE_GET_RESOURCE_ETAG_REQ_BYTES;
+    ASSERT_EQ(encode_pldm_rde_get_resource_etag_req(0, &req, msg, &reqLen), 0);
+    EXPECT_EQ(reqLen, PLDM_RDE_GET_RESOURCE_ETAG_REQ_BYTES);
+
+    struct pldm_rde_get_resource_etag_req decoded = {};
+    ASSERT_EQ(decode_pldm_rde_get_resource_etag_req(
+                  msg, PLDM_RDE_GET_RESOURCE_ETAG_REQ_BYTES, &decoded),
+              0);
+    EXPECT_EQ(decoded.resource_id, req.resource_id);
+}
+#endif
+
+#if HAVE_LIBPLDM_API_TESTING
+TEST(GetResourceETag, encodeDecodeResponseRoundTrip)
+{
+    // ETag length includes the NUL terminator per DSP0218 Table 2.
+    const char etag[] = "\"abc123\"";
+
+    struct pldm_rde_get_resource_etag_resp resp = {};
+    resp.completion_code = PLDM_SUCCESS;
+    resp.etag.string_format = PLDM_RDE_VARSTRING_UTF_8;
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+    resp.etag.string_data.ptr = reinterpret_cast<const uint8_t*>(etag);
+    resp.etag.string_data.length = sizeof(etag);
+
+    const size_t payloadLen =
+        PLDM_RDE_GET_RESOURCE_ETAG_RESP_MIN_BYTES + sizeof(etag);
+    std::vector<uint8_t> respMsg(hdrSize + payloadLen, 0);
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+    auto* msg = reinterpret_cast<pldm_msg*>(respMsg.data());
+
+    size_t encLen = payloadLen;
+    ASSERT_EQ(encode_pldm_rde_get_resource_etag_resp(0, &resp, msg, &encLen),
+              0);
+    EXPECT_EQ(encLen, payloadLen);
+
+    struct pldm_rde_get_resource_etag_resp decoded = {};
+    ASSERT_EQ(decode_pldm_rde_get_resource_etag_resp(msg, payloadLen, &decoded),
+              0);
+    EXPECT_EQ(decoded.completion_code, PLDM_SUCCESS);
+    EXPECT_EQ(decoded.etag.string_format, PLDM_RDE_VARSTRING_UTF_8);
+    ASSERT_EQ(decoded.etag.string_data.length, sizeof(etag));
+    EXPECT_EQ(0, memcmp(decoded.etag.string_data.ptr, etag, sizeof(etag)));
+}
+#endif
+
+#if HAVE_LIBPLDM_API_TESTING
+TEST(GetResourceETag, responseErrorIsCompletionCodeOnly)
+{
+    struct pldm_rde_get_resource_etag_resp resp = {};
+    resp.completion_code = PLDM_RDE_CC_ETAG_CALCULATION_ONGOING;
+    // etag left empty: an error response must not require it.
+
+    std::array<uint8_t, hdrSize + 1> respMsg{};
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+    auto* msg = reinterpret_cast<pldm_msg*>(respMsg.data());
+
+    size_t respLen = 1;
+    ASSERT_EQ(encode_pldm_rde_get_resource_etag_resp(0, &resp, msg, &respLen),
+              0);
+    EXPECT_EQ(respLen, sizeof(resp.completion_code));
+    EXPECT_EQ(msg->payload[0], PLDM_RDE_CC_ETAG_CALCULATION_ONGOING);
+
+    struct pldm_rde_get_resource_etag_resp decoded = {};
+    ASSERT_EQ(decode_pldm_rde_get_resource_etag_resp(msg, 1, &decoded), 0);
+    EXPECT_EQ(decoded.completion_code, PLDM_RDE_CC_ETAG_CALCULATION_ONGOING);
+}
+#endif
+
+#if HAVE_LIBPLDM_API_TESTING
+TEST(GetResourceETag, responseRejectsBadEtag)
+{
+    pldm_msg msg{};
+    size_t respLen = 64;
+
+    // A success response with an empty etag is rejected: the etag must
+    // include the NUL terminator.
+    struct pldm_rde_get_resource_etag_resp resp = {};
+    resp.completion_code = PLDM_SUCCESS;
+    const char etag[] = "x";
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+    resp.etag.string_data.ptr = reinterpret_cast<const uint8_t*>(etag);
+    resp.etag.string_data.length = 0;
+    EXPECT_EQ(encode_pldm_rde_get_resource_etag_resp(0, &resp, &msg, &respLen),
+              -EINVAL);
+
+    // A non-empty etag with a null pointer is rejected.
+    resp.etag.string_data.ptr = nullptr;
+    resp.etag.string_data.length = sizeof(etag);
+    EXPECT_EQ(encode_pldm_rde_get_resource_etag_resp(0, &resp, &msg, &respLen),
+              -EINVAL);
+}
+#endif
