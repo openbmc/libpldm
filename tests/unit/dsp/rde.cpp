@@ -5,6 +5,7 @@
 #include <array>
 #include <cerrno>
 #include <cstring>
+#include <string>
 #include <vector>
 
 #include <gtest/gtest.h>
@@ -390,5 +391,142 @@ TEST(GetSchemaDictionary, requestRejectsBadArgs)
     EXPECT_EQ(decode_pldm_rde_get_schema_dictionary_req(
                   wire, PLDM_RDE_GET_SCHEMA_DICTIONARY_REQ_BYTES, &decoded),
               -EBADMSG);
+}
+#endif
+
+#if HAVE_LIBPLDM_API_TESTING
+TEST(GetSchemaURI, encodeDecodeRequestRoundTrip)
+{
+    struct pldm_rde_get_schema_uri_req req = {};
+    req.resource_id = 0x0a0b0c0d;
+    req.requested_schema_class = PLDM_RDE_SCHEMA_MAJOR;
+    req.oem_extension_number = 0;
+
+    std::array<uint8_t, hdrSize + PLDM_RDE_GET_SCHEMA_URI_REQ_BYTES> reqMsg{};
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+    auto* msg = reinterpret_cast<pldm_msg*>(reqMsg.data());
+
+    size_t reqLen = PLDM_RDE_GET_SCHEMA_URI_REQ_BYTES;
+    ASSERT_EQ(encode_pldm_rde_get_schema_uri_req(0, &req, msg, &reqLen), 0);
+    EXPECT_EQ(reqLen, PLDM_RDE_GET_SCHEMA_URI_REQ_BYTES);
+
+    struct pldm_rde_get_schema_uri_req decoded = {};
+    ASSERT_EQ(decode_pldm_rde_get_schema_uri_req(
+                  msg, PLDM_RDE_GET_SCHEMA_URI_REQ_BYTES, &decoded),
+              0);
+    EXPECT_EQ(decoded.resource_id, req.resource_id);
+    EXPECT_EQ(decoded.requested_schema_class, req.requested_schema_class);
+    EXPECT_EQ(decoded.oem_extension_number, req.oem_extension_number);
+}
+#endif
+
+#if HAVE_LIBPLDM_API_TESTING
+TEST(GetSchemaURI, encodeDecodeResponseRoundTripWalksFragments)
+{
+    // Fragment lengths include the null terminator per DSP0218 Table 2.
+    const char frag0[] = "/redfish/v1/";
+    const char frag1[] = "Systems";
+    std::array<struct pldm_rde_varstring, 2> uris{};
+    uris[0].string_format = PLDM_RDE_VARSTRING_ASCII;
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+    uris[0].string_data.ptr = reinterpret_cast<const uint8_t*>(frag0);
+    uris[0].string_data.length = sizeof(frag0);
+    uris[1].string_format = PLDM_RDE_VARSTRING_ASCII;
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+    uris[1].string_data.ptr = reinterpret_cast<const uint8_t*>(frag1);
+    uris[1].string_data.length = sizeof(frag1);
+
+    const size_t payloadLen =
+        PLDM_RDE_GET_SCHEMA_URI_RESP_FIXED_BYTES +
+        (PLDM_RDE_VARSTRING_HEADER_BYTES + sizeof(frag0)) +
+        (PLDM_RDE_VARSTRING_HEADER_BYTES + sizeof(frag1));
+    std::vector<uint8_t> respMsg(hdrSize + payloadLen, 0);
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+    auto* msg = reinterpret_cast<pldm_msg*>(respMsg.data());
+
+    struct pldm_rde_get_schema_uri_resp resp = {};
+    resp.completion_code = PLDM_SUCCESS;
+    resp.string_fragment_count = 2;
+
+    size_t encLen = payloadLen;
+    ASSERT_EQ(encode_pldm_rde_get_schema_uri_resp(0, &resp, uris.data(), msg,
+                                                  &encLen),
+              0);
+    EXPECT_EQ(encLen, payloadLen);
+
+    struct pldm_rde_get_schema_uri_resp decoded = {};
+    struct pldm_rde_varstring_iter iter = {};
+    ASSERT_EQ(
+        decode_pldm_rde_get_schema_uri_resp(msg, payloadLen, &decoded, &iter),
+        0);
+    EXPECT_EQ(decoded.completion_code, PLDM_SUCCESS);
+    EXPECT_EQ(decoded.string_fragment_count, 2);
+
+    std::vector<std::string> got;
+    struct pldm_rde_varstring frag = {};
+    int rc = 0;
+    foreach_pldm_rde_varstring(iter, frag, rc)
+    {
+        EXPECT_EQ(frag.string_format, PLDM_RDE_VARSTRING_ASCII);
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+        got.emplace_back(reinterpret_cast<const char*>(frag.string_data.ptr),
+                         frag.string_data.length);
+    }
+    ASSERT_EQ(rc, 0);
+    ASSERT_EQ(got.size(), 2U);
+    EXPECT_EQ(got[0], std::string(frag0, sizeof(frag0)));
+    EXPECT_EQ(got[1], std::string(frag1, sizeof(frag1)));
+}
+#endif
+
+#if HAVE_LIBPLDM_API_TESTING
+TEST(GetSchemaURI, responseErrorIsCompletionCodeOnly)
+{
+    std::array<uint8_t, hdrSize + 1> respMsg{};
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+    auto* msg = reinterpret_cast<pldm_msg*>(respMsg.data());
+
+    // An error response requires no fragments, so uris may be null.
+    struct pldm_rde_get_schema_uri_resp resp = {};
+    resp.completion_code = PLDM_ERROR;
+    size_t respLen = 1;
+    ASSERT_EQ(
+        encode_pldm_rde_get_schema_uri_resp(0, &resp, nullptr, msg, &respLen),
+        0);
+    EXPECT_EQ(respLen, 1U);
+    EXPECT_EQ(msg->payload[0], PLDM_ERROR);
+
+    struct pldm_rde_get_schema_uri_resp decoded = {};
+    struct pldm_rde_varstring_iter iter = {};
+    ASSERT_EQ(decode_pldm_rde_get_schema_uri_resp(msg, 1, &decoded, &iter), 0);
+    EXPECT_EQ(decoded.completion_code, PLDM_ERROR);
+    EXPECT_TRUE(pldm_rde_varstring_iter_end(&iter));
+}
+#endif
+
+#if HAVE_LIBPLDM_API_TESTING
+TEST(GetSchemaURI, requestRejectsBadArgs)
+{
+    struct pldm_rde_get_schema_uri_req req = {};
+    // invalid: not a defined schemaClass.
+    req.requested_schema_class = PLDM_RDE_SCHEMA_MAX;
+    pldm_msg msg{};
+
+    size_t reqLen = PLDM_RDE_GET_SCHEMA_URI_REQ_BYTES;
+    EXPECT_EQ(encode_pldm_rde_get_schema_uri_req(0, &req, &msg, &reqLen),
+              -EINVAL);
+    EXPECT_EQ(encode_pldm_rde_get_schema_uri_req(0, nullptr, &msg, &reqLen),
+              -EINVAL);
+
+    // A success response with a zero fragment count is rejected on encode.
+    pldm_msg respMsg{};
+    size_t respLen = PLDM_RDE_GET_SCHEMA_URI_RESP_FIXED_BYTES;
+    struct pldm_rde_get_schema_uri_resp resp = {};
+    resp.completion_code = PLDM_SUCCESS;
+    resp.string_fragment_count = 0;
+    struct pldm_rde_varstring uri = {};
+    EXPECT_EQ(
+        encode_pldm_rde_get_schema_uri_resp(0, &resp, &uri, &respMsg, &respLen),
+        -EINVAL);
 }
 #endif
