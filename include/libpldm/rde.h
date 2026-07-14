@@ -1,10 +1,12 @@
 /* SPDX-License-Identifier: Apache-2.0 OR GPL-2.0-or-later */
 #pragma once
 
+#include "compiler.h"
 #include <libpldm/api.h>
 #include <libpldm/base.h>
 #include <libpldm/pldm_types.h>
 
+#include <stdbool.h>
 #include <stddef.h>
 #include <stdint.h>
 
@@ -369,6 +371,206 @@ int encode_pldm_rde_get_schema_dictionary_resp(
 int decode_pldm_rde_get_schema_dictionary_resp(
 	const struct pldm_msg *msg, size_t payload_length,
 	struct pldm_rde_get_schema_dictionary_resp *resp);
+
+/* GetSchemaURI (0x04) */
+
+/** @struct pldm_rde_varstring_iter
+ *
+ *  Low-level cursor over a run of varstrings in a message buffer. A command's
+ *  foreach macro builds a fresh cursor from the decoded response on each
+ *  traversal, so the response can be walked more than once.
+ */
+struct pldm_rde_varstring_iter {
+	struct variable_field field;
+	size_t count;
+};
+
+/** @brief Test whether a varstring iterator is exhausted. */
+LIBPLDM_ITERATOR
+bool pldm_rde_varstring_iter_end(const struct pldm_rde_varstring_iter *iter)
+{
+	return !iter->count;
+}
+
+/** @brief Advance a varstring iterator by one entry. */
+LIBPLDM_ITERATOR
+bool pldm_rde_varstring_iter_next(struct pldm_rde_varstring_iter *iter)
+{
+	if (!iter->count) {
+		return false;
+	}
+	iter->count--;
+	return true;
+}
+
+/** @brief Decode the varstring at the iterator's cursor.
+ *
+ *  @param[in,out] iter      - Iterator; its span is advanced past the entry.
+ *  @param[out]    varstring - Decoded entry, spanning the message buffer.
+ *  @return 0 on success, a negative errno value on failure.
+ */
+int decode_pldm_rde_varstring_from_iter(struct pldm_rde_varstring_iter *iter,
+					struct pldm_rde_varstring *varstring);
+
+/* resource_id(4) + requested_schema_class(1) + oem_extension_number(1) */
+#define PLDM_RDE_GET_SCHEMA_URI_REQ_BYTES 6
+
+/* completion_code(1) + string_fragment_count(1) */
+#define PLDM_RDE_GET_SCHEMA_URI_RESP_FIXED_BYTES 2
+
+/* StringFragmentCount is > 0 per DSP0218 Table 55, so a success response
+ * carries at least one varstring fragment header after the fixed fields.
+ */
+#define PLDM_RDE_GET_SCHEMA_URI_RESP_MIN_BYTES                                 \
+	(PLDM_RDE_GET_SCHEMA_URI_RESP_FIXED_BYTES +                            \
+	 PLDM_RDE_VARSTRING_HEADER_BYTES)
+
+/** @struct pldm_rde_get_schema_uri_req
+ *
+ *  Decoded GetSchemaURI request.
+ */
+struct pldm_rde_get_schema_uri_req {
+	uint32_t resource_id;
+	uint8_t requested_schema_class;
+	uint8_t oem_extension_number;
+};
+
+/** @struct pldm_rde_get_schema_uri_resp
+ *
+ *  Decoded GetSchemaURI response. fragments spans the URI-fragment bytes in the
+ *  message buffer; walk them with foreach_pldm_rde_get_schema_uri_fragment(),
+ *  which may be run more than once.
+ */
+struct pldm_rde_get_schema_uri_resp {
+	uint8_t completion_code;
+	uint8_t string_fragment_count;
+	struct variable_field fragments;
+};
+
+/** @brief Build a fragment iterator over a decoded GetSchemaURI response.
+ *
+ *  @param[in] resp - A response populated by
+ *                    decode_pldm_rde_get_schema_uri_resp().
+ *  @return A fresh iterator positioned at the first URI fragment.
+ */
+LIBPLDM_ITERATOR
+struct pldm_rde_varstring_iter pldm_rde_get_schema_uri_fragment_iter_init(
+	const struct pldm_rde_get_schema_uri_resp *resp)
+{
+	struct pldm_rde_varstring_iter iter;
+
+	iter.field = resp->fragments;
+	iter.count = resp->string_fragment_count;
+
+	return iter;
+}
+
+/** @brief Iterate the URI fragments of a decoded GetSchemaURI response.
+ *
+ *  Builds a fresh cursor from @p resp on each use, so the fragments may be
+ *  walked more than once (e.g. once to size a buffer, once to copy).
+ *
+ *  @param resp     - The struct pldm_rde_get_schema_uri_resp lvalue from decode.
+ *  @param fragment - The struct pldm_rde_varstring lvalue for each fragment.
+ *  @param rc       - An int lvalue set non-zero if a fragment fails to decode.
+ */
+#define foreach_pldm_rde_get_schema_uri_fragment(resp, fragment, rc)           \
+	for (struct pldm_rde_varstring_iter fragment##_iter =                  \
+		     ((rc) = 0,                                                \
+		     pldm_rde_get_schema_uri_fragment_iter_init(&(resp)));     \
+	     !(rc) && !pldm_rde_varstring_iter_end(&(fragment##_iter)) &&      \
+	     !((rc) = decode_pldm_rde_varstring_from_iter(&(fragment##_iter),  \
+							  &(fragment)));       \
+	     pldm_rde_varstring_iter_next(&(fragment##_iter)))
+
+/** @brief Encode GetSchemaURI request.
+ *
+ *  @param[in]  instance_id    - Message's instance id.
+ *  @param[in]  req            - Request to encode. requested_schema_class must
+ *                               be less than PLDM_RDE_SCHEMA_MAX.
+ *  @param[out] msg            - Request message.
+ *  @param[in,out] payload_length - On entry the caller-allocated buffer size;
+ *                               must be >= PLDM_RDE_GET_SCHEMA_URI_REQ_BYTES.
+ *                               On exit the encoded message length.
+ *  @return 0 on success, a negative errno value on failure.
+ */
+int encode_pldm_rde_get_schema_uri_req(
+	uint8_t instance_id, const struct pldm_rde_get_schema_uri_req *req,
+	struct pldm_msg *msg, size_t *payload_length);
+
+/** @brief Decode GetSchemaURI request.
+ *
+ *  @param[in]  msg            - Request message.
+ *  @param[in]  payload_length - Length of request payload.
+ *  @param[out] req            - Decoded request. requested_schema_class is
+ *                               validated to be less than PLDM_RDE_SCHEMA_MAX.
+ *  @return 0 on success, a negative errno value on failure.
+ */
+int decode_pldm_rde_get_schema_uri_req(const struct pldm_msg *msg,
+				       size_t payload_length,
+				       struct pldm_rde_get_schema_uri_req *req);
+
+/** @brief Encode GetSchemaURI response.
+ *
+ *  On a non-SUCCESS completion_code only the completion code is emitted.
+ *
+ *  @param[in]  instance_id    - Message's instance id.
+ *  @param[in]  resp           - Response fixed fields. On success
+ *                               string_fragment_count must be non-zero.
+ *  @param[in]  uris           - Array of resp->string_fragment_count
+ *                               varstrings.
+ *  @param[out] msg            - Response message.
+ *  @param[in,out] payload_length - On entry the caller-allocated buffer size;
+ *                               on exit the encoded message length.
+ *  @return 0 on success, a negative errno value on failure.
+ */
+int encode_pldm_rde_get_schema_uri_resp(
+	uint8_t instance_id, const struct pldm_rde_get_schema_uri_resp *resp,
+	const struct pldm_rde_varstring *uris, struct pldm_msg *msg,
+	size_t *payload_length);
+
+/** @brief Decode GetSchemaURI response.
+ *
+ *  On a non-SUCCESS completion code only resp->completion_code is populated and
+ *  resp->fragments is left empty.
+ *
+ *  @param[in]  msg            - Response message.
+ *  @param[in]  payload_length - Length of response payload.
+ *  @param[out] resp           - Decoded response; resp->fragments spans the URI
+ *                               fragments in @p msg's buffer.
+ *  @return 0 on success, a negative errno value on failure.
+ *
+ *  Example use of the function is as follows:
+ *
+ *  @code
+ *  struct pldm_rde_get_schema_uri_resp resp;
+ *  struct pldm_rde_varstring fragment;
+ *  int rc;
+ *
+ *  rc = decode_pldm_rde_get_schema_uri_resp(msg, payload_length, &resp);
+ *  if (rc) {
+ *      // Handle any error from decoding the fixed-portion of the response
+ *  }
+ *
+ *  // The fragments may be walked more than once, e.g. to size then fill.
+ *  foreach_pldm_rde_get_schema_uri_fragment(resp, fragment, rc) {
+ *      // Add fragment.string_data.length to a running total
+ *  }
+ *  if (rc) {
+ *      // Handle any decoding error while iterating the URI fragments
+ *  }
+ *
+ *  foreach_pldm_rde_get_schema_uri_fragment(resp, fragment, rc) {
+ *      // Concatenate fragment.string_data to reassemble the schema URI
+ *  }
+ *  if (rc) {
+ *      // Handle any decoding error while iterating the URI fragments
+ *  }
+ *  @endcode
+ */
+int decode_pldm_rde_get_schema_uri_resp(
+	const struct pldm_msg *msg, size_t payload_length,
+	struct pldm_rde_get_schema_uri_resp *resp);
 
 #ifdef __cplusplus
 }
