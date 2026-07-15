@@ -732,6 +732,84 @@ int decode_pldm_rde_rde_operation_init_resp(
 	const struct pldm_msg *msg, size_t payload_length,
 	struct pldm_rde_rde_operation_init_resp *resp);
 
+/* RDEOperationComplete (0x13) */
+
+/* resource_id(4) + operation_id(2) */
+#define PLDM_RDE_OPERATION_COMPLETE_REQ_BYTES 6
+
+/* completion_code(1) */
+#define PLDM_RDE_OPERATION_COMPLETE_RESP_BYTES 1
+
+/** @struct pldm_rde_rde_operation_complete_req
+ *
+ *  Decoded RDEOperationComplete request.
+ */
+struct pldm_rde_rde_operation_complete_req {
+	uint32_t resource_id;
+	uint16_t operation_id;
+};
+
+/** @struct pldm_rde_rde_operation_complete_resp
+ *
+ *  Decoded RDEOperationComplete response, which carries only a completion
+ *  code.
+ */
+struct pldm_rde_rde_operation_complete_resp {
+	uint8_t completion_code;
+};
+
+/** @brief Encode RDEOperationComplete request.
+ *
+ *  @param[in]  instance_id    - Message's instance id.
+ *  @param[in]  req            - Request to encode.
+ *  @param[out] msg            - Request message.
+ *  @param[in,out] payload_length - On entry the caller-allocated buffer size;
+ *                               must be >=
+ *                               PLDM_RDE_OPERATION_COMPLETE_REQ_BYTES.
+ *                               On exit the encoded message length.
+ *  @return 0 on success, a negative errno value on failure.
+ */
+int encode_pldm_rde_rde_operation_complete_req(
+	uint8_t instance_id,
+	const struct pldm_rde_rde_operation_complete_req *req,
+	struct pldm_msg *msg, size_t *payload_length);
+
+/** @brief Decode RDEOperationComplete request.
+ *
+ *  @param[in]  msg            - Request message.
+ *  @param[in]  payload_length - Length of request payload.
+ *  @param[out] req            - Decoded request.
+ *  @return 0 on success, a negative errno value on failure.
+ */
+int decode_pldm_rde_rde_operation_complete_req(
+	const struct pldm_msg *msg, size_t payload_length,
+	struct pldm_rde_rde_operation_complete_req *req);
+
+/** @brief Encode RDEOperationComplete response.
+ *
+ *  @param[in]  instance_id    - Message's instance id.
+ *  @param[in]  resp           - Response to encode.
+ *  @param[out] msg            - Response message.
+ *  @param[in,out] payload_length - On entry the caller-allocated buffer size;
+ *                               on exit the encoded message length.
+ *  @return 0 on success, a negative errno value on failure.
+ */
+int encode_pldm_rde_rde_operation_complete_resp(
+	uint8_t instance_id,
+	const struct pldm_rde_rde_operation_complete_resp *resp,
+	struct pldm_msg *msg, size_t *payload_length);
+
+/** @brief Decode RDEOperationComplete response.
+ *
+ *  @param[in]  msg            - Response message.
+ *  @param[in]  payload_length - Length of response payload.
+ *  @param[out] resp           - Decoded response.
+ *  @return 0 on success, a negative errno value on failure.
+ */
+int decode_pldm_rde_rde_operation_complete_resp(
+	const struct pldm_msg *msg, size_t payload_length,
+	struct pldm_rde_rde_operation_complete_resp *resp);
+
 #ifdef __cplusplus
 }
 #endif

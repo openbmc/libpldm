@@ -19,6 +19,11 @@ Change categories:
 
 ### Added
 
+- rde: Add RDEOperationComplete command
+  - Add `encode_pldm_rde_rde_operation_complete_req()`
+  - Add `decode_pldm_rde_rde_operation_complete_req()`
+  - Add `encode_pldm_rde_rde_operation_complete_resp()`
+  - Add `decode_pldm_rde_rde_operation_complete_resp()`
 - rde: Add RDEOperationInit command
   - Add `encode_pldm_rde_rde_operation_init_req()`
   - Add `decode_pldm_rde_rde_operation_init_req()`
