@@ -907,6 +907,150 @@ int decode_pldm_rde_rde_operation_status_resp(
 	const struct pldm_msg *msg, size_t payload_length,
 	struct pldm_rde_rde_operation_status_resp *resp);
 
+/* RDEOperationEnumerate (0x16) */
+
+/* completion_code(1) + operation_count(2) */
+#define PLDM_RDE_OPERATION_ENUMERATE_RESP_FIXED_BYTES 3
+
+/* resource_id(4) + operation_id(2) + operation_type(1) */
+#define PLDM_RDE_OPERATION_ENUMERATE_ENTRY_BYTES 7
+
+/** @struct pldm_rde_rde_operation_enumerate_resp
+ *
+ *  Decoded RDEOperationEnumerate response fixed fields. The per-Operation
+ *  entries follow via a separate struct pldm_rde_operation_enumerate_iter set
+ *  by the decode function.
+ */
+struct pldm_rde_rde_operation_enumerate_resp {
+	uint8_t completion_code;
+	uint16_t operation_count;
+};
+
+/** @struct pldm_rde_op_entry
+ *
+ *  One active Operation reported by RDEOperationEnumerate (DSP0218 Table 70).
+ */
+struct pldm_rde_op_entry {
+	uint32_t resource_id;
+	uint16_t operation_id;
+	uint8_t operation_type;
+};
+
+/** @struct pldm_rde_operation_enumerate_iter
+ *
+ *  Iterator over the Operation entries trailing a decoded
+ *  RDEOperationEnumerate response. Initialised by the decode function; walked
+ *  with foreach_pldm_rde_op_entry().
+ */
+struct pldm_rde_operation_enumerate_iter {
+	struct variable_field field;
+	size_t count;
+};
+
+/** @brief Test whether an Operation-entry iterator is exhausted. */
+LIBPLDM_ITERATOR
+bool pldm_rde_operation_enumerate_iter_end(
+	const struct pldm_rde_operation_enumerate_iter *iter)
+{
+	return !iter->count;
+}
+
+/** @brief Advance an Operation-entry iterator by one entry. */
+LIBPLDM_ITERATOR
+bool pldm_rde_operation_enumerate_iter_next(
+	struct pldm_rde_operation_enumerate_iter *iter)
+{
+	if (!iter->count) {
+		return false;
+	}
+	iter->count--;
+	return true;
+}
+
+/** @brief Decode the Operation entry at the iterator's cursor.
+ *
+ *  @param[in,out] iter  - Iterator; its span is advanced past the entry.
+ *  @param[out]    entry - Decoded entry.
+ *  @return 0 on success, a negative errno value on failure.
+ */
+int decode_pldm_rde_op_entry_from_iter(
+	struct pldm_rde_operation_enumerate_iter *iter,
+	struct pldm_rde_op_entry *entry);
+
+/** @brief Iterate the Operation entries yielded by a decode_*() call.
+ *
+ *  @param iter  - The struct pldm_rde_operation_enumerate_iter lvalue set by
+ *                 decode.
+ *  @param entry - The struct pldm_rde_op_entry lvalue for each entry.
+ *  @param rc    - An int lvalue set non-zero if an entry fails to decode.
+ */
+#define foreach_pldm_rde_op_entry(iter, entry, rc)                             \
+	for ((rc) = 0;                                                         \
+	     !pldm_rde_operation_enumerate_iter_end(&(iter)) &&                \
+	     !((rc) = decode_pldm_rde_op_entry_from_iter(&(iter), &(entry)));  \
+	     pldm_rde_operation_enumerate_iter_next(&(iter)))
+
+/** @brief Encode RDEOperationEnumerate request.
+ *
+ *  The request carries no parameters.
+ *
+ *  @param[in]  instance_id    - Message's instance id.
+ *  @param[out] msg            - Request message.
+ *  @param[in,out] payload_length - On entry the caller-allocated buffer size;
+ *                               on exit the encoded payload length (zero).
+ *  @return 0 on success, a negative errno value on failure.
+ */
+int encode_pldm_rde_rde_operation_enumerate_req(uint8_t instance_id,
+						struct pldm_msg *msg,
+						size_t *payload_length);
+
+/** @brief Decode RDEOperationEnumerate request.
+ *
+ *  The request carries no parameters; the payload is validated to be empty.
+ *
+ *  @param[in]  msg            - Request message.
+ *  @param[in]  payload_length - Length of request payload.
+ *  @return 0 on success, a negative errno value on failure.
+ */
+int decode_pldm_rde_rde_operation_enumerate_req(const struct pldm_msg *msg,
+						size_t payload_length);
+
+/** @brief Encode RDEOperationEnumerate response.
+ *
+ *  On a non-SUCCESS completion_code only the completion code is emitted.
+ *
+ *  @param[in]  instance_id    - Message's instance id.
+ *  @param[in]  resp           - Response fixed fields.
+ *  @param[in]  entries        - Array of resp->operation_count entries; may be
+ *                               NULL when operation_count is zero.
+ *  @param[out] msg            - Response message.
+ *  @param[in,out] payload_length - On entry the caller-allocated buffer size;
+ *                               on exit the encoded message length.
+ *  @return 0 on success, a negative errno value on failure.
+ */
+int encode_pldm_rde_rde_operation_enumerate_resp(
+	uint8_t instance_id,
+	const struct pldm_rde_rde_operation_enumerate_resp *resp,
+	const struct pldm_rde_op_entry *entries, struct pldm_msg *msg,
+	size_t *payload_length);
+
+/** @brief Decode RDEOperationEnumerate response.
+ *
+ *  On a non-SUCCESS completion code only resp->completion_code is populated and
+ *  the iterator is left empty.
+ *
+ *  @param[in]  msg            - Response message.
+ *  @param[in]  payload_length - Length of response payload.
+ *  @param[out] resp           - Decoded fixed fields.
+ *  @param[out] entries        - Iterator over the Operation entries; walk it
+ *                               with foreach_pldm_rde_op_entry().
+ *  @return 0 on success, a negative errno value on failure.
+ */
+int decode_pldm_rde_rde_operation_enumerate_resp(
+	const struct pldm_msg *msg, size_t payload_length,
+	struct pldm_rde_rde_operation_enumerate_resp *resp,
+	struct pldm_rde_operation_enumerate_iter *entries);
+
 #ifdef __cplusplus
 }
 #endif
