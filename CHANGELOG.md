@@ -19,6 +19,11 @@ Change categories:
 
 ### Added
 
+- rde: Add RDEOperationInit command
+  - Add `encode_pldm_rde_rde_operation_init_req()`
+  - Add `decode_pldm_rde_rde_operation_init_req()`
+  - Add `encode_pldm_rde_rde_operation_init_resp()`
+  - Add `decode_pldm_rde_rde_operation_init_resp()`
 - rde: Add GetResourceETag command
   - Add `encode_pldm_rde_get_resource_etag_req()`
   - Add `decode_pldm_rde_get_resource_etag_req()`
