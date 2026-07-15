@@ -484,7 +484,40 @@ static int
     return 0;
 }
 
+static int
+    fuzz_decode_pldm_rde_operation_enumerate_req(const struct pldm_msg* msg,
+                                                 size_t payload_length)
+{
+    decode_pldm_rde_operation_enumerate_req(msg, payload_length);
+
+    return 0;
+}
+
+static int
+    fuzz_decode_pldm_rde_operation_enumerate_resp(const struct pldm_msg* msg,
+                                                  size_t payload_length)
+{
+    struct pldm_rde_operation_enumerate_resp resp;
+    struct pldm_rde_op_entry entry;
+    int rc;
+
+    if (decode_pldm_rde_operation_enumerate_resp(msg, payload_length, &resp))
+    {
+        return 0;
+    }
+
+    foreach_pldm_rde_op_entry(resp, entry, rc)
+    {
+        (void)entry;
+    }
+    (void)rc;
+
+    return 0;
+}
+
 static int (*const decode_pldm_msg_tests[])(const struct pldm_msg*, size_t) = {
+    fuzz_decode_pldm_rde_operation_enumerate_req,
+    fuzz_decode_pldm_rde_operation_enumerate_resp,
     fuzz_decode_pldm_rde_operation_status_req,
     fuzz_decode_pldm_rde_operation_status_resp,
     fuzz_decode_pldm_rde_operation_complete_req,
@@ -1266,8 +1299,86 @@ static int fuzz_encode_pldm_rde_operation_status_resp(struct pldm_msg* msg,
     return 0;
 }
 
+static int fuzz_encode_pldm_rde_operation_enumerate_req(struct pldm_msg* msg,
+                                                        size_t payload_length,
+                                                        const uint8_t* data,
+                                                        size_t size)
+{
+    PLDM_MSGBUF_RO_DEFINE_P(buf);
+    uint8_t instance_id;
+    int rc;
+
+    rc = pldm_msgbuf_init_errno(buf, 0, data, size);
+    if (rc)
+    {
+        return -1;
+    }
+
+    pldm_msgbuf_extract(buf, instance_id);
+
+    rc = pldm_msgbuf_complete(buf);
+    if (rc)
+    {
+        return -1;
+    }
+
+    encode_pldm_rde_operation_enumerate_req(instance_id, msg, &payload_length);
+
+    return 0;
+}
+
+static int fuzz_encode_pldm_rde_operation_enumerate_resp(struct pldm_msg* msg,
+                                                         size_t payload_length,
+                                                         const uint8_t* data,
+                                                         size_t size)
+{
+    struct pldm_rde_operation_enumerate_resp resp = {0};
+    struct pldm_rde_op_entry entries[8];
+    PLDM_MSGBUF_RO_DEFINE_P(buf);
+    const uint8_t* tail;
+    size_t tail_len;
+    uint8_t instance_id;
+    uint16_t count;
+    int rc;
+
+    rc = pldm_msgbuf_init_errno(buf, 0, data, size);
+    if (rc)
+    {
+        return -1;
+    }
+
+    pldm_msgbuf_extract(buf, instance_id);
+    pldm_msgbuf_extract(buf, resp.completion_code);
+    pldm_msgbuf_extract(buf, count);
+    pldm_msgbuf_span_remaining(buf, (const void**)&tail, &tail_len);
+
+    rc = pldm_msgbuf_complete(buf);
+    if (rc)
+    {
+        return -1;
+    }
+
+    count %= (uint16_t)(ARRAY_SIZE(entries) + 1);
+    resp.operation_count = count;
+    for (uint16_t i = 0; i < count; i++)
+    {
+        size_t off = tail_len ? (i % tail_len) : 0;
+
+        entries[i].resource_id = tail_len ? tail[off] : 0;
+        entries[i].operation_id = (uint16_t)(tail_len ? tail[off] : 0);
+        entries[i].operation_type = tail_len ? tail[off] : 0;
+    }
+
+    encode_pldm_rde_operation_enumerate_resp(instance_id, &resp, entries, msg,
+                                             &payload_length);
+
+    return 0;
+}
+
 static int (*const encode_pldm_msg_tests[])(struct pldm_msg*, size_t,
                                             const uint8_t*, size_t) = {
+    fuzz_encode_pldm_rde_operation_enumerate_req,
+    fuzz_encode_pldm_rde_operation_enumerate_resp,
     fuzz_encode_pldm_rde_operation_status_req,
     fuzz_encode_pldm_rde_operation_status_resp,
     fuzz_encode_pldm_rde_operation_complete_req,
