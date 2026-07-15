@@ -1171,6 +1171,128 @@ int decode_pldm_rde_operation_enumerate_resp(
 	const struct pldm_msg *msg, size_t payload_length,
 	struct pldm_rde_operation_enumerate_resp *resp);
 
+/* RDEMultipartSend (0x30) */
+
+/** @brief TransferFlag enumeration per DSP0218 Tables 71 and 72. Shared by
+ *  RDEMultipartSend and RDEMultipartReceive.
+ */
+enum pldm_rde_transfer_flag {
+	PLDM_RDE_TRANSFER_FLAG_START = 0,
+	PLDM_RDE_TRANSFER_FLAG_MIDDLE = 1,
+	PLDM_RDE_TRANSFER_FLAG_END = 2,
+	PLDM_RDE_TRANSFER_FLAG_START_AND_END = 3,
+	PLDM_RDE_TRANSFER_FLAG_MAX,
+};
+
+/** @brief TransferOperation enumeration per DSP0218 Tables 71 and 72. Shared
+ *  by RDEMultipartSend and RDEMultipartReceive. RDEMultipartReceive requests
+ *  use only FIRST_PART, NEXT_PART, and ABORT.
+ */
+enum pldm_rde_transfer_operation {
+	PLDM_RDE_TRANSFER_OPERATION_FIRST_PART = 0,
+	PLDM_RDE_TRANSFER_OPERATION_NEXT_PART = 1,
+	PLDM_RDE_TRANSFER_OPERATION_ABORT = 2,
+	PLDM_RDE_TRANSFER_OPERATION_COMPLETE = 3,
+	PLDM_RDE_TRANSFER_OPERATION_MAX,
+};
+
+/* data_transfer_handle(4) + operation_id(2) + transfer_flag(1) +
+ * next_data_transfer_handle(4) + data_length_bytes(4)
+ */
+#define PLDM_RDE_MULTIPART_SEND_REQ_FIXED_BYTES 15
+
+/* completion_code(1) + transfer_operation(1) */
+#define PLDM_RDE_MULTIPART_SEND_RESP_BYTES 2
+
+/** @struct pldm_rde_multipart_send_req
+ *
+ *  Decoded RDEMultipartSend request. data is the payload chunk, spanning the
+ *  message buffer on decode and pointing at the caller's bytes on encode.
+ *  data_integrity_checksum is present on the wire only for a final chunk
+ *  (transfer_flag END or START_AND_END); the on-wire DataLengthBytes counts
+ *  the data plus that checksum.
+ */
+struct pldm_rde_multipart_send_req {
+	uint32_t data_transfer_handle;
+	uint16_t operation_id;
+	uint8_t transfer_flag;
+	uint32_t next_data_transfer_handle;
+	struct variable_field data;
+	uint32_t data_integrity_checksum;
+};
+
+/** @struct pldm_rde_multipart_send_resp
+ *
+ *  Decoded RDEMultipartSend response.
+ */
+struct pldm_rde_multipart_send_resp {
+	uint8_t completion_code;
+	uint8_t transfer_operation;
+};
+
+/** @brief Encode RDEMultipartSend request.
+ *
+ *  @param[in]  instance_id    - Message's instance id.
+ *  @param[in]  req            - Request to encode. transfer_flag must be less
+ *                               than PLDM_RDE_TRANSFER_FLAG_MAX.
+ *                               data_integrity_checksum is emitted only when
+ *                               transfer_flag is END or START_AND_END.
+ *  @param[out] msg            - Request message.
+ *  @param[in,out] payload_length - On entry the caller-allocated buffer size;
+ *                               on exit the encoded message length.
+ *  @return 0 on success, a negative errno value on failure.
+ */
+int encode_pldm_rde_multipart_send_req(
+	uint8_t instance_id, const struct pldm_rde_multipart_send_req *req,
+	struct pldm_msg *msg, size_t *payload_length);
+
+/** @brief Decode RDEMultipartSend request.
+ *
+ *  @param[in]  msg            - Request message.
+ *  @param[in]  payload_length - Length of request payload.
+ *  @param[out] req            - Decoded request. data spans @p msg's buffer;
+ *                               data_integrity_checksum is populated only for a
+ *                               final chunk.
+ *  @return 0 on success, a negative errno value on failure.
+ */
+int decode_pldm_rde_multipart_send_req(const struct pldm_msg *msg,
+				       size_t payload_length,
+				       struct pldm_rde_multipart_send_req *req);
+
+/** @brief Encode RDEMultipartSend response.
+ *
+ *  On a non-SUCCESS completion_code other than
+ *  PLDM_RDE_CC_ERROR_BAD_CHECKSUM only the completion code is emitted; a
+ *  BAD_CHECKSUM response still carries transfer_operation so the RDE Device may
+ *  request a restart.
+ *
+ *  @param[in]  instance_id    - Message's instance id.
+ *  @param[in]  resp           - Response to encode. When transfer_operation is
+ *                               emitted it must be less than
+ *                               PLDM_RDE_TRANSFER_OPERATION_MAX.
+ *  @param[out] msg            - Response message.
+ *  @param[in,out] payload_length - On entry the caller-allocated buffer size;
+ *                               on exit the encoded message length.
+ *  @return 0 on success, a negative errno value on failure.
+ */
+int encode_pldm_rde_multipart_send_resp(
+	uint8_t instance_id, const struct pldm_rde_multipart_send_resp *resp,
+	struct pldm_msg *msg, size_t *payload_length);
+
+/** @brief Decode RDEMultipartSend response.
+ *
+ *  On a non-SUCCESS completion code other than PLDM_RDE_CC_ERROR_BAD_CHECKSUM
+ *  only resp->completion_code is populated.
+ *
+ *  @param[in]  msg            - Response message.
+ *  @param[in]  payload_length - Length of response payload.
+ *  @param[out] resp           - Decoded response.
+ *  @return 0 on success, a negative errno value on failure.
+ */
+int decode_pldm_rde_multipart_send_resp(
+	const struct pldm_msg *msg, size_t payload_length,
+	struct pldm_rde_multipart_send_resp *resp);
+
 #ifdef __cplusplus
 }
 #endif
