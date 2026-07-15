@@ -678,3 +678,169 @@ TEST(GetResourceETag, responseRejectsBadEtag)
               -EINVAL);
 }
 #endif
+
+#if HAVE_LIBPLDM_API_TESTING
+TEST(RDEOperationInit, encodeDecodeRequestRoundTrip)
+{
+    const uint8_t locator[] = {0x01, 0x02, 0x03};
+    const uint8_t payload[] = {0xaa, 0xbb, 0xcc, 0xdd};
+
+    struct pldm_rde_operation_init_req req = {};
+    req.resource_id = 0x11223344;
+    req.operation_id = 0x8001;
+    req.operation_type = PLDM_RDE_OPERATION_TYPE_UPDATE;
+    // locator_valid | contains_request_payload
+    req.operation_flags.byte = 0x03;
+    req.send_data_transfer_handle = 0x55667788;
+    req.operation_locator.ptr = locator;
+    req.operation_locator.length = sizeof(locator);
+    req.request_payload.ptr = payload;
+    req.request_payload.length = sizeof(payload);
+
+    const size_t payloadLen = PLDM_RDE_OPERATION_INIT_REQ_FIXED_BYTES +
+                              sizeof(locator) + sizeof(payload);
+    std::vector<uint8_t> reqMsg(hdrSize + payloadLen, 0);
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+    auto* msg = reinterpret_cast<pldm_msg*>(reqMsg.data());
+
+    size_t reqLen = payloadLen;
+    ASSERT_EQ(encode_pldm_rde_operation_init_req(0, &req, msg, &reqLen), 0);
+    EXPECT_EQ(reqLen, payloadLen);
+
+    struct pldm_rde_operation_init_req decoded = {};
+    ASSERT_EQ(decode_pldm_rde_operation_init_req(msg, payloadLen, &decoded), 0);
+    EXPECT_EQ(decoded.resource_id, req.resource_id);
+    EXPECT_EQ(decoded.operation_id, req.operation_id);
+    EXPECT_EQ(decoded.operation_type, req.operation_type);
+    EXPECT_EQ(decoded.operation_flags.byte, req.operation_flags.byte);
+    EXPECT_EQ(decoded.send_data_transfer_handle, req.send_data_transfer_handle);
+    ASSERT_EQ(decoded.operation_locator.length, sizeof(locator));
+    EXPECT_EQ(0,
+              memcmp(decoded.operation_locator.ptr, locator, sizeof(locator)));
+    ASSERT_EQ(decoded.request_payload.length, sizeof(payload));
+    EXPECT_EQ(0, memcmp(decoded.request_payload.ptr, payload, sizeof(payload)));
+}
+#endif
+
+#if HAVE_LIBPLDM_API_TESTING
+TEST(RDEOperationInit, requestRejectsBadArgs)
+{
+    pldm_msg msg{};
+    size_t reqLen = PLDM_RDE_OPERATION_INIT_REQ_FIXED_BYTES;
+
+    // An out-of-range operation type is rejected.
+    struct pldm_rde_operation_init_req req = {};
+    req.operation_type = PLDM_RDE_OPERATION_TYPE_MAX;
+    EXPECT_EQ(encode_pldm_rde_operation_init_req(0, &req, &msg, &reqLen),
+              -EINVAL);
+    EXPECT_EQ(encode_pldm_rde_operation_init_req(0, nullptr, &msg, &reqLen),
+              -EINVAL);
+
+    // A non-empty locator with a null pointer is rejected.
+    struct pldm_rde_operation_init_req bad = {};
+    bad.operation_type = PLDM_RDE_OPERATION_TYPE_READ;
+    bad.operation_locator.ptr = nullptr;
+    bad.operation_locator.length = 4;
+    EXPECT_EQ(encode_pldm_rde_operation_init_req(0, &bad, &msg, &reqLen),
+              -EINVAL);
+}
+#endif
+
+#if HAVE_LIBPLDM_API_TESTING
+TEST(RDEOperationInit, encodeDecodeResponseRoundTrip)
+{
+    // ETag length includes the NULL terminator per DSP0218 Table 2.
+    const char etag[] = "\"v1\"";
+    const uint8_t payload[] = {0x10, 0x20, 0x30};
+
+    struct pldm_rde_operation_init_resp resp = {};
+    resp.completion_code = PLDM_SUCCESS;
+    resp.operation_status = PLDM_RDE_OPERATION_STATUS_COMPLETED;
+    resp.completion_percentage = 100;
+    resp.completion_time_seconds = 0;
+    resp.operation_execution_flags.byte = 0x04; // HaveResultPayload
+    resp.result_transfer_handle = 0;
+    resp.permission_flags.byte = 0x01; // read access
+    resp.etag.string_format = PLDM_RDE_VARSTRING_UTF_8;
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+    resp.etag.string_data.ptr = reinterpret_cast<const uint8_t*>(etag);
+    resp.etag.string_data.length = sizeof(etag);
+    resp.response_payload.ptr = payload;
+    resp.response_payload.length = sizeof(payload);
+
+    const size_t payloadLen = PLDM_RDE_OPERATION_INIT_RESP_FIXED_BYTES +
+                              PLDM_RDE_VARSTRING_HEADER_BYTES + sizeof(etag) +
+                              sizeof(payload);
+    std::vector<uint8_t> respMsg(hdrSize + payloadLen, 0);
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+    auto* msg = reinterpret_cast<pldm_msg*>(respMsg.data());
+
+    size_t encLen = payloadLen;
+    ASSERT_EQ(encode_pldm_rde_operation_init_resp(0, &resp, msg, &encLen), 0);
+    EXPECT_EQ(encLen, payloadLen);
+
+    struct pldm_rde_operation_init_resp decoded = {};
+    ASSERT_EQ(decode_pldm_rde_operation_init_resp(msg, payloadLen, &decoded),
+              0);
+    EXPECT_EQ(decoded.completion_code, PLDM_SUCCESS);
+    EXPECT_EQ(decoded.operation_status, PLDM_RDE_OPERATION_STATUS_COMPLETED);
+    EXPECT_EQ(decoded.completion_percentage, 100);
+    EXPECT_EQ(decoded.completion_time_seconds, 0U);
+    EXPECT_EQ(decoded.operation_execution_flags.byte, 0x04);
+    EXPECT_EQ(decoded.result_transfer_handle, 0U);
+    EXPECT_EQ(decoded.permission_flags.byte, 0x01);
+    EXPECT_EQ(decoded.etag.string_format, PLDM_RDE_VARSTRING_UTF_8);
+    ASSERT_EQ(decoded.etag.string_data.length, sizeof(etag));
+    EXPECT_EQ(0, memcmp(decoded.etag.string_data.ptr, etag, sizeof(etag)));
+    ASSERT_EQ(decoded.response_payload.length, sizeof(payload));
+    EXPECT_EQ(0,
+              memcmp(decoded.response_payload.ptr, payload, sizeof(payload)));
+}
+#endif
+
+#if HAVE_LIBPLDM_API_TESTING
+TEST(RDEOperationInit, responseErrorIsCompletionCodeOnly)
+{
+    struct pldm_rde_operation_init_resp resp = {};
+    resp.completion_code = PLDM_RDE_CC_ERROR_NO_SUCH_RESOURCE;
+
+    std::array<uint8_t, hdrSize + 1> respMsg{};
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+    auto* msg = reinterpret_cast<pldm_msg*>(respMsg.data());
+
+    size_t respLen = 1;
+    ASSERT_EQ(encode_pldm_rde_operation_init_resp(0, &resp, msg, &respLen), 0);
+    EXPECT_EQ(respLen, sizeof(resp.completion_code));
+    EXPECT_EQ(msg->payload[0], PLDM_RDE_CC_ERROR_NO_SUCH_RESOURCE);
+
+    struct pldm_rde_operation_init_resp decoded = {};
+    ASSERT_EQ(decode_pldm_rde_operation_init_resp(msg, 1, &decoded), 0);
+    EXPECT_EQ(decoded.completion_code, PLDM_RDE_CC_ERROR_NO_SUCH_RESOURCE);
+}
+#endif
+
+#if HAVE_LIBPLDM_API_TESTING
+TEST(RDEOperationInit, responseRejectsBadArgs)
+{
+    pldm_msg msg{};
+    size_t respLen = 64;
+
+    // A success response with an empty etag is rejected: the etag must
+    // include the NULL terminator.
+    struct pldm_rde_operation_init_resp resp = {};
+    resp.completion_code = PLDM_SUCCESS;
+    const char etag[] = "x";
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+    resp.etag.string_data.ptr = reinterpret_cast<const uint8_t*>(etag);
+    resp.etag.string_data.length = 0;
+    EXPECT_EQ(encode_pldm_rde_operation_init_resp(0, &resp, &msg, &respLen),
+              -EINVAL);
+
+    // A non-empty response payload with a null pointer is rejected.
+    resp.etag.string_data.length = sizeof(etag);
+    resp.response_payload.ptr = nullptr;
+    resp.response_payload.length = 4;
+    EXPECT_EQ(encode_pldm_rde_operation_init_resp(0, &resp, &msg, &respLen),
+              -EINVAL);
+}
+#endif
