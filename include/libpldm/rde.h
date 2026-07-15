@@ -887,6 +887,101 @@ int decode_pldm_rde_operation_complete_resp(
 	const struct pldm_msg *msg, size_t payload_length,
 	struct pldm_rde_operation_complete_resp *resp);
 
+/* RDEOperationStatus (0x14) */
+
+/* resource_id(4) + operation_id(2) */
+#define PLDM_RDE_OPERATION_STATUS_REQ_BYTES 6
+
+/* The response is byte-identical to the RDEOperationInit response per DSP0218
+ * Table 68. */
+#define PLDM_RDE_OPERATION_STATUS_RESP_FIXED_BYTES                             \
+	PLDM_RDE_OPERATION_INIT_RESP_FIXED_BYTES
+
+/** @struct pldm_rde_operation_status_req
+ *
+ *  Decoded RDEOperationStatus request.
+ */
+struct pldm_rde_operation_status_req {
+	uint32_t resource_id;
+	uint16_t operation_id;
+};
+
+/** @struct pldm_rde_operation_status_resp
+ *
+ *  Decoded RDEOperationStatus response. Its fields and wire layout are
+ *  identical to struct pldm_rde_operation_init_resp per DSP0218 Table 68.
+ *  etag and response_payload span the message buffer on decode.
+ */
+struct pldm_rde_operation_status_resp {
+	uint8_t completion_code;
+	uint8_t operation_status;
+	uint8_t completion_percentage;
+	uint32_t completion_time_seconds;
+	bitfield8_t operation_execution_flags;
+	uint32_t result_transfer_handle;
+	bitfield8_t permission_flags;
+	struct pldm_rde_varstring etag;
+	struct variable_field response_payload;
+};
+
+/** @brief Encode RDEOperationStatus request.
+ *
+ *  @param[in]  instance_id    - Message's instance id.
+ *  @param[in]  req            - Request to encode.
+ *  @param[out] msg            - Request message.
+ *  @param[in,out] payload_length - On entry the caller-allocated buffer size;
+ *                               must be >= PLDM_RDE_OPERATION_STATUS_REQ_BYTES.
+ *                               On exit the encoded message length.
+ *  @return 0 on success, a negative errno value on failure.
+ */
+int encode_pldm_rde_operation_status_req(
+	uint8_t instance_id, const struct pldm_rde_operation_status_req *req,
+	struct pldm_msg *msg, size_t *payload_length);
+
+/** @brief Decode RDEOperationStatus request.
+ *
+ *  @param[in]  msg            - Request message.
+ *  @param[in]  payload_length - Length of request payload.
+ *  @param[out] req            - Decoded request.
+ *  @return 0 on success, a negative errno value on failure.
+ */
+int decode_pldm_rde_operation_status_req(
+	const struct pldm_msg *msg, size_t payload_length,
+	struct pldm_rde_operation_status_req *req);
+
+/** @brief Encode RDEOperationStatus response.
+ *
+ *  On a non-SUCCESS completion_code only the completion code is emitted.
+ *
+ *  @param[in]  instance_id    - Message's instance id.
+ *  @param[in]  resp           - Response to encode. On success etag.string_data
+ *                               must be non-empty (it includes the NULL
+ *                               terminator) and fit in a uint8 length, and
+ *                               response_payload.length must fit in a uint32.
+ *  @param[out] msg            - Response message.
+ *  @param[in,out] payload_length - On entry the caller-allocated buffer size;
+ *                               on exit the encoded message length.
+ *  @return 0 on success, a negative errno value on failure.
+ */
+int encode_pldm_rde_operation_status_resp(
+	uint8_t instance_id, const struct pldm_rde_operation_status_resp *resp,
+	struct pldm_msg *msg, size_t *payload_length);
+
+/** @brief Decode RDEOperationStatus response.
+ *
+ *  On a non-SUCCESS completion code only resp->completion_code is populated.
+ *  On success etag and response_payload span @p msg's buffer.
+ *
+ *  @param[in]  msg            - Response message.
+ *  @param[in]  payload_length - Length of response payload.
+ *  @param[out] resp           - Decoded response. Output member values are
+ *                               host-endian.
+ *  @return 0 on success, a negative errno value on failure.
+ */
+int decode_pldm_rde_operation_status_resp(
+	const struct pldm_msg *msg, size_t payload_length,
+	struct pldm_rde_operation_status_resp *resp);
+
 #ifdef __cplusplus
 }
 #endif
