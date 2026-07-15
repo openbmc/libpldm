@@ -1174,6 +1174,127 @@ int decode_pldm_rde_rde_multipart_send_resp(
 	const struct pldm_msg *msg, size_t payload_length,
 	struct pldm_rde_rde_multipart_send_resp *resp);
 
+/* RDEMultipartReceive (0x31) */
+
+/* data_transfer_handle(4) + operation_id(2) + transfer_operation(1) */
+#define PLDM_RDE_MULTIPART_RECEIVE_REQ_BYTES 7
+
+/* completion_code(1) + transfer_flag(1) + next_data_transfer_handle(4) +
+ * data_length_bytes(4)
+ */
+#define PLDM_RDE_MULTIPART_RECEIVE_RESP_FIXED_BYTES 10
+
+/** @struct pldm_rde_rde_multipart_receive_req
+ *
+ *  Decoded RDEMultipartReceive request. transfer_operation is one of
+ *  PLDM_RDE_TRANSFER_OPERATION_FIRST_PART, _NEXT_PART, or _ABORT.
+ */
+struct pldm_rde_rde_multipart_receive_req {
+	uint32_t data_transfer_handle;
+	uint16_t operation_id;
+	uint8_t transfer_operation;
+};
+
+/** @struct pldm_rde_rde_multipart_receive_resp
+ *
+ *  Decoded RDEMultipartReceive response. data is the payload chunk, spanning
+ *  the message buffer on decode and pointing at the caller's bytes on encode.
+ *  data_integrity_checksum is present on the wire only for a final chunk
+ *  (transfer_flag END or START_AND_END); the on-wire DataLengthBytes counts
+ *  the data plus that checksum.
+ */
+struct pldm_rde_rde_multipart_receive_resp {
+	uint8_t completion_code;
+	uint8_t transfer_flag;
+	uint32_t next_data_transfer_handle;
+	struct variable_field data;
+	uint32_t data_integrity_checksum;
+};
+
+/** @brief Encode RDEMultipartReceive request.
+ *
+ *  @param[in]  instance_id    - Message's instance id.
+ *  @param[in]  req            - Request to encode. transfer_operation must be
+ *                               PLDM_RDE_TRANSFER_OPERATION_FIRST_PART,
+ *                               _NEXT_PART, or _ABORT.
+ *  @param[out] msg            - Request message.
+ *  @param[in,out] payload_length - On entry the caller-allocated buffer size;
+ *                               must be >=
+ *                               PLDM_RDE_MULTIPART_RECEIVE_REQ_BYTES.
+ *                               On exit the encoded message length.
+ *  @return 0 on success, a negative errno value on failure.
+ */
+int encode_pldm_rde_rde_multipart_receive_req(
+	uint8_t instance_id,
+	const struct pldm_rde_rde_multipart_receive_req *req,
+	struct pldm_msg *msg, size_t *payload_length);
+
+/** @brief Decode RDEMultipartReceive request.
+ *
+ *  @param[in]  msg            - Request message.
+ *  @param[in]  payload_length - Length of request payload.
+ *  @param[out] req            - Decoded request. transfer_operation is
+ *                               validated to be FIRST_PART, NEXT_PART, or
+ *                               ABORT.
+ *  @return 0 on success, a negative errno value on failure.
+ */
+int decode_pldm_rde_rde_multipart_receive_req(
+	const struct pldm_msg *msg, size_t payload_length,
+	struct pldm_rde_rde_multipart_receive_req *req);
+
+/** @brief Encode RDEMultipartReceive response.
+ *
+ *  On a non-SUCCESS completion_code only the completion code is emitted.
+ *
+ *  @param[in]  instance_id    - Message's instance id.
+ *  @param[in]  resp           - Response to encode. On success transfer_flag
+ *                               must be less than PLDM_RDE_TRANSFER_FLAG_MAX;
+ *                               data_integrity_checksum is emitted only when
+ *                               transfer_flag is END or START_AND_END.
+ *  @param[out] msg            - Response message.
+ *  @param[in,out] payload_length - On entry the caller-allocated buffer size;
+ *                               on exit the encoded message length.
+ *  @return 0 on success, a negative errno value on failure.
+ */
+int encode_pldm_rde_rde_multipart_receive_resp(
+	uint8_t instance_id,
+	const struct pldm_rde_rde_multipart_receive_resp *resp,
+	struct pldm_msg *msg, size_t *payload_length);
+
+/** @brief Decode RDEMultipartReceive response.
+ *
+ *  On a non-SUCCESS completion code only resp->completion_code is populated. An
+ *  aborted transfer is acknowledged with a SUCCESS completion code and no
+ *  further fields (a one-byte payload); the decoder recognises this and leaves
+ *  data empty. On a normal success data spans @p msg's buffer, and
+ *  data_integrity_checksum is populated only for a final chunk.
+ *
+ *  @param[in]  msg            - Response message.
+ *  @param[in]  payload_length - Length of response payload.
+ *  @param[out] resp           - Decoded response.
+ *  @return 0 on success, a negative errno value on failure.
+ */
+int decode_pldm_rde_rde_multipart_receive_resp(
+	const struct pldm_msg *msg, size_t payload_length,
+	struct pldm_rde_rde_multipart_receive_resp *resp);
+
+/** @brief Encode an RDEMultipartReceive aborted-transfer acknowledgement.
+ *
+ *  Emits a SUCCESS response carrying only the completion code, as an RDE Device
+ *  does to acknowledge a transfer aborted via TransferOperation ABORT per
+ *  DSP0218 Table 72. decode_pldm_rde_rde_multipart_receive_resp recognises the
+ *  resulting one-byte payload.
+ *
+ *  @param[in]  instance_id    - Message's instance id.
+ *  @param[out] msg            - Response message.
+ *  @param[in,out] payload_length - On entry the caller-allocated buffer size;
+ *                               on exit the encoded payload length (one byte).
+ *  @return 0 on success, a negative errno value on failure.
+ */
+int encode_pldm_rde_rde_multipart_receive_abort_resp(uint8_t instance_id,
+						     struct pldm_msg *msg,
+						     size_t *payload_length);
+
 #ifdef __cplusplus
 }
 #endif
