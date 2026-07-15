@@ -982,6 +982,195 @@ int decode_pldm_rde_operation_status_resp(
 	const struct pldm_msg *msg, size_t payload_length,
 	struct pldm_rde_operation_status_resp *resp);
 
+/* RDEOperationEnumerate (0x16) */
+
+/* completion_code(1) + operation_count(2) */
+#define PLDM_RDE_OPERATION_ENUMERATE_RESP_FIXED_BYTES 3
+
+/* resource_id(4) + operation_id(2) + operation_type(1) */
+#define PLDM_RDE_OPERATION_ENUMERATE_ENTRY_BYTES 7
+
+/** @struct pldm_rde_operation_enumerate_resp
+ *
+ *  Decoded RDEOperationEnumerate response. entries spans the per-Operation
+ *  entry bytes in the message buffer; walk them with foreach_pldm_rde_op_entry(),
+ *  which may be run more than once.
+ */
+struct pldm_rde_operation_enumerate_resp {
+	uint8_t completion_code;
+	uint16_t operation_count;
+	struct variable_field entries;
+};
+
+/** @struct pldm_rde_op_entry
+ *
+ *  One active Operation reported by RDEOperationEnumerate (DSP0218 Table 70).
+ */
+struct pldm_rde_op_entry {
+	uint32_t resource_id;
+	uint16_t operation_id;
+	uint8_t operation_type;
+};
+
+/** @struct pldm_rde_operation_enumerate_iter
+ *
+ *  Low-level cursor over the Operation entries in a message buffer. The
+ *  foreach macro builds a fresh cursor from the decoded response on each
+ *  traversal, so the entries can be walked more than once.
+ */
+struct pldm_rde_operation_enumerate_iter {
+	struct variable_field field;
+	size_t count;
+};
+
+/** @brief Test whether an Operation-entry iterator is exhausted. */
+LIBPLDM_ITERATOR
+bool pldm_rde_operation_enumerate_iter_end(
+	const struct pldm_rde_operation_enumerate_iter *iter)
+{
+	return !iter->count;
+}
+
+/** @brief Advance an Operation-entry iterator by one entry. */
+LIBPLDM_ITERATOR
+bool pldm_rde_operation_enumerate_iter_next(
+	struct pldm_rde_operation_enumerate_iter *iter)
+{
+	if (!iter->count) {
+		return false;
+	}
+	iter->count--;
+	return true;
+}
+
+/** @brief Decode the Operation entry at the iterator's cursor.
+ *
+ *  @param[in,out] iter  - Iterator; its span is advanced past the entry.
+ *  @param[out]    entry - Decoded entry.
+ *  @return 0 on success, a negative errno value on failure.
+ */
+int decode_pldm_rde_op_entry_from_iter(
+	struct pldm_rde_operation_enumerate_iter *iter,
+	struct pldm_rde_op_entry *entry);
+
+/** @brief Build an Operation-entry iterator over a decoded response.
+ *
+ *  @param[in] resp - A response populated by
+ *                    decode_pldm_rde_operation_enumerate_resp().
+ *  @return A fresh iterator positioned at the first Operation entry.
+ */
+LIBPLDM_ITERATOR
+struct pldm_rde_operation_enumerate_iter pldm_rde_operation_enumerate_iter_init(
+	const struct pldm_rde_operation_enumerate_resp *resp)
+{
+	struct pldm_rde_operation_enumerate_iter iter;
+
+	iter.field = resp->entries;
+	iter.count = resp->operation_count;
+
+	return iter;
+}
+
+/** @brief Iterate the Operation entries of a decoded response.
+ *
+ *  Builds a fresh cursor from @p resp on each use, so the entries may be walked
+ *  more than once.
+ *
+ *  @param resp  - The struct pldm_rde_operation_enumerate_resp lvalue from
+ *                 decode.
+ *  @param entry - The struct pldm_rde_op_entry lvalue for each entry.
+ *  @param rc    - An int lvalue set non-zero if an entry fails to decode.
+ */
+#define foreach_pldm_rde_op_entry(resp, entry, rc)                             \
+	for (struct pldm_rde_operation_enumerate_iter entry##_iter =           \
+		     ((rc) = 0,                                                \
+		     pldm_rde_operation_enumerate_iter_init(&(resp)));         \
+	     !(rc) &&                                                          \
+	     !pldm_rde_operation_enumerate_iter_end(&(entry##_iter)) &&        \
+	     !((rc) = decode_pldm_rde_op_entry_from_iter(&(entry##_iter),      \
+							 &(entry)));           \
+	     pldm_rde_operation_enumerate_iter_next(&(entry##_iter)))
+
+/** @brief Encode RDEOperationEnumerate request.
+ *
+ *  The request carries no parameters.
+ *
+ *  @param[in]  instance_id    - Message's instance id.
+ *  @param[out] msg            - Request message.
+ *  @param[in,out] payload_length - On entry the caller-allocated buffer size;
+ *                               on exit the encoded payload length (zero).
+ *  @return 0 on success, a negative errno value on failure.
+ */
+int encode_pldm_rde_operation_enumerate_req(uint8_t instance_id,
+					    struct pldm_msg *msg,
+					    size_t *payload_length);
+
+/** @brief Decode RDEOperationEnumerate request.
+ *
+ *  The request carries no parameters; the payload is validated to be empty.
+ *
+ *  @param[in]  msg            - Request message.
+ *  @param[in]  payload_length - Length of request payload.
+ *  @return 0 on success, a negative errno value on failure.
+ */
+int decode_pldm_rde_operation_enumerate_req(const struct pldm_msg *msg,
+					    size_t payload_length);
+
+/** @brief Encode RDEOperationEnumerate response.
+ *
+ *  On a non-SUCCESS completion_code only the completion code is emitted.
+ *
+ *  @param[in]  instance_id    - Message's instance id.
+ *  @param[in]  resp           - Response fixed fields.
+ *  @param[in]  entries        - Array of resp->operation_count entries; may be
+ *                               NULL when operation_count is zero.
+ *  @param[out] msg            - Response message.
+ *  @param[in,out] payload_length - On entry the caller-allocated buffer size;
+ *                               on exit the encoded message length.
+ *  @return 0 on success, a negative errno value on failure.
+ */
+int encode_pldm_rde_operation_enumerate_resp(
+	uint8_t instance_id,
+	const struct pldm_rde_operation_enumerate_resp *resp,
+	const struct pldm_rde_op_entry *entries, struct pldm_msg *msg,
+	size_t *payload_length);
+
+/** @brief Decode RDEOperationEnumerate response.
+ *
+ *  On a non-SUCCESS completion code only resp->completion_code is populated and
+ *  resp->entries is left empty.
+ *
+ *  @param[in]  msg            - Response message.
+ *  @param[in]  payload_length - Length of response payload.
+ *  @param[out] resp           - Decoded response; resp->entries spans the
+ *                               Operation entries in @p msg's buffer.
+ *  @return 0 on success, a negative errno value on failure.
+ *
+ *  Example use of the function is as follows:
+ *
+ *  @code
+ *  struct pldm_rde_operation_enumerate_resp resp;
+ *  struct pldm_rde_op_entry entry;
+ *  int rc;
+ *
+ *  rc = decode_pldm_rde_operation_enumerate_resp(msg, payload_length, &resp);
+ *  if (rc) {
+ *      // Handle any error from decoding the fixed-portion of the response
+ *  }
+ *
+ *  // The entries may be walked more than once.
+ *  foreach_pldm_rde_op_entry(resp, entry, rc) {
+ *      // Do something with entry
+ *  }
+ *  if (rc) {
+ *      // Handle any decoding error while iterating the entries
+ *  }
+ *  @endcode
+ */
+int decode_pldm_rde_operation_enumerate_resp(
+	const struct pldm_msg *msg, size_t payload_length,
+	struct pldm_rde_operation_enumerate_resp *resp);
+
 #ifdef __cplusplus
 }
 #endif
