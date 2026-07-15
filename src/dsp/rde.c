@@ -1300,3 +1300,116 @@ int decode_pldm_rde_rde_operation_complete_resp(
 
 	return pldm_msgbuf_complete_consumed(buf);
 }
+
+LIBPLDM_ABI_TESTING
+int encode_pldm_rde_rde_operation_status_req(
+	uint8_t instance_id,
+	const struct pldm_rde_rde_operation_status_req *req,
+	struct pldm_msg *msg, size_t *payload_length)
+{
+	PLDM_MSGBUF_RW_DEFINE_P(buf);
+	int rc;
+
+	if (msg == NULL || req == NULL || payload_length == NULL) {
+		return -EINVAL;
+	}
+
+	rc = encode_pldm_header_only_errno(PLDM_REQUEST, instance_id, PLDM_RDE,
+					   PLDM_RDE_CMD_RDE_OPERATION_STATUS,
+					   msg);
+	if (rc) {
+		return rc;
+	}
+
+	rc = pldm_msgbuf_init_errno(buf, PLDM_RDE_OPERATION_STATUS_REQ_BYTES,
+				    msg->payload, *payload_length);
+	if (rc) {
+		return rc;
+	}
+	pldm_msgbuf_insert(buf, req->resource_id);
+	pldm_msgbuf_insert(buf, req->operation_id);
+
+	return pldm_msgbuf_complete_used(buf, *payload_length, payload_length);
+}
+
+LIBPLDM_ABI_TESTING
+int decode_pldm_rde_rde_operation_status_req(
+	const struct pldm_msg *msg, size_t payload_length,
+	struct pldm_rde_rde_operation_status_req *req)
+{
+	PLDM_MSGBUF_RO_DEFINE_P(buf);
+	int rc;
+
+	if (msg == NULL || req == NULL) {
+		return -EINVAL;
+	}
+
+	rc = pldm_msgbuf_init_errno(buf, PLDM_RDE_OPERATION_STATUS_REQ_BYTES,
+				    msg->payload, payload_length);
+	if (rc) {
+		return rc;
+	}
+	pldm_msgbuf_extract(buf, req->resource_id);
+	pldm_msgbuf_extract(buf, req->operation_id);
+
+	return pldm_msgbuf_complete_consumed(buf);
+}
+
+LIBPLDM_ABI_TESTING
+int encode_pldm_rde_rde_operation_status_resp(
+	uint8_t instance_id,
+	const struct pldm_rde_rde_operation_status_resp *resp,
+	struct pldm_msg *msg, size_t *payload_length)
+{
+	int rc;
+
+	if (msg == NULL || resp == NULL || payload_length == NULL) {
+		return -EINVAL;
+	}
+
+	rc = encode_pldm_header_only_errno(PLDM_RESPONSE, instance_id, PLDM_RDE,
+					   PLDM_RDE_CMD_RDE_OPERATION_STATUS,
+					   msg);
+	if (rc) {
+		return rc;
+	}
+
+	/* An error response carries only the completion code. */
+	if (resp->completion_code != PLDM_SUCCESS) {
+		return encode_rde_cc_only_resp(msg, resp->completion_code,
+					       payload_length);
+	}
+
+	return encode_rde_operation_resp_body(
+		msg, resp->completion_code, resp->operation_status,
+		resp->completion_percentage, resp->completion_time_seconds,
+		resp->operation_execution_flags.byte,
+		resp->result_transfer_handle, resp->permission_flags.byte,
+		&resp->etag, &resp->response_payload, payload_length);
+}
+
+LIBPLDM_ABI_TESTING
+int decode_pldm_rde_rde_operation_status_resp(
+	const struct pldm_msg *msg, size_t payload_length,
+	struct pldm_rde_rde_operation_status_resp *resp)
+{
+	int rc;
+
+	if (msg == NULL || resp == NULL) {
+		return -EINVAL;
+	}
+
+	rc = pldm_msg_has_error(msg, payload_length);
+	if (rc) {
+		resp->completion_code = rc;
+		return 0;
+	}
+
+	return decode_rde_operation_resp_body(
+		msg, payload_length, &resp->completion_code,
+		&resp->operation_status, &resp->completion_percentage,
+		&resp->completion_time_seconds,
+		&resp->operation_execution_flags.byte,
+		&resp->result_transfer_handle, &resp->permission_flags.byte,
+		&resp->etag, &resp->response_payload);
+}

@@ -876,3 +876,156 @@ TEST(RDEOperationComplete, requestRejectsBadArgs)
         -EINVAL);
 }
 #endif
+
+#if HAVE_LIBPLDM_API_TESTING
+TEST(RDEOperationStatus, encodeDecodeRequestRoundTrip)
+{
+    struct pldm_rde_rde_operation_status_req req = {};
+    req.resource_id = 0x0a0b0c0d;
+    req.operation_id = 0x8042;
+
+    std::array<uint8_t, hdrSize + PLDM_RDE_OPERATION_STATUS_REQ_BYTES> reqMsg{};
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+    auto* msg = reinterpret_cast<pldm_msg*>(reqMsg.data());
+
+    size_t reqLen = PLDM_RDE_OPERATION_STATUS_REQ_BYTES;
+    ASSERT_EQ(encode_pldm_rde_rde_operation_status_req(0, &req, msg, &reqLen),
+              0);
+    EXPECT_EQ(reqLen, PLDM_RDE_OPERATION_STATUS_REQ_BYTES);
+
+    struct pldm_rde_rde_operation_status_req decoded = {};
+    ASSERT_EQ(decode_pldm_rde_rde_operation_status_req(
+                  msg, PLDM_RDE_OPERATION_STATUS_REQ_BYTES, &decoded),
+              0);
+    EXPECT_EQ(decoded.resource_id, req.resource_id);
+    EXPECT_EQ(decoded.operation_id, req.operation_id);
+}
+#endif
+
+#if HAVE_LIBPLDM_API_TESTING
+TEST(RDEOperationStatus, encodeDecodeResponseRoundTrip)
+{
+    const char etag[] = "\"v9\"";
+    const uint8_t payload[] = {0x01, 0x02};
+
+    struct pldm_rde_rde_operation_status_resp resp = {};
+    resp.completion_code = PLDM_SUCCESS;
+    resp.operation_status = PLDM_RDE_OPERATION_STATUS_RUNNING;
+    resp.completion_percentage = 42;
+    resp.completion_time_seconds = 0xffffffff;
+    resp.operation_execution_flags.byte = 0x00;
+    resp.result_transfer_handle = 0x11223344;
+    resp.permission_flags.byte = 0x03;
+    resp.etag.string_format = PLDM_RDE_VARSTRING_UTF_8;
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+    resp.etag.string_data.ptr = reinterpret_cast<const uint8_t*>(etag);
+    resp.etag.string_data.length = sizeof(etag);
+    resp.response_payload.ptr = payload;
+    resp.response_payload.length = sizeof(payload);
+
+    const size_t payloadLen = PLDM_RDE_OPERATION_STATUS_RESP_FIXED_BYTES +
+                              PLDM_RDE_VARSTRING_HEADER_BYTES + sizeof(etag) +
+                              sizeof(payload);
+    std::vector<uint8_t> respMsg(hdrSize + payloadLen, 0);
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+    auto* msg = reinterpret_cast<pldm_msg*>(respMsg.data());
+
+    size_t encLen = payloadLen;
+    ASSERT_EQ(encode_pldm_rde_rde_operation_status_resp(0, &resp, msg, &encLen),
+              0);
+    EXPECT_EQ(encLen, payloadLen);
+
+    struct pldm_rde_rde_operation_status_resp decoded = {};
+    ASSERT_EQ(
+        decode_pldm_rde_rde_operation_status_resp(msg, payloadLen, &decoded),
+        0);
+    EXPECT_EQ(decoded.operation_status, PLDM_RDE_OPERATION_STATUS_RUNNING);
+    EXPECT_EQ(decoded.completion_percentage, 42);
+    EXPECT_EQ(decoded.completion_time_seconds, 0xffffffffU);
+    EXPECT_EQ(decoded.result_transfer_handle, 0x11223344U);
+    EXPECT_EQ(decoded.permission_flags.byte, 0x03);
+    ASSERT_EQ(decoded.etag.string_data.length, sizeof(etag));
+    EXPECT_EQ(0, memcmp(decoded.etag.string_data.ptr, etag, sizeof(etag)));
+    ASSERT_EQ(decoded.response_payload.length, sizeof(payload));
+    EXPECT_EQ(0,
+              memcmp(decoded.response_payload.ptr, payload, sizeof(payload)));
+}
+#endif
+
+#if HAVE_LIBPLDM_API_TESTING
+TEST(RDEOperationStatus, responseErrorIsCompletionCodeOnly)
+{
+    struct pldm_rde_rde_operation_status_resp resp = {};
+    resp.completion_code = PLDM_RDE_CC_ERROR_UNSUPPORTED;
+
+    std::array<uint8_t, hdrSize + 1> respMsg{};
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+    auto* msg = reinterpret_cast<pldm_msg*>(respMsg.data());
+
+    size_t respLen = 1;
+    ASSERT_EQ(
+        encode_pldm_rde_rde_operation_status_resp(0, &resp, msg, &respLen), 0);
+    EXPECT_EQ(respLen, sizeof(resp.completion_code));
+
+    struct pldm_rde_rde_operation_status_resp decoded = {};
+    ASSERT_EQ(decode_pldm_rde_rde_operation_status_resp(msg, 1, &decoded), 0);
+    EXPECT_EQ(decoded.completion_code, PLDM_RDE_CC_ERROR_UNSUPPORTED);
+}
+#endif
+
+#if HAVE_LIBPLDM_API_TESTING
+// DSP0218 Table 68 defines the RDEOperationStatus response to be byte-identical
+// to the RDEOperationInit response; the two encoders share a helper, so their
+// payloads must match for equal field values.
+TEST(RDEOperationStatus, responseBodyMatchesOperationInit)
+{
+    const char etag[] = "\"same\"";
+    const uint8_t payload[] = {0xde, 0xad, 0xbe, 0xef};
+
+    const size_t payloadLen = PLDM_RDE_OPERATION_INIT_RESP_FIXED_BYTES +
+                              PLDM_RDE_VARSTRING_HEADER_BYTES + sizeof(etag) +
+                              sizeof(payload);
+
+    struct pldm_rde_rde_operation_status_resp sResp = {};
+    sResp.completion_code = PLDM_SUCCESS;
+    sResp.operation_status = PLDM_RDE_OPERATION_STATUS_COMPLETED;
+    sResp.completion_percentage = 100;
+    sResp.completion_time_seconds = 7;
+    sResp.operation_execution_flags.byte = 0x04;
+    sResp.result_transfer_handle = 0x55667788;
+    sResp.permission_flags.byte = 0x21;
+    sResp.etag.string_format = PLDM_RDE_VARSTRING_UTF_8;
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+    sResp.etag.string_data.ptr = reinterpret_cast<const uint8_t*>(etag);
+    sResp.etag.string_data.length = sizeof(etag);
+    sResp.response_payload.ptr = payload;
+    sResp.response_payload.length = sizeof(payload);
+
+    struct pldm_rde_rde_operation_init_resp iResp = {};
+    iResp.completion_code = sResp.completion_code;
+    iResp.operation_status = sResp.operation_status;
+    iResp.completion_percentage = sResp.completion_percentage;
+    iResp.completion_time_seconds = sResp.completion_time_seconds;
+    iResp.operation_execution_flags = sResp.operation_execution_flags;
+    iResp.result_transfer_handle = sResp.result_transfer_handle;
+    iResp.permission_flags = sResp.permission_flags;
+    iResp.etag = sResp.etag;
+    iResp.response_payload = sResp.response_payload;
+
+    std::vector<uint8_t> sMsg(hdrSize + payloadLen, 0);
+    std::vector<uint8_t> iMsg(hdrSize + payloadLen, 0);
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+    auto* sm = reinterpret_cast<pldm_msg*>(sMsg.data());
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+    auto* im = reinterpret_cast<pldm_msg*>(iMsg.data());
+
+    size_t sLen = payloadLen;
+    size_t iLen = payloadLen;
+    ASSERT_EQ(encode_pldm_rde_rde_operation_status_resp(0, &sResp, sm, &sLen),
+              0);
+    ASSERT_EQ(encode_pldm_rde_rde_operation_init_resp(0, &iResp, im, &iLen), 0);
+    ASSERT_EQ(sLen, iLen);
+    // The payloads (all bytes after the PLDM header) must be identical.
+    EXPECT_EQ(0, memcmp(sm->payload, im->payload, sLen));
+}
+#endif
