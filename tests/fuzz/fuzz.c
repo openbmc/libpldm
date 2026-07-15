@@ -488,7 +488,41 @@ static int
     return 0;
 }
 
+static int
+    fuzz_decode_pldm_rde_rde_operation_enumerate_req(const struct pldm_msg* msg,
+                                                     size_t payload_length)
+{
+    decode_pldm_rde_rde_operation_enumerate_req(msg, payload_length);
+
+    return 0;
+}
+
+static int fuzz_decode_pldm_rde_rde_operation_enumerate_resp(
+    const struct pldm_msg* msg, size_t payload_length)
+{
+    struct pldm_rde_rde_operation_enumerate_resp resp;
+    struct pldm_rde_operation_enumerate_iter iter;
+    struct pldm_rde_op_entry entry;
+    int rc;
+
+    if (decode_pldm_rde_rde_operation_enumerate_resp(msg, payload_length, &resp,
+                                                     &iter))
+    {
+        return 0;
+    }
+
+    foreach_pldm_rde_op_entry(iter, entry, rc)
+    {
+        (void)entry;
+    }
+    (void)rc;
+
+    return 0;
+}
+
 static int (*const decode_pldm_msg_tests[])(const struct pldm_msg*, size_t) = {
+    fuzz_decode_pldm_rde_rde_operation_enumerate_req,
+    fuzz_decode_pldm_rde_rde_operation_enumerate_resp,
     fuzz_decode_pldm_rde_rde_operation_status_req,
     fuzz_decode_pldm_rde_rde_operation_status_resp,
     fuzz_decode_pldm_rde_rde_operation_complete_req,
