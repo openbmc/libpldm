@@ -466,7 +466,31 @@ static int
     return 0;
 }
 
+static int
+    fuzz_decode_pldm_rde_rde_operation_status_req(const struct pldm_msg* msg,
+                                                  size_t payload_length)
+{
+    struct pldm_rde_rde_operation_status_req req;
+
+    decode_pldm_rde_rde_operation_status_req(msg, payload_length, &req);
+
+    return 0;
+}
+
+static int
+    fuzz_decode_pldm_rde_rde_operation_status_resp(const struct pldm_msg* msg,
+                                                   size_t payload_length)
+{
+    struct pldm_rde_rde_operation_status_resp resp;
+
+    decode_pldm_rde_rde_operation_status_resp(msg, payload_length, &resp);
+
+    return 0;
+}
+
 static int (*const decode_pldm_msg_tests[])(const struct pldm_msg*, size_t) = {
+    fuzz_decode_pldm_rde_rde_operation_status_req,
+    fuzz_decode_pldm_rde_rde_operation_status_resp,
     fuzz_decode_pldm_rde_rde_operation_complete_req,
     fuzz_decode_pldm_rde_rde_operation_complete_resp,
     fuzz_decode_pldm_rde_rde_operation_init_req,
