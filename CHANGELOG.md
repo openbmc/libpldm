@@ -22,6 +22,11 @@ Change categories:
 - libpldm++ support for fw update pkg v1.1.0
 - libpldm++ support for fw update pkg v1.2.0
 - libpldm++ support for fw update pkg v1.3.0
+- rde: Add RDEOperationComplete command
+  - Add `encode_pldm_rde_rde_operation_complete_req()`
+  - Add `decode_pldm_rde_rde_operation_complete_req()`
+  - Add `encode_pldm_rde_rde_operation_complete_resp()`
+  - Add `decode_pldm_rde_rde_operation_complete_resp()`
 - rde: Add RDEOperationInit command
   - Add `encode_pldm_rde_rde_operation_init_req()`
   - Add `decode_pldm_rde_rde_operation_init_req()`
