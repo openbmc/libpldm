@@ -654,6 +654,162 @@ int decode_pldm_rde_get_resource_etag_resp(
 	const struct pldm_msg *msg, size_t payload_length,
 	struct pldm_rde_get_resource_etag_resp *resp);
 
+/* RDEOperationInit (0x10) */
+
+/* OperationID (rdeOpID) per DSP0218 Table 30: a uint16 whose most-significant
+ * bit flags an MC-initiated Operation, and whose 0x0000 value means "no
+ * Operation". These constants document the field; libpldm carries operation_id
+ * verbatim and does not act on them, as ownership of the OperationID namespace
+ * belongs to the MC and RDE Device rather than the codec.
+ */
+#define PLDM_RDE_MC_INITIATED_OPERATION (1u << 15)
+#define PLDM_RDE_OPERATION_ID_NONE	0x0000
+
+/** @brief OperationType enumeration per DSP0218 Table 64. */
+enum pldm_rde_operation_type {
+	PLDM_RDE_OPERATION_TYPE_HEAD = 0,
+	PLDM_RDE_OPERATION_TYPE_READ = 1,
+	PLDM_RDE_OPERATION_TYPE_CREATE = 2,
+	PLDM_RDE_OPERATION_TYPE_DELETE = 3,
+	PLDM_RDE_OPERATION_TYPE_UPDATE = 4,
+	PLDM_RDE_OPERATION_TYPE_REPLACE = 5,
+	PLDM_RDE_OPERATION_TYPE_ACTION = 6,
+	PLDM_RDE_OPERATION_TYPE_MAX,
+};
+
+/** @brief OperationStatus enumeration per DSP0218 Table 64. */
+enum pldm_rde_operation_status {
+	PLDM_RDE_OPERATION_STATUS_INACTIVE = 0,
+	PLDM_RDE_OPERATION_STATUS_NEEDS_INPUT = 1,
+	PLDM_RDE_OPERATION_STATUS_TRIGGERED = 2,
+	PLDM_RDE_OPERATION_STATUS_RUNNING = 3,
+	PLDM_RDE_OPERATION_STATUS_HAVE_RESULTS = 4,
+	PLDM_RDE_OPERATION_STATUS_COMPLETED = 5,
+	PLDM_RDE_OPERATION_STATUS_FAILED = 6,
+	PLDM_RDE_OPERATION_STATUS_ABANDONED = 7,
+	PLDM_RDE_OPERATION_STATUS_MAX,
+};
+
+/* resource_id(4) + operation_id(2) + operation_type(1) + operation_flags(1) +
+ * send_data_transfer_handle(4) + operation_locator_length(1) +
+ * request_payload_length(4)
+ */
+#define PLDM_RDE_OPERATION_INIT_REQ_FIXED_BYTES 17
+
+/* Fixed prefix: completion_code(1) + operation_status(1) +
+ * completion_percentage(1) + completion_time_seconds(4) +
+ * operation_execution_flags(1) + result_transfer_handle(4) +
+ * permission_flags(1) + response_payload_length(4); a NULL-terminated ETag
+ * varstring and the response payload follow.
+ */
+#define PLDM_RDE_OPERATION_INIT_RESP_FIXED_BYTES 17
+
+/* The response always carries a NULL-terminated ETag varstring per DSP0218
+ * Table 64 (skipped Operations still return a NULL-only ETag), so a success
+ * response is at least the fixed prefix plus that mandatory ETag.
+ */
+#define PLDM_RDE_OPERATION_INIT_RESP_MIN_BYTES                                 \
+	(PLDM_RDE_OPERATION_INIT_RESP_FIXED_BYTES +                            \
+	 PLDM_RDE_VARSTRING_HEADER_BYTES + 1)
+
+/** @struct pldm_rde_operation_init_req
+ *
+ *  Decoded RDEOperationInit request. operation_locator and request_payload are
+ *  spans into the message buffer on decode and point at the caller's bytes on
+ *  encode; their lengths carry the on-wire OperationLocatorLength (uint8) and
+ *  RequestPayloadLength (uint32) fields.
+ */
+struct pldm_rde_operation_init_req {
+	uint32_t resource_id;
+	uint16_t operation_id;
+	uint8_t operation_type;
+	bitfield8_t operation_flags;
+	uint32_t send_data_transfer_handle;
+	struct variable_field operation_locator;
+	struct variable_field request_payload;
+};
+
+/** @struct pldm_rde_operation_init_resp
+ *
+ *  Decoded RDEOperationInit response. etag spans the message buffer on decode
+ *  and points at the caller's bytes on encode; response_payload likewise, with
+ *  its length carrying the on-wire ResponsePayloadLength (uint32) field. This
+ *  response is byte-identical to the RDEOperationStatus response per DSP0218
+ *  Table 68.
+ */
+struct pldm_rde_operation_init_resp {
+	uint8_t completion_code;
+	uint8_t operation_status;
+	uint8_t completion_percentage;
+	uint32_t completion_time_seconds;
+	bitfield8_t operation_execution_flags;
+	uint32_t result_transfer_handle;
+	bitfield8_t permission_flags;
+	struct pldm_rde_varstring etag;
+	struct variable_field response_payload;
+};
+
+/** @brief Encode RDEOperationInit request.
+ *
+ *  @param[in]  instance_id    - Message's instance id.
+ *  @param[in]  req            - Request to encode. operation_type must be less
+ *                               than PLDM_RDE_OPERATION_TYPE_MAX,
+ *                               operation_locator.length must fit in a uint8,
+ *                               and request_payload.length in a uint32.
+ *  @param[out] msg            - Request message.
+ *  @param[in,out] payload_length - On entry the caller-allocated buffer size;
+ *                               on exit the encoded message length.
+ *  @return 0 on success, a negative errno value on failure.
+ */
+int encode_pldm_rde_operation_init_req(
+	uint8_t instance_id, const struct pldm_rde_operation_init_req *req,
+	struct pldm_msg *msg, size_t *payload_length);
+
+/** @brief Decode RDEOperationInit request.
+ *
+ *  @param[in]  msg            - Request message.
+ *  @param[in]  payload_length - Length of request payload.
+ *  @param[out] req            - Decoded request. operation_locator and
+ *                               request_payload span @p msg's buffer.
+ *  @return 0 on success, a negative errno value on failure.
+ */
+int decode_pldm_rde_operation_init_req(const struct pldm_msg *msg,
+				       size_t payload_length,
+				       struct pldm_rde_operation_init_req *req);
+
+/** @brief Encode RDEOperationInit response.
+ *
+ *  On a non-SUCCESS completion_code only the completion code is emitted.
+ *
+ *  @param[in]  instance_id    - Message's instance id.
+ *  @param[in]  resp           - Response to encode. On success etag.string_data
+ *                               must be non-empty (it includes the NULL
+ *                               terminator) and fit in a uint8 length, and
+ *                               response_payload.length must fit in a uint32.
+ *  @param[out] msg            - Response message.
+ *  @param[in,out] payload_length - On entry the caller-allocated buffer size;
+ *                               on exit the encoded message length.
+ *  @return 0 on success, a negative errno value on failure.
+ */
+int encode_pldm_rde_operation_init_resp(
+	uint8_t instance_id, const struct pldm_rde_operation_init_resp *resp,
+	struct pldm_msg *msg, size_t *payload_length);
+
+/** @brief Decode RDEOperationInit response.
+ *
+ *  On a non-SUCCESS completion code only resp->completion_code is populated.
+ *  On success etag and response_payload span @p msg's buffer.
+ *
+ *  @param[in]  msg            - Response message.
+ *  @param[in]  payload_length - Length of response payload.
+ *  @param[out] resp           - Decoded response. Output member values are
+ *                               host-endian.
+ *  @return 0 on success, a negative errno value on failure.
+ */
+int decode_pldm_rde_operation_init_resp(
+	const struct pldm_msg *msg, size_t payload_length,
+	struct pldm_rde_operation_init_resp *resp);
+
 #ifdef __cplusplus
 }
 #endif
