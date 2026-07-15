@@ -34,6 +34,11 @@ Change categories:
 - firmware_update: Add GetPackageData command
   - Add `encode_get_package_data_resp()`
   - Add `decode_get_package_data_req()`
+- rde: Add RDEMultipartSend command
+  - Add `encode_pldm_rde_multipart_send_req()`
+  - Add `decode_pldm_rde_multipart_send_req()`
+  - Add `encode_pldm_rde_multipart_send_resp()`
+  - Add `decode_pldm_rde_multipart_send_resp()`
 - rde: Add RDEOperationEnumerate command
   - Add `encode_pldm_rde_operation_enumerate_req()`
   - Add `decode_pldm_rde_operation_enumerate_req()`
