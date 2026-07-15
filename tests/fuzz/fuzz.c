@@ -421,7 +421,29 @@ static int
     return 0;
 }
 
+static int fuzz_decode_pldm_rde_operation_init_req(const struct pldm_msg* msg,
+                                                   size_t payload_length)
+{
+    struct pldm_rde_operation_init_req req;
+
+    decode_pldm_rde_operation_init_req(msg, payload_length, &req);
+
+    return 0;
+}
+
+static int fuzz_decode_pldm_rde_operation_init_resp(const struct pldm_msg* msg,
+                                                    size_t payload_length)
+{
+    struct pldm_rde_operation_init_resp resp;
+
+    decode_pldm_rde_operation_init_resp(msg, payload_length, &resp);
+
+    return 0;
+}
+
 static int (*const decode_pldm_msg_tests[])(const struct pldm_msg*, size_t) = {
+    fuzz_decode_pldm_rde_operation_init_req,
+    fuzz_decode_pldm_rde_operation_init_resp,
     fuzz_decode_pldm_rde_get_resource_etag_req,
     fuzz_decode_pldm_rde_get_resource_etag_resp,
     fuzz_decode_pldm_rde_get_schema_uri_req,
@@ -932,8 +954,122 @@ static int fuzz_encode_pldm_rde_get_resource_etag_resp(struct pldm_msg* msg,
     return 0;
 }
 
+static int fuzz_encode_pldm_rde_operation_init_req(struct pldm_msg* msg,
+                                                   size_t payload_length,
+                                                   const uint8_t* data,
+                                                   size_t size)
+{
+    struct pldm_rde_operation_init_req req = {0};
+    PLDM_MSGBUF_RO_DEFINE_P(buf);
+    const uint8_t* tail;
+    size_t tail_len;
+    uint8_t instance_id;
+    uint8_t locator_len;
+    int rc;
+
+    rc = pldm_msgbuf_init_errno(buf, 0, data, size);
+    if (rc)
+    {
+        return -1;
+    }
+
+    pldm_msgbuf_extract(buf, instance_id);
+    pldm_msgbuf_extract(buf, req.resource_id);
+    pldm_msgbuf_extract(buf, req.operation_id);
+    pldm_msgbuf_extract(buf, req.operation_type);
+    pldm_msgbuf_extract(buf, req.operation_flags.byte);
+    pldm_msgbuf_extract(buf, req.send_data_transfer_handle);
+    pldm_msgbuf_extract(buf, locator_len);
+    pldm_msgbuf_span_remaining(buf, (const void**)&tail, &tail_len);
+
+    rc = pldm_msgbuf_complete(buf);
+    if (rc)
+    {
+        return -1;
+    }
+
+    /* Split the tail between the locator and the payload, so both spans are
+     * driven by the fuzz input. */
+    if (tail_len)
+    {
+        locator_len %= (uint8_t)(tail_len + 1);
+    }
+    else
+    {
+        locator_len = 0;
+    }
+    req.operation_locator.ptr = tail;
+    req.operation_locator.length = locator_len;
+    req.request_payload.ptr = tail + locator_len;
+    req.request_payload.length = tail_len - locator_len;
+
+    encode_pldm_rde_operation_init_req(instance_id, &req, msg, &payload_length);
+
+    return 0;
+}
+
+static int fuzz_encode_pldm_rde_operation_init_resp(struct pldm_msg* msg,
+                                                    size_t payload_length,
+                                                    const uint8_t* data,
+                                                    size_t size)
+{
+    struct pldm_rde_operation_init_resp resp = {0};
+    PLDM_MSGBUF_RO_DEFINE_P(buf);
+    const uint8_t* tail;
+    size_t tail_len;
+    uint8_t instance_id;
+    uint8_t etag_len;
+    int rc;
+
+    rc = pldm_msgbuf_init_errno(buf, 0, data, size);
+    if (rc)
+    {
+        return -1;
+    }
+
+    pldm_msgbuf_extract(buf, instance_id);
+    pldm_msgbuf_extract(buf, resp.completion_code);
+    pldm_msgbuf_extract(buf, resp.operation_status);
+    pldm_msgbuf_extract(buf, resp.completion_percentage);
+    pldm_msgbuf_extract(buf, resp.completion_time_seconds);
+    pldm_msgbuf_extract(buf, resp.operation_execution_flags.byte);
+    pldm_msgbuf_extract(buf, resp.result_transfer_handle);
+    pldm_msgbuf_extract(buf, resp.permission_flags.byte);
+    pldm_msgbuf_extract(buf, resp.etag.string_format);
+    pldm_msgbuf_extract(buf, etag_len);
+    pldm_msgbuf_span_remaining(buf, (const void**)&tail, &tail_len);
+
+    rc = pldm_msgbuf_complete(buf);
+    if (rc)
+    {
+        return -1;
+    }
+
+    /* Split the tail between the ETag and the response payload, so both
+     * spans are driven by the fuzz input. */
+    if (tail_len)
+    {
+        etag_len %= (uint8_t)(tail_len + 1);
+    }
+    else
+    {
+        etag_len = 0;
+    }
+    resp.etag.string_data.ptr = tail;
+    resp.etag.string_data.length = etag_len;
+    resp.response_payload.ptr = tail + etag_len;
+    resp.response_payload.length = tail_len - etag_len;
+
+    encode_pldm_rde_operation_init_resp(instance_id, &resp, msg,
+                                        &payload_length);
+
+    return 0;
+}
+
 static int (*const encode_pldm_msg_tests[])(struct pldm_msg*, size_t,
                                             const uint8_t*, size_t) = {
+    fuzz_encode_pldm_rde_operation_init_req,
+    fuzz_encode_pldm_rde_operation_init_resp,
     fuzz_encode_pldm_rde_get_resource_etag_req,
     fuzz_encode_pldm_rde_get_resource_etag_resp,
     fuzz_encode_pldm_rde_get_schema_uri_req,
