@@ -22,6 +22,12 @@ Change categories:
 - libpldm++ support for fw update pkg v1.1.0
 - libpldm++ support for fw update pkg v1.2.0
 - libpldm++ support for fw update pkg v1.3.0
+- rde: Add RDEMultipartReceive command
+  - Add `encode_pldm_rde_rde_multipart_receive_req()`
+  - Add `decode_pldm_rde_rde_multipart_receive_req()`
+  - Add `encode_pldm_rde_rde_multipart_receive_resp()`
+  - Add `decode_pldm_rde_rde_multipart_receive_resp()`
+  - Add `encode_pldm_rde_rde_multipart_receive_abort_resp()`
 - rde: Add RDEMultipartSend command
   - Add `encode_pldm_rde_rde_multipart_send_req()`
   - Add `decode_pldm_rde_rde_multipart_send_req()`
