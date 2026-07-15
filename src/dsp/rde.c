@@ -1200,3 +1200,103 @@ int decode_pldm_rde_rde_operation_init_resp(
 		&resp->result_transfer_handle, &resp->permission_flags.byte,
 		&resp->etag, &resp->response_payload);
 }
+
+LIBPLDM_ABI_TESTING
+int encode_pldm_rde_rde_operation_complete_req(
+	uint8_t instance_id,
+	const struct pldm_rde_rde_operation_complete_req *req,
+	struct pldm_msg *msg, size_t *payload_length)
+{
+	PLDM_MSGBUF_RW_DEFINE_P(buf);
+	int rc;
+
+	if (msg == NULL || req == NULL || payload_length == NULL) {
+		return -EINVAL;
+	}
+
+	rc = encode_pldm_header_only_errno(PLDM_REQUEST, instance_id, PLDM_RDE,
+					   PLDM_RDE_CMD_RDE_OPERATION_COMPLETE,
+					   msg);
+	if (rc) {
+		return rc;
+	}
+
+	rc = pldm_msgbuf_init_errno(buf, PLDM_RDE_OPERATION_COMPLETE_REQ_BYTES,
+				    msg->payload, *payload_length);
+	if (rc) {
+		return rc;
+	}
+	pldm_msgbuf_insert(buf, req->resource_id);
+	pldm_msgbuf_insert(buf, req->operation_id);
+
+	return pldm_msgbuf_complete_used(buf, *payload_length, payload_length);
+}
+
+LIBPLDM_ABI_TESTING
+int decode_pldm_rde_rde_operation_complete_req(
+	const struct pldm_msg *msg, size_t payload_length,
+	struct pldm_rde_rde_operation_complete_req *req)
+{
+	PLDM_MSGBUF_RO_DEFINE_P(buf);
+	int rc;
+
+	if (msg == NULL || req == NULL) {
+		return -EINVAL;
+	}
+
+	rc = pldm_msgbuf_init_errno(buf, PLDM_RDE_OPERATION_COMPLETE_REQ_BYTES,
+				    msg->payload, payload_length);
+	if (rc) {
+		return rc;
+	}
+	pldm_msgbuf_extract(buf, req->resource_id);
+	pldm_msgbuf_extract(buf, req->operation_id);
+
+	return pldm_msgbuf_complete_consumed(buf);
+}
+
+LIBPLDM_ABI_TESTING
+int encode_pldm_rde_rde_operation_complete_resp(
+	uint8_t instance_id,
+	const struct pldm_rde_rde_operation_complete_resp *resp,
+	struct pldm_msg *msg, size_t *payload_length)
+{
+	int rc;
+
+	if (msg == NULL || resp == NULL || payload_length == NULL) {
+		return -EINVAL;
+	}
+
+	rc = encode_pldm_header_only_errno(PLDM_RESPONSE, instance_id, PLDM_RDE,
+					   PLDM_RDE_CMD_RDE_OPERATION_COMPLETE,
+					   msg);
+	if (rc) {
+		return rc;
+	}
+
+	/* The response carries only the completion code per DSP0218 Table 67. */
+	return encode_rde_cc_only_resp(msg, resp->completion_code,
+				       payload_length);
+}
+
+LIBPLDM_ABI_TESTING
+int decode_pldm_rde_rde_operation_complete_resp(
+	const struct pldm_msg *msg, size_t payload_length,
+	struct pldm_rde_rde_operation_complete_resp *resp)
+{
+	PLDM_MSGBUF_RO_DEFINE_P(buf);
+	int rc;
+
+	if (msg == NULL || resp == NULL) {
+		return -EINVAL;
+	}
+
+	rc = pldm_msgbuf_init_errno(buf, sizeof(resp->completion_code),
+				    msg->payload, payload_length);
+	if (rc) {
+		return rc;
+	}
+	pldm_msgbuf_extract(buf, resp->completion_code);
+
+	return pldm_msgbuf_complete_consumed(buf);
+}

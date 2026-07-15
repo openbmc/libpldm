@@ -804,3 +804,75 @@ TEST(RDEOperationInit, responseRejectsBadArgs)
               -EINVAL);
 }
 #endif
+
+#if HAVE_LIBPLDM_API_TESTING
+TEST(RDEOperationComplete, encodeDecodeRequestRoundTrip)
+{
+    struct pldm_rde_rde_operation_complete_req req = {};
+    req.resource_id = 0x0a0b0c0d;
+    req.operation_id = 0x8042;
+
+    std::array<uint8_t, hdrSize + PLDM_RDE_OPERATION_COMPLETE_REQ_BYTES>
+        reqMsg{};
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+    auto* msg = reinterpret_cast<pldm_msg*>(reqMsg.data());
+
+    size_t reqLen = PLDM_RDE_OPERATION_COMPLETE_REQ_BYTES;
+    ASSERT_EQ(encode_pldm_rde_rde_operation_complete_req(0, &req, msg, &reqLen),
+              0);
+    EXPECT_EQ(reqLen, PLDM_RDE_OPERATION_COMPLETE_REQ_BYTES);
+
+    struct pldm_rde_rde_operation_complete_req decoded = {};
+    ASSERT_EQ(decode_pldm_rde_rde_operation_complete_req(
+                  msg, PLDM_RDE_OPERATION_COMPLETE_REQ_BYTES, &decoded),
+              0);
+    EXPECT_EQ(decoded.resource_id, req.resource_id);
+    EXPECT_EQ(decoded.operation_id, req.operation_id);
+}
+#endif
+
+#if HAVE_LIBPLDM_API_TESTING
+TEST(RDEOperationComplete, encodeDecodeResponseRoundTrip)
+{
+    for (uint8_t cc :
+         {uint8_t{PLDM_SUCCESS}, uint8_t{PLDM_RDE_CC_ERROR_NO_SUCH_RESOURCE}})
+    {
+        struct pldm_rde_rde_operation_complete_resp resp = {};
+        resp.completion_code = cc;
+
+        std::array<uint8_t, hdrSize + PLDM_RDE_OPERATION_COMPLETE_RESP_BYTES>
+            respMsg{};
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+        auto* msg = reinterpret_cast<pldm_msg*>(respMsg.data());
+
+        size_t respLen = PLDM_RDE_OPERATION_COMPLETE_RESP_BYTES;
+        ASSERT_EQ(encode_pldm_rde_rde_operation_complete_resp(0, &resp, msg,
+                                                              &respLen),
+                  0);
+        EXPECT_EQ(respLen, PLDM_RDE_OPERATION_COMPLETE_RESP_BYTES);
+        EXPECT_EQ(msg->payload[0], cc);
+
+        struct pldm_rde_rde_operation_complete_resp decoded = {};
+        ASSERT_EQ(decode_pldm_rde_rde_operation_complete_resp(
+                      msg, PLDM_RDE_OPERATION_COMPLETE_RESP_BYTES, &decoded),
+                  0);
+        EXPECT_EQ(decoded.completion_code, cc);
+    }
+}
+#endif
+
+#if HAVE_LIBPLDM_API_TESTING
+TEST(RDEOperationComplete, requestRejectsBadArgs)
+{
+    pldm_msg msg{};
+    size_t reqLen = PLDM_RDE_OPERATION_COMPLETE_REQ_BYTES;
+    EXPECT_EQ(
+        encode_pldm_rde_rde_operation_complete_req(0, nullptr, &msg, &reqLen),
+        -EINVAL);
+
+    struct pldm_rde_rde_operation_complete_req req = {};
+    EXPECT_EQ(
+        encode_pldm_rde_rde_operation_complete_req(0, &req, nullptr, &reqLen),
+        -EINVAL);
+}
+#endif
