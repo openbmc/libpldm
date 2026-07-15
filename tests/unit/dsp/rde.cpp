@@ -1555,3 +1555,206 @@ TEST(RDEOperationStatus, decodeResponseRejectsMissingEtag)
               -EOVERFLOW);
 }
 #endif
+
+#if HAVE_LIBPLDM_API_TESTING
+TEST(RDEOperationEnumerate, encodeDecodeRequestRoundTrip)
+{
+    std::array<uint8_t, hdrSize + 4> reqMsg{};
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+    auto* msg = reinterpret_cast<pldm_msg*>(reqMsg.data());
+
+    size_t reqLen = 0;
+    ASSERT_EQ(encode_pldm_rde_operation_enumerate_req(0, msg, &reqLen), 0);
+    EXPECT_EQ(reqLen, 0U);
+
+    EXPECT_EQ(decode_pldm_rde_operation_enumerate_req(msg, 0), 0);
+    // The request carries no parameters, so a non-empty payload is rejected.
+    EXPECT_NE(decode_pldm_rde_operation_enumerate_req(msg, 4), 0);
+}
+#endif
+
+#if HAVE_LIBPLDM_API_TESTING
+TEST(RDEOperationEnumerate, encodeDecodeResponseRoundTripWalksEntries)
+{
+    std::array<struct pldm_rde_op_entry, 2> operations{};
+    operations[0].resource_id = 0x00001111;
+    operations[0].operation_id = 0x8001;
+    operations[0].operation_type = PLDM_RDE_OPERATION_TYPE_READ;
+    operations[1].resource_id = 0x00002222;
+    operations[1].operation_id = 0x8002;
+    operations[1].operation_type = PLDM_RDE_OPERATION_TYPE_UPDATE;
+
+    const size_t payloadLen = PLDM_RDE_OPERATION_ENUMERATE_RESP_FIXED_BYTES +
+                              2 * PLDM_RDE_OPERATION_ENUMERATE_ENTRY_BYTES;
+    std::vector<uint8_t> respMsg(hdrSize + payloadLen, 0);
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+    auto* msg = reinterpret_cast<pldm_msg*>(respMsg.data());
+
+    struct pldm_rde_operation_enumerate_resp resp = {};
+    resp.completion_code = PLDM_SUCCESS;
+    resp.operation_count = 2;
+
+    size_t encLen = payloadLen;
+    ASSERT_EQ(encode_pldm_rde_operation_enumerate_resp(
+                  0, &resp, operations.data(), msg, &encLen),
+              0);
+    EXPECT_EQ(encLen, payloadLen);
+
+    struct pldm_rde_operation_enumerate_resp decoded = {};
+    ASSERT_EQ(
+        decode_pldm_rde_operation_enumerate_resp(msg, payloadLen, &decoded), 0);
+    EXPECT_EQ(decoded.completion_code, PLDM_SUCCESS);
+    EXPECT_EQ(decoded.operation_count, 2);
+
+    std::vector<struct pldm_rde_op_entry> got;
+    struct pldm_rde_op_entry entry = {};
+    int rc = 0;
+    foreach_pldm_rde_op_entry(decoded, entry, rc)
+    {
+        got.push_back(entry);
+    }
+    ASSERT_EQ(rc, 0);
+    ASSERT_EQ(got.size(), 2U);
+    EXPECT_EQ(got[0].resource_id, operations[0].resource_id);
+    EXPECT_EQ(got[0].operation_id, operations[0].operation_id);
+    EXPECT_EQ(got[0].operation_type, operations[0].operation_type);
+    EXPECT_EQ(got[1].resource_id, operations[1].resource_id);
+    EXPECT_EQ(got[1].operation_id, operations[1].operation_id);
+    EXPECT_EQ(got[1].operation_type, operations[1].operation_type);
+
+    // The entries can be walked again: the macro re-inits from decoded.
+    size_t secondPass = 0;
+    foreach_pldm_rde_op_entry(decoded, entry, rc)
+    {
+        secondPass++;
+    }
+    ASSERT_EQ(rc, 0);
+    EXPECT_EQ(secondPass, 2U);
+}
+#endif
+
+#if HAVE_LIBPLDM_API_TESTING
+TEST(RDEOperationEnumerate, responseEmptyWhenCountZero)
+{
+    std::array<uint8_t, hdrSize + PLDM_RDE_OPERATION_ENUMERATE_RESP_FIXED_BYTES>
+        respMsg{};
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+    auto* msg = reinterpret_cast<pldm_msg*>(respMsg.data());
+
+    struct pldm_rde_operation_enumerate_resp resp = {};
+    resp.completion_code = PLDM_SUCCESS;
+    resp.operation_count = 0;
+
+    size_t encLen = PLDM_RDE_OPERATION_ENUMERATE_RESP_FIXED_BYTES;
+    ASSERT_EQ(encode_pldm_rde_operation_enumerate_resp(0, &resp, nullptr, msg,
+                                                       &encLen),
+              0);
+    EXPECT_EQ(encLen, PLDM_RDE_OPERATION_ENUMERATE_RESP_FIXED_BYTES);
+
+    struct pldm_rde_operation_enumerate_resp decoded = {};
+    ASSERT_EQ(decode_pldm_rde_operation_enumerate_resp(msg, encLen, &decoded),
+              0);
+    EXPECT_EQ(decoded.operation_count, 0);
+
+    size_t n = 0;
+    struct pldm_rde_op_entry entry = {};
+    int rc = 0;
+    foreach_pldm_rde_op_entry(decoded, entry, rc)
+    {
+        n++;
+    }
+    EXPECT_EQ(rc, 0);
+    EXPECT_EQ(n, 0U);
+}
+#endif
+
+#if HAVE_LIBPLDM_API_TESTING
+TEST(RDEOperationEnumerate, responseErrorIsCompletionCodeOnly)
+{
+    std::array<uint8_t, hdrSize + 1> respMsg{};
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+    auto* msg = reinterpret_cast<pldm_msg*>(respMsg.data());
+
+    struct pldm_rde_operation_enumerate_resp resp = {};
+    resp.completion_code = PLDM_ERROR;
+    size_t respLen = 1;
+    ASSERT_EQ(encode_pldm_rde_operation_enumerate_resp(0, &resp, nullptr, msg,
+                                                       &respLen),
+              0);
+    EXPECT_EQ(respLen, 1U);
+
+    struct pldm_rde_operation_enumerate_resp decoded = {};
+    ASSERT_EQ(decode_pldm_rde_operation_enumerate_resp(msg, 1, &decoded), 0);
+    EXPECT_EQ(decoded.completion_code, PLDM_ERROR);
+    EXPECT_EQ(decoded.operation_count, 0);
+}
+#endif
+
+#if HAVE_LIBPLDM_API_TESTING
+TEST(RDEOperationEnumerate, responseRejectsTruncatedEntries)
+{
+    // Encode two Operations, then decode claiming a payload that holds only
+    // one: the fixed-size entries must exactly fill the trailing bytes.
+    std::array<struct pldm_rde_op_entry, 2> operations{};
+    operations[0].operation_type = PLDM_RDE_OPERATION_TYPE_READ;
+    operations[1].operation_type = PLDM_RDE_OPERATION_TYPE_READ;
+
+    const size_t fullLen = PLDM_RDE_OPERATION_ENUMERATE_RESP_FIXED_BYTES +
+                           2 * PLDM_RDE_OPERATION_ENUMERATE_ENTRY_BYTES;
+    std::vector<uint8_t> respMsg(hdrSize + fullLen, 0);
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+    auto* msg = reinterpret_cast<pldm_msg*>(respMsg.data());
+
+    struct pldm_rde_operation_enumerate_resp resp = {};
+    resp.completion_code = PLDM_SUCCESS;
+    resp.operation_count = 2;
+    size_t encLen = fullLen;
+    ASSERT_EQ(encode_pldm_rde_operation_enumerate_resp(
+                  0, &resp, operations.data(), msg, &encLen),
+              0);
+
+    // operation_count is 2 in the buffer, but only one entry's worth of
+    // trailing bytes is presented.
+    const size_t shortLen = PLDM_RDE_OPERATION_ENUMERATE_RESP_FIXED_BYTES +
+                            PLDM_RDE_OPERATION_ENUMERATE_ENTRY_BYTES;
+    struct pldm_rde_operation_enumerate_resp decoded = {};
+    EXPECT_EQ(decode_pldm_rde_operation_enumerate_resp(msg, shortLen, &decoded),
+              -EBADMSG);
+}
+#endif
+
+#if HAVE_LIBPLDM_API_TESTING
+TEST(RDEOperationEnumerate, entryDecodeRejectsUndefinedOperationType)
+{
+    // OperationType must be one DSP0218 Table 64 defines, so an entry
+    // carrying 7 is rejected while walking the response.
+    const size_t payloadLen = PLDM_RDE_OPERATION_ENUMERATE_RESP_FIXED_BYTES +
+                              PLDM_RDE_OPERATION_ENUMERATE_ENTRY_BYTES;
+    std::vector<uint8_t> respMsg(hdrSize + payloadLen, 0);
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+    auto* msg = reinterpret_cast<pldm_msg*>(respMsg.data());
+    msg->payload[0] = PLDM_SUCCESS;
+    msg->payload[1] = 1; // operation_count, little-endian uint16
+    msg->payload[2] = 0;
+    // The entry's resource_id and operation_id stay zero; operation_type is
+    // the last byte of the 7-byte entry.
+    msg->payload[PLDM_RDE_OPERATION_ENUMERATE_RESP_FIXED_BYTES +
+                 PLDM_RDE_OPERATION_ENUMERATE_ENTRY_BYTES - 1] =
+        PLDM_RDE_OPERATION_TYPE_MAX + 1; // 7, one past OPERATION_ACTION
+
+    struct pldm_rde_operation_enumerate_resp decoded = {};
+    ASSERT_EQ(
+        decode_pldm_rde_operation_enumerate_resp(msg, payloadLen, &decoded), 0);
+    ASSERT_EQ(decoded.operation_count, 1);
+
+    struct pldm_rde_op_entry entry = {};
+    int rc = 0;
+    size_t walked = 0;
+    foreach_pldm_rde_op_entry(decoded, entry, rc)
+    {
+        walked++;
+    }
+    EXPECT_EQ(rc, -EPROTO);
+    EXPECT_EQ(walked, 0U); // the loop body never runs for a rejected entry
+}
+#endif
