@@ -34,6 +34,12 @@ Change categories:
 - firmware_update: Add GetPackageData command
   - Add `encode_get_package_data_resp()`
   - Add `decode_get_package_data_req()`
+- rde: Add RDEOperationEnumerate command
+  - Add `encode_pldm_rde_operation_enumerate_req()`
+  - Add `decode_pldm_rde_operation_enumerate_req()`
+  - Add `encode_pldm_rde_operation_enumerate_resp()`
+  - Add `decode_pldm_rde_operation_enumerate_resp()`
+  - Add `decode_pldm_rde_op_entry_from_iter()` and `foreach_pldm_rde_op_entry()`
 - rde: Add RDEOperationStatus command
   - Add `encode_pldm_rde_operation_status_req()`
   - Add `decode_pldm_rde_operation_status_req()`
