@@ -1424,3 +1424,196 @@ int decode_pldm_rde_operation_status_resp(
 		&resp->result_transfer_handle, &resp->permission_flags.byte,
 		&resp->etag, &resp->response_payload);
 }
+
+LIBPLDM_ABI_TESTING
+int encode_pldm_rde_operation_enumerate_req(uint8_t instance_id,
+					    struct pldm_msg *msg,
+					    size_t *payload_length)
+{
+	PLDM_MSGBUF_RW_DEFINE_P(buf);
+	int rc;
+
+	if (msg == NULL || payload_length == NULL) {
+		return -EINVAL;
+	}
+
+	rc = encode_pldm_header_only_errno(PLDM_REQUEST, instance_id, PLDM_RDE,
+					   PLDM_RDE_CMD_RDE_OPERATION_ENUMERATE,
+					   msg);
+	if (rc) {
+		return rc;
+	}
+
+	/* The request carries no parameters. */
+	rc = pldm_msgbuf_init_errno(buf, 0, msg->payload, *payload_length);
+	if (rc) {
+		return rc;
+	}
+
+	return pldm_msgbuf_complete_used(buf, *payload_length, payload_length);
+}
+
+LIBPLDM_ABI_TESTING
+int decode_pldm_rde_operation_enumerate_req(const struct pldm_msg *msg,
+					    size_t payload_length)
+{
+	PLDM_MSGBUF_RO_DEFINE_P(buf);
+	int rc;
+
+	if (msg == NULL) {
+		return -EINVAL;
+	}
+
+	/* The request carries no parameters, so the payload must be empty. */
+	rc = pldm_msgbuf_init_errno(buf, 0, msg->payload, payload_length);
+	if (rc) {
+		return rc;
+	}
+
+	return pldm_msgbuf_complete_consumed(buf);
+}
+
+LIBPLDM_ABI_TESTING
+int decode_pldm_rde_op_entry_from_iter(
+	struct pldm_rde_operation_enumerate_iter *iter,
+	struct pldm_rde_op_entry *entry)
+{
+	PLDM_MSGBUF_RO_DEFINE_P(buf);
+	int rc;
+
+	if (iter == NULL || iter->field.ptr == NULL || entry == NULL) {
+		return -EINVAL;
+	}
+
+	rc = pldm_msgbuf_init_errno(buf,
+				    PLDM_RDE_OPERATION_ENUMERATE_ENTRY_BYTES,
+				    iter->field.ptr, iter->field.length);
+	if (rc) {
+		return rc;
+	}
+
+	pldm_msgbuf_extract(buf, entry->resource_id);
+	pldm_msgbuf_extract(buf, entry->operation_id);
+	pldm_msgbuf_extract(buf, entry->operation_type);
+
+	iter->field.ptr = NULL;
+	pldm_msgbuf_span_remaining(buf, (const void **)&iter->field.ptr,
+				   &iter->field.length);
+
+	return pldm_msgbuf_complete(buf);
+}
+
+LIBPLDM_ABI_TESTING
+int encode_pldm_rde_operation_enumerate_resp(
+	uint8_t instance_id,
+	const struct pldm_rde_operation_enumerate_resp *resp,
+	const struct pldm_rde_op_entry *entries, struct pldm_msg *msg,
+	size_t *payload_length)
+{
+	PLDM_MSGBUF_RW_DEFINE_P(buf);
+	int rc;
+
+	if (msg == NULL || resp == NULL || payload_length == NULL) {
+		return -EINVAL;
+	}
+
+	rc = encode_pldm_header_only_errno(PLDM_RESPONSE, instance_id, PLDM_RDE,
+					   PLDM_RDE_CMD_RDE_OPERATION_ENUMERATE,
+					   msg);
+	if (rc) {
+		return rc;
+	}
+
+	/* An error response carries only the completion code. */
+	if (resp->completion_code != PLDM_SUCCESS) {
+		return encode_rde_cc_only_resp(msg, resp->completion_code,
+					       payload_length);
+	}
+
+	if (resp->operation_count > 0 && entries == NULL) {
+		return -EINVAL;
+	}
+	for (uint16_t i = 0; i < resp->operation_count; i++) {
+		if (entries[i].operation_type >= PLDM_RDE_OPERATION_TYPE_MAX) {
+			return -EINVAL;
+		}
+	}
+
+	rc = pldm_msgbuf_init_errno(
+		buf,
+		(size_t)PLDM_RDE_OPERATION_ENUMERATE_RESP_FIXED_BYTES +
+			(size_t)resp->operation_count *
+				PLDM_RDE_OPERATION_ENUMERATE_ENTRY_BYTES,
+		msg->payload, *payload_length);
+	if (rc) {
+		return rc;
+	}
+	pldm_msgbuf_insert(buf, resp->completion_code);
+	pldm_msgbuf_insert(buf, resp->operation_count);
+
+	for (uint16_t i = 0; i < resp->operation_count; i++) {
+		pldm_msgbuf_insert(buf, entries[i].resource_id);
+		pldm_msgbuf_insert(buf, entries[i].operation_id);
+		pldm_msgbuf_insert(buf, entries[i].operation_type);
+	}
+
+	return pldm_msgbuf_complete_used(buf, *payload_length, payload_length);
+}
+
+LIBPLDM_ABI_TESTING
+int decode_pldm_rde_operation_enumerate_resp(
+	const struct pldm_msg *msg, size_t payload_length,
+	struct pldm_rde_operation_enumerate_resp *resp)
+{
+	PLDM_MSGBUF_RO_DEFINE_P(buf);
+	const void *remaining = NULL;
+	size_t remaining_length = 0;
+	int rc;
+
+	if (msg == NULL || resp == NULL) {
+		return -EINVAL;
+	}
+
+	/* Leave the entries empty so the error and short paths are safe to
+	 * iterate. */
+	resp->entries.ptr = NULL;
+	resp->entries.length = 0;
+	resp->operation_count = 0;
+
+	rc = pldm_msg_has_error(msg, payload_length);
+	if (rc) {
+		resp->completion_code = rc;
+		return 0;
+	}
+
+	rc = pldm_msgbuf_init_errno(
+		buf, PLDM_RDE_OPERATION_ENUMERATE_RESP_FIXED_BYTES,
+		msg->payload, payload_length);
+	if (rc) {
+		return rc;
+	}
+	pldm_msgbuf_extract(buf, resp->completion_code);
+	pldm_msgbuf_extract(buf, resp->operation_count);
+
+	rc = pldm_msgbuf_span_remaining(buf, &remaining, &remaining_length);
+	if (rc) {
+		return pldm_msgbuf_discard(buf, rc);
+	}
+
+	rc = pldm_msgbuf_complete(buf);
+	if (rc) {
+		return rc;
+	}
+
+	/* Every entry is a fixed PLDM_RDE_OPERATION_ENUMERATE_ENTRY_BYTES, so
+	 * the trailing bytes must hold exactly operation_count of them. */
+	if (remaining_length !=
+	    (size_t)resp->operation_count *
+		    PLDM_RDE_OPERATION_ENUMERATE_ENTRY_BYTES) {
+		return -EBADMSG;
+	}
+
+	resp->entries.ptr = remaining;
+	resp->entries.length = remaining_length;
+	return 0;
+}
