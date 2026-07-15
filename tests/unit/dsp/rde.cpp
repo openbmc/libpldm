@@ -1187,3 +1187,163 @@ TEST(RDEOperationEnumerate, responseRejectsTruncatedEntries)
               -EBADMSG);
 }
 #endif
+
+#if HAVE_LIBPLDM_API_TESTING
+TEST(RDEMultipartSend, encodeDecodeRequestRoundTripFinalChunk)
+{
+    const uint8_t data[] = {0x11, 0x22, 0x33, 0x44, 0x55};
+    struct pldm_rde_rde_multipart_send_req req = {};
+    req.data_transfer_handle = 0x01020304;
+    req.operation_id = 0x8001;
+    req.transfer_flag = PLDM_RDE_TRANSFER_FLAG_START_AND_END;
+    req.next_data_transfer_handle = 0;
+    req.data.ptr = data;
+    req.data.length = sizeof(data);
+    req.data_integrity_checksum = 0xdeadbeef;
+
+    const size_t payloadLen = PLDM_RDE_MULTIPART_SEND_REQ_FIXED_BYTES +
+                              sizeof(data) + sizeof(uint32_t);
+    std::vector<uint8_t> reqMsg(hdrSize + payloadLen, 0);
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+    auto* msg = reinterpret_cast<pldm_msg*>(reqMsg.data());
+
+    size_t reqLen = payloadLen;
+    ASSERT_EQ(encode_pldm_rde_rde_multipart_send_req(0, &req, msg, &reqLen), 0);
+    EXPECT_EQ(reqLen, payloadLen);
+
+    struct pldm_rde_rde_multipart_send_req decoded = {};
+    ASSERT_EQ(decode_pldm_rde_rde_multipart_send_req(msg, payloadLen, &decoded),
+              0);
+    EXPECT_EQ(decoded.data_transfer_handle, req.data_transfer_handle);
+    EXPECT_EQ(decoded.operation_id, req.operation_id);
+    EXPECT_EQ(decoded.transfer_flag, req.transfer_flag);
+    EXPECT_EQ(decoded.next_data_transfer_handle, req.next_data_transfer_handle);
+    ASSERT_EQ(decoded.data.length, sizeof(data));
+    EXPECT_EQ(0, memcmp(decoded.data.ptr, data, sizeof(data)));
+    EXPECT_EQ(decoded.data_integrity_checksum, 0xdeadbeefU);
+}
+#endif
+
+#if HAVE_LIBPLDM_API_TESTING
+TEST(RDEMultipartSend, encodeDecodeRequestRoundTripMiddleChunk)
+{
+    const uint8_t data[] = {0xaa, 0xbb};
+    struct pldm_rde_rde_multipart_send_req req = {};
+    req.data_transfer_handle = 5;
+    req.operation_id = 0x8002;
+    req.transfer_flag = PLDM_RDE_TRANSFER_FLAG_MIDDLE;
+    req.next_data_transfer_handle = 6;
+    req.data.ptr = data;
+    req.data.length = sizeof(data);
+    // A checksum is not emitted for a non-final chunk, so this is ignored.
+    req.data_integrity_checksum = 0x99999999;
+
+    const size_t payloadLen =
+        PLDM_RDE_MULTIPART_SEND_REQ_FIXED_BYTES + sizeof(data);
+    std::vector<uint8_t> reqMsg(hdrSize + payloadLen, 0);
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+    auto* msg = reinterpret_cast<pldm_msg*>(reqMsg.data());
+
+    size_t reqLen = payloadLen;
+    ASSERT_EQ(encode_pldm_rde_rde_multipart_send_req(0, &req, msg, &reqLen), 0);
+    EXPECT_EQ(reqLen, payloadLen);
+
+    struct pldm_rde_rde_multipart_send_req decoded = {};
+    ASSERT_EQ(decode_pldm_rde_rde_multipart_send_req(msg, payloadLen, &decoded),
+              0);
+    EXPECT_EQ(decoded.transfer_flag, PLDM_RDE_TRANSFER_FLAG_MIDDLE);
+    ASSERT_EQ(decoded.data.length, sizeof(data));
+    EXPECT_EQ(0, memcmp(decoded.data.ptr, data, sizeof(data)));
+    // No checksum is present on the wire for a non-final chunk.
+    EXPECT_EQ(decoded.data_integrity_checksum, 0U);
+}
+#endif
+
+#if HAVE_LIBPLDM_API_TESTING
+TEST(RDEMultipartSend, requestRejectsBadArgs)
+{
+    pldm_msg msg{};
+    size_t reqLen = PLDM_RDE_MULTIPART_SEND_REQ_FIXED_BYTES;
+
+    struct pldm_rde_rde_multipart_send_req req = {};
+    req.transfer_flag = PLDM_RDE_TRANSFER_FLAG_MAX; // invalid
+    EXPECT_EQ(encode_pldm_rde_rde_multipart_send_req(0, &req, &msg, &reqLen),
+              -EINVAL);
+    EXPECT_EQ(encode_pldm_rde_rde_multipart_send_req(0, nullptr, &msg, &reqLen),
+              -EINVAL);
+}
+#endif
+
+#if HAVE_LIBPLDM_API_TESTING
+TEST(RDEMultipartSend, encodeDecodeResponseRoundTrip)
+{
+    struct pldm_rde_rde_multipart_send_resp resp = {};
+    resp.completion_code = PLDM_SUCCESS;
+    resp.transfer_operation = PLDM_RDE_TRANSFER_OPERATION_NEXT_PART;
+
+    std::array<uint8_t, hdrSize + PLDM_RDE_MULTIPART_SEND_RESP_BYTES> respMsg{};
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+    auto* msg = reinterpret_cast<pldm_msg*>(respMsg.data());
+
+    size_t respLen = PLDM_RDE_MULTIPART_SEND_RESP_BYTES;
+    ASSERT_EQ(encode_pldm_rde_rde_multipart_send_resp(0, &resp, msg, &respLen),
+              0);
+    EXPECT_EQ(respLen, PLDM_RDE_MULTIPART_SEND_RESP_BYTES);
+
+    struct pldm_rde_rde_multipart_send_resp decoded = {};
+    ASSERT_EQ(decode_pldm_rde_rde_multipart_send_resp(msg, respLen, &decoded),
+              0);
+    EXPECT_EQ(decoded.completion_code, PLDM_SUCCESS);
+    EXPECT_EQ(decoded.transfer_operation,
+              PLDM_RDE_TRANSFER_OPERATION_NEXT_PART);
+}
+#endif
+
+#if HAVE_LIBPLDM_API_TESTING
+// DSP0218 Table 71 keeps the TransferOperation field in a BAD_CHECKSUM
+// response so the RDE Device can request a restart, unlike every other error.
+TEST(RDEMultipartSend, responseBadChecksumCarriesTransferOperation)
+{
+    struct pldm_rde_rde_multipart_send_resp resp = {};
+    resp.completion_code = PLDM_RDE_CC_ERROR_BAD_CHECKSUM;
+    resp.transfer_operation = PLDM_RDE_TRANSFER_OPERATION_FIRST_PART;
+
+    std::array<uint8_t, hdrSize + PLDM_RDE_MULTIPART_SEND_RESP_BYTES> respMsg{};
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+    auto* msg = reinterpret_cast<pldm_msg*>(respMsg.data());
+
+    size_t respLen = PLDM_RDE_MULTIPART_SEND_RESP_BYTES;
+    ASSERT_EQ(encode_pldm_rde_rde_multipart_send_resp(0, &resp, msg, &respLen),
+              0);
+    EXPECT_EQ(respLen, PLDM_RDE_MULTIPART_SEND_RESP_BYTES);
+
+    struct pldm_rde_rde_multipart_send_resp decoded = {};
+    ASSERT_EQ(decode_pldm_rde_rde_multipart_send_resp(msg, respLen, &decoded),
+              0);
+    EXPECT_EQ(decoded.completion_code, PLDM_RDE_CC_ERROR_BAD_CHECKSUM);
+    EXPECT_EQ(decoded.transfer_operation,
+              PLDM_RDE_TRANSFER_OPERATION_FIRST_PART);
+}
+#endif
+
+#if HAVE_LIBPLDM_API_TESTING
+TEST(RDEMultipartSend, responseOtherErrorIsCompletionCodeOnly)
+{
+    struct pldm_rde_rde_multipart_send_resp resp = {};
+    resp.completion_code = PLDM_RDE_CC_ERROR_UNEXPECTED;
+    resp.transfer_operation = PLDM_RDE_TRANSFER_OPERATION_NEXT_PART;
+
+    std::array<uint8_t, hdrSize + 1> respMsg{};
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+    auto* msg = reinterpret_cast<pldm_msg*>(respMsg.data());
+
+    size_t respLen = 1;
+    ASSERT_EQ(encode_pldm_rde_rde_multipart_send_resp(0, &resp, msg, &respLen),
+              0);
+    EXPECT_EQ(respLen, 1U);
+
+    struct pldm_rde_rde_multipart_send_resp decoded = {};
+    ASSERT_EQ(decode_pldm_rde_rde_multipart_send_resp(msg, 1, &decoded), 0);
+    EXPECT_EQ(decoded.completion_code, PLDM_RDE_CC_ERROR_UNEXPECTED);
+}
+#endif

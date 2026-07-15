@@ -1608,3 +1608,220 @@ int decode_pldm_rde_rde_operation_enumerate_resp(
 	entries->count = resp->operation_count;
 	return 0;
 }
+
+/* A multipart transfer appends a 32-bit data integrity checksum only on the
+ * final chunk, indicated by a transfer flag of END or START_AND_END per
+ * DSP0218 Tables 71 and 72. Shared by RDEMultipartSend and
+ * RDEMultipartReceive. */
+static bool pldm_rde_transfer_flag_has_checksum(uint8_t transfer_flag)
+{
+	return transfer_flag == PLDM_RDE_TRANSFER_FLAG_END ||
+	       transfer_flag == PLDM_RDE_TRANSFER_FLAG_START_AND_END;
+}
+
+LIBPLDM_ABI_TESTING
+int encode_pldm_rde_rde_multipart_send_req(
+	uint8_t instance_id, const struct pldm_rde_rde_multipart_send_req *req,
+	struct pldm_msg *msg, size_t *payload_length)
+{
+	PLDM_MSGBUF_RW_DEFINE_P(buf);
+	bool has_checksum;
+	size_t checksum_size;
+	int rc;
+
+	if (msg == NULL || req == NULL || payload_length == NULL) {
+		return -EINVAL;
+	}
+	if (req->transfer_flag >= PLDM_RDE_TRANSFER_FLAG_MAX) {
+		return -EINVAL;
+	}
+	if (req->data.length > 0 && req->data.ptr == NULL) {
+		return -EINVAL;
+	}
+	has_checksum = pldm_rde_transfer_flag_has_checksum(req->transfer_flag);
+	checksum_size = has_checksum ? sizeof(req->data_integrity_checksum) : 0;
+	/* DataLengthBytes (data plus the trailing checksum) is a uint32 on the
+	 * wire; the guard is a no-op where size_t cannot exceed it. */
+#if SIZE_MAX > UINT32_MAX
+	if (req->data.length > (size_t)UINT32_MAX - checksum_size) {
+		return -EINVAL;
+	}
+#endif
+
+	rc = encode_pldm_header_only_errno(PLDM_REQUEST, instance_id, PLDM_RDE,
+					   PLDM_RDE_CMD_RDE_MULTIPART_SEND,
+					   msg);
+	if (rc) {
+		return rc;
+	}
+
+	rc = pldm_msgbuf_init_errno(
+		buf,
+		(size_t)PLDM_RDE_MULTIPART_SEND_REQ_FIXED_BYTES +
+			req->data.length + checksum_size,
+		msg->payload, *payload_length);
+	if (rc) {
+		return rc;
+	}
+	pldm_msgbuf_insert(buf, req->data_transfer_handle);
+	pldm_msgbuf_insert(buf, req->operation_id);
+	pldm_msgbuf_insert(buf, req->transfer_flag);
+	pldm_msgbuf_insert(buf, req->next_data_transfer_handle);
+	/* DataLengthBytes counts the data plus the trailing checksum, if any. */
+	pldm_msgbuf_insert_uint32(buf,
+				  (uint32_t)(req->data.length + checksum_size));
+
+	if (req->data.length > 0) {
+		rc = pldm_msgbuf_insert_array_uint8(
+			buf, req->data.length, req->data.ptr, req->data.length);
+		if (rc) {
+			return pldm_msgbuf_discard(buf, rc);
+		}
+	}
+	if (has_checksum) {
+		pldm_msgbuf_insert(buf, req->data_integrity_checksum);
+	}
+
+	return pldm_msgbuf_complete_used(buf, *payload_length, payload_length);
+}
+
+LIBPLDM_ABI_TESTING
+int decode_pldm_rde_rde_multipart_send_req(
+	const struct pldm_msg *msg, size_t payload_length,
+	struct pldm_rde_rde_multipart_send_req *req)
+{
+	PLDM_MSGBUF_RO_DEFINE_P(buf);
+	uint32_t data_length_bytes = 0;
+	size_t checksum_size;
+	size_t data_length;
+	bool has_checksum;
+	int rc;
+
+	if (msg == NULL || req == NULL) {
+		return -EINVAL;
+	}
+
+	rc = pldm_msgbuf_init_errno(buf,
+				    PLDM_RDE_MULTIPART_SEND_REQ_FIXED_BYTES,
+				    msg->payload, payload_length);
+	if (rc) {
+		return rc;
+	}
+	pldm_msgbuf_extract(buf, req->data_transfer_handle);
+	pldm_msgbuf_extract(buf, req->operation_id);
+	pldm_msgbuf_extract(buf, req->transfer_flag);
+	pldm_msgbuf_extract(buf, req->next_data_transfer_handle);
+	pldm_msgbuf_extract(buf, data_length_bytes);
+
+	/* TransferFlag governs whether a trailing checksum is present, so it
+	 * must be valid before the data span can be sized. */
+	if (req->transfer_flag >= PLDM_RDE_TRANSFER_FLAG_MAX) {
+		return pldm_msgbuf_discard(buf, -EBADMSG);
+	}
+	has_checksum = pldm_rde_transfer_flag_has_checksum(req->transfer_flag);
+	checksum_size = has_checksum ? sizeof(req->data_integrity_checksum) : 0;
+	if (data_length_bytes < checksum_size) {
+		return pldm_msgbuf_discard(buf, -EBADMSG);
+	}
+	data_length = data_length_bytes - checksum_size;
+
+	req->data.ptr = NULL;
+	rc = pldm_msgbuf_span_required(buf, data_length,
+				       (const void **)&req->data.ptr);
+	if (rc) {
+		return pldm_msgbuf_discard(buf, rc);
+	}
+	req->data.length = data_length;
+
+	if (has_checksum) {
+		pldm_msgbuf_extract(buf, req->data_integrity_checksum);
+	} else {
+		req->data_integrity_checksum = 0;
+	}
+
+	return pldm_msgbuf_complete_consumed(buf);
+}
+
+LIBPLDM_ABI_TESTING
+int encode_pldm_rde_rde_multipart_send_resp(
+	uint8_t instance_id,
+	const struct pldm_rde_rde_multipart_send_resp *resp,
+	struct pldm_msg *msg, size_t *payload_length)
+{
+	PLDM_MSGBUF_RW_DEFINE_P(buf);
+	int rc;
+
+	if (msg == NULL || resp == NULL || payload_length == NULL) {
+		return -EINVAL;
+	}
+
+	rc = encode_pldm_header_only_errno(PLDM_RESPONSE, instance_id, PLDM_RDE,
+					   PLDM_RDE_CMD_RDE_MULTIPART_SEND,
+					   msg);
+	if (rc) {
+		return rc;
+	}
+
+	/* Every non-SUCCESS completion code carries only the completion code
+	 * except ERROR_BAD_CHECKSUM, which still reports transfer_operation so
+	 * the RDE Device may request a restart per DSP0218 Table 71. */
+	if (resp->completion_code != PLDM_SUCCESS &&
+	    resp->completion_code != PLDM_RDE_CC_ERROR_BAD_CHECKSUM) {
+		return encode_rde_cc_only_resp(msg, resp->completion_code,
+					       payload_length);
+	}
+
+	if (resp->transfer_operation >= PLDM_RDE_TRANSFER_OPERATION_MAX) {
+		return -EINVAL;
+	}
+
+	rc = pldm_msgbuf_init_errno(buf, PLDM_RDE_MULTIPART_SEND_RESP_BYTES,
+				    msg->payload, *payload_length);
+	if (rc) {
+		return rc;
+	}
+	pldm_msgbuf_insert(buf, resp->completion_code);
+	pldm_msgbuf_insert(buf, resp->transfer_operation);
+
+	return pldm_msgbuf_complete_used(buf, *payload_length, payload_length);
+}
+
+LIBPLDM_ABI_TESTING
+int decode_pldm_rde_rde_multipart_send_resp(
+	const struct pldm_msg *msg, size_t payload_length,
+	struct pldm_rde_rde_multipart_send_resp *resp)
+{
+	PLDM_MSGBUF_RO_DEFINE_P(buf);
+	int rc;
+
+	if (msg == NULL || resp == NULL) {
+		return -EINVAL;
+	}
+
+	rc = pldm_msgbuf_init_errno(buf, sizeof(resp->completion_code),
+				    msg->payload, payload_length);
+	if (rc) {
+		return rc;
+	}
+	pldm_msgbuf_extract(buf, resp->completion_code);
+
+	/* A non-SUCCESS response other than ERROR_BAD_CHECKSUM carries only the
+	 * completion code. */
+	if (resp->completion_code != PLDM_SUCCESS &&
+	    resp->completion_code != PLDM_RDE_CC_ERROR_BAD_CHECKSUM) {
+		resp->transfer_operation = 0;
+		return pldm_msgbuf_discard(buf, 0);
+	}
+
+	pldm_msgbuf_extract(buf, resp->transfer_operation);
+
+	rc = pldm_msgbuf_complete_consumed(buf);
+	if (rc) {
+		return rc;
+	}
+
+	if (resp->transfer_operation >= PLDM_RDE_TRANSFER_OPERATION_MAX) {
+		return -EBADMSG;
+	}
+	return 0;
+}
