@@ -1825,3 +1825,247 @@ int decode_pldm_rde_rde_multipart_send_resp(
 	}
 	return 0;
 }
+
+LIBPLDM_ABI_TESTING
+int encode_pldm_rde_rde_multipart_receive_req(
+	uint8_t instance_id,
+	const struct pldm_rde_rde_multipart_receive_req *req,
+	struct pldm_msg *msg, size_t *payload_length)
+{
+	PLDM_MSGBUF_RW_DEFINE_P(buf);
+	int rc;
+
+	if (msg == NULL || req == NULL || payload_length == NULL) {
+		return -EINVAL;
+	}
+	/* A receive request uses only FIRST_PART, NEXT_PART, or ABORT per
+	 * DSP0218 Table 72. */
+	if (req->transfer_operation > PLDM_RDE_TRANSFER_OPERATION_ABORT) {
+		return -EINVAL;
+	}
+
+	rc = encode_pldm_header_only_errno(PLDM_REQUEST, instance_id, PLDM_RDE,
+					   PLDM_RDE_CMD_RDE_MULTIPART_RECEIVE,
+					   msg);
+	if (rc) {
+		return rc;
+	}
+
+	rc = pldm_msgbuf_init_errno(buf, PLDM_RDE_MULTIPART_RECEIVE_REQ_BYTES,
+				    msg->payload, *payload_length);
+	if (rc) {
+		return rc;
+	}
+	pldm_msgbuf_insert(buf, req->data_transfer_handle);
+	pldm_msgbuf_insert(buf, req->operation_id);
+	pldm_msgbuf_insert(buf, req->transfer_operation);
+
+	return pldm_msgbuf_complete_used(buf, *payload_length, payload_length);
+}
+
+LIBPLDM_ABI_TESTING
+int decode_pldm_rde_rde_multipart_receive_req(
+	const struct pldm_msg *msg, size_t payload_length,
+	struct pldm_rde_rde_multipart_receive_req *req)
+{
+	PLDM_MSGBUF_RO_DEFINE_P(buf);
+	int rc;
+
+	if (msg == NULL || req == NULL) {
+		return -EINVAL;
+	}
+
+	rc = pldm_msgbuf_init_errno(buf, PLDM_RDE_MULTIPART_RECEIVE_REQ_BYTES,
+				    msg->payload, payload_length);
+	if (rc) {
+		return rc;
+	}
+	pldm_msgbuf_extract(buf, req->data_transfer_handle);
+	pldm_msgbuf_extract(buf, req->operation_id);
+	pldm_msgbuf_extract(buf, req->transfer_operation);
+
+	rc = pldm_msgbuf_complete_consumed(buf);
+	if (rc) {
+		return rc;
+	}
+
+	/* A receive request uses only FIRST_PART, NEXT_PART, or ABORT per
+	 * DSP0218 Table 72. */
+	if (req->transfer_operation > PLDM_RDE_TRANSFER_OPERATION_ABORT) {
+		return -EBADMSG;
+	}
+	return 0;
+}
+
+LIBPLDM_ABI_TESTING
+int encode_pldm_rde_rde_multipart_receive_resp(
+	uint8_t instance_id,
+	const struct pldm_rde_rde_multipart_receive_resp *resp,
+	struct pldm_msg *msg, size_t *payload_length)
+{
+	PLDM_MSGBUF_RW_DEFINE_P(buf);
+	bool has_checksum;
+	size_t checksum_size;
+	int rc;
+
+	if (msg == NULL || resp == NULL || payload_length == NULL) {
+		return -EINVAL;
+	}
+
+	rc = encode_pldm_header_only_errno(PLDM_RESPONSE, instance_id, PLDM_RDE,
+					   PLDM_RDE_CMD_RDE_MULTIPART_RECEIVE,
+					   msg);
+	if (rc) {
+		return rc;
+	}
+
+	/* An error response carries only the completion code. */
+	if (resp->completion_code != PLDM_SUCCESS) {
+		return encode_rde_cc_only_resp(msg, resp->completion_code,
+					       payload_length);
+	}
+
+	if (resp->transfer_flag >= PLDM_RDE_TRANSFER_FLAG_MAX) {
+		return -EINVAL;
+	}
+	if (resp->data.length > 0 && resp->data.ptr == NULL) {
+		return -EINVAL;
+	}
+	has_checksum = pldm_rde_transfer_flag_has_checksum(resp->transfer_flag);
+	checksum_size = has_checksum ? sizeof(resp->data_integrity_checksum) :
+				       0;
+	/* DataLengthBytes (data plus the trailing checksum) is a uint32 on the
+	 * wire; the guard is a no-op where size_t cannot exceed it. */
+#if SIZE_MAX > UINT32_MAX
+	if (resp->data.length > (size_t)UINT32_MAX - checksum_size) {
+		return -EINVAL;
+	}
+#endif
+
+	rc = pldm_msgbuf_init_errno(
+		buf,
+		(size_t)PLDM_RDE_MULTIPART_RECEIVE_RESP_FIXED_BYTES +
+			resp->data.length + checksum_size,
+		msg->payload, *payload_length);
+	if (rc) {
+		return rc;
+	}
+	pldm_msgbuf_insert(buf, resp->completion_code);
+	pldm_msgbuf_insert(buf, resp->transfer_flag);
+	pldm_msgbuf_insert(buf, resp->next_data_transfer_handle);
+	/* DataLengthBytes counts the data plus the trailing checksum, if any. */
+	pldm_msgbuf_insert_uint32(
+		buf, (uint32_t)(resp->data.length + checksum_size));
+
+	if (resp->data.length > 0) {
+		rc = pldm_msgbuf_insert_array_uint8(buf, resp->data.length,
+						    resp->data.ptr,
+						    resp->data.length);
+		if (rc) {
+			return pldm_msgbuf_discard(buf, rc);
+		}
+	}
+	if (has_checksum) {
+		pldm_msgbuf_insert(buf, resp->data_integrity_checksum);
+	}
+
+	return pldm_msgbuf_complete_used(buf, *payload_length, payload_length);
+}
+
+LIBPLDM_ABI_TESTING
+int decode_pldm_rde_rde_multipart_receive_resp(
+	const struct pldm_msg *msg, size_t payload_length,
+	struct pldm_rde_rde_multipart_receive_resp *resp)
+{
+	PLDM_MSGBUF_RO_DEFINE_P(buf);
+	uint32_t data_length_bytes = 0;
+	size_t checksum_size;
+	size_t data_length;
+	bool has_checksum;
+	int rc;
+
+	if (msg == NULL || resp == NULL) {
+		return -EINVAL;
+	}
+
+	rc = pldm_msg_has_error(msg, payload_length);
+	if (rc) {
+		resp->completion_code = rc;
+		return 0;
+	}
+
+	/* An aborted transfer is acknowledged with a SUCCESS completion code and
+	 * no further fields (a one-byte payload) per DSP0218 Table 72. */
+	if (payload_length == sizeof(resp->completion_code)) {
+		resp->completion_code = PLDM_SUCCESS;
+		resp->transfer_flag = 0;
+		resp->next_data_transfer_handle = 0;
+		resp->data.ptr = NULL;
+		resp->data.length = 0;
+		resp->data_integrity_checksum = 0;
+		return 0;
+	}
+
+	rc = pldm_msgbuf_init_errno(buf,
+				    PLDM_RDE_MULTIPART_RECEIVE_RESP_FIXED_BYTES,
+				    msg->payload, payload_length);
+	if (rc) {
+		return rc;
+	}
+	pldm_msgbuf_extract(buf, resp->completion_code);
+	pldm_msgbuf_extract(buf, resp->transfer_flag);
+	pldm_msgbuf_extract(buf, resp->next_data_transfer_handle);
+	pldm_msgbuf_extract(buf, data_length_bytes);
+
+	/* TransferFlag governs whether a trailing checksum is present, so it
+	 * must be valid before the data span can be sized. */
+	if (resp->transfer_flag >= PLDM_RDE_TRANSFER_FLAG_MAX) {
+		return pldm_msgbuf_discard(buf, -EBADMSG);
+	}
+	has_checksum = pldm_rde_transfer_flag_has_checksum(resp->transfer_flag);
+	checksum_size = has_checksum ? sizeof(resp->data_integrity_checksum) :
+				       0;
+	if (data_length_bytes < checksum_size) {
+		return pldm_msgbuf_discard(buf, -EBADMSG);
+	}
+	data_length = data_length_bytes - checksum_size;
+
+	resp->data.ptr = NULL;
+	rc = pldm_msgbuf_span_required(buf, data_length,
+				       (const void **)&resp->data.ptr);
+	if (rc) {
+		return pldm_msgbuf_discard(buf, rc);
+	}
+	resp->data.length = data_length;
+
+	if (has_checksum) {
+		pldm_msgbuf_extract(buf, resp->data_integrity_checksum);
+	} else {
+		resp->data_integrity_checksum = 0;
+	}
+
+	return pldm_msgbuf_complete_consumed(buf);
+}
+
+LIBPLDM_ABI_TESTING
+int encode_pldm_rde_rde_multipart_receive_abort_resp(uint8_t instance_id,
+						     struct pldm_msg *msg,
+						     size_t *payload_length)
+{
+	int rc;
+
+	if (msg == NULL || payload_length == NULL) {
+		return -EINVAL;
+	}
+
+	rc = encode_pldm_header_only_errno(PLDM_RESPONSE, instance_id, PLDM_RDE,
+					   PLDM_RDE_CMD_RDE_MULTIPART_RECEIVE,
+					   msg);
+	if (rc) {
+		return rc;
+	}
+
+	/* An aborted transfer is acknowledged with a SUCCESS completion code and
+	 * no further fields per DSP0218 Table 72. */
+	return encode_rde_cc_only_resp(msg, PLDM_SUCCESS, payload_length);
+}
