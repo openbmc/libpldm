@@ -44,6 +44,14 @@ reviewers:
 - rushtotom@gmail.com
 
 matchers:
+- exact: CHANGELOG.md
+  owners:
+  - alexander.hansen@9elements.com
+- exact: tests/fuzz/fuzz++.cpp
+  owners:
+  - alexander.hansen@9elements.com
+  reviewers:
+  - molberding@nvidia.com
 - partial_regex: /dsp/(file|base)\.
   reviewers:
   - chaul@amperecomputing.com
