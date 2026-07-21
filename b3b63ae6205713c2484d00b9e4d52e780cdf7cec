@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "59dee0d4_8481b16e",
+        "filename": "include/libpldm/rde.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 366,
+      "author": {
+        "id": 1002838
+      },
+      "writtenOn": "2026-07-21T12:43:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "45dab678_6976ffe1",
+      "revId": "b3b63ae6205713c2484d00b9e4d52e780cdf7cec",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "50406b57_84782d3a",
@@ -31,6 +49,24 @@
       "writtenOn": "2026-07-21T08:35:20Z",
       "side": 1,
       "message": "Probably should be moved to the `92300: rde: Add NegotiateRedfishParameters command` | https://gerrit.openbmc.org/c/openbmc/libpldm/+/92300",
+      "revId": "b3b63ae6205713c2484d00b9e4d52e780cdf7cec",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eacad449_32d2012c",
+        "filename": "include/libpldm/rde.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 372,
+      "author": {
+        "id": 1002838
+      },
+      "writtenOn": "2026-07-21T12:43:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "50406b57_84782d3a",
       "revId": "b3b63ae6205713c2484d00b9e4d52e780cdf7cec",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -52,6 +88,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fbab4b98_10c81f5a",
+        "filename": "include/libpldm/rde.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 498,
+      "author": {
+        "id": 1002838
+      },
+      "writtenOn": "2026-07-21T12:43:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3ce29085_e21afc10",
+      "revId": "b3b63ae6205713c2484d00b9e4d52e780cdf7cec",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "37834ce4_620dd39f",
@@ -65,6 +119,24 @@
       "writtenOn": "2026-07-21T08:35:20Z",
       "side": 1,
       "message": "Can we iterate several times over this?",
+      "revId": "b3b63ae6205713c2484d00b9e4d52e780cdf7cec",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d8f2369f_51abe3f4",
+        "filename": "include/libpldm/rde.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 513,
+      "author": {
+        "id": 1002838
+      },
+      "writtenOn": "2026-07-21T12:43:07Z",
+      "side": 1,
+      "message": "I\u0027ve reworked this to match the PDR iterator convention in platform.h so it now supports multiple passes",
+      "parentUuid": "37834ce4_620dd39f",
       "revId": "b3b63ae6205713c2484d00b9e4d52e780cdf7cec",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -86,6 +158,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "66f414db_2043483d",
+        "filename": "src/dsp/rde.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 532,
+      "author": {
+        "id": 1002838
+      },
+      "writtenOn": "2026-07-21T12:43:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4bf5b743_437a68e2",
+      "revId": "b3b63ae6205713c2484d00b9e4d52e780cdf7cec",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fd0d16e1_0dbf4c15",
@@ -99,6 +189,24 @@
       "writtenOn": "2026-07-21T08:35:20Z",
       "side": 1,
       "message": "Since `StringFragmentCount` should be `\u003e0`, shouldn\u0027t we include it to min size?",
+      "revId": "b3b63ae6205713c2484d00b9e4d52e780cdf7cec",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "96aeab5d_99363097",
+        "filename": "src/dsp/rde.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 712,
+      "author": {
+        "id": 1002838
+      },
+      "writtenOn": "2026-07-21T12:43:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fd0d16e1_0dbf4c15",
       "revId": "b3b63ae6205713c2484d00b9e4d52e780cdf7cec",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
