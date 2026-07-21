@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ca46e45d_b2b231ac",
+        "filename": "include/libpldm/rde.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 1180,
+      "author": {
+        "id": 1000926
+      },
+      "writtenOn": "2026-07-21T09:34:52Z",
+      "side": 1,
+      "message": "I see some inconsistency between the prefixes pldm_rde_ and pldm_rde_rde_",
+      "revId": "f7777bb74d7c23451d90bbac15eebe739a7463e6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
