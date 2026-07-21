@@ -54,6 +54,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2d8659b3_5b736472",
+        "filename": "include/libpldm/rde.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 636,
+      "author": {
+        "id": 1000926
+      },
+      "writtenOn": "2026-07-21T09:16:34Z",
+      "side": 1,
+      "message": "I see some inconsistency between the prefixes `pldm_rde_` and `pldm_rde_rde_`\n\nExample\n```\npldm_rde_rde_operation_init_req\n\nPLDM_RDE_OPERATION_INIT_RESP_FIXED_BYTES\n```",
+      "revId": "dee825176f5f2766aff6d85c0b7cd8537e686796",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "bff44d63_6b27150f",
         "filename": "include/libpldm/rde.h",
         "patchSetId": 2
