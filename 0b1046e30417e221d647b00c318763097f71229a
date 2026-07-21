@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "98a82138_8574ccec",
+        "filename": "include/libpldm/rde.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 1000926
+      },
+      "writtenOn": "2026-07-21T08:14:56Z",
+      "side": 1,
+      "message": "To the discussion. \n\nWouldn\u0027t it be better to name it `enum pldm_rde_schema_class` ?",
+      "revId": "0b1046e30417e221d647b00c318763097f71229a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7f8d8947_a46f7136",
+        "filename": "include/libpldm/rde.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 1000926
+      },
+      "writtenOn": "2026-07-21T08:14:56Z",
+      "side": 1,
+      "message": "I think `PLDM_RDE_SCHEMA_ERROR` is a little bit confusing.\n\nWouldn\u0027t it be better to name it `PLDM_RDE_SCHEMA_TYPE_ERROR` (or `PLDM_RDE_SCHEMA_CLASS_ERROR` depending on the answer to the previous question)",
+      "revId": "0b1046e30417e221d647b00c318763097f71229a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ced445af_cabde773",
+        "filename": "include/libpldm/rde.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 260,
+      "author": {
+        "id": 1000926
+      },
+      "writtenOn": "2026-07-21T08:14:56Z",
+      "side": 1,
+      "message": "To the discussion\n\nI don\u0027t think such pattern is used in libpldm code",
+      "revId": "0b1046e30417e221d647b00c318763097f71229a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cf436c0d_d0c64199",
+        "filename": "include/libpldm/rde.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 275,
+      "author": {
+        "id": 1000926
+      },
+      "writtenOn": "2026-07-21T08:14:56Z",
+      "side": 1,
+      "message": "Can I ask a question @andrew@codeconstruct.com.au ? From the libpldm code it looks like it doesn\u0027t use enums as types in structs.\n\nBut can I ask, why we can\u0027t use `enum pldm_rde_schema_type` here?",
+      "revId": "0b1046e30417e221d647b00c318763097f71229a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
