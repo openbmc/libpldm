@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "45dab678_6976ffe1",
+        "filename": "include/libpldm/rde.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 366,
+      "author": {
+        "id": 1000926
+      },
+      "writtenOn": "2026-07-21T08:35:20Z",
+      "side": 1,
+      "message": "typo: NULL",
+      "revId": "b3b63ae6205713c2484d00b9e4d52e780cdf7cec",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "50406b57_84782d3a",
+        "filename": "include/libpldm/rde.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 372,
+      "author": {
+        "id": 1000926
+      },
+      "writtenOn": "2026-07-21T08:35:20Z",
+      "side": 1,
+      "message": "Probably should be moved to the `92300: rde: Add NegotiateRedfishParameters command` | https://gerrit.openbmc.org/c/openbmc/libpldm/+/92300",
+      "revId": "b3b63ae6205713c2484d00b9e4d52e780cdf7cec",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3ce29085_e21afc10",
+        "filename": "include/libpldm/rde.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 498,
+      "author": {
+        "id": 1000926
+      },
+      "writtenOn": "2026-07-21T08:35:20Z",
+      "side": 1,
+      "message": "I think documentation of how to use iterator API to decode the response of this command is needed here\n\nhttps://github.com/openbmc/libpldm/blob/84ef0f40e8f5565785ef0b97cb0352ffdb33c2bc/include/libpldm/platform.h#L3128",
+      "revId": "b3b63ae6205713c2484d00b9e4d52e780cdf7cec",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "37834ce4_620dd39f",
+        "filename": "include/libpldm/rde.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 513,
+      "author": {
+        "id": 1000926
+      },
+      "writtenOn": "2026-07-21T08:35:20Z",
+      "side": 1,
+      "message": "Can we iterate several times over this?",
+      "revId": "b3b63ae6205713c2484d00b9e4d52e780cdf7cec",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fd0d16e1_0dbf4c15",
+        "filename": "src/dsp/rde.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 712,
+      "author": {
+        "id": 1000926
+      },
+      "writtenOn": "2026-07-21T08:35:20Z",
+      "side": 1,
+      "message": "Since `StringFragmentCount` should be `\u003e0`, shouldn\u0027t we include it to min size?",
+      "revId": "b3b63ae6205713c2484d00b9e4d52e780cdf7cec",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
