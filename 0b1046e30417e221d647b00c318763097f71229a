@@ -54,6 +54,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "140061af_132904c5",
+        "filename": "include/libpldm/rde.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 260,
+      "author": {
+        "id": 1002838
+      },
+      "writtenOn": "2026-07-21T11:55:37Z",
+      "side": 1,
+      "message": "when a future DSP0218 revision adds a schema class,\ninserting it before the sentinel keeps `\u003e\u003d PLDM_RDE_SCHEMA_MAX` correct with\nno magic number to update, and all call sites stay in sync.",
+      "parentUuid": "ced445af_cabde773",
+      "revId": "0b1046e30417e221d647b00c318763097f71229a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cf436c0d_d0c64199",
         "filename": "include/libpldm/rde.h",
         "patchSetId": 3
