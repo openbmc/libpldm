@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a2338dab_09275dfd",
+        "filename": "include/libpldm/rde.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 1064,
+      "author": {
+        "id": 1000926
+      },
+      "writtenOn": "2026-07-21T09:31:04Z",
+      "side": 1,
+      "message": "To the discussion\n\nI don\u0027t think such pattern is used in libpldm code",
+      "revId": "293259d8557a4598f7790db0ea540ea9b7d428eb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "60a471ec_f5df7035",
+        "filename": "include/libpldm/rde.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 1076,
+      "author": {
+        "id": 1000926
+      },
+      "writtenOn": "2026-07-21T09:31:04Z",
+      "side": 1,
+      "message": "To the discussion\n\nI don\u0027t think such pattern is used in libpldm code",
+      "revId": "293259d8557a4598f7790db0ea540ea9b7d428eb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5d5c4c24_ded6519b",
+        "filename": "include/libpldm/rde.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 1082,
+      "author": {
+        "id": 1000926
+      },
+      "writtenOn": "2026-07-21T09:31:04Z",
+      "side": 1,
+      "message": "I see some inconsistency between the prefixes pldm_rde_ and pldm_rde_rde_",
+      "revId": "293259d8557a4598f7790db0ea540ea9b7d428eb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "14cd2e9a_ad456231",
+        "filename": "src/dsp/rde.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1714,
+      "author": {
+        "id": 1000926
+      },
+      "writtenOn": "2026-07-21T09:31:04Z",
+      "side": 1,
+      "message": "Can\u0027t we use pldm_msgbuf_extract_uint32_to_size here?",
+      "revId": "293259d8557a4598f7790db0ea540ea9b7d428eb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
