@@ -1,0 +1,140 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "07a8fb15_d0341832",
+        "filename": "include/libpldm/rde.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 608,
+      "author": {
+        "id": 1000926
+      },
+      "writtenOn": "2026-07-21T09:11:56Z",
+      "side": 1,
+      "message": "To the discussion:\n\nI\u0027m not sure if libpldm uses such pattern",
+      "revId": "dee825176f5f2766aff6d85c0b7cd8537e686796",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2a43c020_4c3ebc35",
+        "filename": "include/libpldm/rde.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 621,
+      "author": {
+        "id": 1000926
+      },
+      "writtenOn": "2026-07-21T09:11:56Z",
+      "side": 1,
+      "message": "To the discussion:\n\nI\u0027m not sure if libpldm uses such pattern",
+      "revId": "dee825176f5f2766aff6d85c0b7cd8537e686796",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "79532884_707bbb4b",
+        "filename": "include/libpldm/rde.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 632,
+      "author": {
+        "id": 1000926
+      },
+      "writtenOn": "2026-07-21T09:11:56Z",
+      "side": 1,
+      "message": "+ ETag ?",
+      "revId": "dee825176f5f2766aff6d85c0b7cd8537e686796",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bff44d63_6b27150f",
+        "filename": "include/libpldm/rde.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 645,
+      "author": {
+        "id": 1000926
+      },
+      "writtenOn": "2026-07-21T09:11:56Z",
+      "side": 1,
+      "message": "To the discussion:\n\nrdeOpID has a separate description in the spec (`5.3.25 rdeOpID PLDM data type`). I wonder if we should create a separate type for it:\n```\nuint16 OperationIdentifier \n\nNumeric identifier for the Operation. Operation identifiers with the most significant bit set \n(1b) are reserved for use by the MC when it instantiates Operations.  Operation identifiers \nwith the most significant bit clear (0b) are reserved for use by the RDE Device when it \ninstantiates Operations in response to commands from other protocols that it chooses to \nmake visible via RDE. The value 0x0000 is reserved to indicate no Operation. \n```\n\nI also wonder what should we do about Device/MC flag.\n\n```\nstruct pldm_rde_op_id {\n    uint16_t id: 15;\n    uint16_t direction : 1;\n};\n```\n\nOr should we at least add something like `PLDM_RDE_MC_INITIATED_OPERATION (1\u003c\u003c15)`?",
+      "revId": "dee825176f5f2766aff6d85c0b7cd8537e686796",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "85eb7915_cb37aee1",
+        "filename": "src/dsp/rde.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 988,
+      "author": {
+        "id": 1000926
+      },
+      "writtenOn": "2026-07-21T09:11:56Z",
+      "side": 1,
+      "message": "Can\u0027t we use pldm_msgbuf_extract_uint8_to_size here?",
+      "revId": "dee825176f5f2766aff6d85c0b7cd8537e686796",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "29c9c998_44250963",
+        "filename": "src/dsp/rde.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 989,
+      "author": {
+        "id": 1000926
+      },
+      "writtenOn": "2026-07-21T09:11:56Z",
+      "side": 1,
+      "message": "Can\u0027t we use pldm_msgbuf_extract_uint32_to_size here?",
+      "revId": "dee825176f5f2766aff6d85c0b7cd8537e686796",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3965f49c_35872565",
+        "filename": "src/dsp/rde.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1122,
+      "author": {
+        "id": 1000926
+      },
+      "writtenOn": "2026-07-21T09:11:56Z",
+      "side": 1,
+      "message": "Can\u0027t we use pldm_msgbuf_extract_uint32_to_size here?",
+      "revId": "dee825176f5f2766aff6d85c0b7cd8537e686796",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0ab058d4_a457d223",
+        "filename": "src/dsp/rde.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1124,
+      "author": {
+        "id": 1000926
+      },
+      "writtenOn": "2026-07-21T09:11:56Z",
+      "side": 1,
+      "message": "Can\u0027t we use pldm_msgbuf_extract_uint8_to_size here?",
+      "revId": "dee825176f5f2766aff6d85c0b7cd8537e686796",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
