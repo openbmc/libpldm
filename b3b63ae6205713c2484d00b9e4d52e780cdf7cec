@@ -71,6 +71,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4bf5b743_437a68e2",
+        "filename": "src/dsp/rde.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 532,
+      "author": {
+        "id": 1000926
+      },
+      "writtenOn": "2026-07-21T08:47:27Z",
+      "side": 1,
+      "message": "Can\u0027t we use `pldm_msgbuf_extract_uint8_to_size` here?",
+      "revId": "b3b63ae6205713c2484d00b9e4d52e780cdf7cec",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fd0d16e1_0dbf4c15",
         "filename": "src/dsp/rde.c",
         "patchSetId": 6
