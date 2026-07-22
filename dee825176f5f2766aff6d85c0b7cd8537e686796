@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "103f8417_a12747e6",
+        "filename": "include/libpldm/rde.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 608,
+      "author": {
+        "id": 1002838
+      },
+      "writtenOn": "2026-07-22T04:23:37Z",
+      "side": 1,
+      "message": "PLDM_RDE_OPERATION_TYPE_MAX (and PLDM_RDE_OPERATION_STATUS_MAX) is an auto-\n valued trailing sentinel I use as the upper bound when validating the field\n against the enum (operation_type \u003e\u003d PLDM_RDE_OPERATION_TYPE_MAX), so the bound\n stays correct with no magic number if a future DSP0218 revision appends a\n value.",
+      "parentUuid": "07a8fb15_d0341832",
+      "revId": "dee825176f5f2766aff6d85c0b7cd8537e686796",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2a43c020_4c3ebc35",
         "filename": "include/libpldm/rde.h",
         "patchSetId": 2
@@ -31,6 +49,24 @@
       "writtenOn": "2026-07-21T09:11:56Z",
       "side": 1,
       "message": "To the discussion:\n\nI\u0027m not sure if libpldm uses such pattern",
+      "revId": "dee825176f5f2766aff6d85c0b7cd8537e686796",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0f664dac_13910f8c",
+        "filename": "include/libpldm/rde.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 621,
+      "author": {
+        "id": 1002838
+      },
+      "writtenOn": "2026-07-22T04:23:37Z",
+      "side": 1,
+      "message": "Same above",
+      "parentUuid": "2a43c020_4c3ebc35",
       "revId": "dee825176f5f2766aff6d85c0b7cd8537e686796",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -52,6 +88,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4decfc17_01bb835d",
+        "filename": "include/libpldm/rde.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 632,
+      "author": {
+        "id": 1002838
+      },
+      "writtenOn": "2026-07-22T04:23:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "79532884_707bbb4b",
+      "revId": "dee825176f5f2766aff6d85c0b7cd8537e686796",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2d8659b3_5b736472",
@@ -65,6 +119,24 @@
       "writtenOn": "2026-07-21T09:16:34Z",
       "side": 1,
       "message": "I see some inconsistency between the prefixes `pldm_rde_` and `pldm_rde_rde_`\n\nExample\n```\npldm_rde_rde_operation_init_req\n\nPLDM_RDE_OPERATION_INIT_RESP_FIXED_BYTES\n```",
+      "revId": "dee825176f5f2766aff6d85c0b7cd8537e686796",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4fc56314_613b4ae9",
+        "filename": "include/libpldm/rde.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 636,
+      "author": {
+        "id": 1002838
+      },
+      "writtenOn": "2026-07-22T04:23:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2d8659b3_5b736472",
       "revId": "dee825176f5f2766aff6d85c0b7cd8537e686796",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -86,6 +158,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e0cc70a5_0c1375a9",
+        "filename": "include/libpldm/rde.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 645,
+      "author": {
+        "id": 1002838
+      },
+      "writtenOn": "2026-07-22T04:23:37Z",
+      "side": 1,
+      "message": "Add PLDM_RDE_MC_INITIATED_OPERATION (1\u003c\u003c15) and PLDM_RDE_OPERATION_ID_NONE",
+      "parentUuid": "bff44d63_6b27150f",
+      "revId": "dee825176f5f2766aff6d85c0b7cd8537e686796",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "85eb7915_cb37aee1",
@@ -99,6 +189,24 @@
       "writtenOn": "2026-07-21T09:11:56Z",
       "side": 1,
       "message": "Can\u0027t we use pldm_msgbuf_extract_uint8_to_size here?",
+      "revId": "dee825176f5f2766aff6d85c0b7cd8537e686796",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "19ea50a6_97c9edfd",
+        "filename": "src/dsp/rde.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 988,
+      "author": {
+        "id": 1002838
+      },
+      "writtenOn": "2026-07-22T04:23:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "85eb7915_cb37aee1",
       "revId": "dee825176f5f2766aff6d85c0b7cd8537e686796",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -120,6 +228,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a416be26_f514dc1f",
+        "filename": "src/dsp/rde.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 989,
+      "author": {
+        "id": 1002838
+      },
+      "writtenOn": "2026-07-22T04:23:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "29c9c998_44250963",
+      "revId": "dee825176f5f2766aff6d85c0b7cd8537e686796",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3965f49c_35872565",
@@ -137,6 +263,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "417ba3fe_6e543381",
+        "filename": "src/dsp/rde.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1122,
+      "author": {
+        "id": 1002838
+      },
+      "writtenOn": "2026-07-22T04:23:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3965f49c_35872565",
+      "revId": "dee825176f5f2766aff6d85c0b7cd8537e686796",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0ab058d4_a457d223",
@@ -150,6 +294,24 @@
       "writtenOn": "2026-07-21T09:11:56Z",
       "side": 1,
       "message": "Can\u0027t we use pldm_msgbuf_extract_uint8_to_size here?",
+      "revId": "dee825176f5f2766aff6d85c0b7cd8537e686796",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3556ebce_ea055bc7",
+        "filename": "src/dsp/rde.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1124,
+      "author": {
+        "id": 1002838
+      },
+      "writtenOn": "2026-07-22T04:23:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ab058d4_a457d223",
       "revId": "dee825176f5f2766aff6d85c0b7cd8537e686796",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
