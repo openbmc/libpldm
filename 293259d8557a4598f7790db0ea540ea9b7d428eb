@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5e05fa08_c797452d",
+        "filename": "include/libpldm/rde.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 1064,
+      "author": {
+        "id": 1002838
+      },
+      "writtenOn": "2026-07-22T05:57:08Z",
+      "side": 1,
+      "message": "same with previous commits.",
+      "parentUuid": "a2338dab_09275dfd",
+      "revId": "293259d8557a4598f7790db0ea540ea9b7d428eb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "60a471ec_f5df7035",
         "filename": "include/libpldm/rde.h",
         "patchSetId": 2
@@ -31,6 +49,24 @@
       "writtenOn": "2026-07-21T09:31:04Z",
       "side": 1,
       "message": "To the discussion\n\nI don\u0027t think such pattern is used in libpldm code",
+      "revId": "293259d8557a4598f7790db0ea540ea9b7d428eb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f9366e23_16b732d4",
+        "filename": "include/libpldm/rde.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 1076,
+      "author": {
+        "id": 1002838
+      },
+      "writtenOn": "2026-07-22T05:57:08Z",
+      "side": 1,
+      "message": "same with previous commits.",
+      "parentUuid": "60a471ec_f5df7035",
       "revId": "293259d8557a4598f7790db0ea540ea9b7d428eb",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -52,6 +88,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2e70aac6_76858c31",
+        "filename": "include/libpldm/rde.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 1082,
+      "author": {
+        "id": 1002838
+      },
+      "writtenOn": "2026-07-22T05:57:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5d5c4c24_ded6519b",
+      "revId": "293259d8557a4598f7790db0ea540ea9b7d428eb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "14cd2e9a_ad456231",
@@ -65,6 +119,24 @@
       "writtenOn": "2026-07-21T09:31:04Z",
       "side": 1,
       "message": "Can\u0027t we use pldm_msgbuf_extract_uint32_to_size here?",
+      "revId": "293259d8557a4598f7790db0ea540ea9b7d428eb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "00535755_bde1400d",
+        "filename": "src/dsp/rde.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1714,
+      "author": {
+        "id": 1002838
+      },
+      "writtenOn": "2026-07-22T05:57:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "14cd2e9a_ad456231",
       "revId": "293259d8557a4598f7790db0ea540ea9b7d428eb",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
