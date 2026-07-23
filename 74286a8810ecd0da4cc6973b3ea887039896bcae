@@ -71,6 +71,60 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "17baea90_ba5657b7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 30
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002723
+      },
+      "writtenOn": "2026-07-23T14:05:00Z",
+      "side": 1,
+      "message": "Done. I rebased the series onto the current main branch.",
+      "parentUuid": "9f0d95e5_7a24dde7",
+      "revId": "74286a8810ecd0da4cc6973b3ea887039896bcae",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0f8216a5_91a22cbd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 30
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002723
+      },
+      "writtenOn": "2026-07-23T14:05:00Z",
+      "side": 1,
+      "message": "Change 85298 has since merged. I rebased this series on top of it and aligned the new request and response handling with its wire-field and validation patterns, without duplicating the sensor-enable functionality.",
+      "parentUuid": "af471e43_4104608d",
+      "revId": "74286a8810ecd0da4cc6973b3ea887039896bcae",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4ed144ec_a44322f3",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 30
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002723
+      },
+      "writtenOn": "2026-07-23T14:05:00Z",
+      "side": 1,
+      "message": "Done. I replaced the four API-specific entries with one entry containing the commit subject and moved it to the top of the Added list.",
+      "parentUuid": "14b68ee4_08d8edd4",
+      "revId": "74286a8810ecd0da4cc6973b3ea887039896bcae",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "14b68ee4_08d8edd4",
@@ -94,6 +148,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "983a6937_ba7e931f",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 30
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002723
+      },
+      "writtenOn": "2026-07-23T14:05:00Z",
+      "side": 1,
+      "message": "Done. The request structure, message-length macros, and function declarations are now grouped together. The block is also before SetNumericEffecterValue, following command-code order.",
+      "parentUuid": "df6eeaba_1509312d",
+      "revId": "74286a8810ecd0da4cc6973b3ea887039896bcae",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "df6eeaba_1509312d",
@@ -113,6 +185,96 @@
         "endLine": 48,
         "endChar": 62
       },
+      "revId": "74286a8810ecd0da4cc6973b3ea887039896bcae",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0f56e59a_6ab75ac5",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 30
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002723
+      },
+      "writtenOn": "2026-07-23T14:05:00Z",
+      "side": 1,
+      "message": "Done. The decoder now checks the result of extracting effecter_operational_state before using it.",
+      "parentUuid": "aa02433d_de138dd5",
+      "revId": "74286a8810ecd0da4cc6973b3ea887039896bcae",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3d9dfe8e_a9eaff21",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 30
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002723
+      },
+      "writtenOn": "2026-07-23T14:05:00Z",
+      "side": 1,
+      "message": "Done. I shortened the comment so it fits within 80 columns.",
+      "parentUuid": "1e931546_fd325da2",
+      "revId": "74286a8810ecd0da4cc6973b3ea887039896bcae",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5491fcc3_04ccf147",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 30
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002723
+      },
+      "writtenOn": "2026-07-23T14:05:00Z",
+      "side": 1,
+      "message": "Done. The structure member is now a uint8_t, and the encoding cast is no longer needed.",
+      "parentUuid": "3e95f622_3dd8f566",
+      "revId": "74286a8810ecd0da4cc6973b3ea887039896bcae",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a32b9d17_7fe5ad2f",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 30
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002723
+      },
+      "writtenOn": "2026-07-23T14:05:00Z",
+      "side": 1,
+      "message": "Done. I replaced the chained comparisons with the suggested switch.",
+      "parentUuid": "3ea53c3b_9e134556",
+      "revId": "74286a8810ecd0da4cc6973b3ea887039896bcae",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "69d49f72_401e7050",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 30
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002723
+      },
+      "writtenOn": "2026-07-23T14:05:00Z",
+      "side": 1,
+      "message": "Done. The decoder now accepts only the four states allowed by Table 47 and returns -EPROTO for an unsupported wire value. I also added a unit test for the invalid-state path.",
+      "parentUuid": "6af88000_370f6d4d",
       "revId": "74286a8810ecd0da4cc6973b3ea887039896bcae",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -222,6 +384,60 @@
       "side": 1,
       "message": "Yes, please add such a check.",
       "parentUuid": "1d11e575_2499dcbd",
+      "revId": "74286a8810ecd0da4cc6973b3ea887039896bcae",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6a1e4af5_05449b6d",
+        "filename": "tests/dsp/platform.cpp",
+        "patchSetId": 30
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002723
+      },
+      "writtenOn": "2026-07-23T14:05:00Z",
+      "side": 1,
+      "message": "Done. I replaced the loop with a helper and one explicit invocation per completion code.",
+      "parentUuid": "2167af65_aff673ea",
+      "revId": "74286a8810ecd0da4cc6973b3ea887039896bcae",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a0b06aea_e031a0ba",
+        "filename": "tests/dsp/platform.cpp",
+        "patchSetId": 30
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002723
+      },
+      "writtenOn": "2026-07-23T14:05:00Z",
+      "side": 1,
+      "message": "Done. I replaced the loop with a helper and one explicit invocation per completion code.",
+      "parentUuid": "28ca902c_df0cbd92",
+      "revId": "74286a8810ecd0da4cc6973b3ea887039896bcae",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c72a2370_878f558d",
+        "filename": "tests/dsp/platform.cpp",
+        "patchSetId": 30
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002723
+      },
+      "writtenOn": "2026-07-23T14:05:00Z",
+      "side": 1,
+      "message": "Done. I moved the common test body into a helper and invoke it once for each of the four valid states, so a failure can be attributed to a specific call.",
+      "parentUuid": "974eade9_e272c47f",
       "revId": "74286a8810ecd0da4cc6973b3ea887039896bcae",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
