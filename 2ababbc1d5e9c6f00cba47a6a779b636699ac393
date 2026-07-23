@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "f8128e22_d04af3a6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2026-07-23T12:18:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3d9369b0_54bdbd92",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 13
+      },
+      "revId": "2ababbc1d5e9c6f00cba47a6a779b636699ac393",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "bbc2ea31_769b37a5",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
@@ -64,6 +88,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "db506f4b_f7431060",
+        "filename": "bindings/cpp/CONTRIBUTING.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2026-07-23T12:18:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b18cbaca_2b4dc408",
+      "range": {
+        "startLine": 3,
+        "startChar": 0,
+        "endLine": 3,
+        "endChar": 4
+      },
+      "revId": "2ababbc1d5e9c6f00cba47a6a779b636699ac393",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "74169bfb_79d85727",
@@ -81,6 +129,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9c5b284d_ce2684ea",
+        "filename": "bindings/cpp/CONTRIBUTING.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2026-07-23T12:18:05Z",
+      "side": 1,
+      "message": "Sure, applied it 👍",
+      "parentUuid": "74169bfb_79d85727",
+      "revId": "2ababbc1d5e9c6f00cba47a6a779b636699ac393",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f5a28fa7_e0298c34",
@@ -94,6 +160,30 @@
       "writtenOn": "2026-07-22T18:19:33Z",
       "side": 1,
       "message": "nit: Struct\n```suggestion\n- [Mighty Struct][mighty-struct]\n```",
+      "range": {
+        "startLine": 41,
+        "startChar": 10,
+        "endLine": 41,
+        "endChar": 17
+      },
+      "revId": "2ababbc1d5e9c6f00cba47a6a779b636699ac393",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "279d8fe2_3af3f7ff",
+        "filename": "bindings/cpp/CONTRIBUTING.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2026-07-23T12:18:05Z",
+      "side": 1,
+      "message": "Thanks, fixed it 👍",
+      "parentUuid": "f5a28fa7_e0298c34",
       "range": {
         "startLine": 41,
         "startChar": 10,
