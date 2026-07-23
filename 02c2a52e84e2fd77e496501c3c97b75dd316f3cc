@@ -72,6 +72,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fa81b434_68fa2235",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 35
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1002723
+      },
+      "writtenOn": "2026-07-23T14:30:15Z",
+      "side": 1,
+      "message": "Done. The subject is now `dsp: platform: Add iterators for effecter\nauxiliary names`.",
+      "parentUuid": "3efedabf_6c057e76",
+      "revId": "02c2a52e84e2fd77e496501c3c97b75dd316f3cc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6b6f15a4_9260b50b",
@@ -95,6 +113,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6738679c_9e427efa",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 35
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1002723
+      },
+      "writtenOn": "2026-07-23T14:30:15Z",
+      "side": 1,
+      "message": "Done. The commit message and API documentation now reference DSP0248 v1.3.0,\nsection 28.15, Table 93.",
+      "parentUuid": "6b6f15a4_9260b50b",
+      "range": {
+        "startLine": 10,
+        "startChar": 34,
+        "endLine": 11,
+        "endChar": 8
+      },
+      "revId": "02c2a52e84e2fd77e496501c3c97b75dd316f3cc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "92d9a553_22fd767c",
@@ -108,6 +150,30 @@
       "writtenOn": "2026-05-11T00:07:12Z",
       "side": 1,
       "message": "I suggest removing this. The list is evident from the patch itself.",
+      "range": {
+        "startLine": 14,
+        "startChar": 0,
+        "endLine": 18,
+        "endChar": 1
+      },
+      "revId": "02c2a52e84e2fd77e496501c3c97b75dd316f3cc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0d33aada_15cac148",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 35
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1002723
+      },
+      "writtenOn": "2026-07-23T14:30:15Z",
+      "side": 1,
+      "message": "Done. I removed it.",
+      "parentUuid": "92d9a553_22fd767c",
       "range": {
         "startLine": 14,
         "startChar": 0,
@@ -149,6 +215,30 @@
       "writtenOn": "2026-05-11T00:07:12Z",
       "side": 1,
       "message": "See the documentation here:\n\nhttps://github.com/openbmc/libpldm/blob/4509e841f6a4cad2411aa00db7cefac52330f9d2/CONTRIBUTING.md#L469-L500\n\nIn my opinion your change falls into the \"simple\" case there - listing just the commit subject is enough.",
+      "range": {
+        "startLine": 52,
+        "startChar": 0,
+        "endLine": 54,
+        "endChar": 67
+      },
+      "revId": "02c2a52e84e2fd77e496501c3c97b75dd316f3cc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c7591bf6_5c234d76",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 35
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1002723
+      },
+      "writtenOn": "2026-07-23T14:30:15Z",
+      "side": 1,
+      "message": "Done. The changelog now has one entry containing only the commit subject.",
+      "parentUuid": "16eadd38_b9a15374",
       "range": {
         "startLine": 52,
         "startChar": 0,
@@ -266,6 +356,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7fc30a82_b332ba1f",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 35
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1002723
+      },
+      "writtenOn": "2026-07-23T14:30:15Z",
+      "side": 1,
+      "message": "Done. `PLDM_PDR_EFFECTER_AUXILIARY_NAMES_MIN_LENGTH` is now immediately below\n`struct pldm_platform_effecter_auxiliary_names_pdr`.",
+      "parentUuid": "333d6a9a_f2fe3b3b",
+      "revId": "02c2a52e84e2fd77e496501c3c97b75dd316f3cc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1748fc88_13e0d92b",
@@ -279,6 +387,30 @@
       "writtenOn": "2026-05-11T00:07:12Z",
       "side": 1,
       "message": "If you\u0027re going to represent the `tag` member as `const char *` then I expect we can omit `tag_length` as you\u0027re stating that `tag` is a valid C string. If it\u0027s not a valid C string (which we should be wary of if it\u0027s pointing into the message buffer) you should use `struct variable_field` instead.",
+      "range": {
+        "startLine": 656,
+        "startChar": 1,
+        "endLine": 657,
+        "endChar": 19
+      },
+      "revId": "02c2a52e84e2fd77e496501c3c97b75dd316f3cc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3e848c46_9f05b8f2",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 35
+      },
+      "lineNbr": 657,
+      "author": {
+        "id": 1002723
+      },
+      "writtenOn": "2026-07-23T14:30:15Z",
+      "side": 1,
+      "message": "Done. The language tag is now exposed as `struct variable_field`, so the API\ndoes not claim that data from the message buffer is a safe C string.",
+      "parentUuid": "1748fc88_13e0d92b",
       "range": {
         "startLine": 656,
         "startChar": 1,
@@ -312,6 +444,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d3a1ee1b_28ba73be",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 35
+      },
+      "lineNbr": 659,
+      "author": {
+        "id": 1002723
+      },
+      "writtenOn": "2026-07-23T14:30:15Z",
+      "side": 1,
+      "message": "Done. The UTF-16BE name is now exposed as `struct variable_field`. The\ndocumentation states that callers are responsible for decoding it.",
+      "parentUuid": "47b462da_875688c7",
+      "range": {
+        "startLine": 658,
+        "startChar": 1,
+        "endLine": 659,
+        "endChar": 20
+      },
+      "revId": "02c2a52e84e2fd77e496501c3c97b75dd316f3cc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1339909f_4c9c827c",
@@ -329,6 +485,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5ffebb69_6fe4ac9a",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 35
+      },
+      "lineNbr": 661,
+      "author": {
+        "id": 1002723
+      },
+      "writtenOn": "2026-07-23T14:30:15Z",
+      "side": 1,
+      "message": "Done. The decoded entry structures, PDR structure, length macro, iterators,\nfunctions, and iteration macros are now grouped together.",
+      "parentUuid": "1339909f_4c9c827c",
+      "revId": "02c2a52e84e2fd77e496501c3c97b75dd316f3cc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "79adf59f_90429d17",
@@ -342,6 +516,30 @@
       "writtenOn": "2026-05-11T00:07:12Z",
       "side": 1,
       "message": "Can you please use the uncontracted `auxiliary` form consistently throughout your change?\n\nI\u0027ve pushed a change to `CONTRIBUTING` to document why:",
+      "range": {
+        "startLine": 1013,
+        "startChar": 30,
+        "endLine": 1013,
+        "endChar": 33
+      },
+      "revId": "02c2a52e84e2fd77e496501c3c97b75dd316f3cc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "edffe765_8ed95f31",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 35
+      },
+      "lineNbr": 1013,
+      "author": {
+        "id": 1002723
+      },
+      "writtenOn": "2026-07-23T14:30:15Z",
+      "side": 1,
+      "message": "Done. The new inner-iterator symbols now consistently use\n`effecter_auxiliary_name_string`; the contracted `effecter_aux_name` form has\nbeen removed from this change.",
+      "parentUuid": "79adf59f_90429d17",
       "range": {
         "startLine": 1013,
         "startChar": 30,
