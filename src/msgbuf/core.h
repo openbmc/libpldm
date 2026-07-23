@@ -1002,7 +1002,7 @@ pldm__msgbuf_insert_array_void(struct pldm_msgbuf_rw *ctx, size_t count,
 
 	if (ctx->remaining >= (intmax_t)count) {
 		assert(ctx->cursor);
-		memcpy(ctx->cursor, src, count);
+		memmove(ctx->cursor, src, count);
 		ctx->cursor += count;
 		ctx->remaining -= (intmax_t)count;
 		return 0;
