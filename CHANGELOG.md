@@ -40,6 +40,7 @@ Change categories:
 ### Fixed
 
 - dsp: pdr: Bound children read in `pldm_entity_association_pdr_extract()`
+- platform: Fix data-field typo in PDR decoder doc comments
 
 ### Security
 
