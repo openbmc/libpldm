@@ -42,6 +42,7 @@ Change categories:
 - dsp: pdr: Bound children read in `pldm_entity_association_pdr_extract()`
 - dsp: platform: Add const modifier to the pdr argument of
   pldm_platform_redfish_action_pdr_action_iter_init
+- platform: Fix data-field typo in PDR decoder doc comments
 
 ### Security
 
