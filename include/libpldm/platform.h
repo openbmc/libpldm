@@ -3275,7 +3275,7 @@ struct pldm_platform_redfish_action_pdr_action_iter {
 LIBPLDM_ITERATOR
 struct pldm_platform_redfish_action_pdr_action_iter
 pldm_platform_redfish_action_pdr_action_iter_init(
-	struct pldm_platform_redfish_action_pdr *pdr)
+	const struct pldm_platform_redfish_action_pdr *pdr)
 {
 	struct pldm_platform_redfish_action_pdr_action_iter iter;
 
