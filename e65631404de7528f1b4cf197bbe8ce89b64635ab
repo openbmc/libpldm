@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d77f2c17_d7c7e2b2",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 599,
+      "author": {
+        "id": 1002810
+      },
+      "writtenOn": "2026-07-27T09:20:13Z",
+      "side": 1,
+      "message": "encode_pldm_header_only_errno() in src/dsp/base.h already does exactly this, including the\nNULL check, and dsp/base.h is already included here. Would it be worth reusing it?",
+      "revId": "e65631404de7528f1b4cf197bbe8ce89b64635ab",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "174c5289_43a54d60",
+        "filename": "tests/fuzz/fuzz.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 609,
+      "author": {
+        "id": 1002810
+      },
+      "writtenOn": "2026-07-27T09:20:13Z",
+      "side": 1,
+      "message": "Would it be better to move this to encode_pldm_msg_tests[]? As an encoder that always\nreturns 0, it also stops LLVMFuzzerTestOneInput() from ever returning -1.",
+      "revId": "e65631404de7528f1b4cf197bbe8ce89b64635ab",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2ff95974_fa412d60",
+        "filename": "tests/unit/dsp/platform.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 815,
+      "author": {
+        "id": 1002810
+      },
+      "writtenOn": "2026-07-27T09:20:13Z",
+      "side": 1,
+      "message": "Since the encoder only writes the PLDM header, rc \u003d\u003d 0 would also hold if the command or\ntype were wrong. Would it be worth asserting hdr.command/type/request here as well?",
+      "revId": "e65631404de7528f1b4cf197bbe8ce89b64635ab",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
