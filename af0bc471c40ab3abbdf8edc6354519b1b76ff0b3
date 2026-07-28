@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ed2fb839_0448cff4",
+        "filename": "include/libpldm/platform_pd.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2026-07-28T13:51:08Z",
+      "side": 1,
+      "message": "After implementing a type 7 responder, and adding support to this patch for compact numeric sensors, I think passing the sensor_id instead of the full PDR would provide more flexibility of efficiency for the hosting application.  The application can verify the PDR exists fairly easilu if they don\u0027t keep a pointer to it in their user context.",
+      "revId": "af0bc471c40ab3abbdf8edc6354519b1b76ff0b3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a4d34bfb_28c51886",
+        "filename": "src/platform_device/pd.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 430,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2026-07-28T13:51:08Z",
+      "side": 1,
+      "message": "is this argument name too verbose?",
+      "revId": "af0bc471c40ab3abbdf8edc6354519b1b76ff0b3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
