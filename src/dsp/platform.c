@@ -2524,7 +2524,7 @@ int decode_pldm_platform_set_numeric_sensor_enable_resp(
 	return pldm_msgbuf_complete_consumed(buf);
 }
 
-LIBPLDM_ABI_TESTING
+LIBPLDM_ABI_STABLE
 int encode_pldm_platform_set_state_sensor_enables_req(
 	uint8_t instance_id,
 	const struct pldm_platform_set_state_sensor_enables_req *req,
@@ -2586,7 +2586,7 @@ int encode_pldm_platform_set_state_sensor_enables_req(
 	return pldm_msgbuf_complete_used(buf, *payload_length, payload_length);
 }
 
-LIBPLDM_ABI_TESTING
+LIBPLDM_ABI_STABLE
 int decode_pldm_platform_set_state_sensor_enables_resp(
 	const struct pldm_msg *msg, size_t payload_length,
 	struct pldm_platform_set_state_sensor_enables_resp *resp)
