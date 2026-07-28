@@ -19,6 +19,7 @@ Change categories:
 
 ### Added
 
+- dsp: platform: Add `encode_pldm_platform_set_state_sensor_enables_resp()`
 - dsp: platform: Add `decode_pldm_platform_set_state_sensor_enables_resp()`
 - dsp: platform: Add `encode_pldm_platform_set_state_sensor_enables_req()`
 - dsp: platform: Add `encode_pldm_platform_state_sensor_pdr()`,
