@@ -3776,7 +3776,6 @@ TEST(SetStateSensorEnables, testDecodeInvalidEventRequest)
 }
 #endif // LIBPLDM_API_TESTING
 
-#if HAVE_LIBPLDM_API_TESTING
 TEST(SetStateSensorEnables, testGoodEncodeRequest)
 {
     PLDM_MSG_DEFINE_P(msg,
@@ -3814,9 +3813,7 @@ TEST(SetStateSensorEnables, testGoodEncodeRequest)
     };
     EXPECT_EQ(memcmp(msg->payload, expected.data(), expected.size()), 0);
 }
-#endif // LIBPLDM_API_TESTING
 
-#if HAVE_LIBPLDM_API_TESTING
 TEST(SetStateSensorEnables, testEncodeRequestMaxCompositeSensorCount)
 {
     PLDM_MSG_DEFINE_P(msg,
@@ -3853,9 +3850,7 @@ TEST(SetStateSensorEnables, testEncodeRequestMaxCompositeSensorCount)
         };
     EXPECT_EQ(memcmp(msg->payload, expected.data(), expected.size()), 0);
 }
-#endif // LIBPLDM_API_TESTING
 
-#if HAVE_LIBPLDM_API_TESTING
 TEST(SetStateSensorEnables, testBadEncodeRequest)
 {
     int rc;
@@ -3934,7 +3929,6 @@ TEST(SetStateSensorEnables, testBadEncodeRequest)
                                                            msg, &pl);
     EXPECT_EQ(rc, -EOVERFLOW);
 }
-#endif // LIBPLDM_API_TESTING
 
 #if HAVE_LIBPLDM_API_TESTING
 TEST(SetStateSensorEnables, testGoodEncodeResponse)
@@ -3994,7 +3988,6 @@ TEST(SetStateSensorEnables, testBadEncodeResponse)
 }
 #endif // LIBPLDM_API_TESTING
 
-#if HAVE_LIBPLDM_API_TESTING
 TEST(SetStateSensorEnables, testDecodeResponse)
 {
     struct pldm_platform_set_state_sensor_enables_resp decoded = {};
@@ -4014,9 +4007,7 @@ TEST(SetStateSensorEnables, testDecodeResponse)
     EXPECT_EQ(rc, 0);
     EXPECT_EQ(decoded.completion_code, PLDM_ERROR_INVALID_DATA);
 }
-#endif // LIBPLDM_API_TESTING
 
-#if HAVE_LIBPLDM_API_TESTING
 TEST(SetStateSensorEnables, testBadDecodeResponse)
 {
     int rc;
@@ -4045,7 +4036,6 @@ TEST(SetStateSensorEnables, testBadDecodeResponse)
     rc = decode_pldm_platform_set_state_sensor_enables_resp(msg, 2, &decoded);
     EXPECT_EQ(rc, -EBADMSG);
 }
-#endif // LIBPLDM_API_TESTING
 
 #if HAVE_LIBPLDM_API_TESTING
 TEST(GetEventReceiver, testGoodEncodeRequest)
