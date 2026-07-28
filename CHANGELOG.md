@@ -40,6 +40,9 @@ Change categories:
   `encode_pldm_platform_state_sensor_possible_states()`
 - dsp: platform: Stabilise `decode_pldm_platform_state_sensor_pdr()`
 - dsp: platform: Stabilise the State Sensor PDR possible_states iterators
+- dsp: platform: Stabilise SetStateSensorEnables requester APIs
+  - `encode_pldm_platform_set_state_sensor_enables_req()`
+  - `decode_pldm_platform_set_state_sensor_enables_resp()`
 - doxygen: Enable warnings as errors
 
   Many header files were modified to fix issues identified in the documentation.
