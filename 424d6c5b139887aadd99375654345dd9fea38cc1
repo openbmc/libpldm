@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c0eaeefb_f66650da",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2026-07-28T00:52:09Z",
+      "side": 1,
+      "message": "libpldm already has support for multipart send/recv + encode/decode + req/resp in base.c.  I\u0027m wondering why the libpldm client would not just use those?  We certainly don\u0027t need to duplicate all that code.",
+      "revId": "424d6c5b139887aadd99375654345dd9fea38cc1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
