@@ -3937,6 +3937,55 @@ TEST(SetStateSensorEnables, testBadEncodeRequest)
 #endif // LIBPLDM_API_TESTING
 
 #if HAVE_LIBPLDM_API_TESTING
+TEST(SetStateSensorEnables, testGoodEncodeResponse)
+{
+    PLDM_MSG_DEFINE_P(msg, PLDM_PLATFORM_SET_STATE_SENSOR_ENABLES_RESP_BYTES);
+    constexpr uint8_t instanceID = 0x0A;
+
+    size_t payload_length = PLDM_PLATFORM_SET_STATE_SENSOR_ENABLES_RESP_BYTES;
+    auto rc = encode_pldm_platform_set_state_sensor_enables_resp(
+        instanceID, PLDM_SUCCESS, msg, &payload_length);
+
+    ASSERT_EQ(rc, 0);
+    EXPECT_EQ(payload_length,
+              PLDM_PLATFORM_SET_STATE_SENSOR_ENABLES_RESP_BYTES);
+    EXPECT_EQ(msg->hdr.command, PLDM_SET_STATE_SENSOR_ENABLES);
+    EXPECT_EQ(msg->hdr.type, PLDM_PLATFORM);
+    EXPECT_EQ(msg->hdr.request, 0);
+    EXPECT_EQ(msg->hdr.instance_id, instanceID);
+
+    uint8_t completion_code = 0xff;
+    ASSERT_EQ(decode_pldm_platform_set_state_sensor_enables_resp(
+                  msg, payload_length, &completion_code),
+              0);
+    EXPECT_EQ(completion_code, PLDM_SUCCESS);
+}
+#endif // LIBPLDM_API_TESTING
+
+#if HAVE_LIBPLDM_API_TESTING
+TEST(SetStateSensorEnables, testBadEncodeResponse)
+{
+    int rc;
+    PLDM_MSG_DEFINE_P(msg, PLDM_PLATFORM_SET_STATE_SENSOR_ENABLES_RESP_BYTES);
+    size_t pl;
+
+    pl = PLDM_PLATFORM_SET_STATE_SENSOR_ENABLES_RESP_BYTES;
+    rc = encode_pldm_platform_set_state_sensor_enables_resp(0, PLDM_SUCCESS,
+                                                            NULL, &pl);
+    EXPECT_EQ(rc, -EINVAL);
+
+    rc = encode_pldm_platform_set_state_sensor_enables_resp(0, PLDM_SUCCESS,
+                                                            msg, NULL);
+    EXPECT_EQ(rc, -EINVAL);
+
+    pl = 0;
+    rc = encode_pldm_platform_set_state_sensor_enables_resp(0, PLDM_SUCCESS,
+                                                            msg, &pl);
+    EXPECT_EQ(rc, -EOVERFLOW);
+}
+#endif // LIBPLDM_API_TESTING
+
+#if HAVE_LIBPLDM_API_TESTING
 TEST(SetStateSensorEnables, testDecodeResponse)
 {
     uint8_t completion_code = 0;
