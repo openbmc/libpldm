@@ -45,6 +45,14 @@ enum pldm_file_cmd {
 	PLDM_FILE_CMD_DF_FIFO_SEND = 0x21,
 };
 
+/** @brief DfOpen request DfOpenAttribute bits (DSP0242 Table 9) */
+enum pldm_file_df_open_attribute {
+	PLDM_FILE_DF_OPEN_READ_WRITE = 1u << 0,	   /* 1 = Write (unsupported) */
+	PLDM_FILE_DF_OPEN_EXCLUSIVE = 1u << 1,
+	PLDM_FILE_DF_OPEN_REG_FIFO = 1u << 2,	   /* 1 = Streaming FIFO */
+	PLDM_FILE_DF_OPEN_POLLED_PUSHED = 1u << 3, /* 1 = Pushed */
+};
+
 /** @struct pldm_file_df_open_req
  *
  *  Structure representing PLDM File DfOpen request.

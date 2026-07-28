@@ -19,6 +19,7 @@ Change categories:
 
 ### Added
 
+- dsp: file: Introduce `enum pldm_file_df_open_attribute`
 - dsp: platform: Introduce `encode_pldm_platform_compact_numeric_sensor_pdr()`
 - dsp: platform: Introduce `decode_pldm_platform_compact_numeric_sensor_pdr()`
 - dsp: platform: Introduce `encode_pldm_platform_numeric_sensor_pdr()`
