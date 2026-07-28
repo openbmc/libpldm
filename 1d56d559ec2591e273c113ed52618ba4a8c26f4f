@@ -58,6 +58,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0660846a_67a9d1f4",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 32
+      },
+      "lineNbr": 1514,
+      "author": {
+        "id": 1002723
+      },
+      "writtenOn": "2026-07-28T03:27:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "51eb1cef_930f5bd8",
+      "range": {
+        "startLine": 1513,
+        "startChar": 1,
+        "endLine": 1514,
+        "endChar": 53
+      },
+      "revId": "1d56d559ec2591e273c113ed52618ba4a8c26f4f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "86efd781_0920fcab",
@@ -81,6 +105,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a3d97893_d4724167",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 32
+      },
+      "lineNbr": 4148,
+      "author": {
+        "id": 1002723
+      },
+      "writtenOn": "2026-07-28T03:27:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "86efd781_0920fcab",
+      "range": {
+        "startLine": 4143,
+        "startChar": 1,
+        "endLine": 4148,
+        "endChar": 38
+      },
+      "revId": "1d56d559ec2591e273c113ed52618ba4a8c26f4f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "13cf0018_5053fe55",
@@ -94,6 +142,30 @@
       "writtenOn": "2026-07-27T15:25:16Z",
       "side": 1,
       "message": "nit:\nCan we also assert the header in the test here?",
+      "range": {
+        "startLine": 996,
+        "startChar": 0,
+        "endLine": 996,
+        "endChar": 53
+      },
+      "revId": "1d56d559ec2591e273c113ed52618ba4a8c26f4f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9b545f20_0e388785",
+        "filename": "tests/unit/dsp/platform.cpp",
+        "patchSetId": 32
+      },
+      "lineNbr": 996,
+      "author": {
+        "id": 1002723
+      },
+      "writtenOn": "2026-07-28T03:27:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "13cf0018_5053fe55",
       "range": {
         "startLine": 996,
         "startChar": 0,
