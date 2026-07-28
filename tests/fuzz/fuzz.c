@@ -428,6 +428,42 @@ static int fuzz_encode_pldm_platform_set_numeric_sensor_enable_req(
     return 0;
 }
 
+static int fuzz_encode_pldm_platform_set_state_sensor_enables_req(
+    struct pldm_msg* msg, size_t payload_length, const uint8_t* data,
+    size_t size)
+{
+    struct pldm_platform_set_state_sensor_enables_req req;
+    PLDM_MSGBUF_RO_DEFINE_P(buf);
+    uint8_t instance_id;
+    int rc;
+
+    rc = pldm_msgbuf_init_errno(buf, 0, data, size);
+    if (rc)
+    {
+        return -1;
+    }
+
+    pldm_msgbuf_extract(buf, instance_id);
+    pldm_msgbuf_extract(buf, req.sensor_id);
+    pldm_msgbuf_extract(buf, req.composite_sensor_count);
+    for (size_t i = 0; i < ARRAY_SIZE(req.fields); i++)
+    {
+        pldm_msgbuf_extract(buf, req.fields[i].sensor_operational_state);
+        pldm_msgbuf_extract(buf, req.fields[i].sensor_event_message_enable);
+    }
+
+    rc = pldm_msgbuf_complete(buf);
+    if (rc)
+    {
+        return -1;
+    }
+
+    encode_pldm_platform_set_state_sensor_enables_req(instance_id, &req, msg,
+                                                      &payload_length);
+
+    return 0;
+}
+
 static int fuzz_encode_pldm_file_df_heartbeat_resp(struct pldm_msg* msg,
                                                    size_t payload_length,
                                                    const uint8_t* data,
@@ -465,6 +501,7 @@ static int (*const encode_pldm_msg_tests[])(struct pldm_msg*, size_t,
     fuzz_encode_pldm_base_get_tid_resp,
     fuzz_encode_pldm_base_get_pldm_types_resp,
     fuzz_encode_pldm_platform_set_numeric_sensor_enable_req,
+    fuzz_encode_pldm_platform_set_state_sensor_enables_req,
     fuzz_encode_pldm_file_df_heartbeat_resp,
 };
 
