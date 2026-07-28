@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "757c672b_0026b2cc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 40
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002885
+      },
+      "writtenOn": "2026-07-28T06:41:24Z",
+      "side": 1,
+      "message": "Overall this is good.",
+      "revId": "8e4a5b35e105f5ed1121bfc295fb8553f889b90b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b2958616_01cdb6bb",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 40
+      },
+      "lineNbr": 874,
+      "author": {
+        "id": 1002885
+      },
+      "writtenOn": "2026-07-28T06:41:24Z",
+      "side": 1,
+      "message": "Not sure if this macro should obey the prefix rule of \"pldm_platform\" as well?",
+      "range": {
+        "startLine": 874,
+        "startChar": 0,
+        "endLine": 874,
+        "endChar": 55
+      },
+      "revId": "8e4a5b35e105f5ed1121bfc295fb8553f889b90b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1b5baafa_2c5d4aa7",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 40
+      },
+      "lineNbr": 3546,
+      "author": {
+        "id": 1002885
+      },
+      "writtenOn": "2026-07-28T06:41:24Z",
+      "side": 1,
+      "message": "nit: \nI think we can drop this since we didn\u0027t use `name_string_count` here.\nLeaving it for `pldm_msgbuf_complete_consumed` will make the code cleaner.",
+      "range": {
+        "startLine": 3544,
+        "startChar": 1,
+        "endLine": 3546,
+        "endChar": 2
+      },
+      "revId": "8e4a5b35e105f5ed1121bfc295fb8553f889b90b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0ddb9715_2c30a381",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 40
+      },
+      "lineNbr": 3594,
+      "author": {
+        "id": 1002885
+      },
+      "writtenOn": "2026-07-28T06:41:24Z",
+      "side": 1,
+      "message": "nit:\nThis can be removed as well.",
+      "range": {
+        "startLine": 3592,
+        "startChar": 1,
+        "endLine": 3594,
+        "endChar": 2
+      },
+      "revId": "8e4a5b35e105f5ed1121bfc295fb8553f889b90b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
