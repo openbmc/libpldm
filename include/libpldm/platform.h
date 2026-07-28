@@ -1461,6 +1461,39 @@ struct pldm_set_state_sensor_enables_req {
 		fields[PLDM_SET_STATE_SENSOR_ENABLES_MAX_COUNT];
 };
 
+/** @struct pldm_platform_set_state_sensor_enables_field
+ *
+ *  Structure representing a stateSensorOperationalStateField entry of a
+ *  SetStateSensorEnables request
+ */
+struct pldm_platform_set_state_sensor_enables_field {
+	uint8_t sensor_operational_state;
+	uint8_t sensor_event_message_enable;
+};
+
+#define PLDM_PLATFORM_SET_STATE_SENSOR_ENABLES_MAX_COUNT 8
+
+/** @struct pldm_platform_set_state_sensor_enables_req
+ *
+ *  Structure representing a SetStateSensorEnables request
+ */
+struct pldm_platform_set_state_sensor_enables_req {
+	uint16_t sensor_id;
+	uint8_t composite_sensor_count;
+	struct pldm_platform_set_state_sensor_enables_field
+		fields[PLDM_PLATFORM_SET_STATE_SENSOR_ENABLES_MAX_COUNT];
+};
+
+/*
+ * The request carries sensorID, compositeSensorCount and then one two-byte
+ * field per sensor in the composite. compositeSensorCount is constrained to
+ * 1..PLDM_PLATFORM_SET_STATE_SENSOR_ENABLES_MAX_COUNT, so the encoded request
+ * length varies between the two bounds below.
+ */
+#define PLDM_PLATFORM_SET_STATE_SENSOR_ENABLES_MIN_REQ_BYTES (3 + (2 * 1))
+#define PLDM_PLATFORM_SET_STATE_SENSOR_ENABLES_MAX_REQ_BYTES                   \
+	(3 + (2 * PLDM_PLATFORM_SET_STATE_SENSOR_ENABLES_MAX_COUNT))
+
 /* Responder */
 
 /* SetNumericEffecterValue */
@@ -2566,6 +2599,27 @@ int encode_pldm_platform_set_numeric_sensor_enable_req(
 int decode_pldm_platform_set_numeric_sensor_enable_resp(
 	const struct pldm_msg *msg, size_t payload_length,
 	uint8_t *completion_code);
+
+/* SetStateSensorEnables */
+
+/** @brief Encode SetStateSensorEnables request
+ *
+ *  @param[in] instance_id - Message's instance id
+ *  @param[in] req - Request parameters. .composite_sensor_count must be in the
+ *                   range 1..PLDM_PLATFORM_SET_STATE_SENSOR_ENABLES_MAX_COUNT,
+ *                   and only that many entries of .fields are encoded.
+ *  @param[out] msg - Request message
+ *  @param[in,out] payload_length - Size of the buffer on input; set to the
+ *                                  actual encoded length on output
+ *
+ *  @return error code: 0 on success
+ *                      -EINVAL if the function input parameters are incorrect
+ *                      -EOVERFLOW if payload_length is too small
+ */
+int encode_pldm_platform_set_state_sensor_enables_req(
+	uint8_t instance_id,
+	const struct pldm_platform_set_state_sensor_enables_req *req,
+	struct pldm_msg *msg, size_t *payload_length);
 
 /* GetSensorReading */
 
