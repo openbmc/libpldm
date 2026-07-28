@@ -19,6 +19,7 @@ Change categories:
 
 ### Added
 
+- dsp: platform: Add `encode_pldm_platform_set_state_sensor_enables_req()`
 - dsp: platform: Add `possible_states` iterator for the State Sensor PDR
   - `foreach_pldm_platform_state_sensor_pdr_possible_states()`
   - `foreach_pldm_platform_state_sensor_pdr_states()`
