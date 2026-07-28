@@ -1518,6 +1518,16 @@ struct pldm_platform_set_state_sensor_enables_req {
 #define PLDM_PLATFORM_SET_STATE_SENSOR_ENABLES_MAX_REQ_BYTES                   \
 	(3 + (2 * PLDM_PLATFORM_SET_STATE_SENSOR_ENABLES_MAX_COUNT))
 
+/** @struct pldm_platform_set_state_sensor_enables_resp
+ *
+ *  Structure representing a SetStateSensorEnables response
+ */
+struct pldm_platform_set_state_sensor_enables_resp {
+	uint8_t completion_code;
+};
+
+#define PLDM_PLATFORM_SET_STATE_SENSOR_ENABLES_RESP_BYTES 1
+
 /* Responder */
 
 /* SetNumericEffecterValue */
@@ -2695,6 +2705,21 @@ int encode_pldm_platform_set_state_sensor_enables_req(
 	uint8_t instance_id,
 	const struct pldm_platform_set_state_sensor_enables_req *req,
 	struct pldm_msg *msg, size_t *payload_length);
+
+/** @brief Decode SetStateSensorEnables response
+ *
+ *  @param[in] msg - PLDM response message.
+ *  @param[in] payload_length - Length of response message payload
+ *  @param[out] resp - Returned decoded response.
+ *
+ *  @return error code: 0 on success
+ *                      -EINVAL if the function input parameters are incorrect
+ *                      -EOVERFLOW if payload is too short
+ *                      -EBADMSG if payload is too long
+ */
+int decode_pldm_platform_set_state_sensor_enables_resp(
+	const struct pldm_msg *msg, size_t payload_length,
+	struct pldm_platform_set_state_sensor_enables_resp *resp);
 
 /* GetSensorReading */
 
