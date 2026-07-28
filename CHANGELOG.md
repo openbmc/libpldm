@@ -36,6 +36,9 @@ Change categories:
 
 ### Changed
 
+- dsp: platform: Stabilise SetStateSensorEnables requester APIs
+  - `encode_pldm_platform_set_state_sensor_enables_req()`
+  - `decode_pldm_platform_set_state_sensor_enables_resp()`
 - dsp: platform: Stabilise `encode_pldm_platform_state_sensor_pdr()` and
   `encode_pldm_platform_state_sensor_possible_states()`
 - dsp: platform: Stabilise `decode_pldm_platform_state_sensor_pdr()`
