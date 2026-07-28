@@ -3777,6 +3777,166 @@ TEST(SetStateSensorEnables, testDecodeInvalidEventRequest)
 #endif // LIBPLDM_API_TESTING
 
 #if HAVE_LIBPLDM_API_TESTING
+TEST(SetStateSensorEnables, testGoodEncodeRequest)
+{
+    PLDM_MSG_DEFINE_P(msg,
+                      PLDM_PLATFORM_SET_STATE_SENSOR_ENABLES_MAX_REQ_BYTES);
+    constexpr uint8_t instanceID = 0x0A;
+    constexpr size_t encodedLength = 7;
+    struct pldm_platform_set_state_sensor_enables_req req = {
+        .sensor_id = 0x4567,
+        .composite_sensor_count = 2,
+        .op_fields =
+            {
+                {PLDM_SET_SENSOR_DISABLED, PLDM_NO_EVENT_GENERATION},
+                {PLDM_SET_SENSOR_UNAVAILABLE, PLDM_EVENTS_DISABLED},
+            },
+    };
+
+    size_t payload_length =
+        PLDM_PLATFORM_SET_STATE_SENSOR_ENABLES_MAX_REQ_BYTES;
+    auto rc = encode_pldm_platform_set_state_sensor_enables_req(
+        instanceID, &req, msg, &payload_length);
+
+    ASSERT_EQ(rc, 0);
+    EXPECT_EQ(payload_length, encodedLength);
+    EXPECT_EQ(msg->hdr.command, PLDM_SET_STATE_SENSOR_ENABLES);
+    EXPECT_EQ(msg->hdr.type, PLDM_PLATFORM);
+    EXPECT_EQ(msg->hdr.request, 1);
+    EXPECT_EQ(msg->hdr.datagram, 0);
+    EXPECT_EQ(msg->hdr.instance_id, instanceID);
+
+    const std::array<uint8_t, encodedLength> expected{
+        0x67, 0x45, // sensor ID 0x4567
+        0x02,       // count
+        0x01, 0x00, // opField 0
+        0x02, 0x01, // opField 1
+    };
+    EXPECT_EQ(memcmp(msg->payload, expected.data(), expected.size()), 0);
+}
+#endif // LIBPLDM_API_TESTING
+
+#if HAVE_LIBPLDM_API_TESTING
+TEST(SetStateSensorEnables, testEncodeRequestMaxCompositeSensorCount)
+{
+    PLDM_MSG_DEFINE_P(msg,
+                      PLDM_PLATFORM_SET_STATE_SENSOR_ENABLES_MAX_REQ_BYTES);
+    struct pldm_platform_set_state_sensor_enables_req req = {
+        .sensor_id = 0x1123,
+        .composite_sensor_count =
+            PLDM_PLATFORM_SET_STATE_SENSOR_ENABLES_MAX_COUNT,
+        .op_fields = {},
+    };
+
+    for (auto& op_field : req.op_fields)
+    {
+        op_field.sensor_operational_state = PLDM_SET_SENSOR_ENABLED;
+        op_field.sensor_event_message_enable = PLDM_STATE_EVENTS_ONLY_ENABLED;
+    }
+
+    size_t payload_length =
+        PLDM_PLATFORM_SET_STATE_SENSOR_ENABLES_MAX_REQ_BYTES;
+    auto rc = encode_pldm_platform_set_state_sensor_enables_req(
+        0, &req, msg, &payload_length);
+
+    ASSERT_EQ(rc, 0);
+    EXPECT_EQ(payload_length,
+              PLDM_PLATFORM_SET_STATE_SENSOR_ENABLES_MAX_REQ_BYTES);
+
+    const std::array<uint8_t,
+                     PLDM_PLATFORM_SET_STATE_SENSOR_ENABLES_MAX_REQ_BYTES>
+        expected{
+            0x23, 0x11, // sensor ID 0x1123
+            0x08,       // count
+            0x00, 0x04, 0x00, 0x04, 0x00, 0x04, 0x00, 0x04,
+            0x00, 0x04, 0x00, 0x04, 0x00, 0x04, 0x00, 0x04,
+        };
+    EXPECT_EQ(memcmp(msg->payload, expected.data(), expected.size()), 0);
+}
+#endif // LIBPLDM_API_TESTING
+
+#if HAVE_LIBPLDM_API_TESTING
+TEST(SetStateSensorEnables, testBadEncodeRequest)
+{
+    int rc;
+    PLDM_MSG_DEFINE_P(msg,
+                      PLDM_PLATFORM_SET_STATE_SENSOR_ENABLES_MAX_REQ_BYTES);
+    constexpr uint8_t instanceID = 0x0A;
+    constexpr size_t maxLength =
+        PLDM_PLATFORM_SET_STATE_SENSOR_ENABLES_MAX_REQ_BYTES;
+    const struct pldm_platform_set_state_sensor_enables_req req = {
+        .sensor_id = 0x4567,
+        .composite_sensor_count = 2,
+        .op_fields =
+            {
+                {PLDM_SET_SENSOR_DISABLED, PLDM_NO_EVENT_GENERATION},
+                {PLDM_SET_SENSOR_UNAVAILABLE, PLDM_EVENTS_DISABLED},
+            },
+    };
+
+    size_t pl;
+
+    // Test null msg pointer
+    pl = maxLength;
+    rc = encode_pldm_platform_set_state_sensor_enables_req(instanceID, &req,
+                                                           NULL, &pl);
+    EXPECT_EQ(rc, -EINVAL);
+
+    // Test null req pointer
+    pl = maxLength;
+    rc = encode_pldm_platform_set_state_sensor_enables_req(instanceID, NULL,
+                                                           msg, &pl);
+    EXPECT_EQ(rc, -EINVAL);
+
+    // Test null payload_length pointer
+    rc = encode_pldm_platform_set_state_sensor_enables_req(instanceID, &req,
+                                                           msg, NULL);
+    EXPECT_EQ(rc, -EINVAL);
+
+    // Test zero composite sensor count
+    struct pldm_platform_set_state_sensor_enables_req zeroCountReq = req;
+    zeroCountReq.composite_sensor_count = 0;
+    pl = maxLength;
+    rc = encode_pldm_platform_set_state_sensor_enables_req(
+        instanceID, &zeroCountReq, msg, &pl);
+    EXPECT_EQ(rc, -EINVAL);
+
+    // Test excessive composite sensor count
+    struct pldm_platform_set_state_sensor_enables_req bigCountReq = req;
+    bigCountReq.composite_sensor_count =
+        PLDM_PLATFORM_SET_STATE_SENSOR_ENABLES_MAX_COUNT + 1;
+    pl = maxLength;
+    rc = encode_pldm_platform_set_state_sensor_enables_req(
+        instanceID, &bigCountReq, msg, &pl);
+    EXPECT_EQ(rc, -EINVAL);
+
+    // Test invalid operational state
+    struct pldm_platform_set_state_sensor_enables_req invalidOpStateReq = req;
+    invalidOpStateReq.op_fields[1].sensor_operational_state =
+        PLDM_SET_SENSOR_UNAVAILABLE + 1;
+    pl = maxLength;
+    rc = encode_pldm_platform_set_state_sensor_enables_req(
+        instanceID, &invalidOpStateReq, msg, &pl);
+    EXPECT_EQ(rc, -EINVAL);
+
+    // Test invalid event message enable
+    struct pldm_platform_set_state_sensor_enables_req invalidEventReq = req;
+    invalidEventReq.op_fields[1].sensor_event_message_enable =
+        PLDM_STATE_EVENTS_ONLY_ENABLED + 1;
+    pl = maxLength;
+    rc = encode_pldm_platform_set_state_sensor_enables_req(
+        instanceID, &invalidEventReq, msg, &pl);
+    EXPECT_EQ(rc, -EINVAL);
+
+    // Test buffer too small for the requested field count
+    pl = PLDM_PLATFORM_SET_STATE_SENSOR_ENABLES_MIN_REQ_BYTES;
+    rc = encode_pldm_platform_set_state_sensor_enables_req(instanceID, &req,
+                                                           msg, &pl);
+    EXPECT_EQ(rc, -EOVERFLOW);
+}
+#endif // LIBPLDM_API_TESTING
+
+#if HAVE_LIBPLDM_API_TESTING
 TEST(GetEventReceiver, testGoodEncodeRequest)
 {
     std::array<uint8_t, sizeof(pldm_msg)> requestMsg{};
