@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "40e232f1_945dac94",
+        "filename": "include/libpldm/platform_pd.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2026-07-28T13:53:11Z",
+      "side": 1,
+      "message": "done",
+      "parentUuid": "ed2fb839_0448cff4",
+      "revId": "af0bc471c40ab3abbdf8edc6354519b1b76ff0b3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a4d34bfb_28c51886",
@@ -31,6 +49,24 @@
       "writtenOn": "2026-07-28T13:51:08Z",
       "side": 1,
       "message": "is this argument name too verbose?",
+      "revId": "af0bc471c40ab3abbdf8edc6354519b1b76ff0b3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "981b75a6_5e5c08fe",
+        "filename": "src/platform_device/pd.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 430,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2026-07-28T13:53:11Z",
+      "side": 1,
+      "message": "yes, yes it is.  done.",
+      "parentUuid": "a4d34bfb_28c51886",
       "revId": "af0bc471c40ab3abbdf8edc6354519b1b76ff0b3",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }

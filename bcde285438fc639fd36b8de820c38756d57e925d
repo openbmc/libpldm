@@ -107,6 +107,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "14673e02_01239cc9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2026-07-28T13:53:11Z",
+      "side": 1,
+      "message": "marking as resolved in case you are filtering on these.  feel free to unresolve.",
+      "parentUuid": "0192ec3e_0cd24482",
+      "revId": "bcde285438fc639fd36b8de820c38756d57e925d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9864dfdd_f36a4cd8",
