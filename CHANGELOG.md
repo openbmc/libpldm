@@ -21,6 +21,7 @@ Change categories:
 
 - dsp: platform: Add `encode_pldm_platform_set_state_sensor_enables_req()`
 - dsp: platform: Add `decode_pldm_platform_set_state_sensor_enables_resp()`
+- dsp: platform: Add `encode_pldm_platform_set_state_sensor_enables_resp()`
 - libpldm++ support for fw update pkg v1.1.0
 - libpldm++ support for fw update pkg v1.2.0
 - libpldm++ support for fw update pkg v1.3.0
