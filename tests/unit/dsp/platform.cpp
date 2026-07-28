@@ -3937,6 +3937,75 @@ TEST(SetStateSensorEnables, testBadEncodeRequest)
 #endif // LIBPLDM_API_TESTING
 
 #if HAVE_LIBPLDM_API_TESTING
+TEST(SetStateSensorEnables, testDecodeResponse)
+{
+    struct pldm_platform_set_state_sensor_enables_resp decoded = {};
+
+    const std::array<uint8_t, hdrSize + 1> success{
+        0x00,
+        PLDM_PLATFORM,
+        PLDM_SET_STATE_SENSOR_ENABLES,
+        PLDM_SUCCESS,
+    };
+
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+    auto successMsg = reinterpret_cast<const pldm_msg*>(success.data());
+
+    auto rc = decode_pldm_platform_set_state_sensor_enables_resp(
+        successMsg, PLDM_PLATFORM_SET_STATE_SENSOR_ENABLES_RESP_BYTES,
+        &decoded);
+    EXPECT_EQ(rc, 0);
+    EXPECT_EQ(decoded.completion_code, PLDM_SUCCESS);
+
+    const std::array<uint8_t, hdrSize + 1> error{
+        0x00,
+        PLDM_PLATFORM,
+        PLDM_SET_STATE_SENSOR_ENABLES,
+        PLDM_ERROR_INVALID_DATA,
+    };
+
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+    auto errorMsg = reinterpret_cast<const pldm_msg*>(error.data());
+
+    rc = decode_pldm_platform_set_state_sensor_enables_resp(
+        errorMsg, PLDM_PLATFORM_SET_STATE_SENSOR_ENABLES_RESP_BYTES, &decoded);
+    EXPECT_EQ(rc, 0);
+    EXPECT_EQ(decoded.completion_code, PLDM_ERROR_INVALID_DATA);
+}
+#endif // LIBPLDM_API_TESTING
+
+#if HAVE_LIBPLDM_API_TESTING
+TEST(SetStateSensorEnables, testBadDecodeResponse)
+{
+    int rc;
+    struct pldm_platform_set_state_sensor_enables_resp decoded = {};
+
+    const std::array<uint8_t, hdrSize + 2> resp{
+        0x00, PLDM_PLATFORM, PLDM_SET_STATE_SENSOR_ENABLES, PLDM_SUCCESS, 0x00,
+    };
+
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+    auto msg = reinterpret_cast<const pldm_msg*>(resp.data());
+
+    rc = decode_pldm_platform_set_state_sensor_enables_resp(
+        NULL, PLDM_PLATFORM_SET_STATE_SENSOR_ENABLES_RESP_BYTES, &decoded);
+    EXPECT_EQ(rc, -EINVAL);
+
+    rc = decode_pldm_platform_set_state_sensor_enables_resp(
+        msg, PLDM_PLATFORM_SET_STATE_SENSOR_ENABLES_RESP_BYTES, NULL);
+    EXPECT_EQ(rc, -EINVAL);
+
+    // Short response
+    rc = decode_pldm_platform_set_state_sensor_enables_resp(msg, 0, &decoded);
+    EXPECT_EQ(rc, -EOVERFLOW);
+
+    // Overlength response
+    rc = decode_pldm_platform_set_state_sensor_enables_resp(msg, 2, &decoded);
+    EXPECT_EQ(rc, -EBADMSG);
+}
+#endif // LIBPLDM_API_TESTING
+
+#if HAVE_LIBPLDM_API_TESTING
 TEST(GetEventReceiver, testGoodEncodeRequest)
 {
     std::array<uint8_t, sizeof(pldm_msg)> requestMsg{};
