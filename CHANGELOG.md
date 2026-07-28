@@ -28,6 +28,8 @@ Change categories:
 
 ### Changed
 
+- dsp: platform: Stabilise `encode_pldm_platform_set_state_sensor_enables_req()`
+- dsp: platform: Stabilise `decode_pldm_platform_set_state_sensor_enables_resp()`
 - doxygen: Enable warnings as errors
 
   Many header files were modified to fix issues identified in the documentation.
