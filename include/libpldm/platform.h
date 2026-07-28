@@ -2915,6 +2915,23 @@ int decode_set_state_sensor_enables_req(
 	const struct pldm_msg *msg, size_t payload_length,
 	struct pldm_set_state_sensor_enables_req *req);
 
+/** @brief Encode SetStateSensorEnables response
+ *
+ *  @param[in] instance_id - Message's instance id
+ *  @param[in] resp - Response parameters
+ *  @param[out] msg - Response message
+ *  @param[in,out] payload_length - Size of the buffer on input; set to the
+ *                                  actual encoded length on output
+ *
+ *  @return error code: 0 on success
+ *                      -EINVAL if the function input parameters are incorrect
+ *                      -EOVERFLOW if payload_length is too small
+ */
+int encode_pldm_platform_set_state_sensor_enables_resp(
+	uint8_t instance_id,
+	const struct pldm_platform_set_state_sensor_enables_resp *resp,
+	struct pldm_msg *msg, size_t *payload_length);
+
 /** @struct pldm_platform_redfish_resource_pdr
  *
  *  Structure representing Redfish Resource PDR
