@@ -29,6 +29,10 @@ Change categories:
 
 ### Changed
 
+- dsp: platform: Stabilise SetStateSensorEnables requester APIs
+  - `encode_pldm_platform_set_state_sensor_enables_req()`
+  - `decode_pldm_platform_set_state_sensor_enables_resp()`
+
 - doxygen: Enable warnings as errors
 
   Many header files were modified to fix issues identified in the documentation.
