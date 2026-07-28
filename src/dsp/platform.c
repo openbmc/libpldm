@@ -2890,6 +2890,38 @@ int decode_set_state_sensor_enables_req(
 }
 
 LIBPLDM_ABI_TESTING
+int encode_pldm_platform_set_state_sensor_enables_resp(
+	uint8_t instance_id,
+	const struct pldm_platform_set_state_sensor_enables_resp *resp,
+	struct pldm_msg *msg, size_t *payload_length)
+{
+	PLDM_MSGBUF_RW_DEFINE_P(buf);
+	int rc;
+
+	if (resp == NULL || msg == NULL || payload_length == NULL) {
+		return -EINVAL;
+	}
+
+	rc = encode_pldm_header_only_errno(PLDM_RESPONSE, instance_id,
+					   PLDM_PLATFORM,
+					   PLDM_SET_STATE_SENSOR_ENABLES, msg);
+	if (rc) {
+		return rc;
+	}
+
+	rc = pldm_msgbuf_init_errno(
+		buf, PLDM_PLATFORM_SET_STATE_SENSOR_ENABLES_RESP_BYTES,
+		msg->payload, *payload_length);
+	if (rc) {
+		return rc;
+	}
+
+	pldm_msgbuf_insert(buf, resp->completion_code);
+
+	return pldm_msgbuf_complete_used(buf, *payload_length, payload_length);
+}
+
+LIBPLDM_ABI_TESTING
 int encode_get_event_receiver_req(uint8_t instance_id, struct pldm_msg *msg,
 				  size_t payload_length LIBPLDM_CC_UNUSED)
 {
