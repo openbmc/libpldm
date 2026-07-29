@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "52c2af1a_f7d1af3e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2026-07-29T12:30:55Z",
+      "side": 1,
+      "message": "Thanks for the patch.  I know the implementation here is pretty trivial but a fuzz test would be good:\n\nhttps://github.com/openbmc/libpldm/blob/cac92b6a494a85add1c261e7602bec18d8957fde/CONTRIBUTING.md#L285\n\nEverything else looks good to me.",
+      "revId": "5cda0ddd30fd23de534e69c3dd851ae0cba7bd6f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3cf75bdc_c3a938f8",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2026-07-29T12:30:55Z",
+      "side": 1,
+      "message": "bit of a nit but this is supposed to go on top.  https://github.com/openbmc/libpldm/blob/cac92b6a494a85add1c261e7602bec18d8957fde/CONTRIBUTING.md#L49",
+      "revId": "5cda0ddd30fd23de534e69c3dd851ae0cba7bd6f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
