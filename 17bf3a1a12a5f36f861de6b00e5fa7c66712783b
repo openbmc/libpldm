@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ccfbac33_57547f84",
+        "filename": "src/dsp/rde.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 320,
+      "author": {
+        "id": 1002810
+      },
+      "writtenOn": "2026-07-29T11:07:07Z",
+      "side": 1,
+      "message": "nit: the request encoder checks the size at 237 before writing the header at 242, but here the header goes in at 307 and the check is only at 320. Would it be worth moving the check above 307, so -EINVAL leaves msg untouched?",
+      "revId": "17bf3a1a12a5f36f861de6b00e5fa7c66712783b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6e70a12c_fda63f89",
+        "filename": "tests/unit/dsp/rde.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 288,
+      "author": {
+        "id": 1002810
+      },
+      "writtenOn": "2026-07-29T11:07:07Z",
+      "side": 1,
+      "message": "nit: Could the decode half be added here too? The same test in 92300 builds a wire buffer and checks decode_..._req returns -EBADMSG (rde.cpp:58-68 there), and without it the checks at rde.c:287, 320 and 372 have no test.",
+      "revId": "17bf3a1a12a5f36f861de6b00e5fa7c66712783b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b86a9dfb_edf258bd",
+        "filename": "tests/unit/dsp/rde.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 294,
+      "author": {
+        "id": 1002810
+      },
+      "writtenOn": "2026-07-29T11:07:07Z",
+      "side": 1,
+      "message": "nit: pldm_msg only has one byte of payload[] while reqLen at 296 says four, so this relies on both calls returning -EINVAL before anything gets written. Would a sized std::array like line 209 be safer here?",
+      "revId": "17bf3a1a12a5f36f861de6b00e5fa7c66712783b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
