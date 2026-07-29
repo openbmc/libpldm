@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e596334c_f3f8827e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2026-07-29T12:24:42Z",
+      "side": 1,
+      "message": "What you have here looks good to me, thanks for the patch.  One thing missing is a fuzz test:\n\nhttps://github.com/openbmc/libpldm/blob/cac92b6a494a85add1c261e7602bec18d8957fde/CONTRIBUTING.md#L285\n\nAlso, it would be nice to add a new decode method for the request so we have the full set of updated codecs for this command.  I\u0027m not sure if @andrew@codeconstruct.com.au will insist on that but https://github.com/openbmc/libpldm/blob/cac92b6a494a85add1c261e7602bec18d8957fde/CONTRIBUTING.md#L151 sort of suggests that.  If you do decide to add the new decode method don\u0027t forget https://github.com/openbmc/libpldm/blob/cac92b6a494a85add1c261e7602bec18d8957fde/CONTRIBUTING.md#L364",
+      "revId": "1ddbc17e8d52d4b536fca54fbe832c3aca09cf92",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
