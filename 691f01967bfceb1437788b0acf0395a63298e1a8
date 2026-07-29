@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3bf2cc19_d5bd9d1b",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 5
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1002810
+      },
+      "writtenOn": "2026-07-29T11:45:35Z",
+      "side": 1,
+      "message": "nit: These say pldm_rde_rde_operation_status_*, but the actual symbols are pldm_rde_operation_status_*. Should the CHANGELOG be updated to match?",
+      "revId": "691f01967bfceb1437788b0acf0395a63298e1a8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "449511f2_5dc71fa3",
+        "filename": "include/libpldm/rde.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 897,
+      "author": {
+        "id": 1002810
+      },
+      "writtenOn": "2026-07-29T11:45:35Z",
+      "side": 1,
+      "message": "This aliases RESP_FIXED_BYTES but not RESP_MIN_BYTES. Should both be aliased?",
+      "revId": "691f01967bfceb1437788b0acf0395a63298e1a8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5d13cec7_2754bd61",
+        "filename": "tests/unit/dsp/rde.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 936,
+      "author": {
+        "id": 1002810
+      },
+      "writtenOn": "2026-07-29T11:45:35Z",
+      "side": 1,
+      "message": "All four tests here are happy paths — the -EINVAL, -EOVERFLOW and -EBADMSG branches aren\u0027t covered. Should a negative test be added?",
+      "revId": "691f01967bfceb1437788b0acf0395a63298e1a8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
