@@ -2695,9 +2695,9 @@ int decode_set_numeric_sensor_enable_req(
 }
 
 LIBPLDM_ABI_TESTING
-int decode_set_state_sensor_enables_req(
+int decode_pldm_platform_set_state_sensor_enables_req(
 	const struct pldm_msg *msg, size_t payload_length,
-	struct pldm_set_state_sensor_enables_req *req)
+	struct pldm_platform_set_state_sensor_enables_req *req)
 {
 	PLDM_MSGBUF_RO_DEFINE_P(buf);
 	int rc;
@@ -2706,42 +2706,46 @@ int decode_set_state_sensor_enables_req(
 		return -EINVAL;
 	}
 
+	/* sensorID and compositeSensorCount precede the variable-length fields */
 	rc = pldm_msgbuf_init_errno(buf, 3, msg->payload, payload_length);
 	if (rc) {
 		return rc;
 	}
 
 	pldm_msgbuf_extract(buf, req->sensor_id);
-	rc = pldm_msgbuf_extract(buf, req->field_count);
+	rc = pldm_msgbuf_extract(buf, req->composite_sensor_count);
 	if (rc) {
-		return rc;
+		return pldm_msgbuf_discard(buf, rc);
 	}
 
-	if (req->field_count < 1 ||
-	    req->field_count > PLDM_SET_STATE_SENSOR_ENABLES_MAX_COUNT) {
-		return -EPROTO;
+	if (req->composite_sensor_count < 1 ||
+	    req->composite_sensor_count >
+		    PLDM_PLATFORM_SET_STATE_SENSOR_ENABLES_MAX_COUNT) {
+		return pldm_msgbuf_discard(buf, -EPROTO);
 	}
 
-	for (uint8_t i = 0; i < req->field_count; i++) {
-		uint8_t event_enable_val = 0;
-		uint8_t op_state_val = 0;
+	for (uint8_t i = 0; i < req->composite_sensor_count; i++) {
+		uint8_t event_message_enable_val = 0;
+		uint8_t operational_state_val = 0;
 
-		pldm_msgbuf_extract(buf, op_state_val);
-		rc = pldm_msgbuf_extract(buf, event_enable_val);
+		pldm_msgbuf_extract(buf, operational_state_val);
+		rc = pldm_msgbuf_extract(buf, event_message_enable_val);
 		if (rc) {
 			return pldm_msgbuf_discard(buf, rc);
 		}
 
-		if (op_state_val > PLDM_SET_SENSOR_UNAVAILABLE) {
+		if (operational_state_val > PLDM_SET_SENSOR_UNAVAILABLE) {
 			return pldm_msgbuf_discard(buf, -EPROTO);
 		}
 
-		if (event_enable_val > PLDM_STATE_EVENTS_ONLY_ENABLED) {
+		if (event_message_enable_val >
+		    PLDM_PLATFORM_SET_SENSOR_EVENT_MESSAGE_ENABLE_STATE_EVENTS_ONLY) {
 			return pldm_msgbuf_discard(buf, -EPROTO);
 		}
 
-		req->fields[i].op_state = op_state_val;
-		req->fields[i].event_enable = event_enable_val;
+		req->fields[i].sensor_operational_state = operational_state_val;
+		req->fields[i].sensor_event_message_enable =
+			event_message_enable_val;
 	}
 
 	return pldm_msgbuf_complete_consumed(buf);
