@@ -3692,7 +3692,7 @@ TEST(SetNumericSensorEnable, testDecodeInvalidEventRequest)
 TEST(SetStateSensorEnables, testDecodeRequest)
 {
     int rc;
-    struct pldm_set_state_sensor_enables_req decoded;
+    struct pldm_platform_set_state_sensor_enables_req decoded;
 
     const std::array<uint8_t, hdrSize + 8> req
         // PLDM header
@@ -3709,22 +3709,57 @@ TEST(SetStateSensorEnables, testDecodeRequest)
     auto msg = reinterpret_cast<const pldm_msg*>(req.data());
 
     // Good decode
-    rc = decode_set_state_sensor_enables_req(msg, 7, &decoded);
+    rc = decode_pldm_platform_set_state_sensor_enables_req(msg, 7, &decoded);
     EXPECT_EQ(rc, 0);
     EXPECT_EQ(decoded.sensor_id, 0x4567);
-    EXPECT_EQ(decoded.field_count, 2);
-    EXPECT_EQ(decoded.fields[0].op_state, PLDM_SET_SENSOR_DISABLED);
-    EXPECT_EQ(decoded.fields[0].event_enable, PLDM_NO_EVENT_GENERATION);
-    EXPECT_EQ(decoded.fields[1].op_state, PLDM_SET_SENSOR_UNAVAILABLE);
-    EXPECT_EQ(decoded.fields[1].event_enable, PLDM_EVENTS_DISABLED);
+    EXPECT_EQ(decoded.composite_sensor_count, 2);
+    EXPECT_EQ(decoded.fields[0].sensor_operational_state,
+              PLDM_SET_SENSOR_DISABLED);
+    EXPECT_EQ(decoded.fields[0].sensor_event_message_enable,
+              PLDM_PLATFORM_SET_SENSOR_EVENT_MESSAGE_NO_CHANGE);
+    EXPECT_EQ(decoded.fields[1].sensor_operational_state,
+              PLDM_SET_SENSOR_UNAVAILABLE);
+    EXPECT_EQ(decoded.fields[1].sensor_event_message_enable,
+              PLDM_PLATFORM_SET_SENSOR_EVENT_MESSAGE_DISABLE_EVENTS);
 
     // Short message
-    rc = decode_set_state_sensor_enables_req(msg, 6, &decoded);
+    rc = decode_pldm_platform_set_state_sensor_enables_req(msg, 6, &decoded);
     EXPECT_EQ(rc, -EOVERFLOW);
 
     // Overlength message
-    rc = decode_set_state_sensor_enables_req(msg, 8, &decoded);
+    rc = decode_pldm_platform_set_state_sensor_enables_req(msg, 8, &decoded);
     EXPECT_EQ(rc, -EBADMSG);
+}
+
+#endif // LIBPLDM_API_TESTING
+
+#if HAVE_LIBPLDM_API_TESTING
+TEST(SetStateSensorEnables, testDecodeBadRequest)
+{
+    int rc;
+    struct pldm_platform_set_state_sensor_enables_req decoded;
+
+    const std::array<uint8_t, hdrSize + 5> req
+        // PLDM header
+        {
+            PLDM_PLATFORM, 0x80, PLDM_SET_STATE_SENSOR_ENABLES,
+            0x67,          0x45, // sensor ID 0x4567
+            0x00,                // count
+            0x01,          0x00, // field 0
+        };
+
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+    auto msg = reinterpret_cast<const pldm_msg*>(req.data());
+
+    rc = decode_pldm_platform_set_state_sensor_enables_req(NULL, 5, &decoded);
+    EXPECT_EQ(rc, -EINVAL);
+
+    rc = decode_pldm_platform_set_state_sensor_enables_req(msg, 5, NULL);
+    EXPECT_EQ(rc, -EINVAL);
+
+    // Zero composite sensor count
+    rc = decode_pldm_platform_set_state_sensor_enables_req(msg, 5, &decoded);
+    EXPECT_EQ(rc, -EPROTO);
 }
 #endif // LIBPLDM_API_TESTING
 
@@ -3732,7 +3767,7 @@ TEST(SetStateSensorEnables, testDecodeRequest)
 TEST(SetStateSensorEnables, testDecodeInvalidOpRequest)
 {
     int rc;
-    struct pldm_set_state_sensor_enables_req decoded;
+    struct pldm_platform_set_state_sensor_enables_req decoded;
 
     const std::array<uint8_t, hdrSize + 7> req
         // PLDM header
@@ -3747,7 +3782,7 @@ TEST(SetStateSensorEnables, testDecodeInvalidOpRequest)
     // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto msg = reinterpret_cast<const pldm_msg*>(req.data());
 
-    rc = decode_set_state_sensor_enables_req(msg, 7, &decoded);
+    rc = decode_pldm_platform_set_state_sensor_enables_req(msg, 7, &decoded);
     EXPECT_EQ(rc, -EPROTO);
 }
 #endif // LIBPLDM_API_TESTING
@@ -3756,7 +3791,7 @@ TEST(SetStateSensorEnables, testDecodeInvalidOpRequest)
 TEST(SetStateSensorEnables, testDecodeInvalidEventRequest)
 {
     int rc;
-    struct pldm_set_state_sensor_enables_req decoded;
+    struct pldm_platform_set_state_sensor_enables_req decoded;
 
     const std::array<uint8_t, hdrSize + 7> req
         // PLDM header
@@ -3771,7 +3806,7 @@ TEST(SetStateSensorEnables, testDecodeInvalidEventRequest)
     // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto msg = reinterpret_cast<const pldm_msg*>(req.data());
 
-    rc = decode_set_state_sensor_enables_req(msg, 7, &decoded);
+    rc = decode_pldm_platform_set_state_sensor_enables_req(msg, 7, &decoded);
     EXPECT_EQ(rc, -EPROTO);
 }
 #endif // LIBPLDM_API_TESTING
