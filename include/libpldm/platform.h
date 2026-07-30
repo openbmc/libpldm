@@ -1407,28 +1407,6 @@ struct pldm_platform_set_numeric_sensor_enable_req {
 #define PLDM_PLATFORM_SET_NUMERIC_SENSOR_ENABLE_REQ_BYTES  4
 #define PLDM_PLATFORM_SET_NUMERIC_SENSOR_ENABLE_RESP_BYTES 1
 
-/** @struct pldm_set_state_sensor_enable_field
- *
- *  Structure representing PLDM set state sensor enables fields
- */
-struct pldm_set_state_sensor_enable_field {
-	enum pldm_set_sensor_operational_state op_state;
-	enum pldm_sensor_event_message_enable event_enable;
-};
-
-#define PLDM_SET_STATE_SENSOR_ENABLES_MAX_COUNT 8
-
-/** @struct pldm_set_state_sensor_enables_req
- *
- *  Structure representing a SetStateSensorEnables request
- */
-struct pldm_set_state_sensor_enables_req {
-	uint16_t sensor_id;
-	uint8_t field_count;
-	struct pldm_set_state_sensor_enable_field
-		fields[PLDM_SET_STATE_SENSOR_ENABLES_MAX_COUNT];
-};
-
 /** @struct pldm_platform_set_state_sensor_enables_field
  *
  *  Structure representing a stateSensorOperationalStateField entry of a
@@ -2902,8 +2880,8 @@ int decode_set_numeric_sensor_enable_req(
  *
  *  @param[in] msg - PLDM request message.
  *  @param[in] payload_length - Length of request message.
- *  @param[out] req - Returned decoded request.
- *                    .field_count is set to the number of populated fields.
+ *  @param[out] req - Returned decoded request. .composite_sensor_count is set
+ *                    to the number of populated entries of .fields.
  *
  *  @return error code: 0 on success
  *                      -EINVAL if the function input parameters are incorrect
@@ -2911,9 +2889,9 @@ int decode_set_numeric_sensor_enable_req(
  *                      -EBADMSG if the input request message is too long
  *                      -EOVERFLOW if the input request message is too short.
  */
-int decode_set_state_sensor_enables_req(
+int decode_pldm_platform_set_state_sensor_enables_req(
 	const struct pldm_msg *msg, size_t payload_length,
-	struct pldm_set_state_sensor_enables_req *req);
+	struct pldm_platform_set_state_sensor_enables_req *req);
 
 /** @brief Encode SetStateSensorEnables response
  *
