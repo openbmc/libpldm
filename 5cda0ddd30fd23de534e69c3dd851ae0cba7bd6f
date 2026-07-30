@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "58502ddf_bf07aad8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002885
+      },
+      "writtenOn": "2026-07-30T12:33:54Z",
+      "side": 1,
+      "message": "Thanks for the review as well!\nAlso, I have added fuzz test in PS5.\nThanks for acknowledging that, too.",
+      "parentUuid": "52c2af1a_f7d1af3e",
+      "revId": "5cda0ddd30fd23de534e69c3dd851ae0cba7bd6f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3cf75bdc_c3a938f8",
@@ -31,6 +49,24 @@
       "writtenOn": "2026-07-29T12:30:55Z",
       "side": 1,
       "message": "bit of a nit but this is supposed to go on top.  https://github.com/openbmc/libpldm/blob/cac92b6a494a85add1c261e7602bec18d8957fde/CONTRIBUTING.md#L49",
+      "revId": "5cda0ddd30fd23de534e69c3dd851ae0cba7bd6f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "73c75189_b24713e6",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1002885
+      },
+      "writtenOn": "2026-07-30T12:33:54Z",
+      "side": 1,
+      "message": "Acknowledged, modified in PS5.\nThanks for acknowledging this!",
+      "parentUuid": "3cf75bdc_c3a938f8",
       "revId": "5cda0ddd30fd23de534e69c3dd851ae0cba7bd6f",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -52,6 +88,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a7648c55_77cc1c9a",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 2584,
+      "author": {
+        "id": 1002885
+      },
+      "writtenOn": "2026-07-30T12:33:54Z",
+      "side": 1,
+      "message": "Good catch.\nI have fixed the wording in PS4.",
+      "parentUuid": "f5470a59_9d57ec42",
+      "revId": "5cda0ddd30fd23de534e69c3dd851ae0cba7bd6f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fe13a6b1_1dbc0f3f",
@@ -69,6 +123,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8ade52d3_42a6f59e",
+        "filename": "tests/unit/dsp/platform.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 3940,
+      "author": {
+        "id": 1002885
+      },
+      "writtenOn": "2026-07-30T12:33:54Z",
+      "side": 1,
+      "message": "Sure.\nI have added the hotpath as a new test case in PS5.",
+      "parentUuid": "fe13a6b1_1dbc0f3f",
+      "revId": "5cda0ddd30fd23de534e69c3dd851ae0cba7bd6f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0735f0b7_94926479",
@@ -82,6 +154,24 @@
       "writtenOn": "2026-07-30T08:47:48Z",
       "side": 1,
       "message": "These header bytes don\u0027t line up with pldm_msg_hdr — byte 0 is instance/request and byte 1 is the type, so PLDM_PLATFORM lands in the instance field and the type ends up 0 (PLDM_BASE). The test still passes because the decoder doesn\u0027t look at the header. Was a valid header intended here?",
+      "revId": "5cda0ddd30fd23de534e69c3dd851ae0cba7bd6f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4ce3557d_3b4c0dee",
+        "filename": "tests/unit/dsp/platform.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 3945,
+      "author": {
+        "id": 1002885
+      },
+      "writtenOn": "2026-07-30T12:33:54Z",
+      "side": 1,
+      "message": "You\u0027re right!!!\nI have modified this in PS5 and thanks for the catching!",
+      "parentUuid": "0735f0b7_94926479",
       "revId": "5cda0ddd30fd23de534e69c3dd851ae0cba7bd6f",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
