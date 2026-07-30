@@ -19,6 +19,7 @@ Change categories:
 
 ### Added
 
+- dsp: platform: Add `decode_pldm_platform_set_state_sensor_enables_req()`
 - dsp: platform: Add `encode_pldm_platform_set_state_sensor_enables_resp()`
 - dsp: platform: Add `decode_pldm_platform_set_state_sensor_enables_resp()`
 - dsp: platform: Add `encode_pldm_platform_set_state_sensor_enables_req()`
@@ -37,6 +38,8 @@ Change categories:
 
 ### Removed
 
+- dsp: platform: Remove `decode_set_state_sensor_enables_req()` and associated
+  types, replaced by `decode_pldm_platform_set_state_sensor_enables_req()`
 - dsp: base: Remove `{en,de}code_get_tid_resp()` and associated types
 - dsp: base: Remove `decode_multipart_receive_req()`
 
