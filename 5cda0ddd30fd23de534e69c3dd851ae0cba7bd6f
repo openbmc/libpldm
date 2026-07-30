@@ -33,6 +33,57 @@
       "message": "bit of a nit but this is supposed to go on top.  https://github.com/openbmc/libpldm/blob/cac92b6a494a85add1c261e7602bec18d8957fde/CONTRIBUTING.md#L49",
       "revId": "5cda0ddd30fd23de534e69c3dd851ae0cba7bd6f",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f5470a59_9d57ec42",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 2584,
+      "author": {
+        "id": 1002810
+      },
+      "writtenOn": "2026-07-30T08:47:48Z",
+      "side": 1,
+      "message": "nit: the other decoders in this header say \"Length of response message payload\" (e.g. 1777, 1801). Should this one match? The value passed in excludes the header.",
+      "revId": "5cda0ddd30fd23de534e69c3dd851ae0cba7bd6f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fe13a6b1_1dbc0f3f",
+        "filename": "tests/unit/dsp/platform.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 3940,
+      "author": {
+        "id": 1002810
+      },
+      "writtenOn": "2026-07-30T08:47:48Z",
+      "side": 1,
+      "message": "This only exercises an error completion code. Would a PLDM_SUCCESS case be worth adding too, since that\u0027s the common path?",
+      "revId": "5cda0ddd30fd23de534e69c3dd851ae0cba7bd6f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0735f0b7_94926479",
+        "filename": "tests/unit/dsp/platform.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 3945,
+      "author": {
+        "id": 1002810
+      },
+      "writtenOn": "2026-07-30T08:47:48Z",
+      "side": 1,
+      "message": "These header bytes don\u0027t line up with pldm_msg_hdr — byte 0 is instance/request and byte 1 is the type, so PLDM_PLATFORM lands in the instance field and the type ends up 0 (PLDM_BASE). The test still passes because the decoder doesn\u0027t look at the header. Was a valid header intended here?",
+      "revId": "5cda0ddd30fd23de534e69c3dd851ae0cba7bd6f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
