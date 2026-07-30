@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "51f1deb3_2c657cb8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002885
+      },
+      "writtenOn": "2026-07-30T12:35:24Z",
+      "side": 1,
+      "message": "Sure!\nI have added the test in PS5.",
+      "parentUuid": "bddcac44_d28a5712",
+      "revId": "c4521162fc10963d847ef8ff20515a51181d165d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3abfc67e_182f3855",
@@ -31,6 +49,24 @@
       "writtenOn": "2026-07-29T12:32:59Z",
       "side": 1,
       "message": "a nit - this goes on top.\n\nhttps://github.com/openbmc/libpldm/blob/cac92b6a494a85add1c261e7602bec18d8957fde/CONTRIBUTING.md#L49",
+      "revId": "c4521162fc10963d847ef8ff20515a51181d165d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a2568ba9_abda51f0",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1002885
+      },
+      "writtenOn": "2026-07-30T12:35:24Z",
+      "side": 1,
+      "message": "Done, modified it in PS5.\nThanks for acknowledging this.",
+      "parentUuid": "3abfc67e_182f3855",
       "revId": "c4521162fc10963d847ef8ff20515a51181d165d",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
