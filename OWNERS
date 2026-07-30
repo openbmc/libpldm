@@ -47,7 +47,6 @@ matchers:
 - exact: CHANGELOG.md
   owners:
   - alexander.hansen@9elements.com
-- exact: tests/fuzz/fuzz++.cpp
   owners:
   - alexander.hansen@9elements.com
   reviewers:
