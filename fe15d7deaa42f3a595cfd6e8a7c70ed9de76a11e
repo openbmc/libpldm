@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e9e463cd_aead228a",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 5
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1002838
+      },
+      "writtenOn": "2026-07-31T02:19:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c86ab596_8427cd64",
+      "revId": "fe15d7deaa42f3a595cfd6e8a7c70ed9de76a11e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3a700a05_6eb737f1",
@@ -35,6 +53,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2ba31134_9d1d7b08",
+        "filename": "src/dsp/rde.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1307,
+      "author": {
+        "id": 1002838
+      },
+      "writtenOn": "2026-07-31T02:19:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3a700a05_6eb737f1",
+      "revId": "fe15d7deaa42f3a595cfd6e8a7c70ed9de76a11e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0cea3acf_0973a70b",
@@ -48,6 +84,24 @@
       "writtenOn": "2026-07-30T08:56:36Z",
       "side": 1,
       "message": "There\u0027s a requestRejectsBadArgs but no response equivalent — the NULL paths in the resp encoder and decoder aren\u0027t covered. RDEOperationInit has both. Worth adding one here?",
+      "revId": "fe15d7deaa42f3a595cfd6e8a7c70ed9de76a11e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e225a688_cb1d67da",
+        "filename": "tests/unit/dsp/rde.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 922,
+      "author": {
+        "id": 1002838
+      },
+      "writtenOn": "2026-07-31T02:19:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0cea3acf_0973a70b",
       "revId": "fe15d7deaa42f3a595cfd6e8a7c70ed9de76a11e",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
