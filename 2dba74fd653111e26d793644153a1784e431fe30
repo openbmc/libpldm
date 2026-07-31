@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4175bfb7_2a872345",
+        "filename": "src/dsp/rde.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 543,
+      "author": {
+        "id": 1002838
+      },
+      "writtenOn": "2026-07-31T02:21:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "74914eb5_fe03d3fe",
+      "revId": "2dba74fd653111e26d793644153a1784e431fe30",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3ee2a784_21ad13e5",
@@ -35,6 +53,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ed3f556d_c9fd9f9d",
+        "filename": "src/dsp/rde.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 655,
+      "author": {
+        "id": 1002838
+      },
+      "writtenOn": "2026-07-31T02:21:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3ee2a784_21ad13e5",
+      "revId": "2dba74fd653111e26d793644153a1784e431fe30",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bcf3bb1d_e7f45ba1",
@@ -48,6 +84,24 @@
       "writtenOn": "2026-07-31T02:03:55Z",
       "side": 1,
       "message": "Only the encoder is covered here — the decoder\u0027s -EBADMSG at rde.c:613 isn\u0027t. Worth adding?",
+      "revId": "2dba74fd653111e26d793644153a1784e431fe30",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "65ba1013_6bb8374b",
+        "filename": "tests/unit/dsp/rde.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 530,
+      "author": {
+        "id": 1002838
+      },
+      "writtenOn": "2026-07-31T02:21:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bcf3bb1d_e7f45ba1",
       "revId": "2dba74fd653111e26d793644153a1784e431fe30",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
