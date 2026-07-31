@@ -16,6 +16,24 @@
       "message": "looks good to me.  Just need to add a changelog entry:\n\n```\nAdd a CHANGELOG entry to document updates under abi/ and include/libpldm/\n```",
       "revId": "68b099316de0b9b81a804559aa1c85b5046a50f9",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4f102634_09d3e698",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002838
+      },
+      "writtenOn": "2026-07-31T01:42:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a9618c08_c7549779",
+      "revId": "68b099316de0b9b81a804559aa1c85b5046a50f9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
