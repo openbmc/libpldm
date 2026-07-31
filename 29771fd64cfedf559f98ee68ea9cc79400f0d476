@@ -16,6 +16,24 @@
       "message": "I don\u0027t mind - it seems there\u0027s some bureaucracy to follow to be considered active - instead of only having patches and/or reviews in the last few months. As long as that doesn\u0027t affect the availability of the support for Zephyr. If that\u0027s the case - because it would then be considered abandoned or so - then I will ask for help on how to get the tof-call thing done in order to keep Zephyr support in place.",
       "revId": "29771fd64cfedf559f98ee68ea9cc79400f0d476",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bd488468_9196530f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-07-31T00:03:30Z",
+      "side": 1,
+      "message": "I think this change is a bit overzealous. I\u0027d rather Ederson be kept on the subdirectory list. Zephyr support is a feature with a narrow scope and is something that Ederson has more motivation to maintain than I do.\n\nIf it\u0027s truly an issue then I\u0027d rather we `s/owners/reviewers/`.\n\nThat said I think the policy is reasonable for top-level repository owners.",
+      "parentUuid": "0f706f69_63d13163",
+      "revId": "29771fd64cfedf559f98ee68ea9cc79400f0d476",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
