@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6b7a356b_8bf17b84",
+        "filename": "src/dsp/rde.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 320,
+      "author": {
+        "id": 1002838
+      },
+      "writtenOn": "2026-07-31T02:04:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ccfbac33_57547f84",
+      "revId": "17bf3a1a12a5f36f861de6b00e5fa7c66712783b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6e70a12c_fda63f89",
@@ -35,6 +53,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4981a42f_a3dcdff4",
+        "filename": "tests/unit/dsp/rde.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 288,
+      "author": {
+        "id": 1002838
+      },
+      "writtenOn": "2026-07-31T02:04:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e70a12c_fda63f89",
+      "revId": "17bf3a1a12a5f36f861de6b00e5fa7c66712783b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b86a9dfb_edf258bd",
@@ -48,6 +84,24 @@
       "writtenOn": "2026-07-29T11:07:07Z",
       "side": 1,
       "message": "nit: pldm_msg only has one byte of payload[] while reqLen at 296 says four, so this relies on both calls returning -EINVAL before anything gets written. Would a sized std::array like line 209 be safer here?",
+      "revId": "17bf3a1a12a5f36f861de6b00e5fa7c66712783b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fa57b2fc_f467ee7e",
+        "filename": "tests/unit/dsp/rde.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 294,
+      "author": {
+        "id": 1002838
+      },
+      "writtenOn": "2026-07-31T02:04:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b86a9dfb_edf258bd",
       "revId": "17bf3a1a12a5f36f861de6b00e5fa7c66712783b",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
