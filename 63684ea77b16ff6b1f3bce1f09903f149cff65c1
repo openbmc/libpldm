@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "36ca947e_f4ab7d91",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2721,
+      "author": {
+        "id": 1002810
+      },
+      "writtenOn": "2026-07-31T03:39:07Z",
+      "side": 1,
+      "message": "nit: composite_sensor_count is uint8_t, so \u003c 1 is just \u003d\u003d 0 — the latter reads more directly?",
+      "revId": "63684ea77b16ff6b1f3bce1f09903f149cff65c1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "45ab860d_8a524a17",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2728,
+      "author": {
+        "id": 1002810
+      },
+      "writtenOn": "2026-07-31T03:39:07Z",
+      "side": 1,
+      "message": "These temporaries were needed when the struct fields were enums, but this patch makes both uint8_t — could they extract straight into req-\u003efields[i] now? Line 2715 already does that for sensor_id.",
+      "revId": "63684ea77b16ff6b1f3bce1f09903f149cff65c1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "47ec02a4_c4baed6e",
+        "filename": "tests/unit/dsp/platform.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 3762,
+      "author": {
+        "id": 1002810
+      },
+      "writtenOn": "2026-07-31T03:39:07Z",
+      "side": 1,
+      "message": "This covers the \u003c 1 half of the check at platform.c:2721, but not \u003e MAX_COUNT. The encoder side tests that at line 3942 — worth a decoder case too?",
+      "revId": "63684ea77b16ff6b1f3bce1f09903f149cff65c1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
