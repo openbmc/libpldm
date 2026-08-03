@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4b1d7e4e_ad238e83",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 2918,
+      "author": {
+        "id": 1002885
+      },
+      "writtenOn": "2026-08-03T05:09:52Z",
+      "side": 1,
+      "message": "Done in PS7.",
+      "parentUuid": "b50b7dad_60d76d96",
+      "revId": "c6cb676260750b1ae914fff5c8f3ca8f7621ed9a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "860ff621_f4818e8a",
@@ -31,6 +49,24 @@
       "writtenOn": "2026-08-02T00:08:02Z",
       "side": 1,
       "message": "nit: this is the six-line header setup. encode_pldm_header_only_errno() does the same in one call and is what the newer additions use (firmware_update.c, the new RDE commands) — dsp/base.h is already included here. Worth using it for new code, or is platform.c deliberately staying on the older form?",
+      "revId": "c6cb676260750b1ae914fff5c8f3ca8f7621ed9a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "95098f43_4bac2504",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 2756,
+      "author": {
+        "id": 1002885
+      },
+      "writtenOn": "2026-08-03T05:09:52Z",
+      "side": 1,
+      "message": "Done in PS7.",
+      "parentUuid": "860ff621_f4818e8a",
       "revId": "c6cb676260750b1ae914fff5c8f3ca8f7621ed9a",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -52,6 +88,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4ebcbceb_85fde905",
+        "filename": "tests/fuzz/fuzz.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 488,
+      "author": {
+        "id": 1002885
+      },
+      "writtenOn": "2026-08-03T05:09:52Z",
+      "side": 1,
+      "message": "Well I am actually following the nearer slibling, `set_numeric_sensor_enable_req()`.\n\nHowever, I am happy to submit another PS for the switching if you insists.",
+      "parentUuid": "26b3d2c4_476dee53",
+      "revId": "c6cb676260750b1ae914fff5c8f3ca8f7621ed9a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "57ee8965_a00be6a6",
@@ -65,6 +119,24 @@
       "writtenOn": "2026-08-02T00:08:02Z",
       "side": 1,
       "message": "This passes RESP_BYTES in and expects RESP_BYTES out, so it\u0027d pass even if the function never wrote back. testGoodEncodeRequest at 3796 passes MAX_REQ_BYTES and expects 7 — could this do the same?",
+      "revId": "c6cb676260750b1ae914fff5c8f3ca8f7621ed9a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c5754e82_5ece208d",
+        "filename": "tests/unit/dsp/platform.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 3953,
+      "author": {
+        "id": 1002885
+      },
+      "writtenOn": "2026-08-03T05:09:52Z",
+      "side": 1,
+      "message": "Thanks for the catching!\nI have modified this in PS7.",
+      "parentUuid": "57ee8965_a00be6a6",
       "revId": "c6cb676260750b1ae914fff5c8f3ca8f7621ed9a",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -86,6 +158,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "867040fa_ec97a686",
+        "filename": "tests/unit/dsp/platform.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 3961,
+      "author": {
+        "id": 1002885
+      },
+      "writtenOn": "2026-08-03T05:09:52Z",
+      "side": 1,
+      "message": "Agreed for that.\nI have submitted PS7 to compares against the expected byte array instead.",
+      "parentUuid": "3c9fc89a_10e3a4c6",
+      "revId": "c6cb676260750b1ae914fff5c8f3ca8f7621ed9a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "15d579d1_a6387d9a",
@@ -99,6 +189,24 @@
       "writtenOn": "2026-08-02T00:08:02Z",
       "side": 1,
       "message": "An instance_id above PLDM_INSTANCE_MAX also returns -EINVAL through pack_pldm_header_errno(), and that isn\u0027t covered. Worth one more case?",
+      "revId": "c6cb676260750b1ae914fff5c8f3ca8f7621ed9a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fc2d31b9_326bff22",
+        "filename": "tests/unit/dsp/platform.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 3993,
+      "author": {
+        "id": 1002885
+      },
+      "writtenOn": "2026-08-03T05:09:52Z",
+      "side": 1,
+      "message": "Done in PS7.\nThanks for telling this.",
+      "parentUuid": "15d579d1_a6387d9a",
       "revId": "c6cb676260750b1ae914fff5c8f3ca8f7621ed9a",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
