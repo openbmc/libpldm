@@ -1,3 +1,5 @@
+#include "testpkg-util.hpp"
+
 #include <libpldm/api.h>
 #include <libpldm/edac.h>
 
@@ -181,16 +183,7 @@ static std::vector<uint8_t> makePkgV1_1_0()
     pkg[packageHeaderSizeOffset] = finalSize & 0xff;
     pkg[packageHeaderSizeOffset + 1] = (finalSize >> 8) & 0xff;
 
-    // actual checksum
-    const uint32_t check = pldm_edac_crc32(pkg.data(), pkg.size());
-
-    // PackageHeaderChecksum
-    auto checksum =
-        std::vector<uint8_t>{static_cast<uint8_t>(check & 0xff),
-                             static_cast<uint8_t>((check >> 8) & 0xff),
-                             static_cast<uint8_t>((check >> 16) & 0xff),
-                             static_cast<uint8_t>((check >> 24) & 0xff)};
-    pkg.insert(pkg.end(), checksum.begin(), checksum.end());
+    appendCRC(pkg);
 
     // end of package header
 

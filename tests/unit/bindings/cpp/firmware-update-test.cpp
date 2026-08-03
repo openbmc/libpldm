@@ -1,3 +1,5 @@
+#include "testpkg-util.hpp"
+
 #include <libpldm/api.h>
 
 #include <expected>
@@ -82,10 +84,6 @@ const std::vector<uint8_t> fwPkgHdrSingleComponent{
     0x56, 0x65, 0x72, 0x73, 0x69, 0x6F,
     0x6E, 0x53, 0x74, 0x72, 0x69, 0x6E,
     0x67, 0x33,             // component version string
-
-    0x54, 0x9d, 0x7d, 0xe1, // package header checksum
-
-    0x00,                   // component image
     // clang-format on
 };
 
@@ -96,7 +94,14 @@ TEST(PackageParserTest, ValidPkgSingleDescriptorSingleComponent)
 
     std::cout << pkgSize << std::endl;
 
-    auto res = PackageParser::parse(fwPkgHdrSingleComponent, PackagePin::v1);
+    std::vector<uint8_t> pkg = fwPkgHdrSingleComponent;
+
+    appendCRC(pkg);
+
+    // component image
+    pkg.push_back(0x00);
+
+    auto res = PackageParser::parse(pkg, PackagePin::v1);
 
     if (!res.has_value())
     {
@@ -237,8 +242,6 @@ TEST(PackageParserTest, ValidPkgMultipleDescriptorsMultipleComponents)
         0x56, 0x65, 0x72, 0x73, 0x69, 0x6F, 0x6E, 0x53, 0x74, 0x72, 0x69, 0x6E,
         0x67, 0x37, // component version string
 
-        0x14, 0xa9, 0xbf, 0x39, // package checksum
-        0x00                    // component image
         // clang-format on
     };
 
@@ -246,7 +249,14 @@ TEST(PackageParserTest, ValidPkgMultipleDescriptorsMultipleComponents)
 
     std::cout << pkgSize << std::endl;
 
-    auto res = PackageParser::parse(fwPkgHdr, PackagePin::v1);
+    std::vector<uint8_t> pkg = fwPkgHdr;
+
+    appendCRC(pkg);
+
+    // component image
+    pkg.push_back(0x00);
+
+    auto res = PackageParser::parse(pkg, PackagePin::v1);
 
     if (!res.has_value())
     {
