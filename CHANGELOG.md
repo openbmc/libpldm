@@ -22,6 +22,7 @@ Change categories:
 - libpldm++ support for fw update pkg v1.1.0
 - libpldm++ support for fw update pkg v1.2.0
 - libpldm++ support for fw update pkg v1.3.0
+- oem: ibm: Add new filetype PLDM_FILE_TYPE_RECONFIG_LOOP for reconfigloop notification
 
 ### Changed
 
