@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "26ddbce2_34b687f1",
+        "filename": "src/dsp/rde.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 289,
+      "author": {
+        "id": 1002838
+      },
+      "writtenOn": "2026-08-04T08:21:29Z",
+      "side": 1,
+      "message": "Done — switched to -EPROTO, and applied the same convention to all value-domain checks across the RDE series for consistency (structural framing checks keep -EBADMSG, matching msgbuf).",
+      "parentUuid": "fcc55697_d8165b87",
+      "range": {
+        "startLine": 289,
+        "startChar": 2,
+        "endLine": 289,
+        "endChar": 18
+      },
+      "revId": "7636d0db05caadc8e61159fe56e91c6fc9310543",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "61470248_e057075c",
@@ -47,6 +71,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d06b1700_e2b2ae05",
+        "filename": "tests/unit/dsp/rde.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 1002838
+      },
+      "writtenOn": "2026-08-04T08:21:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "61470248_e057075c",
+      "range": {
+        "startLine": 219,
+        "startChar": 4,
+        "endLine": 219,
+        "endChar": 70
+      },
+      "revId": "7636d0db05caadc8e61159fe56e91c6fc9310543",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a0160cb7_3aaa07fe",
@@ -60,6 +108,30 @@
       "writtenOn": "2026-08-04T05:21:38Z",
       "side": 1,
       "message": "Here as well, will be nice to have a checking on header.",
+      "range": {
+        "startLine": 248,
+        "startChar": 4,
+        "endLine": 248,
+        "endChar": 72
+      },
+      "revId": "7636d0db05caadc8e61159fe56e91c6fc9310543",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3d3e343a_9ba15989",
+        "filename": "tests/unit/dsp/rde.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 248,
+      "author": {
+        "id": 1002838
+      },
+      "writtenOn": "2026-08-04T08:21:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a0160cb7_3aaa07fe",
       "range": {
         "startLine": 248,
         "startChar": 4,
