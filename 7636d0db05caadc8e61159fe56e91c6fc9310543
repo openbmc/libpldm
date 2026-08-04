@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fcc55697_d8165b87",
+        "filename": "src/dsp/rde.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 289,
+      "author": {
+        "id": 1002885
+      },
+      "writtenOn": "2026-08-04T05:21:38Z",
+      "side": 1,
+      "message": "Not sure if we should to use `-EPROTO` here?",
+      "range": {
+        "startLine": 289,
+        "startChar": 2,
+        "endLine": 289,
+        "endChar": 18
+      },
+      "revId": "7636d0db05caadc8e61159fe56e91c6fc9310543",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "61470248_e057075c",
+        "filename": "tests/unit/dsp/rde.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 1002885
+      },
+      "writtenOn": "2026-08-04T05:21:38Z",
+      "side": 1,
+      "message": "nit: Can we add a line here to check the encoded header?",
+      "range": {
+        "startLine": 219,
+        "startChar": 4,
+        "endLine": 219,
+        "endChar": 70
+      },
+      "revId": "7636d0db05caadc8e61159fe56e91c6fc9310543",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a0160cb7_3aaa07fe",
+        "filename": "tests/unit/dsp/rde.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 248,
+      "author": {
+        "id": 1002885
+      },
+      "writtenOn": "2026-08-04T05:21:38Z",
+      "side": 1,
+      "message": "Here as well, will be nice to have a checking on header.",
+      "range": {
+        "startLine": 248,
+        "startChar": 4,
+        "endLine": 248,
+        "endChar": 72
+      },
+      "revId": "7636d0db05caadc8e61159fe56e91c6fc9310543",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
