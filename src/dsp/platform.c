@@ -1722,92 +1722,97 @@ int decode_numeric_sensor_data(const uint8_t *sensor_data,
 			       uint8_t *sensor_data_size,
 			       uint32_t *present_reading)
 {
+	struct pldm_numeric_sensor_value reading;
+
+	if (sensor_data_size == NULL || present_reading == NULL) {
+		return PLDM_ERROR_INVALID_DATA;
+	}
+
+	int rc = decode_numeric_sensor_data_to_value(
+		sensor_data, sensor_data_length, event_state,
+		previous_event_state, &reading);
+
+	if (rc) {
+		return pldm_xlate_errno(rc);
+	}
+
+	*sensor_data_size = reading.sensor_data_size;
+	switch (*sensor_data_size) {
+	case PLDM_SENSOR_DATA_SIZE_UINT8:
+		*present_reading = reading.value.value_u8;
+		break;
+	case PLDM_SENSOR_DATA_SIZE_SINT8:
+		*present_reading = (uint32_t)(int32_t)reading.value.value_s8;
+		break;
+	case PLDM_SENSOR_DATA_SIZE_UINT16:
+		*present_reading = reading.value.value_u16;
+		break;
+	case PLDM_SENSOR_DATA_SIZE_SINT16:
+		*present_reading = (uint32_t)(int32_t)reading.value.value_s16;
+		break;
+	case PLDM_SENSOR_DATA_SIZE_UINT32:
+		*present_reading = reading.value.value_u32;
+		break;
+	case PLDM_SENSOR_DATA_SIZE_SINT32:
+		*present_reading = (uint32_t)reading.value.value_s32;
+		break;
+	default:
+		return PLDM_ERROR_INVALID_DATA;
+	}
+
+	return PLDM_SUCCESS;
+}
+
+LIBPLDM_ABI_TESTING
+int decode_numeric_sensor_data_to_value(
+	const uint8_t *sensor_data, size_t sensor_data_length,
+	uint8_t *event_state, uint8_t *previous_event_state,
+	struct pldm_numeric_sensor_value *present_reading)
+{
 	PLDM_MSGBUF_RO_DEFINE_P(buf);
 	int rc;
 
-	if (sensor_data == NULL || sensor_data_size == NULL ||
-	    event_state == NULL || previous_event_state == NULL ||
-	    present_reading == NULL) {
-		return PLDM_ERROR_INVALID_DATA;
+	if (sensor_data == NULL || event_state == NULL ||
+	    previous_event_state == NULL || present_reading == NULL) {
+		return -EINVAL;
 	}
 
 	if (sensor_data_length >
 	    PLDM_SENSOR_EVENT_NUMERIC_SENSOR_STATE_MAX_DATA_LENGTH) {
-		return PLDM_ERROR_INVALID_LENGTH;
+		return -EOVERFLOW;
 	}
 
 	rc = pldm_msgbuf_init_errno(
 		buf, PLDM_SENSOR_EVENT_NUMERIC_SENSOR_STATE_MIN_DATA_LENGTH,
 		sensor_data, sensor_data_length);
 	if (rc) {
-		return pldm_xlate_errno(rc);
+		return rc;
 	}
 
 	pldm_msgbuf_extract_p(buf, event_state);
 	pldm_msgbuf_extract_p(buf, previous_event_state);
-	rc = pldm_msgbuf_extract_p(buf, sensor_data_size);
+	rc = pldm_msgbuf_extract(buf, present_reading->sensor_data_size);
 	if (rc) {
-		return pldm_xlate_errno(pldm_msgbuf_discard(buf, rc));
+		return pldm_msgbuf_discard(buf, rc);
 	}
 
-	/*
-	 * The implementation below is bonkers, but it's because the function
-	 * prototype is bonkers. The `present_reading` argument should have been
-	 * a tagged union.
-	 */
-	switch (*sensor_data_size) {
-	case PLDM_SENSOR_DATA_SIZE_UINT8: {
-		uint8_t val;
-		if (!pldm_msgbuf_extract(buf, val)) {
-			*present_reading = (uint32_t)val;
-		}
-		break;
+	if (present_reading->sensor_data_size > PLDM_SENSOR_DATA_SIZE_MAX) {
+		return pldm_msgbuf_discard(buf, -EINVAL);
 	}
-	case PLDM_SENSOR_DATA_SIZE_SINT8: {
-		int8_t val;
-		if (!pldm_msgbuf_extract(buf, val)) {
-			*present_reading = (uint32_t)(int32_t)val;
-		}
-		break;
-	}
-	case PLDM_SENSOR_DATA_SIZE_UINT16: {
-		uint16_t val;
-		if (!pldm_msgbuf_extract(buf, val)) {
-			*present_reading = (uint32_t)val;
-		}
-		break;
-	}
-	case PLDM_SENSOR_DATA_SIZE_SINT16: {
-		int16_t val;
-		if (!pldm_msgbuf_extract(buf, val)) {
-			*present_reading = (uint32_t)(int32_t)val;
-		}
-		break;
-	}
-	case PLDM_SENSOR_DATA_SIZE_UINT32: {
-		uint32_t val;
-		if (!pldm_msgbuf_extract(buf, val)) {
-			*present_reading = (uint32_t)val;
-		}
-		break;
-	}
-	case PLDM_SENSOR_DATA_SIZE_SINT32: {
-		int32_t val;
-		if (!pldm_msgbuf_extract(buf, val)) {
-			*present_reading = (uint32_t)val;
-		}
-		break;
-	}
-	default:
-		return pldm_msgbuf_discard(buf, PLDM_ERROR_INVALID_DATA);
+
+	rc = pldm_msgbuf_extract_sensor_data64(
+		buf, present_reading->sensor_data_size,
+		&present_reading->value);
+	if (rc) {
+		return pldm_msgbuf_discard(buf, rc);
 	}
 
 	rc = pldm_msgbuf_complete_consumed(buf);
 	if (rc) {
-		return pldm_xlate_errno(rc);
+		return rc;
 	}
 
-	return PLDM_SUCCESS;
+	return 0;
 }
 
 LIBPLDM_ABI_STABLE
@@ -2450,7 +2455,7 @@ int decode_get_sensor_reading_resp(
 		return pldm_xlate_errno(pldm_msgbuf_discard(buf, rc));
 	}
 
-	if (*sensor_data_size > PLDM_SENSOR_DATA_SIZE_SINT32) {
+	if (*sensor_data_size > PLDM_SENSOR_DATA_SIZE_MAX) {
 		return pldm_msgbuf_discard(buf, PLDM_ERROR_INVALID_DATA);
 	}
 
@@ -2485,7 +2490,7 @@ int encode_get_sensor_reading_resp(uint8_t instance_id, uint8_t completion_code,
 		return PLDM_ERROR_INVALID_DATA;
 	}
 
-	if (sensor_data_size > PLDM_EFFECTER_DATA_SIZE_SINT32) {
+	if (sensor_data_size > PLDM_SENSOR_DATA_SIZE_MAX) {
 		return PLDM_ERROR_INVALID_DATA;
 	}
 
@@ -2511,15 +2516,15 @@ int encode_get_sensor_reading_resp(uint8_t instance_id, uint8_t completion_code,
 	response->previous_state = previous_state;
 	response->event_state = event_state;
 
-	if (sensor_data_size == PLDM_EFFECTER_DATA_SIZE_UINT8 ||
-	    sensor_data_size == PLDM_EFFECTER_DATA_SIZE_SINT8) {
+	if (sensor_data_size == PLDM_SENSOR_DATA_SIZE_UINT8 ||
+	    sensor_data_size == PLDM_SENSOR_DATA_SIZE_SINT8) {
 		if (payload_length != PLDM_GET_SENSOR_READING_MIN_RESP_BYTES) {
 			return PLDM_ERROR_INVALID_LENGTH;
 		}
 		response->present_reading[0] = *present_reading;
 
-	} else if (sensor_data_size == PLDM_EFFECTER_DATA_SIZE_UINT16 ||
-		   sensor_data_size == PLDM_EFFECTER_DATA_SIZE_SINT16) {
+	} else if (sensor_data_size == PLDM_SENSOR_DATA_SIZE_UINT16 ||
+		   sensor_data_size == PLDM_SENSOR_DATA_SIZE_SINT16) {
 		if (payload_length !=
 		    PLDM_GET_SENSOR_READING_MIN_RESP_BYTES + 1) {
 			return PLDM_ERROR_INVALID_LENGTH;
@@ -2528,8 +2533,8 @@ int encode_get_sensor_reading_resp(uint8_t instance_id, uint8_t completion_code,
 		val = htole16(val);
 		memcpy(response->present_reading, &val, 2);
 
-	} else if (sensor_data_size == PLDM_EFFECTER_DATA_SIZE_UINT32 ||
-		   sensor_data_size == PLDM_EFFECTER_DATA_SIZE_SINT32) {
+	} else if (sensor_data_size == PLDM_SENSOR_DATA_SIZE_UINT32 ||
+		   sensor_data_size == PLDM_SENSOR_DATA_SIZE_SINT32) {
 		if (payload_length !=
 		    PLDM_GET_SENSOR_READING_MIN_RESP_BYTES + 3) {
 			return PLDM_ERROR_INVALID_LENGTH;
@@ -2537,6 +2542,16 @@ int encode_get_sensor_reading_resp(uint8_t instance_id, uint8_t completion_code,
 		uint32_t val = *(uint32_t *)present_reading;
 		val = htole32(val);
 		memcpy(response->present_reading, &val, 4);
+	} else if (sensor_data_size == PLDM_SENSOR_DATA_SIZE_UINT64 ||
+		   sensor_data_size == PLDM_SENSOR_DATA_SIZE_SINT64) {
+		if (payload_length !=
+		    PLDM_GET_SENSOR_READING_MIN_RESP_BYTES + 7) {
+			return PLDM_ERROR_INVALID_LENGTH;
+		}
+		uint64_t val;
+		memcpy(&val, present_reading, sizeof(val));
+		val = htole64(val);
+		memcpy(response->present_reading, &val, sizeof(val));
 	}
 
 	return PLDM_SUCCESS;
@@ -3083,7 +3098,7 @@ int decode_numeric_effecter_pdr_data(
 	if (rc) {
 		return pldm_xlate_errno(pldm_msgbuf_discard(buf, rc));
 	}
-	if (pdr_value->effecter_data_size > PLDM_SENSOR_DATA_SIZE_MAX) {
+	if (pdr_value->effecter_data_size > PLDM_EFFECTER_DATA_SIZE_SINT32) {
 		return pldm_msgbuf_discard(buf, PLDM_ERROR_INVALID_DATA);
 	}
 
