@@ -2866,7 +2866,7 @@ TEST(PlatformEventMessage, testGoodNumericSensorEventDataDecodeRequest)
     uint8_t retEventState;
     uint8_t retPreviousEventState;
     uint8_t retSensorDataSize;
-    uint32_t retPresentReading;
+    union_sensor_data_size retPresentReading;
 
     auto rc = decode_numeric_sensor_data(
         // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
@@ -2877,7 +2877,7 @@ TEST(PlatformEventMessage, testGoodNumericSensorEventDataDecodeRequest)
     EXPECT_EQ(retEventState, eventState);
     EXPECT_EQ(retPreviousEventState, previousEventState);
     EXPECT_EQ(retSensorDataSize, sensorDataSize);
-    EXPECT_EQ(retPresentReading, presentReading);
+    EXPECT_EQ(retPresentReading.value_u32, presentReading);
 
     int16_t presentReadingNew = -31432;
     {
@@ -2898,7 +2898,7 @@ TEST(PlatformEventMessage, testGoodNumericSensorEventDataDecodeRequest)
     EXPECT_EQ(retEventState, eventState);
     EXPECT_EQ(retPreviousEventState, previousEventState);
     EXPECT_EQ(retSensorDataSize, sensorDataSize);
-    EXPECT_EQ(static_cast<int16_t>(retPresentReading), presentReadingNew);
+    EXPECT_EQ(retPresentReading.value_s16, presentReadingNew);
 }
 
 TEST(PlatformEventMessage, testBadNumericSensorEventDataDecodeRequest)
@@ -2906,7 +2906,7 @@ TEST(PlatformEventMessage, testBadNumericSensorEventDataDecodeRequest)
     uint8_t eventState;
     uint8_t previousEventState;
     uint8_t sensorDataSize;
-    uint32_t presentReading;
+    union_sensor_data_size presentReading;
     size_t sensorDataLength =
         PLDM_SENSOR_EVENT_NUMERIC_SENSOR_STATE_MAX_DATA_LENGTH;
     auto rc = decode_numeric_sensor_data(NULL, sensorDataLength, &eventState,
@@ -3479,7 +3479,7 @@ TEST(GetSensorReading, testBadEncodeResponse)
         // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         reinterpret_cast<uint8_t*>(&presentReading), response,
         responseMsg.size() - hdrSize);
-    EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
+    EXPECT_EQ(rc, PLDM_ERROR_INVALID_LENGTH);
 
     uint8_t sensor_dataSize = PLDM_EFFECTER_DATA_SIZE_UINT8;
 
