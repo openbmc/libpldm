@@ -2899,6 +2899,52 @@ TEST(PlatformEventMessage, testGoodNumericSensorEventDataDecodeRequest)
     EXPECT_EQ(retPreviousEventState, previousEventState);
     EXPECT_EQ(retSensorDataSize, sensorDataSize);
     EXPECT_EQ(static_cast<int16_t>(retPresentReading), presentReadingNew);
+
+#if HAVE_LIBPLDM_ABI_TESTING
+    union_sensor_data_size64 retPresentReadingUnion;
+    sensorDataSize = PLDM_SENSOR_DATA_SIZE_UINT32;
+    sensorData->sensor_data_size = sensorDataSize;
+    sensorDataLength = PLDM_SENSOR_EVENT_NUMERIC_SENSOR_STATE_32BIT_DATA_LENGTH;
+    {
+        uint32_t presentReadingLE = htole32(presentReading);
+        memcpy(&sensorData->present_reading, &presentReadingLE,
+               sizeof(presentReadingLE));
+    }
+
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+    rc = decode_numeric_sensor_data_to_union(
+        reinterpret_cast<uint8_t*>(sensorData), sensorDataLength,
+        &retEventState, &retPreviousEventState, &retSensorDataSize,
+        &retPresentReadingUnion);
+    EXPECT_EQ(rc, PLDM_SUCCESS);
+    EXPECT_EQ(retPresentReadingUnion.value_u32, presentReading);
+
+    uint64_t presentReading64 = 0x1122334455667788;
+    {
+        uint64_t presentReading64LE = htole64(presentReading64);
+        memcpy(&sensorData->present_reading, &presentReading64LE,
+               sizeof(presentReading64LE));
+    }
+    sensorDataSize = PLDM_SENSOR_DATA_SIZE_UINT64;
+    sensorData->sensor_data_size = sensorDataSize;
+    sensorDataLength = PLDM_SENSOR_EVENT_NUMERIC_SENSOR_STATE_64BIT_DATA_LENGTH;
+
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+    rc = decode_numeric_sensor_data_to_union(
+        reinterpret_cast<uint8_t*>(sensorData), sensorDataLength,
+        &retEventState, &retPreviousEventState, &retSensorDataSize,
+        &retPresentReadingUnion);
+    EXPECT_EQ(rc, PLDM_SUCCESS);
+    EXPECT_EQ(retSensorDataSize, sensorDataSize);
+    EXPECT_EQ(retPresentReadingUnion.value_u64, presentReading64);
+
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+    rc = decode_numeric_sensor_data(reinterpret_cast<uint8_t*>(sensorData),
+                                    sensorDataLength, &retEventState,
+                                    &retPreviousEventState, &retSensorDataSize,
+                                    &retPresentReading);
+    EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
+#endif
 }
 
 TEST(PlatformEventMessage, testBadNumericSensorEventDataDecodeRequest)
@@ -3479,7 +3525,7 @@ TEST(GetSensorReading, testBadEncodeResponse)
         // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         reinterpret_cast<uint8_t*>(&presentReading), response,
         responseMsg.size() - hdrSize);
-    EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
+    EXPECT_EQ(rc, PLDM_ERROR_INVALID_LENGTH);
 
     uint8_t sensor_dataSize = PLDM_EFFECTER_DATA_SIZE_UINT8;
 

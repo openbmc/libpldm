@@ -51,6 +51,36 @@ pldm_msgbuf_extract_sensor_data(struct pldm_msgbuf_ro *ctx,
 		return pldm_msgbuf_extract(ctx, dst->value_u32);
 	case PLDM_SENSOR_DATA_SIZE_SINT32:
 		return pldm_msgbuf_extract(ctx, dst->value_s32);
+	case PLDM_SENSOR_DATA_SIZE_UINT64:
+	case PLDM_SENSOR_DATA_SIZE_SINT64:
+		return -PLDM_ERROR_INVALID_DATA;
+	}
+
+	return -PLDM_ERROR_INVALID_DATA;
+}
+
+LIBPLDM_CC_ALWAYS_INLINE int
+pldm_msgbuf_extract_sensor_data64(struct pldm_msgbuf_ro *ctx,
+				  enum pldm_sensor_readings_data_type tag,
+				  union_sensor_data_size64 *dst)
+{
+	switch (tag) {
+	case PLDM_SENSOR_DATA_SIZE_UINT8:
+		return pldm_msgbuf_extract(ctx, dst->value_u8);
+	case PLDM_SENSOR_DATA_SIZE_SINT8:
+		return pldm_msgbuf_extract(ctx, dst->value_s8);
+	case PLDM_SENSOR_DATA_SIZE_UINT16:
+		return pldm_msgbuf_extract(ctx, dst->value_u16);
+	case PLDM_SENSOR_DATA_SIZE_SINT16:
+		return pldm_msgbuf_extract(ctx, dst->value_s16);
+	case PLDM_SENSOR_DATA_SIZE_UINT32:
+		return pldm_msgbuf_extract(ctx, dst->value_u32);
+	case PLDM_SENSOR_DATA_SIZE_SINT32:
+		return pldm_msgbuf_extract(ctx, dst->value_s32);
+	case PLDM_SENSOR_DATA_SIZE_UINT64:
+		return pldm_msgbuf_extract(ctx, dst->value_u64);
+	case PLDM_SENSOR_DATA_SIZE_SINT64:
+		return pldm_msgbuf_extract(ctx, dst->value_s64);
 	}
 
 	return -PLDM_ERROR_INVALID_DATA;
@@ -79,6 +109,10 @@ pldm_msgbuf_extract_sensor_value(struct pldm_msgbuf_ro *ctx,
 		return pldm__msgbuf_extract_uint32(ctx, val);
 	case PLDM_SENSOR_DATA_SIZE_SINT32:
 		return pldm__msgbuf_extract_int32(ctx, val);
+	case PLDM_SENSOR_DATA_SIZE_UINT64:
+		return pldm__msgbuf_extract_uint64(ctx, val);
+	case PLDM_SENSOR_DATA_SIZE_SINT64:
+		return pldm__msgbuf_extract_int64(ctx, val);
 	}
 
 	return -PLDM_ERROR_INVALID_DATA;
@@ -120,6 +154,9 @@ LIBPLDM_CC_ALWAYS_INLINE int pldm__msgbuf_extract_range_field_format(
 		return pldm__msgbuf_extract_real32(
 			ctx, ((char *)rff) + offsetof(union_range_field_format,
 						      value_f32));
+	case PLDM_RANGE_FIELD_FORMAT_UINT64:
+	case PLDM_RANGE_FIELD_FORMAT_SINT64:
+		return -PLDM_ERROR_INVALID_DATA;
 	}
 
 	return -PLDM_ERROR_INVALID_DATA;
