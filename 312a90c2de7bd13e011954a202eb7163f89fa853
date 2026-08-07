@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "798e2754_6656bb77",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003022
+      },
+      "writtenOn": "2026-08-07T21:45:02Z",
+      "side": 1,
+      "message": "The current failure is unrelated to this patch. scripts/run-ci reaches the ARM\ncross-build path, where gtest/gmock are not found via pkg-config, so\ntests/unit/meson.build falls back to import(\u0027cmake\u0027).subproject(\u0027googletest\u0027).\nThe CI image does not provide CMake, causing Meson to fail with \"Unable to find\nCMake\".\n\nThis looks like a CI/container dependency issue, or a separate libpldm build\nfallback cleanup, rather than a failure introduced by the 64-bit sensor support\nchange.",
+      "revId": "312a90c2de7bd13e011954a202eb7163f89fa853",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
