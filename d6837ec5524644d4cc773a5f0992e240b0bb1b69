@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4651b16f_3eb80ee4",
+        "filename": "src/dsp/rde.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 1863,
+      "author": {
+        "id": 1002810
+      },
+      "writtenOn": "2026-08-07T02:40:45Z",
+      "side": 1,
+      "message": "Is it safe to depend on ABORT being the last accepted value in the enum? A dedicated bound — say PLDM_RDE_TRANSFER_OPERATION_RECEIVE_MAX next to the enum, or an explicit check against the three accepted values — would survive a reordering.",
+      "revId": "d6837ec5524644d4cc773a5f0992e240b0bb1b69",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9fe3ef78_6c840b2a",
+        "filename": "tests/fuzz/fuzz.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 561,
+      "author": {
+        "id": 1002810
+      },
+      "writtenOn": "2026-08-07T02:40:45Z",
+      "side": 1,
+      "message": "Would it make sense to register the encoders here as well?",
+      "revId": "d6837ec5524644d4cc773a5f0992e240b0bb1b69",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4900a0e7_7c89ab36",
+        "filename": "tests/unit/dsp/rde.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 1610,
+      "author": {
+        "id": 1002810
+      },
+      "writtenOn": "2026-08-07T02:40:45Z",
+      "side": 1,
+      "message": "Could the decoder\u0027s rejection paths be covered here too?",
+      "revId": "d6837ec5524644d4cc773a5f0992e240b0bb1b69",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
