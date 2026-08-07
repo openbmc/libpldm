@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ee2e0b5f_71c81319",
+        "filename": "src/dsp/rde.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 831,
+      "author": {
+        "id": 1002810
+      },
+      "writtenOn": "2026-08-07T04:23:20Z",
+      "side": 1,
+      "message": "The comment above says the ETag is NULL-terminated — should this check that the last byte actually is one, alongside the length and pointer checks?",
+      "revId": "ac6854e0522d651467804add55edf7a9244b2c00",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b82991be_059b70c1",
+        "filename": "src/dsp/rde.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 885,
+      "author": {
+        "id": 1002810
+      },
+      "writtenOn": "2026-08-07T04:23:20Z",
+      "side": 1,
+      "message": "string_format isn\u0027t range-checked here, while requested_schema_class is checked on both the encode and decode sides elsewhere in this file. Would a _MAX on enum pldm_rde_varstring_format make that possible?",
+      "revId": "ac6854e0522d651467804add55edf7a9244b2c00",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9cbf1a5a_1e8d1b5a",
+        "filename": "tests/unit/dsp/rde.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 747,
+      "author": {
+        "id": 1002810
+      },
+      "writtenOn": "2026-08-07T04:23:20Z",
+      "side": 1,
+      "message": "Two of the three conditions in the encoder\u0027s etag check (rde.c:831) are covered here — could the \u003e UINT8_MAX one be added as well?",
+      "revId": "ac6854e0522d651467804add55edf7a9244b2c00",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
