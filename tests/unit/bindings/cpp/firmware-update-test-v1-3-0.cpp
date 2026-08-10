@@ -140,30 +140,6 @@ static std::vector<uint8_t> makePkgV1_3_0()
     downstreamdevidarea[0] = downstreamdevidareaLength & 0xff;
     downstreamdevidarea[1] = (downstreamdevidareaLength >> 8) & 0xff;
 
-    const std::vector<uint8_t> componentimageinfoarea{
-        // clang-format off
-    // Component Image Information Area
-    0x01, 0x00,             // component image count
-
-    0x0A, 0x00,             // component classification
-    0x64, 0x00,             // component identifier
-    0xFF, 0xFF, 0xFF, 0xFF, // component comparison stamp
-    0x00, 0x00,             // component options
-
-    0x00, 0x00,             // requested component activation method
-    0x8B, 0x00, 0x00, 0x00, // component location offset
-    0x01, 0x00, 0x00, 0x00, // component size
-    0x01,                   // component version string type
-    0x0E,                   // component version string length
-
-    0x56, 0x65, 0x72, 0x73, 0x69, 0x6F,
-    0x6E, 0x53, 0x74, 0x72, 0x69, 0x6E,
-    0x67, 0x33,             // component version string
-    0x5, 0x00, 0x00, 0x00, // ComponentOpaqueDataLength
-    0x05, 0x04, 0x03, 0x02, 0x01, // ComponentOpaqueData
-        // clang-format on
-    };
-
     std::vector<uint8_t> pkg{};
 
     pkg.insert(pkg.end(), headerUUID.begin(), headerUUID.end());
@@ -177,8 +153,9 @@ static std::vector<uint8_t> makePkgV1_3_0()
     pkg.insert(pkg.end(), downstreamdevidarea.begin(),
                downstreamdevidarea.end());
 
-    pkg.insert(pkg.end(), componentimageinfoarea.begin(),
-               componentimageinfoarea.end());
+    appendComponentImageInfoArea1(pkg);
+
+    appendComponentOpaqueData(pkg);
 
     // count in the checksum bytes still to be added
     const uint16_t finalSize = pkg.size() + 8;
