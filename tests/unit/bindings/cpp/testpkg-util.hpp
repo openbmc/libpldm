@@ -19,3 +19,10 @@ void appendComponentImageInfoArea2(std::vector<uint8_t>& pkg);
 
 // append ComponentOpaqueData
 void appendComponentOpaqueData(std::vector<uint8_t>& pkg);
+
+// append FirmwareDeviceIdRecord
+void appendFirmwareDeviceIdRecord1(std::vector<uint8_t>& pkg);
+void appendFirmwareDeviceIdRecord2(std::vector<uint8_t>& pkg);
+void appendFirmwareDeviceIdRecord3(std::vector<uint8_t>& pkg);
+
+void appendFirmwareDeviceIdArea1(std::vector<uint8_t>& pkg);

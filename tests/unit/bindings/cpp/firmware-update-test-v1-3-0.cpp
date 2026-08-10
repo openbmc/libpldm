@@ -49,48 +49,6 @@ static std::vector<uint8_t> makePkgV1_3_0()
         // clang-format on
     };
 
-    const std::vector<uint8_t> fwdevidarea{
-        // Firmware Device Identification Area
-
-        // clang-format off
-    0x01,       // device id record count
-
-    0x3a, 0x00, // record 0: record length
-
-    0x01,                   // record 0: descriptor count
-    0x01, 0x00, 0x00, 0x00, // record 0: device update options flags
-
-    0x01,       // record 0: component image set version string type
-    0x0E,       // record 0: component image set version string length
-    0x00, 0x00, // record 0: firmware device package data length
-
-    0x08, 0x00, 0x00, 0x00, // record 0: ReferenceManifestLength
-
-    0x01,       // applicable components
-
-    0x56, 0x65, 0x72, 0x73, 0x69, 0x6F, 0x6E,
-    0x53, 0x74, 0x72, 0x69, 0x6E, 0x67,
-    0x32,       // component image set version string (14 bytes)
-
-    // record descriptors below
-    0x02, 0x00, // record 0: descriptor type: UUID
-
-    0x10, 0x00, // record 0: InitialDescriptorLength (16 bytes)
-
-    0x16, 0x20, 0x23, 0xC9, 0x3E, 0xC5, 0x41,
-    0x15, 0x95, 0xF4, 0x48, 0x70, 0x1D, 0x49,
-    0xD6, 0x75, // record 0: InitialDescriptorData (UUID)
-
-    // firmware device package data (empty here)
-    // ReferenceManifestData
-    0x03, // SVHID,  (e.g. PCI SIG)
-    0x02, // VendorIDLen
-    0x20, 0xaf, // (e.g. Accelink)
-    // actual manifest data (completely made up and without meaning)
-    0x21, 0x22, 0x23, 0x24,
-        // clang-format on
-    };
-
     std::vector<uint8_t> downstreamdevidarea{
         // clang-format off
     // Downstream Device Identification Area
@@ -146,7 +104,10 @@ static std::vector<uint8_t> makePkgV1_3_0()
     pkg.insert(pkg.end(), 0x04); // pkg header format revision
     const size_t packageHeaderSizeOffset = pkg.size();
     pkg.insert(pkg.end(), header.begin(), header.end());
-    pkg.insert(pkg.end(), fwdevidarea.begin(), fwdevidarea.end());
+
+    // Firmware Device Identification Area
+    pkg.push_back(0x01); // device id record count
+    appendFirmwareDeviceIdRecord3(pkg);
 
     // DownstreamDeviceIDRecordCount
     pkg.push_back(0x01);
