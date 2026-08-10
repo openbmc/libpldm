@@ -50,47 +50,6 @@ static std::vector<uint8_t> makePkgV1_1_0()
         // clang-format on
     };
 
-    std::vector<uint8_t> fwdevidarea{
-        // Firmware Device Identification Area
-
-        // clang-format off
-    0x00, 0x00, // record 0: record length
-
-    0x01,                   // record 0: descriptor count
-    0x00, 0x00, 0x00, 0x00, // record 0: device update options flags
-
-    0x01,       // record 0: component image set version string type
-    0x01,       // record 0: component image set version string length
-    0x00, 0x00, // record 0: firmware device package data length
-
-    0x01,       // applicable components
-
-    'v',       // component image set version string
-
-    // record descriptors below
-    0x02, 0x00, // record 0: descriptor type: UUID
-
-    0x10, 0x00, // record 0: InitialDescriptorLength (16 bytes)
-
-    0x16, 0x20, 0x23, 0xC9, 0x3E, 0xC5, 0x41,
-    0x15, 0x95, 0xF4, 0x48, 0x70, 0x1D, 0x49,
-    0xD6, 0x75, // record 0: InitialDescriptorData (UUID)
-
-    // firmware device package data (empty here)
-        // clang-format on
-    };
-
-    {
-        // set Recordlength
-        const uint16_t recordLength = fwdevidarea.size();
-
-        std::cout << "firmware device area length: " << recordLength
-                  << std::endl;
-
-        fwdevidarea[0] = recordLength & 0xff;
-        fwdevidarea[1] = (recordLength >> 8) & 0xff;
-    }
-
     std::vector<uint8_t> downstreamdevidarea{
         // clang-format off
     // Downstream Device Identification Area
@@ -145,7 +104,7 @@ static std::vector<uint8_t> makePkgV1_1_0()
 
     // firmware device record count
     pkg.push_back(0x01);
-    pkg.insert(pkg.end(), fwdevidarea.begin(), fwdevidarea.end());
+    appendFirmwareDeviceIdRecord2(pkg);
 
     // DownstreamDeviceIDRecordCount
     pkg.push_back(0x01);
