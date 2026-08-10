@@ -67,34 +67,14 @@ const std::vector<uint8_t> fwPkgHdrSingleComponent{
 
     // firmware device package data (empty here)
 
-    // component image info area
-    0x01, 0x00,             // component image count
-
-    0x0A, 0x00,             // component classification
-    0x64, 0x00,             // component identifier
-    0xFF, 0xFF, 0xFF, 0xFF, // component comparison stamp
-    0x00, 0x00,             // component options
-
-    0x00, 0x00,             // requested component activation method
-    0x8B, 0x00, 0x00, 0x00, // component location offset
-    0x01, 0x00, 0x00, 0x00, // component size
-    0x01,                   // component version string type
-    0x0E,                   // component version string length
-
-    0x56, 0x65, 0x72, 0x73, 0x69, 0x6F,
-    0x6E, 0x53, 0x74, 0x72, 0x69, 0x6E,
-    0x67, 0x33,             // component version string
     // clang-format on
 };
 
 TEST(PackageParserTest, ValidPkgSingleDescriptorSingleComponent)
 {
-
-    uintmax_t pkgSize = fwPkgHdrSingleComponent.size();
-
-    std::cout << pkgSize << std::endl;
-
     std::vector<uint8_t> pkg = fwPkgHdrSingleComponent;
+
+    appendComponentImageInfoArea1(pkg);
 
     appendCRC(pkg);
 
@@ -199,57 +179,12 @@ TEST(PackageParserTest, ValidPkgMultipleDescriptorsMultipleComponents)
         0x72, 0x69, 0x6E, 0x67, 0x34, 0x02, 0x00, 0x10, 0x00, 0x12, 0x44, 0xD2,
         0x64, 0x8D, 0x7D, 0x47, 0x18, 0xA0, 0x30, 0xFC, 0x8A, 0x56, 0x58, 0x7D,
         0x5D,
-
-        0x03, 0x00, // component image count
-
-        0x0A, 0x00,             // component classification
-        0x64, 0x00,             // component identifier
-        0xFF, 0xFF, 0xFF, 0xFF, // component comparison stamp
-        0x00, 0x00,             // component options
-
-        0x00, 0x00,             // requested component activation method
-        0x46, 0x01, 0x00, 0x00, // component location offset
-        0x01, 0x00, 0x00, 0x00, // component size
-        0x01,                   // component version string type
-        0x0E,                   // component version string length
-
-        0x56, 0x65, 0x72, 0x73, 0x69, 0x6F, 0x6E, 0x53, 0x74, 0x72, 0x69, 0x6E,
-        0x67, 0x35, // component version string (14 bytes)
-
-        0x0A, 0x00,             // component classification
-        0xC8, 0x00,             // component identifier
-        0xFF, 0xFF, 0xFF, 0xFF, // component comparison stamp
-        0x00, 0x00,             // component options
-
-        0x01, 0x00,             // requested component activation method
-        0x46, 0x01, 0x00, 0x00, // component location offset
-        0x01, 0x00, 0x00, 0x00, // component size
-        0x01,                   // component version string type
-        0x0E,                   // component version string length
-        0x56, 0x65, 0x72, 0x73, 0x69, 0x6F, 0x6E, 0x53, 0x74, 0x72, 0x69, 0x6E,
-        0x67, 0x36, // component version string
-
-        0xB,  0x00,             // component classification
-        0x2C, 0x01,             // component identifier
-        0xFF, 0xFF, 0xFF, 0xFF, // component comparison stamp
-        0x01, 0x00,             // component options
-
-        0x0C, 0x00,             // requested component activation method
-        0x46, 0x01, 0x00, 0x00, // component location offset
-        0x01, 0x00, 0x00, 0x00, // component size
-        0x01,                   // component version string type
-        0x0E,                   // component version string length
-        0x56, 0x65, 0x72, 0x73, 0x69, 0x6F, 0x6E, 0x53, 0x74, 0x72, 0x69, 0x6E,
-        0x67, 0x37, // component version string
-
         // clang-format on
     };
 
-    const uintmax_t pkgSize = fwPkgHdr.size();
-
-    std::cout << pkgSize << std::endl;
-
     std::vector<uint8_t> pkg = fwPkgHdr;
+
+    appendComponentImageInfoArea2(pkg);
 
     appendCRC(pkg);
 
