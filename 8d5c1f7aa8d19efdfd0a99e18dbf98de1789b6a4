@@ -1,0 +1,101 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "307bbf4d_6a4229cf",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 27
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1002395
+      },
+      "writtenOn": "2026-08-11T13:26:59Z",
+      "side": 1,
+      "message": "Should this go to `Unreleased` section instead of `v0.17.0`?",
+      "revId": "8d5c1f7aa8d19efdfd0a99e18dbf98de1789b6a4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "20d22bf1_7b16b85a",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 27
+      },
+      "lineNbr": 3656,
+      "author": {
+        "id": 1002395
+      },
+      "writtenOn": "2026-08-11T13:26:59Z",
+      "side": 1,
+      "message": "Is reference to `State Effecter PDR` implementation really necessary?",
+      "revId": "8d5c1f7aa8d19efdfd0a99e18dbf98de1789b6a4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "373183d7_2393cff8",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 27
+      },
+      "lineNbr": 3704,
+      "author": {
+        "id": 1002395
+      },
+      "writtenOn": "2026-08-11T13:26:59Z",
+      "side": 1,
+      "message": "The legacy struct `state_sensor_possible_states` has packed attribute, should we define new one without packed attribute for this new API?",
+      "revId": "8d5c1f7aa8d19efdfd0a99e18dbf98de1789b6a4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d054ff3c_2ab02df8",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 27
+      },
+      "lineNbr": 3795,
+      "author": {
+        "id": 1002395
+      },
+      "writtenOn": "2026-08-11T13:26:59Z",
+      "side": 1,
+      "message": "shouldn\u0027t this be `pldm_platform_state_sensor_pdr_iter`?",
+      "range": {
+        "startLine": 3795,
+        "startChar": 13,
+        "endLine": 3795,
+        "endChar": 64
+      },
+      "revId": "8d5c1f7aa8d19efdfd0a99e18dbf98de1789b6a4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0b9482ca_6b34d6ab",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 27
+      },
+      "lineNbr": 3850,
+      "author": {
+        "id": 1002395
+      },
+      "writtenOn": "2026-08-11T13:26:59Z",
+      "side": 1,
+      "message": "shouldn\u0027t this be `pldm_platform_state_sensor_pdr_possible_states_iter`?",
+      "range": {
+        "startLine": 3850,
+        "startChar": 13,
+        "endLine": 3850,
+        "endChar": 48
+      },
+      "revId": "8d5c1f7aa8d19efdfd0a99e18dbf98de1789b6a4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
