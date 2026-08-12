@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "21648a31_98bf45a6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1002395
+      },
+      "writtenOn": "2026-08-12T06:34:10Z",
+      "side": 1,
+      "message": "Add the section number along side the spec and version.",
+      "revId": "47e15fe5d23e362005cd07306d87ef3805ff5b99",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d7a36de2_1685d43b",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 1437,
+      "author": {
+        "id": 1002395
+      },
+      "writtenOn": "2026-08-12T06:34:10Z",
+      "side": 1,
+      "message": "Can we also add information in commit message on how this will coexist with already existing similar struct?",
+      "revId": "47e15fe5d23e362005cd07306d87ef3805ff5b99",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "83d48f7c_8f3d81e9",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 1448,
+      "author": {
+        "id": 1002395
+      },
+      "writtenOn": "2026-08-12T06:34:10Z",
+      "side": 1,
+      "message": "Can we also add information in commit message on how this new struct will coexist with already existing struct for the command SetStateSensorEnables?",
+      "revId": "47e15fe5d23e362005cd07306d87ef3805ff5b99",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
