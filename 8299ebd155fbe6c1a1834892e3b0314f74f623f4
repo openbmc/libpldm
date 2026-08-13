@@ -16,6 +16,24 @@
       "message": "Should this go to `Unreleased` section instead of `v0.17.0`?",
       "revId": "8299ebd155fbe6c1a1834892e3b0314f74f623f4",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6dbc53ba_7f949dc2",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 30
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1002885
+      },
+      "writtenOn": "2026-08-13T08:10:43Z",
+      "side": 1,
+      "message": "Oh right, thanks for the catching!\nI have corrected it in PS 35.",
+      "parentUuid": "2bb55108_1033992a",
+      "revId": "8299ebd155fbe6c1a1834892e3b0314f74f623f4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
