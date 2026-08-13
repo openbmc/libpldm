@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0a2cb736_0dd65df5",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2715,
+      "author": {
+        "id": 1002885
+      },
+      "writtenOn": "2026-08-13T13:03:54Z",
+      "side": 1,
+      "message": "`init_errno(buf, 3, ...)` guarantees these 3 bytes, so this extract can\u0027t fail. `msgbuf` also defers errors, which `complete_consumed()` catches any overflow at the end.\n\nHowever, I am happy to add the error handler if you insist.",
+      "parentUuid": "5f9272bc_bd7e3fbf",
+      "revId": "584670b092d2370a25f98ff9b5ab99b6f42baa64",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c8756509_b96b261e",
@@ -31,6 +49,24 @@
       "writtenOn": "2026-08-10T09:55:32Z",
       "side": 1,
       "message": "here as well do we need to handle the rc of this extraction?",
+      "revId": "584670b092d2370a25f98ff9b5ab99b6f42baa64",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3bf1743e_5cf74e49",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2728,
+      "author": {
+        "id": 1002885
+      },
+      "writtenOn": "2026-08-13T13:03:54Z",
+      "side": 1,
+      "message": "Thanks for catching this, I have added error handler for this extraction in PS8.",
+      "parentUuid": "c8756509_b96b261e",
       "revId": "584670b092d2370a25f98ff9b5ab99b6f42baa64",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
