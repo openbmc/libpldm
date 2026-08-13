@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a28e2794_6acdd15a",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 27
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1002885
+      },
+      "writtenOn": "2026-08-13T08:27:49Z",
+      "side": 1,
+      "message": "Yes, thanks for the catching!\nI have modified it in PS30.",
+      "parentUuid": "307bbf4d_6a4229cf",
+      "revId": "8d5c1f7aa8d19efdfd0a99e18dbf98de1789b6a4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "20d22bf1_7b16b85a",
@@ -35,6 +53,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ce377d54_75eee736",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 27
+      },
+      "lineNbr": 3656,
+      "author": {
+        "id": 1002885
+      },
+      "writtenOn": "2026-08-13T08:27:49Z",
+      "side": 1,
+      "message": "Nope, I have removed the redundant comment.\nThanks for acknowledging this.",
+      "parentUuid": "20d22bf1_7b16b85a",
+      "revId": "8d5c1f7aa8d19efdfd0a99e18dbf98de1789b6a4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "373183d7_2393cff8",
@@ -48,6 +84,24 @@
       "writtenOn": "2026-08-11T13:26:59Z",
       "side": 1,
       "message": "The legacy struct `state_sensor_possible_states` has packed attribute, should we define new one without packed attribute for this new API?",
+      "revId": "8d5c1f7aa8d19efdfd0a99e18dbf98de1789b6a4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "96a5ea99_f2547a51",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 27
+      },
+      "lineNbr": 3704,
+      "author": {
+        "id": 1002885
+      },
+      "writtenOn": "2026-08-13T08:27:49Z",
+      "side": 1,
+      "message": "Sure, I think this is necessary as I just noticed the `CONTRIBUTING.md` actually suggested us avoid to uses these legacy struct.\n\nhttps://github.com/openbmc/libpldm/blob/58463c9cd81216c95b34eb30dd5e1236bd65bcd2/CONTRIBUTING.md?plain\u003d1#L170\n\nAnd therefore I have introduced a new struct in PS30, thanks for acknowledging this.",
+      "parentUuid": "373183d7_2393cff8",
       "revId": "8d5c1f7aa8d19efdfd0a99e18dbf98de1789b6a4",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -75,6 +129,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8283749c_2925a636",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 27
+      },
+      "lineNbr": 3795,
+      "author": {
+        "id": 1002885
+      },
+      "writtenOn": "2026-08-13T08:27:49Z",
+      "side": 1,
+      "message": "Agreed, I have renamed it in PS30.",
+      "parentUuid": "d054ff3c_2ab02df8",
+      "range": {
+        "startLine": 3795,
+        "startChar": 13,
+        "endLine": 3795,
+        "endChar": 64
+      },
+      "revId": "8d5c1f7aa8d19efdfd0a99e18dbf98de1789b6a4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0b9482ca_6b34d6ab",
@@ -88,6 +166,30 @@
       "writtenOn": "2026-08-11T13:26:59Z",
       "side": 1,
       "message": "shouldn\u0027t this be `pldm_platform_state_sensor_pdr_possible_states_iter`?",
+      "range": {
+        "startLine": 3850,
+        "startChar": 13,
+        "endLine": 3850,
+        "endChar": 48
+      },
+      "revId": "8d5c1f7aa8d19efdfd0a99e18dbf98de1789b6a4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e1534692_93b53e01",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 27
+      },
+      "lineNbr": 3850,
+      "author": {
+        "id": 1002885
+      },
+      "writtenOn": "2026-08-13T08:27:49Z",
+      "side": 1,
+      "message": "Done renaming in PS30.",
+      "parentUuid": "0b9482ca_6b34d6ab",
       "range": {
         "startLine": 3850,
         "startChar": 13,
