@@ -89,7 +89,7 @@ enum pldm_platform_transfer_flag {
 /* Minimum length of sensor event data */
 #define PLDM_MSG_POLL_EVENT_LENGTH 7
 /* Minimum data length of CPER event type */
-#define PLDM_PLATFORM_CPER_EVENT_MIN_LENGTH 4
+#define PLDM_PLATFORM_CPER_EVENT_MIN_LENGTH 6
 
 /* Minimum length of sensor event data */
 #define PLDM_SENSOR_EVENT_DATA_MIN_LENGTH			 5
@@ -1270,7 +1270,7 @@ struct pldm_message_poll_event {
 struct pldm_platform_cper_event {
 	uint8_t format_version;
 	uint8_t format_type;
-	uint16_t event_data_length;
+	uint32_t event_data_length;
 #ifndef __cplusplus
 	uint8_t event_data[] LIBPLDM_CC_COUNTED_BY(event_data_length);
 #endif
