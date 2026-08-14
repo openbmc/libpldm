@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a4a4b0bf_e2632af7",
+        "filename": "include/libpldm/oem/ibm/file_io.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2026-08-14T06:42:48Z",
+      "side": 1,
+      "message": "can we maintain uniformity with how the enum value is defined - PLDM_FILE_TYPE_RECONFIG_LOOP \u003d 0x1a,?",
+      "revId": "374d015402c458011cff4f6dfe5a2077d9dcc09c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
