@@ -395,6 +395,18 @@ pldm::fw_update::PackageParser::parse(const std::span<const uint8_t> &pkg,
 			"could not iterate component image area", rc));
 	}
 
+	for (const auto &fw : fwDeviceIDRecords) {
+		for (const size_t ac : fw.applicableComponents) {
+			if (ac < componentImageInfos.size()) {
+				continue;
+			}
+			std::string msg = "applicable component index " +
+					  std::to_string(ac) +
+					  " is out of bounds ";
+			return std::unexpected(PackageParserError(msg));
+		}
+	}
+
 	// We cannot do a std::make_unique here since since the constructor is private.
 	// We are friends but the constructor is called inside the template which is not a friend.
 	return std::unique_ptr<Package>(
