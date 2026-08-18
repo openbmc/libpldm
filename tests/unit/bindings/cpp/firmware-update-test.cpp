@@ -17,19 +17,15 @@ namespace pldm
 namespace fw_update
 {
 
-const std::vector<uint8_t> fwPkgHdrSingleComponent{
-    // clang-format off
-    0xF0, 0x18, 0x87, 0x8C, 0xCB, 0x7D, 0x49, 0x43,
-    0x98, 0x00, 0xA0, 0x2F, 0x05, 0x9A, 0xCA, 0x02, // UUID
-
-    0x01,       // pkg header format revision
-    0x8b, 0x00, // pkg header size
-    // clang-format on
-};
-
 TEST(PackageParserTest, ValidPkgSingleDescriptorSingleComponent)
 {
-    std::vector<uint8_t> pkg = fwPkgHdrSingleComponent;
+    std::vector<uint8_t> pkg;
+
+    appendPackageHeaderIdentifier(pkg, pldm::fw_update::PackagePin::v1);
+
+    // pkg header size
+    pkg.push_back(0x8b);
+    pkg.push_back(0x00);
 
     // pkg release date time (13 bytes, timestamp104)
     appendTimestamp104(pkg);
@@ -108,17 +104,13 @@ TEST(PackageParserTest, ValidPkgSingleDescriptorSingleComponent)
 
 TEST(PackageParserTest, ValidPkgMultipleDescriptorsMultipleComponents)
 {
-    std::vector<uint8_t> fwPkgHdr{
-        // clang-format off
-        0xF0, 0x18, 0x87, 0x8C, 0xCB, 0x7D, 0x49, 0x43, 0x98, 0x00, 0xA0, 0x2F,
-        0x05, 0x9A, 0xCA, 0x02, // UUID
+    std::vector<uint8_t> pkg;
 
-        0x01,       // header format revision
-        0x46, 0x01, // pkg header size
-        // clang-format on
-    };
+    appendPackageHeaderIdentifier(pkg, pldm::fw_update::PackagePin::v1);
 
-    std::vector<uint8_t> pkg = fwPkgHdr;
+    // pkg header size
+    pkg.push_back(0x46);
+    pkg.push_back(0x01);
 
     // pkg release date time, 13 bytes, timestamp104
     appendTimestamp104(pkg);

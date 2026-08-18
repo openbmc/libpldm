@@ -24,19 +24,11 @@ namespace fw_update
 #if HAVE_LIBPLDM_API_TESTING
 static std::vector<uint8_t> makePkgV1_1_0()
 {
+    std::vector<uint8_t> header;
 
-    const std::vector<uint8_t> headerUUID{
-        // clang-format off
-    0x12, 0x44, 0xd2, 0x64, 0x8d, 0x7d, 0x47, 0x18,
-    0xa0, 0x30, 0xfc, 0x8a, 0x56, 0x58, 0x7d, 0x5a, // UUID
-        // clang-format on
-    };
-
-    std::vector<uint8_t> header{
-        // clang-format off
-    0x00, 0x00, // pkg header size, this is updated later
-        // clang-format on
-    };
+    // pkg header size, updated later
+    header.push_back(0x00);
+    header.push_back(0x00);
 
     // pkg release date time (13 bytes, timestamp104)
     appendTimestamp104(header);
@@ -95,8 +87,8 @@ static std::vector<uint8_t> makePkgV1_1_0()
 
     std::vector<uint8_t> pkg{};
 
-    pkg.insert(pkg.end(), headerUUID.begin(), headerUUID.end());
-    pkg.push_back(0x02); // pkg header format revision
+    appendPackageHeaderIdentifier(pkg, pldm::fw_update::PackagePin::v1_1_0);
+
     const size_t packageHeaderSizeOffset = pkg.size();
     pkg.insert(pkg.end(), header.begin(), header.end());
 

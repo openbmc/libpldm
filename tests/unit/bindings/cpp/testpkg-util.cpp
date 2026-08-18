@@ -1,9 +1,59 @@
 #include "testpkg-util.hpp"
 
 #include <libpldm/edac.h>
+#include <libpldm/firmware_update.h>
 
 #include <cstdint>
+#include <stdexcept>
 #include <vector>
+
+void appendPackageHeaderIdentifier(std::vector<uint8_t>& pkg,
+                                   pldm::fw_update::PackagePin pin)
+{
+
+    std::vector<uint8_t> uuid;
+    if (pin == pldm::fw_update::PackagePin::v1)
+    {
+        uuid = PLDM_PACKAGE_HEADER_IDENTIFIER_V1_0;
+    }
+    else if (pin == pldm::fw_update::PackagePin::v1_1_0)
+    {
+        uuid = PLDM_PACKAGE_HEADER_IDENTIFIER_V1_1;
+    }
+    else if (pin == pldm::fw_update::PackagePin::v1_2_0)
+    {
+        uuid = PLDM_PACKAGE_HEADER_IDENTIFIER_V1_2;
+    }
+    else if (pin == pldm::fw_update::PackagePin::v1_3_0)
+    {
+        uuid = PLDM_PACKAGE_HEADER_IDENTIFIER_V1_3;
+    }
+    else
+    {
+        throw std::invalid_argument("unsupported package pin");
+    }
+
+    // PackageHeaderIdentifier
+    pkg.insert(pkg.end(), uuid.begin(), uuid.end());
+
+    // PackageHeaderFormatRevision
+    if (pin == pldm::fw_update::PackagePin::v1)
+    {
+        pkg.push_back(PLDM_PACKAGE_HEADER_FORMAT_REVISION_FR01H);
+    }
+    else if (pin == pldm::fw_update::PackagePin::v1_1_0)
+    {
+        pkg.push_back(PLDM_PACKAGE_HEADER_FORMAT_REVISION_FR02H);
+    }
+    else if (pin == pldm::fw_update::PackagePin::v1_2_0)
+    {
+        pkg.push_back(PLDM_PACKAGE_HEADER_FORMAT_REVISION_FR03H);
+    }
+    else if (pin == pldm::fw_update::PackagePin::v1_3_0)
+    {
+        pkg.push_back(PLDM_PACKAGE_HEADER_FORMAT_REVISION_FR04H);
+    }
+}
 
 void appendCRC(std::vector<uint8_t>& pkg)
 {

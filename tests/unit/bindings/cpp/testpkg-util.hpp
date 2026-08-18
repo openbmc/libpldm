@@ -1,10 +1,15 @@
 #pragma once
 
 #include <cstdint>
+#include <libpldm++/firmware_update.hpp>
 #include <vector>
 
-// helper for appending a checksum to a fw update package in unit tests
+// helper for appending the PackageHeaderIdentifier (UUID)
+// and PackageHeaderFormatRevision
+void appendPackageHeaderIdentifier(std::vector<uint8_t>& pkg,
+                                   pldm::fw_update::PackagePin pin);
 
+// helper for appending a checksum to a fw update package in unit tests
 void appendCRC(std::vector<uint8_t>& pkg);
 
 // helper for appending a type-length-string field to a fw update package
