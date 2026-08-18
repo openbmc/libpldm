@@ -33,6 +33,7 @@ Change categories:
 - libpldm++ support for fw update pkg v1.1.0
 - libpldm++ support for fw update pkg v1.2.0
 - libpldm++ support for fw update pkg v1.3.0
+- stateset: Added new enum pldm_state_set_performance_values from DSP0249 v1.4.0
 
 ### Changed
 
