@@ -7,6 +7,10 @@
 
 void appendCRC(std::vector<uint8_t>& pkg);
 
+// helper for appending a type-length-string field to a fw update package
+void appendTypeLengthString(std::vector<uint8_t>& pkg,
+                            const std::vector<uint8_t>& str);
+
 // appends a component image info record to a fw update package
 void appendComponentImageInfo1(std::vector<uint8_t>& pkg);
 void appendComponentImageInfo2(std::vector<uint8_t>& pkg);

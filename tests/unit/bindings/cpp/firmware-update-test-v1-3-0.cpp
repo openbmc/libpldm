@@ -29,7 +29,7 @@ static std::vector<uint8_t> makePkgV1_3_0()
         // clang-format on
     };
 
-    const std::vector<uint8_t> header{
+    std::vector<uint8_t> header{
         // clang-format off
     0x8b, 0x00, // pkg header size, this is updated later
 
@@ -38,16 +38,13 @@ static std::vector<uint8_t> makePkgV1_3_0()
     0x00,       // pkg release date time (13 bytes, timestamp104)
 
     0x08, 0x00, // component bitmap bit length
-
-    0x01,       // package version string type
-
-    0x0E,       // package version string length
-
-    0x56, 0x65, 0x72, 0x73, 0x69, 0x6F,
-    0x6E, 0x53, 0x74, 0x72, 0x69, 0x6E,
-    0x67, 0x31, // package version string
         // clang-format on
     };
+
+    // package version string
+    appendTypeLengthString(
+        header, std::vector<uint8_t>{0x56, 0x65, 0x72, 0x73, 0x69, 0x6F, 0x6E,
+                                     0x53, 0x74, 0x72, 0x69, 0x6E, 0x67, 0x31});
 
     std::vector<uint8_t> downstreamdevidarea{
         // clang-format off

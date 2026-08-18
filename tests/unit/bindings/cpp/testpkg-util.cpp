@@ -20,6 +20,20 @@ void appendCRC(std::vector<uint8_t>& pkg)
     pkg.insert(pkg.end(), checksum.begin(), checksum.end());
 }
 
+void appendTypeLengthString(std::vector<uint8_t>& pkg,
+                            const std::vector<uint8_t>& str)
+{
+
+    // DSP0267, Table 33 String Type Values
+    // ASCII
+    pkg.push_back(0x01);
+
+    // string length
+    pkg.push_back(str.size());
+
+    pkg.insert(pkg.end(), str.begin(), str.end());
+}
+
 void appendComponentImageInfo1(std::vector<uint8_t>& pkg)
 {
 
@@ -33,16 +47,16 @@ void appendComponentImageInfo1(std::vector<uint8_t>& pkg)
     0x00, 0x00,             // requested component activation method
     0x8B, 0x00, 0x00, 0x00, // component location offset
     0x01, 0x00, 0x00, 0x00, // component size
-    0x01,                   // component version string type
-    0x0E,                   // component version string length
 
-    0x56, 0x65, 0x72, 0x73, 0x69, 0x6F,
-    0x6E, 0x53, 0x74, 0x72, 0x69, 0x6E,
-    0x67, 0x33,             // component version string
         // clang-format on
     };
 
     pkg.insert(pkg.end(), info.begin(), info.end());
+
+    // component version string
+    appendTypeLengthString(
+        pkg, std::vector<uint8_t>{0x56, 0x65, 0x72, 0x73, 0x69, 0x6F, 0x6E,
+                                  0x53, 0x74, 0x72, 0x69, 0x6E, 0x67, 0x33});
 }
 
 void appendComponentImageInfo2(std::vector<uint8_t>& pkg)
@@ -58,15 +72,16 @@ void appendComponentImageInfo2(std::vector<uint8_t>& pkg)
         0x00, 0x00,             // requested component activation method
         0x46, 0x01, 0x00, 0x00, // component location offset
         0x01, 0x00, 0x00, 0x00, // component size
-        0x01,                   // component version string type
-        0x0E,                   // component version string length
 
-        0x56, 0x65, 0x72, 0x73, 0x69, 0x6F, 0x6E, 0x53, 0x74, 0x72, 0x69, 0x6E,
-        0x67, 0x35, // component version string (14 bytes)
         // clang-format on
     };
 
     pkg.insert(pkg.end(), info.begin(), info.end());
+
+    // component version string
+    appendTypeLengthString(
+        pkg, std::vector<uint8_t>{0x56, 0x65, 0x72, 0x73, 0x69, 0x6F, 0x6E,
+                                  0x53, 0x74, 0x72, 0x69, 0x6E, 0x67, 0x35});
 }
 
 void appendComponentImageInfo3(std::vector<uint8_t>& pkg)
@@ -82,14 +97,16 @@ void appendComponentImageInfo3(std::vector<uint8_t>& pkg)
         0x01, 0x00,             // requested component activation method
         0x46, 0x01, 0x00, 0x00, // component location offset
         0x01, 0x00, 0x00, 0x00, // component size
-        0x01,                   // component version string type
-        0x0E,                   // component version string length
-        0x56, 0x65, 0x72, 0x73, 0x69, 0x6F, 0x6E, 0x53, 0x74, 0x72, 0x69, 0x6E,
-        0x67, 0x36, // component version string
+
         // clang-format on
     };
 
     pkg.insert(pkg.end(), info.begin(), info.end());
+
+    // component version string
+    appendTypeLengthString(
+        pkg, std::vector<uint8_t>{0x56, 0x65, 0x72, 0x73, 0x69, 0x6F, 0x6E,
+                                  0x53, 0x74, 0x72, 0x69, 0x6E, 0x67, 0x36});
 }
 
 void appendComponentImageInfo4(std::vector<uint8_t>& pkg)
@@ -105,14 +122,16 @@ void appendComponentImageInfo4(std::vector<uint8_t>& pkg)
         0x0C, 0x00,             // requested component activation method
         0x46, 0x01, 0x00, 0x00, // component location offset
         0x01, 0x00, 0x00, 0x00, // component size
-        0x01,                   // component version string type
-        0x0E,                   // component version string length
-        0x56, 0x65, 0x72, 0x73, 0x69, 0x6F, 0x6E, 0x53, 0x74, 0x72, 0x69, 0x6E,
-        0x67, 0x37, // component version string
+
         // clang-format on
     };
 
     pkg.insert(pkg.end(), info.begin(), info.end());
+
+    // component version string
+    appendTypeLengthString(
+        pkg, std::vector<uint8_t>{0x56, 0x65, 0x72, 0x73, 0x69, 0x6F, 0x6E,
+                                  0x53, 0x74, 0x72, 0x69, 0x6E, 0x67, 0x37});
 }
 
 void appendComponentImageInfoArea1(std::vector<uint8_t>& pkg)
