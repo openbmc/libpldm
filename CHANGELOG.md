@@ -19,6 +19,7 @@ Change categories:
 
 ### Added
 
+- stateset: Added new enum pldm_state_set_performance_values from DSP0249 v1.4.0
 - dsp: platform: Add `decode_pldm_platform_set_state_sensor_enables_req()`
 - dsp: platform: Add `encode_pldm_platform_set_state_sensor_enables_resp()`
 - dsp: platform: Add `decode_pldm_platform_set_state_sensor_enables_resp()`
