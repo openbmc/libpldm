@@ -297,6 +297,56 @@ TEST(PackageParserTest, ValidPkgMultipleDescriptorsMultipleComponents)
     // end asserting component image info
 }
 
+TEST(PackageParserTest,
+     InValidPkgSingleDescriptorSingleComponentApplicableComponentOOB)
+{
+    // failure: the applicable component is out of bounds
+    std::vector<uint8_t> pkg;
+
+    appendPackageHeaderIdentifier(pkg, pldm::fw_update::PackagePin::v1);
+
+    // pkg header size
+    pkg.push_back(0x8b);
+    pkg.push_back(0x00);
+
+    // pkg release date time (13 bytes, timestamp104)
+    appendTimestamp104(pkg);
+
+    // component bitmap bit length
+    pkg.push_back(0x08);
+    pkg.push_back(0x00);
+
+    // package version string
+    appendTypeLengthString(
+        pkg, std::vector<uint8_t>{0x56, 0x65, 0x72, 0x73, 0x69, 0x6F, 0x6E,
+                                  0x53, 0x74, 0x72, 0x69, 0x6E, 0x67, 0x31});
+
+    // device id record count
+    pkg.push_back(0x01);
+
+    // describes an applicable component which does not exist in the package
+    appendFirmwareDeviceIdRecord1InvalidApplicableComponentOOB(pkg);
+
+    appendComponentImageInfoArea1(pkg);
+
+    appendCRC(pkg);
+
+    // component image
+    pkg.push_back(0x00);
+
+    auto res = PackageParser::parse(pkg, PackagePin::v1);
+
+    if (!res.has_value())
+    {
+        std::cout << res.error().msg << std::endl;
+
+        EXPECT_EQ(res.error().msg,
+                  "applicable component index 3 is out of bounds");
+    }
+
+    ASSERT_FALSE(res.has_value());
+}
+
 TEST(PackageParserTest, InvalidPkgBadChecksum)
 {
     std::vector<uint8_t> fwPkgHdr{
