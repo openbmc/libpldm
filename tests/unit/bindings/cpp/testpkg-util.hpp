@@ -11,6 +11,9 @@ void appendCRC(std::vector<uint8_t>& pkg);
 void appendTypeLengthString(std::vector<uint8_t>& pkg,
                             const std::vector<uint8_t>& str);
 
+// helper for appending a timestamp104 value
+void appendTimestamp104(std::vector<uint8_t>& pkg);
+
 // appends a component image info record to a fw update package
 void appendComponentImageInfo1(std::vector<uint8_t>& pkg);
 void appendComponentImageInfo2(std::vector<uint8_t>& pkg);

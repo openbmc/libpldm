@@ -24,18 +24,19 @@ const std::vector<uint8_t> fwPkgHdrSingleComponent{
 
     0x01,       // pkg header format revision
     0x8b, 0x00, // pkg header size
-
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-    0x00, 0x00, 0x19, 0x0C, 0xE5, 0x07,
-    0x00,       // pkg release date time (13 bytes, timestamp104)
-
-    0x08, 0x00, // component bitmap bit length
     // clang-format on
 };
 
 TEST(PackageParserTest, ValidPkgSingleDescriptorSingleComponent)
 {
     std::vector<uint8_t> pkg = fwPkgHdrSingleComponent;
+
+    // pkg release date time (13 bytes, timestamp104)
+    appendTimestamp104(pkg);
+
+    // component bitmap bit length
+    pkg.push_back(0x08);
+    pkg.push_back(0x00);
 
     // package version string
     appendTypeLengthString(
@@ -114,16 +115,17 @@ TEST(PackageParserTest, ValidPkgMultipleDescriptorsMultipleComponents)
 
         0x01,       // header format revision
         0x46, 0x01, // pkg header size
-
-        0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x19, 0x0C, 0xE5, 0x07,
-        0x00, // pkg release date time, 13 bytes, timestamp104
-
-        0x08, 0x00, // component bitmap bit length
-
         // clang-format on
     };
 
     std::vector<uint8_t> pkg = fwPkgHdr;
+
+    // pkg release date time, 13 bytes, timestamp104
+    appendTimestamp104(pkg);
+
+    // component bitmap bit length
+    pkg.push_back(0x08);
+    pkg.push_back(0x00);
 
     // package version string
     appendTypeLengthString(

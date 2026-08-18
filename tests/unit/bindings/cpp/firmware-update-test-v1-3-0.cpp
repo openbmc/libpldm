@@ -32,14 +32,15 @@ static std::vector<uint8_t> makePkgV1_3_0()
     std::vector<uint8_t> header{
         // clang-format off
     0x8b, 0x00, // pkg header size, this is updated later
-
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-    0x00, 0x00, 0x19, 0x0C, 0xE5, 0x07,
-    0x00,       // pkg release date time (13 bytes, timestamp104)
-
-    0x08, 0x00, // component bitmap bit length
         // clang-format on
     };
+
+    // pkg release date time (13 bytes, timestamp104)
+    appendTimestamp104(header);
+
+    // component bitmap bit length
+    header.push_back(0x08);
+    header.push_back(0x00);
 
     // package version string
     appendTypeLengthString(

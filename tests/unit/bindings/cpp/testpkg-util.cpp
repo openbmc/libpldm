@@ -34,6 +34,16 @@ void appendTypeLengthString(std::vector<uint8_t>& pkg,
     pkg.insert(pkg.end(), str.begin(), str.end());
 }
 
+void appendTimestamp104(std::vector<uint8_t>& pkg)
+{
+
+    std::vector<uint8_t> timestamp104Bytes{0x00, 0x00, 0x00, 0x00, 0x00,
+                                           0x00, 0x00, 0x00, 0x19, 0x0C,
+                                           0xE5, 0x07, 0x00};
+
+    pkg.insert(pkg.end(), timestamp104Bytes.begin(), timestamp104Bytes.end());
+}
+
 void appendComponentImageInfo1(std::vector<uint8_t>& pkg)
 {
 
