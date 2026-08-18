@@ -219,6 +219,14 @@ enum pldm_state_set_presence_values {
 	PLDM_STATE_SET_PRESENCE_NOT_PRESENT = 2,
 };
 
+/* @brief List of states for the Performance state set (ID 14).
+ */
+enum pldm_state_set_performance_values {
+	PLDM_STATE_SET_PERFORMANCE_NORMAL = 1,
+	PLDM_STATE_SET_PERFORMANCE_THROTTLED = 2,
+	PLDM_STATE_SET_PERFORMANCE_DEGRADED = 3,
+};
+
 /* @brief List of states for the Configuration State state set (ID 15).
  */
 enum pldm_state_set_configuration_state_values {
