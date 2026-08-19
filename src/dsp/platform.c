@@ -851,7 +851,8 @@ int encode_set_numeric_effecter_value_req(uint8_t instance_id,
 			return PLDM_ERROR_INVALID_LENGTH;
 		}
 
-		uint16_t val = *(uint16_t *)(effecter_value);
+		uint16_t val;
+		memcpy(&val, effecter_value, sizeof(val));
 		val = htole16(val);
 		memcpy(request->effecter_value, &val, sizeof(uint16_t));
 
@@ -862,7 +863,8 @@ int encode_set_numeric_effecter_value_req(uint8_t instance_id,
 			return PLDM_ERROR_INVALID_LENGTH;
 		}
 
-		uint32_t val = *(uint32_t *)(effecter_value);
+		uint32_t val;
+		memcpy(&val, effecter_value, sizeof(val));
 		val = htole32(val);
 		memcpy(request->effecter_value, &val, sizeof(uint32_t));
 	}
@@ -1994,11 +1996,13 @@ int encode_get_numeric_effecter_value_resp(
 		    PLDM_GET_NUMERIC_EFFECTER_VALUE_MIN_RESP_BYTES + 2) {
 			return PLDM_ERROR_INVALID_LENGTH;
 		}
-		uint16_t val_pending = *(uint16_t *)pending_value;
+		uint16_t val_pending;
+		memcpy(&val_pending, pending_value, sizeof(val_pending));
 		val_pending = htole16(val_pending);
 		memcpy(response->pending_and_present_values, &val_pending,
 		       sizeof(uint16_t));
-		uint16_t val_present = *(uint16_t *)present_value;
+		uint16_t val_present;
+		memcpy(&val_present, present_value, sizeof(val_present));
 		val_present = htole16(val_present);
 		memcpy((response->pending_and_present_values +
 			sizeof(uint16_t)),
@@ -2010,11 +2014,13 @@ int encode_get_numeric_effecter_value_resp(
 		    PLDM_GET_NUMERIC_EFFECTER_VALUE_MIN_RESP_BYTES + 6) {
 			return PLDM_ERROR_INVALID_LENGTH;
 		}
-		uint32_t val_pending = *(uint32_t *)pending_value;
+		uint32_t val_pending;
+		memcpy(&val_pending, pending_value, sizeof(val_pending));
 		val_pending = htole32(val_pending);
 		memcpy(response->pending_and_present_values, &val_pending,
 		       sizeof(uint32_t));
-		uint32_t val_present = *(uint32_t *)present_value;
+		uint32_t val_present;
+		memcpy(&val_present, present_value, sizeof(val_present));
 		val_present = htole32(val_present);
 		memcpy((response->pending_and_present_values +
 			sizeof(uint32_t)),
@@ -2525,7 +2531,8 @@ int encode_get_sensor_reading_resp(uint8_t instance_id, uint8_t completion_code,
 		    PLDM_GET_SENSOR_READING_MIN_RESP_BYTES + 1) {
 			return PLDM_ERROR_INVALID_LENGTH;
 		}
-		uint16_t val = *(uint16_t *)present_reading;
+		uint16_t val;
+		memcpy(&val, present_reading, sizeof(val));
 		val = htole16(val);
 		memcpy(response->present_reading, &val, 2);
 
@@ -2535,7 +2542,8 @@ int encode_get_sensor_reading_resp(uint8_t instance_id, uint8_t completion_code,
 		    PLDM_GET_SENSOR_READING_MIN_RESP_BYTES + 3) {
 			return PLDM_ERROR_INVALID_LENGTH;
 		}
-		uint32_t val = *(uint32_t *)present_reading;
+		uint32_t val;
+		memcpy(&val, present_reading, sizeof(val));
 		val = htole32(val);
 		memcpy(response->present_reading, &val, 4);
 	}

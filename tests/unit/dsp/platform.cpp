@@ -947,6 +947,46 @@ TEST(SetNumericEffecterValue, testGoodEncodeRequest)
     EXPECT_EQ(effecter_value, *val);
 }
 
+TEST(SetNumericEffecterValue, testEncodeRequestUnalignedValue)
+{
+    // The effecter_value parameter is a uint8_t pointer, so callers are
+    // entitled to pass an unaligned address.
+    alignas(4) std::array<uint8_t, 8> value{};
+    std::array<uint8_t,
+               hdrSize + PLDM_SET_NUMERIC_EFFECTER_VALUE_MIN_REQ_BYTES + 3>
+        requestMsg{};
+
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+    auto request = reinterpret_cast<pldm_msg*>(requestMsg.data());
+
+    struct pldm_set_numeric_effecter_value_req* req =
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+        reinterpret_cast<struct pldm_set_numeric_effecter_value_req*>(
+            request->payload);
+
+    value = {0x00, 0x34, 0x12, 0x00, 0x00, 0x00, 0x00, 0x00};
+
+    auto rc = encode_set_numeric_effecter_value_req(
+        0, 0x000a, PLDM_EFFECTER_DATA_SIZE_UINT16, value.data() + 1, request,
+        PLDM_SET_NUMERIC_EFFECTER_VALUE_MIN_REQ_BYTES + 1);
+
+    EXPECT_EQ(rc, PLDM_SUCCESS);
+    EXPECT_EQ(req->effecter_value[0], 0x34);
+    EXPECT_EQ(req->effecter_value[1], 0x12);
+
+    value = {0x00, 0x78, 0x56, 0x34, 0x12, 0x00, 0x00, 0x00};
+
+    rc = encode_set_numeric_effecter_value_req(
+        0, 0x000a, PLDM_EFFECTER_DATA_SIZE_UINT32, value.data() + 1, request,
+        PLDM_SET_NUMERIC_EFFECTER_VALUE_MIN_REQ_BYTES + 3);
+
+    EXPECT_EQ(rc, PLDM_SUCCESS);
+    EXPECT_EQ(req->effecter_value[0], 0x78);
+    EXPECT_EQ(req->effecter_value[1], 0x56);
+    EXPECT_EQ(req->effecter_value[2], 0x34);
+    EXPECT_EQ(req->effecter_value[3], 0x12);
+}
+
 TEST(SetNumericEffecterValue, testBadEncodeRequest)
 {
     std::vector<uint8_t> requestMsg(
@@ -3112,6 +3152,54 @@ TEST(GetNumericEffecterValue, testGoodEncodeResponse)
     EXPECT_EQ(presentValue, val_present);
 }
 
+TEST(GetNumericEffecterValue, testEncodeResponseUnalignedValues)
+{
+    // The pending_value and present_value parameters are uint8_t pointers, so
+    // callers are entitled to pass unaligned addresses.
+    alignas(4) std::array<uint8_t, 8> pending{};
+    alignas(4) std::array<uint8_t, 8> present{};
+    std::array<uint8_t,
+               hdrSize + PLDM_GET_NUMERIC_EFFECTER_VALUE_MIN_RESP_BYTES + 6>
+        responseMsg{};
+
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+    auto response = reinterpret_cast<pldm_msg*>(responseMsg.data());
+
+    struct pldm_get_numeric_effecter_value_resp* resp =
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+        reinterpret_cast<struct pldm_get_numeric_effecter_value_resp*>(
+            response->payload);
+
+    pending = {0x00, 0x34, 0x12, 0x00, 0x00, 0x00, 0x00, 0x00};
+    present = {0x00, 0x78, 0x56, 0x00, 0x00, 0x00, 0x00, 0x00};
+
+    auto rc = encode_get_numeric_effecter_value_resp(
+        0, PLDM_SUCCESS, PLDM_EFFECTER_DATA_SIZE_UINT16,
+        EFFECTER_OPER_STATE_ENABLED_NOUPDATEPENDING, pending.data() + 1,
+        present.data() + 1, response,
+        PLDM_GET_NUMERIC_EFFECTER_VALUE_MIN_RESP_BYTES + 2);
+
+    EXPECT_EQ(rc, PLDM_SUCCESS);
+    EXPECT_EQ(resp->pending_and_present_values[0], 0x34);
+    EXPECT_EQ(resp->pending_and_present_values[1], 0x12);
+    EXPECT_EQ(resp->pending_and_present_values[2], 0x78);
+    EXPECT_EQ(resp->pending_and_present_values[3], 0x56);
+
+    pending = {0x00, 0x78, 0x56, 0x34, 0x12, 0x00, 0x00, 0x00};
+    present = {0x00, 0xef, 0xcd, 0xab, 0x89, 0x00, 0x00, 0x00};
+
+    rc = encode_get_numeric_effecter_value_resp(
+        0, PLDM_SUCCESS, PLDM_EFFECTER_DATA_SIZE_UINT32,
+        EFFECTER_OPER_STATE_ENABLED_NOUPDATEPENDING, pending.data() + 1,
+        present.data() + 1, response,
+        PLDM_GET_NUMERIC_EFFECTER_VALUE_MIN_RESP_BYTES + 6);
+
+    EXPECT_EQ(rc, PLDM_SUCCESS);
+    EXPECT_EQ(resp->pending_and_present_values[0], 0x78);
+    EXPECT_EQ(resp->pending_and_present_values[4], 0xef);
+    EXPECT_EQ(resp->pending_and_present_values[7], 0x89);
+}
+
 TEST(GetNumericEffecterValue, testBadEncodeResponse)
 {
     std::array<uint8_t,
@@ -3506,6 +3594,51 @@ TEST(GetSensorReading, testGoodEncodeResponse)
     EXPECT_EQ(presentReading,
               // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
               *(reinterpret_cast<uint8_t*>(&resp->present_reading[0])));
+}
+
+TEST(GetSensorReading, testEncodeResponseUnalignedReading)
+{
+    // The present_reading parameter is a uint8_t pointer, so callers are
+    // entitled to pass an unaligned address.
+    alignas(4) std::array<uint8_t, 8> reading{};
+    std::array<uint8_t, hdrSize + PLDM_GET_SENSOR_READING_MIN_RESP_BYTES + 3>
+        responseMsg{};
+
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+    auto response = reinterpret_cast<pldm_msg*>(responseMsg.data());
+
+    struct pldm_get_sensor_reading_resp* resp =
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+        reinterpret_cast<struct pldm_get_sensor_reading_resp*>(
+            response->payload);
+
+    // uint16 reading of 0x1234 placed at an odd offset
+    reading = {0x00, 0x34, 0x12, 0x00, 0x00, 0x00, 0x00, 0x00};
+
+    auto rc = encode_get_sensor_reading_resp(
+        0, PLDM_SUCCESS, PLDM_SENSOR_DATA_SIZE_UINT16, PLDM_SENSOR_ENABLED,
+        PLDM_NO_EVENT_GENERATION, PLDM_SENSOR_NORMAL, PLDM_SENSOR_NORMAL,
+        PLDM_SENSOR_NORMAL, reading.data() + 1, response,
+        PLDM_GET_SENSOR_READING_MIN_RESP_BYTES + 1);
+
+    EXPECT_EQ(rc, PLDM_SUCCESS);
+    EXPECT_EQ(resp->present_reading[0], 0x34);
+    EXPECT_EQ(resp->present_reading[1], 0x12);
+
+    // uint32 reading of 0x12345678 placed at an odd offset
+    reading = {0x00, 0x78, 0x56, 0x34, 0x12, 0x00, 0x00, 0x00};
+
+    rc = encode_get_sensor_reading_resp(
+        0, PLDM_SUCCESS, PLDM_SENSOR_DATA_SIZE_UINT32, PLDM_SENSOR_ENABLED,
+        PLDM_NO_EVENT_GENERATION, PLDM_SENSOR_NORMAL, PLDM_SENSOR_NORMAL,
+        PLDM_SENSOR_NORMAL, reading.data() + 1, response,
+        PLDM_GET_SENSOR_READING_MIN_RESP_BYTES + 3);
+
+    EXPECT_EQ(rc, PLDM_SUCCESS);
+    EXPECT_EQ(resp->present_reading[0], 0x78);
+    EXPECT_EQ(resp->present_reading[1], 0x56);
+    EXPECT_EQ(resp->present_reading[2], 0x34);
+    EXPECT_EQ(resp->present_reading[3], 0x12);
 }
 
 TEST(GetSensorReading, testBadEncodeResponse)
