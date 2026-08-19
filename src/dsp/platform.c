@@ -1914,6 +1914,106 @@ int decode_numeric_sensor_pdr_data(
 	return PLDM_SUCCESS;
 }
 
+LIBPLDM_ABI_TESTING
+int encode_pldm_platform_state_sensor_pdr(
+	const struct pldm_platform_state_sensor_pdr *pdr, void *data,
+	size_t *data_len)
+{
+	PLDM_MSGBUF_RW_DEFINE_P(buf);
+	size_t entry_min;
+	size_t entry_max;
+	size_t fixed;
+	int rc;
+
+	if (!pdr || !data || !data_len) {
+		return -EINVAL;
+	}
+
+	if (!pdr->composite_sensor_count ||
+	    pdr->composite_sensor_count >
+		    PLDM_PLATFORM_STATE_SENSOR_MAX_COMPOSITE_COUNT) {
+		return -EINVAL;
+	}
+
+	fixed = PLDM_PLATFORM_STATE_SENSOR_PDR_MIN_LENGTH -
+		sizeof(struct pldm_pdr_hdr);
+	entry_min = PLDM_PLATFORM_STATE_SENSOR_POSSIBLE_STATES_MIN_LENGTH + 1;
+	entry_max = PLDM_PLATFORM_STATE_SENSOR_POSSIBLE_STATES_MIN_LENGTH +
+		    UINT8_MAX;
+
+	if (pdr->hdr.length < fixed + pdr->composite_sensor_count * entry_min ||
+	    pdr->hdr.length > fixed + pdr->composite_sensor_count * entry_max) {
+		return -EINVAL;
+	}
+
+	rc = pldm_msgbuf_init_errno(buf,
+				    PLDM_PLATFORM_STATE_SENSOR_PDR_MIN_LENGTH,
+				    data, *data_len);
+	if (rc) {
+		return rc;
+	}
+
+	pldm_msgbuf_insert(buf, pdr->hdr.record_handle);
+	pldm_msgbuf_insert(buf, pdr->hdr.version);
+	pldm_msgbuf_insert(buf, pdr->hdr.type);
+	pldm_msgbuf_insert(buf, pdr->hdr.record_change_num);
+	pldm_msgbuf_insert(buf, pdr->hdr.length);
+	pldm_msgbuf_insert(buf, pdr->terminus_handle);
+	pldm_msgbuf_insert(buf, pdr->sensor_id);
+	pldm_msgbuf_insert(buf, pdr->entity_type);
+	pldm_msgbuf_insert(buf, pdr->entity_instance_number);
+	pldm_msgbuf_insert(buf, pdr->container_id);
+	pldm_msgbuf_insert(buf, pdr->sensor_init);
+	pldm_msgbuf_insert(buf, pdr->sensor_auxiliary_names_pdr);
+	pldm_msgbuf_insert(buf, pdr->composite_sensor_count);
+
+	return pldm_msgbuf_complete_used(buf, *data_len, data_len);
+}
+
+LIBPLDM_ABI_TESTING
+int encode_pldm_platform_state_sensor_possible_states(
+	const struct pldm_platform_state_sensor_possible_states *states,
+	const struct variable_field *possible_states, void *data,
+	size_t *data_len)
+{
+	PLDM_MSGBUF_RW_DEFINE_P(buf);
+	int rc;
+
+	if (!states || !possible_states || !possible_states->ptr || !data ||
+	    !data_len) {
+		return -EINVAL;
+	}
+
+	if (!states->possible_states_size) {
+		return -EINVAL;
+	}
+
+	if (possible_states->length != states->possible_states_size) {
+		return -EINVAL;
+	}
+
+	rc = pldm_msgbuf_init_errno(
+		buf,
+		PLDM_PLATFORM_STATE_SENSOR_POSSIBLE_STATES_MIN_LENGTH +
+			states->possible_states_size,
+		data, *data_len);
+	if (rc) {
+		return rc;
+	}
+
+	pldm_msgbuf_insert(buf, states->state_set_id);
+	pldm_msgbuf_insert(buf, states->possible_states_size);
+
+	rc = pldm_msgbuf_insert_array(buf, states->possible_states_size,
+				      possible_states->ptr,
+				      possible_states->length);
+	if (rc) {
+		return pldm_msgbuf_discard(buf, rc);
+	}
+
+	return pldm_msgbuf_complete_used(buf, *data_len, data_len);
+}
+
 LIBPLDM_ABI_STABLE
 int encode_get_numeric_effecter_value_req(uint8_t instance_id,
 					  uint16_t effecter_id,
