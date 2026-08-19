@@ -291,7 +291,7 @@ int decode_set_state_effecter_states_req(const struct pldm_msg *msg,
 		return pldm_xlate_errno(pldm_msgbuf_discard(buf, rc));
 	}
 
-	if (*comp_effecter_count > 8) {
+	if (*comp_effecter_count < 0x1 || *comp_effecter_count > 0x8) {
 		return pldm_msgbuf_discard(buf, PLDM_ERROR_INVALID_DATA);
 	}
 
