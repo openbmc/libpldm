@@ -572,12 +572,63 @@ static int fuzz_pldm_entity_association_pdr_extract(const uint8_t* data,
     return 0;
 }
 
+static int fuzz_encode_pldm_platform_state_sensor_pdr(const uint8_t* data,
+                                                      size_t size)
+{
+    struct pldm_platform_state_sensor_pdr pdr = {0};
+    uint8_t out[PLDM_PLATFORM_STATE_SENSOR_PDR_MIN_LENGTH];
+    size_t out_len = sizeof(out);
+
+    if (size < sizeof(pdr.hdr.length) + sizeof(pdr.composite_sensor_count))
+    {
+        return 0;
+    }
+
+    pdr.hdr.type = PLDM_STATE_SENSOR_PDR;
+    pdr.hdr.length = (uint16_t)(data[0] | (data[1] << 8));
+    pdr.composite_sensor_count = data[2 % size];
+
+    encode_pldm_platform_state_sensor_pdr(&pdr, out, &out_len);
+
+    return 0;
+}
+
+static int
+    fuzz_encode_pldm_platform_state_sensor_possible_states(const uint8_t* data,
+                                                           size_t size)
+{
+    struct pldm_platform_state_sensor_possible_states states = {0};
+    struct variable_field possible_states = {0};
+    uint8_t
+        out[UINT8_MAX + PLDM_PLATFORM_STATE_SENSOR_POSSIBLE_STATES_MIN_LENGTH];
+    size_t out_len = sizeof(out);
+
+    if (size < PLDM_PLATFORM_STATE_SENSOR_POSSIBLE_STATES_MIN_LENGTH)
+    {
+        return 0;
+    }
+
+    states.state_set_id = (uint16_t)(data[0] | (data[1] << 8));
+    states.possible_states_size = data[2];
+    possible_states.ptr =
+        data + PLDM_PLATFORM_STATE_SENSOR_POSSIBLE_STATES_MIN_LENGTH;
+    possible_states.length =
+        size - PLDM_PLATFORM_STATE_SENSOR_POSSIBLE_STATES_MIN_LENGTH;
+
+    encode_pldm_platform_state_sensor_possible_states(&states, &possible_states,
+                                                      out, &out_len);
+
+    return 0;
+}
+
 static int (*const fuzz_tests[])(const uint8_t*, size_t) = {
     fuzz_decode_pldm_firmware_update_package,
     fuzz_get_fru_record_by_option,
     fuzz_pldm_pdr_add,
     fuzz_pldm_entity_association_pdr_extract,
     fuzz_pldm_state_effecter_pdr,
+    fuzz_encode_pldm_platform_state_sensor_pdr,
+    fuzz_encode_pldm_platform_state_sensor_possible_states,
     libpldm_decode_one_pldm_msg,
     libpldm_encode_one_pldm_msg,
 };
