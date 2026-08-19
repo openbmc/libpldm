@@ -45,6 +45,8 @@ Change categories:
 - platform: Fix data-field typo in PDR decoder doc comments
 - dsp: platform: Reject a `compositeEffecterCount` of zero in
   `decode_set_state_effecter_states_req()`
+- dsp: platform: Reject a NULL `field` argument in
+  `encode_get_state_sensor_readings_resp()`
 
 ### Security
 
