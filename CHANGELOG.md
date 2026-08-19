@@ -43,6 +43,8 @@ Change categories:
 - dsp: platform: Add const modifier to the pdr argument of
   pldm_platform_redfish_action_pdr_action_iter_init
 - platform: Fix data-field typo in PDR decoder doc comments
+- dsp: platform: Reject a `compositeEffecterCount` of zero in
+  `decode_set_state_effecter_states_req()`
 
 ### Security
 
