@@ -20,6 +20,9 @@ Change categories:
 ### Added
 
 - fru: New constants for additional bound on GetFRURecordTable payload size
+- dsp: platform: Add `encode_pldm_platform_state_sensor_pdr()`,
+  `encode_pldm_platform_state_sensor_possible_states()` and their PDR structs
+  (DSP0248 v1.3.0)
 - libpldm++ support for fw update pkg v1.1.0
 - libpldm++ support for fw update pkg v1.2.0
 - libpldm++ support for fw update pkg v1.3.0

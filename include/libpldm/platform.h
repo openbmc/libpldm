@@ -123,6 +123,29 @@ enum pldm_platform_transfer_flag {
 	 PLDM_PDR_NUMERIC_EFFECTER_PDR_VARIED_EFFECTER_DATA_SIZE_MIN_LENGTH +  \
 	 PLDM_PDR_NUMERIC_EFFECTER_PDR_VARIED_RANGE_FIELD_MIN_LENGTH)
 
+/*
+ * Minimum length of state sensor PDR, including the 10-byte common PDR
+ * header, PLDMTerminusHandle, sensorID, entityType, entityInstanceNumber,
+ * containerID, sensorInit, sensorAuxiliaryNamesPDR and compositeSensorCount
+ * in `Table 81 - State Sensor PDR` of DSP0248 v1.3.0. The variable
+ * possible_states[] array that follows is not covered by this minimum.
+ */
+#define PLDM_PLATFORM_STATE_SENSOR_PDR_MIN_LENGTH 23
+
+/*
+ * Minimum length of one possible_states[] entry of the state sensor PDR,
+ * covering stateSetID and possibleStatesSize in `Table 81 - State Sensor PDR`
+ * of DSP0248 v1.3.0. The possibleStates bitfield that follows is not covered
+ * by this minimum.
+ */
+#define PLDM_PLATFORM_STATE_SENSOR_POSSIBLE_STATES_MIN_LENGTH 3
+
+/*
+ * Maximum compositeSensorCount of the state sensor PDR in
+ * `Table 81 - State Sensor PDR` of DSP0248 v1.3.0.
+ */
+#define PLDM_PLATFORM_STATE_SENSOR_MAX_COMPOSITE_COUNT 8
+
 /**
  * Minimum length of entity auxiliary name effecter PDR includes size of hdr,
  * entityType, entityInstanceNumber, entityContainerID, sharedNameCount and
@@ -853,6 +876,41 @@ struct pldm_value_pdr_hdr {
 	uint8_t type;
 	uint16_t record_change_num;
 	uint16_t length;
+};
+
+/** @struct pldm_platform_state_sensor_pdr
+ *
+ *  Structure representing the fixed portion of the State Sensor PDR defined in
+ *  `Table 81 - State Sensor PDR` of DSP0248 v1.3.0, up to and including
+ *  compositeSensorCount. The trailing variable-length possible_states[] array
+ *  is handled by the caller and is not represented here.
+ *
+ *  This is the unpacked representation exchanged with
+ *  encode_pldm_platform_state_sensor_pdr(); see @ref pldm_state_sensor_pdr for
+ *  the legacy packed representation.
+ */
+struct pldm_platform_state_sensor_pdr {
+	struct pldm_value_pdr_hdr hdr;
+	uint16_t terminus_handle;
+	uint16_t sensor_id;
+	uint16_t entity_type;
+	uint16_t entity_instance_number;
+	uint16_t container_id;
+	uint8_t sensor_init;
+	bool8_t sensor_auxiliary_names_pdr;
+	uint8_t composite_sensor_count;
+};
+
+/** @struct pldm_platform_state_sensor_possible_states
+ *
+ *  Structure representing the fixed fields of one possible_states entry of the
+ *  State Sensor PDR defined in `Table 81 - State Sensor PDR` of DSP0248 v1.3.0,
+ *  up to and including possibleStatesSize. The trailing variable-length states[]
+ *  bitfield array is handled by the caller and is not represented here.
+ */
+struct pldm_platform_state_sensor_possible_states {
+	uint16_t state_set_id;
+	uint8_t possible_states_size;
 };
 
 /** @struct pldm_numeric_sensor_value_pdr
@@ -2312,6 +2370,61 @@ int decode_numeric_sensor_data(const uint8_t *sensor_data,
 int decode_numeric_sensor_pdr_data(
 	const void *pdr_data, size_t pdr_data_length,
 	struct pldm_numeric_sensor_value_pdr *pdr_value);
+
+/** @brief Encode State Sensor PDR data
+ *
+ *  Encodes the fixed portion of a State Sensor PDR as defined in
+ *  `Table 81 - State Sensor PDR` of DSP0248 v1.3.0, up to and including
+ *  compositeSensorCount, from @ref pldm_platform_state_sensor_pdr. The
+ *  variable-length possible_states[] array that follows compositeSensorCount
+ *  is not encoded here; append one entry per composite sensor with
+ *  encode_pldm_platform_state_sensor_possible_states(), starting at @p data
+ *  advanced by the returned @p data_len.
+ *
+ *  hdr.length is encoded as supplied. Since the per-entry possibleStatesSize
+ *  values are not visible here, it is range checked against the smallest and
+ *  largest encoding of compositeSensorCount entries rather than matched
+ *  exactly.
+ *
+ *  @param[in] pdr - unpacked state sensor PDR struct (fixed fields)
+ *  @param[out] data - buffer to receive the encoded PDR data
+ *  @param[in,out] data_len - on entry the length of @p data, on success the
+ *                            number of bytes written
+ *  @return 0 on success, otherwise a negative errno value:
+ *          -EINVAL - @p pdr, @p data or @p data_len is NULL, pdr->hdr.length
+ *                    is out of range, or pdr->composite_sensor_count is
+ *                    outside 1..PLDM_PLATFORM_STATE_SENSOR_MAX_COMPOSITE_COUNT
+ *          -EOVERFLOW - @p data is shorter than the fixed portion
+ */
+int encode_pldm_platform_state_sensor_pdr(
+	const struct pldm_platform_state_sensor_pdr *pdr, void *data,
+	size_t *data_len);
+
+/**
+ * @brief Encode one possible_states entry of a State Sensor PDR
+ *
+ * Encodes stateSetID, possibleStatesSize and the possibleStates bitfield of
+ * one composite sensor entry of `Table 81 - State Sensor PDR` of DSP0248
+ * v1.3.0. Call once per composite sensor, appending each entry after the
+ * fixed portion written by encode_pldm_platform_state_sensor_pdr().
+ *
+ * @param[in]     states          - Fixed fields of the entry.
+ * @param[in]     possible_states - The possibleStates bitfield. Its length
+ *                                  must equal states->possible_states_size.
+ * @param[out]    data            - Buffer to receive the encoded entry.
+ * @param[in,out] data_len        - On entry the length of @p data, on success
+ *                                  the number of bytes written.
+ *
+ * @retval  0          - Success.
+ * @retval -EINVAL     - Invalid input pointers, states->possible_states_size
+ *                       is zero, or possible_states->length does not equal
+ *                       states->possible_states_size.
+ * @retval -EOVERFLOW  - Buffer too small for entry.
+ */
+int encode_pldm_platform_state_sensor_possible_states(
+	const struct pldm_platform_state_sensor_possible_states *states,
+	const struct variable_field *possible_states, void *data,
+	size_t *data_len);
 
 /* GetNumericEffecterValue */
 
