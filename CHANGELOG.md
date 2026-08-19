@@ -47,6 +47,8 @@ Change categories:
   `decode_set_state_effecter_states_req()`
 - dsp: platform: Reject a NULL `field` argument in
   `encode_get_state_sensor_readings_resp()`
+- dsp: platform: Avoid unaligned loads of caller-provided sensor and effecter
+  values
 
 ### Security
 
