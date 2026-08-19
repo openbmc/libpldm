@@ -902,7 +902,8 @@ int encode_get_state_sensor_readings_resp(uint8_t instance_id,
 		return PLDM_ERROR_INVALID_DATA;
 	}
 
-	if (comp_sensor_count < 0x1 || comp_sensor_count > 0x8) {
+	if (field == NULL || comp_sensor_count < 0x1 ||
+	    comp_sensor_count > 0x8) {
 		return PLDM_ERROR_INVALID_DATA;
 	}
 
