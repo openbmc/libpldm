@@ -191,6 +191,39 @@ TEST(SetStateEffecterStates, testBadDecodeRequest)
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
 }
 
+TEST(SetStateEffecterStates, testBadDecodeRequestCompEffecterCount)
+{
+    // DSP0248 Table 52: compositeEffecterCount value is 0x01 to 0x08
+    uint16_t retEffecterId = 0;
+    uint8_t retCompEffecterCnt = 0;
+    std::array<set_effecter_state_field, 8> retStateField{};
+
+    std::array<uint8_t, hdrSize + PLDM_SET_STATE_EFFECTER_STATES_REQ_BYTES>
+        requestMsg{};
+
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+    auto request = reinterpret_cast<pldm_msg*>(requestMsg.data());
+
+    // compositeEffecterCount below the lower bound
+    request->payload[0] = 0x42;
+    request->payload[1] = 0x00;
+    request->payload[2] = 0x00;
+
+    auto rc = decode_set_state_effecter_states_req(
+        request, 3, &retEffecterId, &retCompEffecterCnt, retStateField.data());
+
+    EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
+
+    // compositeEffecterCount above the upper bound
+    request->payload[2] = 0x09;
+
+    rc = decode_set_state_effecter_states_req(
+        request, PLDM_SET_STATE_EFFECTER_STATES_REQ_BYTES, &retEffecterId,
+        &retCompEffecterCnt, retStateField.data());
+
+    EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
+}
+
 TEST(SetStateEffecterStates, testBadDecodeResponse)
 {
     std::array<uint8_t, PLDM_SET_STATE_EFFECTER_STATES_RESP_BYTES>
