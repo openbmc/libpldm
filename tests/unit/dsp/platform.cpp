@@ -5171,6 +5171,283 @@ TEST(decodeNumericSensorPdrDataDeathTest, InvalidSizeTest)
 }
 
 #if HAVE_LIBPLDM_API_TESTING
+TEST(encodePldmPlatformStateSensorPdr, GoodTest)
+{
+    const std::vector<uint8_t> expected{
+        0x1,
+        0x0,
+        0x0,
+        0x0,                   // record handle = 1
+        0x1,                   // PDRHeaderVersion
+        PLDM_STATE_SENSOR_PDR, // PDRType
+        0x0,
+        0x0, // recordChangeNumber
+        0x15,
+        0x0, // dataLength = 21 (bytes after the 10-byte header)
+        0x2,
+        0x0, // PLDMTerminusHandle = 2
+        0x3,
+        0x0, // sensorID = 3
+        PLDM_ENTITY_POWER_SUPPLY,
+        0x0, // entityType = Power Supply(120)
+        0x1,
+        0x0, // entityInstanceNumber = 1
+        0x4,
+        0x0,          // containerID = 4
+        PLDM_NO_INIT, // sensorInit
+        false,        // sensorAuxiliaryNamesPDR
+        0x2,          // compositeSensorCount = 2
+        // composite sensor 0: stateSetID=1 (Health), 1 byte of states
+        0x1,
+        0x0,
+        0x1,
+        0x0e,
+        // composite sensor 1: stateSetID=13 (Presence), 1 byte of states
+        0xd,
+        0x0,
+        0x1,
+        0x06,
+    };
+
+    struct pldm_platform_state_sensor_pdr pdr = {};
+    pdr.hdr.record_handle = 1;
+    pdr.hdr.version = 1;
+    pdr.hdr.type = PLDM_STATE_SENSOR_PDR;
+    pdr.hdr.record_change_num = 0;
+    pdr.hdr.length = 21;
+    pdr.terminus_handle = 2;
+    pdr.sensor_id = 3;
+    pdr.entity_type = PLDM_ENTITY_POWER_SUPPLY;
+    pdr.entity_instance_number = 1;
+    pdr.container_id = 4;
+    pdr.sensor_init = PLDM_NO_INIT;
+    pdr.sensor_auxiliary_names_pdr = false;
+    pdr.composite_sensor_count = 2;
+
+    std::vector<uint8_t> encoded(expected.size());
+    size_t offset = 0;
+    size_t len = encoded.size();
+
+    ASSERT_EQ(
+        0, encode_pldm_platform_state_sensor_pdr(&pdr, encoded.data(), &len));
+    EXPECT_EQ(PLDM_PLATFORM_STATE_SENSOR_PDR_MIN_LENGTH, len);
+    offset += len;
+
+    const uint8_t health = 0x0e;
+    struct pldm_platform_state_sensor_possible_states states = {};
+    struct variable_field bits = {};
+
+    states.state_set_id = 1;
+    states.possible_states_size = 1;
+    bits.ptr = &health;
+    bits.length = 1;
+
+    len = encoded.size() - offset;
+    ASSERT_EQ(0, encode_pldm_platform_state_sensor_possible_states(
+                     &states, &bits, encoded.data() + offset, &len));
+    EXPECT_EQ(PLDM_PLATFORM_STATE_SENSOR_POSSIBLE_STATES_MIN_LENGTH + 1u, len);
+    offset += len;
+
+    const uint8_t presence = 0x06;
+
+    states.state_set_id = 13;
+    states.possible_states_size = 1;
+    bits.ptr = &presence;
+    bits.length = 1;
+
+    len = encoded.size() - offset;
+    ASSERT_EQ(0, encode_pldm_platform_state_sensor_possible_states(
+                     &states, &bits, encoded.data() + offset, &len));
+    EXPECT_EQ(PLDM_PLATFORM_STATE_SENSOR_POSSIBLE_STATES_MIN_LENGTH + 1u, len);
+    offset += len;
+
+    EXPECT_EQ(expected.size(), offset);
+    EXPECT_EQ(expected, encoded);
+}
+
+TEST(encodePldmPlatformStateSensorPdr, InvalidArgTest)
+{
+    std::vector<uint8_t> encoded(PLDM_PLATFORM_STATE_SENSOR_PDR_MIN_LENGTH);
+    struct pldm_platform_state_sensor_pdr pdr = {};
+    size_t len = encoded.size();
+
+    pdr.hdr.length = 21;
+    pdr.composite_sensor_count = 2;
+
+    EXPECT_EQ(-EINVAL, encode_pldm_platform_state_sensor_pdr(
+                           nullptr, encoded.data(), &len));
+    EXPECT_EQ(-EINVAL,
+              encode_pldm_platform_state_sensor_pdr(&pdr, nullptr, &len));
+    EXPECT_EQ(-EINVAL, encode_pldm_platform_state_sensor_pdr(
+                           &pdr, encoded.data(), nullptr));
+}
+
+TEST(encodePldmPlatformStateSensorPdr, InvalidCompositeSensorCountTest)
+{
+    std::vector<uint8_t> encoded(PLDM_PLATFORM_STATE_SENSOR_PDR_MIN_LENGTH);
+    struct pldm_platform_state_sensor_pdr pdr = {};
+    size_t len = encoded.size();
+
+    pdr.hdr.length = 21;
+    pdr.composite_sensor_count = 0;
+    EXPECT_EQ(-EINVAL, encode_pldm_platform_state_sensor_pdr(
+                           &pdr, encoded.data(), &len));
+
+    pdr.composite_sensor_count =
+        PLDM_PLATFORM_STATE_SENSOR_MAX_COMPOSITE_COUNT + 1;
+    EXPECT_EQ(-EINVAL, encode_pldm_platform_state_sensor_pdr(
+                           &pdr, encoded.data(), &len));
+}
+
+TEST(encodePldmPlatformStateSensorPdr, InvalidDataLengthTest)
+{
+    std::vector<uint8_t> encoded(PLDM_PLATFORM_STATE_SENSOR_PDR_MIN_LENGTH);
+    struct pldm_platform_state_sensor_pdr pdr = {};
+    size_t len = encoded.size();
+
+    pdr.composite_sensor_count = 2;
+
+    pdr.hdr.length = 20;
+    EXPECT_EQ(-EINVAL, encode_pldm_platform_state_sensor_pdr(
+                           &pdr, encoded.data(), &len));
+
+    pdr.hdr.length = 530;
+    EXPECT_EQ(-EINVAL, encode_pldm_platform_state_sensor_pdr(
+                           &pdr, encoded.data(), &len));
+}
+
+TEST(encodePldmPlatformStateSensorPdr, ShortBufferTest)
+{
+    std::vector<uint8_t> encoded(PLDM_PLATFORM_STATE_SENSOR_PDR_MIN_LENGTH - 1);
+    struct pldm_platform_state_sensor_pdr pdr = {};
+    size_t len = encoded.size();
+
+    pdr.hdr.length = 21;
+    pdr.composite_sensor_count = 2;
+
+    EXPECT_EQ(-EOVERFLOW, encode_pldm_platform_state_sensor_pdr(
+                              &pdr, encoded.data(), &len));
+}
+
+TEST(encodePldmPlatformStateSensorPossibleStates, GoodTest)
+{
+    const std::vector<uint8_t> expected{
+        0xd,
+        0x0, // stateSetID = 13 (Presence)
+        0x2, // possibleStatesSize = 2
+        0x06,
+        0x01, // possibleStates
+    };
+
+    const std::array<uint8_t, 2> bytes{0x06, 0x01};
+    struct pldm_platform_state_sensor_possible_states states = {};
+    struct variable_field bits = {};
+
+    states.state_set_id = 13;
+    states.possible_states_size = 2;
+    bits.ptr = bytes.data();
+    bits.length = bytes.size();
+
+    std::vector<uint8_t> encoded(expected.size());
+    size_t len = encoded.size();
+
+    ASSERT_EQ(0, encode_pldm_platform_state_sensor_possible_states(
+                     &states, &bits, encoded.data(), &len));
+    EXPECT_EQ(expected.size(), len);
+    EXPECT_EQ(expected, encoded);
+}
+
+TEST(encodePldmPlatformStateSensorPossibleStates, InvalidArgTest)
+{
+    const uint8_t byte = 0x0e;
+    struct pldm_platform_state_sensor_possible_states states = {};
+    struct variable_field bits = {};
+    std::vector<uint8_t> encoded(
+        PLDM_PLATFORM_STATE_SENSOR_POSSIBLE_STATES_MIN_LENGTH + 1);
+    size_t len = encoded.size();
+
+    states.state_set_id = 1;
+    states.possible_states_size = 1;
+    bits.ptr = &byte;
+    bits.length = 1;
+
+    EXPECT_EQ(-EINVAL, encode_pldm_platform_state_sensor_possible_states(
+                           nullptr, &bits, encoded.data(), &len));
+    EXPECT_EQ(-EINVAL, encode_pldm_platform_state_sensor_possible_states(
+                           &states, nullptr, encoded.data(), &len));
+    EXPECT_EQ(-EINVAL, encode_pldm_platform_state_sensor_possible_states(
+                           &states, &bits, nullptr, &len));
+    EXPECT_EQ(-EINVAL, encode_pldm_platform_state_sensor_possible_states(
+                           &states, &bits, encoded.data(), nullptr));
+
+    struct variable_field noPtr = {};
+    noPtr.ptr = nullptr;
+    noPtr.length = 1;
+    EXPECT_EQ(-EINVAL, encode_pldm_platform_state_sensor_possible_states(
+                           &states, &noPtr, encoded.data(), &len));
+}
+
+TEST(encodePldmPlatformStateSensorPossibleStates, ZeroSizeTest)
+{
+    struct pldm_platform_state_sensor_possible_states states = {};
+    struct variable_field bits = {};
+    std::vector<uint8_t> encoded(
+        PLDM_PLATFORM_STATE_SENSOR_POSSIBLE_STATES_MIN_LENGTH);
+    size_t len = encoded.size();
+
+    states.state_set_id = 13;
+    states.possible_states_size = 0;
+
+    bits.ptr = nullptr;
+    bits.length = 0;
+    EXPECT_EQ(-EINVAL, encode_pldm_platform_state_sensor_possible_states(
+                           &states, &bits, encoded.data(), &len));
+
+    const uint8_t byte = 0x0e;
+    bits.ptr = &byte;
+    bits.length = 0;
+    EXPECT_EQ(-EINVAL, encode_pldm_platform_state_sensor_possible_states(
+                           &states, &bits, encoded.data(), &len));
+}
+
+TEST(encodePldmPlatformStateSensorPossibleStates, SizeMismatchTest)
+{
+    const std::array<uint8_t, 2> bytes{0x06, 0x01};
+    struct pldm_platform_state_sensor_possible_states states = {};
+    struct variable_field bits = {};
+    std::vector<uint8_t> encoded(
+        PLDM_PLATFORM_STATE_SENSOR_POSSIBLE_STATES_MIN_LENGTH + 2);
+    size_t len = encoded.size();
+
+    states.state_set_id = 13;
+    states.possible_states_size = 1;
+    bits.ptr = bytes.data();
+    bits.length = bytes.size();
+
+    EXPECT_EQ(-EINVAL, encode_pldm_platform_state_sensor_possible_states(
+                           &states, &bits, encoded.data(), &len));
+}
+
+TEST(encodePldmPlatformStateSensorPossibleStates, ShortBufferTest)
+{
+    const uint8_t byte = 0x0e;
+    struct pldm_platform_state_sensor_possible_states states = {};
+    struct variable_field bits = {};
+    std::vector<uint8_t> encoded(
+        PLDM_PLATFORM_STATE_SENSOR_POSSIBLE_STATES_MIN_LENGTH);
+    size_t len = encoded.size();
+
+    states.state_set_id = 1;
+    states.possible_states_size = 1;
+    bits.ptr = &byte;
+    bits.length = 1;
+
+    EXPECT_EQ(-EOVERFLOW, encode_pldm_platform_state_sensor_possible_states(
+                              &states, &bits, encoded.data(), &len));
+}
+#endif
+
+#if HAVE_LIBPLDM_API_TESTING
 TEST(decodeNumericEffecterPdrData, Uint8Test)
 {
     std::vector<uint8_t> pdr1{
