@@ -1072,6 +1072,22 @@ TEST(GetStateSensorReadings, testBadEncodeResponse)
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
 }
 
+TEST(GetStateSensorReadings, testBadEncodeResponseNullField)
+{
+    std::array<uint8_t, hdrSize +
+                            PLDM_GET_STATE_SENSOR_READINGS_MIN_RESP_BYTES +
+                            sizeof(get_sensor_state_field)>
+        responseMsg{};
+
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+    auto response = reinterpret_cast<pldm_msg*>(responseMsg.data());
+
+    auto rc = encode_get_state_sensor_readings_resp(0, PLDM_SUCCESS, 1, nullptr,
+                                                    response);
+
+    EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
+}
+
 TEST(GetStateSensorReadings, testGoodDecodeResponse)
 {
     std::array<uint8_t, hdrSize +
