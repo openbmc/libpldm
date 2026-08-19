@@ -3563,7 +3563,7 @@ TEST(GetSensorReading, testGoodEncodeResponse)
     auto response = reinterpret_cast<pldm_msg*>(responseMsg.data());
 
     uint8_t completionCode = 0;
-    uint8_t sensor_dataSize = PLDM_EFFECTER_DATA_SIZE_UINT8;
+    uint8_t sensor_dataSize = PLDM_SENSOR_DATA_SIZE_UINT8;
     uint8_t sensor_operationalState = PLDM_SENSOR_ENABLED;
     uint8_t sensor_event_messageEnable = PLDM_NO_EVENT_GENERATION;
     uint8_t presentState = PLDM_SENSOR_NORMAL;
@@ -3663,7 +3663,7 @@ TEST(GetSensorReading, testBadEncodeResponse)
         responseMsg.size() - hdrSize);
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
 
-    uint8_t sensor_dataSize = PLDM_EFFECTER_DATA_SIZE_UINT8;
+    uint8_t sensor_dataSize = PLDM_SENSOR_DATA_SIZE_UINT8;
 
     rc = encode_get_sensor_reading_resp(
         0, PLDM_SUCCESS, sensor_dataSize, 1, 1, 1, 1, 1,
@@ -3679,7 +3679,7 @@ TEST(GetSensorReading, testGoodDecodeResponse)
         responseMsg{};
 
     uint8_t completionCode = 0;
-    uint8_t sensor_dataSize = PLDM_EFFECTER_DATA_SIZE_UINT32;
+    uint8_t sensor_dataSize = PLDM_SENSOR_DATA_SIZE_UINT32;
     uint8_t sensor_operationalState = PLDM_SENSOR_STATUSUNKOWN;
     uint8_t sensor_event_messageEnable = PLDM_EVENTS_ENABLED;
     uint8_t presentState = PLDM_SENSOR_CRITICAL;
@@ -3746,7 +3746,7 @@ TEST(GetSensorReading, testBadDecodeResponse)
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
 
     uint8_t completionCode = 0;
-    uint8_t sensor_dataSize = PLDM_EFFECTER_DATA_SIZE_UINT8;
+    uint8_t sensor_dataSize = PLDM_SENSOR_DATA_SIZE_UINT8;
     uint8_t sensor_operationalState = PLDM_SENSOR_INTEST;
     uint8_t sensor_event_messageEnable = PLDM_EVENTS_DISABLED;
     uint8_t presentState = PLDM_SENSOR_FATAL;
