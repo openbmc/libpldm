@@ -469,6 +469,27 @@ int get_fru_record_by_option(const uint8_t *table, size_t table_size,
 
 /* SetFruRecordTable */
 
+/** @brief Create a PLDM request message for SetFruRecordTable
+ *
+ *  @param[in] instance_id - Message's instance id
+ *  @param[in] data_transfer_handle - A handle used to identify a FRU Record
+ *                                    Table data transfer
+ *  @param[in] transfer_flag - Flag to indicate what part of the transfer this
+ *                             request represents
+ *  @param[in] fru_table_data - Pointer to the section of the FRU Record Table
+ *                              being transferred in this request
+ *  @param[in] fru_table_length - Length of the FRU Record Table section
+ *  @param[in,out] msg - Message will be written to this
+ *  @param[in] payload_length - Length of request message payload
+ *  @return pldm_completion_codes
+ *  @note  Caller is responsible for memory alloc and dealloc of param
+ *         'msg.payload'
+ */
+int encode_set_fru_record_table_req(
+	uint8_t instance_id, uint32_t data_transfer_handle,
+	uint8_t transfer_flag, const uint8_t *fru_table_data,
+	size_t fru_table_length, struct pldm_msg *msg, size_t payload_length);
+
 /** @brief Decode SetFruRecordTable request data
  *
  *  @param[in] msg - PLDM request message payload
@@ -502,6 +523,20 @@ int encode_set_fru_record_table_resp(uint8_t instance_id,
 				     uint32_t next_data_transfer_handle,
 				     size_t payload_length,
 				     struct pldm_msg *msg);
+
+/** @brief Decode SetFruRecordTable response data
+ *
+ *  @param[in] msg - Response message
+ *  @param[in] payload_length - Length of response message payload
+ *  @param[out] completion_code - Pointer to response msg's PLDM completion code
+ *  @param[out] next_data_transfer_handle - A handle used to identify the next
+ *                                          portion of the transfer
+ *  @return pldm_completion_codes
+ */
+int decode_set_fru_record_table_resp(const struct pldm_msg *msg,
+				     size_t payload_length,
+				     uint8_t *completion_code,
+				     uint32_t *next_data_transfer_handle);
 
 #ifdef __cplusplus
 }
