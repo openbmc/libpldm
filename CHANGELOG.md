@@ -19,6 +19,8 @@ Change categories:
 
 ### Added
 
+- dsp: fru: Introduce `encode_set_fru_record_table_req()`
+- dsp: fru: Introduce `decode_set_fru_record_table_resp()`
 - libpldm++ support for fw update pkg v1.1.0
 - libpldm++ support for fw update pkg v1.2.0
 - libpldm++ support for fw update pkg v1.3.0
