@@ -1,4 +1,5 @@
 #include <endian.h>
+#include <libpldm/api.h>
 #include <libpldm/base.h>
 #include <libpldm/fru.h>
 
@@ -989,6 +990,127 @@ TEST(SetFRURecordTable, testBadDecodeRequest)
         &retTransferHandle, &retTransferFlag, &table);
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_LENGTH);
 }
+
+#if HAVE_LIBPLDM_API_TESTING
+TEST(SetFRURecordTable, testGoodEncodeRequest)
+{
+    uint8_t instanceId = 2;
+    uint32_t dataTransferHandle = 32;
+    uint8_t transferFlag = PLDM_START_AND_END;
+    std::vector<uint8_t> fruTableData = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+
+    std::vector<uint8_t> requestMsg(sizeof(pldm_msg_hdr) +
+                                    PLDM_SET_FRU_RECORD_TABLE_MIN_REQ_BYTES +
+                                    fruTableData.size());
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+    auto request = reinterpret_cast<struct pldm_msg*>(requestMsg.data());
+    size_t payloadLength = requestMsg.size() - sizeof(pldm_msg_hdr);
+
+    auto rc = encode_set_fru_record_table_req(
+        instanceId, dataTransferHandle, transferFlag, fruTableData.data(),
+        fruTableData.size(), request, payloadLength);
+    EXPECT_EQ(rc, PLDM_SUCCESS);
+    EXPECT_EQ(request->hdr.request, PLDM_REQUEST);
+    EXPECT_EQ(request->hdr.instance_id, instanceId);
+    EXPECT_EQ(request->hdr.type, PLDM_FRU);
+    EXPECT_EQ(request->hdr.command, PLDM_SET_FRU_RECORD_TABLE);
+
+    struct pldm_set_fru_record_table_req* req =
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+        reinterpret_cast<struct pldm_set_fru_record_table_req*>(
+            request->payload);
+    EXPECT_EQ(htole32(dataTransferHandle), req->data_transfer_handle);
+    EXPECT_EQ(transferFlag, req->transfer_flag);
+    EXPECT_EQ(0, memcmp(req->fru_record_table_data, fruTableData.data(),
+                        fruTableData.size()));
+}
+
+TEST(SetFRURecordTable, testBadEncodeRequest)
+{
+    uint8_t instanceId = 0;
+    uint32_t dataTransferHandle = 0;
+    uint8_t transferFlag = PLDM_START_AND_END;
+    std::vector<uint8_t> fruTableData = {1, 2, 3, 4};
+
+    std::vector<uint8_t> requestMsg(sizeof(pldm_msg_hdr) +
+                                    PLDM_SET_FRU_RECORD_TABLE_MIN_REQ_BYTES +
+                                    fruTableData.size());
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+    auto request = reinterpret_cast<struct pldm_msg*>(requestMsg.data());
+    size_t payloadLength = requestMsg.size() - sizeof(pldm_msg_hdr);
+
+    // Message buffer is NULL
+    auto rc = encode_set_fru_record_table_req(
+        instanceId, dataTransferHandle, transferFlag, fruTableData.data(),
+        fruTableData.size(), NULL, payloadLength);
+    EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
+
+    // FRU table data is NULL
+    rc = encode_set_fru_record_table_req(
+        instanceId, dataTransferHandle, transferFlag, NULL, fruTableData.size(),
+        request, payloadLength);
+    EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
+
+    // Payload length too small to hold the FRU table data
+    rc = encode_set_fru_record_table_req(
+        instanceId, dataTransferHandle, transferFlag, fruTableData.data(),
+        fruTableData.size(), request, PLDM_SET_FRU_RECORD_TABLE_MIN_REQ_BYTES);
+    EXPECT_EQ(rc, PLDM_ERROR_INVALID_LENGTH);
+}
+
+TEST(SetFRURecordTable, testGoodDecodeResponse)
+{
+    uint8_t completionCode = PLDM_SUCCESS;
+    uint32_t nextDataTransferHandle = 0x16;
+
+    std::array<uint8_t,
+               sizeof(pldm_msg_hdr) + PLDM_SET_FRU_RECORD_TABLE_RESP_BYTES>
+        responseMsg{};
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+    auto responsePtr = reinterpret_cast<pldm_msg*>(responseMsg.data());
+    size_t payloadLength = responseMsg.size() - sizeof(pldm_msg_hdr);
+
+    struct pldm_set_fru_record_table_resp* response =
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+        reinterpret_cast<struct pldm_set_fru_record_table_resp*>(
+            responsePtr->payload);
+    response->completion_code = completionCode;
+    response->next_data_transfer_handle = htole32(nextDataTransferHandle);
+
+    uint8_t retCompletionCode = 0;
+    uint32_t retNextDataTransferHandle = 0;
+
+    auto rc = decode_set_fru_record_table_resp(responsePtr, payloadLength,
+                                               &retCompletionCode,
+                                               &retNextDataTransferHandle);
+    EXPECT_EQ(rc, PLDM_SUCCESS);
+    EXPECT_EQ(completionCode, retCompletionCode);
+    EXPECT_EQ(nextDataTransferHandle, retNextDataTransferHandle);
+}
+
+TEST(SetFRURecordTable, testBadDecodeResponse)
+{
+    std::array<uint8_t,
+               sizeof(pldm_msg_hdr) + PLDM_SET_FRU_RECORD_TABLE_RESP_BYTES>
+        responseMsg{};
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+    auto responsePtr = reinterpret_cast<pldm_msg*>(responseMsg.data());
+
+    uint8_t retCompletionCode = 0;
+    uint32_t retNextDataTransferHandle = 0;
+
+    // Response message is NULL
+    auto rc = decode_set_fru_record_table_resp(
+        NULL, PLDM_SET_FRU_RECORD_TABLE_RESP_BYTES, &retCompletionCode,
+        &retNextDataTransferHandle);
+    EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
+
+    // Completion code is SUCCESS (zero-init) but payload length is invalid
+    rc = decode_set_fru_record_table_resp(responsePtr, 0, &retCompletionCode,
+                                          &retNextDataTransferHandle);
+    EXPECT_EQ(rc, PLDM_ERROR_INVALID_LENGTH);
+}
+#endif
 
 TEST(GetFruRecordByOption, badArgs)
 {
