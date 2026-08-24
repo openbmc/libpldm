@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "80142fa8_5eb1e68e",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 2378,
+      "author": {
+        "id": 1002810
+      },
+      "writtenOn": "2026-08-24T04:06:32Z",
+      "side": 1,
+      "message": "hdr.length isn\u0027t validated here, while the sibling file_descriptor_pdr encoder does validate it. Worth aligning the two for consistency.",
+      "revId": "10452525d1963e71b645bc211c6a626fff795e4d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "84e58bd4_7c7a2139",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1962,
+      "author": {
+        "id": 1002810
+      },
+      "writtenOn": "2026-08-24T04:06:32Z",
+      "side": 1,
+      "message": "ptr is still required non-null when size is 0. Worth adding a test case for that.",
+      "revId": "10452525d1963e71b645bc211c6a626fff795e4d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "764be107_e05f91ad",
+        "filename": "tests/fuzz/fuzz.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 615,
+      "author": {
+        "id": 1002810
+      },
+      "writtenOn": "2026-08-24T04:06:32Z",
+      "side": 1,
+      "message": "size and length are currently drawn independently. Deriving them from the same value would let the fuzzer exercise the actual copy path more often.",
+      "revId": "10452525d1963e71b645bc211c6a626fff795e4d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
