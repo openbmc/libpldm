@@ -18,6 +18,8 @@ enum ibm_oem_pldm_state_set_ids {
 	PLDM_OEM_IBM_PCIE_SLOT_EFFECTER_STATE = 32779,
 	PLDM_OEM_IBM_PCIE_SLOT_SENSOR_STATE = 32780,
 	PLDM_OEM_IBM_PCIE_TOPOLOGY_ACTIONS = 32781,
+	PLDM_OEM_IBM_NEXT_BOOT_SIDE = 32782,
+	PLDM_OEM_IBM_CURRENT_BOOT_SIDE = 32783,
 };
 
 enum pldm_oem_ibm_pcie_slot_effecter_state {
@@ -78,6 +80,11 @@ enum pldm_oem_ibm_pcie_topology_actions {
 enum pldm_oem_ibm_boot_side_rename_state {
 	PLDM_OEM_IBM_BOOT_SIDE_RENAME_STATE_NOT_RENAMED = 0x1,
 	PLDM_OEM_IBM_BOOT_SIDE_RENAME_STATE_RENAMED = 0x2,
+};
+
+enum ibm_oem_pldm_state_set_boot_side_values {
+	PERM = 0x1,
+	TEMP = 0x2,
 };
 
 #ifdef __cplusplus
