@@ -19,6 +19,9 @@ Change categories:
 
 ### Added
 
+- oem: ibm: state_set: Add `PLDM_OEM_IBM_NEXT_BOOT_SIDE` and
+  `PLDM_OEM_IBM_CURRENT_BOOT_SIDE` state set IDs with
+  `ibm_oem_pldm_state_set_boot_side_values` enum (`PERM`, `TEMP`)
 - libpldm++ support for fw update pkg v1.1.0
 - libpldm++ support for fw update pkg v1.2.0
 - libpldm++ support for fw update pkg v1.3.0
