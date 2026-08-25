@@ -20,104 +20,67 @@ namespace fw_update
 {
 
 #if HAVE_LIBPLDM_API_TESTING
+static void
+    appendDownstreamDeviceIDRecord(std::vector<uint8_t>& pkg,
+                                   uint8_t downstreamApplicableComponents)
+{
+    const size_t recordLengthOffset = pkg.size();
+    appendLE16(pkg, PLACEHOLDER); // DownstreamDeviceRecordLength
+    pkg.push_back(0x01);          // DownstreamDeviceDescriptorCount
+    appendLE32(pkg, 0x01);        // DownstreamDeviceUpdateOptionFlags
+    pkg.push_back(0x01);          // Minimum version string type: ASCII
+    pkg.push_back(0x0E);          // Minimum version string length
+    appendLE16(pkg, 0x03);        // DownstreamDevicePackageDataLength
+    appendLE32(pkg, 0x08);        // DownstreamDeviceReferenceManifestLength
+    pkg.push_back(downstreamApplicableComponents);
+    appendString(pkg, "VersionString1");
+    appendLE32(pkg, 0x0a090a09); // Minimum version comparison stamp
+
+    appendDescriptorTLV(pkg, PLDM_FWUP_UUID,
+                        {0x16, 0x20, 0x23, 0xC9, 0x3E, 0xC5, 0x41, 0x15, 0x95,
+                         0xF4, 0x48, 0x70, 0x1D, 0x49, 0xD6, 0x75});
+
+    // DownstreamDevicePackageData
+    const std::vector<uint8_t> packageData{0xde, 0xde, 0xfe};
+    pkg.insert(pkg.end(), packageData.begin(), packageData.end());
+
+    // DownstreamDeviceReferenceManifestData: PCI-SIG vendor ID and manifest
+    const std::vector<uint8_t> manifestData{0x03, 0x02, 0x1d, 0xa0,
+                                            0x31, 0x32, 0x33, 0x34};
+    pkg.insert(pkg.end(), manifestData.begin(), manifestData.end());
+
+    patchLE16(pkg, recordLengthOffset, pkg.size() - recordLengthOffset);
+}
+#endif
+
+#if HAVE_LIBPLDM_API_TESTING
 static std::vector<uint8_t>
     makePkgV1_3_0(uint8_t downstreamApplicableComponents = 0x01)
 {
-    std::vector<uint8_t> header;
+    std::vector<uint8_t> pkg;
+    appendPackageHeaderIdentifier(pkg, PackagePin::v1_3_0);
+    const size_t packageHeaderSizeOffset = pkg.size();
 
     // pkg header size, this is updated later
-    appendLE16(header, PLACEHOLDER);
+    appendLE16(pkg, PLACEHOLDER);
 
     // pkg release date time (13 bytes, timestamp104)
-    appendTimestamp104(header);
+    appendTimestamp104(pkg);
 
     // component bitmap bit length
-    appendLE16(header, 0x08);
+    appendLE16(pkg, 0x08);
 
     // package version string
-    appendTypeLengthString(header, "VersionString1");
-
-    std::vector<uint8_t> ddevidarea{};
-
-    // Downstream Device Identification Area
-
-    // DownstreamDeviceRecordLength
-    appendLE16(ddevidarea, PLACEHOLDER);
-
-    // DownstreamDeviceDescriptorCount
-    ddevidarea.push_back(0x01);
-
-    // DownstreamDeviceUpdateOptionFlags
-    appendLE32(ddevidarea, 0x01);
-
-    // DownstreamDeviceSelfContainedActivationMinVersionStringType
-    ddevidarea.push_back(0x01);
-
-    // DownstreamDeviceSelfContainedActivationMinVersionStringLength
-    ddevidarea.push_back(0x0E);
-
-    // DownstreamDevicePackageDataLength
-    appendLE16(ddevidarea, 0x03);
-
-    // DownstreamDeviceReferenceManifestLength
-    appendLE32(ddevidarea, 0x08);
-
-    // DownstreamDeviceApplicableComponents
-    ddevidarea.push_back(downstreamApplicableComponents);
-
-    // DownstreamDeviceSelfContainedActivationMinVersionString
-    appendString(ddevidarea, "VersionString1");
-
-    // DownstreamDeviceSelfContainedActivationMinVersionComparisonStamp
-    appendLE32(ddevidarea, 0x0a090a09);
-
-    // DownstreamDeviceRecordDescriptors
-    // record descriptors below
-
-    appendDescriptorTLV(ddevidarea, PLDM_FWUP_UUID,
-                        std::vector<uint8_t>{
-                            // clang-format off
-        0x16, 0x20, 0x23, 0xC9, 0x3E, 0xC5, 0x41, 0x15,
-        0x95, 0xF4, 0x48, 0x70, 0x1D, 0x49, 0xD6, 0x75,
-                            // clang-format on
-                        });
-
-    // DownstreamDevicePackageData
-    const std::vector<uint8_t> ddpd = {0xde, 0xde, 0xfe};
-    ddevidarea.insert(ddevidarea.end(), ddpd.begin(), ddpd.end());
-
-    // DownstreamDeviceReferenceManifestData (as per Table 10)
-    // SVHID,  (e.g. PCI SIG)
-    ddevidarea.push_back(0x03);
-
-    // VendorIDLen
-    ddevidarea.push_back(0x02);
-
-    // (e.g. 3M Company)
-    ddevidarea.push_back(0x1d);
-    ddevidarea.push_back(0xa0);
-
-    // actual manifest data (completely made up and without meaning)
-    const std::vector<uint8_t> rmd = {0x31, 0x32, 0x33, 0x34};
-    ddevidarea.insert(ddevidarea.end(), rmd.begin(), rmd.end());
-
-    // set DownstreamDeviceRecordLength
-    patchLE16(ddevidarea, 0, ddevidarea.size());
-
-    std::vector<uint8_t> pkg{};
-
-    appendPackageHeaderIdentifier(pkg, pldm::fw_update::PackagePin::v1_3_0);
-
-    const size_t packageHeaderSizeOffset = pkg.size();
-    pkg.insert(pkg.end(), header.begin(), header.end());
+    appendTypeLengthString(pkg, "VersionString1");
 
     // Firmware Device Identification Area
     pkg.push_back(0x01); // device id record count
     appendFirmwareDeviceIdRecord3(pkg);
 
+    // Downstream Device Identification Area
     // DownstreamDeviceIDRecordCount
     pkg.push_back(0x01);
-    pkg.insert(pkg.end(), ddevidarea.begin(), ddevidarea.end());
+    appendDownstreamDeviceIDRecord(pkg, downstreamApplicableComponents);
 
     const auto clos = appendComponentImageInfoArea1(pkg);
 
