@@ -35,78 +35,6 @@ static std::vector<uint8_t> makePkgV1_3_0()
     // package version string
     appendTypeLengthString(header, "VersionString1");
 
-    std::vector<uint8_t> ddevidarea{};
-
-    // Downstream Device Identification Area
-
-    // DownstreamDeviceRecordLength
-    appendLE16(ddevidarea, PLACEHOLDER);
-
-    // DownstreamDeviceDescriptorCount
-    ddevidarea.push_back(0x01);
-
-    // DownstreamDeviceUpdateOptionFlags
-    appendLE32(ddevidarea, 0x01);
-
-    // DownstreamDeviceSelfContainedActivationMinVersionStringType
-    ddevidarea.push_back(0x01);
-
-    // DownstreamDeviceSelfContainedActivationMinVersionStringLength
-    ddevidarea.push_back(0x0E);
-
-    // DownstreamDevicePackageDataLength
-    appendLE16(ddevidarea, 0x03);
-
-    // DownstreamDeviceReferenceManifestLength
-    appendLE32(ddevidarea, 0x08);
-
-    // DownstreamDeviceApplicableComponents
-    ddevidarea.push_back(0x01);
-
-    // DownstreamDeviceSelfContainedActivationMinVersionString
-    appendString(ddevidarea, "VersionString1");
-
-    // DownstreamDeviceSelfContainedActivationMinVersionComparisonStamp
-    appendLE32(ddevidarea, 0x0a090a09);
-
-    // DownstreamDeviceRecordDescriptors
-    // record descriptors below
-
-    // record 0: descriptor type: UUID
-    appendLE16(ddevidarea, 0x0002);
-
-    // record 0: InitialDescriptorLength (16 bytes)
-    appendLE16(ddevidarea, 0x0010);
-
-    // record 0: InitialDescriptorData (UUID)
-    const std::vector<uint8_t> idd = {
-        0x16, 0x20, 0x23, 0xC9, 0x3E, 0xC5, 0x41, 0x15,
-        0x95, 0xF4, 0x48, 0x70, 0x1D, 0x49, 0xD6, 0x75,
-    };
-    ddevidarea.insert(ddevidarea.end(), idd.begin(), idd.end());
-
-    // DownstreamDevicePackageData
-    const std::vector<uint8_t> ddpd = {0xde, 0xde, 0xfe};
-    ddevidarea.insert(ddevidarea.end(), ddpd.begin(), ddpd.end());
-
-    // DownstreamDeviceReferenceManifestData (as per Table 10)
-    // SVHID,  (e.g. PCI SIG)
-    ddevidarea.push_back(0x03);
-
-    // VendorIDLen
-    ddevidarea.push_back(0x02);
-
-    // (e.g. 3M Company)
-    ddevidarea.push_back(0x1d);
-    ddevidarea.push_back(0xa0);
-
-    // actual manifest data (completely made up and without meaning)
-    const std::vector<uint8_t> rmd = {0x31, 0x32, 0x33, 0x34};
-    ddevidarea.insert(ddevidarea.end(), rmd.begin(), rmd.end());
-
-    // set DownstreamDeviceRecordLength
-    patchLE16(ddevidarea, 0, ddevidarea.size());
-
     std::vector<uint8_t> pkg{};
 
     appendPackageHeaderIdentifier(pkg, pldm::fw_update::PackagePin::v1_3_0);
@@ -118,9 +46,10 @@ static std::vector<uint8_t> makePkgV1_3_0()
     pkg.push_back(0x01); // device id record count
     appendFirmwareDeviceIdRecord3(pkg);
 
+    // Downstream Device Identification Area
     // DownstreamDeviceIDRecordCount
     pkg.push_back(0x01);
-    pkg.insert(pkg.end(), ddevidarea.begin(), ddevidarea.end());
+    appendDownstreamDeviceIDRecords1(pkg);
 
     const auto clos = appendComponentImageInfoArea1(pkg);
 

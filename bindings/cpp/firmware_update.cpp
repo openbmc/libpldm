@@ -23,7 +23,7 @@ pldm::fw_update::PackageParserError::PackageParserError(std::string s, int rc)
 std::expected<void, std::string>
 pldm::fw_update::PackageParser::helperParseFDDescriptor(
 	struct pldm_descriptor *desc,
-	std::map<uint16_t, std::unique_ptr<pldm::fw_update::DescriptorData> >
+	std::multimap<uint16_t, std::unique_ptr<pldm::fw_update::DescriptorData> >
 		&descriptors) noexcept
 {
 	int rc;
@@ -147,7 +147,7 @@ pldm::fw_update::PackageParser::helperParseDownstreamDeviceIDRecord(
 	const auto refManifestData = getReferenceManifestData(
 		downstreamDeviceId.reference_manifest_data);
 
-	std::map<uint16_t, std::unique_ptr<pldm::fw_update::DescriptorData> >
+	std::multimap<uint16_t, std::unique_ptr<pldm::fw_update::DescriptorData> >
 		descriptors{};
 
 	struct pldm_descriptor desc;
@@ -190,6 +190,7 @@ static uint8_t pinMap(pldm::fw_update::PackagePin pin)
 	case pldm::fw_update::PackagePin::v1_2_0:
 		return PLDM_PACKAGE_HEADER_FORMAT_REVISION_FR03H;
 	case pldm::fw_update::PackagePin::v1_3_0:
+	case pldm::fw_update::PackagePin::v1_3_0_amend:
 		return PLDM_PACKAGE_HEADER_FORMAT_REVISION_FR04H;
 	}
 
@@ -243,7 +244,8 @@ pldm::fw_update::PackageParser::parse(const std::span<const uint8_t> &pkg,
 	int rc;
 
 	if (pin != PackagePin::v1 && pin != PackagePin::v1_1_0 &&
-	    pin != PackagePin::v1_2_0 && pin != PackagePin::v1_3_0) {
+	    pin != PackagePin::v1_2_0 && pin != PackagePin::v1_3_0 &&
+	    pin != PackagePin::v1_3_0_amend) {
 		return std::unexpected(
 			PackageParserError("unsupported format revision"));
 	}
@@ -271,7 +273,7 @@ pldm::fw_update::PackageParser::parse(const std::span<const uint8_t> &pkg,
 	foreach_pldm_package_firmware_device_id_record(package,
 						       deviceIdRecordData, rc)
 	{
-		std::map<uint16_t, std::unique_ptr<DescriptorData> >
+		std::multimap<uint16_t, std::unique_ptr<DescriptorData> >
 			descriptors{};
 		struct pldm_descriptor descriptorData;
 

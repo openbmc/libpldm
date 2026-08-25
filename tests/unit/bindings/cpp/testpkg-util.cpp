@@ -492,6 +492,62 @@ void appendFirmwareDeviceIdRecord3(std::vector<uint8_t>& pkg)
     patchLE16(pkg, recordLengthOffset, pkg.size() - recordLengthOffset);
 }
 
+void appendFirmwareDeviceIdRecord4(std::vector<uint8_t>& pkg)
+{
+    const size_t recordLengthOffset = pkg.size();
+    // record 0: record length
+    appendLE16(pkg, PLACEHOLDER);
+
+    // record 0: descriptor count
+    pkg.push_back(0x02);
+
+    appendLE32(pkg, 0x01);
+
+    // record 0: component image set version string type
+    pkg.push_back(0x01);
+
+    // record 0: component image set version string length
+    pkg.push_back(0x0E);
+
+    // record 0: firmware device package data length
+    appendLE16(pkg, 0x00);
+
+    // ReferenceManifestLength
+    appendLE32(pkg, 0x00);
+
+    // applicable components
+    pkg.push_back(0x01);
+
+    // component image set version string (14 bytes)
+    appendString(pkg, "VersionString2");
+
+    // record descriptors below
+    // record 0: descriptor type
+    appendLE16(pkg, PLDM_FWUP_IANA_ENTERPRISE_ID);
+
+    // InitialDescriptorLength
+    appendLE16(pkg, 4);
+
+    // record 0: InitialDescriptorData
+    const std::vector<uint8_t> initialDescriptorData{0xD6, 0x75, 0x02, 0x38};
+    pkg.insert(pkg.end(), initialDescriptorData.begin(),
+               initialDescriptorData.end());
+
+    // record 0: descriptor type
+    appendLE16(pkg, PLDM_FWUP_IANA_ENTERPRISE_ID);
+
+    // DescriptorLength
+    appendLE16(pkg, 4);
+
+    // record 0: InitialDescriptorData
+    const std::vector<uint8_t> initialDescriptorData2{0xD6, 0x77, 0x03, 0x39};
+    pkg.insert(pkg.end(), initialDescriptorData2.begin(),
+               initialDescriptorData2.end());
+
+    patchLE16(pkg, recordLengthOffset, pkg.size() - recordLengthOffset);
+    // firmware device package data (empty here)
+}
+
 static void appendFirmwareDeviceIdArea1Record0(std::vector<uint8_t>& pkg)
 {
     const size_t recordLengthOffset = pkg.size();
@@ -657,4 +713,151 @@ void appendFirmwareDeviceIdArea1(std::vector<uint8_t>& pkg)
     appendFirmwareDeviceIdArea1Record0(pkg);
     appendFirmwareDeviceIdArea1Record1(pkg);
     appendFirmwareDeviceIdArea1Record2(pkg);
+}
+
+static void appendDownstreamDeviceIDRecordPrefix(
+    std::vector<uint8_t>& pkg, const size_t descriptorCount,
+    const size_t downstreamDevicePackageDataLength)
+{
+    std::vector<uint8_t> ddevidarea{};
+
+    // DownstreamDeviceRecordLength
+    appendLE16(ddevidarea, PLACEHOLDER);
+
+    // DownstreamDeviceDescriptorCount
+    ddevidarea.push_back(descriptorCount);
+
+    // DownstreamDeviceUpdateOptionFlags
+    appendLE32(ddevidarea, 0x01);
+
+    // DownstreamDeviceSelfContainedActivationMinVersionStringType
+    ddevidarea.push_back(0x01);
+
+    // DownstreamDeviceSelfContainedActivationMinVersionStringLength
+    ddevidarea.push_back(0x0E);
+
+    // DownstreamDevicePackageDataLength
+    appendLE16(ddevidarea, downstreamDevicePackageDataLength);
+
+    // DownstreamDeviceReferenceManifestLength
+    appendLE32(ddevidarea, 0x08);
+
+    // DownstreamDeviceApplicableComponents
+    ddevidarea.push_back(0x01);
+
+    // DownstreamDeviceSelfContainedActivationMinVersionString
+    appendString(ddevidarea, "VersionString1");
+
+    // DownstreamDeviceSelfContainedActivationMinVersionComparisonStamp
+    appendLE32(ddevidarea, 0x0a090a09);
+
+    pkg.insert(pkg.end(), ddevidarea.begin(), ddevidarea.end());
+}
+
+static void appendDownstreamDeviceReferenceManifestData(
+    std::vector<uint8_t>& ddevidarea)
+{
+    // DownstreamDeviceReferenceManifestData (as per Table 10)
+    // SVHID,  (e.g. PCI SIG)
+    ddevidarea.push_back(0x03);
+
+    // VendorIDLen
+    ddevidarea.push_back(0x02);
+
+    // (e.g. 3M Company)
+    ddevidarea.push_back(0x1d);
+    ddevidarea.push_back(0xa0);
+
+    // actual manifest data (completely made up and without meaning)
+    const std::vector<uint8_t> rmd = {0x31, 0x32, 0x33, 0x34};
+    ddevidarea.insert(ddevidarea.end(), rmd.begin(), rmd.end());
+}
+
+void appendDownstreamDeviceIDRecords1(std::vector<uint8_t>& pkg)
+{
+    std::vector<uint8_t> ddevidarea{};
+    const std::vector<uint8_t> ddpd = {0xde, 0xde, 0xfe};
+
+    appendDownstreamDeviceIDRecordPrefix(ddevidarea, 0x1, ddpd.size());
+
+    // DownstreamDeviceRecordDescriptors
+    // record descriptors below
+
+    // descriptor 0: descriptor type
+    appendLE16(ddevidarea, PLDM_FWUP_UUID);
+
+    const std::vector<uint8_t> idd = {
+        0x16, 0x20, 0x23, 0xC9, 0x3E, 0xC5, 0x41, 0x15,
+        0x95, 0xF4, 0x48, 0x70, 0x1D, 0x49, 0xD6, 0x75,
+    };
+
+    // descriptor 0: InitialDescriptorLength
+    appendLE16(ddevidarea, idd.size());
+
+    // descriptor 0: InitialDescriptorData
+    ddevidarea.insert(ddevidarea.end(), idd.begin(), idd.end());
+
+    // DownstreamDevicePackageData
+    ddevidarea.insert(ddevidarea.end(), ddpd.begin(), ddpd.end());
+
+    // DownstreamDeviceReferenceManifestData (as per Table 10)
+    appendDownstreamDeviceReferenceManifestData(ddevidarea);
+
+    // set DownstreamDeviceRecordLength
+    patchLE16(ddevidarea, 0, ddevidarea.size());
+
+    pkg.insert(pkg.end(), ddevidarea.begin(), ddevidarea.end());
+}
+
+void appendDownstreamDeviceIDRecords2(std::vector<uint8_t>& pkg)
+{
+    std::vector<uint8_t> ddevidarea{};
+    const std::vector<uint8_t> ddpd = {0xde, 0xde, 0xfe};
+
+    appendDownstreamDeviceIDRecordPrefix(ddevidarea, 0x2, ddpd.size());
+
+    // DownstreamDeviceRecordDescriptors
+    // record descriptors below
+
+    const std::vector<uint8_t> iana1 = {
+        0x16,
+        0x20,
+        0x23,
+        0xC9,
+    };
+    const std::vector<uint8_t> iana2 = {
+        0x16,
+        0x20,
+        0x23,
+        0xCA,
+    };
+
+    // descriptor 0: descriptor type
+    appendLE16(ddevidarea, PLDM_FWUP_IANA_ENTERPRISE_ID);
+
+    // descriptor 0: InitialDescriptorLength
+    appendLE16(ddevidarea, iana1.size());
+
+    // descriptor 0: InitialDescriptorData
+    ddevidarea.insert(ddevidarea.end(), iana1.begin(), iana1.end());
+
+    // descriptor 0: descriptor type
+    appendLE16(ddevidarea, PLDM_FWUP_IANA_ENTERPRISE_ID);
+
+    // descriptor 0: InitialDescriptorLength
+    appendLE16(ddevidarea, iana2.size());
+
+    // descriptor 0: InitialDescriptorData
+    ddevidarea.insert(ddevidarea.end(), iana2.begin(), iana2.end());
+
+    // DownstreamDevicePackageData
+    ddevidarea.insert(ddevidarea.end(), ddpd.begin(), ddpd.end());
+
+    // DownstreamDeviceReferenceManifestData (as per Table 10)
+    appendDownstreamDeviceReferenceManifestData(ddevidarea);
+
+    // set DownstreamDeviceRecordLength
+    patchLE16(ddevidarea, 0, ddevidarea.size());
+
+    pkg.insert(pkg.end(), ddevidarea.begin(), ddevidarea.end());
 }

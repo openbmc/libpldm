@@ -67,5 +67,9 @@ void appendFirmwareDeviceIdRecord1InvalidApplicableComponentOOB(
     std::vector<uint8_t>& pkg);
 void appendFirmwareDeviceIdRecord2(std::vector<uint8_t>& pkg);
 void appendFirmwareDeviceIdRecord3(std::vector<uint8_t>& pkg);
+void appendFirmwareDeviceIdRecord4(std::vector<uint8_t>& pkg);
 
 void appendFirmwareDeviceIdArea1(std::vector<uint8_t>& pkg);
+
+void appendDownstreamDeviceIDRecords1(std::vector<uint8_t>& pkg);
+void appendDownstreamDeviceIDRecords2(std::vector<uint8_t>& pkg);
