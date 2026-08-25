@@ -29,6 +29,7 @@ namespace fw_update
 		v1_1_0,
 		v1_2_0,
 		v1_3_0,
+		v1_3_0_amend,
 	};
 
 	// forward declare structs and classes for our 'friend' declarations
@@ -57,6 +58,21 @@ namespace fw_update
 				std::unique_ptr<pldm::fw_update::DescriptorData> >
 		copyDescriptorMap(
 			const std::map<
+				uint16_t,
+				std::unique_ptr<pldm::fw_update::DescriptorData> >
+				&recordDescriptors);
+		static std::map<uint16_t,
+				std::unique_ptr<pldm::fw_update::DescriptorData> >
+		copyDescriptorMapFromMultiMap(
+			const std::multimap<
+				uint16_t,
+				std::unique_ptr<pldm::fw_update::DescriptorData> >
+				&recordDescriptors);
+		static std::multimap<
+			uint16_t,
+			std::unique_ptr<pldm::fw_update::DescriptorData> >
+		copyDescriptorMultiMap(
+			const std::multimap<
 				uint16_t,
 				std::unique_ptr<pldm::fw_update::DescriptorData> >
 				&recordDescriptors);
@@ -161,7 +177,8 @@ namespace fw_update
 			const std::bitset<32> &deviceUpdateOptionFlags,
 			const std::vector<size_t> &applicableComponents,
 			const std::string &componentImageSetVersionString,
-			const std::map<uint16_t, std::unique_ptr<DescriptorData> >
+			const std::multimap<uint16_t,
+					    std::unique_ptr<DescriptorData> >
 				&descriptors,
 			const std::vector<uint8_t> &firmwareDevicePackageData,
 			const std::optional<ReferenceManifestData>
@@ -195,6 +212,7 @@ namespace fw_update
 		// To avoid any mismatch in usage due to layout difference of a value map
 		// on struct growth, we store a unique_ptr.
 		// introduced in PackagePin::v1
+		// deprecated, use recordDescriptors2
 		const std::map<uint16_t, std::unique_ptr<DescriptorData> >
 			recordDescriptors;
 
@@ -203,6 +221,10 @@ namespace fw_update
 
 		// introduced in PackagePin::v1_3_0
 		const std::optional<ReferenceManifestData> referenceManifestData;
+
+		// introduced in PackagePin::v1_3_0_amend
+		const std::multimap<uint16_t, std::unique_ptr<DescriptorData> >
+			recordDescriptors2;
 	};
 
 	struct DownstreamDeviceIDRecord
@@ -218,7 +240,8 @@ namespace fw_update
 			const std::optional<uint32_t> &
 				downstreamDeviceSelfContainedActivationMinVersionComparisonStamp,
 			const std::vector<size_t> &applicableComponents,
-			const std::map<uint16_t, std::unique_ptr<DescriptorData> >
+			const std::multimap<uint16_t,
+					    std::unique_ptr<DescriptorData> >
 				&recordDescriptors,
 
 			const std::vector<uint8_t> &downstreamDevicePackageData,
@@ -248,6 +271,7 @@ namespace fw_update
 			downstreamDeviceSelfContainedActivationMinVersionComparisonStamp;
 
 		// introduced in PackagePin::v1_1_0
+		// deprecated, use downstreamDeviceRecordDescriptors2
 		const std::map<uint16_t, std::unique_ptr<DescriptorData> >
 			downstreamDeviceRecordDescriptors;
 
@@ -257,6 +281,10 @@ namespace fw_update
 		// introduced in PackagePin::v1_3_0
 		const std::optional<ReferenceManifestData>
 			downstreamDeviceReferenceManifestData;
+
+		// introduced in PackagePin::v1_3_0_amend
+		const std::multimap<uint16_t, std::unique_ptr<DescriptorData> >
+			downstreamDeviceRecordDescriptors2;
 	};
 
 	struct Package : libpldm::GrowableStruct<struct Package>,
@@ -321,8 +349,9 @@ namespace fw_update
 	    private:
 		static std::expected<void, std::string> helperParseFDDescriptor(
 			struct pldm_descriptor *desc,
-			std::map<uint16_t,
-				 std::unique_ptr<pldm::fw_update::DescriptorData> >
+			std::multimap<
+				uint16_t,
+				std::unique_ptr<pldm::fw_update::DescriptorData> >
 				&descriptors) noexcept;
 
 		static std::expected<void, pldm::fw_update::PackageParserError>
