@@ -16,6 +16,42 @@
       "message": "why a -EINVAL and not PLDM_ERROR_INVALID_DATA?",
       "revId": "9d1f777121d86f932cf8872d03647e4f8e5c378a",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5b77b1c5_58a00646",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 604,
+      "author": {
+        "id": 1002838
+      },
+      "writtenOn": "2026-08-25T12:32:49Z",
+      "side": 1,
+      "message": "This is a new API (LIBPLDM_ABI_TESTING), and CONTRIBUTING.md requires new APIs to return negative errno values rather than PLDM completion codes:\n\n \"New APIs return negative errno values on error and not PLDM completion codes.\"",
+      "parentUuid": "a6e580f3_44f1b0cb",
+      "revId": "9d1f777121d86f932cf8872d03647e4f8e5c378a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3787a5e9_9b107fc6",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 604,
+      "author": {
+        "id": 1002838
+      },
+      "writtenOn": "2026-08-25T12:32:49Z",
+      "side": 1,
+      "message": "This is a new API (LIBPLDM_ABI_TESTING), and CONTRIBUTING.md requires new\n    APIs to return negative errno values rather than PLDM completion codes:\n\n      \"New APIs return negative errno values on error and not PLDM completion\n       codes.\"",
+      "parentUuid": "a6e580f3_44f1b0cb",
+      "revId": "9d1f777121d86f932cf8872d03647e4f8e5c378a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
