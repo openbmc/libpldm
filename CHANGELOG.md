@@ -21,6 +21,19 @@ Change categories:
 
 ### Changed
 
+- libpldm++: Preserve multiple descriptors of the same type
+
+  This breaks API and ABI compatibility; consumers must rebuild
+
+  The following members now use `std::multimap` instead of `std::map`:
+
+  - `pldm::fw_update::FirmwareDeviceIDRecord::recordDescriptors`
+  - `pldm::fw_update::DownstreamDeviceIDRecord::downstreamDeviceRecordDescriptors`
+
+  Use `equal_range(key)` to retrieve all descriptors of a type; `at(key)` is no
+  longer available. Record equality ignores the ordering of descriptors with the
+  same type but preserves their multiplicity.
+
 ### Deprecated
 
 ### Removed

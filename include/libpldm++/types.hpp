@@ -1,5 +1,6 @@
 #pragma once
 
+#include <algorithm>
 #include <bitset>
 #include <cstdint>
 #include <libpldm/firmware_update.h>
@@ -82,6 +83,58 @@ template <class Derived> struct GrowableStruct {
 		}
 
 		return *(GetPtr(member)) != *(other.GetPtr(member));
+	}
+
+	// compare K,V pairs in maps where V is a pointer
+	template <class T> static bool compareKV(const T &a, const T &b)
+	{
+		if (a.first != b.first) {
+			return false;
+		}
+
+		if (!a.second || !b.second) {
+			return !a.second && !b.second;
+		}
+
+		return *a.second == *b.second;
+	}
+
+	// deep compare maps for equality where the values are unique_ptr.
+	// Values with the same key may appear in any order, but their
+	// multiplicities must match. This works for maps and multimaps.
+	template <class T>
+	bool CompareMapEq(const T Derived::*member, const Derived &other) const
+	{
+		if (HasMember(member) && !other.HasMember(member)) {
+			return false;
+		}
+		if (!HasMember(member) && other.HasMember(member)) {
+			return false;
+		}
+		if (!HasMember(member) && !other.HasMember(member)) {
+			return true;
+		}
+
+		const auto &lhs = *GetPtr(member);
+		const auto &rhs = *other.GetPtr(member);
+
+		if (lhs.size() != rhs.size()) {
+			return false;
+		}
+
+		for (auto first = lhs.begin(); first != lhs.end();) {
+			const auto last = lhs.upper_bound(first->first);
+			const auto [otherFirst, otherLast] =
+				rhs.equal_range(first->first);
+
+			if (!std::is_permutation(
+				    first, last, otherFirst, otherLast,
+				    compareKV<typename T::value_type>)) {
+				return false;
+			}
+			first = last;
+		}
+		return true;
 	}
 
     private:
