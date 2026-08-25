@@ -492,6 +492,59 @@ void appendFirmwareDeviceIdRecord3(std::vector<uint8_t>& pkg)
     patchLE16(pkg, recordLengthOffset, pkg.size() - recordLengthOffset);
 }
 
+void appendFirmwareDeviceIdRecord4(std::vector<uint8_t>& pkg)
+{
+    const size_t recordLengthOffset = pkg.size();
+    // record 0: record length
+    appendLE16(pkg, PLACEHOLDER);
+
+    // record 0: descriptor count
+    pkg.push_back(0x02);
+
+    appendLE32(pkg, 0x01);
+
+    // record 0: component image set version string type
+    pkg.push_back(0x01);
+
+    // record 0: component image set version string length
+    pkg.push_back(0x0E);
+
+    // record 0: firmware device package data length
+    appendLE16(pkg, 0x00);
+
+    // applicable components
+    pkg.push_back(0x01);
+
+    // component image set version string (14 bytes)
+    appendString(pkg, "VersionString2");
+
+    // record descriptors below
+    // record 0: descriptor type: UUID
+    appendLE16(pkg, 0x02);
+
+    // InitialDescriptorLength
+    appendLE16(pkg, 2);
+
+    // record 0: InitialDescriptorData (UUID)
+    const std::vector<uint8_t> initialDescriptorData{0xD6, 0x75};
+    pkg.insert(pkg.end(), initialDescriptorData.begin(),
+               initialDescriptorData.end());
+
+    // record 0: descriptor type: UUID
+    appendLE16(pkg, 0x02);
+
+    // DescriptorLength
+    appendLE16(pkg, 2);
+
+    // record 0: InitialDescriptorData (UUID)
+    const std::vector<uint8_t> initialDescriptorData2{0xD6, 0x77};
+    pkg.insert(pkg.end(), initialDescriptorData2.begin(),
+               initialDescriptorData2.end());
+
+    patchLE16(pkg, recordLengthOffset, pkg.size() - recordLengthOffset);
+    // firmware device package data (empty here)
+}
+
 static void appendFirmwareDeviceIdArea1Record0(std::vector<uint8_t>& pkg)
 {
     const size_t recordLengthOffset = pkg.size();

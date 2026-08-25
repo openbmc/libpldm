@@ -62,6 +62,43 @@ pldm::fw_update::DescriptorData::copyDescriptorMap(
 	return res;
 }
 
+std::map<uint16_t, std::unique_ptr<pldm::fw_update::DescriptorData> >
+pldm::fw_update::DescriptorData::copyDescriptorMapFromMultiMap(
+	const std::multimap<uint16_t,
+			    std::unique_ptr<pldm::fw_update::DescriptorData> >
+		&recordDescriptors)
+{
+	std::map<uint16_t, std::unique_ptr<pldm::fw_update::DescriptorData> >
+		res;
+	// We have to init the map here manually since the descriptor constructor
+	// is not a friend of the template which would otherwise be able to construct it.
+	for (const auto &[key, desc] : recordDescriptors) {
+		res[key] = std::unique_ptr<pldm::fw_update::DescriptorData>(
+			new pldm::fw_update::DescriptorData(*desc));
+	}
+
+	return res;
+}
+std::multimap<uint16_t, std::unique_ptr<pldm::fw_update::DescriptorData> >
+pldm::fw_update::DescriptorData::copyDescriptorMultiMap(
+	const std::multimap<uint16_t,
+			    std::unique_ptr<pldm::fw_update::DescriptorData> >
+		&recordDescriptors)
+{
+	std::multimap<uint16_t, std::unique_ptr<pldm::fw_update::DescriptorData> >
+		res;
+	// We have to init the map here manually since the descriptor constructor
+	// is not a friend of the template which would otherwise be able to construct it.
+	for (const auto &[key, desc] : recordDescriptors) {
+		res.insert(
+			{ key, std::unique_ptr<pldm::fw_update::DescriptorData>(
+				       new pldm::fw_update::DescriptorData(
+					       *desc)) });
+	}
+
+	return res;
+}
+
 pldm::fw_update::ComponentImageInfo::ComponentImageInfo(
 	uint16_t componentClassification, uint16_t componentIdentifier,
 	uint32_t componentComparisonStamp, std::bitset<16> componentOptions,
@@ -141,16 +178,19 @@ pldm::fw_update::FirmwareDeviceIDRecord::FirmwareDeviceIDRecord(
 	const std::bitset<32> &deviceUpdateOptionFlags,
 	const std::vector<size_t> &applicableComponents,
 	const std::string &componentImageSetVersion,
-	const std::map<uint16_t, std::unique_ptr<DescriptorData> >
+	const std::multimap<uint16_t, std::unique_ptr<DescriptorData> >
 		&descriptorsIn,
 	const std::vector<uint8_t> &firmwareDevicePackageData,
 	const std::optional<ReferenceManifestData> &referenceManifestData)
 	: deviceUpdateOptionFlags(deviceUpdateOptionFlags),
 	  applicableComponents(applicableComponents),
 	  componentImageSetVersionString(componentImageSetVersion),
-	  recordDescriptors(DescriptorData::copyDescriptorMap(descriptorsIn)),
+	  recordDescriptors(
+		  DescriptorData::copyDescriptorMapFromMultiMap(descriptorsIn)),
 	  firmwareDevicePackageData(firmwareDevicePackageData),
-	  referenceManifestData(referenceManifestData)
+	  referenceManifestData(referenceManifestData),
+	  recordDescriptors2(
+		  DescriptorData::copyDescriptorMultiMap(descriptorsIn))
 {
 }
 
@@ -163,7 +203,9 @@ pldm::fw_update::FirmwareDeviceIDRecord::FirmwareDeviceIDRecord(
 	  recordDescriptors(
 		  DescriptorData::copyDescriptorMap(ref.recordDescriptors)),
 	  firmwareDevicePackageData(ref.firmwareDevicePackageData),
-	  referenceManifestData(ref.referenceManifestData)
+	  referenceManifestData(ref.referenceManifestData),
+	  recordDescriptors2(DescriptorData::copyDescriptorMultiMap(
+		  ref.recordDescriptors2))
 {
 }
 
@@ -253,7 +295,7 @@ pldm::fw_update::DownstreamDeviceIDRecord::DownstreamDeviceIDRecord(
 	const std::optional<uint32_t> &
 		downstreamDeviceSelfContainedActivationMinVersionComparisonStamp,
 	const std::vector<size_t> &applicableComponents,
-	const std::map<uint16_t, std::unique_ptr<DescriptorData> >
+	const std::multimap<uint16_t, std::unique_ptr<DescriptorData> >
 		&recordDescriptors,
 
 	const std::vector<uint8_t> &downstreamDevicePackageData,
@@ -266,10 +308,13 @@ pldm::fw_update::DownstreamDeviceIDRecord::DownstreamDeviceIDRecord(
 	  downstreamDeviceSelfContainedActivationMinVersionComparisonStamp(
 		  downstreamDeviceSelfContainedActivationMinVersionComparisonStamp),
 	  downstreamDeviceRecordDescriptors(
-		  DescriptorData::copyDescriptorMap(recordDescriptors)),
+		  DescriptorData::copyDescriptorMapFromMultiMap(
+			  recordDescriptors)),
 	  downstreamDevicePackageData(downstreamDevicePackageData),
 	  downstreamDeviceReferenceManifestData(
-		  downstreamDeviceReferenceManifestData)
+		  downstreamDeviceReferenceManifestData),
+	  downstreamDeviceRecordDescriptors2(
+		  DescriptorData::copyDescriptorMultiMap(recordDescriptors))
 {
 }
 
@@ -288,7 +333,10 @@ pldm::fw_update::DownstreamDeviceIDRecord::DownstreamDeviceIDRecord(
 		  ref.downstreamDeviceRecordDescriptors)),
 	  downstreamDevicePackageData(ref.downstreamDevicePackageData),
 	  downstreamDeviceReferenceManifestData(
-		  ref.downstreamDeviceReferenceManifestData)
+		  ref.downstreamDeviceReferenceManifestData),
+	  downstreamDeviceRecordDescriptors2(
+		  DescriptorData::copyDescriptorMultiMap(
+			  ref.downstreamDeviceRecordDescriptors2))
 
 {
 }

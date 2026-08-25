@@ -106,6 +106,105 @@ TEST(PackageParserTest, ValidPkgSingleDescriptorSingleComponent)
     EXPECT_EQ(outCompImageInfos[0].componentVersion, "VersionString3");
 }
 
+TEST(PackageParserTest, ValidPkg2DescriptorsSameTypeSingleComponent)
+{
+    // single firmware device id record
+    // multiple firmware device id record record descriptors with the same type
+    // single component
+    std::vector<uint8_t> pkg;
+
+    appendPackageHeaderIdentifier(pkg, pldm::fw_update::PackagePin::v1);
+
+    const size_t packageHeaderSizeOffset = pkg.size();
+
+    // pkg header size, updated later
+    appendLE16(pkg, PLACEHOLDER);
+
+    // pkg release date time (13 bytes, timestamp104)
+    appendTimestamp104(pkg);
+
+    // component bitmap bit length
+    appendLE16(pkg, 0x08);
+
+    // package version string
+    appendTypeLengthString(pkg, "VersionString1");
+
+    // device id record count
+    pkg.push_back(0x01);
+
+    appendFirmwareDeviceIdRecord4(pkg);
+
+    const auto clos = appendComponentImageInfoArea1(pkg);
+
+    const uint16_t finalSize = pkg.size() + 4;
+    // set PackageHeaderSize
+    patchLE16(pkg, packageHeaderSizeOffset, finalSize);
+
+    // now we know component location offset
+    for (const size_t clo : clos)
+    {
+        patchLE32(pkg, clo, pkg.size() + 4);
+    }
+
+    appendCRC(pkg);
+
+    // component image
+    pkg.push_back(0x00);
+
+    auto res = PackageParser::parse(pkg, PackagePin::v1);
+
+    if (!res.has_value())
+    {
+        std::cout << res.error().msg << std::endl;
+        if (res.error().rc.has_value())
+        {
+            std::cout << res.error().rc.value() << std::endl;
+        }
+    }
+
+    ASSERT_TRUE(res.has_value());
+
+    const auto& outfwDeviceIDRecords = res.value()->firmwareDeviceIdRecords;
+
+    std::vector<uint8_t> dd1Data{0xD6, 0x75};
+    std::vector<uint8_t> dd2Data{0xD6, 0x77};
+
+    ASSERT_EQ(outfwDeviceIDRecords.size(), 1);
+
+    const auto& fwDeviceIDRecord = outfwDeviceIDRecords[0];
+
+#if HAVE_LIBPLDM_API_TESTING
+    EXPECT_EQ(fwDeviceIDRecord.getDescriptorTypes(),
+              std::vector<uint16_t>({PLDM_FWUP_UUID}));
+#endif
+
+    EXPECT_EQ(fwDeviceIDRecord.recordDescriptors2.count(PLDM_FWUP_UUID), 2);
+
+    bool found1 = false;
+    bool found2 = false;
+
+    for (const auto& [k, v] : fwDeviceIDRecord.recordDescriptors2)
+    {
+
+        EXPECT_EQ(k, PLDM_FWUP_UUID);
+        ASSERT_TRUE(v);
+
+        if (v->data == dd1Data)
+        {
+            found1 = true;
+        }
+        if (v->data == dd2Data)
+        {
+            found2 = true;
+        }
+
+        EXPECT_EQ(v->vendorDefinedDescriptorTitle, std::nullopt);
+    }
+
+    EXPECT_TRUE(found1);
+    EXPECT_TRUE(found2);
+}
+
 TEST(PackageParserTest, ValidPkgMultipleDescriptorsMultipleComponents)
 {
     std::vector<uint8_t> pkg;
