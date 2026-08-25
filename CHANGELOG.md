@@ -43,6 +43,7 @@ Change categories:
 
 ### Fixed
 
+- libpldm++: !ABI break! to allow multiple record descriptors of the same type
 - bindings: cpp: Validate ApplicableComponents indices for downstream-device
   records
 - bindings: cpp: PackageParser: Check for ApplicableComponents OOB index
