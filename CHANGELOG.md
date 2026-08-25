@@ -43,6 +43,7 @@ Change categories:
 
 ### Fixed
 
+- libpldm++: !ABI break! to allow multiple record descriptors of the same type
 - bindings: cpp: PackageParser: Restrict the initial descriptor of device id
   records with vendor defined descriptors
 - bindings: cpp: PackageParser: Validate initial descriptor type of device id

@@ -4,6 +4,7 @@
 #include <libpldm/api.h>
 #include <libpldm/firmware_update.h>
 
+#include <algorithm>
 #include <expected>
 #include <libpldm++/firmware_update.hpp>
 #include <libpldm++/types.hpp>
@@ -201,6 +202,52 @@ static std::vector<uint8_t>
     return pkg;
 }
 
+#if HAVE_LIBPLDM_API_TESTING
+TEST(PackageParserTest, FDEqualityIgnoresAdditionalDescriptorOrder)
+{
+    std::vector<TestDescriptor> descriptors{
+        {PLDM_FWUP_IANA_ENTERPRISE_ID, iana4},
+        {PLDM_FWUP_VENDOR_DEFINED, vendorDefined},
+        {PLDM_FWUP_VENDOR_DEFINED, vendorDefined}};
+    descriptors[2].data.back() = 0x56;
+    const auto firstPkg = makePkgWithFDDescriptors(descriptors, 3);
+    std::swap(descriptors[1], descriptors[2]);
+    const auto secondPkg = makePkgWithFDDescriptors(descriptors, 3);
+    const auto first = PackageParser::parse(firstPkg, PackagePin::v1_3_0_amend);
+    const auto second =
+        PackageParser::parse(secondPkg, PackagePin::v1_3_0_amend);
+
+    ASSERT_TRUE(first.has_value());
+    ASSERT_TRUE(second.has_value());
+    EXPECT_EQ(first.value()->firmwareDeviceIdRecords,
+              second.value()->firmwareDeviceIdRecords);
+    EXPECT_EQ(*first.value(), *second.value());
+}
+#endif
+
+#if HAVE_LIBPLDM_API_TESTING
+TEST(PackageParserTest, DDEqualityIgnoresAdditionalDescriptorOrder)
+{
+    std::vector<TestDescriptor> descriptors{
+        {PLDM_FWUP_IANA_ENTERPRISE_ID, iana4},
+        {PLDM_FWUP_VENDOR_DEFINED, vendorDefined},
+        {PLDM_FWUP_VENDOR_DEFINED, vendorDefined}};
+    descriptors[2].data.back() = 0x56;
+    const auto firstPkg = makePkgWithDDDescriptors(descriptors, 3);
+    std::swap(descriptors[1], descriptors[2]);
+    const auto secondPkg = makePkgWithDDDescriptors(descriptors, 3);
+    const auto first = PackageParser::parse(firstPkg, PackagePin::v1_3_0_amend);
+    const auto second =
+        PackageParser::parse(secondPkg, PackagePin::v1_3_0_amend);
+
+    ASSERT_TRUE(first.has_value());
+    ASSERT_TRUE(second.has_value());
+    EXPECT_EQ(first.value()->downstreamDeviceIdRecords,
+              second.value()->downstreamDeviceIdRecords);
+    EXPECT_EQ(*first.value(), *second.value());
+}
+#endif
+
 TEST(PackageParserTest, FDNoDescriptorsRejected)
 {
     auto pkg = makePkgWithFDDescriptors({}, 0);
@@ -261,13 +308,17 @@ TEST(PackageParserTest, FDStandardDescriptorsAccepted)
 
     const auto& descriptors = records[0].recordDescriptors;
     EXPECT_EQ(descriptors.size(), 4);
-    EXPECT_EQ(descriptors.at(PLDM_FWUP_PCI_VENDOR_ID)->data, pciVendor2);
-    EXPECT_EQ(descriptors.at(PLDM_FWUP_PCI_REVISION_ID_RANGE)->data,
-              std::vector<uint8_t>({0x01, 0x02}));
-    EXPECT_EQ(descriptors.at(PLDM_FWUP_IEEE_EUI_64_ID)->data.size(), 8);
+    EXPECT_EQ(descriptors.lower_bound(PLDM_FWUP_PCI_VENDOR_ID)->second->data,
+              pciVendor2);
     EXPECT_EQ(
-        descriptors.at(PLDM_FWUP_VENDOR_DEFINED)->vendorDefinedDescriptorTitle,
-        "OpenBMC");
+        descriptors.lower_bound(PLDM_FWUP_PCI_REVISION_ID_RANGE)->second->data,
+        std::vector<uint8_t>({0x01, 0x02}));
+    EXPECT_EQ(
+        descriptors.lower_bound(PLDM_FWUP_IEEE_EUI_64_ID)->second->data.size(),
+        8);
+    EXPECT_EQ(descriptors.lower_bound(PLDM_FWUP_VENDOR_DEFINED)
+                  ->second->vendorDefinedDescriptorTitle,
+              "OpenBMC");
 }
 
 TEST(PackageParserTest, DDDescriptorWrongLengthRejected)
@@ -302,7 +353,8 @@ TEST(PackageParserTest, FDInitialDescriptorTypesAccepted)
         const auto& descriptors =
             res.value()->firmwareDeviceIdRecords[0].recordDescriptors;
         EXPECT_EQ(descriptors.size(), 1);
-        EXPECT_EQ(descriptors.at(initial.type)->data, initial.data);
+        EXPECT_EQ(descriptors.lower_bound(initial.type)->second->data,
+                  initial.data);
     }
 }
 
@@ -359,7 +411,8 @@ TEST(PackageParserTest, DDInitialDescriptorTypesAccepted)
 
         const auto& descriptors = records[0].downstreamDeviceRecordDescriptors;
         EXPECT_EQ(descriptors.size(), 1);
-        EXPECT_EQ(descriptors.at(initial.type)->data, initial.data);
+        EXPECT_EQ(descriptors.lower_bound(initial.type)->second->data,
+                  initial.data);
     }
 }
 
@@ -405,7 +458,8 @@ TEST(PackageParserTest, FDVendorDefinedInitialDescriptorTypesAccepted)
         const auto& descriptors =
             res.value()->firmwareDeviceIdRecords[0].recordDescriptors;
         EXPECT_EQ(descriptors.size(), 2);
-        EXPECT_EQ(descriptors.at(initial.type)->data, initial.data);
+        EXPECT_EQ(descriptors.lower_bound(initial.type)->second->data,
+                  initial.data);
     }
 }
 
@@ -457,7 +511,8 @@ TEST(PackageParserTest, DDVendorDefinedInitialDescriptorTypesAccepted)
 
         const auto& descriptors = records[0].downstreamDeviceRecordDescriptors;
         EXPECT_EQ(descriptors.size(), 2);
-        EXPECT_EQ(descriptors.at(initial.type)->data, initial.data);
+        EXPECT_EQ(descriptors.lower_bound(initial.type)->second->data,
+                  initial.data);
     }
 }
 
