@@ -84,6 +84,42 @@ template <class Derived> struct GrowableStruct {
 		return *(GetPtr(member)) != *(other.GetPtr(member));
 	}
 
+	// compare K,V pairs in maps where V is a pointer
+	template <class T> static bool compareKV(const T &a, const T &b)
+	{
+		if (a.first != b.first) {
+			return false;
+		}
+
+		if (!a.second || !b.second) {
+			return !a.second && !b.second;
+		}
+
+		return *a.second == *b.second;
+	}
+
+	// deep compare maps for equality where the values are unique_ptr.
+	// This should work for maps and multimaps.
+	template <class T>
+	bool CompareMapEq(const T Derived::*member, const Derived &other) const
+	{
+		if (HasMember(member) && !other.HasMember(member)) {
+			return false;
+		}
+		if (!HasMember(member) && other.HasMember(member)) {
+			return false;
+		}
+		if (!HasMember(member) && !other.HasMember(member)) {
+			return true;
+		}
+
+		const auto &lhs = *GetPtr(member);
+		const auto &rhs = *other.GetPtr(member);
+
+		return std::equal(lhs.begin(), lhs.end(), rhs.begin(),
+				  rhs.end(), compareKV<typename T::value_type>);
+	}
+
     private:
 	// unchecked access
 	template <class T> T Get(const T Derived::*member) const

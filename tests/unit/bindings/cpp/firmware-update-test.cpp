@@ -86,7 +86,7 @@ TEST(PackageParserTest, ValidPkgSingleDescriptorSingleComponent)
 
     // assert for descriptor type PLDM_FWUP_UUID
     const auto& d1 =
-        outfwDeviceIDRecords[0].recordDescriptors.at(PLDM_FWUP_UUID);
+        outfwDeviceIDRecords[0].recordDescriptors.find(PLDM_FWUP_UUID)->second;
     EXPECT_EQ(d1->data, dd1Data);
     EXPECT_EQ(d1->vendorDefinedDescriptorTitle, std::nullopt);
 
@@ -192,30 +192,31 @@ TEST(PackageParserTest, ValidPkgMultipleDescriptorsMultipleComponents)
 #endif
 
     // assert record descriptor contents
-    EXPECT_EQ(
-        outfwDeviceIDRecords[0].recordDescriptors.at(PLDM_FWUP_UUID)->data,
-        dd1Data);
     EXPECT_EQ(outfwDeviceIDRecords[0]
-                  .recordDescriptors.at(PLDM_FWUP_UUID)
-                  ->vendorDefinedDescriptorTitle,
+                  .recordDescriptors.find(PLDM_FWUP_UUID)
+                  ->second->data,
+              dd1Data);
+    EXPECT_EQ(outfwDeviceIDRecords[0]
+                  .recordDescriptors.find(PLDM_FWUP_UUID)
+                  ->second->vendorDefinedDescriptorTitle,
               std::nullopt);
 
     EXPECT_EQ(outfwDeviceIDRecords[0]
-                  .recordDescriptors.at(PLDM_FWUP_IANA_ENTERPRISE_ID)
-                  ->data,
+                  .recordDescriptors.find(PLDM_FWUP_IANA_ENTERPRISE_ID)
+                  ->second->data,
               dd2Data);
     EXPECT_EQ(outfwDeviceIDRecords[0]
-                  .recordDescriptors.at(PLDM_FWUP_IANA_ENTERPRISE_ID)
-                  ->vendorDefinedDescriptorTitle,
+                  .recordDescriptors.find(PLDM_FWUP_IANA_ENTERPRISE_ID)
+                  ->second->vendorDefinedDescriptorTitle,
               std::nullopt);
 
     EXPECT_EQ(outfwDeviceIDRecords[0]
-                  .recordDescriptors.at(PLDM_FWUP_VENDOR_DEFINED)
-                  ->data,
+                  .recordDescriptors.find(PLDM_FWUP_VENDOR_DEFINED)
+                  ->second->data,
               dd3Data);
     EXPECT_EQ(outfwDeviceIDRecords[0]
-                  .recordDescriptors.at(PLDM_FWUP_VENDOR_DEFINED)
-                  ->vendorDefinedDescriptorTitle,
+                  .recordDescriptors.find(PLDM_FWUP_VENDOR_DEFINED)
+                  ->second->vendorDefinedDescriptorTitle,
               "OpenBMC");
 
     EXPECT_EQ(outfwDeviceIDRecords[0].firmwareDevicePackageData,
@@ -235,7 +236,7 @@ TEST(PackageParserTest, ValidPkgMultipleDescriptorsMultipleComponents)
 #endif
 
     const auto& d1 =
-        outfwDeviceIDRecords[1].recordDescriptors.at(PLDM_FWUP_UUID);
+        outfwDeviceIDRecords[1].recordDescriptors.find(PLDM_FWUP_UUID)->second;
 
     EXPECT_EQ(d1->data, dd4Data);
     EXPECT_EQ(d1->vendorDefinedDescriptorTitle, std::nullopt);
@@ -258,7 +259,7 @@ TEST(PackageParserTest, ValidPkgMultipleDescriptorsMultipleComponents)
 
     // assert for descriptor type PLDM_FWUP_UUID
     const auto& d2 =
-        outfwDeviceIDRecords[2].recordDescriptors.at(PLDM_FWUP_UUID);
+        outfwDeviceIDRecords[2].recordDescriptors.find(PLDM_FWUP_UUID)->second;
 
     EXPECT_EQ(d2->data, dd5Data);
     EXPECT_EQ(d2->vendorDefinedDescriptorTitle, std::nullopt);

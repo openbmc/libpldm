@@ -39,6 +39,7 @@ Change categories:
 
 ### Fixed
 
+- libpldm++: !ABI break! to allow multiple record descriptors of the same type
 - bindings: cpp: PackageParser: Check for ApplicableComponents OOB index
 - dsp: pdr: Bound children read in `pldm_entity_association_pdr_extract()`
 - dsp: platform: Add const modifier to the pdr argument of

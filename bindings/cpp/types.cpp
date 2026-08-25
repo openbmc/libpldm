@@ -44,19 +44,21 @@ bool pldm::fw_update::DescriptorData::operator==(
 	return true;
 }
 
-std::map<uint16_t, std::unique_ptr<pldm::fw_update::DescriptorData> >
-pldm::fw_update::DescriptorData::copyDescriptorMap(
-	const std::map<uint16_t,
-		       std::unique_ptr<pldm::fw_update::DescriptorData> >
+std::multimap<uint16_t, std::unique_ptr<pldm::fw_update::DescriptorData> >
+pldm::fw_update::DescriptorData::copyDescriptorMultiMap(
+	const std::multimap<uint16_t,
+			    std::unique_ptr<pldm::fw_update::DescriptorData> >
 		&recordDescriptors)
 {
-	std::map<uint16_t, std::unique_ptr<pldm::fw_update::DescriptorData> >
+	std::multimap<uint16_t, std::unique_ptr<pldm::fw_update::DescriptorData> >
 		res;
 	// We have to init the map here manually since the descriptor constructor
 	// is not a friend of the template which would otherwise be able to construct it.
 	for (const auto &[key, desc] : recordDescriptors) {
-		res[key] = std::unique_ptr<pldm::fw_update::DescriptorData>(
-			new pldm::fw_update::DescriptorData(*desc));
+		res.insert(
+			{ key, std::unique_ptr<pldm::fw_update::DescriptorData>(
+				       new pldm::fw_update::DescriptorData(
+					       *desc)) });
 	}
 
 	return res;
@@ -141,14 +143,15 @@ pldm::fw_update::FirmwareDeviceIDRecord::FirmwareDeviceIDRecord(
 	const std::bitset<32> &deviceUpdateOptionFlags,
 	const std::vector<size_t> &applicableComponents,
 	const std::string &componentImageSetVersion,
-	const std::map<uint16_t, std::unique_ptr<DescriptorData> >
+	const std::multimap<uint16_t, std::unique_ptr<DescriptorData> >
 		&descriptorsIn,
 	const std::vector<uint8_t> &firmwareDevicePackageData,
 	const std::optional<ReferenceManifestData> &referenceManifestData)
 	: deviceUpdateOptionFlags(deviceUpdateOptionFlags),
 	  applicableComponents(applicableComponents),
 	  componentImageSetVersionString(componentImageSetVersion),
-	  recordDescriptors(DescriptorData::copyDescriptorMap(descriptorsIn)),
+	  recordDescriptors(
+		  DescriptorData::copyDescriptorMultiMap(descriptorsIn)),
 	  firmwareDevicePackageData(firmwareDevicePackageData),
 	  referenceManifestData(referenceManifestData)
 {
@@ -160,8 +163,8 @@ pldm::fw_update::FirmwareDeviceIDRecord::FirmwareDeviceIDRecord(
 	: deviceUpdateOptionFlags(ref.deviceUpdateOptionFlags),
 	  applicableComponents(ref.applicableComponents),
 	  componentImageSetVersionString(ref.componentImageSetVersionString),
-	  recordDescriptors(
-		  DescriptorData::copyDescriptorMap(ref.recordDescriptors)),
+	  recordDescriptors(DescriptorData::copyDescriptorMultiMap(
+		  ref.recordDescriptors)),
 	  firmwareDevicePackageData(ref.firmwareDevicePackageData),
 	  referenceManifestData(ref.referenceManifestData)
 {
@@ -207,39 +210,8 @@ bool pldm::fw_update::FirmwareDeviceIDRecord::operator==(
 
 	// need to manually compare the map since otherwise unique_ptr
 	// default comparison would only compare pointer values
-	if (HasMember(&FirmwareDeviceIDRecord::recordDescriptors) !=
-	    other.HasMember(&FirmwareDeviceIDRecord::recordDescriptors)) {
-		// different size structs compare not equal
+	if (!CompareMapEq(&FirmwareDeviceIDRecord::recordDescriptors, other)) {
 		return false;
-	}
-	if (!HasMember(&FirmwareDeviceIDRecord::recordDescriptors) &&
-	    !other.HasMember(&FirmwareDeviceIDRecord::recordDescriptors)) {
-		// none of them has record descriptors field
-		return true;
-	}
-
-	// both have record descriptors field
-	if (recordDescriptors.size() != other.recordDescriptors.size()) {
-		return false;
-	}
-
-	for (const auto &[k, v] : recordDescriptors) {
-		if (!other.recordDescriptors.contains(k)) {
-			return false;
-		}
-		const auto &otherDesc = other.recordDescriptors.at(k);
-
-		if (!v.get() && !otherDesc.get()) {
-			continue;
-		}
-		if (!v.get() || !otherDesc.get()) {
-			return false;
-		}
-
-		// descriptor value comparison
-		if (*v != *otherDesc) {
-			return false;
-		}
 	}
 
 	return CompareEQ(&FirmwareDeviceIDRecord::referenceManifestData, other);
@@ -253,7 +225,7 @@ pldm::fw_update::DownstreamDeviceIDRecord::DownstreamDeviceIDRecord(
 	const std::optional<uint32_t> &
 		downstreamDeviceSelfContainedActivationMinVersionComparisonStamp,
 	const std::vector<size_t> &applicableComponents,
-	const std::map<uint16_t, std::unique_ptr<DescriptorData> >
+	const std::multimap<uint16_t, std::unique_ptr<DescriptorData> >
 		&recordDescriptors,
 
 	const std::vector<uint8_t> &downstreamDevicePackageData,
@@ -266,7 +238,7 @@ pldm::fw_update::DownstreamDeviceIDRecord::DownstreamDeviceIDRecord(
 	  downstreamDeviceSelfContainedActivationMinVersionComparisonStamp(
 		  downstreamDeviceSelfContainedActivationMinVersionComparisonStamp),
 	  downstreamDeviceRecordDescriptors(
-		  DescriptorData::copyDescriptorMap(recordDescriptors)),
+		  DescriptorData::copyDescriptorMultiMap(recordDescriptors)),
 	  downstreamDevicePackageData(downstreamDevicePackageData),
 	  downstreamDeviceReferenceManifestData(
 		  downstreamDeviceReferenceManifestData)
@@ -284,8 +256,9 @@ pldm::fw_update::DownstreamDeviceIDRecord::DownstreamDeviceIDRecord(
 		  ref.downstreamDeviceSelfContainedActivationMinVersionString),
 	  downstreamDeviceSelfContainedActivationMinVersionComparisonStamp(
 		  ref.downstreamDeviceSelfContainedActivationMinVersionComparisonStamp),
-	  downstreamDeviceRecordDescriptors(DescriptorData::copyDescriptorMap(
-		  ref.downstreamDeviceRecordDescriptors)),
+	  downstreamDeviceRecordDescriptors(
+		  DescriptorData::copyDescriptorMultiMap(
+			  ref.downstreamDeviceRecordDescriptors)),
 	  downstreamDevicePackageData(ref.downstreamDevicePackageData),
 	  downstreamDeviceReferenceManifestData(
 		  ref.downstreamDeviceReferenceManifestData)
@@ -325,42 +298,14 @@ bool pldm::fw_update::DownstreamDeviceIDRecord::operator==(
 		return false;
 	}
 
-	const bool selfHasddrd = HasMember(
-		&DownstreamDeviceIDRecord::downstreamDeviceRecordDescriptors);
-	const bool otherHasddrd = other.HasMember(
-		&DownstreamDeviceIDRecord::downstreamDeviceRecordDescriptors);
-
-	if (selfHasddrd != otherHasddrd) {
+	// need to manually compare the map since otherwise unique_ptr
+	// default comparison would only compare pointer values
+	if (!CompareMapEq(
+		    &DownstreamDeviceIDRecord::downstreamDeviceRecordDescriptors,
+		    other)) {
 		return false;
 	}
 
-	if (selfHasddrd && otherHasddrd) {
-		if (downstreamDeviceRecordDescriptors.size() !=
-		    other.downstreamDeviceRecordDescriptors.size()) {
-			return false;
-		}
-
-		for (const auto &[k, v] : downstreamDeviceRecordDescriptors) {
-			if (!other.downstreamDeviceRecordDescriptors.contains(
-				    k)) {
-				return false;
-			}
-			const auto &otherDesc =
-				other.downstreamDeviceRecordDescriptors.at(k);
-
-			if (!v.get() && !otherDesc.get()) {
-				continue;
-			}
-			if (!v.get() || !otherDesc.get()) {
-				return false;
-			}
-
-			// descriptor value comparison
-			if (*v != *otherDesc) {
-				return false;
-			}
-		}
-	}
 	if (CompareNEQ(&DownstreamDeviceIDRecord::downstreamDevicePackageData,
 		       other)) {
 		return false;
@@ -429,6 +374,9 @@ bool pldm::fw_update::Package::operator==(const Package &other) const
 		return false;
 	}
 	if (CompareNEQ(&Package::componentImageInformation, other)) {
+		return false;
+	}
+	if (CompareNEQ(&Package::downstreamDeviceIdRecords, other)) {
 		return false;
 	}
 	return true;
