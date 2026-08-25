@@ -53,10 +53,11 @@ namespace fw_update
 		DescriptorData(const std::string &title,
 			       const std::vector<uint8_t> &data);
 
-		static std::map<uint16_t,
-				std::unique_ptr<pldm::fw_update::DescriptorData> >
-		copyDescriptorMap(
-			const std::map<
+		static std::multimap<
+			uint16_t,
+			std::unique_ptr<pldm::fw_update::DescriptorData> >
+		copyDescriptorMultiMap(
+			const std::multimap<
 				uint16_t,
 				std::unique_ptr<pldm::fw_update::DescriptorData> >
 				&recordDescriptors);
@@ -161,7 +162,8 @@ namespace fw_update
 			const std::bitset<32> &deviceUpdateOptionFlags,
 			const std::vector<size_t> &applicableComponents,
 			const std::string &componentImageSetVersionString,
-			const std::map<uint16_t, std::unique_ptr<DescriptorData> >
+			const std::multimap<uint16_t,
+					    std::unique_ptr<DescriptorData> >
 				&descriptors,
 			const std::vector<uint8_t> &firmwareDevicePackageData,
 			const std::optional<ReferenceManifestData>
@@ -195,7 +197,7 @@ namespace fw_update
 		// To avoid any mismatch in usage due to layout difference of a value map
 		// on struct growth, we store a unique_ptr.
 		// introduced in PackagePin::v1
-		const std::map<uint16_t, std::unique_ptr<DescriptorData> >
+		const std::multimap<uint16_t, std::unique_ptr<DescriptorData> >
 			recordDescriptors;
 
 		// introduced in PackagePin::v1
@@ -218,7 +220,8 @@ namespace fw_update
 			const std::optional<uint32_t> &
 				downstreamDeviceSelfContainedActivationMinVersionComparisonStamp,
 			const std::vector<size_t> &applicableComponents,
-			const std::map<uint16_t, std::unique_ptr<DescriptorData> >
+			const std::multimap<uint16_t,
+					    std::unique_ptr<DescriptorData> >
 				&recordDescriptors,
 
 			const std::vector<uint8_t> &downstreamDevicePackageData,
@@ -248,7 +251,7 @@ namespace fw_update
 			downstreamDeviceSelfContainedActivationMinVersionComparisonStamp;
 
 		// introduced in PackagePin::v1_1_0
-		const std::map<uint16_t, std::unique_ptr<DescriptorData> >
+		const std::multimap<uint16_t, std::unique_ptr<DescriptorData> >
 			downstreamDeviceRecordDescriptors;
 
 		// introduced in PackagePin::v1_1_0
@@ -321,8 +324,9 @@ namespace fw_update
 	    private:
 		static std::expected<void, std::string> helperParseFDDescriptor(
 			struct pldm_descriptor *desc,
-			std::map<uint16_t,
-				 std::unique_ptr<pldm::fw_update::DescriptorData> >
+			std::multimap<
+				uint16_t,
+				std::unique_ptr<pldm::fw_update::DescriptorData> >
 				&descriptors) noexcept;
 
 		static std::expected<void, pldm::fw_update::PackageParserError>

@@ -43,6 +43,7 @@ Change categories:
 
 ### Fixed
 
+- libpldm++: !API+ABI break! to allow multiple record descriptors of the same type
 - bindings: cpp: PackageParser: Reject descriptor types not in DSP0267 Table 8
 - bindings: cpp: PackageParser: Restrict the initial descriptor of device id
   records with vendor defined descriptors
