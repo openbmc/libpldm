@@ -143,7 +143,7 @@ pldm::fw_update::PackageParserError::PackageParserError(std::string s, int rc)
 std::expected<void, std::string>
 pldm::fw_update::PackageParser::helperParseFDDescriptor(
 	struct pldm_descriptor *desc,
-	std::map<uint16_t, std::unique_ptr<pldm::fw_update::DescriptorData> >
+	std::multimap<uint16_t, std::unique_ptr<pldm::fw_update::DescriptorData> >
 		&descriptors) noexcept
 {
 	int rc;
@@ -289,7 +289,7 @@ pldm::fw_update::PackageParser::helperParseDownstreamDeviceIDRecord(
 	const auto refManifestData = getReferenceManifestData(
 		downstreamDeviceId.reference_manifest_data);
 
-	std::map<uint16_t, std::unique_ptr<pldm::fw_update::DescriptorData> >
+	std::multimap<uint16_t, std::unique_ptr<pldm::fw_update::DescriptorData> >
 		descriptors{};
 
 	struct pldm_descriptor desc;
@@ -452,7 +452,7 @@ pldm::fw_update::PackageParser::parse(const std::span<const uint8_t> &pkg,
 	foreach_pldm_package_firmware_device_id_record(package,
 						       deviceIdRecordData, rc)
 	{
-		std::map<uint16_t, std::unique_ptr<DescriptorData> >
+		std::multimap<uint16_t, std::unique_ptr<DescriptorData> >
 			descriptors{};
 		struct pldm_descriptor descriptorData;
 		uint16_t initialType = 0;
