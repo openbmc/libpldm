@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "802ff3b6_f0b0c249",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 2458,
+      "author": {
+        "id": 1003128
+      },
+      "writtenOn": "2026-08-26T00:45:49Z",
+      "side": 1,
+      "message": "This relaxes the bound from a literal SINT32 to PLDM_SENSOR_DATA_SIZE_MAX, which this change redefines as SINT64, so tags 6 and 7 now reach the extraction below.\n\ndecode_get_sensor_reading_resp() is LIBPLDM_ABI_STABLE and takes present_reading as a plain uint8_t *. Existing callers had no reason to allocate more than four bytes, because a 64-bit reading could not be decoded before this change. The unguarded 64-bit case now added to pldm_msgbuf_extract_sensor_value() then writes eight bytes into that buffer, so a responder that reports sensorDataSize \u003d uint64 causes an out-of-bounds write in the caller.\n\nThis looks like the same issue Andrew raised on 84665 on 2026-01-29:\n\n  \"This must be guarded to prevent the 64-bit access. Existing users may only have passed a 32-bit buffer. This may cause an out-of-bounds write.\"\n\nKeeping the literal SINT32 bound here - and adding a separate 64-bit capable entry point, the way decode_numeric_sensor_data_to_value() is introduced for the event path - would avoid it.",
+      "revId": "817cfb8f785c55f10f7c21d3876ef3a5e28ef768",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "30952cb1_3afdafff",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 2493,
+      "author": {
+        "id": 1003128
+      },
+      "writtenOn": "2026-08-26T00:45:49Z",
+      "side": 1,
+      "message": "Same bound relaxation on the encode side. The 64-bit branch added below does\n\n    memcpy(\u0026val, present_reading, sizeof(val));\n\nwhich reads eight bytes from a const uint8_t * supplied by the caller. encode_get_sensor_reading_resp() is also ABI_STABLE, so an existing caller passing the address of a 32-bit value would now be read out of bounds when sensor_data_size says uint64.\n\nSeparately, swapping PLDM_EFFECTER_DATA_SIZE_* for PLDM_SENSOR_DATA_SIZE_* in this function is a good fix on its own - the two enumerations happen to agree today but nothing requires them to.",
+      "revId": "817cfb8f785c55f10f7c21d3876ef3a5e28ef768",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ab516135_a2c6441b",
+        "filename": "src/msgbuf/platform.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1003128
+      },
+      "writtenOn": "2026-08-26T00:45:49Z",
+      "side": 1,
+      "message": "This is the other half of the problem noted on src/dsp/platform.c. pldm_msgbuf_extract_sensor_data() just above is guarded for the 64-bit tags:\n\n    case PLDM_SENSOR_DATA_SIZE_UINT64:\n    case PLDM_SENSOR_DATA_SIZE_SINT64:\n            return -EINVAL;\n\nand so is pldm__msgbuf_extract_range_field_format() below. This one isn\u0027t, and it\u0027s the one writing through a void * whose size it cannot know - the comment above the function already calls that out.\n\nIf the 64-bit capable path goes through a new entry point instead, this helper can stay guarded like its neighbours.",
+      "revId": "817cfb8f785c55f10f7c21d3876ef3a5e28ef768",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
