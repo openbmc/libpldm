@@ -24,69 +24,96 @@ static std::vector<uint8_t> makePkgV1_3_0()
     std::vector<uint8_t> header;
 
     // pkg header size, this is updated later
-    header.push_back(0x8b);
-    header.push_back(0x00);
+    appendLE16(header, 0x8b);
 
     // pkg release date time (13 bytes, timestamp104)
     appendTimestamp104(header);
 
     // component bitmap bit length
-    header.push_back(0x08);
-    header.push_back(0x00);
+    appendLE16(header, 0x08);
 
     // package version string
     appendTypeLengthString(
         header, std::vector<uint8_t>{0x56, 0x65, 0x72, 0x73, 0x69, 0x6F, 0x6E,
                                      0x53, 0x74, 0x72, 0x69, 0x6E, 0x67, 0x31});
 
-    std::vector<uint8_t> downstreamdevidarea{
-        // clang-format off
+    std::vector<uint8_t> ddevidarea{};
+
     // Downstream Device Identification Area
-    0x00, 0x10, // DownstreamDeviceRecordLength
-    0x01, // DownstreamDeviceDescriptorCount
-    0x01, 0x00, 0x00, 0x00, // DownstreamDeviceUpdateOptionFlags
 
-    0x01,       // DownstreamDeviceSelfContainedActivationMinVersionStringType
-    0x0E,       // DownstreamDeviceSelfContainedActivationMinVersionStringLength
+    // DownstreamDeviceRecordLength
+    appendLE16(ddevidarea, 0x1000);
 
-    0x03, 0x00, // DownstreamDevicePackageDataLength
-    0x08, 0x00, 0x00, 0x00, // DownstreamDeviceReferenceManifestLength
+    // DownstreamDeviceDescriptorCount
+    ddevidarea.push_back(0x01);
 
-    0x01, // DownstreamDeviceApplicableComponents
+    // DownstreamDeviceUpdateOptionFlags
+    appendLE32(ddevidarea, 0x01);
 
-    0x56, 0x65, 0x72, 0x73, 0x69, 0x6F,
-    0x6E, 0x53, 0x74, 0x72, 0x69, 0x6E,
-    0x67, 0x31, // DownstreamDeviceSelfContainedActivationMinVersionString
+    // DownstreamDeviceSelfContainedActivationMinVersionStringType
+    ddevidarea.push_back(0x01);
 
-    0x09, 0xa, 0x9, 0xa, // DownstreamDeviceSelfContainedActivationMinVersionComparisonStamp
+    // DownstreamDeviceSelfContainedActivationMinVersionStringLength
+    ddevidarea.push_back(0x0E);
+
+    // DownstreamDevicePackageDataLength
+    appendLE16(ddevidarea, 0x03);
+
+    // DownstreamDeviceReferenceManifestLength
+    appendLE32(ddevidarea, 0x08);
+
+    // DownstreamDeviceApplicableComponents
+    ddevidarea.push_back(0x01);
+
+    // DownstreamDeviceSelfContainedActivationMinVersionString
+    const std::vector<uint8_t> ddscamvs = {
+        0x56, 0x65, 0x72, 0x73, 0x69, 0x6F, 0x6E,
+        0x53, 0x74, 0x72, 0x69, 0x6E, 0x67, 0x31,
+    };
+    ddevidarea.insert(ddevidarea.end(), ddscamvs.begin(), ddscamvs.end());
+
+    // DownstreamDeviceSelfContainedActivationMinVersionComparisonStamp
+    appendLE32(ddevidarea, 0x0a090a09);
 
     // DownstreamDeviceRecordDescriptors
     // record descriptors below
-    0x02, 0x00, // record 0: descriptor type: UUID
 
-    0x10, 0x00, // record 0: InitialDescriptorLength (16 bytes)
+    // record 0: descriptor type: UUID
+    appendLE16(ddevidarea, 0x0002);
 
-    0x16, 0x20, 0x23, 0xC9, 0x3E, 0xC5, 0x41,
-    0x15, 0x95, 0xF4, 0x48, 0x70, 0x1D, 0x49,
-    0xD6, 0x75, // record 0: InitialDescriptorData (UUID)
+    // record 0: InitialDescriptorLength (16 bytes)
+    appendLE16(ddevidarea, 0x0010);
+
+    // record 0: InitialDescriptorData (UUID)
+    const std::vector<uint8_t> idd = {
+        0x16, 0x20, 0x23, 0xC9, 0x3E, 0xC5, 0x41, 0x15,
+        0x95, 0xF4, 0x48, 0x70, 0x1D, 0x49, 0xD6, 0x75,
+    };
+    ddevidarea.insert(ddevidarea.end(), idd.begin(), idd.end());
 
     // DownstreamDevicePackageData
-    0xde, 0xde, 0xfe,
+    const std::vector<uint8_t> ddpd = {0xde, 0xde, 0xfe};
+    ddevidarea.insert(ddevidarea.end(), ddpd.begin(), ddpd.end());
 
     // DownstreamDeviceReferenceManifestData (as per Table 10)
-    0x03, // SVHID,  (e.g. PCI SIG)
-    0x02, // VendorIDLen
-    0x1d, 0xa0, // (e.g. 3M Company)
-    // actual manifest data (completely made up and without meaning)
-    0x31, 0x32, 0x33, 0x34,
+    // SVHID,  (e.g. PCI SIG)
+    ddevidarea.push_back(0x03);
 
-        // clang-format on
-    };
+    // VendorIDLen
+    ddevidarea.push_back(0x02);
+
+    // (e.g. 3M Company)
+    ddevidarea.push_back(0x1d);
+    ddevidarea.push_back(0xa0);
+
+    // actual manifest data (completely made up and without meaning)
+    const std::vector<uint8_t> rmd = {0x31, 0x32, 0x33, 0x34};
+    ddevidarea.insert(ddevidarea.end(), rmd.begin(), rmd.end());
 
     // set DownstreamDeviceRecordLength
-    const uint16_t downstreamdevidareaLength = downstreamdevidarea.size();
-    downstreamdevidarea[0] = downstreamdevidareaLength & 0xff;
-    downstreamdevidarea[1] = (downstreamdevidareaLength >> 8) & 0xff;
+    const uint16_t downstreamdevidareaLength = ddevidarea.size();
+    ddevidarea[0] = downstreamdevidareaLength & 0xff;
+    ddevidarea[1] = (downstreamdevidareaLength >> 8) & 0xff;
 
     std::vector<uint8_t> pkg{};
 
@@ -101,8 +128,7 @@ static std::vector<uint8_t> makePkgV1_3_0()
 
     // DownstreamDeviceIDRecordCount
     pkg.push_back(0x01);
-    pkg.insert(pkg.end(), downstreamdevidarea.begin(),
-               downstreamdevidarea.end());
+    pkg.insert(pkg.end(), ddevidarea.begin(), ddevidarea.end());
 
     appendComponentImageInfoArea1(pkg);
 

@@ -24,15 +24,13 @@ TEST(PackageParserTest, ValidPkgSingleDescriptorSingleComponent)
     appendPackageHeaderIdentifier(pkg, pldm::fw_update::PackagePin::v1);
 
     // pkg header size
-    pkg.push_back(0x8b);
-    pkg.push_back(0x00);
+    appendLE16(pkg, 0x8b);
 
     // pkg release date time (13 bytes, timestamp104)
     appendTimestamp104(pkg);
 
     // component bitmap bit length
-    pkg.push_back(0x08);
-    pkg.push_back(0x00);
+    appendLE16(pkg, 0x08);
 
     // package version string
     appendTypeLengthString(
@@ -109,15 +107,13 @@ TEST(PackageParserTest, ValidPkgMultipleDescriptorsMultipleComponents)
     appendPackageHeaderIdentifier(pkg, pldm::fw_update::PackagePin::v1);
 
     // pkg header size
-    pkg.push_back(0x46);
-    pkg.push_back(0x01);
+    appendLE16(pkg, 0x0146);
 
     // pkg release date time, 13 bytes, timestamp104
     appendTimestamp104(pkg);
 
     // component bitmap bit length
-    pkg.push_back(0x08);
-    pkg.push_back(0x00);
+    appendLE16(pkg, 0x08);
 
     // package version string
     appendTypeLengthString(
@@ -306,15 +302,13 @@ TEST(PackageParserTest,
     appendPackageHeaderIdentifier(pkg, pldm::fw_update::PackagePin::v1);
 
     // pkg header size
-    pkg.push_back(0x8b);
-    pkg.push_back(0x00);
+    appendLE16(pkg, 0x8b);
 
     // pkg release date time (13 bytes, timestamp104)
     appendTimestamp104(pkg);
 
     // component bitmap bit length
-    pkg.push_back(0x08);
-    pkg.push_back(0x00);
+    appendLE16(pkg, 0x08);
 
     // package version string
     appendTypeLengthString(

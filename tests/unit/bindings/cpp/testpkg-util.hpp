@@ -4,6 +4,18 @@
 #include <libpldm++/firmware_update.hpp>
 #include <vector>
 
+// helper to create byte vector from little endian uint32_t
+std::vector<uint8_t> le32Vector(uint32_t x);
+
+// helper to append uint32_t value as little endian
+void appendLE32(std::vector<uint8_t>& pkg, uint32_t x);
+
+// helper to create byte vector from little endian uint16_t
+std::vector<uint8_t> le16Vector(uint16_t x);
+
+// helper to append uint16_t value as little endian
+void appendLE16(std::vector<uint8_t>& pkg, uint16_t x);
+
 // helper for appending the PackageHeaderIdentifier (UUID)
 // and PackageHeaderFormatRevision
 void appendPackageHeaderIdentifier(std::vector<uint8_t>& pkg,
