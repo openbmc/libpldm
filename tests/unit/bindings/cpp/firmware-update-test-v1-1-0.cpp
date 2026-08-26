@@ -27,62 +27,75 @@ static std::vector<uint8_t> makePkgV1_1_0()
     std::vector<uint8_t> header;
 
     // pkg header size, updated later
-    header.push_back(0x00);
-    header.push_back(0x00);
+    appendLE16(header, 0x00);
 
     // pkg release date time (13 bytes, timestamp104)
     appendTimestamp104(header);
 
     // component bitmap bit length
-    header.push_back(0x08);
-    header.push_back(0x00);
+    appendLE16(header, 0x08);
 
     // package version string
     appendTypeLengthString(header, std::vector<uint8_t>{'v'});
 
-    std::vector<uint8_t> downstreamdevidarea{
-        // clang-format off
     // Downstream Device Identification Area
-    0x00, 0x00, // DownstreamDeviceRecordLength, this is updated later
-    0x01, // DownstreamDeviceDescriptorCount
-    0x01, 0x00, 0x00, 0x00, // DownstreamDeviceUpdateOptionFlags
+    std::vector<uint8_t> ddevidarea{};
 
-    0x01,       // DownstreamDeviceSelfContainedActivationMinVersionStringType
-    0x01,       // DownstreamDeviceSelfContainedActivationMinVersionStringLength
+    // DownstreamDeviceRecordLength, this is updated later
+    appendLE16(ddevidarea, 0x0000);
 
-    0x03, 0x00, // DownstreamDevicePackageDataLength
+    // DownstreamDeviceDescriptorCount
+    ddevidarea.push_back(0x01);
 
-    0x01, // DownstreamDeviceApplicableComponents
+    // DownstreamDeviceUpdateOptionFlags
+    appendLE32(ddevidarea, 0x01);
 
-    'v', // DownstreamDeviceSelfContainedActivationMinVersionString
+    // DownstreamDeviceSelfContainedActivationMinVersionStringType
+    ddevidarea.push_back(0x01);
+
+    // DownstreamDeviceSelfContainedActivationMinVersionStringLength
+    ddevidarea.push_back(0x01);
+
+    // DownstreamDevicePackageDataLength
+    appendLE16(ddevidarea, 0x03);
+
+    // DownstreamDeviceApplicableComponents
+    ddevidarea.push_back(0x01);
+
+    // DownstreamDeviceSelfContainedActivationMinVersionString
+    ddevidarea.push_back('v');
 
     // DownstreamDeviceSelfContainedActivationMinVersionComparisonStamp
-    0x06, 0x07, 0x08, 0x09,
+    appendLE32(ddevidarea, 0x09080706);
 
     // DownstreamDeviceRecordDescriptors
     // record descriptors below
-    0x02, 0x00, // record 0: descriptor type: UUID
 
-    0x10, 0x00, // record 0: InitialDescriptorLength (16 bytes)
+    // record 0: descriptor type: UUID
+    appendLE16(ddevidarea, 0x02);
 
-    0x16, 0x20, 0x23, 0xC9, 0x3E, 0xC5, 0x41,
-    0x15, 0x95, 0xF4, 0x48, 0x70, 0x1D, 0x49,
-    0xD6, 0x75, // record 0: InitialDescriptorData (UUID)
+    // record 0: InitialDescriptorLength (16 bytes)
+    appendLE16(ddevidarea, 0x10);
+
+    // record 0: InitialDescriptorData (UUID)
+    std::vector<uint8_t> r0dd = {0x16, 0x20, 0x23, 0xC9, 0x3E, 0xC5,
+                                 0x41, 0x15, 0x95, 0xF4, 0x48, 0x70,
+                                 0x1D, 0x49, 0xD6, 0x75};
+    ddevidarea.insert(ddevidarea.end(), r0dd.begin(), r0dd.end());
 
     // DownstreamDevicePackageData
-    0x83, 0x27, 0x72,
-        // clang-format on
-    };
+    std::vector<uint8_t> ddpd = {0x83, 0x27, 0x72};
+    ddevidarea.insert(ddevidarea.end(), ddpd.begin(), ddpd.end());
 
     {
         // set DownstreamDeviceRecordLength
-        const uint16_t downstreamdevidareaLength = downstreamdevidarea.size();
+        const uint16_t downstreamdevidareaLength = ddevidarea.size();
 
         std::cout << "downstream device area length: "
                   << downstreamdevidareaLength << std::endl;
 
-        downstreamdevidarea[0] = downstreamdevidareaLength & 0xff;
-        downstreamdevidarea[1] = (downstreamdevidareaLength >> 8) & 0xff;
+        ddevidarea[0] = downstreamdevidareaLength & 0xff;
+        ddevidarea[1] = (downstreamdevidareaLength >> 8) & 0xff;
     }
 
     std::vector<uint8_t> pkg{};
@@ -98,8 +111,7 @@ static std::vector<uint8_t> makePkgV1_1_0()
 
     // DownstreamDeviceIDRecordCount
     pkg.push_back(0x01);
-    pkg.insert(pkg.end(), downstreamdevidarea.begin(),
-               downstreamdevidarea.end());
+    pkg.insert(pkg.end(), ddevidarea.begin(), ddevidarea.end());
 
     appendComponentImageInfoArea1(pkg);
 
