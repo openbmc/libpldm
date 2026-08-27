@@ -35,6 +35,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6927095a_31d9f4de",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1002640
+      },
+      "writtenOn": "2026-08-27T08:55:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d9816573_b103ab10",
+      "revId": "6c4fa5d39476c261e80ccc82296be01119062280",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "524eddd6_9d83661a",
@@ -48,6 +66,24 @@
       "writtenOn": "2025-10-13T08:09:54Z",
       "side": 1,
       "message": "Can we add the description about from which DSP0248 version the 64data sized is added?",
+      "revId": "6c4fa5d39476c261e80ccc82296be01119062280",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2a452550_ba69c9ef",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 757,
+      "author": {
+        "id": 1002640
+      },
+      "writtenOn": "2026-08-27T08:55:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "524eddd6_9d83661a",
       "revId": "6c4fa5d39476c261e80ccc82296be01119062280",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -99,6 +135,24 @@
       "writtenOn": "2025-10-13T08:09:54Z",
       "side": 1,
       "message": "Can add new test case for 64 bits and keeps the others test cases do not change?",
+      "revId": "6c4fa5d39476c261e80ccc82296be01119062280",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1c1d7a5a_9ee41c88",
+        "filename": "tests/dsp/platform.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 800,
+      "author": {
+        "id": 1002640
+      },
+      "writtenOn": "2026-08-27T08:55:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f4ac4577_b57e4e4c",
       "revId": "6c4fa5d39476c261e80ccc82296be01119062280",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
