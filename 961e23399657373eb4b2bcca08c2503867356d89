@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "481d35b0_7be9f313",
+        "filename": "src/dsp/fru.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 594,
+      "author": {
+        "id": 1002607
+      },
+      "writtenOn": "2026-08-27T08:19:13Z",
+      "side": 1,
+      "message": "pls refer to https://github.com/openbmc/libpldm/blob/ddb871f7184a9fc2492e704c4ac483cf0b68d439/CONTRIBUTING.md?plain\u003d1#L234\n\nWe can\u0027t introduce a new API as stable directly",
+      "revId": "961e23399657373eb4b2bcca08c2503867356d89",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
