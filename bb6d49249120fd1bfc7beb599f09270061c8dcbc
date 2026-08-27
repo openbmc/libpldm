@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bfde2182_e3a53289",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 10
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2026-08-27T07:58:18Z",
+      "side": 1,
+      "message": "This should be added to the Unreleased section",
+      "revId": "bb6d49249120fd1bfc7beb599f09270061c8dcbc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c39bab80_e95b6451",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 870,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2026-08-27T07:58:18Z",
+      "side": 1,
+      "message": "have a new line here",
+      "revId": "bb6d49249120fd1bfc7beb599f09270061c8dcbc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
