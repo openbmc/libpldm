@@ -16,6 +16,24 @@
       "message": "To be honest, this all seems a little unfortunate.\n\nI don\u0027t have any concrete feedback other than that though.",
       "revId": "6c982ecce7acd5cc41f65c4ed61d207e4a70dd9f",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4bd67701_c942dafc",
+        "filename": "tests/unit/bindings/cpp/testpkg-util.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2026-08-28T09:59:09Z",
+      "side": 1,
+      "message": "I think this patch is an improvement over just putting the large vectors of hex literals into the source code.\n\nAnyone who wants to write a testcase needs a package (as an `std::span\u003cconst uint8_t\u003e`) so we need some way to create it. And it cannot be the same one each time as we need to inject some error into the package for the parser to find.\n\nThese helper functions are by no means meant to be the final or optimal shape of an API to create packages. I would expect them to be further improved in future patches to allow for creating packages more easily.\n\nSome things i still want to improve:\n\npatterns like:\n```\n    pkg.insert(pkg.end(), initialDescriptorData.begin(),\n               initialDescriptorData.end());\n\n```\ncould be simplified\n\nand \n```\n    pkg.push_back(0x01);\n\n    appendLE32(pkg, 0x01);\n\n    pkg.push_back(0x01);\n```\n\nis also not great as the `pkg` is in a different position each time.\n\nBut since this diff is already quite large, i did not include those changes here.\n\nHappy to make any requested changes for this patch or the overall direction of these changes.",
+      "parentUuid": "e85dbf1b_1e3cd71a",
+      "revId": "6c982ecce7acd5cc41f65c4ed61d207e4a70dd9f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
