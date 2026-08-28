@@ -96,7 +96,7 @@ void appendCRC(std::vector<uint8_t>& pkg)
 }
 
 void appendTypeLengthString(std::vector<uint8_t>& pkg,
-                            const std::vector<uint8_t>& str)
+                            const std::string_view& str)
 {
 
     // DSP0267, Table 33 String Type Values
@@ -106,6 +106,11 @@ void appendTypeLengthString(std::vector<uint8_t>& pkg,
     // string length
     pkg.push_back(str.size());
 
+    pkg.insert(pkg.end(), str.begin(), str.end());
+}
+
+void appendString(std::vector<uint8_t>& pkg, const std::string_view& str)
+{
     pkg.insert(pkg.end(), str.begin(), str.end());
 }
 
@@ -137,9 +142,7 @@ void appendComponentImageInfo1(std::vector<uint8_t>& pkg)
     appendLE32(pkg, 0x01);
 
     // component version string
-    appendTypeLengthString(
-        pkg, std::vector<uint8_t>{0x56, 0x65, 0x72, 0x73, 0x69, 0x6F, 0x6E,
-                                  0x53, 0x74, 0x72, 0x69, 0x6E, 0x67, 0x33});
+    appendTypeLengthString(pkg, "VersionString3");
 }
 
 void appendComponentImageInfo2(std::vector<uint8_t>& pkg)
@@ -160,9 +163,7 @@ void appendComponentImageInfo2(std::vector<uint8_t>& pkg)
     appendLE32(pkg, 0x01);
 
     // component version string
-    appendTypeLengthString(
-        pkg, std::vector<uint8_t>{0x56, 0x65, 0x72, 0x73, 0x69, 0x6F, 0x6E,
-                                  0x53, 0x74, 0x72, 0x69, 0x6E, 0x67, 0x35});
+    appendTypeLengthString(pkg, "VersionString5");
 }
 
 void appendComponentImageInfo3(std::vector<uint8_t>& pkg)
@@ -183,9 +184,7 @@ void appendComponentImageInfo3(std::vector<uint8_t>& pkg)
     appendLE32(pkg, 0x01);
 
     // component version string
-    appendTypeLengthString(
-        pkg, std::vector<uint8_t>{0x56, 0x65, 0x72, 0x73, 0x69, 0x6F, 0x6E,
-                                  0x53, 0x74, 0x72, 0x69, 0x6E, 0x67, 0x36});
+    appendTypeLengthString(pkg, "VersionString6");
 }
 
 void appendComponentImageInfo4(std::vector<uint8_t>& pkg)
@@ -206,9 +205,7 @@ void appendComponentImageInfo4(std::vector<uint8_t>& pkg)
     appendLE32(pkg, 0x01);
 
     // component version string
-    appendTypeLengthString(
-        pkg, std::vector<uint8_t>{0x56, 0x65, 0x72, 0x73, 0x69, 0x6F, 0x6E,
-                                  0x53, 0x74, 0x72, 0x69, 0x6E, 0x67, 0x37});
+    appendTypeLengthString(pkg, "VersionString7");
 }
 
 void appendComponentImageInfoArea1(std::vector<uint8_t>& pkg)
@@ -269,9 +266,7 @@ void appendFirmwareDeviceIdRecord1(std::vector<uint8_t>& pkg)
     pkg.push_back(0x01);
 
     // component image set version string (14 bytes)
-    std::vector<uint8_t> cisvs = {0x56, 0x65, 0x72, 0x73, 0x69, 0x6F, 0x6E,
-                                  0x53, 0x74, 0x72, 0x69, 0x6E, 0x67, 0x32};
-    pkg.insert(pkg.end(), cisvs.begin(), cisvs.end());
+    appendString(pkg, "VersionString2");
 
     // record descriptors below
     // record 0: descriptor type: UUID
@@ -317,9 +312,7 @@ void appendFirmwareDeviceIdRecord1InvalidApplicableComponentOOB(
     pkg.push_back(0x09);
 
     // component image set version string (14 bytes)
-    std::vector<uint8_t> cisvs = {0x56, 0x65, 0x72, 0x73, 0x69, 0x6F, 0x6E,
-                                  0x53, 0x74, 0x72, 0x69, 0x6E, 0x67, 0x32};
-    pkg.insert(pkg.end(), cisvs.begin(), cisvs.end());
+    appendString(pkg, "VersionString2");
 
     // record descriptors below
     // record 0: descriptor type: UUID
@@ -365,7 +358,7 @@ void appendFirmwareDeviceIdRecord2(std::vector<uint8_t>& pkg)
     pkg.push_back(0x01);
 
     // component image set version string
-    pkg.push_back('v');
+    appendString(pkg, "v");
 
     // record descriptors below
 
@@ -421,9 +414,7 @@ void appendFirmwareDeviceIdRecord3(std::vector<uint8_t>& pkg)
     pkg.push_back(0x01);
 
     // component image set version string (14 bytes)
-    std::vector<uint8_t> cisvs{0x56, 0x65, 0x72, 0x73, 0x69, 0x6F, 0x6E,
-                               0x53, 0x74, 0x72, 0x69, 0x6E, 0x67, 0x32};
-    pkg.insert(pkg.end(), cisvs.begin(), cisvs.end());
+    appendString(pkg, "VersionString2");
 
     // record descriptors below
     // record 0: descriptor type: UUID
@@ -485,11 +476,7 @@ void appendFirmwareDeviceIdArea1(std::vector<uint8_t>& pkg)
     pkg.push_back(0x03);
 
     // component image set version string (14 bytes)
-    std::vector<uint8_t> cisvs{
-        0x56, 0x65, 0x72, 0x73, 0x69, 0x6F, 0x6E,
-        0x53, 0x74, 0x72, 0x69, 0x6E, 0x67, 0x32,
-    };
-    pkg.insert(pkg.end(), cisvs.begin(), cisvs.end());
+    appendString(pkg, "VersionString2");
 
     // record 0: descriptor 0: record descriptor type: uuid
     appendLE16(pkg, 0x02);
@@ -547,11 +534,7 @@ void appendFirmwareDeviceIdArea1(std::vector<uint8_t>& pkg)
     pkg.push_back(0x07);
 
     // component image set version string (15 bytes)
-    std::vector<uint8_t> cisvs2{
-        0x56, 0x65, 0x72, 0x73, 0x69, 0x6F, 0x6E, 0x53,
-        0x74, 0x72, 0x69, 0x6E, 0x67, 0x33, 0x02,
-    };
-    pkg.insert(pkg.end(), cisvs2.begin(), cisvs2.end());
+    appendString(pkg, "VersionString3\x02");
 
     // record 1: descriptor 0:
 
@@ -590,11 +573,7 @@ void appendFirmwareDeviceIdArea1(std::vector<uint8_t>& pkg)
     pkg.push_back(0x01);
 
     // component image set version string (15 bytes)
-    std::vector<uint8_t> cisvs3{
-        0x56, 0x65, 0x72, 0x73, 0x69, 0x6F, 0x6E, 0x53,
-        0x74, 0x72, 0x69, 0x6E, 0x67, 0x34, 0x02,
-    };
-    pkg.insert(pkg.end(), cisvs3.begin(), cisvs3.end());
+    appendString(pkg, "VersionString4\x02");
 
     // descriptor type
     appendLE16(pkg, 0x1000);

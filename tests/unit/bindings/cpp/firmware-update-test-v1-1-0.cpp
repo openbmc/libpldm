@@ -36,7 +36,7 @@ static std::vector<uint8_t> makePkgV1_1_0()
     appendLE16(header, 0x08);
 
     // package version string
-    appendTypeLengthString(header, std::vector<uint8_t>{'v'});
+    appendTypeLengthString(header, "v");
 
     // Downstream Device Identification Area
     std::vector<uint8_t> ddevidarea{};
@@ -63,7 +63,7 @@ static std::vector<uint8_t> makePkgV1_1_0()
     ddevidarea.push_back(0x01);
 
     // DownstreamDeviceSelfContainedActivationMinVersionString
-    ddevidarea.push_back('v');
+    appendString(ddevidarea, "v");
 
     // DownstreamDeviceSelfContainedActivationMinVersionComparisonStamp
     appendLE32(ddevidarea, 0x09080706);

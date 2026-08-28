@@ -33,9 +33,7 @@ static std::vector<uint8_t> makePkgV1_3_0()
     appendLE16(header, 0x08);
 
     // package version string
-    appendTypeLengthString(
-        header, std::vector<uint8_t>{0x56, 0x65, 0x72, 0x73, 0x69, 0x6F, 0x6E,
-                                     0x53, 0x74, 0x72, 0x69, 0x6E, 0x67, 0x31});
+    appendTypeLengthString(header, "VersionString1");
 
     std::vector<uint8_t> ddevidarea{};
 
@@ -66,11 +64,7 @@ static std::vector<uint8_t> makePkgV1_3_0()
     ddevidarea.push_back(0x01);
 
     // DownstreamDeviceSelfContainedActivationMinVersionString
-    const std::vector<uint8_t> ddscamvs = {
-        0x56, 0x65, 0x72, 0x73, 0x69, 0x6F, 0x6E,
-        0x53, 0x74, 0x72, 0x69, 0x6E, 0x67, 0x31,
-    };
-    ddevidarea.insert(ddevidarea.end(), ddscamvs.begin(), ddscamvs.end());
+    appendString(ddevidarea, "VersionString1");
 
     // DownstreamDeviceSelfContainedActivationMinVersionComparisonStamp
     appendLE32(ddevidarea, 0x0a090a09);

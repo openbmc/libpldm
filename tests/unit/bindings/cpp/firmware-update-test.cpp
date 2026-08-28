@@ -33,9 +33,7 @@ TEST(PackageParserTest, ValidPkgSingleDescriptorSingleComponent)
     appendLE16(pkg, 0x08);
 
     // package version string
-    appendTypeLengthString(
-        pkg, std::vector<uint8_t>{0x56, 0x65, 0x72, 0x73, 0x69, 0x6F, 0x6E,
-                                  0x53, 0x74, 0x72, 0x69, 0x6E, 0x67, 0x31});
+    appendTypeLengthString(pkg, "VersionString1");
 
     // device id record count
     pkg.push_back(0x01);
@@ -116,9 +114,7 @@ TEST(PackageParserTest, ValidPkgMultipleDescriptorsMultipleComponents)
     appendLE16(pkg, 0x08);
 
     // package version string
-    appendTypeLengthString(
-        pkg, std::vector<uint8_t>{0x56, 0x65, 0x72, 0x73, 0x69, 0x6F, 0x6E,
-                                  0x53, 0x74, 0x72, 0x69, 0x6E, 0x67, 0x31});
+    appendTypeLengthString(pkg, "VersionString1");
 
     appendFirmwareDeviceIdArea1(pkg);
 
@@ -311,9 +307,7 @@ TEST(PackageParserTest,
     appendLE16(pkg, 0x08);
 
     // package version string
-    appendTypeLengthString(
-        pkg, std::vector<uint8_t>{0x56, 0x65, 0x72, 0x73, 0x69, 0x6F, 0x6E,
-                                  0x53, 0x74, 0x72, 0x69, 0x6E, 0x67, 0x31});
+    appendTypeLengthString(pkg, "VersionString1");
 
     // device id record count
     pkg.push_back(0x01);

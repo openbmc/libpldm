@@ -2,6 +2,7 @@
 
 #include <cstdint>
 #include <libpldm++/firmware_update.hpp>
+#include <string_view>
 #include <vector>
 
 // helper to create little endian byte vector from uint32_t
@@ -26,7 +27,9 @@ void appendCRC(std::vector<uint8_t>& pkg);
 
 // helper for appending a type-length-string field to a fw update package
 void appendTypeLengthString(std::vector<uint8_t>& pkg,
-                            const std::vector<uint8_t>& str);
+                            const std::string_view& str);
+// helper for appending a (separate) string field to a fw update package
+void appendString(std::vector<uint8_t>& pkg, const std::string_view& str);
 
 // helper for appending a timestamp104 value
 void appendTimestamp104(std::vector<uint8_t>& pkg);
