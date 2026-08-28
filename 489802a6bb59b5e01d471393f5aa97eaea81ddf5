@@ -16,6 +16,24 @@
       "message": "Where are they used?",
       "revId": "489802a6bb59b5e01d471393f5aa97eaea81ddf5",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1f742d0d_941f06b9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 15
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1002885
+      },
+      "writtenOn": "2026-08-28T06:05:59Z",
+      "side": 1,
+      "message": "Apologized that I have missed this,\nhave now added the patch in which the newly introduced APIs were used.",
+      "parentUuid": "8b4985c9_992da5c6",
+      "revId": "489802a6bb59b5e01d471393f5aa97eaea81ddf5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
