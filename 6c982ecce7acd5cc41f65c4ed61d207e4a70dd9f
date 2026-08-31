@@ -3,6 +3,23 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "fb885d81_0b973dd4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001711
+      },
+      "writtenOn": "2026-08-31T14:28:24Z",
+      "side": 1,
+      "message": "The whole byte stitching is as Andrew said \u0027unfortunate\u0027 but I think this change is at least an improvement even if not an ideal solution (though a proper large refactor using enums and so on is a giant feature creep imo)",
+      "revId": "6c982ecce7acd5cc41f65c4ed61d207e4a70dd9f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "e85dbf1b_1e3cd71a",
         "filename": "tests/unit/bindings/cpp/testpkg-util.cpp",
         "patchSetId": 2
