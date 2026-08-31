@@ -35,6 +35,26 @@ void appendLE16(std::vector<uint8_t>& pkg, uint16_t x)
     pkg.insert(pkg.end(), v.begin(), v.end());
 }
 
+void patchLE32(std::vector<uint8_t>& pkg, size_t offset, uint32_t value)
+{
+
+    auto v = le32Vector(value);
+    for (size_t i = offset; i < pkg.size() && (i - offset) < v.size(); i++)
+    {
+        pkg[i] = v[i - offset];
+    }
+}
+
+void patchLE16(std::vector<uint8_t>& pkg, size_t offset, uint32_t value)
+{
+
+    auto v = le16Vector(value);
+    for (size_t i = offset; i < pkg.size() && (i - offset) < v.size(); i++)
+    {
+        pkg[i] = v[i - offset];
+    }
+}
+
 void appendPackageHeaderIdentifier(std::vector<uint8_t>& pkg,
                                    pldm::fw_update::PackagePin pin)
 {
@@ -124,7 +144,7 @@ void appendTimestamp104(std::vector<uint8_t>& pkg)
     pkg.insert(pkg.end(), timestamp104Bytes.begin(), timestamp104Bytes.end());
 }
 
-void appendComponentImageInfo1(std::vector<uint8_t>& pkg)
+size_t appendComponentImageInfo1(std::vector<uint8_t>& pkg)
 {
     // component classification
     appendLE16(pkg, 0x000A);
@@ -136,16 +156,21 @@ void appendComponentImageInfo1(std::vector<uint8_t>& pkg)
     appendLE16(pkg, 0x0000);
     // requested component activation method
     appendLE16(pkg, 0x0000);
+
+    size_t offset = pkg.size();
+
     // component location offset
-    appendLE32(pkg, 0x8B);
+    appendLE32(pkg, PLACEHOLDER);
     // component size
     appendLE32(pkg, 0x01);
 
     // component version string
     appendTypeLengthString(pkg, "VersionString3");
+
+    return offset;
 }
 
-void appendComponentImageInfo2(std::vector<uint8_t>& pkg)
+size_t appendComponentImageInfo2(std::vector<uint8_t>& pkg)
 {
     // component classification
     appendLE16(pkg, 0x000A);
@@ -157,16 +182,21 @@ void appendComponentImageInfo2(std::vector<uint8_t>& pkg)
     appendLE16(pkg, 0x0000);
     // requested component activation method
     appendLE16(pkg, 0x0000);
+
+    size_t offset = pkg.size();
+
     // component location offset
-    appendLE32(pkg, 0x146);
+    appendLE32(pkg, PLACEHOLDER);
     // component size
     appendLE32(pkg, 0x01);
 
     // component version string
     appendTypeLengthString(pkg, "VersionString5");
+
+    return offset;
 }
 
-void appendComponentImageInfo3(std::vector<uint8_t>& pkg)
+size_t appendComponentImageInfo3(std::vector<uint8_t>& pkg)
 {
     // component classification
     appendLE16(pkg, 0x000A);
@@ -178,16 +208,21 @@ void appendComponentImageInfo3(std::vector<uint8_t>& pkg)
     appendLE16(pkg, 0x0000);
     // requested component activation method
     appendLE16(pkg, 0x0001);
+
+    size_t offset = pkg.size();
+
     // component location offset
-    appendLE32(pkg, 0x146);
+    appendLE32(pkg, PLACEHOLDER);
     // component size
     appendLE32(pkg, 0x01);
 
     // component version string
     appendTypeLengthString(pkg, "VersionString6");
+
+    return offset;
 }
 
-void appendComponentImageInfo4(std::vector<uint8_t>& pkg)
+size_t appendComponentImageInfo4(std::vector<uint8_t>& pkg)
 {
     // component classification
     appendLE16(pkg, 0x000B);
@@ -199,54 +234,59 @@ void appendComponentImageInfo4(std::vector<uint8_t>& pkg)
     appendLE16(pkg, 0x0001);
     // requested component activation method
     appendLE16(pkg, 0x000C);
+
+    size_t offset = pkg.size();
+
     // component location offset
-    appendLE32(pkg, 0x146);
+    appendLE32(pkg, PLACEHOLDER);
     // component size
     appendLE32(pkg, 0x01);
 
     // component version string
     appendTypeLengthString(pkg, "VersionString7");
+
+    return offset;
 }
 
-void appendComponentImageInfoArea1(std::vector<uint8_t>& pkg)
+std::vector<size_t> appendComponentImageInfoArea1(std::vector<uint8_t>& pkg)
 {
 
     // component image info area
     // component image count
     appendLE16(pkg, 0x01);
 
-    appendComponentImageInfo1(pkg);
+    return {appendComponentImageInfo1(pkg)};
 }
 
-void appendComponentImageInfoArea2(std::vector<uint8_t>& pkg)
+std::vector<size_t> appendComponentImageInfoArea2(std::vector<uint8_t>& pkg)
 {
 
     // component image info area
     // component image count
     appendLE16(pkg, 0x03);
 
-    appendComponentImageInfo2(pkg);
-    appendComponentImageInfo3(pkg);
-    appendComponentImageInfo4(pkg);
+    return {appendComponentImageInfo2(pkg), appendComponentImageInfo3(pkg),
+            appendComponentImageInfo4(pkg)};
 }
 
 void appendComponentOpaqueData(std::vector<uint8_t>& pkg)
 {
-    // ComponentOpaqueDataLength
-    appendLE32(pkg, 0x05);
-
-    // ComponentOpaqueData
     const std::vector<uint8_t> componentOpaqueData{0x05, 0x04, 0x03, 0x02,
                                                    0x01};
 
+    // ComponentOpaqueDataLength
+    appendLE32(pkg, componentOpaqueData.size());
+
+    // ComponentOpaqueData
     pkg.insert(pkg.end(), componentOpaqueData.begin(),
                componentOpaqueData.end());
 }
 
 void appendFirmwareDeviceIdRecord1(std::vector<uint8_t>& pkg)
 {
+    const size_t recordLengthOffset = pkg.size();
     // record 0: record length
-    appendLE16(pkg, 0x2E);
+    appendLE16(pkg, PLACEHOLDER);
 
     // record 0: descriptor count
     pkg.push_back(0x01);
@@ -283,6 +323,7 @@ void appendFirmwareDeviceIdRecord1(std::vector<uint8_t>& pkg)
     pkg.insert(pkg.end(), initialDescriptorData.begin(),
                initialDescriptorData.end());
 
+    patchLE16(pkg, recordLengthOffset, pkg.size() - recordLengthOffset);
     // firmware device package data (empty here)
 }
 
@@ -290,8 +331,9 @@ void appendFirmwareDeviceIdRecord1(std::vector<uint8_t>& pkg)
 void appendFirmwareDeviceIdRecord1InvalidApplicableComponentOOB(
     std::vector<uint8_t>& pkg)
 {
+    const size_t recordLengthOffset = pkg.size();
     // record 0: record length
-    appendLE16(pkg, 0x2E);
+    appendLE16(pkg, PLACEHOLDER);
 
     // record 0: descriptor count
     pkg.push_back(0x01);
@@ -329,6 +371,7 @@ void appendFirmwareDeviceIdRecord1InvalidApplicableComponentOOB(
     pkg.insert(pkg.end(), initialDescriptorData.begin(),
                initialDescriptorData.end());
 
+    patchLE16(pkg, recordLengthOffset, pkg.size() - recordLengthOffset);
     // firmware device package data (empty here)
 }
 
@@ -338,7 +381,7 @@ void appendFirmwareDeviceIdRecord2(std::vector<uint8_t>& pkg)
     const size_t recordLengthOffset = pkg.size();
 
     // record 0: record length, patched later
-    appendLE16(pkg, 0x0000);
+    appendLE16(pkg, PLACEHOLDER);
 
     // record 0: descriptor count
     pkg.push_back(0x01);
@@ -377,20 +420,18 @@ void appendFirmwareDeviceIdRecord2(std::vector<uint8_t>& pkg)
     pkg.insert(pkg.end(), initialDescriptorData.begin(),
                initialDescriptorData.end());
 
-    {
-        // set Recordlength
-        const uint16_t recordLength = pkg.size() - recordLengthOffset;
+    // set Recordlength
+    patchLE16(pkg, recordLengthOffset, pkg.size() - recordLengthOffset);
 
-        pkg[recordLengthOffset] = recordLength & 0xff;
-        pkg[recordLengthOffset + 1] = (recordLength >> 8) & 0xff;
-    }
     // firmware device package data (empty here)
 }
 
 void appendFirmwareDeviceIdRecord3(std::vector<uint8_t>& pkg)
 {
+    const size_t recordLengthOffset = pkg.size();
+
     // record 0: record length
-    appendLE16(pkg, 0x003a);
+    appendLE16(pkg, PLACEHOLDER);
 
     // record 0: descriptor count
     pkg.push_back(0x01);
@@ -447,15 +488,16 @@ void appendFirmwareDeviceIdRecord3(std::vector<uint8_t>& pkg)
     const std::vector<uint8_t> referenceManifestData = {0x21, 0x22, 0x23, 0x24};
     pkg.insert(pkg.end(), referenceManifestData.begin(),
                referenceManifestData.end());
+
+    patchLE16(pkg, recordLengthOffset, pkg.size() - recordLengthOffset);
 }
 
-void appendFirmwareDeviceIdArea1(std::vector<uint8_t>& pkg)
+static void appendFirmwareDeviceIdArea1Record0(std::vector<uint8_t>& pkg)
 {
-    // DeviceIDRecordCount
-    pkg.push_back(0x03);
+    const size_t recordLengthOffset = pkg.size();
 
     // record 0: record length
-    appendLE16(pkg, 0x45);
+    appendLE16(pkg, PLACEHOLDER);
 
     // record 0: descriptor count
     pkg.push_back(0x03);
@@ -505,7 +547,7 @@ void appendFirmwareDeviceIdArea1(std::vector<uint8_t>& pkg)
     appendLE16(pkg, 0xFFFF);
 
     // record 0: descriptor 2: additional descriptor length
-    appendLE16(pkg, 0x0B);
+    appendLE16(pkg, 11);
 
     // record 0: descriptor 2: additional descriptor identifier data
     std::vector<uint8_t> dd3{
@@ -513,12 +555,20 @@ void appendFirmwareDeviceIdArea1(std::vector<uint8_t>& pkg)
     };
     pkg.insert(pkg.end(), dd3.begin(), dd3.end());
 
+    patchLE16(pkg, recordLengthOffset, pkg.size() - recordLengthOffset);
+}
+
+static void appendFirmwareDeviceIdArea1Record1(std::vector<uint8_t>& pkg)
+{
+    const size_t recordLengthOffset = pkg.size();
+
     // record 1: record length
-    appendLE16(pkg, 0x2E);
+    appendLE16(pkg, PLACEHOLDER);
 
     // record 1: descriptor count
     pkg.push_back(0x01);
 
+    // record 1: device update option flags
     appendLE32(pkg, 0x00);
 
     // record 1: component image set version string type
@@ -533,16 +583,15 @@ void appendFirmwareDeviceIdArea1(std::vector<uint8_t>& pkg)
     // applicable components
     pkg.push_back(0x07);
 
-    // component image set version string (15 bytes)
-    appendString(pkg, "VersionString3\x02");
+    appendString(pkg, "VersionString3");
 
     // record 1: descriptor 0:
 
     // descriptor type
-    appendLE16(pkg, 0x1000);
+    appendLE16(pkg, PLDM_FWUP_UUID);
 
     // descriptor length
-    appendLE16(pkg, 0x1200);
+    appendLE16(pkg, 15);
 
     // descriptorData
     std::vector<uint8_t> r1dd0{
@@ -551,13 +600,21 @@ void appendFirmwareDeviceIdArea1(std::vector<uint8_t>& pkg)
     };
     pkg.insert(pkg.end(), r1dd0.begin(), r1dd0.end());
 
+    patchLE16(pkg, recordLengthOffset, pkg.size() - recordLengthOffset);
+}
+
+static void appendFirmwareDeviceIdArea1Record2(std::vector<uint8_t>& pkg)
+{
+    const size_t recordLengthOffset = pkg.size();
+
     // record 2:
     // record length
-    appendLE16(pkg, 0x2E);
+    appendLE16(pkg, PLACEHOLDER);
 
     // descriptor count
     pkg.push_back(0x01);
 
+    // device update option flags
     appendLE32(pkg, 0x00);
 
     // component image set version string type
@@ -572,14 +629,14 @@ void appendFirmwareDeviceIdArea1(std::vector<uint8_t>& pkg)
     // applicable components
     pkg.push_back(0x01);
 
-    // component image set version string (15 bytes)
-    appendString(pkg, "VersionString4\x02");
+    // component image set version string
+    appendString(pkg, "VersionString4");
 
     // descriptor type
-    appendLE16(pkg, 0x1000);
+    appendLE16(pkg, PLDM_FWUP_UUID);
 
     // descriptor length
-    appendLE16(pkg, 0x1200);
+    appendLE16(pkg, 15);
 
     // descriptorData
     std::vector<uint8_t> r2dd0{
@@ -588,4 +645,16 @@ void appendFirmwareDeviceIdArea1(std::vector<uint8_t>& pkg)
     };
 
     pkg.insert(pkg.end(), r2dd0.begin(), r2dd0.end());
+
+    patchLE16(pkg, recordLengthOffset, pkg.size() - recordLengthOffset);
+}
+
+void appendFirmwareDeviceIdArea1(std::vector<uint8_t>& pkg)
+{
+    // DeviceIDRecordCount
+    pkg.push_back(0x03);
+
+    appendFirmwareDeviceIdArea1Record0(pkg);
+    appendFirmwareDeviceIdArea1Record1(pkg);
+    appendFirmwareDeviceIdArea1Record2(pkg);
 }

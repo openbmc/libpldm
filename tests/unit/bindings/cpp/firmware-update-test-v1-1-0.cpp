@@ -27,7 +27,7 @@ static std::vector<uint8_t> makePkgV1_1_0()
     std::vector<uint8_t> header;
 
     // pkg header size, updated later
-    appendLE16(header, 0x00);
+    appendLE16(header, PLACEHOLDER);
 
     // pkg release date time (13 bytes, timestamp104)
     appendTimestamp104(header);
@@ -42,7 +42,7 @@ static std::vector<uint8_t> makePkgV1_1_0()
     std::vector<uint8_t> ddevidarea{};
 
     // DownstreamDeviceRecordLength, this is updated later
-    appendLE16(ddevidarea, 0x0000);
+    appendLE16(ddevidarea, PLACEHOLDER);
 
     // DownstreamDeviceDescriptorCount
     ddevidarea.push_back(0x01);
@@ -87,16 +87,8 @@ static std::vector<uint8_t> makePkgV1_1_0()
     std::vector<uint8_t> ddpd = {0x83, 0x27, 0x72};
     ddevidarea.insert(ddevidarea.end(), ddpd.begin(), ddpd.end());
 
-    {
-        // set DownstreamDeviceRecordLength
-        const uint16_t downstreamdevidareaLength = ddevidarea.size();
-
-        std::cout << "downstream device area length: "
-                  << downstreamdevidareaLength << std::endl;
-
-        ddevidarea[0] = downstreamdevidareaLength & 0xff;
-        ddevidarea[1] = (downstreamdevidareaLength >> 8) & 0xff;
-    }
+    // set DownstreamDeviceRecordLength
+    patchLE16(ddevidarea, 0, ddevidarea.size());
 
     std::vector<uint8_t> pkg{};
 
@@ -113,13 +105,17 @@ static std::vector<uint8_t> makePkgV1_1_0()
     pkg.push_back(0x01);
     pkg.insert(pkg.end(), ddevidarea.begin(), ddevidarea.end());
 
-    appendComponentImageInfoArea1(pkg);
+    const auto clos = appendComponentImageInfoArea1(pkg);
 
     // count in the checksum bytes still to be added
     const uint16_t finalSize = pkg.size() + 4;
     // set PackageHeaderSize
-    pkg[packageHeaderSizeOffset] = finalSize & 0xff;
-    pkg[packageHeaderSizeOffset + 1] = (finalSize >> 8) & 0xff;
+    patchLE16(pkg, packageHeaderSizeOffset, finalSize);
+
+    for (const size_t clo : clos)
+    {
+        patchLE32(pkg, clo, finalSize);
+    }
 
     appendCRC(pkg);
 

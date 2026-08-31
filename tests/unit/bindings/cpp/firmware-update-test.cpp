@@ -23,8 +23,9 @@ TEST(PackageParserTest, ValidPkgSingleDescriptorSingleComponent)
 
     appendPackageHeaderIdentifier(pkg, pldm::fw_update::PackagePin::v1);
 
+    const size_t hdrSizeOffset = pkg.size();
     // pkg header size
-    appendLE16(pkg, 0x8b);
+    appendLE16(pkg, PLACEHOLDER);
 
     // pkg release date time (13 bytes, timestamp104)
     appendTimestamp104(pkg);
@@ -40,7 +41,14 @@ TEST(PackageParserTest, ValidPkgSingleDescriptorSingleComponent)
 
     appendFirmwareDeviceIdRecord1(pkg);
 
-    appendComponentImageInfoArea1(pkg);
+    const auto clos = appendComponentImageInfoArea1(pkg);
+
+    for (const size_t clo : clos)
+    {
+        patchLE32(pkg, clo, pkg.size() + 4);
+    }
+
+    patchLE16(pkg, hdrSizeOffset, pkg.size() + 4);
 
     appendCRC(pkg);
 
@@ -104,8 +112,10 @@ TEST(PackageParserTest, ValidPkgMultipleDescriptorsMultipleComponents)
 
     appendPackageHeaderIdentifier(pkg, pldm::fw_update::PackagePin::v1);
 
+    const size_t hdrSizeOffset = pkg.size();
+
     // pkg header size
-    appendLE16(pkg, 0x0146);
+    appendLE16(pkg, PLACEHOLDER);
 
     // pkg release date time, 13 bytes, timestamp104
     appendTimestamp104(pkg);
@@ -118,7 +128,16 @@ TEST(PackageParserTest, ValidPkgMultipleDescriptorsMultipleComponents)
 
     appendFirmwareDeviceIdArea1(pkg);
 
-    appendComponentImageInfoArea2(pkg);
+    const auto clos = appendComponentImageInfoArea2(pkg);
+
+    // set PackageHeaderSize
+    patchLE16(pkg, hdrSizeOffset, pkg.size() + 4);
+
+    // patch CLO
+    for (const size_t clo : clos)
+    {
+        patchLE32(pkg, clo, pkg.size() + 4);
+    }
 
     appendCRC(pkg);
 
@@ -145,13 +164,11 @@ TEST(PackageParserTest, ValidPkgMultipleDescriptorsMultipleComponents)
 
     std::vector<uint8_t> dd3Data{0x12, 0x34};
 
-    std::vector<uint8_t> dd4Data{0x12, 0x44, 0xD2, 0x64, 0x8D, 0x7D,
-                                 0x47, 0x18, 0xA0, 0x30, 0xFC, 0x8A,
-                                 0x56, 0x58, 0x7D, 0x5C};
+    std::vector<uint8_t> dd4Data{0x44, 0xD2, 0x64, 0x8D, 0x7D, 0x47, 0x18, 0xA0,
+                                 0x30, 0xFC, 0x8A, 0x56, 0x58, 0x7D, 0x5C};
 
-    std::vector<uint8_t> dd5Data{0x12, 0x44, 0xD2, 0x64, 0x8D, 0x7D,
-                                 0x47, 0x18, 0xA0, 0x30, 0xFC, 0x8A,
-                                 0x56, 0x58, 0x7D, 0x5D};
+    std::vector<uint8_t> dd5Data{0x44, 0xD2, 0x64, 0x8D, 0x7D, 0x47, 0x18, 0xA0,
+                                 0x30, 0xFC, 0x8A, 0x56, 0x58, 0x7D, 0x5D};
 
     ASSERT_EQ(outfwDeviceIDRecords.size(), 3);
 
@@ -297,8 +314,9 @@ TEST(PackageParserTest,
 
     appendPackageHeaderIdentifier(pkg, pldm::fw_update::PackagePin::v1);
 
+    const size_t hdrSizeOffset = pkg.size();
     // pkg header size
-    appendLE16(pkg, 0x8b);
+    appendLE16(pkg, PLACEHOLDER);
 
     // pkg release date time (13 bytes, timestamp104)
     appendTimestamp104(pkg);
@@ -315,7 +333,14 @@ TEST(PackageParserTest,
     // describes an applicable component which does not exist in the package
     appendFirmwareDeviceIdRecord1InvalidApplicableComponentOOB(pkg);
 
-    appendComponentImageInfoArea1(pkg);
+    const auto clos = appendComponentImageInfoArea1(pkg);
+
+    for (size_t clo : clos)
+    {
+        patchLE32(pkg, clo, pkg.size() + 4);
+    }
+
+    patchLE16(pkg, hdrSizeOffset, pkg.size() + 4);
 
     appendCRC(pkg);
 

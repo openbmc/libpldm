@@ -5,6 +5,8 @@
 #include <string_view>
 #include <vector>
 
+constexpr uint16_t PLACEHOLDER = 0x3838;
+
 // helper to create little endian byte vector from uint32_t
 std::vector<uint8_t> le32Vector(uint32_t x);
 
@@ -16,6 +18,12 @@ std::vector<uint8_t> le16Vector(uint16_t x);
 
 // helper to append uint16_t value as little endian
 void appendLE16(std::vector<uint8_t>& pkg, uint16_t x);
+
+// helper to patch uint32_t value as little endian
+void patchLE32(std::vector<uint8_t>& pkg, size_t offset, uint32_t value);
+
+// helper to patch uint16_t value as little endian
+void patchLE16(std::vector<uint8_t>& pkg, size_t offset, uint32_t value);
 
 // helper for appending the PackageHeaderIdentifier (UUID)
 // and PackageHeaderFormatRevision
@@ -35,14 +43,20 @@ void appendString(std::vector<uint8_t>& pkg, const std::string_view& str);
 void appendTimestamp104(std::vector<uint8_t>& pkg);
 
 // appends a component image info record to a fw update package
-void appendComponentImageInfo1(std::vector<uint8_t>& pkg);
-void appendComponentImageInfo2(std::vector<uint8_t>& pkg);
-void appendComponentImageInfo3(std::vector<uint8_t>& pkg);
-void appendComponentImageInfo4(std::vector<uint8_t>& pkg);
+// @returns offset of component location offset
+size_t appendComponentImageInfo1(std::vector<uint8_t>& pkg);
+// @returns offset of component location offset
+size_t appendComponentImageInfo2(std::vector<uint8_t>& pkg);
+// @returns offset of component location offset
+size_t appendComponentImageInfo3(std::vector<uint8_t>& pkg);
+// @returns offset of component location offset
+size_t appendComponentImageInfo4(std::vector<uint8_t>& pkg);
 
 // append a complete component image info area
-void appendComponentImageInfoArea1(std::vector<uint8_t>& pkg);
-void appendComponentImageInfoArea2(std::vector<uint8_t>& pkg);
+// @returns offsets of component location offset
+std::vector<size_t> appendComponentImageInfoArea1(std::vector<uint8_t>& pkg);
+// @returns offsets of component location offset
+std::vector<size_t> appendComponentImageInfoArea2(std::vector<uint8_t>& pkg);
 
 // append ComponentOpaqueData
 void appendComponentOpaqueData(std::vector<uint8_t>& pkg);
