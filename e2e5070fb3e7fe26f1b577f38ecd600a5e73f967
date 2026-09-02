@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "88076b7e_594956a2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002640
+      },
+      "writtenOn": "2026-09-02T07:31:02Z",
+      "side": 1,
+      "message": "CI passes after resolving merge conflict",
+      "parentUuid": "ca25d88d_8ed0b0c4",
+      "revId": "e2e5070fb3e7fe26f1b577f38ecd600a5e73f967",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "01fddebc_17c4e50a",
@@ -35,6 +53,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bcab4c66_08efd4b3",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 12
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 1002640
+      },
+      "writtenOn": "2026-09-02T07:31:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "01fddebc_17c4e50a",
+      "revId": "e2e5070fb3e7fe26f1b577f38ecd600a5e73f967",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "624ae742_f5f60fc8",
@@ -48,6 +84,24 @@
       "writtenOn": "2026-09-02T06:17:15Z",
       "side": 1,
       "message": "nit: Please leave a line after this",
+      "revId": "e2e5070fb3e7fe26f1b577f38ecd600a5e73f967",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dc1bf50c_44c6395a",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 2037,
+      "author": {
+        "id": 1002640
+      },
+      "writtenOn": "2026-09-02T07:31:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "624ae742_f5f60fc8",
       "revId": "e2e5070fb3e7fe26f1b577f38ecd600a5e73f967",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
