@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ca25d88d_8ed0b0c4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2026-09-02T06:17:15Z",
+      "side": 1,
+      "message": "please resolve the merge conflict and the CI",
+      "revId": "e2e5070fb3e7fe26f1b577f38ecd600a5e73f967",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "01fddebc_17c4e50a",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 12
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2026-09-02T06:17:15Z",
+      "side": 1,
+      "message": "remove this entry",
+      "revId": "e2e5070fb3e7fe26f1b577f38ecd600a5e73f967",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "624ae742_f5f60fc8",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 2037,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2026-09-02T06:17:15Z",
+      "side": 1,
+      "message": "nit: Please leave a line after this",
+      "revId": "e2e5070fb3e7fe26f1b577f38ecd600a5e73f967",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
