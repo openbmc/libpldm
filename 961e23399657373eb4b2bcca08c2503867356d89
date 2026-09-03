@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "67721456_13e05aa7",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1002771
+      },
+      "writtenOn": "2026-09-03T14:47:40Z",
+      "side": 1,
+      "message": "Fixed in Patch Set 5. Moved both new FRU entries to the top of the Added section, following the Keep a Changelog convention that the latest version comes first.",
+      "parentUuid": "19442931_c774950e",
+      "revId": "961e23399657373eb4b2bcca08c2503867356d89",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "481d35b0_7be9f313",
         "filename": "src/dsp/fru.c",
         "patchSetId": 4
@@ -31,6 +49,24 @@
       "writtenOn": "2026-08-27T08:19:13Z",
       "side": 1,
       "message": "pls refer to https://github.com/openbmc/libpldm/blob/ddb871f7184a9fc2492e704c4ac483cf0b68d439/CONTRIBUTING.md?plain\u003d1#L234\n\nWe can\u0027t introduce a new API as stable directly",
+      "revId": "961e23399657373eb4b2bcca08c2503867356d89",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1f957253_973b8cf3",
+        "filename": "src/dsp/fru.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 594,
+      "author": {
+        "id": 1002771
+      },
+      "writtenOn": "2026-09-03T14:47:40Z",
+      "side": 1,
+      "message": "Fixed in Patch Set 5. Both new APIs are now marked LIBPLDM_ABI_TESTING as required by CONTRIBUTING.md. They can be stabilized in a follow-up change once the pldmtool consumer patch is ready.",
+      "parentUuid": "481d35b0_7be9f313",
       "revId": "961e23399657373eb4b2bcca08c2503867356d89",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
