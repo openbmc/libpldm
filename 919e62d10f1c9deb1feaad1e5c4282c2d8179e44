@@ -16,6 +16,23 @@
       "message": "please address the merge conflict",
       "revId": "919e62d10f1c9deb1feaad1e5c4282c2d8179e44",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "486d60d0_70ba8738",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2026-09-07T08:59:34Z",
+      "side": 1,
+      "message": "Hi @abhist.chauhan@intel.com, you will also have to add the fuzz tests for the APIs written\n\nhttps://github.com/openbmc/libpldm/blob/6c982ecce7acd5cc41f65c4ed61d207e4a70dd9f/CONTRIBUTING.md#testing",
+      "revId": "919e62d10f1c9deb1feaad1e5c4282c2d8179e44",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
