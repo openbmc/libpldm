@@ -1429,6 +1429,11 @@ struct pldm_set_state_sensor_enables_req {
 		fields[PLDM_SET_STATE_SENSOR_ENABLES_MAX_COUNT];
 };
 
+#define PLDM_SET_STATE_SENSOR_ENABLES_MIN_REQ_BYTES 5
+#define PLDM_SET_STATE_SENSOR_ENABLES_MAX_REQ_BYTES \
+	(PLDM_SET_STATE_SENSOR_ENABLES_MIN_REQ_BYTES + \
+	 (PLDM_SET_STATE_SENSOR_ENABLES_MAX_COUNT - 1) * 2)
+
 /* Responder */
 
 /* SetNumericEffecterValue */
@@ -2818,6 +2823,23 @@ int decode_pldm_platform_file_descriptor_pdr(
 int decode_set_numeric_sensor_enable_req(
 	const struct pldm_msg *msg, size_t payload_length,
 	struct pldm_platform_set_numeric_sensor_enable_req *req);
+
+/** @brief Encode SetStateSensorEnables request
+ *
+ *  @param[in] instance_id - Message's instance id
+ *  @param[in] req - Request parameters
+ *  @param[out] msg - Request message
+ *  @param[in,out] payload_length - Size of the buffer on input; set to the
+ *                                  actual encoded length on output
+ *
+ *  @return error code: 0 on success
+ *                      -EINVAL if the function input parameters are incorrect
+ *                      -EOVERFLOW if payload_length is too small
+ */
+int encode_set_state_sensor_enables_req(
+	uint8_t instance_id,
+	const struct pldm_set_state_sensor_enables_req *req,
+	struct pldm_msg *msg, size_t *payload_length);
 
 /** @brief Decode SetStateSensorEnables request
  *
