@@ -2609,6 +2609,55 @@ int decode_set_numeric_sensor_enable_req(
 }
 
 LIBPLDM_ABI_TESTING
+int encode_set_state_sensor_enables_req(
+	uint8_t instance_id,
+	const struct pldm_set_state_sensor_enables_req *req,
+	struct pldm_msg *msg, size_t *payload_length)
+{
+	struct pldm_header_info header = { 0 };
+	PLDM_MSGBUF_RW_DEFINE_P(buf);
+	int rc;
+
+	if (req == NULL || msg == NULL || payload_length == NULL ||
+	    req->field_count < 1 ||
+	    req->field_count > PLDM_SET_STATE_SENSOR_ENABLES_MAX_COUNT) {
+		return -EINVAL;
+	}
+
+	for (uint8_t i = 0; i < req->field_count; i++) {
+		if (req->fields[i].op_state > PLDM_SET_SENSOR_UNAVAILABLE ||
+		    req->fields[i].event_enable > PLDM_STATE_EVENTS_ONLY_ENABLED) {
+			return -EINVAL;
+		}
+	}
+
+	header.msg_type = PLDM_REQUEST;
+	header.instance = instance_id;
+	header.pldm_type = PLDM_PLATFORM;
+	header.command = PLDM_SET_STATE_SENSOR_ENABLES;
+
+	rc = pack_pldm_header_errno(&header, &msg->hdr);
+	if (rc) {
+		return rc;
+	}
+
+	rc = pldm_msgbuf_init_errno(buf, PLDM_SET_STATE_SENSOR_ENABLES_MIN_REQ_BYTES,
+				    msg->payload, *payload_length);
+	if (rc) {
+		return rc;
+	}
+
+	pldm_msgbuf_insert(buf, req->sensor_id);
+	pldm_msgbuf_insert(buf, req->field_count);
+	for (uint8_t i = 0; i < req->field_count; i++) {
+		pldm_msgbuf_insert(buf, req->fields[i].op_state);
+		pldm_msgbuf_insert(buf, req->fields[i].event_enable);
+	}
+
+	return pldm_msgbuf_complete_used(buf, *payload_length, payload_length);
+}
+
+LIBPLDM_ABI_TESTING
 int decode_set_state_sensor_enables_req(
 	const struct pldm_msg *msg, size_t payload_length,
 	struct pldm_set_state_sensor_enables_req *req)
