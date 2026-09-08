@@ -3729,6 +3729,40 @@ TEST(SetStateSensorEnables, testDecodeRequest)
 #endif // LIBPLDM_API_TESTING
 
 #if HAVE_LIBPLDM_API_TESTING
+TEST(SetStateSensorEnables, testEncodeRequest)
+{
+    struct pldm_set_state_sensor_enables_req request{};
+    request.sensor_id = 0x4567;
+    request.field_count = 2;
+    request.fields[0].op_state = PLDM_SET_SENSOR_DISABLED;
+    request.fields[0].event_enable = PLDM_NO_EVENT_GENERATION;
+    request.fields[1].op_state = PLDM_SET_SENSOR_UNAVAILABLE;
+    request.fields[1].event_enable = PLDM_EVENTS_DISABLED;
+
+    std::array<uint8_t, hdrSize + PLDM_SET_STATE_SENSOR_ENABLES_MAX_REQ_BYTES>
+        buffer{};
+    auto msg = reinterpret_cast<pldm_msg*>(buffer.data());
+    size_t payloadLength = PLDM_SET_STATE_SENSOR_ENABLES_MAX_REQ_BYTES;
+
+    auto rc = encode_set_state_sensor_enables_req(
+        0x80, &request, msg, &payloadLength);
+    ASSERT_EQ(rc, PLDM_SUCCESS);
+    EXPECT_EQ(payloadLength, 7);
+    EXPECT_EQ(msg->hdr.type, PLDM_REQUEST);
+    EXPECT_EQ(msg->hdr.instance_id, 0x80);
+    EXPECT_EQ(msg->hdr.pldm_type, PLDM_PLATFORM);
+    EXPECT_EQ(msg->hdr.command, PLDM_SET_STATE_SENSOR_ENABLES);
+    EXPECT_EQ(msg->payload[0], 0x67);
+    EXPECT_EQ(msg->payload[1], 0x45);
+    EXPECT_EQ(msg->payload[2], 2);
+    EXPECT_EQ(msg->payload[3], PLDM_SET_SENSOR_DISABLED);
+    EXPECT_EQ(msg->payload[4], PLDM_NO_EVENT_GENERATION);
+    EXPECT_EQ(msg->payload[5], PLDM_SET_SENSOR_UNAVAILABLE);
+    EXPECT_EQ(msg->payload[6], PLDM_EVENTS_DISABLED);
+}
+#endif // LIBPLDM_API_TESTING
+
+#if HAVE_LIBPLDM_API_TESTING
 TEST(SetStateSensorEnables, testDecodeInvalidOpRequest)
 {
     int rc;
