@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a101e1d9_40274b46",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-09-10T23:41:27Z",
+      "side": 1,
+      "message": "\u003e These four (93691-93694) have shown \"User not approved, see admin, no CI\" on every patch set since 2026-08-19, now on PS3 after a rebase. Verified can\u0027t be satisfied while that holds, so they\u0027ve been sitting without CI for three weeks.\n\u003e\n\n\u003e Could someone set Ok-To-Test so CI can run?\n\nNo.\n\n\u003e\n\n\u003e Happy to sort out anything else needed first. I have not signed the OpenBMC CLA yet - if that\u0027s the actual blocker rather than the whitelist, please say so and I\u0027ll get it done.\n\nYou need to sign the CLA.\n\n\u003e I asked on the mailing list on 2026-09-03 (\"libpldm: CI not running for new contributor (93691-93694)\") but haven\u0027t had a reply.\n\nIncorrect:\n\nhttps://lore.kernel.org/all/f2d729c0ca7f6587393c1a58799f2921f46c749d.camel@codeconstruct.com.au/",
+      "revId": "8471c62668f5b540da229d2e9f7087e5abd30e14",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
