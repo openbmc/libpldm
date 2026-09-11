@@ -19,6 +19,9 @@ Change categories:
 
 ### Added
 
+- dsp: platform: Add `encode_set_numeric_effecter_enable_req()`
+- dsp: platform: Add `decode_set_numeric_effecter_enable_req()`
+- dsp: platform: Add `decode_set_numeric_effecter_enable_resp()`
 - libpldm++ support for fw update pkg v1.1.0
 - libpldm++ support for fw update pkg v1.2.0
 - libpldm++ support for fw update pkg v1.3.0
