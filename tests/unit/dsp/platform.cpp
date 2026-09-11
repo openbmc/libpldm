@@ -4071,6 +4071,172 @@ TEST(SetNumericSensorEnable, testBadDecodeResponse)
 }
 #endif // LIBPLDM_API_TESTING
 
+#if HAVE_LIBPLDM_API_TESTING
+TEST(SetNumericEffecterEnable, testOperationalStates)
+{
+    for (uint16_t state = 0; state <= UINT8_MAX; ++state)
+    {
+        SCOPED_TRACE(state);
+        const auto stateByte = static_cast<uint8_t>(state);
+        const bool valid = state == 0 || state == 2 || state == 3;
+        struct pldm_set_numeric_effecter_enable_req req = {
+            .effecter_id = 0x1123,
+            .effecter_operational_state = stateByte,
+        };
+        PLDM_MSG_DEFINE_P(msg, PLDM_SET_NUMERIC_EFFECTER_ENABLE_REQ_BYTES);
+        size_t payloadLength = PLDM_SET_NUMERIC_EFFECTER_ENABLE_REQ_BYTES;
+        auto rc = encode_set_numeric_effecter_enable_req(
+            0x0A, &req, msg, &payloadLength);
+        EXPECT_EQ(rc, valid ? 0 : -EINVAL);
+        if (valid && rc == 0)
+        {
+            EXPECT_EQ(payloadLength, 3u);
+            EXPECT_EQ(msg->payload[0], 0x23);
+            EXPECT_EQ(msg->payload[1], 0x11);
+            EXPECT_EQ(msg->payload[2], stateByte);
+        }
+
+        msg->payload[0] = 0x23;
+        msg->payload[1] = 0x11;
+        msg->payload[2] = stateByte;
+        struct pldm_set_numeric_effecter_enable_req decoded = {};
+        rc = decode_set_numeric_effecter_enable_req(msg, 3, &decoded);
+        EXPECT_EQ(rc, valid ? 0 : -EPROTO);
+        if (valid && rc == 0)
+        {
+            EXPECT_EQ(decoded.effecter_id, 0x1123);
+            EXPECT_EQ(decoded.effecter_operational_state, stateByte);
+        }
+    }
+}
+
+TEST(SetNumericEffecterEnable, testGoodEncodeRequest)
+{
+    PLDM_MSG_DEFINE_P(msg, PLDM_SET_NUMERIC_EFFECTER_ENABLE_REQ_BYTES);
+    constexpr uint8_t instanceID = 0x0A;
+    struct pldm_set_numeric_effecter_enable_req req = {
+        .effecter_id = 0x1123,
+        .effecter_operational_state = EFFECTER_OPER_STATE_DISABLED,
+    };
+
+    size_t payload_length = PLDM_SET_NUMERIC_EFFECTER_ENABLE_REQ_BYTES;
+    auto rc = encode_set_numeric_effecter_enable_req(instanceID, &req, msg,
+                                                     &payload_length);
+
+    ASSERT_EQ(rc, 0);
+    EXPECT_EQ(payload_length, PLDM_SET_NUMERIC_EFFECTER_ENABLE_REQ_BYTES);
+    EXPECT_EQ(msg->hdr.command, PLDM_SET_NUMERIC_EFFECTER_ENABLE);
+    EXPECT_EQ(msg->hdr.type, PLDM_PLATFORM);
+    EXPECT_EQ(msg->hdr.request, 1);
+    EXPECT_EQ(msg->hdr.datagram, 0);
+    EXPECT_EQ(msg->hdr.instance_id, instanceID);
+
+    struct pldm_set_numeric_effecter_enable_req decoded = {};
+    ASSERT_EQ(decode_set_numeric_effecter_enable_req(
+                  msg, PLDM_SET_NUMERIC_EFFECTER_ENABLE_REQ_BYTES, &decoded),
+              0);
+    EXPECT_EQ(decoded.effecter_id, req.effecter_id);
+    EXPECT_EQ(decoded.effecter_operational_state,
+              req.effecter_operational_state);
+
+    // Over-sized buffer: succeeds and payload_length is written back to
+    // actual encoded size
+    PLDM_MSG_DEFINE_P(msg2, PLDM_SET_NUMERIC_EFFECTER_ENABLE_REQ_BYTES + 1);
+    size_t oversized_length = PLDM_SET_NUMERIC_EFFECTER_ENABLE_REQ_BYTES + 1;
+    rc = encode_set_numeric_effecter_enable_req(instanceID, &req, msg2,
+                                                &oversized_length);
+    EXPECT_EQ(rc, 0);
+    EXPECT_EQ(oversized_length, PLDM_SET_NUMERIC_EFFECTER_ENABLE_REQ_BYTES);
+}
+#endif // LIBPLDM_API_TESTING
+
+#if HAVE_LIBPLDM_API_TESTING
+TEST(SetNumericEffecterEnable, testBadEncodeRequest)
+{
+    int rc;
+    PLDM_MSG_DEFINE_P(msg, PLDM_SET_NUMERIC_EFFECTER_ENABLE_REQ_BYTES);
+    constexpr uint8_t instanceID = 0x0A;
+    struct pldm_set_numeric_effecter_enable_req req = {
+        .effecter_id = 0x1123,
+        .effecter_operational_state = EFFECTER_OPER_STATE_DISABLED,
+    };
+
+    size_t pl;
+
+    // Test null msg pointer
+    pl = PLDM_SET_NUMERIC_EFFECTER_ENABLE_REQ_BYTES;
+    rc = encode_set_numeric_effecter_enable_req(instanceID, &req, NULL, &pl);
+    EXPECT_EQ(rc, -EINVAL);
+
+    // Test null req pointer
+    pl = PLDM_SET_NUMERIC_EFFECTER_ENABLE_REQ_BYTES;
+    rc = encode_set_numeric_effecter_enable_req(instanceID, NULL, msg, &pl);
+    EXPECT_EQ(rc, -EINVAL);
+
+    // Test invalid operational state
+    struct pldm_set_numeric_effecter_enable_req invalidOpStateReq = req;
+    invalidOpStateReq.effecter_operational_state =
+        EFFECTER_OPER_STATE_UNAVAILABLE + 1;
+    pl = PLDM_SET_NUMERIC_EFFECTER_ENABLE_REQ_BYTES;
+    rc = encode_set_numeric_effecter_enable_req(instanceID, &invalidOpStateReq,
+                                                msg, &pl);
+    EXPECT_EQ(rc, -EINVAL);
+
+    // Test under-sized payload
+    pl = PLDM_SET_NUMERIC_EFFECTER_ENABLE_REQ_BYTES - 1;
+    rc = encode_set_numeric_effecter_enable_req(instanceID, &req, msg, &pl);
+    EXPECT_EQ(rc, -EOVERFLOW);
+}
+#endif // LIBPLDM_API_TESTING
+
+#if HAVE_LIBPLDM_API_TESTING
+TEST(SetNumericEffecterEnable, testGoodDecodeResponse)
+{
+    PLDM_MSG_DEFINE_P(response, PLDM_SET_NUMERIC_EFFECTER_ENABLE_RESP_BYTES);
+
+    uint8_t completionCode = PLDM_SUCCESS;
+    response->payload[0] = completionCode;
+
+    uint8_t resp = 0;
+    auto rc = decode_set_numeric_effecter_enable_resp(
+        response, PLDM_SET_NUMERIC_EFFECTER_ENABLE_RESP_BYTES, &resp);
+
+    ASSERT_EQ(rc, 0);
+    EXPECT_EQ(resp, completionCode);
+}
+#endif // LIBPLDM_API_TESTING
+
+#if HAVE_LIBPLDM_API_TESTING
+TEST(SetNumericEffecterEnable, testBadDecodeResponse)
+{
+    PLDM_MSG_DEFINE_P(response, PLDM_SET_NUMERIC_EFFECTER_ENABLE_RESP_BYTES);
+
+    uint8_t completionCode = PLDM_SUCCESS;
+    response->payload[0] = completionCode;
+
+    uint8_t resp = 0;
+
+    // Test NULL message pointer
+    auto rc = decode_set_numeric_effecter_enable_resp(
+        nullptr, PLDM_SET_NUMERIC_EFFECTER_ENABLE_RESP_BYTES, &resp);
+    EXPECT_EQ(rc, -EINVAL);
+
+    // Test NULL resp pointer
+    rc = decode_set_numeric_effecter_enable_resp(
+        response, PLDM_SET_NUMERIC_EFFECTER_ENABLE_RESP_BYTES, nullptr);
+    EXPECT_EQ(rc, -EINVAL);
+
+    // Test zero-length payload
+    rc = decode_set_numeric_effecter_enable_resp(response, 0, &resp);
+    EXPECT_EQ(rc, -EOVERFLOW);
+
+    // Test over-length payload
+    rc = decode_set_numeric_effecter_enable_resp(
+        response, PLDM_SET_NUMERIC_EFFECTER_ENABLE_RESP_BYTES + 1, &resp);
+    EXPECT_EQ(rc, -EBADMSG);
+}
+#endif // LIBPLDM_API_TESTING
+
 TEST(SetEventReceiver, testGoodEncodeRequest)
 {
     uint8_t eventMessageGlobalEnable =

@@ -2382,6 +2382,73 @@ int decode_pldm_platform_set_numeric_sensor_enable_resp(
 	return pldm_msgbuf_complete_consumed(buf);
 }
 
+LIBPLDM_ABI_TESTING
+int encode_set_numeric_effecter_enable_req(
+	uint8_t instance_id,
+	const struct pldm_set_numeric_effecter_enable_req *req,
+	struct pldm_msg *msg, size_t *payload_length)
+{
+	struct pldm_header_info header = { 0 };
+	PLDM_MSGBUF_RW_DEFINE_P(buf);
+	int rc;
+
+	if (req == NULL || msg == NULL || payload_length == NULL) {
+		return -EINVAL;
+	}
+
+	if (req->effecter_operational_state ==
+		    EFFECTER_OPER_STATE_ENABLED_NOUPDATEPENDING ||
+	    req->effecter_operational_state > EFFECTER_OPER_STATE_UNAVAILABLE) {
+		return -EINVAL;
+	}
+
+	header.msg_type = PLDM_REQUEST;
+	header.instance = instance_id;
+	header.pldm_type = PLDM_PLATFORM;
+	header.command = PLDM_SET_NUMERIC_EFFECTER_ENABLE;
+
+	rc = pack_pldm_header_errno(&header, &msg->hdr);
+	if (rc) {
+		return rc;
+	}
+
+	rc = pldm_msgbuf_init_errno(buf,
+				    PLDM_SET_NUMERIC_EFFECTER_ENABLE_REQ_BYTES,
+				    msg->payload, *payload_length);
+	if (rc) {
+		return rc;
+	}
+
+	pldm_msgbuf_insert(buf, req->effecter_id);
+	pldm_msgbuf_insert(buf, req->effecter_operational_state);
+
+	return pldm_msgbuf_complete_used(buf, *payload_length, payload_length);
+}
+
+LIBPLDM_ABI_TESTING
+int decode_set_numeric_effecter_enable_resp(
+	const struct pldm_msg *msg, size_t payload_length,
+	uint8_t *completion_code)
+{
+	PLDM_MSGBUF_RO_DEFINE_P(buf);
+	int rc;
+
+	if (msg == NULL || completion_code == NULL) {
+		return -EINVAL;
+	}
+
+	rc = pldm_msgbuf_init_errno(buf,
+				    PLDM_SET_NUMERIC_EFFECTER_ENABLE_RESP_BYTES,
+				    msg->payload, payload_length);
+	if (rc) {
+		return rc;
+	}
+
+	pldm_msgbuf_extract_p(buf, completion_code);
+
+	return pldm_msgbuf_complete_consumed(buf);
+}
+
 LIBPLDM_ABI_STABLE
 int encode_get_sensor_reading_req(uint8_t instance_id, uint16_t sensor_id,
 				  uint8_t rearm_event_state,
@@ -2602,6 +2669,40 @@ int decode_set_numeric_sensor_enable_req(
 	}
 
 	if (req->sensor_event_message_enable > PLDM_STATE_EVENTS_ONLY_ENABLED) {
+		return -EPROTO;
+	}
+
+	return 0;
+}
+
+LIBPLDM_ABI_TESTING
+int decode_set_numeric_effecter_enable_req(
+	const struct pldm_msg *msg, size_t payload_length,
+	struct pldm_set_numeric_effecter_enable_req *req)
+{
+	PLDM_MSGBUF_RO_DEFINE_P(buf);
+	int rc;
+
+	if (msg == NULL || req == NULL) {
+		return -EINVAL;
+	}
+
+	rc = pldm_msgbuf_init_errno(buf, 0, msg->payload, payload_length);
+	if (rc) {
+		return rc;
+	}
+
+	pldm_msgbuf_extract(buf, req->effecter_id);
+	pldm_msgbuf_extract(buf, req->effecter_operational_state);
+
+	rc = pldm_msgbuf_complete_consumed(buf);
+	if (rc) {
+		return rc;
+	}
+
+	if (req->effecter_operational_state ==
+		    EFFECTER_OPER_STATE_ENABLED_NOUPDATEPENDING ||
+	    req->effecter_operational_state > EFFECTER_OPER_STATE_UNAVAILABLE) {
 		return -EPROTO;
 	}
 
