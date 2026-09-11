@@ -1407,6 +1407,18 @@ struct pldm_platform_set_numeric_sensor_enable_req {
 #define PLDM_PLATFORM_SET_NUMERIC_SENSOR_ENABLE_REQ_BYTES  4
 #define PLDM_PLATFORM_SET_NUMERIC_SENSOR_ENABLE_RESP_BYTES 1
 
+/** @struct pldm_set_numeric_effecter_enable_req
+ *
+ *  Structure representing a SetNumericEffecterEnable request
+ */
+struct pldm_set_numeric_effecter_enable_req {
+	uint16_t effecter_id;
+	uint8_t effecter_operational_state;
+};
+
+#define PLDM_SET_NUMERIC_EFFECTER_ENABLE_REQ_BYTES  3
+#define PLDM_SET_NUMERIC_EFFECTER_ENABLE_RESP_BYTES 1
+
 /** @struct pldm_set_state_sensor_enable_field
  *
  *  Structure representing PLDM set state sensor enables fields
@@ -2514,6 +2526,38 @@ int decode_pldm_platform_set_numeric_sensor_enable_resp(
 	const struct pldm_msg *msg, size_t payload_length,
 	uint8_t *completion_code);
 
+/** @brief Encode SetNumericEffecterEnable request
+ *
+ *  @param[in] instance_id - Message's instance id
+ *  @param[in] req - Request parameters
+ *  @param[out] msg - Request message
+ *  @param[in,out] payload_length - Size of the buffer on input; set to the
+ *                                  actual encoded length on output
+ *
+ *  @return error code: 0 on success
+ *                      -EINVAL if the function input parameters are incorrect
+ *                      -EOVERFLOW if payload_length is too small
+ */
+int encode_set_numeric_effecter_enable_req(
+	uint8_t instance_id,
+	const struct pldm_set_numeric_effecter_enable_req *req,
+	struct pldm_msg *msg, size_t *payload_length);
+
+/** @brief Decode SetNumericEffecterEnable response
+ *
+ *  @param[in] msg - PLDM response message.
+ *  @param[in] payload_length - Length of response message.
+ *  @param[out] completion_code - PLDM completion code.
+ *
+ *  @return error code: 0 on success
+ *                      -EINVAL if the function input parameters are incorrect
+ *                      -EOVERFLOW if payload is too short
+ *                      -EBADMSG if payload is too long
+ */
+int decode_set_numeric_effecter_enable_resp(
+	const struct pldm_msg *msg, size_t payload_length,
+	uint8_t *completion_code);
+
 /* GetSensorReading */
 
 /** @brief Encode GetSensorReading request data
@@ -2818,6 +2862,21 @@ int decode_pldm_platform_file_descriptor_pdr(
 int decode_set_numeric_sensor_enable_req(
 	const struct pldm_msg *msg, size_t payload_length,
 	struct pldm_platform_set_numeric_sensor_enable_req *req);
+
+/** @brief Decode SetNumericEffecterEnable request
+ *
+ *  @param[in] msg - PLDM request message.
+ *  @param[in] payload_length - Length of request message.
+ *  @param[out] req - Returned decoded request.
+ *
+ *  @return error code: 0 on success
+ *                      -EINVAL if the function input parameters are incorrect
+ *                      -EPROTO if the input request message is invalid
+ *                      -EOVERFLOW if the input request message is too short.
+ */
+int decode_set_numeric_effecter_enable_req(
+	const struct pldm_msg *msg, size_t payload_length,
+	struct pldm_set_numeric_effecter_enable_req *req);
 
 /** @brief Decode SetStateSensorEnables request
  *
