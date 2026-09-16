@@ -1,6 +1,8 @@
 /* SPDX-License-Identifier: Apache-2.0 OR GPL-2.0-or-later */
 #pragma once
 
+#include <libpldm/api.h>
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -330,8 +332,10 @@ typedef struct pldm_entity {
 } __attribute__((packed)) pldm_entity;
 
 enum entity_association_containment_type {
-	PLDM_ENTITY_ASSOCIAION_PHYSICAL = 0x0,
-	PLDM_ENTITY_ASSOCIAION_LOGICAL = 0x1,
+	PLDM_ENTITY_ASSOCIAION_PHYSICAL LIBPLDM_API_DEPRECATED = 0x0,
+	PLDM_ENTITY_ASSOCIATION_PHYSICAL = 0x0,
+	PLDM_ENTITY_ASSOCIAION_LOGICAL LIBPLDM_API_DEPRECATED = 0x1,
+	PLDM_ENTITY_ASSOCIATION_LOGICAL = 0x1,
 };
 
 /** @struct pldm_entity_association_tree
@@ -573,8 +577,8 @@ void pldm_find_entity_ref_in_tree(pldm_entity_association_tree *tree,
  *  @param[in] association_type - relation type filter : logical or physical
  *
  *  @return uint8_t number of children. The returned value is zero if node is NULL or
- *  	    association_type is not one of PLDM_ENTITY_ASSOCIAION_PHYSICAL or
- *  	    PLDM_ENTITY_ASSOCIAION_LOGICAL.
+ *  	    association_type is not one of PLDM_ENTITY_ASSOCIATION_PHYSICAL or
+ *  	    PLDM_ENTITY_ASSOCIATION_LOGICAL.
  */
 uint8_t pldm_entity_get_num_children(pldm_entity_node *node,
 				     uint8_t association_type);
