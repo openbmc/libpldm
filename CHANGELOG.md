@@ -23,6 +23,9 @@ Change categories:
 - libpldm++ support for fw update pkg v1.1.0
 - libpldm++ support for fw update pkg v1.2.0
 - libpldm++ support for fw update pkg v1.3.0
+- pdr: Added correctly spelled PLDM_ENTITY_ASSOCIATION_PHYSICAL and
+  PLDM_ENTITY_ASSOCIATION_LOGICAL members of the
+  entity_association_containment_type enum
 
 ### Changed
 
@@ -35,6 +38,9 @@ Change categories:
   There is no change in behaviour.
 
 ### Deprecated
+
+- Misspelled PLDM_ENTITY_ASSOCIAION_PHYSICAL, PLDM_ENTITY_ASSOCIAION_LOGICAL
+  members of the entity_association_containment_type enum
 
 ### Removed
 
