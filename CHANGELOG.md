@@ -19,6 +19,10 @@ Change categories:
 
 ### Added
 
+- pdr: Added correctly spelled PLDM_ENTITY_ASSOCIATION_PHYSICAL and
+  PLDM_ENTITY_ASSOCIATION_LOGICAL members of the
+  entity_association_containment_type enum
+
 ### Changed
 
 - libpldm++: Preserve multiple descriptors of the same type
@@ -35,6 +39,9 @@ Change categories:
   same type but preserves their multiplicity.
 
 ### Deprecated
+
+- Misspelled PLDM_ENTITY_ASSOCIAION_PHYSICAL, PLDM_ENTITY_ASSOCIAION_LOGICAL
+  members of the entity_association_containment_type enum
 
 ### Removed
 
