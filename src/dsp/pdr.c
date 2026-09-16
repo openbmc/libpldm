@@ -745,8 +745,8 @@ pldm_entity_node *pldm_entity_association_tree_add_entity(
 			return NULL;
 		}
 	}
-	if (association_type != PLDM_ENTITY_ASSOCIAION_PHYSICAL &&
-	    association_type != PLDM_ENTITY_ASSOCIAION_LOGICAL) {
+	if (association_type != PLDM_ENTITY_ASSOCIATION_PHYSICAL &&
+	    association_type != PLDM_ENTITY_ASSOCIATION_LOGICAL) {
 		return NULL;
 	}
 	pldm_entity_node *node = malloc(sizeof(pldm_entity_node));
@@ -951,8 +951,8 @@ uint8_t pldm_entity_get_num_children(pldm_entity_node *node,
 		return 0;
 	}
 
-	if (!(association_type == PLDM_ENTITY_ASSOCIAION_PHYSICAL ||
-	      association_type == PLDM_ENTITY_ASSOCIAION_LOGICAL)) {
+	if (!(association_type == PLDM_ENTITY_ASSOCIATION_PHYSICAL ||
+	      association_type == PLDM_ENTITY_ASSOCIATION_LOGICAL)) {
 		return 0;
 	}
 
@@ -1054,9 +1054,9 @@ static int64_t entity_association_pdr_add_entry(pldm_entity_node *curr,
 						uint32_t record_handle)
 {
 	uint8_t num_logical_children = pldm_entity_get_num_children(
-		curr, PLDM_ENTITY_ASSOCIAION_LOGICAL);
+		curr, PLDM_ENTITY_ASSOCIATION_LOGICAL);
 	uint8_t num_physical_children = pldm_entity_get_num_children(
-		curr, PLDM_ENTITY_ASSOCIAION_PHYSICAL);
+		curr, PLDM_ENTITY_ASSOCIATION_PHYSICAL);
 	int64_t rc;
 
 	if (!num_logical_children && !num_physical_children) {
@@ -1074,7 +1074,7 @@ static int64_t entity_association_pdr_add_entry(pldm_entity_node *curr,
 			(num_logical_children * sizeof(pldm_entity));
 		rc = entity_association_pdr_add_children(
 			curr, repo, logical_pdr_size, num_logical_children,
-			PLDM_ENTITY_ASSOCIAION_LOGICAL, is_remote,
+			PLDM_ENTITY_ASSOCIATION_LOGICAL, is_remote,
 			terminus_handle, record_handle);
 		if (rc < 0) {
 			return rc;
@@ -1095,7 +1095,7 @@ static int64_t entity_association_pdr_add_entry(pldm_entity_node *curr,
 			(num_physical_children * sizeof(pldm_entity));
 		rc = entity_association_pdr_add_children(
 			curr, repo, physical_pdr_size, num_physical_children,
-			PLDM_ENTITY_ASSOCIAION_PHYSICAL, is_remote,
+			PLDM_ENTITY_ASSOCIATION_PHYSICAL, is_remote,
 			terminus_handle, record_handle);
 		if (rc < 0) {
 			return rc;
@@ -1943,7 +1943,7 @@ int pldm_entity_association_pdr_create_new(pldm_pdr *repo,
 		goto cleanup_msgbuf_src_c;
 	}
 	assert(container_id_addr);
-	pldm_msgbuf_insert_uint8(dst, PLDM_ENTITY_ASSOCIAION_PHYSICAL);
+	pldm_msgbuf_insert_uint8(dst, PLDM_ENTITY_ASSOCIATION_PHYSICAL);
 	pldm_msgbuf_copy(dst, src_p, uint16_t, entity_type);
 	pldm_msgbuf_copy(dst, src_p, uint16_t, entity_instance_num);
 	pldm_msgbuf_copy(dst, src_p, uint16_t, entity_container_id);
