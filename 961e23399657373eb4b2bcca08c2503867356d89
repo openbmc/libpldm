@@ -36,6 +36,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b36d21ce_b0e04544",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1002771
+      },
+      "writtenOn": "2026-09-16T11:13:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "67721456_13e05aa7",
+      "revId": "961e23399657373eb4b2bcca08c2503867356d89",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "481d35b0_7be9f313",
@@ -67,6 +85,24 @@
       "side": 1,
       "message": "Fixed in Patch Set 5. Both new APIs are now marked LIBPLDM_ABI_TESTING as required by CONTRIBUTING.md. They can be stabilized in a follow-up change once the pldmtool consumer patch is ready.",
       "parentUuid": "481d35b0_7be9f313",
+      "revId": "961e23399657373eb4b2bcca08c2503867356d89",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3053d3f8_4bc4b527",
+        "filename": "src/dsp/fru.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 594,
+      "author": {
+        "id": 1002771
+      },
+      "writtenOn": "2026-09-16T11:13:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1f957253_973b8cf3",
       "revId": "961e23399657373eb4b2bcca08c2503867356d89",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
