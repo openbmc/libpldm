@@ -1466,6 +1466,101 @@ int encode_set_numeric_effecter_value_resp(uint8_t instance_id,
 					   struct pldm_msg *msg,
 					   size_t payload_length);
 
+/* SetStateEffecterEnables (DSP0248 v1.3.0, 22.4) */
+
+#define PLDM_PLATFORM_SET_STATE_EFFECTER_ENABLES_MAX_COUNT	8
+#define PLDM_PLATFORM_SET_STATE_EFFECTER_ENABLES_ENABLED	0
+#define PLDM_PLATFORM_SET_STATE_EFFECTER_ENABLES_DISABLED	2
+#define PLDM_PLATFORM_SET_STATE_EFFECTER_ENABLES_UNAVAILABLE	3
+#define PLDM_PLATFORM_SET_STATE_EFFECTER_ENABLES_ENABLE_EVENTS	0
+#define PLDM_PLATFORM_SET_STATE_EFFECTER_ENABLES_DISABLE_EVENTS 1
+#define PLDM_PLATFORM_SET_STATE_EFFECTER_ENABLES_NO_CHANGE	0xff
+
+/** @brief Operational state and event-message setting for one state effecter. */
+struct pldm_platform_set_state_effecter_enables_op_field {
+	uint8_t effecter_operational_state;
+	uint8_t event_msg_enable;
+};
+
+/** @brief SetStateEffecterEnables request parameters (not a wire layout). */
+struct pldm_platform_set_state_effecter_enables_req {
+	uint16_t effecter_id;
+	uint8_t composite_effecter_count;
+	struct pldm_platform_set_state_effecter_enables_op_field
+		op_fields[PLDM_PLATFORM_SET_STATE_EFFECTER_ENABLES_MAX_COUNT];
+};
+
+#define PLDM_PLATFORM_SET_STATE_EFFECTER_ENABLES_REQ_MIN_BYTES 5
+#define PLDM_PLATFORM_SET_STATE_EFFECTER_ENABLES_REQ_MAX_BYTES                 \
+	(3 + 2 * PLDM_PLATFORM_SET_STATE_EFFECTER_ENABLES_MAX_COUNT)
+
+/** @brief SetStateEffecterEnables response parameters. */
+struct pldm_platform_set_state_effecter_enables_resp {
+	uint8_t completion_code;
+};
+
+#define PLDM_PLATFORM_SET_STATE_EFFECTER_ENABLES_RESP_BYTES 1
+
+/** @brief Encode a SetStateEffecterEnables request.
+ *
+ *  @param[in] instance_id - PLDM instance ID (0 through 31).
+ *  @param[in] req - Request parameters. Reserved effecter IDs (0 and 65535),
+ *                  counts outside 1 through 8, and reserved field values are
+ *                  rejected. Only the first composite_effecter_count fields
+ *                  are encoded.
+ *  @param[out] msg - Destination message, including space for the PLDM header.
+ *  @param[in,out] payload_length - Payload capacity on input, encoded payload
+ *                                 length on success.
+ *  @return 0 on success, -EINVAL for invalid arguments or field values,
+ *          -EOVERFLOW if the payload buffer is too small.
+ */
+int encode_pldm_platform_set_state_effecter_enables_req(
+	uint8_t instance_id,
+	const struct pldm_platform_set_state_effecter_enables_req *req,
+	struct pldm_msg *msg, size_t *payload_length);
+
+/** @brief Decode a SetStateEffecterEnables request payload.
+ *
+ *  @param[in] msg - Request message.
+ *  @param[in] payload_length - Request payload length, excluding the header.
+ *  @param[out] req - Decoded request. Only the first composite_effecter_count
+ *                   fields are populated. Contents are unspecified on error.
+ *  @return 0 on success, -EINVAL for null arguments, -EOVERFLOW for a truncated
+ *          payload, -EBADMSG for trailing data, -EPROTO for reserved field
+ *          values, reserved effecter IDs, or a count outside 1 through 8.
+ */
+int decode_pldm_platform_set_state_effecter_enables_req(
+	const struct pldm_msg *msg, size_t payload_length,
+	struct pldm_platform_set_state_effecter_enables_req *req);
+
+/** @brief Encode a SetStateEffecterEnables response.
+ *
+ *  @param[in] instance_id - PLDM instance ID (0 through 31).
+ *  @param[in] resp - Response completion code.
+ *  @param[out] msg - Destination message, including space for the PLDM header.
+ *  @param[in,out] payload_length - Payload capacity on input, encoded payload
+ *                                 length on success.
+ *  @return 0 on success, -EINVAL for invalid arguments or instance ID,
+ *          -EOVERFLOW if the payload buffer is too small.
+ */
+int encode_pldm_platform_set_state_effecter_enables_resp(
+	uint8_t instance_id,
+	const struct pldm_platform_set_state_effecter_enables_resp *resp,
+	struct pldm_msg *msg, size_t *payload_length);
+
+/** @brief Decode a SetStateEffecterEnables response payload.
+ *
+ *  @param[in] msg - Response message.
+ *  @param[in] payload_length - Response payload length, excluding the header.
+ *  @param[out] resp - Decoded completion code; valid only on success.
+ *  @return 0 on successful decoding (including nonzero completion codes),
+ *          -EINVAL for null arguments, -EOVERFLOW for a truncated payload,
+ *          -EBADMSG for trailing data.
+ */
+int decode_pldm_platform_set_state_effecter_enables_resp(
+	const struct pldm_msg *msg, size_t payload_length,
+	struct pldm_platform_set_state_effecter_enables_resp *resp);
+
 /* SetStateEffecterStates */
 
 /** @brief Create a PLDM response message for SetStateEffecterStates
