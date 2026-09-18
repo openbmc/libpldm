@@ -19,6 +19,7 @@ Change categories:
 
 ### Added
 
+- dsp: platform: Add request and response codecs for SetStateEffecterEnables
 - fru: New constants for additional bound on GetFRURecordTable payload size
 - libpldm++ support for fw update pkg v1.1.0
 - libpldm++ support for fw update pkg v1.2.0
