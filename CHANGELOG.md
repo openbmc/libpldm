@@ -19,6 +19,8 @@ Change categories:
 
 ### Added
 
+- dsp: platform: Add request and response codecs for SetStateEffecterEnables
+
 ### Changed
 
 - libpldm++: Preserve multiple descriptors of the same type
