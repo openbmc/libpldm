@@ -173,6 +173,181 @@ int encode_state_sensor_pdr(
 	return PLDM_SUCCESS;
 }
 
+static bool set_state_effecter_enables_req_valid(
+	const struct pldm_platform_set_state_effecter_enables_req *req)
+{
+	if (!req->effecter_id || req->effecter_id == UINT16_MAX ||
+	    !req->composite_effecter_count ||
+	    req->composite_effecter_count >
+		    PLDM_PLATFORM_SET_STATE_EFFECTER_ENABLES_MAX_COUNT) {
+		return false;
+	}
+
+	for (size_t index = 0; index < req->composite_effecter_count; ++index) {
+		const struct pldm_platform_set_state_effecter_enables_op_field
+			*field = &req->op_fields[index];
+
+		if (field->effecter_operational_state !=
+			    PLDM_PLATFORM_SET_STATE_EFFECTER_ENABLES_ENABLED &&
+		    field->effecter_operational_state !=
+			    PLDM_PLATFORM_SET_STATE_EFFECTER_ENABLES_DISABLED &&
+		    field->effecter_operational_state !=
+			    PLDM_PLATFORM_SET_STATE_EFFECTER_ENABLES_UNAVAILABLE) {
+			return false;
+		}
+		if (field->event_msg_enable !=
+			    PLDM_PLATFORM_SET_STATE_EFFECTER_ENABLES_ENABLE_EVENTS &&
+		    field->event_msg_enable !=
+			    PLDM_PLATFORM_SET_STATE_EFFECTER_ENABLES_DISABLE_EVENTS &&
+		    field->event_msg_enable !=
+			    PLDM_PLATFORM_SET_STATE_EFFECTER_ENABLES_NO_CHANGE) {
+			return false;
+		}
+	}
+
+	return true;
+}
+
+LIBPLDM_ABI_TESTING
+int encode_pldm_platform_set_state_effecter_enables_req(
+	uint8_t instance_id,
+	const struct pldm_platform_set_state_effecter_enables_req *req,
+	struct pldm_msg *msg, size_t *payload_length)
+{
+	struct pldm_header_info header = {
+		.msg_type = PLDM_REQUEST,
+		.instance = instance_id,
+		.pldm_type = PLDM_PLATFORM,
+		.command = PLDM_SET_STATE_EFFECTER_ENABLES,
+	};
+	PLDM_MSGBUF_RW_DEFINE_P(buf);
+	int rc;
+
+	if (!req || !msg || !payload_length ||
+	    !set_state_effecter_enables_req_valid(req)) {
+		return -EINVAL;
+	}
+
+	rc = pack_pldm_header_errno(&header, &msg->hdr);
+	if (rc) {
+		return rc;
+	}
+
+	rc = pldm_msgbuf_init_errno(buf, 3 + 2 * req->composite_effecter_count,
+				    msg->payload, *payload_length);
+	if (rc) {
+		return rc;
+	}
+
+	pldm_msgbuf_insert(buf, req->effecter_id);
+	pldm_msgbuf_insert(buf, req->composite_effecter_count);
+	for (size_t index = 0; index < req->composite_effecter_count; ++index) {
+		pldm_msgbuf_insert(
+			buf, req->op_fields[index].effecter_operational_state);
+		pldm_msgbuf_insert(buf, req->op_fields[index].event_msg_enable);
+	}
+
+	return pldm_msgbuf_complete_used(buf, *payload_length, payload_length);
+}
+
+LIBPLDM_ABI_TESTING
+int decode_pldm_platform_set_state_effecter_enables_req(
+	const struct pldm_msg *msg, size_t payload_length,
+	struct pldm_platform_set_state_effecter_enables_req *req)
+{
+	PLDM_MSGBUF_RO_DEFINE_P(buf);
+	int rc;
+
+	if (!msg || !req) {
+		return -EINVAL;
+	}
+
+	rc = pldm_msgbuf_init_errno(buf, 3, msg->payload, payload_length);
+	if (rc) {
+		return rc;
+	}
+
+	pldm_msgbuf_extract(buf, req->effecter_id);
+	pldm_msgbuf_extract(buf, req->composite_effecter_count);
+	if (!req->composite_effecter_count ||
+	    req->composite_effecter_count >
+		    PLDM_PLATFORM_SET_STATE_EFFECTER_ENABLES_MAX_COUNT) {
+		return pldm_msgbuf_discard(buf, -EPROTO);
+	}
+
+	for (size_t index = 0; index < req->composite_effecter_count; ++index) {
+		pldm_msgbuf_extract(
+			buf, req->op_fields[index].effecter_operational_state);
+		pldm_msgbuf_extract(buf,
+				    req->op_fields[index].event_msg_enable);
+	}
+
+	rc = pldm_msgbuf_complete_consumed(buf);
+	if (rc) {
+		return rc;
+	}
+
+	return set_state_effecter_enables_req_valid(req) ? 0 : -EPROTO;
+}
+
+LIBPLDM_ABI_TESTING
+int encode_pldm_platform_set_state_effecter_enables_resp(
+	uint8_t instance_id,
+	const struct pldm_platform_set_state_effecter_enables_resp *resp,
+	struct pldm_msg *msg, size_t *payload_length)
+{
+	struct pldm_header_info header = {
+		.msg_type = PLDM_RESPONSE,
+		.instance = instance_id,
+		.pldm_type = PLDM_PLATFORM,
+		.command = PLDM_SET_STATE_EFFECTER_ENABLES,
+	};
+	PLDM_MSGBUF_RW_DEFINE_P(buf);
+	int rc;
+
+	if (!resp || !msg || !payload_length) {
+		return -EINVAL;
+	}
+
+	rc = pack_pldm_header_errno(&header, &msg->hdr);
+	if (rc) {
+		return rc;
+	}
+
+	rc = pldm_msgbuf_init_errno(
+		buf, PLDM_PLATFORM_SET_STATE_EFFECTER_ENABLES_RESP_BYTES,
+		msg->payload, *payload_length);
+	if (rc) {
+		return rc;
+	}
+
+	pldm_msgbuf_insert(buf, resp->completion_code);
+	return pldm_msgbuf_complete_used(buf, *payload_length, payload_length);
+}
+
+LIBPLDM_ABI_TESTING
+int decode_pldm_platform_set_state_effecter_enables_resp(
+	const struct pldm_msg *msg, size_t payload_length,
+	struct pldm_platform_set_state_effecter_enables_resp *resp)
+{
+	PLDM_MSGBUF_RO_DEFINE_P(buf);
+	int rc;
+
+	if (!msg || !resp) {
+		return -EINVAL;
+	}
+
+	rc = pldm_msgbuf_init_errno(
+		buf, PLDM_PLATFORM_SET_STATE_EFFECTER_ENABLES_RESP_BYTES,
+		msg->payload, payload_length);
+	if (rc) {
+		return rc;
+	}
+
+	pldm_msgbuf_extract(buf, resp->completion_code);
+	return pldm_msgbuf_complete_consumed(buf);
+}
+
 LIBPLDM_ABI_STABLE
 int encode_set_state_effecter_states_resp(uint8_t instance_id,
 					  uint8_t completion_code,

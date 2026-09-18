@@ -72,6 +72,293 @@ TEST(StateEffecterPdr, testReasonableInvocations)
     EXPECT_EQ(actual_size, sizeof(effecter) - sizeof(effecter.possible_states));
 }
 
+#if HAVE_LIBPLDM_API_TESTING
+TEST(SetStateEffecterEnables, requestWireFormat)
+{
+    pldm_platform_set_state_effecter_enables_req req{};
+    req.effecter_id = 0x1234;
+    req.composite_effecter_count = 3;
+    req.op_fields[0] = {0, 0};
+    req.op_fields[1] = {2, 1};
+    req.op_fields[2] = {3, 0xff};
+    PLDM_MSG_DEFINE_P(msg,
+                      PLDM_PLATFORM_SET_STATE_EFFECTER_ENABLES_REQ_MAX_BYTES);
+    size_t length = PLDM_PLATFORM_SET_STATE_EFFECTER_ENABLES_REQ_MAX_BYTES;
+    ASSERT_EQ(encode_pldm_platform_set_state_effecter_enables_req(0x1f, &req,
+                                                                  msg, &length),
+              0);
+    EXPECT_EQ(length, 9u);
+    const std::array<uint8_t, 12> expected{0x9f, 0x02, 0x38, 0x34, 0x12, 3,
+                                           0,    0,    2,    1,    3,    0xff};
+    EXPECT_EQ(std::memcmp(msg, expected.data(), expected.size()), 0);
+
+    pldm_platform_set_state_effecter_enables_req decoded{};
+    std::memcpy(msg, expected.data(), expected.size());
+    ASSERT_EQ(decode_pldm_platform_set_state_effecter_enables_req(msg, length,
+                                                                  &decoded),
+              0);
+    EXPECT_EQ(decoded.effecter_id, req.effecter_id);
+    EXPECT_EQ(decoded.composite_effecter_count, 3);
+    for (size_t index = 0; index < 3; ++index)
+    {
+        EXPECT_EQ(decoded.op_fields[index].effecter_operational_state,
+                  req.op_fields[index].effecter_operational_state);
+        EXPECT_EQ(decoded.op_fields[index].event_msg_enable,
+                  req.op_fields[index].event_msg_enable);
+    }
+}
+
+TEST(SetStateEffecterEnables, requestCountsAndLengths)
+{
+    for (uint16_t count = 0; count <= UINT8_MAX; ++count)
+    {
+        SCOPED_TRACE(count);
+        pldm_platform_set_state_effecter_enables_req req{};
+        req.effecter_id = 1;
+        req.composite_effecter_count = count;
+        PLDM_MSG_DEFINE_P(
+            msg, PLDM_PLATFORM_SET_STATE_EFFECTER_ENABLES_REQ_MAX_BYTES + 1);
+        size_t capacity =
+            PLDM_PLATFORM_SET_STATE_EFFECTER_ENABLES_REQ_MAX_BYTES + 1;
+        const bool valid = count >= 1 && count <= 8;
+        EXPECT_EQ(encode_pldm_platform_set_state_effecter_enables_req(
+                      0, &req, msg, &capacity),
+                  valid ? 0 : -EINVAL);
+
+        msg->payload[0] = 1;
+        msg->payload[1] = 0;
+        msg->payload[2] = count;
+        for (size_t index = 3; index < 20; ++index)
+        {
+            msg->payload[index] = 0;
+        }
+        pldm_platform_set_state_effecter_enables_req decoded{};
+        if (!valid)
+        {
+            EXPECT_EQ(decode_pldm_platform_set_state_effecter_enables_req(
+                          msg, 19, &decoded),
+                      -EPROTO);
+            continue;
+        }
+        const size_t expectedLength = 3 + 2 * count;
+        EXPECT_EQ(capacity, expectedLength);
+        for (size_t length = 0; length <= 20; ++length)
+        {
+            SCOPED_TRACE(length);
+            size_t available = length;
+            std::memset(msg->payload, 0xa5, 20);
+            EXPECT_EQ(encode_pldm_platform_set_state_effecter_enables_req(
+                          0, &req, msg, &available),
+                      length < expectedLength ? -EOVERFLOW : 0);
+            if (length >= expectedLength)
+            {
+                EXPECT_EQ(available, expectedLength);
+                EXPECT_EQ(msg->payload[expectedLength], 0xa5);
+            }
+            else
+            {
+                EXPECT_EQ(available, length);
+            }
+            msg->payload[0] = 1;
+            msg->payload[1] = 0;
+            msg->payload[2] = count;
+            std::memset(msg->payload + 3, 0, 17);
+            EXPECT_EQ(decode_pldm_platform_set_state_effecter_enables_req(
+                          msg, length, &decoded),
+                      length < expectedLength   ? -EOVERFLOW
+                      : length > expectedLength ? -EBADMSG
+                                                : 0);
+        }
+    }
+}
+
+TEST(SetStateEffecterEnables, requestFieldValues)
+{
+    for (size_t index = 0; index < 8; ++index)
+    {
+        for (uint16_t value = 0; value <= UINT8_MAX; ++value)
+        {
+            SCOPED_TRACE(index);
+            SCOPED_TRACE(value);
+            for (const bool operational : {false, true})
+            {
+                SCOPED_TRACE(operational);
+                pldm_platform_set_state_effecter_enables_req req{};
+                req.effecter_id = 0xfffe;
+                req.composite_effecter_count = 8;
+                auto& field = req.op_fields[index];
+                if (operational)
+                {
+                    field.effecter_operational_state = value;
+                }
+                else
+                {
+                    field.event_msg_enable = value;
+                }
+                const bool valid =
+                    operational ? (value == 0 || value == 2 || value == 3)
+                                : (value == 0 || value == 1 || value == 0xff);
+                PLDM_MSG_DEFINE_P(
+                    msg,
+                    PLDM_PLATFORM_SET_STATE_EFFECTER_ENABLES_REQ_MAX_BYTES);
+                size_t length =
+                    PLDM_PLATFORM_SET_STATE_EFFECTER_ENABLES_REQ_MAX_BYTES;
+                EXPECT_EQ(encode_pldm_platform_set_state_effecter_enables_req(
+                              0, &req, msg, &length),
+                          valid ? 0 : -EINVAL);
+                std::memset(msg->payload, 0, length);
+                msg->payload[0] = 0xfe;
+                msg->payload[1] = 0xff;
+                msg->payload[2] = 8;
+                msg->payload[3 + 2 * index + (operational ? 0 : 1)] = value;
+                pldm_platform_set_state_effecter_enables_req decoded{};
+                EXPECT_EQ(decode_pldm_platform_set_state_effecter_enables_req(
+                              msg, length, &decoded),
+                          valid ? 0 : -EPROTO);
+                if (valid)
+                {
+                    EXPECT_EQ(
+                        decoded.op_fields[index].effecter_operational_state,
+                        field.effecter_operational_state);
+                    EXPECT_EQ(decoded.op_fields[index].event_msg_enable,
+                              field.event_msg_enable);
+                }
+            }
+        }
+    }
+}
+
+TEST(SetStateEffecterEnables, requestIdentifiersAndUnusedFields)
+{
+    for (const uint16_t effecter : {0, 1, 0xfffe, 0xffff})
+    {
+        pldm_platform_set_state_effecter_enables_req req{};
+        req.effecter_id = effecter;
+        req.composite_effecter_count = 1;
+        req.op_fields[7] = {0xff, 0xfe};
+        PLDM_MSG_DEFINE_P(msg, 5);
+        size_t length = 5;
+        const bool valid = effecter != 0 && effecter != 0xffff;
+        EXPECT_EQ(encode_pldm_platform_set_state_effecter_enables_req(
+                      0, &req, msg, &length),
+                  valid ? 0 : -EINVAL);
+        msg->payload[0] = effecter & 0xff;
+        msg->payload[1] = effecter >> 8;
+        msg->payload[2] = 1;
+        msg->payload[3] = 0;
+        msg->payload[4] = 0;
+        pldm_platform_set_state_effecter_enables_req decoded{};
+        decoded.op_fields[7] = {0xaa, 0x55};
+        EXPECT_EQ(decode_pldm_platform_set_state_effecter_enables_req(
+                      msg, length, &decoded),
+                  valid ? 0 : -EPROTO);
+        if (valid)
+        {
+            EXPECT_EQ(decoded.effecter_id, effecter);
+            EXPECT_EQ(decoded.op_fields[7].effecter_operational_state, 0xaa);
+            EXPECT_EQ(decoded.op_fields[7].event_msg_enable, 0x55);
+        }
+    }
+}
+
+TEST(SetStateEffecterEnables, invalidArguments)
+{
+    pldm_platform_set_state_effecter_enables_req req{};
+    req.effecter_id = 1;
+    req.composite_effecter_count = 1;
+    pldm_platform_set_state_effecter_enables_resp resp{};
+    PLDM_MSG_DEFINE_P(msg, 5);
+    size_t length = 5;
+    EXPECT_EQ(encode_pldm_platform_set_state_effecter_enables_req(0, nullptr,
+                                                                  msg, &length),
+              -EINVAL);
+    EXPECT_EQ(encode_pldm_platform_set_state_effecter_enables_req(
+                  0, &req, nullptr, &length),
+              -EINVAL);
+    EXPECT_EQ(encode_pldm_platform_set_state_effecter_enables_req(0, &req, msg,
+                                                                  nullptr),
+              -EINVAL);
+    EXPECT_EQ(decode_pldm_platform_set_state_effecter_enables_req(nullptr,
+                                                                  length, &req),
+              -EINVAL);
+    EXPECT_EQ(decode_pldm_platform_set_state_effecter_enables_req(msg, length,
+                                                                  nullptr),
+              -EINVAL);
+    EXPECT_EQ(encode_pldm_platform_set_state_effecter_enables_resp(
+                  0, nullptr, msg, &length),
+              -EINVAL);
+    EXPECT_EQ(encode_pldm_platform_set_state_effecter_enables_resp(
+                  0, &resp, nullptr, &length),
+              -EINVAL);
+    EXPECT_EQ(encode_pldm_platform_set_state_effecter_enables_resp(
+                  0, &resp, msg, nullptr),
+              -EINVAL);
+    EXPECT_EQ(decode_pldm_platform_set_state_effecter_enables_resp(
+                  nullptr, length, &resp),
+              -EINVAL);
+    EXPECT_EQ(decode_pldm_platform_set_state_effecter_enables_resp(msg, length,
+                                                                   nullptr),
+              -EINVAL);
+
+    for (uint16_t instance = 0; instance <= UINT8_MAX; ++instance)
+    {
+        SCOPED_TRACE(instance);
+        length = 5;
+        EXPECT_EQ(encode_pldm_platform_set_state_effecter_enables_req(
+                      instance, &req, msg, &length),
+                  instance <= 31 ? 0 : -EINVAL);
+        length = 5;
+        EXPECT_EQ(encode_pldm_platform_set_state_effecter_enables_resp(
+                      instance, &resp, msg, &length),
+                  instance <= 31 ? 0 : -EINVAL);
+    }
+}
+
+TEST(SetStateEffecterEnables, responseLengths)
+{
+    for (size_t capacity = 0; capacity <= 2; ++capacity)
+    {
+        pldm_platform_set_state_effecter_enables_resp resp{0x80};
+        PLDM_MSG_DEFINE_P(msg, 2);
+        msg->payload[1] = 0xa5;
+        size_t length = capacity;
+        EXPECT_EQ(encode_pldm_platform_set_state_effecter_enables_resp(
+                      0, &resp, msg, &length),
+                  capacity ? 0 : -EOVERFLOW);
+        EXPECT_EQ(length, capacity ? 1u : 0u);
+        EXPECT_EQ(msg->payload[1], 0xa5);
+        msg->payload[0] = 0x80;
+        EXPECT_EQ(decode_pldm_platform_set_state_effecter_enables_resp(
+                      msg, capacity, &resp),
+                  capacity == 0   ? -EOVERFLOW
+                  : capacity == 1 ? 0
+                                  : -EBADMSG);
+    }
+}
+
+TEST(SetStateEffecterEnables, responseWireFormat)
+{
+    for (const uint8_t completion : {0, 1, 0x80, 0xff})
+    {
+        pldm_platform_set_state_effecter_enables_resp resp{completion};
+        PLDM_MSG_DEFINE_P(msg, 2);
+        size_t length = 2;
+        ASSERT_EQ(encode_pldm_platform_set_state_effecter_enables_resp(
+                      0x1f, &resp, msg, &length),
+                  0);
+        EXPECT_EQ(length, 1u);
+        const std::array<uint8_t, 4> expected{0x1f, 2, 0x38, completion};
+        EXPECT_EQ(std::memcmp(msg, expected.data(), expected.size()), 0);
+        pldm_platform_set_state_effecter_enables_resp decoded{};
+        std::memcpy(msg, expected.data(), expected.size());
+        ASSERT_EQ(decode_pldm_platform_set_state_effecter_enables_resp(
+                      msg, length, &decoded),
+                  0);
+        EXPECT_EQ(decoded.completion_code, completion);
+    }
+}
+#endif
+
 TEST(SetStateEffecterStates, testEncodeResponse)
 {
     std::array<uint8_t,
