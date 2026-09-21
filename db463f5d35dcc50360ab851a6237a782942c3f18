@@ -35,6 +35,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e6f9bdfb_9900eb04",
+        "filename": "bindings/cpp/types.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2026-09-21T12:54:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8503cd65_0e1fd4f6",
+      "revId": "db463f5d35dcc50360ab851a6237a782942c3f18",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "acd2ddd8_3d18dabb",
@@ -48,6 +66,24 @@
       "writtenOn": "2026-09-18T08:06:29Z",
       "side": 1,
       "message": "Likewise, this equality check should use `downstreamDeviceRecordDescriptors2` so that repeated descriptors are preserved.",
+      "revId": "db463f5d35dcc50360ab851a6237a782942c3f18",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "df2ecd56_f7960935",
+        "filename": "bindings/cpp/types.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 375,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2026-09-21T12:54:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "acd2ddd8_3d18dabb",
       "revId": "db463f5d35dcc50360ab851a6237a782942c3f18",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -75,6 +111,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b236e12b_fda97255",
+        "filename": "tests/unit/bindings/cpp/firmware-update-test.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2026-09-21T12:54:55Z",
+      "side": 1,
+      "message": "yes, since we are expecting the struct to contain the added fields. Fixed it, thank you 👍",
+      "parentUuid": "1565f150_62dd2efe",
+      "range": {
+        "startLine": 154,
+        "startChar": 41,
+        "endLine": 154,
+        "endChar": 55
+      },
+      "revId": "db463f5d35dcc50360ab851a6237a782942c3f18",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "364d8758_ab2647de",
@@ -92,6 +152,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "afd53257_7cfe57e9",
+        "filename": "tests/unit/bindings/cpp/firmware-update-test.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2026-09-21T12:54:55Z",
+      "side": 1,
+      "message": "sure, yes, we need to cover that as well. Should be done now 😊",
+      "parentUuid": "364d8758_ab2647de",
+      "revId": "db463f5d35dcc50360ab851a6237a782942c3f18",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "baf37e5c_450d5083",
@@ -105,6 +183,24 @@
       "writtenOn": "2026-09-18T08:06:29Z",
       "side": 1,
       "message": "`PLDM_FWUP_UUID` has the fixed `PLDM_FWUP_UUID_LENGTH` of 16 bytes, but both UUID descriptors in this valid-package fixture declare a length of two bytes. Could these use valid 16-byte UUID data, or use a descriptor type whose specified length is two bytes?",
+      "revId": "db463f5d35dcc50360ab851a6237a782942c3f18",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e322d4c8_21f4ddea",
+        "filename": "tests/unit/bindings/cpp/testpkg-util.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 526,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2026-09-21T12:54:55Z",
+      "side": 1,
+      "message": "right, changed it to `PLDM_FWUP_IANA_ENTERPRISE_ID` to keep it compact instead of hardcoding 16 bytes here.\n\nLong term we could make a helper like `appendDescriptorTLV` to prevent length mismatches.",
+      "parentUuid": "baf37e5c_450d5083",
       "revId": "db463f5d35dcc50360ab851a6237a782942c3f18",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
