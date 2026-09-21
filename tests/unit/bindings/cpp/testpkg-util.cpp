@@ -134,6 +134,20 @@ void appendString(std::vector<uint8_t>& pkg, const std::string_view& str)
     pkg.insert(pkg.end(), str.begin(), str.end());
 }
 
+void appendDescriptorTLV(std::vector<uint8_t>& pkg, uint16_t descriptorType,
+                         const std::vector<uint8_t>& descriptorData)
+{
+
+    // DescriptorType
+    appendLE16(pkg, descriptorType);
+
+    // InitialDescriptorLength
+    appendLE16(pkg, descriptorData.size());
+
+    // DescriptorData
+    pkg.insert(pkg.end(), descriptorData.begin(), descriptorData.end());
+}
+
 void appendTimestamp104(std::vector<uint8_t>& pkg)
 {
 
@@ -308,20 +322,14 @@ void appendFirmwareDeviceIdRecord1(std::vector<uint8_t>& pkg)
     // component image set version string (14 bytes)
     appendString(pkg, "VersionString2");
 
-    // record descriptors below
-    // record 0: descriptor type: UUID
-    appendLE16(pkg, 0x02);
-
-    // InitialDescriptorLength
-    appendLE16(pkg, 0x10);
-
-    // record 0: InitialDescriptorData (UUID)
-    const std::vector<uint8_t> initialDescriptorData{
+    // InitialDescriptor
+    appendDescriptorTLV(pkg, PLDM_FWUP_UUID,
+                        std::vector<uint8_t>{
+                            // clang-format off
         0x16, 0x20, 0x23, 0xC9, 0x3E, 0xC5, 0x41, 0x15,
         0x95, 0xF4, 0x48, 0x70, 0x1D, 0x49, 0xD6, 0x75,
-    };
-    pkg.insert(pkg.end(), initialDescriptorData.begin(),
-               initialDescriptorData.end());
+                            // clang-format on
+                        });
 
     patchLE16(pkg, recordLengthOffset, pkg.size() - recordLengthOffset);
     // firmware device package data (empty here)
@@ -356,20 +364,14 @@ void appendFirmwareDeviceIdRecord1InvalidApplicableComponentOOB(
     // component image set version string (14 bytes)
     appendString(pkg, "VersionString2");
 
-    // record descriptors below
-    // record 0: descriptor type: UUID
-    appendLE16(pkg, 0x02);
-
-    // InitialDescriptorLength
-    appendLE16(pkg, 0x10);
-
-    // record 0: InitialDescriptorData (UUID)
-    const std::vector<uint8_t> initialDescriptorData{
+    // InitialDescriptor
+    appendDescriptorTLV(pkg, PLDM_FWUP_UUID,
+                        std::vector<uint8_t>{
+                            // clang-format off
         0x16, 0x20, 0x23, 0xC9, 0x3E, 0xC5, 0x41, 0x15,
         0x95, 0xF4, 0x48, 0x70, 0x1D, 0x49, 0xD6, 0x75,
-    };
-    pkg.insert(pkg.end(), initialDescriptorData.begin(),
-               initialDescriptorData.end());
+                            // clang-format on
+                        });
 
     patchLE16(pkg, recordLengthOffset, pkg.size() - recordLengthOffset);
     // firmware device package data (empty here)
@@ -405,20 +407,14 @@ void appendFirmwareDeviceIdRecord2(std::vector<uint8_t>& pkg)
 
     // record descriptors below
 
-    // record 0: descriptor type: UUID
-    appendLE16(pkg, 0x02);
-
-    // record 0: InitialDescriptorLength
-    appendLE16(pkg, 0x10);
-
-    // record 0: InitialDescriptorData (UUID)
-    std::vector<uint8_t> initialDescriptorData{
+    // InitialDescriptor
+    appendDescriptorTLV(pkg, PLDM_FWUP_UUID,
+                        std::vector<uint8_t>{
+                            // clang-format off
         0x16, 0x20, 0x23, 0xC9, 0x3E, 0xC5, 0x41, 0x15,
         0x95, 0xF4, 0x48, 0x70, 0x1D, 0x49, 0xD6, 0x75,
-    };
-
-    pkg.insert(pkg.end(), initialDescriptorData.begin(),
-               initialDescriptorData.end());
+                            // clang-format on
+                        });
 
     // set Recordlength
     patchLE16(pkg, recordLengthOffset, pkg.size() - recordLengthOffset);
@@ -458,19 +454,14 @@ void appendFirmwareDeviceIdRecord3(std::vector<uint8_t>& pkg)
     appendString(pkg, "VersionString2");
 
     // record descriptors below
-    // record 0: descriptor type: UUID
-    appendLE16(pkg, 0x02);
-
-    // record 0: InitialDescriptorLength (16 bytes)
-    appendLE16(pkg, 0x10);
-
-    // record 0: InitialDescriptorData (UUID)
-    std::vector<uint8_t> initialDescriptorData{
+    // InitialDescriptor
+    appendDescriptorTLV(pkg, PLDM_FWUP_UUID,
+                        std::vector<uint8_t>{
+                            // clang-format off
         0x16, 0x20, 0x23, 0xC9, 0x3E, 0xC5, 0x41, 0x15,
         0x95, 0xF4, 0x48, 0x70, 0x1D, 0x49, 0xD6, 0x75,
-    };
-    pkg.insert(pkg.end(), initialDescriptorData.begin(),
-               initialDescriptorData.end());
+                            // clang-format on
+                        });
 
     // firmware device package data (empty here)
 
@@ -520,40 +511,27 @@ static void appendFirmwareDeviceIdArea1Record0(std::vector<uint8_t>& pkg)
     // component image set version string (14 bytes)
     appendString(pkg, "VersionString2");
 
-    // record 0: descriptor 0: record descriptor type: uuid
-    appendLE16(pkg, 0x02);
-
-    // record 0: descriptor 0: initial descriptor length
-    appendLE16(pkg, 0x10);
-
-    // record 0: descriptor 0: initial descriptor data
-    std::vector<uint8_t> dd1{
+    // record 0: InitialDescriptor
+    appendDescriptorTLV(pkg, PLDM_FWUP_UUID,
+                        std::vector<uint8_t>{
+                            // clang-format off
         0x12, 0x44, 0xD2, 0x64, 0x8D, 0x7D, 0x47, 0x18,
         0xA0, 0x30, 0xFC, 0x8A, 0x56, 0x58, 0x7D, 0x5B,
-    };
-    pkg.insert(pkg.end(), dd1.begin(), dd1.end());
+                            // clang-format on
+                        });
 
-    // record 0: descriptor 1: additional descriptor type
-    appendLE16(pkg, 0x01);
+    // record 0: descriptor 1: additional descriptor
+    appendDescriptorTLV(pkg, PLDM_FWUP_IANA_ENTERPRISE_ID,
+                        std::vector<uint8_t>{0x47, 0x16, 0x00, 0x00});
 
-    // record 0: descriptor 1: additional descriptor length
-    appendLE16(pkg, 0x04);
-
-    // record 0: descriptor 1: additional descriptor identifier data
-    std::vector<uint8_t> dd2{0x47, 0x16, 0x00, 0x00};
-    pkg.insert(pkg.end(), dd2.begin(), dd2.end());
-
-    // record 0: descriptor 2: additional descriptor type
-    appendLE16(pkg, 0xFFFF);
-
-    // record 0: descriptor 2: additional descriptor length
-    appendLE16(pkg, 11);
-
-    // record 0: descriptor 2: additional descriptor identifier data
-    std::vector<uint8_t> dd3{
-        0x01, 0x07, 0x4F, 0x70, 0x65, 0x6E, 0x42, 0x4D, 0x43, 0x12, 0x34,
-    };
-    pkg.insert(pkg.end(), dd3.begin(), dd3.end());
+    // record 0: descriptor 2: additional descriptor
+    appendDescriptorTLV(pkg, PLDM_FWUP_VENDOR_DEFINED,
+                        std::vector<uint8_t>{
+                            // clang-format off
+        0x01, 0x07, 0x4F, 0x70, 0x65, 0x6E, 0x42, 0x4D,
+        0x43, 0x12, 0x34,
+                            // clang-format on
+                        });
 
     patchLE16(pkg, recordLengthOffset, pkg.size() - recordLengthOffset);
 }
@@ -586,19 +564,13 @@ static void appendFirmwareDeviceIdArea1Record1(std::vector<uint8_t>& pkg)
     appendString(pkg, "VersionString3");
 
     // record 1: descriptor 0:
-
-    // descriptor type
-    appendLE16(pkg, PLDM_FWUP_UUID);
-
-    // descriptor length
-    appendLE16(pkg, 15);
-
-    // descriptorData
-    std::vector<uint8_t> r1dd0{
+    appendDescriptorTLV(pkg, PLDM_FWUP_UUID,
+                        std::vector<uint8_t>{
+                            // clang-format off
         0x44, 0xD2, 0x64, 0x8D, 0x7D, 0x47, 0x18, 0xA0,
-        0x30, 0xFC, 0x8A, 0x56, 0x58, 0x7D, 0x5C,
-    };
-    pkg.insert(pkg.end(), r1dd0.begin(), r1dd0.end());
+        0x30, 0xFC, 0x8A, 0x56, 0x58, 0x7D, 0x5C, 0x11,
+                            // clang-format on
+                        });
 
     patchLE16(pkg, recordLengthOffset, pkg.size() - recordLengthOffset);
 }
@@ -633,18 +605,13 @@ static void appendFirmwareDeviceIdArea1Record2(std::vector<uint8_t>& pkg)
     appendString(pkg, "VersionString4");
 
     // descriptor type
-    appendLE16(pkg, PLDM_FWUP_UUID);
-
-    // descriptor length
-    appendLE16(pkg, 15);
-
-    // descriptorData
-    std::vector<uint8_t> r2dd0{
+    appendDescriptorTLV(pkg, PLDM_FWUP_UUID,
+                        std::vector<uint8_t>{
+                            // clang-format off
         0x44, 0xD2, 0x64, 0x8D, 0x7D, 0x47, 0x18, 0xA0,
-        0x30, 0xFC, 0x8A, 0x56, 0x58, 0x7D, 0x5D,
-    };
-
-    pkg.insert(pkg.end(), r2dd0.begin(), r2dd0.end());
+        0x30, 0xFC, 0x8A, 0x56, 0x58, 0x7D, 0x5D, 0x12,
+                            // clang-format on
+                        });
 
     patchLE16(pkg, recordLengthOffset, pkg.size() - recordLengthOffset);
 }

@@ -71,17 +71,13 @@ static std::vector<uint8_t> makePkgV1_1_0()
     // DownstreamDeviceRecordDescriptors
     // record descriptors below
 
-    // record 0: descriptor type: UUID
-    appendLE16(ddevidarea, 0x02);
-
-    // record 0: InitialDescriptorLength (16 bytes)
-    appendLE16(ddevidarea, 0x10);
-
-    // record 0: InitialDescriptorData (UUID)
-    std::vector<uint8_t> r0dd = {0x16, 0x20, 0x23, 0xC9, 0x3E, 0xC5,
-                                 0x41, 0x15, 0x95, 0xF4, 0x48, 0x70,
-                                 0x1D, 0x49, 0xD6, 0x75};
-    ddevidarea.insert(ddevidarea.end(), r0dd.begin(), r0dd.end());
+    appendDescriptorTLV(ddevidarea, PLDM_FWUP_UUID,
+                        std::vector<uint8_t>{
+                            // clang-format off
+        0x16, 0x20, 0x23, 0xC9, 0x3E, 0xC5, 0x41, 0x15,
+        0x95, 0xF4, 0x48, 0x70, 0x1D, 0x49, 0xD6, 0x75
+                            // clang-format on
+                        });
 
     // DownstreamDevicePackageData
     std::vector<uint8_t> ddpd = {0x83, 0x27, 0x72};
