@@ -16,6 +16,23 @@
       "message": "Thanks for your review, please take a look again when you have time 👍",
       "revId": "855cad466dab4edb7d2e3fc98677ca103553b42c",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "01cf7b27_e92fcb17",
+        "filename": "include/libpldm++/firmware_update.hpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-09-21T23:43:49Z",
+      "side": 1,
+      "message": "In my view we probably benefit here by breaking backwards compatibility and make that clear in the release notes. I would rather we don\u0027t live with the error forever. Removing this addition down the track also has its problems.\n\nI think much of the value of the ABI management comes from not breaking the ABI for existing users that aren\u0027t already broken (e.g. by implementing updates to the packaging format defined in newly released versions of the standard). Those are the types of things we should plan for. It\u0027s harder to plan against errors like this one, and we should be kind to ourselves when they occur :)\n\nFor what it\u0027s worth, we will be breaking the ABI of the C library at some point to get rid of the bit fields in the core structs, among other things. The ABI compliance check is meant to provide some resistance to provoke thought, rather than force changes into a binary decision.",
+      "revId": "855cad466dab4edb7d2e3fc98677ca103553b42c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
