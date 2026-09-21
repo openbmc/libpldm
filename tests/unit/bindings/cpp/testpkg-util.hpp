@@ -39,6 +39,10 @@ void appendTypeLengthString(std::vector<uint8_t>& pkg,
 // helper for appending a (separate) string field to a fw update package
 void appendString(std::vector<uint8_t>& pkg, const std::string_view& str);
 
+// helper to append a descriptor with type, length, value
+void appendDescriptorTLV(std::vector<uint8_t>& pkg, uint16_t descriptorType,
+                         const std::vector<uint8_t>& descriptorData);
+
 // helper for appending a timestamp104 value
 void appendTimestamp104(std::vector<uint8_t>& pkg);
 
