@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "598cf607_9b47e80a",
+        "filename": "include/libpldm/oem/ibm/state_set.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2026-09-23T05:54:09Z",
+      "side": 1,
+      "message": "I think we also have PLDM_OEM_IBM_BOOT_STATE \u003d 32769, Can we reuse that?",
+      "revId": "5f75ac62da20bf2837229356d6b56998296fac1e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5cd31cbf_218177de",
+        "filename": "include/libpldm/oem/ibm/state_set.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1000938
+      },
+      "writtenOn": "2026-09-23T05:54:09Z",
+      "side": 1,
+      "message": "This is already present in line 47 why are we adding it again?",
+      "revId": "5f75ac62da20bf2837229356d6b56998296fac1e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
