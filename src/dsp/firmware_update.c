@@ -3665,6 +3665,44 @@ int pldm_package_component_image_information_iter_init(struct pldm_package *pkg)
 }
 
 #define PLDM_FWUP_COMPONENT_IMAGE_INFORMATION_MIN_SIZE 22
+static int package_component_image_resolve(const struct pldm_package *pkg,
+					   uint32_t component_location_offset,
+					   uint32_t component_size,
+					   struct variable_field *image)
+{
+	size_t header_size = (size_t)(pkg->areas.ptr - pkg->package.ptr) +
+			     pkg->areas.length + sizeof(uint32_t);
+	PLDM_MSGBUF_RO_DEFINE_P(buf);
+	int rc;
+
+	/* Component images must follow the header areas and their checksums. */
+	if (pkg->hdr->package_header_format_revision >=
+	    PLDM_PACKAGE_HEADER_FORMAT_REVISION_FR04H) {
+		header_size += sizeof(uint32_t);
+	}
+	if (component_location_offset < header_size) {
+		return -EPROTO;
+	}
+
+	rc = pldm_msgbuf_init_errno(buf, 0, pkg->package.ptr,
+				    pkg->package.length);
+	if (rc) {
+		return rc;
+	}
+
+	pldm_msgbuf_span_required(buf, component_location_offset, NULL);
+	pldm_msgbuf_span_required(buf, component_size,
+				  (const void **)&image->ptr);
+
+	rc = pldm_msgbuf_complete(buf);
+	if (rc) {
+		return rc;
+	}
+
+	image->length = component_size;
+	return 0;
+}
+
 LIBPLDM_ABI_STABLE
 int decode_pldm_package_component_image_information_from_iter(
 	struct pldm_package *pkg,
@@ -3756,22 +3794,7 @@ int decode_pldm_package_component_image_information_from_iter(
 	}
 
 	/* Resolve the component image in memory */
-	rc = pldm_msgbuf_init_errno(buf, 0, pkg->package.ptr,
-				    pkg->package.length);
-	if (rc) {
-		return rc;
-	}
-
-	pldm_msgbuf_span_required(buf, component_location_offset, NULL);
-	pldm_msgbuf_span_required(buf, component_size,
-				  (const void **)&info->component_image.ptr);
-
-	rc = pldm_msgbuf_complete(buf);
-	if (rc) {
-		return rc;
-	}
-
-	info->component_image.length = component_size;
-
-	return 0;
+	return package_component_image_resolve(pkg, component_location_offset,
+					       component_size,
+					       &info->component_image);
 }
