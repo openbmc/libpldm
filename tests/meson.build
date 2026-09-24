@@ -1,6 +1,6 @@
 test_include_dirs = [
     include_root,
-    include_directories('../src', '../tests'),
+    include_directories('../polyfills', '../src', '../tests'),
 ]
 
 if get_option('test-methods').contains('unit')
