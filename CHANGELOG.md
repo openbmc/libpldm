@@ -22,6 +22,7 @@ Change categories:
 - libpldm++ support for fw update pkg v1.1.0
 - libpldm++ support for fw update pkg v1.2.0
 - libpldm++ support for fw update pkg v1.3.0
+- fru: New constants for additional bound on GetFRURecordTable payload size
 
 ### Changed
 
@@ -29,6 +30,10 @@ Change categories:
 
   Many header files were modified to fix issues identified in the documentation.
   There is no change in behaviour.
+
+- dsp: fru: additional bounds check for GetFRURecordByOption
+- dsp: fru: additional bounds check for GetFRURecordTable
+- update ABI dump for GCC16
 
 ### Deprecated
 

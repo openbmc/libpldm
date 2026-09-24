@@ -1563,7 +1563,8 @@ TEST(SetTID, testGoodDecodeRequest)
 
     requestMsg[sizeof(pldm_msg_hdr)] = tid;
 
-    pldm_msg* request = new (requestMsg.data()) pldm_msg;
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+    auto request = reinterpret_cast<pldm_msg*>(requestMsg.data());
     auto rc = decode_set_tid_req(
         request, requestMsg.size() - sizeof(pldm_msg_hdr), &tidOut);
 
@@ -1589,7 +1590,8 @@ TEST(SetTID, testBadDecodeRequestMsg)
 TEST(SetTID, testBadDecodeRequestTid)
 {
     std::array<uint8_t, hdrSize + PLDM_SET_TID_REQ_BYTES> requestMsg{};
-    pldm_msg* request = new (requestMsg.data()) pldm_msg;
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+    auto request = reinterpret_cast<pldm_msg*>(requestMsg.data());
 
     auto rc = decode_set_tid_req(
         request, requestMsg.size() - sizeof(pldm_msg_hdr), nullptr);
@@ -1602,7 +1604,8 @@ TEST(SetTID, testBadDecodeRequestTid)
 TEST(SetTID, testBadDecodeRequestMsgSize)
 {
     std::array<uint8_t, hdrSize + PLDM_SET_TID_REQ_BYTES> requestMsg{};
-    pldm_msg* request = new (requestMsg.data()) pldm_msg;
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+    auto request = reinterpret_cast<pldm_msg*>(requestMsg.data());
 
     auto rc = decode_set_tid_req(request, -1, nullptr);
 

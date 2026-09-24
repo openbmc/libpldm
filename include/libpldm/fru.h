@@ -10,13 +10,26 @@ extern "C" {
 #include <stddef.h>
 #include <stdint.h>
 
+// DSP0257 Version 2.0.0, Table 1
+// fixed bytes + max number of entries * max size of an entry
+// 5           + 255                   * (2 + 255)
+#define PLDM_FRU_RECORD_MAX_BYTES 65540
+
 #define PLDM_GET_FRU_RECORD_TABLE_METADATA_REQ_BYTES  0
 #define PLDM_GET_FRU_RECORD_TABLE_METADATA_RESP_BYTES 19
 #define PLDM_GET_FRU_RECORD_TABLE_REQ_BYTES	      5
 #define PLDM_GET_FRU_RECORD_TABLE_MIN_RESP_BYTES      6
-#define PLDM_GET_FRU_RECORD_BY_OPTION_MIN_RESP_BYTES  6
-#define PLDM_SET_FRU_RECORD_TABLE_MIN_REQ_BYTES	      5
-#define PLDM_SET_FRU_RECORD_TABLE_RESP_BYTES	      5
+// DSP0257 Version 2.0.0, Table 6
+// up to 3 pad bytes and 4 byte checksum
+#define PLDM_GET_FRU_RECORD_TABLE_MAX_BYTES (PLDM_FRU_RECORD_MAX_BYTES + 3 + 4)
+
+#define PLDM_GET_FRU_RECORD_TABLE_MAX_RESP_BYTES                               \
+	(PLDM_GET_FRU_RECORD_TABLE_MAX_BYTES +                                 \
+	 PLDM_GET_FRU_RECORD_TABLE_MIN_RESP_BYTES)
+
+#define PLDM_GET_FRU_RECORD_BY_OPTION_MIN_RESP_BYTES 6
+#define PLDM_SET_FRU_RECORD_TABLE_MIN_REQ_BYTES	     5
+#define PLDM_SET_FRU_RECORD_TABLE_RESP_BYTES	     5
 
 #define FRU_TABLE_CHECKSUM_SIZE 4
 
