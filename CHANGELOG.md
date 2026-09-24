@@ -40,6 +40,9 @@ Change categories:
 
 ### Fixed
 
+- libpldm++: Report a specific error for component images overlapping the
+  package header
+
 - bindings: cpp: Preserve downstream device ID records when copying and
   comparing packages
 
