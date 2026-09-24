@@ -314,8 +314,8 @@ int get_fru_record_by_option(const uint8_t *table, size_t table_size,
 			}
 			tlv = (const void *)((const char *)tlv + len);
 
-			if (table_terminator - (sizeof(*tlv) - 1) <
-			    (uintptr_t)tlv) {
+			if (!tlv || table_terminator - (sizeof(*tlv) - 1) <
+					    (uintptr_t)tlv) {
 				return PLDM_ERROR_INVALID_LENGTH;
 			}
 
