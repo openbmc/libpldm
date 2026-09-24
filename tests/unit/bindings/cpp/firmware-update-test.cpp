@@ -1,3 +1,4 @@
+#include "packagebuilder.hpp"
 #include "testpkg-util.hpp"
 
 #include <libpldm/api.h>
