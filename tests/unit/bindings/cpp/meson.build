@@ -7,6 +7,7 @@ testscpp = [
 testpkg_util_lib = static_library(
     'testpkg-util',
     'testpkg-util.cpp',
+    'packagebuilder.cpp',
     include_directories: [include_root],
 )
 
