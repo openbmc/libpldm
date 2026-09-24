@@ -6542,6 +6542,110 @@ TEST(DecodePldmFirmwareUpdatePackage, downstreamDeviceBeforeFirmwareDevice)
     EXPECT_NE(rc, 0);
 }
 
+class PackageComponentImageLocationOffset
+    : public testing::TestWithParam<uint8_t>
+{
+  protected:
+    // The header areas end at byte 96, followed by one or two checksums.
+    static constexpr size_t areasEnd = 96;
+    struct pldm_package_component_image_information info{};
+    pldm_package_header_information_pad hdr{};
+    std::array<uint8_t, 128> package{};
+    struct pldm_package pkg{};
+    size_t headerSize{};
+
+    void SetUp() override
+    {
+        const size_t checksums =
+            GetParam() >= PLDM_PACKAGE_HEADER_FORMAT_REVISION_FR04H ? 2 : 1;
+        headerSize = areasEnd + sizeof(uint32_t) * checksums;
+    }
+
+    int decodeComponentImage(uint32_t offset)
+    {
+        const uint32_t location = htole32(offset);
+
+        // The fixed header occupies 36 bytes, followed by a version string.
+        std::memcpy(package.data() + 36, "test", 4);
+        hdr.package_version_string = {package.data() + 36, 4};
+        // Component information begins at byte 40. Its location offset
+        // and size begin at bytes 52 and 56, respectively.
+        std::memcpy(package.data() + 52, &location, sizeof(location));
+        package[56] = 1;
+        package[60] = PLDM_STR_TYPE_ASCII;
+        package[61] = 1;
+        package[62] = 'v';
+        hdr.package_header_format_revision = GetParam();
+        pkg.hdr = &hdr;
+        pkg.state = PLDM_PACKAGE_PARSE_COMPONENT_IMAGE_INFORMATION;
+        pkg.package = {package.data(), package.size()};
+        pkg.areas = {package.data() + 40, areasEnd - 40};
+        pkg.iter.field = {
+            package.data() + 40,
+            GetParam() >= PLDM_PACKAGE_HEADER_FORMAT_REVISION_FR03H ? 27u
+                                                                    : 23u};
+
+        return decode_pldm_package_component_image_information_from_iter(&pkg,
+                                                                         &info);
+    }
+};
+
+TEST_P(PackageComponentImageLocationOffset, RejectPackageStart)
+{
+    EXPECT_EQ(decodeComponentImage(0), -EPROTO);
+}
+
+TEST_P(PackageComponentImageLocationOffset, RejectHeaderChecksumStart)
+{
+    EXPECT_EQ(decodeComponentImage(areasEnd), -EPROTO);
+}
+
+TEST_P(PackageComponentImageLocationOffset, RejectHeaderChecksumEnd)
+{
+    EXPECT_EQ(decodeComponentImage(areasEnd + sizeof(uint32_t) - 1), -EPROTO);
+}
+
+TEST_P(PackageComponentImageLocationOffset, RejectPayloadChecksumEnd)
+{
+    if (GetParam() < PLDM_PACKAGE_HEADER_FORMAT_REVISION_FR04H)
+    {
+        GTEST_SKIP() << "This revision has no payload checksum";
+    }
+    EXPECT_EQ(decodeComponentImage(headerSize - 1), -EPROTO);
+}
+
+TEST_P(PackageComponentImageLocationOffset, RejectBeyondPackageEnd)
+{
+    EXPECT_EQ(decodeComponentImage(package.size() + 1), -EOVERFLOW);
+}
+
+TEST_P(PackageComponentImageLocationOffset, RejectPackageEnd)
+{
+    // The offset is one past the buffer, leaving no room for the image byte.
+    EXPECT_EQ(decodeComponentImage(package.size()), -EOVERFLOW);
+}
+
+TEST_P(PackageComponentImageLocationOffset, AcceptPayloadStart)
+{
+    ASSERT_EQ(decodeComponentImage(headerSize), 0);
+    EXPECT_EQ(info.component_image.ptr, package.data() + headerSize);
+    EXPECT_EQ(info.component_image.length, 1u);
+}
+
+TEST_P(PackageComponentImageLocationOffset, AcceptAfterPayloadStart)
+{
+    ASSERT_EQ(decodeComponentImage(headerSize + 1), 0);
+    EXPECT_EQ(info.component_image.ptr, package.data() + headerSize + 1);
+    EXPECT_EQ(info.component_image.length, 1u);
+}
+
+INSTANTIATE_TEST_SUITE_P(
+    HeaderRevisions, PackageComponentImageLocationOffset,
+    testing::Values(PLDM_PACKAGE_HEADER_FORMAT_REVISION_FR01H,
+                    PLDM_PACKAGE_HEADER_FORMAT_REVISION_FR02H,
+                    PLDM_PACKAGE_HEADER_FORMAT_REVISION_FR03H,
+                    PLDM_PACKAGE_HEADER_FORMAT_REVISION_FR04H));
+
 TEST(DecodePldmFirmwareUpdatePackage, componentImageInfosBeforeFirmwareDevice)
 {
     const std::array<uint8_t, 182> package{
