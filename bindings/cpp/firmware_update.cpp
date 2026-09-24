@@ -361,6 +361,28 @@ pldm::fw_update::PackageParser::helperParseDownstreamDeviceIDRecord(
 	return {};
 }
 
+static std::expected<void, std::string>
+checkComponentImage(const pldm_package &package,
+		    const pldm_package_component_image_information &imageInfo)
+{
+	// Component images must follow the header areas and their checksums.
+	size_t headerSize = (package.areas.ptr - package.package.ptr) +
+			    package.areas.length + sizeof(uint32_t);
+	if (package.hdr->package_header_format_revision >=
+	    PLDM_PACKAGE_HEADER_FORMAT_REVISION_FR04H) {
+		headerSize += sizeof(uint32_t);
+	}
+	const size_t imageOffset =
+		imageInfo.component_image.ptr - package.package.ptr;
+	if (imageOffset < headerSize) {
+		return std::unexpected("component image offset " +
+				       std::to_string(imageOffset) +
+				       " overlaps package header");
+	}
+
+	return {};
+}
+
 static uint8_t pinMap(pldm::fw_update::PackagePin pin)
 {
 	switch (pin) {
@@ -585,6 +607,12 @@ pldm::fw_update::PackageParser::parse(const std::span<const uint8_t> &pkg,
 	struct pldm_package_component_image_information imageInfo;
 	foreach_pldm_package_component_image_information(package, imageInfo, rc)
 	{
+		auto result = checkComponentImage(package, imageInfo);
+		if (!result.has_value()) {
+			return std::unexpected(
+				PackageParserError(result.error()));
+		}
+
 		const std::bitset<16> compOptions =
 			imageInfo.component_options.value;
 		const std::bitset<16> reqCompActivationMethod =

@@ -18,6 +18,51 @@ namespace pldm
 namespace fw_update
 {
 
+TEST(PackageParserTest, InvalidPkgInvalidLocationOffset)
+{
+    std::vector<uint8_t> pkg;
+
+    appendPackageHeaderIdentifier(pkg, pldm::fw_update::PackagePin::v1);
+
+    const size_t hdrSizeOffset = pkg.size();
+    // pkg header size
+    appendLE16(pkg, PLACEHOLDER);
+
+    // pkg release date time
+    appendTimestamp104(pkg);
+
+    // component bitmap bit length
+    appendLE16(pkg, 0x08);
+
+    // package version string
+    appendTypeLengthString(pkg, "VersionString1");
+
+    // device id record count
+    pkg.push_back(0x01);
+
+    appendFirmwareDeviceIdRecord1(pkg);
+
+    // component image info area
+    // component image count
+    appendLE16(pkg, 0x01);
+
+    const auto componentLocationOffset = appendComponentImageInfo1(pkg);
+
+    // we pretend the components are located right after the info area
+    // which is not possible (needs at least CRC before that)
+    patchLE32(pkg, componentLocationOffset, pkg.size());
+
+    patchLE16(pkg, hdrSizeOffset, pkg.size() + 4);
+
+    appendCRC(pkg);
+
+    auto res = PackageParser::parse(pkg, PackagePin::v1);
+
+    ASSERT_FALSE(res.has_value());
+    EXPECT_EQ(res.error().msg,
+              "component image offset 135 overlaps package header");
+}
+
 TEST(PackageParserTest, ValidPkgSingleDescriptorSingleComponent)
 {
     std::vector<uint8_t> pkg;
