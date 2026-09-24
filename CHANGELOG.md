@@ -40,6 +40,9 @@ Change categories:
 
 ### Fixed
 
+- firmware-update: Reject component images overlapping the package header in the
+  C decoder, also covering the C++ bindings
+
 - bindings: cpp: Preserve downstream device ID records when copying and
   comparing packages
 
