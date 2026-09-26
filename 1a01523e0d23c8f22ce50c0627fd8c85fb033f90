@@ -16,6 +16,24 @@
       "message": "Could you please use a reference to the repo too instead of just putting in the commit hash? Took me a minute to figure out that this hash is part of `openbmc-build-scripts`.",
       "revId": "1a01523e0d23c8f22ce50c0627fd8c85fb033f90",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6533f2bc_d5c4c3f3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2026-09-26T19:43:32Z",
+      "side": 1,
+      "message": "Done, thanks for pointing this out and thanks for your review 👍",
+      "parentUuid": "60b49981_1d920b21",
+      "revId": "1a01523e0d23c8f22ce50c0627fd8c85fb033f90",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
