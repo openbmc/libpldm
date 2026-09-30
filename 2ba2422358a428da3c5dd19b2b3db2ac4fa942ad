@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "20323c78_bfdb3e27",
+        "filename": "include/libpldm/rde.h",
+        "patchSetId": 24
+      },
+      "lineNbr": 427,
+      "author": {
+        "id": 1002885
+      },
+      "writtenOn": "2026-09-30T09:57:54Z",
+      "side": 1,
+      "message": "A valid varstring carries at least the NULL terminator, so shouldn\u0027t this be +1 ?",
+      "range": {
+        "startLine": 425,
+        "startChar": 0,
+        "endLine": 427,
+        "endChar": 34
+      },
+      "revId": "2ba2422358a428da3c5dd19b2b3db2ac4fa942ad",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "780bf9a5_bc765634",
+        "filename": "src/dsp/rde.c",
+        "patchSetId": 24
+      },
+      "lineNbr": 574,
+      "author": {
+        "id": 1002885
+      },
+      "writtenOn": "2026-09-30T09:57:54Z",
+      "side": 1,
+      "message": "Should we do this instead?\n```\nrc \u003d (iter-\u003ecount \u003d\u003d 1) ? pldm_msgbuf_complete_consumed(buf) : \n                          pldm_msgbuf_complete(buf);\n```",
+      "range": {
+        "startLine": 574,
+        "startChar": 1,
+        "endLine": 574,
+        "endChar": 32
+      },
+      "revId": "2ba2422358a428da3c5dd19b2b3db2ac4fa942ad",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c2838403_166f3239",
+        "filename": "src/dsp/rde.c",
+        "patchSetId": 24
+      },
+      "lineNbr": 703,
+      "author": {
+        "id": 1002885
+      },
+      "writtenOn": "2026-09-30T09:57:54Z",
+      "side": 1,
+      "message": "Isn\u0027t this has been covered by the check at L685?\n```\nif (!rde_varstring_valid(\u0026uris[i]))\n```",
+      "range": {
+        "startLine": 703,
+        "startChar": 2,
+        "endLine": 703,
+        "endChar": 39
+      },
+      "revId": "2ba2422358a428da3c5dd19b2b3db2ac4fa942ad",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
