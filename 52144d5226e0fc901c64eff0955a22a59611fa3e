@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ad545ca6_535a6fc0",
+        "filename": "src/dsp/fru.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 594,
+      "author": {
+        "id": 1002885
+      },
+      "writtenOn": "2026-10-01T09:13:46Z",
+      "side": 1,
+      "message": "I think we should align to the existing encoder shape.\nFor eg, \n```\nencode_pldm_fru_set_fru_record_table_req(...)\n```",
+      "range": {
+        "startLine": 594,
+        "startChar": 4,
+        "endLine": 594,
+        "endChar": 35
+      },
+      "revId": "52144d5226e0fc901c64eff0955a22a59611fa3e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6080a8bf_91fffb2b",
+        "filename": "src/dsp/fru.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 601,
+      "author": {
+        "id": 1002885
+      },
+      "writtenOn": "2026-10-01T09:13:46Z",
+      "side": 1,
+      "message": "nit: \nShould we handle the case of `fru_table_length \u003d\u003d 0` as well?",
+      "range": {
+        "startLine": 601,
+        "startChar": 1,
+        "endLine": 601,
+        "endChar": 45
+      },
+      "revId": "52144d5226e0fc901c64eff0955a22a59611fa3e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d608908d_9ea9bc02",
+        "filename": "src/dsp/fru.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 708,
+      "author": {
+        "id": 1002885
+      },
+      "writtenOn": "2026-10-01T09:13:46Z",
+      "side": 1,
+      "message": "nit:\nShould we check `payload_length` before accessing this?",
+      "range": {
+        "startLine": 708,
+        "startChar": 1,
+        "endLine": 708,
+        "endChar": 36
+      },
+      "revId": "52144d5226e0fc901c64eff0955a22a59611fa3e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
