@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "241c8ed8_2f7607c1",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 1770,
+      "author": {
+        "id": 1002838
+      },
+      "writtenOn": "2026-10-05T06:46:53Z",
+      "side": 1,
+      "message": "Done thanks",
+      "parentUuid": "03dfc7c3_2776b896",
+      "range": {
+        "startLine": 1770,
+        "startChar": 0,
+        "endLine": 1770,
+        "endChar": 46
+      },
+      "revId": "61fd204568007a2f5332d4aa2c461574c77d5ba4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ceb3bebb_6ff5b798",
@@ -47,6 +71,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e7b4de89_e7a6adf5",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 1798,
+      "author": {
+        "id": 1002838
+      },
+      "writtenOn": "2026-10-05T06:46:53Z",
+      "side": 1,
+      "message": "Done thanks",
+      "parentUuid": "ceb3bebb_6ff5b798",
+      "range": {
+        "startLine": 1798,
+        "startChar": 4,
+        "endLine": 1798,
+        "endChar": 60
+      },
+      "revId": "61fd204568007a2f5332d4aa2c461574c77d5ba4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c067453d_7d90606e",
@@ -60,6 +108,30 @@
       "writtenOn": "2026-10-05T05:44:03Z",
       "side": 1,
       "message": "Since we have done `pldm_msgbuf_init_errno()` before this point, what kind of error are we trying to catch here?",
+      "range": {
+        "startLine": 620,
+        "startChar": 1,
+        "endLine": 623,
+        "endChar": 2
+      },
+      "revId": "61fd204568007a2f5332d4aa2c461574c77d5ba4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5f0cbb63_9353a6aa",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 623,
+      "author": {
+        "id": 1002838
+      },
+      "writtenOn": "2026-10-05T06:46:53Z",
+      "side": 1,
+      "message": "Done thanks",
+      "parentUuid": "c067453d_7d90606e",
       "range": {
         "startLine": 620,
         "startChar": 1,
