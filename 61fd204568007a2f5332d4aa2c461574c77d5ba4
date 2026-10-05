@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "03dfc7c3_2776b896",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 1770,
+      "author": {
+        "id": 1002885
+      },
+      "writtenOn": "2026-10-05T05:44:03Z",
+      "side": 1,
+      "message": "Shall we follows the naming rule of `pldm_`-prefixed symbols stated in `CONTRIBUTING.md`? \nFor example, `pldm_platform_...`?",
+      "range": {
+        "startLine": 1770,
+        "startChar": 0,
+        "endLine": 1770,
+        "endChar": 46
+      },
+      "revId": "61fd204568007a2f5332d4aa2c461574c77d5ba4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ceb3bebb_6ff5b798",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 1798,
+      "author": {
+        "id": 1002885
+      },
+      "writtenOn": "2026-10-05T05:44:03Z",
+      "side": 1,
+      "message": "Please list the errno values as `decode_pldm_platform_set_numeric_sensor_enable_resp` does.",
+      "range": {
+        "startLine": 1798,
+        "startChar": 4,
+        "endLine": 1798,
+        "endChar": 60
+      },
+      "revId": "61fd204568007a2f5332d4aa2c461574c77d5ba4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c067453d_7d90606e",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 623,
+      "author": {
+        "id": 1002885
+      },
+      "writtenOn": "2026-10-05T05:44:03Z",
+      "side": 1,
+      "message": "Since we have done `pldm_msgbuf_init_errno()` before this point, what kind of error are we trying to catch here?",
+      "range": {
+        "startLine": 620,
+        "startChar": 1,
+        "endLine": 623,
+        "endChar": 2
+      },
+      "revId": "61fd204568007a2f5332d4aa2c461574c77d5ba4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
