@@ -56,6 +56,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f3e0ebcb_187edd0b",
+        "filename": "include/libpldm/rde.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 1064,
+      "author": {
+        "id": 1002838
+      },
+      "writtenOn": "2026-10-05T03:15:41Z",
+      "side": 1,
+      "message": "My intent was to avoid a magic number: with PLDM_RDE_TRANSFER_FLAG_MAX as the\n  bound, a future DSP0218 revision appending a TransferFlag value only needs the\n  enumerator inserted before the sentinel, and every range check stays correct.\n\n  The in-tree form for the same job is a macro aliasing the last real member:\n\n\n      enum pldm_sensor_readings_data_type {\n          ...\n          PLDM_SENSOR_DATA_SIZE_SINT32\n      };\n      #define PLDM_SENSOR_DATA_SIZE_MAX PLDM_SENSOR_DATA_SIZE_SINT32\n\n  I\u0027ll change to this form.\n\nThank you, for review",
+      "parentUuid": "92888830_70239c3e",
+      "revId": "293259d8557a4598f7790db0ea540ea9b7d428eb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "60a471ec_f5df7035",
         "filename": "include/libpldm/rde.h",
         "patchSetId": 2
