@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2ff9dfa4_c8e74453",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 20
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002885
+      },
+      "writtenOn": "2026-10-05T02:43:10Z",
+      "side": 1,
+      "message": "Anyway, thanks for the patch here!",
+      "revId": "e9b147041c152c2843ab3120781ec1b7fffab339",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7dd278cc_d1601bf1",
+        "filename": "src/dsp/rde.c",
+        "patchSetId": 20
+      },
+      "lineNbr": 1681,
+      "author": {
+        "id": 1002885
+      },
+      "writtenOn": "2026-10-05T02:43:10Z",
+      "side": 1,
+      "message": "Why don\u0027t we drop `PLDM_RDE_TRANSFER_FLAG_MAX` and simply check against `PLDM_RDE_TRANSFER_FLAG_START_AND_END`?",
+      "range": {
+        "startLine": 1679,
+        "startChar": 1,
+        "endLine": 1681,
+        "endChar": 2
+      },
+      "revId": "e9b147041c152c2843ab3120781ec1b7fffab339",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5ff29dfb_db188e09",
+        "filename": "src/dsp/rde.c",
+        "patchSetId": 20
+      },
+      "lineNbr": 1768,
+      "author": {
+        "id": 1002885
+      },
+      "writtenOn": "2026-10-05T02:43:10Z",
+      "side": 1,
+      "message": "Same here, I think we are able to drop this and check against `PLDM_RDE_TRANSFER_FLAG_START_AND_END`.",
+      "range": {
+        "startLine": 1766,
+        "startChar": 1,
+        "endLine": 1768,
+        "endChar": 2
+      },
+      "revId": "e9b147041c152c2843ab3120781ec1b7fffab339",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
