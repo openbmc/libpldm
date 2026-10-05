@@ -106,6 +106,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cdebe0ea_7ea6f343",
+        "filename": "include/libpldm/rde.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 260,
+      "author": {
+        "id": 1002838
+      },
+      "writtenOn": "2026-10-05T08:26:21Z",
+      "side": 1,
+      "message": "The bound is now a macro after the enum, aliasing the last spec-defined member\n  (include/libpldm/rde.h:288), the same shape as include/libpldm/platform.h:182:\n\n      enum pldm_range_field_format {\n          ...\n          PLDM_RANGE_FIELD_FORMAT_REAL32\n      };\n      #define PLDM_RANGE_FIELD_FORMAT_MAX PLDM_RANGE_FIELD_FORMAT_REAL32",
+      "parentUuid": "140061af_132904c5",
+      "revId": "0b1046e30417e221d647b00c318763097f71229a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cf436c0d_d0c64199",
