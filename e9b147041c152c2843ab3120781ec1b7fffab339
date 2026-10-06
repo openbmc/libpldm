@@ -41,6 +41,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ae710e2a_de71db36",
+        "filename": "src/dsp/rde.c",
+        "patchSetId": 20
+      },
+      "lineNbr": 1681,
+      "author": {
+        "id": 1002838
+      },
+      "writtenOn": "2026-10-06T08:47:13Z",
+      "side": 1,
+      "message": "Use XXX_MAX as the bound like \n#define PLDM_RANGE_FIELD_FORMAT_MAX PLDM_RANGE_FIELD_FORMAT_REAL32\n(already in current libpldm design)\n\nThe value only needs the enumerator inserted before the sentinel, and every range check stays correct.",
+      "parentUuid": "7dd278cc_d1601bf1",
+      "range": {
+        "startLine": 1679,
+        "startChar": 1,
+        "endLine": 1681,
+        "endChar": 2
+      },
+      "revId": "e9b147041c152c2843ab3120781ec1b7fffab339",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5ff29dfb_db188e09",
@@ -54,6 +78,30 @@
       "writtenOn": "2026-10-05T02:43:10Z",
       "side": 1,
       "message": "Same here, I think we are able to drop this and check against `PLDM_RDE_TRANSFER_FLAG_START_AND_END`.",
+      "range": {
+        "startLine": 1766,
+        "startChar": 1,
+        "endLine": 1768,
+        "endChar": 2
+      },
+      "revId": "e9b147041c152c2843ab3120781ec1b7fffab339",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0b2d6954_fcf7b7a0",
+        "filename": "src/dsp/rde.c",
+        "patchSetId": 20
+      },
+      "lineNbr": 1768,
+      "author": {
+        "id": 1002838
+      },
+      "writtenOn": "2026-10-06T08:47:13Z",
+      "side": 1,
+      "message": "Use XXX_MAX as the bound like \n#define PLDM_RANGE_FIELD_FORMAT_MAX PLDM_RANGE_FIELD_FORMAT_REAL32\n(already in current libpldm design)\n\nThe value only needs the enumerator inserted before the sentinel, and every range check stays correct.",
+      "parentUuid": "5ff29dfb_db188e09",
       "range": {
         "startLine": 1766,
         "startChar": 1,

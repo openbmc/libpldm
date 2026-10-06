@@ -143,6 +143,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9f06e56a_0ac5b8cc",
+        "filename": "include/libpldm/rde.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 1076,
+      "author": {
+        "id": 1002838
+      },
+      "writtenOn": "2026-10-06T08:47:13Z",
+      "side": 1,
+      "message": "Use XXX_MAX as the bound like \n#define PLDM_RANGE_FIELD_FORMAT_MAX PLDM_RANGE_FIELD_FORMAT_REAL32\n(already in current libpldm design)\n\nThe value only needs the enumerator inserted before the sentinel, and every range check stays correct.\n\nThanks",
+      "parentUuid": "e202c662_fede3344",
+      "revId": "293259d8557a4598f7790db0ea540ea9b7d428eb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5d5c4c24_ded6519b",
