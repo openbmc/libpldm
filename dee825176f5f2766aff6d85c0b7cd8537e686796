@@ -36,6 +36,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "32e09a93_4c63bc24",
+        "filename": "include/libpldm/rde.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 608,
+      "author": {
+        "id": 1002838
+      },
+      "writtenOn": "2026-10-06T08:39:21Z",
+      "side": 1,
+      "message": "Change solution like\n#define PLDM_RANGE_FIELD_FORMAT_MAX PLDM_RANGE_FIELD_FORMAT_REAL32",
+      "parentUuid": "103f8417_a12747e6",
+      "revId": "dee825176f5f2766aff6d85c0b7cd8537e686796",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2a43c020_4c3ebc35",
@@ -67,6 +85,24 @@
       "side": 1,
       "message": "Same above",
       "parentUuid": "2a43c020_4c3ebc35",
+      "revId": "dee825176f5f2766aff6d85c0b7cd8537e686796",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1018967e_ac399e8a",
+        "filename": "include/libpldm/rde.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 621,
+      "author": {
+        "id": 1002838
+      },
+      "writtenOn": "2026-10-06T08:39:21Z",
+      "side": 1,
+      "message": "Change solution like\n\n#define PLDM_RANGE_FIELD_FORMAT_MAX PLDM_RANGE_FIELD_FORMAT_REAL32\n\nThanks",
+      "parentUuid": "0f664dac_13910f8c",
       "revId": "dee825176f5f2766aff6d85c0b7cd8537e686796",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },

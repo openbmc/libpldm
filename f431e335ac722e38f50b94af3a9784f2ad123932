@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9416a4a6_9772668e",
+        "filename": "include/libpldm/rde.h",
+        "patchSetId": 21
+      },
+      "lineNbr": 783,
+      "author": {
+        "id": 1002838
+      },
+      "writtenOn": "2026-10-06T08:39:21Z",
+      "side": 1,
+      "message": "Done thanks",
+      "parentUuid": "a9bd2756_8c580128",
+      "range": {
+        "startLine": 783,
+        "startChar": 4,
+        "endLine": 783,
+        "endChar": 73
+      },
+      "revId": "f431e335ac722e38f50b94af3a9784f2ad123932",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1c81561e_18ea0071",
@@ -47,6 +71,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "20344639_b931f635",
+        "filename": "src/dsp/rde.c",
+        "patchSetId": 21
+      },
+      "lineNbr": 1217,
+      "author": {
+        "id": 1002838
+      },
+      "writtenOn": "2026-10-06T08:39:21Z",
+      "side": 1,
+      "message": "Done thanks",
+      "parentUuid": "1c81561e_18ea0071",
+      "range": {
+        "startLine": 1213,
+        "startChar": 1,
+        "endLine": 1217,
+        "endChar": 2
+      },
+      "revId": "f431e335ac722e38f50b94af3a9784f2ad123932",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6e5c2b1c_d397bce2",
@@ -60,6 +108,30 @@
       "writtenOn": "2026-10-01T09:37:47Z",
       "side": 1,
       "message": "Per DSP0218(v1.2.0), section 12.1, a device returning `ERROR_NO_SUCH_RESOURCE` still sends `OperationStatus`. Should we pick them back here?",
+      "range": {
+        "startLine": 1238,
+        "startChar": 1,
+        "endLine": 1243,
+        "endChar": 0
+      },
+      "revId": "f431e335ac722e38f50b94af3a9784f2ad123932",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ee760285_bd0e4d29",
+        "filename": "src/dsp/rde.c",
+        "patchSetId": 21
+      },
+      "lineNbr": 1243,
+      "author": {
+        "id": 1002838
+      },
+      "writtenOn": "2026-10-06T08:39:21Z",
+      "side": 1,
+      "message": "Done thanks",
+      "parentUuid": "6e5c2b1c_d397bce2",
       "range": {
         "startLine": 1238,
         "startChar": 1,
