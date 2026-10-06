@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ea176673_935a4fd6",
+        "filename": "include/libpldm/rde.h",
+        "patchSetId": 21
+      },
+      "lineNbr": 1138,
+      "author": {
+        "id": 1002838
+      },
+      "writtenOn": "2026-10-06T09:20:31Z",
+      "side": 1,
+      "message": "rename pldm_rde_op_entry entries to operations",
+      "parentUuid": "e7979b82_acf71b6c",
+      "range": {
+        "startLine": 1138,
+        "startChar": 1,
+        "endLine": 1138,
+        "endChar": 40
+      },
+      "revId": "30eea08ee1975ec90f942794ee2501d8c1f082c8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9949c69b_96c000f5",
@@ -47,6 +71,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b27f5bb3_f7baa31d",
+        "filename": "src/dsp/rde.c",
+        "patchSetId": 21
+      },
+      "lineNbr": 1061,
+      "author": {
+        "id": 1002838
+      },
+      "writtenOn": "2026-10-06T09:20:31Z",
+      "side": 1,
+      "message": "OK thanks",
+      "parentUuid": "9949c69b_96c000f5",
+      "range": {
+        "startLine": 1058,
+        "startChar": 1,
+        "endLine": 1061,
+        "endChar": 2
+      },
+      "revId": "30eea08ee1975ec90f942794ee2501d8c1f082c8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b9ffc9a8_d416413b",
@@ -60,6 +108,30 @@
       "writtenOn": "2026-10-05T03:14:56Z",
       "side": 1,
       "message": "The encoder rejects `operation_type \u003e\u003d PLDM_RDE_OPERATION_TYPE_MAX`, should this return `-EPROTO` after `pldm_msgbuf_complete()`, like `decode_pldm_rde_operation_init_req() does?",
+      "range": {
+        "startLine": 1532,
+        "startChar": 1,
+        "endLine": 1532,
+        "endChar": 49
+      },
+      "revId": "30eea08ee1975ec90f942794ee2501d8c1f082c8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c2f317a7_64f05211",
+        "filename": "src/dsp/rde.c",
+        "patchSetId": 21
+      },
+      "lineNbr": 1532,
+      "author": {
+        "id": 1002838
+      },
+      "writtenOn": "2026-10-06T09:20:31Z",
+      "side": 1,
+      "message": "Done thanks",
+      "parentUuid": "b9ffc9a8_d416413b",
       "range": {
         "startLine": 1532,
         "startChar": 1,
