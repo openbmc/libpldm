@@ -16,6 +16,24 @@
       "message": "Could validation depend on string_format? For UTF-16 formats, the terminator is a two-byte code unit and the byte length must be aligned. Checking only the last byte accepts malformed provider-name varstrings; this helper is used by both the encoder and decoder.",
       "revId": "b6efaa5fd856d598d485d2b9148ec94560eab7d3",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a10acfac_ea93e910",
+        "filename": "src/dsp/rde.c",
+        "patchSetId": 26
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1002838
+      },
+      "writtenOn": "2026-10-07T13:02:35Z",
+      "side": 1,
+      "message": "Done thanks",
+      "parentUuid": "6a891075_f63b32e0",
+      "revId": "b6efaa5fd856d598d485d2b9148ec94560eab7d3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
