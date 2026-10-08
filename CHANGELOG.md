@@ -21,6 +21,10 @@ Change categories:
 
 ### Changed
 
+- dsp: platform: Stabilise
+  `encode_pldm_platform_set_numeric_sensor_enable_req()`
+- dsp: platform: Stabilise
+  `decode_pldm_platform_set_numeric_sensor_enable_resp()`
 - libpldm++: Preserve multiple descriptors of the same type
 
   This breaks API and ABI compatibility; consumers must rebuild

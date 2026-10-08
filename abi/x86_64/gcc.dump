@@ -6433,6 +6433,50 @@ $VAR1 = {
       'Return' => '117',
       'ShortName' => 'encode_get_sensor_reading_req'
     },
+    '423811' => {
+      'Header' => 'platform.h',
+      'Line' => '2513',
+      'Param' => {
+        '0' => {
+          'name' => 'msg',
+          'type' => '2391'
+        },
+        '1' => {
+          'name' => 'payload_length',
+          'type' => '883'
+        },
+        '2' => {
+          'name' => 'completion_code',
+          'type' => '2396'
+        }
+      },
+      'Return' => '117',
+      'ShortName' => 'decode_pldm_platform_set_numeric_sensor_enable_resp'
+    },
+    '424866' => {
+      'Header' => 'platform.h',
+      'Line' => '2497',
+      'Param' => {
+        '0' => {
+          'name' => 'instance_id',
+          'type' => '150'
+        },
+        '1' => {
+          'name' => 'req',
+          'type' => '426747'
+        },
+        '2' => {
+          'name' => 'msg',
+          'type' => '2312'
+        },
+        '3' => {
+          'name' => 'payload_length',
+          'type' => '2448'
+        }
+      },
+      'Return' => '117',
+      'ShortName' => 'encode_pldm_platform_set_numeric_sensor_enable_req'
+    },
     '426752' => {
       'Header' => 'platform.h',
       'Line' => '2478',
@@ -10082,6 +10126,7 @@ $VAR1 = {
       'decode_pldm_platform_redfish_resource_pdr' => 1,
       'decode_pldm_platform_redfish_resource_pdr_additional_resource_from_iter' => 1,
       'decode_pldm_platform_redfish_resource_pdr_oem_name_from_iter' => 1,
+      'decode_pldm_platform_set_numeric_sensor_enable_resp' => 1,
       'decode_poll_for_platform_event_message_req' => 1,
       'decode_poll_for_platform_event_message_resp' => 1,
       'decode_query_device_identifiers_resp' => 1,
@@ -10186,6 +10231,7 @@ $VAR1 = {
       'encode_pldm_fwup_update_security_revision_req' => 1,
       'encode_pldm_header_only' => 1,
       'encode_pldm_pdr_repository_chg_event_data' => 1,
+      'encode_pldm_platform_set_numeric_sensor_enable_req' => 1,
       'encode_poll_for_platform_event_message_req' => 1,
       'encode_poll_for_platform_event_message_resp' => 1,
       'encode_query_device_identifiers_req' => 1,
@@ -14519,6 +14565,36 @@ $VAR1 = {
       'Size' => '3',
       'Type' => 'Struct'
     },
+    '300862' => {
+      'Header' => 'platform.h',
+      'Line' => '1401',
+      'Memb' => {
+        '0' => {
+          'name' => 'sensor_id',
+          'offset' => '0',
+          'type' => '162'
+        },
+        '1' => {
+          'name' => 'sensor_operational_state',
+          'offset' => '2',
+          'type' => '150'
+        },
+        '2' => {
+          'name' => 'sensor_event_message_enable',
+          'offset' => '3',
+          'type' => '150'
+        }
+      },
+      'Name' => 'struct pldm_platform_set_numeric_sensor_enable_req',
+      'Size' => '4',
+      'Type' => 'Struct'
+    },
+    '300919' => {
+      'BaseType' => '300862',
+      'Name' => 'struct pldm_platform_set_numeric_sensor_enable_req const',
+      'Size' => '4',
+      'Type' => 'Const'
+    },
     '301040' => {
       'Header' => 'platform.h',
       'Line' => '2843',
@@ -14852,6 +14928,12 @@ $VAR1 = {
     '409502' => {
       'BaseType' => '299684',
       'Name' => 'struct pldm_get_event_receiver_resp*',
+      'Size' => '8',
+      'Type' => 'Pointer'
+    },
+    '426747' => {
+      'BaseType' => '300919',
+      'Name' => 'struct pldm_platform_set_numeric_sensor_enable_req const*',
       'Size' => '8',
       'Type' => 'Pointer'
     },

@@ -2314,7 +2314,7 @@ int decode_pldm_pdr_repository_change_record_data(
 	return PLDM_SUCCESS;
 }
 
-LIBPLDM_ABI_TESTING
+LIBPLDM_ABI_STABLE
 int encode_pldm_platform_set_numeric_sensor_enable_req(
 	uint8_t instance_id,
 	const struct pldm_platform_set_numeric_sensor_enable_req *req,
@@ -2358,7 +2358,7 @@ int encode_pldm_platform_set_numeric_sensor_enable_req(
 	return pldm_msgbuf_complete_used(buf, *payload_length, payload_length);
 }
 
-LIBPLDM_ABI_TESTING
+LIBPLDM_ABI_STABLE
 int decode_pldm_platform_set_numeric_sensor_enable_resp(
 	const struct pldm_msg *msg, size_t payload_length,
 	uint8_t *completion_code)

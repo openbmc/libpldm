@@ -3948,7 +3948,6 @@ TEST(SetNumericSensorEnable, testGoodEncodeRequest)
 }
 #endif // LIBPLDM_API_TESTING
 
-#if HAVE_LIBPLDM_API_TESTING
 TEST(SetNumericSensorEnable, testBadEncodeRequest)
 {
     int rc;
@@ -3999,9 +3998,7 @@ TEST(SetNumericSensorEnable, testBadEncodeRequest)
                                                             msg, &pl);
     EXPECT_EQ(rc, -EOVERFLOW);
 }
-#endif // LIBPLDM_API_TESTING
 
-#if HAVE_LIBPLDM_API_TESTING
 TEST(SetNumericSensorEnable, testGoodDecodeResponse)
 {
     PLDM_MSG_DEFINE_P(response,
@@ -4017,9 +4014,7 @@ TEST(SetNumericSensorEnable, testGoodDecodeResponse)
     ASSERT_EQ(rc, 0);
     EXPECT_EQ(resp, completionCode);
 }
-#endif // LIBPLDM_API_TESTING
 
-#if HAVE_LIBPLDM_API_TESTING
 TEST(SetNumericSensorEnable, testGoodDecodeResponseInvalidSensorID)
 {
     PLDM_MSG_DEFINE_P(response,
@@ -4035,9 +4030,7 @@ TEST(SetNumericSensorEnable, testGoodDecodeResponseInvalidSensorID)
     ASSERT_EQ(rc, 0);
     EXPECT_EQ(resp, completionCode);
 }
-#endif // LIBPLDM_API_TESTING
 
-#if HAVE_LIBPLDM_API_TESTING
 TEST(SetNumericSensorEnable, testBadDecodeResponse)
 {
     PLDM_MSG_DEFINE_P(response,
@@ -4069,7 +4062,6 @@ TEST(SetNumericSensorEnable, testBadDecodeResponse)
         &resp);
     EXPECT_EQ(rc, -EBADMSG);
 }
-#endif // LIBPLDM_API_TESTING
 
 TEST(SetEventReceiver, testGoodEncodeRequest)
 {
