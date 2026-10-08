@@ -295,5 +295,112 @@ TEST(PackageParserTest, DDDescriptorWrongLengthRejected)
     EXPECT_EQ(res.error().msg, "descriptor type 2 has length 15, expected 16");
 }
 
+TEST(PackageParserTest, FDInitialDescriptorTypesAccepted)
+{
+    const std::vector<TestDescriptor> initialDescriptors{
+        {PLDM_FWUP_PCI_VENDOR_ID, {0xDE, 0x10}},
+        {PLDM_FWUP_IANA_ENTERPRISE_ID, iana4},
+        {PLDM_FWUP_UUID, uuid16},
+        {PLDM_FWUP_PNP_VENDOR_ID, {0x41, 0x42, 0x43}},
+        {PLDM_FWUP_ACPI_VENDOR_ID, {0x41, 0x42, 0x43, 0x44}},
+    };
+
+    for (const auto& initial : initialDescriptors)
+    {
+        auto pkg = makePkgWithFDDescriptors(
+            {initial, {PLDM_FWUP_VENDOR_DEFINED, vendorDefined}}, 2);
+        auto res = PackageParser::parse(pkg, PackagePin::v1);
+
+        ASSERT_TRUE(res.has_value()) << "initial descriptor type "
+                                     << initial.type << ": " << res.error().msg;
+
+        const auto& descriptors =
+            res.value()->firmwareDeviceIdRecords[0].recordDescriptors;
+        EXPECT_EQ(descriptors.size(), 2);
+        EXPECT_EQ(descriptors.at(initial.type)->data, initial.data);
+    }
+}
+
+TEST(PackageParserTest, FDInitialDescriptorTypesRejected)
+{
+    // additional-only, downstream-only and unknown types
+    const std::vector<TestDescriptor> initialDescriptors{
+        {PLDM_FWUP_PCI_DEVICE_ID, {0x01, 0x02}},
+        {PLDM_FWUP_IEEE_ASSIGNED_COMPANY_ID, {0x01, 0x02, 0x03}},
+        {PLDM_FWUP_SCSI_VENDOR_ID,
+         {0x41, 0x42, 0x43, 0x44, 0x45, 0x46, 0x47, 0x48}},
+        {PLDM_FWUP_VENDOR_DEFINED, vendorDefined},
+        {0x0200, {0x01}},
+    };
+
+    for (const auto& initial : initialDescriptors)
+    {
+        auto pkg = makePkgWithFDDescriptors(
+            {initial, {PLDM_FWUP_IANA_ENTERPRISE_ID, iana4}}, 2);
+        auto res = PackageParser::parse(pkg, PackagePin::v1);
+
+        ASSERT_FALSE(res.has_value())
+            << "initial descriptor type " << initial.type;
+        EXPECT_EQ(res.error().msg,
+                  "descriptor type " + std::to_string(initial.type) +
+                      " is not permitted as the initial descriptor of a "
+                      "firmware device id record");
+    }
+}
+
+TEST(PackageParserTest, DDInitialDescriptorTypesAccepted)
+{
+    const std::vector<TestDescriptor> initialDescriptors{
+        {PLDM_FWUP_PCI_VENDOR_ID, {0xDE, 0x10}},
+        {PLDM_FWUP_IANA_ENTERPRISE_ID, iana4},
+        {PLDM_FWUP_UUID, uuid16},
+        {PLDM_FWUP_PNP_VENDOR_ID, {0x41, 0x42, 0x43}},
+        {PLDM_FWUP_ACPI_VENDOR_ID, {0x41, 0x42, 0x43, 0x44}},
+        {PLDM_FWUP_IEEE_ASSIGNED_COMPANY_ID, {0x01, 0x02, 0x03}},
+        {PLDM_FWUP_SCSI_VENDOR_ID,
+         {0x41, 0x42, 0x43, 0x44, 0x45, 0x46, 0x47, 0x48}},
+    };
+
+    for (const auto& initial : initialDescriptors)
+    {
+        auto pkg = makePkgWithDDDescriptors(
+            {initial, {PLDM_FWUP_VENDOR_DEFINED, vendorDefined}}, 2);
+        auto res = PackageParser::parse(pkg, PackagePin::v1_1_0);
+
+        ASSERT_TRUE(res.has_value()) << "initial descriptor type "
+                                     << initial.type << ": " << res.error().msg;
+
+        const auto& records = res.value()->downstreamDeviceIdRecords;
+        ASSERT_EQ(records.size(), 1);
+
+        const auto& descriptors = records[0].downstreamDeviceRecordDescriptors;
+        EXPECT_EQ(descriptors.size(), 2);
+        EXPECT_EQ(descriptors.at(initial.type)->data, initial.data);
+    }
+}
+
+TEST(PackageParserTest, DDInitialDescriptorTypesRejected)
+{
+    const std::vector<TestDescriptor> initialDescriptors{
+        {PLDM_FWUP_PCI_DEVICE_ID, {0x01, 0x02}},
+        {PLDM_FWUP_VENDOR_DEFINED, vendorDefined},
+        {0x0200, {0x01}},
+    };
+
+    for (const auto& initial : initialDescriptors)
+    {
+        auto pkg = makePkgWithDDDescriptors(
+            {initial, {PLDM_FWUP_IANA_ENTERPRISE_ID, iana4}}, 2);
+        auto res = PackageParser::parse(pkg, PackagePin::v1_1_0);
+
+        ASSERT_FALSE(res.has_value())
+            << "initial descriptor type " << initial.type;
+        EXPECT_EQ(res.error().msg,
+                  "descriptor type " + std::to_string(initial.type) +
+                      " is not permitted as the initial descriptor of a "
+                      "downstream device id record");
+    }
+}
+
 } // namespace fw_update
 } // namespace pldm

@@ -39,6 +39,8 @@ Change categories:
 
 ### Fixed
 
+- bindings: cpp: PackageParser: Validate initial descriptor type of device id
+  records
 - bindings: cpp: PackageParser: Check descriptor lengths against DSP0267 Table 8
 - bindings: cpp: PackageParser: Reject device id records without descriptors
 - bindings: cpp: PackageParser: Check for ApplicableComponents OOB index

@@ -60,6 +60,43 @@ fixedDescriptorLength(uint16_t descriptorType)
 	}
 }
 
+// DSP0267 Table 8: five initial types for FD records, seven for downstream
+static constexpr bool isValidInitialDescriptorType(uint16_t descriptorType,
+						   bool downstreamDevice)
+{
+	switch (descriptorType) {
+	case PLDM_FWUP_PCI_VENDOR_ID:
+	case PLDM_FWUP_IANA_ENTERPRISE_ID:
+	case PLDM_FWUP_UUID:
+	case PLDM_FWUP_PNP_VENDOR_ID:
+	case PLDM_FWUP_ACPI_VENDOR_ID:
+		return true;
+	case PLDM_FWUP_IEEE_ASSIGNED_COMPANY_ID:
+	case PLDM_FWUP_SCSI_VENDOR_ID:
+		return downstreamDevice;
+	default:
+		return false;
+	}
+}
+
+static std::expected<void, std::string>
+checkInitialDescriptor(const struct pldm_descriptor &desc,
+		       bool downstreamDevice)
+{
+	if (isValidInitialDescriptorType(desc.descriptor_type,
+					 downstreamDevice)) {
+		return {};
+	}
+
+	std::string msg = "descriptor type ";
+	msg += std::to_string(desc.descriptor_type);
+	msg += " is not permitted as the initial descriptor of a ";
+	msg += downstreamDevice ? "downstream" : "firmware";
+	msg += " device id record";
+
+	return std::unexpected(msg);
+}
+
 pldm::fw_update::PackageParserError::PackageParserError(std::string s)
 	: msg(std::move(s))
 {
@@ -220,6 +257,15 @@ pldm::fw_update::PackageParser::helperParseDownstreamDeviceIDRecord(
 	foreach_pldm_package_downstream_device_id_record_descriptor(
 		package, downstreamDeviceId, desc, rc)
 	{
+		if (descriptors.empty()) {
+			auto initial = checkInitialDescriptor(desc, true);
+
+			if (!initial.has_value()) {
+				return std::unexpected(
+					PackageParserError(initial.error()));
+			}
+		}
+
 		auto result = helperParseFDDescriptor(&desc, descriptors);
 
 		if (!result.has_value()) {
@@ -348,6 +394,17 @@ pldm::fw_update::PackageParser::parse(const std::span<const uint8_t> &pkg,
 		foreach_pldm_package_firmware_device_id_record_descriptor(
 			package, deviceIdRecordData, descriptorData, rc)
 		{
+			if (descriptors.empty()) {
+				auto initial = checkInitialDescriptor(
+					descriptorData, false);
+
+				if (!initial.has_value()) {
+					return std::unexpected(
+						PackageParserError(
+							initial.error()));
+				}
+			}
+
 			auto result = helperParseFDDescriptor(&descriptorData,
 							      descriptors);
 
