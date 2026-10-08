@@ -43,6 +43,7 @@ Change categories:
 
 ### Fixed
 
+- bindings: cpp: PackageParser: Reject device id records without descriptors
 - bindings: cpp: Validate ApplicableComponents indices for downstream-device
   records
 - bindings: cpp: PackageParser: Check for ApplicableComponents OOB index
