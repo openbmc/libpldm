@@ -169,6 +169,11 @@ pldm::fw_update::PackageParser::helperParseDownstreamDeviceIDRecord(
 			rc));
 	}
 
+	if (descriptors.empty()) {
+		return std::unexpected(pldm::fw_update::PackageParserError(
+			"downstream device id record has no descriptors"));
+	}
+
 	downstreamDeviceIdRecords.emplace_back(
 		pldm::fw_update::DownstreamDeviceIDRecord(
 			deviceUpdateOptionFlags,
@@ -291,6 +296,11 @@ pldm::fw_update::PackageParser::parse(const std::span<const uint8_t> &pkg,
 			return std::unexpected(PackageParserError(
 				"Failed to decode pldm package firmware device id record",
 				rc));
+		}
+
+		if (descriptors.empty()) {
+			return std::unexpected(PackageParserError(
+				"firmware device id record has no descriptors"));
 		}
 
 		std::bitset<32> deviceUpdateOptionFlags =
