@@ -29,6 +29,10 @@ Change categories:
 - dsp: fru: additional bounds check for GetFRURecordByOption
 - dsp: fru: additional bounds check for GetFRURecordTable
 - update ABI dump for GCC16
+- dsp: platform: Stabilise
+  `encode_pldm_platform_set_numeric_sensor_enable_req()`
+- dsp: platform: Stabilise
+  `decode_pldm_platform_set_numeric_sensor_enable_resp()`
 - doxygen: Enable warnings as errors
 
   Many header files were modified to fix issues identified in the documentation.
