@@ -6,9 +6,59 @@
 #include <libpldm/firmware_update.h>
 #include <libpldm/pldm_types.h>
 #include <expected>
+#include <optional>
 #include <span>
+#include <string>
 
 using namespace std;
+
+// DSP0267 Table 8 fixed lengths; unknown types have no length constraint
+static constexpr std::optional<uint16_t>
+fixedDescriptorLength(uint16_t descriptorType)
+{
+	switch (descriptorType) {
+	case PLDM_FWUP_PCI_VENDOR_ID:
+		return PLDM_FWUP_PCI_VENDOR_ID_LENGTH;
+	case PLDM_FWUP_IANA_ENTERPRISE_ID:
+		return PLDM_FWUP_IANA_ENTERPRISE_ID_LENGTH;
+	case PLDM_FWUP_UUID:
+		return PLDM_FWUP_UUID_LENGTH;
+	case PLDM_FWUP_PNP_VENDOR_ID:
+		return PLDM_FWUP_PNP_VENDOR_ID_LENGTH;
+	case PLDM_FWUP_ACPI_VENDOR_ID:
+		return PLDM_FWUP_ACPI_VENDOR_ID_LENGTH;
+	case PLDM_FWUP_IEEE_ASSIGNED_COMPANY_ID:
+		return PLDM_FWUP_IEEE_ASSIGNED_COMPANY_ID_LENGTH;
+	case PLDM_FWUP_SCSI_VENDOR_ID:
+		return PLDM_FWUP_SCSI_VENDOR_ID_LENGTH;
+	case PLDM_FWUP_PCI_DEVICE_ID:
+		return PLDM_FWUP_PCI_DEVICE_ID_LENGTH;
+	case PLDM_FWUP_PCI_SUBSYSTEM_VENDOR_ID:
+		return PLDM_FWUP_PCI_SUBSYSTEM_VENDOR_ID_LENGTH;
+	case PLDM_FWUP_PCI_SUBSYSTEM_ID:
+		return PLDM_FWUP_PCI_SUBSYSTEM_ID_LENGTH;
+	case PLDM_FWUP_PCI_REVISION_ID:
+		return PLDM_FWUP_PCI_REVISION_ID_LENGTH;
+	case PLDM_FWUP_PNP_PRODUCT_IDENTIFIER:
+		return PLDM_FWUP_PNP_PRODUCT_IDENTIFIER_LENGTH;
+	case PLDM_FWUP_ACPI_PRODUCT_IDENTIFIER:
+		return PLDM_FWUP_ACPI_PRODUCT_IDENTIFIER_LENGTH;
+	case PLDM_FWUP_ASCII_MODEL_NUMBER_LONG_STRING:
+		return PLDM_FWUP_ASCII_MODEL_NUMBER_LONG_STRING_LENGTH;
+	case PLDM_FWUP_ASCII_MODEL_NUMBER_SHORT_STRING:
+		return PLDM_FWUP_ASCII_MODEL_NUMBER_SHORT_STRING_LENGTH;
+	case PLDM_FWUP_SCSI_PRODUCT_ID:
+		return PLDM_FWUP_SCSI_PRODUCT_ID_LENGTH;
+	case PLDM_FWUP_UBM_CONTROLLER_DEVICE_CODE:
+		return PLDM_FWUP_UBM_CONTROLLER_DEVICE_CODE_LENGTH;
+	case PLDM_FWUP_IEEE_EUI_64_ID:
+		return PLDM_FWUP_IEEE_EUI_64_ID_LENGTH;
+	case PLDM_FWUP_PCI_REVISION_ID_RANGE:
+		return PLDM_FWUP_PCI_REVISION_ID_RANGE_LENGTH;
+	default:
+		return std::nullopt;
+	}
+}
 
 pldm::fw_update::PackageParserError::PackageParserError(std::string s)
 	: msg(std::move(s))
@@ -32,6 +82,21 @@ pldm::fw_update::PackageParser::helperParseFDDescriptor(
 	descriptorData.length = desc->descriptor_length;
 
 	if (desc->descriptor_type != PLDM_FWUP_VENDOR_DEFINED) {
+		const auto expectedLength =
+			fixedDescriptorLength(desc->descriptor_type);
+
+		if (expectedLength.has_value() &&
+		    expectedLength.value() != desc->descriptor_length) {
+			std::string msg = "descriptor type ";
+			msg += std::to_string(desc->descriptor_type);
+			msg += " has length ";
+			msg += std::to_string(desc->descriptor_length);
+			msg += ", expected ";
+			msg += std::to_string(expectedLength.value());
+
+			return std::unexpected(msg);
+		}
+
 		descriptors.emplace(
 			desc->descriptor_type,
 			std::unique_ptr<pldm::fw_update::DescriptorData>(
