@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3400e639_ece539ae",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-10-08T23:07:24Z",
+      "side": 1,
+      "message": "The implementation is `std::start_lifetime_as\u003c...\u003e()`...",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 21,
+        "endChar": 67
+      },
+      "revId": "465ae7bfc5a33c5938240ce54189e4e3b1f56928",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ec14a8e7_b88058ef",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-10-08T23:07:24Z",
+      "side": 1,
+      "message": "Can you please put new list entries at the top of the list?",
+      "revId": "465ae7bfc5a33c5938240ce54189e4e3b1f56928",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "855865a6_58071ff6",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-10-08T23:07:24Z",
+      "side": 1,
+      "message": "Can you please put new list entries at the top of the list?",
+      "revId": "465ae7bfc5a33c5938240ce54189e4e3b1f56928",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
