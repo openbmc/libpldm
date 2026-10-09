@@ -2598,7 +2598,7 @@ TEST(PlatformEventMessage, testGoodPldmMsgPollEventDataDecodeRequest)
             0x1,                   // version
             0x88, 0x77,            // Event Id
             0x44, 0x33, 0x22, 0x11 // Transfer Handle
-        };
+    };
 
     uint8_t formatVersion = 0x01;
     uint16_t eventID = 0x7788;
@@ -2627,7 +2627,7 @@ TEST(PlatformEventMessage, testBadPldmMsgPollEventDataDecodeRequest)
             0x1,                   // version
             0x88, 0x77,            // Event Id
             0x44, 0x33, 0x22, 0x11 // Transfer Handle
-        };
+    };
 
     struct pldm_message_poll_event poll_event = {};
 
@@ -3621,7 +3621,7 @@ TEST(SetNumericSensorEnable, testDecodeRequest)
             0x00,                // sensorOperationalState
             0x01,                // sensorEventMessageEnable
             0x00,                // extra
-        };
+    };
 
     // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto msg = reinterpret_cast<const pldm_msg*>(req.data());
@@ -3655,7 +3655,7 @@ TEST(SetNumericSensorEnable, testDecodeInvalidOpRequest)
             0x67,          0x45, // sensor ID 0x4567
             0x30,                // Invalid sensorOperationalState
             0x01,                // sensorEventMessageEnable
-        };
+    };
 
     // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto msg = reinterpret_cast<const pldm_msg*>(req.data());
@@ -3678,7 +3678,7 @@ TEST(SetNumericSensorEnable, testDecodeInvalidEventRequest)
             0x67,          0x45, // sensor ID 0x4567
             0x00,                // sensorOperationalState
             0x77,                // Invalid sensorEventMessageEnable
-        };
+    };
 
     // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto msg = reinterpret_cast<const pldm_msg*>(req.data());
@@ -3703,7 +3703,7 @@ TEST(SetStateSensorEnables, testDecodeRequest)
             0x01,          0x00, // field 0
             0x02,          0x01, // field 1
             0x00,                // extra byte
-        };
+    };
 
     // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto msg = reinterpret_cast<const pldm_msg*>(req.data());
@@ -3742,7 +3742,7 @@ TEST(SetStateSensorEnables, testDecodeInvalidOpRequest)
             0x02,                // count
             0x01,          0x00, // field 0
             0x99,          0x01, // field 1 invalid op
-        };
+    };
 
     // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto msg = reinterpret_cast<const pldm_msg*>(req.data());
@@ -3766,7 +3766,7 @@ TEST(SetStateSensorEnables, testDecodeInvalidEventRequest)
             0x02,                // count
             0x01,          0x00, // field 0
             0x00,          0x77, // field 1 invalid event
-        };
+    };
 
     // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     auto msg = reinterpret_cast<const pldm_msg*>(req.data());
