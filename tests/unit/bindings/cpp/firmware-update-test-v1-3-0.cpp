@@ -19,7 +19,8 @@ namespace fw_update
 {
 
 #if HAVE_LIBPLDM_API_TESTING
-static std::vector<uint8_t> makePkgV1_3_0()
+static std::vector<uint8_t>
+    makePkgV1_3_0(uint8_t downstreamApplicableComponents = 0x01)
 {
     std::vector<uint8_t> header;
 
@@ -61,7 +62,7 @@ static std::vector<uint8_t> makePkgV1_3_0()
     appendLE32(ddevidarea, 0x08);
 
     // DownstreamDeviceApplicableComponents
-    ddevidarea.push_back(0x01);
+    ddevidarea.push_back(downstreamApplicableComponents);
 
     // DownstreamDeviceSelfContainedActivationMinVersionString
     appendString(ddevidarea, "VersionString1");
@@ -200,6 +201,17 @@ TEST(PackageParserTest, ValidPkgV1_3_0_SingleDescriptorWithDownstreamDevices)
 
     const std::vector<uint8_t> expectedDSDevicePkgData{0xde, 0xde, 0xfe};
     EXPECT_EQ(dsDevice.downstreamDevicePackageData, expectedDSDevicePkgData);
+}
+#endif
+
+#if HAVE_LIBPLDM_API_TESTING
+TEST(PackageParserTest, InvalidPkgV1_3_0_DownstreamApplicableComponentOOB)
+{
+    auto pkg = makePkgV1_3_0(0x02);
+    auto res = PackageParser::parse(pkg, PackagePin::v1_3_0);
+
+    ASSERT_FALSE(res.has_value());
+    EXPECT_EQ(res.error().msg, "applicable component index 1 is out of bounds");
 }
 #endif
 
