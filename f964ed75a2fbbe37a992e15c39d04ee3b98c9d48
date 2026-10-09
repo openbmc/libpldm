@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6da1ea07_1d85d3c4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2026-10-09T14:37:05Z",
+      "side": 1,
+      "message": "Any reason we don\u0027t change it to `performance-prefer-single-char-overloads` ?",
+      "range": {
+        "startLine": 11,
+        "startChar": 3,
+        "endLine": 14,
+        "endChar": 50
+      },
+      "revId": "f964ed75a2fbbe37a992e15c39d04ee3b98c9d48",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
