@@ -44,6 +44,9 @@ Change categories:
 - dsp: platform: Add const modifier to the pdr argument of
   pldm_platform_redfish_action_pdr_action_iter_init
 - platform: Fix data-field typo in PDR decoder doc comments
+- platform: Use `PLDM_SENSOR_DATA_SIZE_*` rather than
+  `PLDM_EFFECTER_DATA_SIZE_*` to validate the sensor data size in
+  `encode_get_sensor_reading_resp()`
 
 ### Security
 
