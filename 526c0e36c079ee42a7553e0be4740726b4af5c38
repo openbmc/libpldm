@@ -3,6 +3,75 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0dc5e900_c73677f3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2026-10-12T10:34:02Z",
+      "side": 1,
+      "message": "i wonder if this has to be fixed in the C library instead.\nNot sure.\n\n@andrew@codeconstruct.com.au what\u0027s your take on this?",
+      "range": {
+        "startLine": 8,
+        "startChar": 1,
+        "endLine": 15,
+        "endChar": 41
+      },
+      "revId": "526c0e36c079ee42a7553e0be4740726b4af5c38",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9a9ef1d8_1a2a0db3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2026-10-12T10:34:02Z",
+      "side": 1,
+      "message": "Thank you for fixing these tests 👍",
+      "range": {
+        "startLine": 22,
+        "startChar": 0,
+        "endLine": 24,
+        "endChar": 1
+      },
+      "revId": "526c0e36c079ee42a7553e0be4740726b4af5c38",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "57b7ba17_557289e2",
+        "filename": "bindings/cpp/firmware_update.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2026-10-12T10:34:02Z",
+      "side": 1,
+      "message": "LLM gave me the following alternative:\n```\n#include \u003carray\u003e\n#include \u003calgorithm\u003e\n#include \u003ccstdint\u003e\n#include \u003coptional\u003e\n#include \u003cutility\u003e\n\n#define FIXED_DESCRIPTOR(type) std::pair{type, type##_LENGTH}\n\nstatic constexpr auto fixedDescriptorLengths \u003d std::to_array({\n    FIXED_DESCRIPTOR(PLDM_FWUP_PCI_VENDOR_ID),\n    FIXED_DESCRIPTOR(PLDM_FWUP_IANA_ENTERPRISE_ID),\n    FIXED_DESCRIPTOR(PLDM_FWUP_UUID),\n    FIXED_DESCRIPTOR(PLDM_FWUP_PNP_VENDOR_ID),\n    FIXED_DESCRIPTOR(PLDM_FWUP_ACPI_VENDOR_ID),\n    FIXED_DESCRIPTOR(PLDM_FWUP_IEEE_ASSIGNED_COMPANY_ID),\n    FIXED_DESCRIPTOR(PLDM_FWUP_SCSI_VENDOR_ID),\n    FIXED_DESCRIPTOR(PLDM_FWUP_PCI_DEVICE_ID),\n    FIXED_DESCRIPTOR(PLDM_FWUP_PCI_SUBSYSTEM_VENDOR_ID),\n    FIXED_DESCRIPTOR(PLDM_FWUP_PCI_SUBSYSTEM_ID),\n    FIXED_DESCRIPTOR(PLDM_FWUP_PCI_REVISION_ID),\n    FIXED_DESCRIPTOR(PLDM_FWUP_PNP_PRODUCT_IDENTIFIER),\n    FIXED_DESCRIPTOR(PLDM_FWUP_ACPI_PRODUCT_IDENTIFIER),\n    FIXED_DESCRIPTOR(PLDM_FWUP_ASCII_MODEL_NUMBER_LONG_STRING),\n    FIXED_DESCRIPTOR(PLDM_FWUP_ASCII_MODEL_NUMBER_SHORT_STRING),\n    FIXED_DESCRIPTOR(PLDM_FWUP_SCSI_PRODUCT_ID),\n    FIXED_DESCRIPTOR(PLDM_FWUP_UBM_CONTROLLER_DEVICE_CODE),\n    FIXED_DESCRIPTOR(PLDM_FWUP_IEEE_EUI_64_ID),\n    FIXED_DESCRIPTOR(PLDM_FWUP_PCI_REVISION_ID_RANGE),\n});\n\n#undef FIXED_DESCRIPTOR\n\nstatic constexpr std::optional\u003cuint16_t\u003e\n    fixedDescriptorLength(uint16_t descriptorType)\n{\n    const auto it \u003d std::ranges::find_if(\n        fixedDescriptorLengths,\n        [descriptorType](const auto\u0026 entry) {\n            return entry.first \u003d\u003d descriptorType;\n        });\n\n    if (it \u003d\u003d fixedDescriptorLengths.end())\n    {\n        return std::nullopt;\n    }\n\n    return it-\u003esecond;\n}\n```\n\nplease consider it. If for some reason we cannot do it this way, fine but with this macro driven approach we do not have to map `${X}` to `${X}_LENGTH` manually which increases the readability.",
+      "range": {
+        "startLine": 14,
+        "startChar": 1,
+        "endLine": 61,
+        "endChar": 1
+      },
+      "revId": "526c0e36c079ee42a7553e0be4740726b4af5c38",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a503bf35_1185ff82",
         "filename": "tests/unit/bindings/cpp/firmware-update-test-descriptors.cpp",
         "patchSetId": 1
@@ -14,6 +83,24 @@
       "writtenOn": "2026-10-12T08:48:19Z",
       "side": 1,
       "message": "Could this test be table-driven over all fixed-length standard descriptor types? It currently exercises only a subset of the 19 mappings, so an incorrect mapping for another descriptor could go unnoticed.",
+      "revId": "526c0e36c079ee42a7553e0be4740726b4af5c38",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7e5f5afe_e2c36820",
+        "filename": "tests/unit/bindings/cpp/firmware-update-test-descriptors.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2026-10-12T10:34:02Z",
+      "side": 1,
+      "message": "i don\u0027t fully understand this concern. Is there some existing table in libpldm we have overlooked?\n\nTesting some descriptor types should be sufficient to confirm the mechanism works. It works the same for all descriptor types.\n\n\u003e It currently exercises only a subset of the 19 mappings, so an incorrect mapping for another descriptor could go unnoticed.\n\nHow would it go unnoticed? You can review the mapping of type -\u003e length and point out any problems with it?",
+      "parentUuid": "a503bf35_1185ff82",
       "revId": "526c0e36c079ee42a7553e0be4740726b4af5c38",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
