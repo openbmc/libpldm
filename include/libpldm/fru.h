@@ -78,6 +78,14 @@ enum pldm_fru_field_type {
 	PLDM_FRU_FIELD_TYPE_IANA = 0x0f,
 };
 
+/** @brief OEM FRU record set field types, DSP0257 v1.0.1 Table 6
+ *
+ *  Field types 0x02 through 0xfe are vendor-defined.
+ */
+enum pldm_fru_oem_field_type {
+	PLDM_FRU_OEM_FIELD_TYPE_VENDOR_IANA = 0x01,
+};
+
 /** @struct pldm_get_fru_record_table_metadata_resp
  *
  *  Structure representing PLDM get FRU table metadata response.

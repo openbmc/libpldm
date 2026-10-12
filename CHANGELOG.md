@@ -19,6 +19,7 @@ Change categories:
 
 ### Added
 
+- dsp: fru: Introduce `enum pldm_fru_oem_field_type` for DSP0257 Table 6
 - libpldm++ support for fw update pkg v1.1.0
 - libpldm++ support for fw update pkg v1.2.0
 - libpldm++ support for fw update pkg v1.3.0
