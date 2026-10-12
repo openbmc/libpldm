@@ -103,6 +103,29 @@
       "parentUuid": "a503bf35_1185ff82",
       "revId": "526c0e36c079ee42a7553e0be4740726b4af5c38",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8fa9f24b_c7c3fb73",
+        "filename": "tests/unit/bindings/cpp/firmware-update-test-descriptors.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2026-10-12T12:08:07Z",
+      "side": 1,
+      "message": "\u003e PCI Revision ID range assigned by the device\nvendor. This descriptor is optional for a PCI device\nwhen the initial descriptor is 0x0000.\n\n\ni read `optional for a PCI device` to mean that the firmware device needs to be a PCI device to use this descriptor type.\n\nThen together with the 0x0000 description:\n\n\u003e PCI Vendor ID assigned to the device vendor. If the\nFD or downstream device is a PCI device, this\ndescriptor shall be the initial descriptor\n\nit would establish the requirement that we can only use the PCI Revision ID range in case the initial descriptor is type `0x0000`.\n\nWould you interpret this the same?\n\ni would say it\u0027s a nitpick since the length validation is much more important and can fix this up at a later time.\n\nwould leave it up to you if you want to change it. Test `FDAdditionalDescriptorWrongLengthRejected` has the same situation.",
+      "range": {
+        "startLine": 247,
+        "startChar": 0,
+        "endLine": 247,
+        "endChar": 2
+      },
+      "revId": "526c0e36c079ee42a7553e0be4740726b4af5c38",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
