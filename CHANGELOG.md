@@ -19,6 +19,8 @@ Change categories:
 
 ### Added
 
+- dsp: fru: Define the OEM Vendor IANA field type constant
+
 ### Changed
 
 - libpldm++: Preserve multiple descriptors of the same type
