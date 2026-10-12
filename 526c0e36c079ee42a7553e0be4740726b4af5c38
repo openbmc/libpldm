@@ -143,6 +143,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9d22b022_1f23a2e4",
+        "filename": "tests/unit/bindings/cpp/firmware-update-test-descriptors.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 1003102
+      },
+      "writtenOn": "2026-10-12T15:09:43Z",
+      "side": 1,
+      "message": "Yes, that’s correct, provided the test’s expected lengths are taken independently from DSP0267, not copied from the implementation table. That makes the test an independent check and helps catch regressions.",
+      "parentUuid": "2e7f1af7_dc4f7739",
+      "revId": "526c0e36c079ee42a7553e0be4740726b4af5c38",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8fa9f24b_c7c3fb73",
         "filename": "tests/unit/bindings/cpp/firmware-update-test-descriptors.cpp",
         "patchSetId": 1
