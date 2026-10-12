@@ -1412,8 +1412,8 @@ struct pldm_platform_set_numeric_sensor_enable_req {
  *  Structure representing PLDM set state sensor enables fields
  */
 struct pldm_set_state_sensor_enable_field {
-	enum pldm_set_sensor_operational_state op_state;
-	enum pldm_sensor_event_message_enable event_enable;
+	uint8_t op_state;
+	uint8_t event_enable;
 };
 
 #define PLDM_SET_STATE_SENSOR_ENABLES_MAX_COUNT 8
