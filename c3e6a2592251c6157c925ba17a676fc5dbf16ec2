@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "72176c99_e984a3e8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2026-10-12T09:32:09Z",
+      "side": 1,
+      "message": "I\u0027m okay with the C++ binding performing additional validation that the C decoder does not. That would leave the C decoder in the position of \"technically i can parse this package\" and the binding then performs additional checks for spec compliance.\n\nIMO that\u0027s in line with existing pattern of low-level libraries leaving more choices up to the user and higher level libraries doing more checks.",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 27
+      },
+      "revId": "c3e6a2592251c6157c925ba17a676fc5dbf16ec2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d592d83e_ea93f2af",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2026-10-12T09:32:09Z",
+      "side": 1,
+      "message": "Thanks for patching 👍",
+      "revId": "c3e6a2592251c6157c925ba17a676fc5dbf16ec2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
