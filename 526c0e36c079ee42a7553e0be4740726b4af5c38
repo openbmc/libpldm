@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a503bf35_1185ff82",
+        "filename": "tests/unit/bindings/cpp/firmware-update-test-descriptors.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 1003102
+      },
+      "writtenOn": "2026-10-12T08:48:19Z",
+      "side": 1,
+      "message": "Could this test be table-driven over all fixed-length standard descriptor types? It currently exercises only a subset of the 19 mappings, so an incorrect mapping for another descriptor could go unnoticed.",
+      "revId": "526c0e36c079ee42a7553e0be4740726b4af5c38",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
