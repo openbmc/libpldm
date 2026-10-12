@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7b531d8b_af0c85bf",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2488,
+      "author": {
+        "id": 1003102
+      },
+      "writtenOn": "2026-10-12T08:51:01Z",
+      "side": 1,
+      "message": "Could the GetSensorReading encoder tests use PLDM_SENSOR_DATA_SIZE_* values too? They currently pass PLDM_EFFECTER_DATA_SIZE_*, so they don’t verify the sensor enum this change is intended to use.”",
+      "revId": "5f9ade04b33cbac6294a8768d6fc608d0bb667c7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
