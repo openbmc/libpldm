@@ -130,6 +130,7 @@ static void pldm_fd_set_idle(struct pldm_fd *fd,
 	fd->state = PLDM_FD_STATE_IDLE;
 	fd->reason = reason;
 	fd->ua_address_set = false;
+	fd->req.state = PLDM_FD_REQ_UNUSED;
 }
 
 LIBPLDM_CC_NONNULL
