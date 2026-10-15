@@ -152,7 +152,7 @@ TEST(ReadWriteFileMemory, testBadEncodeResponse)
 
 TEST(ReadWriteFileIntoMemory, testGoodDecodeResponse)
 {
-    std::array<uint8_t, PLDM_RW_FILE_MEM_RESP_BYTES + hdrSize> responseMsg{};
+    std::array<uint8_t, PLDM_RW_FILE_MEM_RESP_BYTES + 1 + hdrSize> responseMsg{};
     // Random value for length
     uint32_t length = 0xff00ee12;
     uint32_t lengthLe = htole32(length);
