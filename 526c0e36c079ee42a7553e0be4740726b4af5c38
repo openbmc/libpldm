@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "1d25fae8_23f34afe",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1002297
+      },
+      "writtenOn": "2026-10-15T19:55:47Z",
+      "side": 1,
+      "message": "I\u0027ve left it untouched on purpose since the C API is marked stable. Happy to open a patch based on suggestions",
+      "parentUuid": "0dc5e900_c73677f3",
+      "range": {
+        "startLine": 8,
+        "startChar": 1,
+        "endLine": 15,
+        "endChar": 41
+      },
+      "revId": "526c0e36c079ee42a7553e0be4740726b4af5c38",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "9a9ef1d8_1a2a0db3",
@@ -60,6 +84,30 @@
       "writtenOn": "2026-10-12T10:34:02Z",
       "side": 1,
       "message": "LLM gave me the following alternative:\n```\n#include \u003carray\u003e\n#include \u003calgorithm\u003e\n#include \u003ccstdint\u003e\n#include \u003coptional\u003e\n#include \u003cutility\u003e\n\n#define FIXED_DESCRIPTOR(type) std::pair{type, type##_LENGTH}\n\nstatic constexpr auto fixedDescriptorLengths \u003d std::to_array({\n    FIXED_DESCRIPTOR(PLDM_FWUP_PCI_VENDOR_ID),\n    FIXED_DESCRIPTOR(PLDM_FWUP_IANA_ENTERPRISE_ID),\n    FIXED_DESCRIPTOR(PLDM_FWUP_UUID),\n    FIXED_DESCRIPTOR(PLDM_FWUP_PNP_VENDOR_ID),\n    FIXED_DESCRIPTOR(PLDM_FWUP_ACPI_VENDOR_ID),\n    FIXED_DESCRIPTOR(PLDM_FWUP_IEEE_ASSIGNED_COMPANY_ID),\n    FIXED_DESCRIPTOR(PLDM_FWUP_SCSI_VENDOR_ID),\n    FIXED_DESCRIPTOR(PLDM_FWUP_PCI_DEVICE_ID),\n    FIXED_DESCRIPTOR(PLDM_FWUP_PCI_SUBSYSTEM_VENDOR_ID),\n    FIXED_DESCRIPTOR(PLDM_FWUP_PCI_SUBSYSTEM_ID),\n    FIXED_DESCRIPTOR(PLDM_FWUP_PCI_REVISION_ID),\n    FIXED_DESCRIPTOR(PLDM_FWUP_PNP_PRODUCT_IDENTIFIER),\n    FIXED_DESCRIPTOR(PLDM_FWUP_ACPI_PRODUCT_IDENTIFIER),\n    FIXED_DESCRIPTOR(PLDM_FWUP_ASCII_MODEL_NUMBER_LONG_STRING),\n    FIXED_DESCRIPTOR(PLDM_FWUP_ASCII_MODEL_NUMBER_SHORT_STRING),\n    FIXED_DESCRIPTOR(PLDM_FWUP_SCSI_PRODUCT_ID),\n    FIXED_DESCRIPTOR(PLDM_FWUP_UBM_CONTROLLER_DEVICE_CODE),\n    FIXED_DESCRIPTOR(PLDM_FWUP_IEEE_EUI_64_ID),\n    FIXED_DESCRIPTOR(PLDM_FWUP_PCI_REVISION_ID_RANGE),\n});\n\n#undef FIXED_DESCRIPTOR\n\nstatic constexpr std::optional\u003cuint16_t\u003e\n    fixedDescriptorLength(uint16_t descriptorType)\n{\n    const auto it \u003d std::ranges::find_if(\n        fixedDescriptorLengths,\n        [descriptorType](const auto\u0026 entry) {\n            return entry.first \u003d\u003d descriptorType;\n        });\n\n    if (it \u003d\u003d fixedDescriptorLengths.end())\n    {\n        return std::nullopt;\n    }\n\n    return it-\u003esecond;\n}\n```\n\nplease consider it. If for some reason we cannot do it this way, fine but with this macro driven approach we do not have to map `${X}` to `${X}_LENGTH` manually which increases the readability.",
+      "range": {
+        "startLine": 14,
+        "startChar": 1,
+        "endLine": 61,
+        "endChar": 1
+      },
+      "revId": "526c0e36c079ee42a7553e0be4740726b4af5c38",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a4f88c5b_24681400",
+        "filename": "bindings/cpp/firmware_update.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1002297
+      },
+      "writtenOn": "2026-10-15T19:55:47Z",
+      "side": 1,
+      "message": "Ack, thanks for the suggestion",
+      "parentUuid": "57b7ba17_557289e2",
       "range": {
         "startLine": 14,
         "startChar": 1,
@@ -159,6 +207,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cd03bce2_051c716c",
+        "filename": "tests/unit/bindings/cpp/firmware-update-test-descriptors.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 1002297
+      },
+      "writtenOn": "2026-10-15T19:55:47Z",
+      "side": 1,
+      "message": "I have to agree with Alexander here, maintaining two tables is unnecessary and would require the same review process to ensure that the values were taken correctly from the spec",
+      "parentUuid": "9d22b022_1f23a2e4",
+      "revId": "526c0e36c079ee42a7553e0be4740726b4af5c38",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8fa9f24b_c7c3fb73",
@@ -172,6 +238,30 @@
       "writtenOn": "2026-10-12T12:08:07Z",
       "side": 1,
       "message": "\u003e PCI Revision ID range assigned by the device\nvendor. This descriptor is optional for a PCI device\nwhen the initial descriptor is 0x0000.\n\n\ni read `optional for a PCI device` to mean that the firmware device needs to be a PCI device to use this descriptor type.\n\nThen together with the 0x0000 description:\n\n\u003e PCI Vendor ID assigned to the device vendor. If the\nFD or downstream device is a PCI device, this\ndescriptor shall be the initial descriptor\n\nit would establish the requirement that we can only use the PCI Revision ID range in case the initial descriptor is type `0x0000`.\n\nWould you interpret this the same?\n\ni would say it\u0027s a nitpick since the length validation is much more important and can fix this up at a later time.\n\nwould leave it up to you if you want to change it. Test `FDAdditionalDescriptorWrongLengthRejected` has the same situation.",
+      "range": {
+        "startLine": 247,
+        "startChar": 0,
+        "endLine": 247,
+        "endChar": 2
+      },
+      "revId": "526c0e36c079ee42a7553e0be4740726b4af5c38",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1c2e730f_8a29bc22",
+        "filename": "tests/unit/bindings/cpp/firmware-update-test-descriptors.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 1002297
+      },
+      "writtenOn": "2026-10-15T19:55:47Z",
+      "side": 1,
+      "message": "Agree on the reading, I\u0027ve modified the tests to use PCI ID as initial descriptor. I think we can have a follow up patch for enforcing the requirement",
+      "parentUuid": "8fa9f24b_c7c3fb73",
       "range": {
         "startLine": 247,
         "startChar": 0,
