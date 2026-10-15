@@ -361,7 +361,11 @@ static void appendFirmwareDeviceIdArea1Record0(std::vector<uint8_t>& pkg)
     // component image set version string (14 bytes)
     appendString(pkg, "VersionString2");
 
-    // record 0: InitialDescriptor
+    // record 0: InitialDescriptor: IANA, required first by vendor defined
+    appendDescriptorTLV(pkg, PLDM_FWUP_IANA_ENTERPRISE_ID,
+                        std::vector<uint8_t>{0x47, 0x16, 0x00, 0x00});
+
+    // record 0: descriptor 1: additional descriptor
     appendDescriptorTLV(pkg, PLDM_FWUP_UUID,
                         std::vector<uint8_t>{
                             // clang-format off
@@ -369,10 +373,6 @@ static void appendFirmwareDeviceIdArea1Record0(std::vector<uint8_t>& pkg)
         0xA0, 0x30, 0xFC, 0x8A, 0x56, 0x58, 0x7D, 0x5B,
                             // clang-format on
                         });
-
-    // record 0: descriptor 1: additional descriptor
-    appendDescriptorTLV(pkg, PLDM_FWUP_IANA_ENTERPRISE_ID,
-                        std::vector<uint8_t>{0x47, 0x16, 0x00, 0x00});
 
     // record 0: descriptor 2: additional descriptor
     appendDescriptorTLV(pkg, PLDM_FWUP_VENDOR_DEFINED,

@@ -95,6 +95,41 @@ checkInitialDescriptor(const struct pldm_descriptor &desc,
 	return std::unexpected(msg);
 }
 
+// DSP0267 v1.3.0 Table 7: vendor defined values narrow the initial types
+static constexpr bool
+isValidVendorDefinedInitialDescriptorType(uint16_t descriptorType,
+					  bool downstreamDevice)
+{
+	switch (descriptorType) {
+	case PLDM_FWUP_PCI_VENDOR_ID:
+	case PLDM_FWUP_IANA_ENTERPRISE_ID:
+		return true;
+	case PLDM_FWUP_IEEE_ASSIGNED_COMPANY_ID:
+	case PLDM_FWUP_SCSI_VENDOR_ID:
+		return downstreamDevice;
+	default:
+		return false;
+	}
+}
+
+static std::expected<void, std::string>
+checkVendorDefinedInitialDescriptor(uint16_t initialType, bool vendorDefined,
+				    bool downstreamDevice)
+{
+	if (!vendorDefined || isValidVendorDefinedInitialDescriptorType(
+				      initialType, downstreamDevice)) {
+		return {};
+	}
+
+	std::string msg = "descriptor type ";
+	msg += std::to_string(initialType);
+	msg += " is not permitted as the initial descriptor of a ";
+	msg += downstreamDevice ? "downstream" : "firmware";
+	msg += " device id record with a vendor defined descriptor";
+
+	return std::unexpected(msg);
+}
+
 pldm::fw_update::PackageParserError::PackageParserError(std::string s)
 	: msg(std::move(s))
 {
@@ -251,11 +286,14 @@ pldm::fw_update::PackageParser::helperParseDownstreamDeviceIDRecord(
 		descriptors{};
 
 	struct pldm_descriptor desc;
+	uint16_t initialType = 0;
 
 	foreach_pldm_package_downstream_device_id_record_descriptor(
 		package, downstreamDeviceId, desc, rc)
 	{
 		if (descriptors.empty()) {
+			initialType = desc.descriptor_type;
+
 			auto initial = checkInitialDescriptor(desc, true);
 
 			if (!initial.has_value()) {
@@ -281,6 +319,15 @@ pldm::fw_update::PackageParser::helperParseDownstreamDeviceIDRecord(
 	if (descriptors.empty()) {
 		return std::unexpected(pldm::fw_update::PackageParserError(
 			"downstream device id record has no descriptors"));
+	}
+
+	auto vendorDefined = checkVendorDefinedInitialDescriptor(
+		initialType, descriptors.contains(PLDM_FWUP_VENDOR_DEFINED),
+		true);
+
+	if (!vendorDefined.has_value()) {
+		return std::unexpected(pldm::fw_update::PackageParserError(
+			vendorDefined.error()));
 	}
 
 	downstreamDeviceIdRecords.emplace_back(
@@ -388,11 +435,14 @@ pldm::fw_update::PackageParser::parse(const std::span<const uint8_t> &pkg,
 		std::map<uint16_t, std::unique_ptr<DescriptorData> >
 			descriptors{};
 		struct pldm_descriptor descriptorData;
+		uint16_t initialType = 0;
 
 		foreach_pldm_package_firmware_device_id_record_descriptor(
 			package, deviceIdRecordData, descriptorData, rc)
 		{
 			if (descriptors.empty()) {
+				initialType = descriptorData.descriptor_type;
+
 				auto initial = checkInitialDescriptor(
 					descriptorData, false);
 
@@ -421,6 +471,15 @@ pldm::fw_update::PackageParser::parse(const std::span<const uint8_t> &pkg,
 		if (descriptors.empty()) {
 			return std::unexpected(PackageParserError(
 				"firmware device id record has no descriptors"));
+		}
+
+		auto vendorDefined = checkVendorDefinedInitialDescriptor(
+			initialType,
+			descriptors.contains(PLDM_FWUP_VENDOR_DEFINED), false);
+
+		if (!vendorDefined.has_value()) {
+			return std::unexpected(
+				PackageParserError(vendorDefined.error()));
 		}
 
 		std::bitset<32> deviceUpdateOptionFlags =
