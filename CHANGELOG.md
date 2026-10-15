@@ -39,6 +39,8 @@ Change categories:
 
 ### Fixed
 
+- bindings: cpp: PackageParser: Restrict the initial descriptor of device id
+  records with vendor defined descriptors
 - bindings: cpp: PackageParser: Validate initial descriptor type of device id
   records
 - bindings: cpp: PackageParser: Check descriptor lengths against DSP0267 Table 8

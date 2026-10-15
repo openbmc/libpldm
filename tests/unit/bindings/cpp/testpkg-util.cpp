@@ -520,28 +520,28 @@ static void appendFirmwareDeviceIdArea1Record0(std::vector<uint8_t>& pkg)
     // component image set version string (14 bytes)
     appendString(pkg, "VersionString2");
 
-    // record 0: descriptor 0: record descriptor type: uuid
-    appendLE16(pkg, 0x02);
+    // record 0: descriptor 0: type iana, required first by vendor defined
+    appendLE16(pkg, 0x01);
 
     // record 0: descriptor 0: initial descriptor length
-    appendLE16(pkg, 0x10);
+    appendLE16(pkg, 0x04);
 
     // record 0: descriptor 0: initial descriptor data
+    std::vector<uint8_t> dd2{0x47, 0x16, 0x00, 0x00};
+    pkg.insert(pkg.end(), dd2.begin(), dd2.end());
+
+    // record 0: descriptor 1: additional descriptor type: uuid
+    appendLE16(pkg, 0x02);
+
+    // record 0: descriptor 1: additional descriptor length
+    appendLE16(pkg, 0x10);
+
+    // record 0: descriptor 1: additional descriptor identifier data
     std::vector<uint8_t> dd1{
         0x12, 0x44, 0xD2, 0x64, 0x8D, 0x7D, 0x47, 0x18,
         0xA0, 0x30, 0xFC, 0x8A, 0x56, 0x58, 0x7D, 0x5B,
     };
     pkg.insert(pkg.end(), dd1.begin(), dd1.end());
-
-    // record 0: descriptor 1: additional descriptor type
-    appendLE16(pkg, 0x01);
-
-    // record 0: descriptor 1: additional descriptor length
-    appendLE16(pkg, 0x04);
-
-    // record 0: descriptor 1: additional descriptor identifier data
-    std::vector<uint8_t> dd2{0x47, 0x16, 0x00, 0x00};
-    pkg.insert(pkg.end(), dd2.begin(), dd2.end());
 
     // record 0: descriptor 2: additional descriptor type
     appendLE16(pkg, 0xFFFF);
