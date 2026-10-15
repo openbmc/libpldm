@@ -194,6 +194,17 @@ TEST(ReadWriteFileIntoMemory, testBadDecodeResponse)
     // Payload length is invalid
     rc = decode_rw_file_memory_resp(response, 0, &completionCode, &length);
     ASSERT_EQ(rc, PLDM_ERROR_INVALID_LENGTH);
+
+    rc = decode_rw_file_memory_resp(response, PLDM_RW_FILE_MEM_RESP_BYTES - 1,
+                                    &completionCode, &length);
+    ASSERT_EQ(rc, PLDM_ERROR_INVALID_LENGTH);
+
+    PLDM_MSG_DEFINE_P(oversizedResponse, PLDM_RW_FILE_MEM_RESP_BYTES + 1);
+
+    rc = decode_rw_file_memory_resp(oversizedResponse,
+                                    PLDM_RW_FILE_MEM_RESP_BYTES + 1,
+                                    &completionCode, &length);
+    ASSERT_EQ(rc, PLDM_ERROR_INVALID_LENGTH);
 }
 
 TEST(ReadWriteFileIntoMemory, testGoodEncodeRequest)
