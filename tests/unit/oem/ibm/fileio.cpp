@@ -194,6 +194,21 @@ TEST(ReadWriteFileIntoMemory, testBadDecodeResponse)
     // Payload length is invalid
     rc = decode_rw_file_memory_resp(response, 0, &completionCode, &length);
     ASSERT_EQ(rc, PLDM_ERROR_INVALID_LENGTH);
+
+    rc = decode_rw_file_memory_resp(response, PLDM_RW_FILE_MEM_RESP_BYTES - 1,
+                                    &completionCode, &length);
+    ASSERT_EQ(rc, PLDM_ERROR_INVALID_LENGTH);
+
+    std::array<uint8_t, PLDM_RW_FILE_MEM_RESP_BYTES + 1 + hdrSize>
+        oversizedResponseMsg{};
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+    auto oversizedResponse =
+        reinterpret_cast<pldm_msg*>(oversizedResponseMsg.data());
+
+    rc = decode_rw_file_memory_resp(oversizedResponse,
+                                    oversizedResponseMsg.size() - hdrSize,
+                                    &completionCode, &length);
+    ASSERT_EQ(rc, PLDM_ERROR_INVALID_LENGTH);
 }
 
 TEST(ReadWriteFileIntoMemory, testGoodEncodeRequest)
