@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b618aaf0_d1c984c2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2026-10-16T12:58:26Z",
+      "side": 1,
+      "message": "Thank you for this patch 👍",
+      "revId": "e09c137f80f1bbc9c4998f9dd0684076ab9ec561",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ff5d72a9_ff794ae6",
+        "filename": "bindings/cpp/firmware_update.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2026-10-16T12:58:26Z",
+      "side": 1,
+      "message": "when this function is called the `checkInitialDescriptor` has already succeeded with validation of the allowed initial descriptor type.\n\nSo technically the downstream distinction here is a double-check, but it directly implements the Table 7 restriction so IMO preferable to keep your exact version as it\u0027s correct independent of the other check.",
+      "range": {
+        "startLine": 109,
+        "startChar": 1,
+        "endLine": 109,
+        "endChar": 26
+      },
+      "revId": "e09c137f80f1bbc9c4998f9dd0684076ab9ec561",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
