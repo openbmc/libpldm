@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e9c7b542_5363ce12",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1002395
+      },
+      "writtenOn": "2026-10-16T09:04:32Z",
+      "side": 1,
+      "message": "nit: this is evident from CI status and not needed.",
+      "revId": "7785a1daabf903ea449783a187a9d6e67bc8f5d6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fc31d93e_7c7efc46",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1002395
+      },
+      "writtenOn": "2026-10-16T09:04:32Z",
+      "side": 1,
+      "message": "Please see if the switch statement can be used here, similar to this - https://gerrit.openbmc.org/c/openbmc/libpldm/+/92380/32/src/dsp/rde.c#1906",
+      "revId": "7785a1daabf903ea449783a187a9d6e67bc8f5d6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "78112b61_769158d5",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 1002395
+      },
+      "writtenOn": "2026-10-16T09:04:32Z",
+      "side": 1,
+      "message": "Please see if the switch statement can be used here, too.",
+      "revId": "7785a1daabf903ea449783a187a9d6e67bc8f5d6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "33d96a96_9bc5a4f8",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 1002395
+      },
+      "writtenOn": "2026-10-16T09:04:32Z",
+      "side": 1,
+      "message": "Better to define this just above where it is first used.",
+      "revId": "7785a1daabf903ea449783a187a9d6e67bc8f5d6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
