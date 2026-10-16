@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "84db0659_28749f3b",
+        "filename": "tests/unit/bindings/cpp/firmware-update-test-descriptors.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 289,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2026-10-16T10:50:26Z",
+      "side": 1,
+      "message": "```\nThe following table provides a list of available descriptor types that can be used by the firmware package\nheader and FD or downstream devices. When the FD or downstream device is a PCI device, there are up\nto four descriptors that are mandatory to be implemented.\n\nTable 8 – Descriptor Identifier Table\n```\n\n```\n5.1\n\nUnless otherwise specified, any reserved, unspecified, or unassigned values in enumerations or other\nnumeric ranges are reserved for future definition by the DMTF.\n\n```\n\n\nI interpret the wording `can be used` to mean that other descriptor types cannot be used.\n\nShould we really pass through unknown descriptor types?\n\nIf someone wants to do their own descriptor type i assume they could use the vendor defined descriptor which is intended for such use-case?\n\nLet me know your take on this and possibly\nwe could remove this testcase since the question about unknown descriptor types is unrelated to the length check. We could deal with unknown descriptors in a separate patch.",
+      "range": {
+        "startLine": 273,
+        "startChar": 1,
+        "endLine": 289,
+        "endChar": 1
+      },
+      "revId": "0edbd7fc81972c75862a71df000a76c37609d291",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
