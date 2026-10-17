@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ea9967ef_f9d53320",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2026-10-17T09:30:05Z",
+      "side": 1,
+      "message": "This changes observable runtime behavior and probably needs a `CHANGELOG.md` entry as per `CONTRIBUTING.md`\n\n```\n\n### Changelog\n\n- [ ] New changelog entries document work impacting the users of the library\n  - For example:\n    - Changes to the public headers under `include/libpldm`\n    - Bug-fixes whose impact is observable at runtime\n\n- [ ] New changelog entries are added at the top of their category\u0027s list\n\n- [ ] Work that has no user impact does not have a new changelog entry\n  - For example, refactoring the implementation in a way that:\n    - Doesn\u0027t change the public headers under `include/libpldm`\n    - Doesn\u0027t change observable runtime behaviour\n```\n\nsorry for not raising this from the start and sorry for additional delay.",
+      "range": {
+        "startLine": 11,
+        "startChar": 9,
+        "endLine": 17,
+        "endChar": 1
+      },
+      "revId": "554693c77caaa0f3420db2b23893fc4d0a64cd0b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
