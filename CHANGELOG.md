@@ -43,6 +43,8 @@ Change categories:
 
 ### Fixed
 
+- firmware device: Reset request state when returning to idle or ready for
+  transfer
 - bindings: cpp: PackageParser: Reject trailing bytes after counted descriptors
 - bindings: cpp: PackageParser: Reject descriptor types not in DSP0267 Table 8
 - bindings: cpp: PackageParser: Restrict the initial descriptor of device id
