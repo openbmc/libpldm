@@ -130,6 +130,7 @@ static void pldm_fd_set_idle(struct pldm_fd *fd,
 	fd->state = PLDM_FD_STATE_IDLE;
 	fd->reason = reason;
 	fd->ua_address_set = false;
+	fd->req.state = PLDM_FD_REQ_UNUSED;
 }
 
 LIBPLDM_CC_NONNULL
@@ -531,6 +532,7 @@ static int pldm_fd_pass_comp(struct pldm_fd *fd,
 	}
 
 	if (pcomp.transfer_flag & PLDM_END) {
+		assert(fd->req.state == PLDM_FD_REQ_UNUSED);
 		pldm_fd_set_state(fd, PLDM_FD_STATE_READY_XFER);
 	}
 
@@ -701,6 +703,7 @@ static int pldm_fd_cancel_update_comp(
 	}
 
 	pldm_fd_maybe_cancel_component(fd);
+	fd->req.state = PLDM_FD_REQ_UNUSED;
 	pldm_fd_set_state(fd, PLDM_FD_STATE_READY_XFER);
 
 	return 0;
@@ -1332,6 +1335,7 @@ int pldm_fd_handle_msg(struct pldm_fd *fd, pldm_tid_t remote_address,
 	case PLDM_REQUEST_UPDATE:
 	case PLDM_PASS_COMPONENT_TABLE:
 	case PLDM_UPDATE_COMPONENT:
+	case PLDM_CANCEL_UPDATE_COMPONENT:
 	case PLDM_CANCEL_UPDATE:
 		fd->update_timestamp_fd_t1 = pldm_fd_now(fd);
 		break;
