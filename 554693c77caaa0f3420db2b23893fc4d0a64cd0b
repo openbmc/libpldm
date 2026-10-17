@@ -22,6 +22,30 @@
       },
       "revId": "554693c77caaa0f3420db2b23893fc4d0a64cd0b",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6d545828_6d27706f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1003102
+      },
+      "writtenOn": "2026-10-17T14:13:20Z",
+      "side": 1,
+      "message": "Thanks for pointing this out. added a CHANGELOG entry for this runtime behavior change and uploaded a new patchset.",
+      "parentUuid": "ea9967ef_f9d53320",
+      "range": {
+        "startLine": 11,
+        "startChar": 9,
+        "endLine": 17,
+        "endChar": 1
+      },
+      "revId": "554693c77caaa0f3420db2b23893fc4d0a64cd0b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
