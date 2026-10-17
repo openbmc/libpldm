@@ -42,6 +42,8 @@ Change categories:
 
 - bindings: cpp: Preserve downstream device ID records when copying and
   comparing packages
+- firmware device: Reset request state when returning to idle or ready for
+  transfer
 
 ### Security
 

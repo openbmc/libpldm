@@ -33,6 +33,11 @@ if get_option('abi').contains('testing')
     subdir('transport')
 endif
 
+# The firmware device responder APIs are currently only exposed as testing ABI
+if get_option('abi').contains('testing')
+    tests += ['fd']
+endif
+
 if get_option('oem').contains('ibm')
     subdir('oem/ibm')
 endif
