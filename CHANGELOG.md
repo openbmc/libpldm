@@ -40,6 +40,9 @@ Change categories:
 
 ### Fixed
 
+- firmware device: Reset request state when returning to idle or ready for
+  transfer
+
 ### Security
 
 ## [v0.18.0] - 2026-10-29
