@@ -95,6 +95,54 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9dcf4e36_f48c5917",
+        "filename": "src/oem/ibm/file_io.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1003102
+      },
+      "writtenOn": "2026-10-20T12:17:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fde2aab2_59ae6a77",
+      "range": {
+        "startLine": 100,
+        "startChar": 1,
+        "endLine": 100,
+        "endChar": 50
+      },
+      "revId": "edd83956945eed31c25bdef4d0b7d2cd3e43dfd0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7bcfd1e2_78e58614",
+        "filename": "src/oem/ibm/file_io.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1003102
+      },
+      "writtenOn": "2026-10-20T12:17:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "45dfbabb_c761b703",
+      "range": {
+        "startLine": 100,
+        "startChar": 1,
+        "endLine": 100,
+        "endChar": 50
+      },
+      "revId": "edd83956945eed31c25bdef4d0b7d2cd3e43dfd0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "38449216_98699b58",
@@ -132,6 +180,30 @@
       "side": 1,
       "message": "Added a test for PLDM_RW_FILE_MEM_RESP_BYTES - 1,it verifies PLDM_ERROR_INVALID_LENGTH.”",
       "parentUuid": "38449216_98699b58",
+      "range": {
+        "startLine": 196,
+        "startChar": 4,
+        "endLine": 196,
+        "endChar": 75
+      },
+      "revId": "edd83956945eed31c25bdef4d0b7d2cd3e43dfd0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c153af14_d1f0bdad",
+        "filename": "tests/unit/oem/ibm/fileio.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 1003102
+      },
+      "writtenOn": "2026-10-20T12:17:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "17177274_b542226f",
       "range": {
         "startLine": 196,
         "startChar": 4,
