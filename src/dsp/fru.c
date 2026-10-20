@@ -46,6 +46,10 @@ int decode_get_fru_record_table_metadata_resp(
 		return PLDM_ERROR_INVALID_DATA;
 	}
 
+	if (payload_length < sizeof(*completion_code)) {
+		return PLDM_ERROR_INVALID_LENGTH;
+	}
+
 	*completion_code = msg->payload[0];
 	if (PLDM_SUCCESS != *completion_code) {
 		return PLDM_SUCCESS;
@@ -481,6 +485,10 @@ int decode_get_fru_record_by_option_resp(
 		return PLDM_ERROR_INVALID_DATA;
 	}
 
+	if (payload_length < sizeof(*completion_code)) {
+		return PLDM_ERROR_INVALID_LENGTH;
+	}
+
 	*completion_code = msg->payload[0];
 	if (PLDM_SUCCESS != *completion_code) {
 		return PLDM_SUCCESS;
@@ -546,6 +554,10 @@ int decode_get_fru_record_table_resp_safe(
 	    next_data_transfer_handle == NULL || transfer_flag == NULL ||
 	    fru_record_table_data == NULL || fru_record_table_length == NULL) {
 		return PLDM_ERROR_INVALID_DATA;
+	}
+
+	if (payload_length < sizeof(*completion_code)) {
+		return PLDM_ERROR_INVALID_LENGTH;
 	}
 
 	*completion_code = msg->payload[0];
