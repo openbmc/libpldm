@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e67f8d02_7895bc44",
+        "filename": "tests/unit/dsp/rde.cpp",
+        "patchSetId": 28
+      },
+      "lineNbr": 530,
+      "author": {
+        "id": 1002885
+      },
+      "writtenOn": "2026-10-20T09:48:30Z",
+      "side": 1,
+      "message": "`PLDM_RDE_SCHEMA_CLASS_MAJOR` is 0 and `reqMsg` is zero-initialized, so the test still passes if the encoder never writes `requested_schema_class`.\nCan we uses a non-zero class here, such as `PLDM_RDE_SCHEMA_CLASS_REGISTRY`?",
+      "range": {
+        "startLine": 530,
+        "startChar": 4,
+        "endLine": 530,
+        "endChar": 61
+      },
+      "revId": "01ec8efaf81df1950b25d3085c7d131c7fa84182",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "486ea196_1b111c79",
+        "filename": "tests/unit/dsp/rde.cpp",
+        "patchSetId": 28
+      },
+      "lineNbr": 538,
+      "author": {
+        "id": 1002885
+      },
+      "writtenOn": "2026-10-20T09:48:30Z",
+      "side": 1,
+      "message": "I just noticed that both the round-trip test only checks that decode inverts encode, which could miss the mistake made in both direction. \nShould we compare the payload against an explicit byte array instead?",
+      "range": {
+        "startLine": 538,
+        "startChar": 4,
+        "endLine": 538,
+        "endChar": 79
+      },
+      "revId": "01ec8efaf81df1950b25d3085c7d131c7fa84182",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0bbc70e1_14aefddb",
+        "filename": "tests/unit/dsp/rde.cpp",
+        "patchSetId": 28
+      },
+      "lineNbr": 623,
+      "author": {
+        "id": 1002885
+      },
+      "writtenOn": "2026-10-20T09:48:30Z",
+      "side": 1,
+      "message": "nit:\n`payload[4]` is a magic offset, I think we can add a short comment here to make the intent clearer.",
+      "range": {
+        "startLine": 623,
+        "startChar": 4,
+        "endLine": 623,
+        "endChar": 20
+      },
+      "revId": "01ec8efaf81df1950b25d3085c7d131c7fa84182",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
