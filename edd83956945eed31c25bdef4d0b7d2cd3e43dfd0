@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "711990b4_b7483f5f",
+        "filename": "src/oem/ibm/file_io.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1002885
+      },
+      "writtenOn": "2026-10-20T09:24:06Z",
+      "side": 1,
+      "message": "I think this changes the behaviour of a stable ABI function where oversized payloads used to return `PLDM_ERROR_INVALID_LENGTH` and now succeeded.",
+      "range": {
+        "startLine": 100,
+        "startChar": 1,
+        "endLine": 100,
+        "endChar": 50
+      },
+      "revId": "edd83956945eed31c25bdef4d0b7d2cd3e43dfd0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9d24c134_db82e03f",
+        "filename": "src/oem/ibm/file_io.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1002885
+      },
+      "writtenOn": "2026-10-20T09:24:06Z",
+      "side": 1,
+      "message": "Also, please acknowledge which responder sends such trailing bytes in the response.\n`decode_rw_file_by_type_memory_resp()` has the same response layout and still requires an exact length, as do the other fixed-size response decoders.\n\nPerhaps adding the reason into the commit message will be better.",
+      "range": {
+        "startLine": 100,
+        "startChar": 1,
+        "endLine": 100,
+        "endChar": 50
+      },
+      "revId": "edd83956945eed31c25bdef4d0b7d2cd3e43dfd0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "38449216_98699b58",
+        "filename": "tests/unit/oem/ibm/fileio.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 1002885
+      },
+      "writtenOn": "2026-10-20T09:24:06Z",
+      "side": 1,
+      "message": "Can we add a testcase for `PLDM_RW_FILE_MEM_RESP_BYTES-1` so the new boundary is covered?",
+      "range": {
+        "startLine": 196,
+        "startChar": 4,
+        "endLine": 196,
+        "endChar": 75
+      },
+      "revId": "edd83956945eed31c25bdef4d0b7d2cd3e43dfd0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
