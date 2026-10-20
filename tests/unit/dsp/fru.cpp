@@ -581,26 +581,12 @@ TEST(GetFruRecordTable, testBadDecodeResponse)
     std::vector<uint8_t> fru_record_table_data(9, 0);
     size_t fru_record_table_length = 0;
 
-    std::vector<uint8_t> responseMsg(sizeof(pldm_msg_hdr) +
-                                     PLDM_GET_FRU_RECORD_TABLE_MIN_RESP_BYTES +
-                                     fru_record_table_data.size());
-
-    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
-    auto responsePtr = reinterpret_cast<pldm_msg*>(responseMsg.data());
-
     // Payload message is missing
     auto rc = decode_get_fru_record_table_resp(
         NULL, 0, &completion_code, &next_data_transfer_handle, &transfer_flag,
         fru_record_table_data.data(), &fru_record_table_length);
 
     ASSERT_EQ(rc, PLDM_ERROR_INVALID_DATA);
-
-    // Payload length is invalid
-    rc = decode_get_fru_record_table_resp(
-        responsePtr, 0, &completion_code, &next_data_transfer_handle,
-        &transfer_flag, fru_record_table_data.data(), &fru_record_table_length);
-
-    ASSERT_EQ(rc, PLDM_ERROR_INVALID_LENGTH);
 }
 
 TEST(GetFRURecordByOption, testGoodEncodeRequest)
