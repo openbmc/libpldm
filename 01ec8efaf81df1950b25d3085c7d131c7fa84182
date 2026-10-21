@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "79086399_d5fa5aeb",
+        "filename": "tests/unit/dsp/rde.cpp",
+        "patchSetId": 28
+      },
+      "lineNbr": 530,
+      "author": {
+        "id": 1002838
+      },
+      "writtenOn": "2026-10-21T07:05:13Z",
+      "side": 1,
+      "message": "Done Thanks",
+      "parentUuid": "e67f8d02_7895bc44",
+      "range": {
+        "startLine": 530,
+        "startChar": 4,
+        "endLine": 530,
+        "endChar": 61
+      },
+      "revId": "01ec8efaf81df1950b25d3085c7d131c7fa84182",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "486ea196_1b111c79",
@@ -47,6 +71,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a2701f37_80f4a366",
+        "filename": "tests/unit/dsp/rde.cpp",
+        "patchSetId": 28
+      },
+      "lineNbr": 538,
+      "author": {
+        "id": 1002838
+      },
+      "writtenOn": "2026-10-21T07:05:13Z",
+      "side": 1,
+      "message": "Done Thanks",
+      "parentUuid": "486ea196_1b111c79",
+      "range": {
+        "startLine": 538,
+        "startChar": 4,
+        "endLine": 538,
+        "endChar": 79
+      },
+      "revId": "01ec8efaf81df1950b25d3085c7d131c7fa84182",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0bbc70e1_14aefddb",
@@ -60,6 +108,30 @@
       "writtenOn": "2026-10-20T09:48:30Z",
       "side": 1,
       "message": "nit:\n`payload[4]` is a magic offset, I think we can add a short comment here to make the intent clearer.",
+      "range": {
+        "startLine": 623,
+        "startChar": 4,
+        "endLine": 623,
+        "endChar": 20
+      },
+      "revId": "01ec8efaf81df1950b25d3085c7d131c7fa84182",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "17894ab4_6f5ecf58",
+        "filename": "tests/unit/dsp/rde.cpp",
+        "patchSetId": 28
+      },
+      "lineNbr": 623,
+      "author": {
+        "id": 1002838
+      },
+      "writtenOn": "2026-10-21T07:05:13Z",
+      "side": 1,
+      "message": "Done Thanks",
+      "parentUuid": "0bbc70e1_14aefddb",
       "range": {
         "startLine": 623,
         "startChar": 4,
