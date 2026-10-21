@@ -22,6 +22,30 @@
       },
       "revId": "0edbd7fc81972c75862a71df000a76c37609d291",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "95c3298a_7ec07876",
+        "filename": "tests/unit/bindings/cpp/firmware-update-test-descriptors.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 289,
+      "author": {
+        "id": 1002297
+      },
+      "writtenOn": "2026-10-21T20:43:43Z",
+      "side": 1,
+      "message": "Agree, they should be patched in under oem code ideally (this also matches the legacy decode package parsing functions). I\u0027ve removed this test and will raise another patch to address unknown types (since its unrelated to what the current patch is addressing imo)",
+      "parentUuid": "84db0659_28749f3b",
+      "range": {
+        "startLine": 273,
+        "startChar": 1,
+        "endLine": 289,
+        "endChar": 1
+      },
+      "revId": "0edbd7fc81972c75862a71df000a76c37609d291",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
