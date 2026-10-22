@@ -270,6 +270,17 @@ TEST(PackageParserTest, FDStandardDescriptorsAccepted)
         "OpenBMC");
 }
 
+TEST(PackageParserTest, FDUnknownDescriptorTypeRejected)
+{
+    auto pkg = makePkgWithFDDescriptors(
+        {{PLDM_FWUP_IANA_ENTERPRISE_ID, iana4}, {0x010C, {0x01, 0x02}}}, 2);
+    auto res = PackageParser::parse(pkg, PackagePin::v1);
+
+    ASSERT_FALSE(res.has_value());
+    EXPECT_EQ(res.error().msg,
+              "descriptor type 268 is not defined by DSP0267 Table 8");
+}
+
 TEST(PackageParserTest, DDDescriptorWrongLengthRejected)
 {
     std::vector<uint8_t> uuid15(uuid16.begin(), uuid16.end() - 1);
@@ -279,6 +290,17 @@ TEST(PackageParserTest, DDDescriptorWrongLengthRejected)
 
     ASSERT_FALSE(res.has_value());
     EXPECT_EQ(res.error().msg, "descriptor type 2 has length 15, expected 16");
+}
+
+TEST(PackageParserTest, DDUnknownDescriptorTypeRejected)
+{
+    auto pkg = makePkgWithDDDescriptors(
+        {{PLDM_FWUP_IANA_ENTERPRISE_ID, iana4}, {0x0007, {0x01, 0x02}}}, 2);
+    auto res = PackageParser::parse(pkg, PackagePin::v1_1_0);
+
+    ASSERT_FALSE(res.has_value());
+    EXPECT_EQ(res.error().msg,
+              "descriptor type 7 is not defined by DSP0267 Table 8");
 }
 
 TEST(PackageParserTest, FDInitialDescriptorTypesAccepted)

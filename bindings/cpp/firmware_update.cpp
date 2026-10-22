@@ -155,8 +155,15 @@ pldm::fw_update::PackageParser::helperParseFDDescriptor(
 		const auto expectedLength =
 			fixedDescriptorLength(desc->descriptor_type);
 
-		if (expectedLength.has_value() &&
-		    expectedLength.value() != desc->descriptor_length) {
+		if (!expectedLength.has_value()) {
+			std::string msg = "descriptor type ";
+			msg += std::to_string(desc->descriptor_type);
+			msg += " is not defined by DSP0267 Table 8";
+
+			return std::unexpected(msg);
+		}
+
+		if (expectedLength.value() != desc->descriptor_length) {
 			std::string msg = "descriptor type ";
 			msg += std::to_string(desc->descriptor_type);
 			msg += " has length ";
