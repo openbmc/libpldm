@@ -40,6 +40,9 @@ Change categories:
 
 ### Fixed
 
+- bindings: cpp: Preserve downstream device ID records when copying and
+  comparing packages
+
 ### Security
 
 ## [v0.18.0] - 2026-10-29
