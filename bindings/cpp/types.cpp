@@ -358,7 +358,8 @@ pldm::fw_update::Package::Package(
 LIBPLDM_ABI_TESTING
 pldm::fw_update::Package::Package(const Package &ref)
 	: firmwareDeviceIdRecords(ref.firmwareDeviceIdRecords),
-	  componentImageInformation(ref.componentImageInformation)
+	  componentImageInformation(ref.componentImageInformation),
+	  downstreamDeviceIdRecords(ref.downstreamDeviceIdRecords)
 {
 }
 
@@ -376,5 +377,5 @@ bool pldm::fw_update::Package::operator==(const Package &other) const
 	if (CompareNEQ(&Package::componentImageInformation, other)) {
 		return false;
 	}
-	return true;
+	return CompareEQ(&Package::downstreamDeviceIdRecords, other);
 }
