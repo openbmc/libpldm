@@ -16,6 +16,24 @@
       "message": "This is what I proposed we don\u0027t do. I much prefer we don\u0027t add this, and change the structures wrt `v1_3_0` (that\u0027s the API/ABI break).",
       "revId": "25ae3cba84653a1134d2082b2c62b26ba1794aab",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8288e842_3ab60fb1",
+        "filename": "include/libpldm++/firmware_update.hpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2026-10-23T11:57:08Z",
+      "side": 1,
+      "message": "alright, i removed the `v1_3_0_amend` and did the changes in place.",
+      "parentUuid": "1c76ce1d_373d6d92",
+      "revId": "25ae3cba84653a1134d2082b2c62b26ba1794aab",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
