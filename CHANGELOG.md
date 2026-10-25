@@ -43,6 +43,7 @@ Change categories:
 
 ### Fixed
 
+- dsp: firmware_update: Decode self-contained activation failures in GetStatus
 - bindings: cpp: PackageParser: Reject descriptor types not in DSP0267 Table 8
 - bindings: cpp: PackageParser: Restrict the initial descriptor of device id
   records with vendor defined descriptors
