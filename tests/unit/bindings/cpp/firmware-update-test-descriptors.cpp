@@ -220,6 +220,72 @@ TEST(PackageParserTest, DDNoDescriptorsRejected)
               "downstream device id record has no descriptors");
 }
 
+TEST(PackageParserTest, FDTrailingDescriptorBytesRejected)
+{
+    auto pkg = makePkgWithFDDescriptors(
+        {{PLDM_FWUP_UUID, uuid16}, {PLDM_FWUP_IANA_ENTERPRISE_ID, iana4}}, 1);
+    auto res = PackageParser::parse(pkg, PackagePin::v1);
+
+    ASSERT_FALSE(res.has_value());
+    EXPECT_EQ(res.error().msg,
+              "firmware device id record has 8 trailing descriptor bytes");
+}
+
+TEST(PackageParserTest, DDTrailingDescriptorBytesRejected)
+{
+    auto pkg = makePkgWithDDDescriptors(
+        {{PLDM_FWUP_UUID, uuid16}, {PLDM_FWUP_IANA_ENTERPRISE_ID, iana4}}, 1);
+    auto res = PackageParser::parse(pkg, PackagePin::v1_1_0);
+
+    ASSERT_FALSE(res.has_value());
+    EXPECT_EQ(res.error().msg,
+              "downstream device id record has 8 trailing descriptor bytes");
+}
+
+TEST(PackageParserTest, FDDescriptorCountTooLargeRejected)
+{
+    auto pkg = makePkgWithFDDescriptors({{PLDM_FWUP_UUID, uuid16}}, 2);
+    auto res = PackageParser::parse(pkg, PackagePin::v1);
+
+    ASSERT_FALSE(res.has_value());
+    EXPECT_EQ(res.error().msg,
+              "Failed to decode pldm package firmware device id record");
+}
+
+TEST(PackageParserTest, DDDescriptorCountTooLargeRejected)
+{
+    auto pkg = makePkgWithDDDescriptors({{PLDM_FWUP_UUID, uuid16}}, 2);
+    auto res = PackageParser::parse(pkg, PackagePin::v1_1_0);
+
+    ASSERT_FALSE(res.has_value());
+    EXPECT_EQ(res.error().msg,
+              "could not iterate downstream device record descriptors");
+}
+
+TEST(PackageParserTest, FDDescriptorAreaFullyConsumedAccepted)
+{
+    auto pkg = makePkgWithFDDescriptors(
+        {{PLDM_FWUP_UUID, uuid16}, {PLDM_FWUP_IANA_ENTERPRISE_ID, iana4}}, 2);
+    auto res = PackageParser::parse(pkg, PackagePin::v1);
+
+    ASSERT_TRUE(res.has_value()) << res.error().msg;
+    const auto& records = res.value()->firmwareDeviceIdRecords;
+    ASSERT_EQ(records.size(), 1);
+    EXPECT_EQ(records[0].recordDescriptors.size(), 2);
+}
+
+TEST(PackageParserTest, DDDescriptorAreaFullyConsumedAccepted)
+{
+    auto pkg = makePkgWithDDDescriptors(
+        {{PLDM_FWUP_UUID, uuid16}, {PLDM_FWUP_IANA_ENTERPRISE_ID, iana4}}, 2);
+    auto res = PackageParser::parse(pkg, PackagePin::v1_1_0);
+
+    ASSERT_TRUE(res.has_value()) << res.error().msg;
+    const auto& records = res.value()->downstreamDeviceIdRecords;
+    ASSERT_EQ(records.size(), 1);
+    EXPECT_EQ(records[0].downstreamDeviceRecordDescriptors.size(), 2);
+}
+
 TEST(PackageParserTest, FDDescriptorWrongLengthRejected)
 {
     std::vector<uint8_t> uuid15(uuid16.begin(), uuid16.end() - 1);
