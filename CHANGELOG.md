@@ -40,6 +40,7 @@ Change categories:
 
 ### Fixed
 
+- dsp: firmware_update: Decode self-contained activation failures in GetStatus
 - bindings: cpp: Preserve downstream device ID records when copying and
   comparing packages
 
