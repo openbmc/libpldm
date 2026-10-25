@@ -4811,6 +4811,69 @@ TEST(GetStatus, goodPathDecodeResponse)
         &progressPercent, &reasonCode, &updateOptionFlagsEnabled);
     EXPECT_EQ(rc, PLDM_SUCCESS);
     EXPECT_EQ(completionCode, PLDM_ERROR_NOT_READY);
+
+    // Self-contained activation failure reported by AuxState in IDLE.
+    constexpr std::array<uint8_t, hdrSize + sizeof(pldm_get_status_resp)>
+        getStatusResponse4{0x00, 0x00, 0x00, 0x00, 0x00, 0x06, 0x04,
+                           0x00, 0x64, 0x01, 0x01, 0x00, 0x00, 0x00};
+    auto responseMsg4 =
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+        reinterpret_cast<const pldm_msg*>(getStatusResponse4.data());
+    rc = decode_get_status_resp(
+        responseMsg4, getStatusResponse4.size() - hdrSize, &completionCode,
+        &currentState, &previousState, &auxState, &auxStateStatus,
+        &progressPercent, &reasonCode, &updateOptionFlagsEnabled);
+    EXPECT_EQ(rc, PLDM_SUCCESS);
+    EXPECT_EQ(completionCode, PLDM_SUCCESS);
+    EXPECT_EQ(currentState, PLDM_FD_STATE_IDLE);
+    EXPECT_EQ(previousState, PLDM_FD_STATE_ACTIVATE);
+    EXPECT_EQ(auxState, PLDM_FD_IDLE_SELF_CONTAINED_ACTIVATION_FAILURE);
+    EXPECT_EQ(auxStateStatus, PLDM_FD_AUX_STATE_IN_PROGRESS_OR_SUCCESS);
+    EXPECT_EQ(progressPercent, 100);
+    EXPECT_EQ(reasonCode, PLDM_FD_ACTIVATE_FW);
+    EXPECT_EQ(updateOptionFlagsEnabled.value, updateOptionFlagsEnabled2);
+
+    // Self-contained activation failure reported by both fields in IDLE.
+    constexpr std::array<uint8_t, hdrSize + sizeof(pldm_get_status_resp)>
+        getStatusResponse5{0x00, 0x00, 0x00, 0x00, 0x00, 0x06, 0x04,
+                           0x0b, 0x64, 0x01, 0x01, 0x00, 0x00, 0x00};
+    auto responseMsg5 =
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+        reinterpret_cast<const pldm_msg*>(getStatusResponse5.data());
+    rc = decode_get_status_resp(
+        responseMsg5, getStatusResponse5.size() - hdrSize, &completionCode,
+        &currentState, &previousState, &auxState, &auxStateStatus,
+        &progressPercent, &reasonCode, &updateOptionFlagsEnabled);
+    EXPECT_EQ(rc, PLDM_SUCCESS);
+    EXPECT_EQ(completionCode, PLDM_SUCCESS);
+    EXPECT_EQ(currentState, PLDM_FD_STATE_IDLE);
+    EXPECT_EQ(previousState, PLDM_FD_STATE_ACTIVATE);
+    EXPECT_EQ(auxState, PLDM_FD_IDLE_SELF_CONTAINED_ACTIVATION_FAILURE);
+    EXPECT_EQ(auxStateStatus, PLDM_FD_SELF_CONTAINED_ACTIVATION_FAILURE);
+    EXPECT_EQ(progressPercent, 100);
+    EXPECT_EQ(reasonCode, PLDM_FD_ACTIVATE_FW);
+    EXPECT_EQ(updateOptionFlagsEnabled.value, updateOptionFlagsEnabled2);
+
+    // Self-contained activation failure reported during ACTIVATE.
+    constexpr std::array<uint8_t, hdrSize + sizeof(pldm_get_status_resp)>
+        getStatusResponse6{0x00, 0x00, 0x00, 0x00, 0x06, 0x06, 0x02,
+                           0x0b, 0x64, 0x01, 0x01, 0x00, 0x00, 0x00};
+    auto responseMsg6 =
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+        reinterpret_cast<const pldm_msg*>(getStatusResponse6.data());
+    rc = decode_get_status_resp(
+        responseMsg6, getStatusResponse6.size() - hdrSize, &completionCode,
+        &currentState, &previousState, &auxState, &auxStateStatus,
+        &progressPercent, &reasonCode, &updateOptionFlagsEnabled);
+    EXPECT_EQ(rc, PLDM_SUCCESS);
+    EXPECT_EQ(completionCode, PLDM_SUCCESS);
+    EXPECT_EQ(currentState, PLDM_FD_STATE_ACTIVATE);
+    EXPECT_EQ(previousState, PLDM_FD_STATE_ACTIVATE);
+    EXPECT_EQ(auxState, PLDM_FD_OPERATION_FAILED);
+    EXPECT_EQ(auxStateStatus, PLDM_FD_SELF_CONTAINED_ACTIVATION_FAILURE);
+    EXPECT_EQ(progressPercent, 100);
+    EXPECT_EQ(reasonCode, PLDM_FD_ACTIVATE_FW);
+    EXPECT_EQ(updateOptionFlagsEnabled.value, updateOptionFlagsEnabled2);
 }
 
 TEST(GetStatus, errorPathDecodeResponse)
@@ -4926,7 +4989,7 @@ TEST(GetStatus, errorPathDecodeResponse)
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
 
     constexpr std::array<uint8_t, hdrSize + sizeof(pldm_get_status_resp)>
-        getStatusResponse5{0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x04,
+        getStatusResponse5{0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x05,
                            0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
     auto responseMsg5 =
         // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
@@ -4938,8 +5001,8 @@ TEST(GetStatus, errorPathDecodeResponse)
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
 
     constexpr std::array<uint8_t, hdrSize + sizeof(pldm_get_status_resp)>
-        getStatusResponse6{0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-                           0x0b, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
+        getStatusResponse6{0x00, 0x00, 0x00, 0x00, 0x06, 0x00, 0x02,
+                           0x0c, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
     auto responseMsg6 =
         // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         reinterpret_cast<const pldm_msg*>(getStatusResponse6.data());
@@ -4983,6 +5046,84 @@ TEST(GetStatus, errorPathDecodeResponse)
         reinterpret_cast<const pldm_msg*>(getStatusResponse9.data());
     rc = decode_get_status_resp(
         responseMsg9, getStatusResponse9.size() - hdrSize, &completionCode,
+        &currentState, &previousState, &auxState, &auxStateStatus,
+        &progressPercent, &reasonCode, &updateOptionFlagsEnabled);
+    EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
+
+    // AuxState 4 is invalid in LEARN COMPONENTS; it is only valid in IDLE.
+    constexpr std::array<uint8_t, hdrSize + sizeof(pldm_get_status_resp)>
+        getStatusResponse10{0x00, 0x00, 0x00, 0x00, 0x01, 0x06, 0x04,
+                            0x0b, 0x64, 0x01, 0x01, 0x00, 0x00, 0x00};
+    auto responseMsg10 =
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+        reinterpret_cast<const pldm_msg*>(getStatusResponse10.data());
+    rc = decode_get_status_resp(
+        responseMsg10, getStatusResponse10.size() - hdrSize, &completionCode,
+        &currentState, &previousState, &auxState, &auxStateStatus,
+        &progressPercent, &reasonCode, &updateOptionFlagsEnabled);
+    EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
+
+    // AuxState 4 is invalid in READY XFER; it is only valid in IDLE.
+    constexpr std::array<uint8_t, hdrSize + sizeof(pldm_get_status_resp)>
+        getStatusResponse11{0x00, 0x00, 0x00, 0x00, 0x02, 0x06, 0x04,
+                            0x0b, 0x64, 0x01, 0x01, 0x00, 0x00, 0x00};
+    auto responseMsg11 =
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+        reinterpret_cast<const pldm_msg*>(getStatusResponse11.data());
+    rc = decode_get_status_resp(
+        responseMsg11, getStatusResponse11.size() - hdrSize, &completionCode,
+        &currentState, &previousState, &auxState, &auxStateStatus,
+        &progressPercent, &reasonCode, &updateOptionFlagsEnabled);
+    EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
+
+    // AuxState 4 is invalid in DOWNLOAD; it is only valid in IDLE.
+    constexpr std::array<uint8_t, hdrSize + sizeof(pldm_get_status_resp)>
+        getStatusResponse12{0x00, 0x00, 0x00, 0x00, 0x03, 0x06, 0x04,
+                            0x0b, 0x64, 0x01, 0x01, 0x00, 0x00, 0x00};
+    auto responseMsg12 =
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+        reinterpret_cast<const pldm_msg*>(getStatusResponse12.data());
+    rc = decode_get_status_resp(
+        responseMsg12, getStatusResponse12.size() - hdrSize, &completionCode,
+        &currentState, &previousState, &auxState, &auxStateStatus,
+        &progressPercent, &reasonCode, &updateOptionFlagsEnabled);
+    EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
+
+    // AuxState 4 is invalid in VERIFY; it is only valid in IDLE.
+    constexpr std::array<uint8_t, hdrSize + sizeof(pldm_get_status_resp)>
+        getStatusResponse13{0x00, 0x00, 0x00, 0x00, 0x04, 0x06, 0x04,
+                            0x0b, 0x64, 0x01, 0x01, 0x00, 0x00, 0x00};
+    auto responseMsg13 =
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+        reinterpret_cast<const pldm_msg*>(getStatusResponse13.data());
+    rc = decode_get_status_resp(
+        responseMsg13, getStatusResponse13.size() - hdrSize, &completionCode,
+        &currentState, &previousState, &auxState, &auxStateStatus,
+        &progressPercent, &reasonCode, &updateOptionFlagsEnabled);
+    EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
+
+    // AuxState 4 is invalid in APPLY; it is only valid in IDLE.
+    constexpr std::array<uint8_t, hdrSize + sizeof(pldm_get_status_resp)>
+        getStatusResponse14{0x00, 0x00, 0x00, 0x00, 0x05, 0x06, 0x04,
+                            0x0b, 0x64, 0x01, 0x01, 0x00, 0x00, 0x00};
+    auto responseMsg14 =
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+        reinterpret_cast<const pldm_msg*>(getStatusResponse14.data());
+    rc = decode_get_status_resp(
+        responseMsg14, getStatusResponse14.size() - hdrSize, &completionCode,
+        &currentState, &previousState, &auxState, &auxStateStatus,
+        &progressPercent, &reasonCode, &updateOptionFlagsEnabled);
+    EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
+
+    // AuxState 4 is invalid in ACTIVATE; it is only valid in IDLE.
+    constexpr std::array<uint8_t, hdrSize + sizeof(pldm_get_status_resp)>
+        getStatusResponse15{0x00, 0x00, 0x00, 0x00, 0x06, 0x06, 0x04,
+                            0x0b, 0x64, 0x01, 0x01, 0x00, 0x00, 0x00};
+    auto responseMsg15 =
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+        reinterpret_cast<const pldm_msg*>(getStatusResponse15.data());
+    rc = decode_get_status_resp(
+        responseMsg15, getStatusResponse15.size() - hdrSize, &completionCode,
         &currentState, &previousState, &auxState, &auxStateStatus,
         &progressPercent, &reasonCode, &updateOptionFlagsEnabled);
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);

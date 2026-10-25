@@ -40,6 +40,8 @@ Change categories:
 
 ### Fixed
 
+- dsp: firmware_update: Decode self-contained activation failures in GetStatus
+
 ### Security
 
 ## [v0.18.0] - 2026-10-29
