@@ -43,6 +43,7 @@ Change categories:
 
 ### Fixed
 
+- dsp: firmware_update: Decode self-contained activation failures in GetStatus
 - bindings: cpp: PackageParser: Restrict the initial descriptor of device id
   records with vendor defined descriptors
 - bindings: cpp: PackageParser: Validate initial descriptor type of device id
