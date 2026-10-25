@@ -4813,6 +4813,118 @@ TEST(GetStatus, goodPathDecodeResponse)
     EXPECT_EQ(completionCode, PLDM_ERROR_NOT_READY);
 }
 
+TEST(GetStatus, decodeResponseIdleSelfContainedFailure)
+{
+    constexpr std::array<uint8_t, hdrSize + sizeof(pldm_get_status_resp)>
+        getStatusResponse{0x00, 0x00, 0x00, 0x00, 0x00, 0x06, 0x04,
+                          0x0b, 0x65, 0x01, 0x00, 0x00, 0x00, 0x00};
+    auto responseMsg =
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+        reinterpret_cast<const pldm_msg*>(getStatusResponse.data());
+
+    uint8_t completionCode = 0;
+    uint8_t currentState = 0;
+    uint8_t previousState = 0;
+    uint8_t auxState = 0;
+    uint8_t auxStateStatus = 0;
+    uint8_t progressPercent = 0;
+    uint8_t reasonCode = 0;
+    bitfield32_t updateOptionFlagsEnabled{0};
+
+    auto rc = decode_get_status_resp(
+        responseMsg, getStatusResponse.size() - hdrSize, &completionCode,
+        &currentState, &previousState, &auxState, &auxStateStatus,
+        &progressPercent, &reasonCode, &updateOptionFlagsEnabled);
+    EXPECT_EQ(rc, PLDM_SUCCESS);
+    EXPECT_EQ(currentState, PLDM_FD_STATE_IDLE);
+    EXPECT_EQ(auxState, PLDM_FD_IDLE_SELF_CONTAINED_ACTIVATION_FAILURE);
+    EXPECT_EQ(auxStateStatus, PLDM_FD_SELF_CONTAINED_ACTIVATION_FAILURE);
+}
+
+TEST(GetStatus, decodeResponseActivateSelfContainedFailure)
+{
+    constexpr std::array<uint8_t, hdrSize + sizeof(pldm_get_status_resp)>
+        getStatusResponse{0x00, 0x00, 0x00, 0x00, 0x06, 0x02, 0x02,
+                          0x0b, 0x65, 0x00, 0x00, 0x00, 0x00, 0x00};
+    auto responseMsg =
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+        reinterpret_cast<const pldm_msg*>(getStatusResponse.data());
+
+    uint8_t completionCode = 0;
+    uint8_t currentState = 0;
+    uint8_t previousState = 0;
+    uint8_t auxState = 0;
+    uint8_t auxStateStatus = 0;
+    uint8_t progressPercent = 0;
+    uint8_t reasonCode = 0;
+    bitfield32_t updateOptionFlagsEnabled{0};
+
+    auto rc = decode_get_status_resp(
+        responseMsg, getStatusResponse.size() - hdrSize, &completionCode,
+        &currentState, &previousState, &auxState, &auxStateStatus,
+        &progressPercent, &reasonCode, &updateOptionFlagsEnabled);
+    EXPECT_EQ(rc, PLDM_SUCCESS);
+    EXPECT_EQ(currentState, PLDM_FD_STATE_ACTIVATE);
+    EXPECT_EQ(auxState, PLDM_FD_OPERATION_FAILED);
+    EXPECT_EQ(auxStateStatus, PLDM_FD_SELF_CONTAINED_ACTIVATION_FAILURE);
+}
+
+TEST(GetStatus, decodeResponseLearnComponents)
+{
+    constexpr std::array<uint8_t, hdrSize + sizeof(pldm_get_status_resp)>
+        getStatusResponse{0x00, 0x00, 0x00, 0x00, 0x01, 0x00, 0x03,
+                          0x00, 0x65, 0x00, 0x00, 0x00, 0x00, 0x00};
+    auto responseMsg =
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+        reinterpret_cast<const pldm_msg*>(getStatusResponse.data());
+
+    uint8_t completionCode = 0;
+    uint8_t currentState = 0;
+    uint8_t previousState = 0;
+    uint8_t auxState = 0;
+    uint8_t auxStateStatus = 0;
+    uint8_t progressPercent = 0;
+    uint8_t reasonCode = 0;
+    bitfield32_t updateOptionFlagsEnabled{0};
+
+    auto rc = decode_get_status_resp(
+        responseMsg, getStatusResponse.size() - hdrSize, &completionCode,
+        &currentState, &previousState, &auxState, &auxStateStatus,
+        &progressPercent, &reasonCode, &updateOptionFlagsEnabled);
+    EXPECT_EQ(rc, PLDM_SUCCESS);
+    EXPECT_EQ(currentState, PLDM_FD_STATE_LEARN_COMPONENTS);
+    EXPECT_EQ(auxState, PLDM_FD_IDLE_LEARN_COMPONENTS_READ_XFER);
+    EXPECT_EQ(auxStateStatus, PLDM_FD_AUX_STATE_IN_PROGRESS_OR_SUCCESS);
+}
+
+TEST(GetStatus, decodeResponseReadyXfer)
+{
+    constexpr std::array<uint8_t, hdrSize + sizeof(pldm_get_status_resp)>
+        getStatusResponse{0x00, 0x00, 0x00, 0x00, 0x02, 0x01, 0x03,
+                          0x00, 0x65, 0x00, 0x00, 0x00, 0x00, 0x00};
+    auto responseMsg =
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+        reinterpret_cast<const pldm_msg*>(getStatusResponse.data());
+
+    uint8_t completionCode = 0;
+    uint8_t currentState = 0;
+    uint8_t previousState = 0;
+    uint8_t auxState = 0;
+    uint8_t auxStateStatus = 0;
+    uint8_t progressPercent = 0;
+    uint8_t reasonCode = 0;
+    bitfield32_t updateOptionFlagsEnabled{0};
+
+    auto rc = decode_get_status_resp(
+        responseMsg, getStatusResponse.size() - hdrSize, &completionCode,
+        &currentState, &previousState, &auxState, &auxStateStatus,
+        &progressPercent, &reasonCode, &updateOptionFlagsEnabled);
+    EXPECT_EQ(rc, PLDM_SUCCESS);
+    EXPECT_EQ(currentState, PLDM_FD_STATE_READY_XFER);
+    EXPECT_EQ(auxState, PLDM_FD_IDLE_LEARN_COMPONENTS_READ_XFER);
+    EXPECT_EQ(auxStateStatus, PLDM_FD_AUX_STATE_IN_PROGRESS_OR_SUCCESS);
+}
+
 TEST(GetStatus, errorPathDecodeResponse)
 {
     uint8_t completionCode = 0;
@@ -4926,7 +5038,7 @@ TEST(GetStatus, errorPathDecodeResponse)
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
 
     constexpr std::array<uint8_t, hdrSize + sizeof(pldm_get_status_resp)>
-        getStatusResponse5{0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x04,
+        getStatusResponse5{0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x05,
                            0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
     auto responseMsg5 =
         // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
@@ -4938,8 +5050,8 @@ TEST(GetStatus, errorPathDecodeResponse)
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
 
     constexpr std::array<uint8_t, hdrSize + sizeof(pldm_get_status_resp)>
-        getStatusResponse6{0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-                           0x0b, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
+        getStatusResponse6{0x00, 0x00, 0x00, 0x00, 0x06, 0x00, 0x02,
+                           0x0c, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
     auto responseMsg6 =
         // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         reinterpret_cast<const pldm_msg*>(getStatusResponse6.data());
@@ -4983,6 +5095,56 @@ TEST(GetStatus, errorPathDecodeResponse)
         reinterpret_cast<const pldm_msg*>(getStatusResponse9.data());
     rc = decode_get_status_resp(
         responseMsg9, getStatusResponse9.size() - hdrSize, &completionCode,
+        &currentState, &previousState, &auxState, &auxStateStatus,
+        &progressPercent, &reasonCode, &updateOptionFlagsEnabled);
+    EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
+}
+
+TEST(GetStatus, decodeResponseIdleSelfContainedFailureInLearnComponents)
+{
+    constexpr std::array<uint8_t, hdrSize + sizeof(pldm_get_status_resp)>
+        getStatusResponse{0x00, 0x00, 0x00, 0x00, 0x01, 0x00, 0x04,
+                          0x0b, 0x65, 0x00, 0x00, 0x00, 0x00, 0x00};
+    auto responseMsg =
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+        reinterpret_cast<const pldm_msg*>(getStatusResponse.data());
+
+    uint8_t completionCode = 0;
+    uint8_t currentState = 0;
+    uint8_t previousState = 0;
+    uint8_t auxState = 0;
+    uint8_t auxStateStatus = 0;
+    uint8_t progressPercent = 0;
+    uint8_t reasonCode = 0;
+    bitfield32_t updateOptionFlagsEnabled{0};
+
+    auto rc = decode_get_status_resp(
+        responseMsg, getStatusResponse.size() - hdrSize, &completionCode,
+        &currentState, &previousState, &auxState, &auxStateStatus,
+        &progressPercent, &reasonCode, &updateOptionFlagsEnabled);
+    EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);
+}
+
+TEST(GetStatus, decodeResponseIdleSelfContainedFailureInActivate)
+{
+    constexpr std::array<uint8_t, hdrSize + sizeof(pldm_get_status_resp)>
+        getStatusResponse{0x00, 0x00, 0x00, 0x00, 0x06, 0x02, 0x04,
+                          0x0b, 0x65, 0x00, 0x00, 0x00, 0x00, 0x00};
+    auto responseMsg =
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+        reinterpret_cast<const pldm_msg*>(getStatusResponse.data());
+
+    uint8_t completionCode = 0;
+    uint8_t currentState = 0;
+    uint8_t previousState = 0;
+    uint8_t auxState = 0;
+    uint8_t auxStateStatus = 0;
+    uint8_t progressPercent = 0;
+    uint8_t reasonCode = 0;
+    bitfield32_t updateOptionFlagsEnabled{0};
+
+    auto rc = decode_get_status_resp(
+        responseMsg, getStatusResponse.size() - hdrSize, &completionCode,
         &currentState, &previousState, &auxState, &auxStateStatus,
         &progressPercent, &reasonCode, &updateOptionFlagsEnabled);
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);

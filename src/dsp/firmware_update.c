@@ -258,10 +258,37 @@ static bool is_aux_state_valid(uint8_t aux_state)
 	case PLDM_FD_OPERATION_SUCCESSFUL:
 	case PLDM_FD_OPERATION_FAILED:
 	case PLDM_FD_IDLE_LEARN_COMPONENTS_READ_XFER:
+	case PLDM_FD_IDLE_SELF_CONTAINED_ACTIVATION_FAILURE:
 		return true;
 
 	default:
 		return false;
+	}
+}
+
+/** @brief Check if aux state in GetStatus command response is valid for the
+ *         current state
+ *
+ *  @param[in] current_state - current state machine state of the FD/FDP
+ *  @param[in] aux_state - aux state of the FD/FDP
+ *
+ *  @return true if aux state is valid in the current state, false if not
+ */
+static bool is_aux_state_valid_in_state(uint8_t current_state,
+					uint8_t aux_state)
+{
+	if (aux_state == PLDM_FD_IDLE_SELF_CONTAINED_ACTIVATION_FAILURE) {
+		return current_state == PLDM_FD_STATE_IDLE;
+	}
+
+	switch (current_state) {
+	case PLDM_FD_STATE_IDLE:
+	case PLDM_FD_STATE_LEARN_COMPONENTS:
+	case PLDM_FD_STATE_READY_XFER:
+		return aux_state == PLDM_FD_IDLE_LEARN_COMPONENTS_READ_XFER;
+
+	default:
+		return true;
 	}
 }
 
@@ -276,6 +303,7 @@ static bool is_aux_state_status_valid(uint8_t aux_state_status)
 	if (aux_state_status == PLDM_FD_AUX_STATE_IN_PROGRESS_OR_SUCCESS ||
 	    aux_state_status == PLDM_FD_TIMEOUT ||
 	    aux_state_status == PLDM_FD_GENERIC_ERROR ||
+	    aux_state_status == PLDM_FD_SELF_CONTAINED_ACTIVATION_FAILURE ||
 	    (aux_state_status >= PLDM_FD_VENDOR_DEFINED_STATUS_CODE_START &&
 	     aux_state_status <= PLDM_FD_VENDOR_DEFINED_STATUS_CODE_END)) {
 		return true;
@@ -3082,13 +3110,9 @@ int decode_get_status_resp(const struct pldm_msg *msg, size_t payload_length,
 		return PLDM_ERROR_INVALID_DATA;
 	}
 
-	if ((response->current_state == PLDM_FD_STATE_IDLE) ||
-	    (response->current_state == PLDM_FD_STATE_LEARN_COMPONENTS) ||
-	    (response->current_state == PLDM_FD_STATE_READY_XFER)) {
-		if (response->aux_state !=
-		    PLDM_FD_IDLE_LEARN_COMPONENTS_READ_XFER) {
-			return PLDM_ERROR_INVALID_DATA;
-		}
+	if (!is_aux_state_valid_in_state(response->current_state,
+					 response->aux_state)) {
+		return PLDM_ERROR_INVALID_DATA;
 	}
 
 	*current_state = response->current_state;
