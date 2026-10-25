@@ -43,6 +43,7 @@ Change categories:
 
 ### Fixed
 
+- bindings: cpp: PackageParser: Reject trailing bytes after counted descriptors
 - bindings: cpp: PackageParser: Reject descriptor types not in DSP0267 Table 8
 - bindings: cpp: PackageParser: Restrict the initial descriptor of device id
   records with vendor defined descriptors

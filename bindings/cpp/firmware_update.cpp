@@ -294,6 +294,8 @@ pldm::fw_update::PackageParser::helperParseDownstreamDeviceIDRecord(
 
 	struct pldm_descriptor desc;
 	uint16_t initialType = 0;
+	size_t remainingDescriptorBytes =
+		downstreamDeviceId.record_descriptors.length;
 
 	foreach_pldm_package_downstream_device_id_record_descriptor(
 		package, downstreamDeviceId, desc, rc)
@@ -315,6 +317,10 @@ pldm::fw_update::PackageParser::helperParseDownstreamDeviceIDRecord(
 			return std::unexpected(
 				PackageParserError(result.error()));
 		}
+
+		remainingDescriptorBytes -= sizeof(desc.descriptor_type) +
+					    sizeof(desc.descriptor_length) +
+					    desc.descriptor_length;
 	}
 
 	if (rc) {
@@ -326,6 +332,13 @@ pldm::fw_update::PackageParser::helperParseDownstreamDeviceIDRecord(
 	if (descriptors.empty()) {
 		return std::unexpected(pldm::fw_update::PackageParserError(
 			"downstream device id record has no descriptors"));
+	}
+
+	if (remainingDescriptorBytes) {
+		return std::unexpected(pldm::fw_update::PackageParserError(
+			"downstream device id record has " +
+			std::to_string(remainingDescriptorBytes) +
+			" trailing descriptor bytes"));
 	}
 
 	auto vendorDefined = checkVendorDefinedInitialDescriptor(
@@ -443,6 +456,8 @@ pldm::fw_update::PackageParser::parse(const std::span<const uint8_t> &pkg,
 			descriptors{};
 		struct pldm_descriptor descriptorData;
 		uint16_t initialType = 0;
+		size_t remainingDescriptorBytes =
+			deviceIdRecordData.record_descriptors.length;
 
 		foreach_pldm_package_firmware_device_id_record_descriptor(
 			package, deviceIdRecordData, descriptorData, rc)
@@ -467,6 +482,11 @@ pldm::fw_update::PackageParser::parse(const std::span<const uint8_t> &pkg,
 				return std::unexpected(
 					PackageParserError(result.error()));
 			}
+
+			remainingDescriptorBytes -=
+				sizeof(descriptorData.descriptor_type) +
+				sizeof(descriptorData.descriptor_length) +
+				descriptorData.descriptor_length;
 		}
 
 		if (rc) {
@@ -478,6 +498,13 @@ pldm::fw_update::PackageParser::parse(const std::span<const uint8_t> &pkg,
 		if (descriptors.empty()) {
 			return std::unexpected(PackageParserError(
 				"firmware device id record has no descriptors"));
+		}
+
+		if (remainingDescriptorBytes) {
+			return std::unexpected(PackageParserError(
+				"firmware device id record has " +
+				std::to_string(remainingDescriptorBytes) +
+				" trailing descriptor bytes"));
 		}
 
 		auto vendorDefined = checkVendorDefinedInitialDescriptor(
