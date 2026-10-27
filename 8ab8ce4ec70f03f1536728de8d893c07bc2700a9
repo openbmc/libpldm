@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "882efbc4_438dd40c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 21
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1003195
+      },
+      "writtenOn": "2026-10-27T06:54:52Z",
+      "side": 1,
+      "message": "The body mentions shared pldm_get_fd_data_* types and PLDM_GET_FD_DATA_* macros that GetMetaData reuses, but the diff adds only pldm_get_package_data_* symbols and does not touch GetMetaData. Please align the message with the code, or include the shared parts.",
+      "revId": "8ab8ce4ec70f03f1536728de8d893c07bc2700a9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0844e0e8_0807064a",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 21
+      },
+      "lineNbr": 3779,
+      "author": {
+        "id": 1003195
+      },
+      "writtenOn": "2026-10-27T06:54:52Z",
+      "side": 1,
+      "message": "The two common helpers have a single caller each here. Is GetMetaData part of this series? If so, please state the order; if not, consider inlining.",
+      "revId": "8ab8ce4ec70f03f1536728de8d893c07bc2700a9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "08222314_f163e86e",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 21
+      },
+      "lineNbr": 3829,
+      "author": {
+        "id": 1003195
+      },
+      "writtenOn": "2026-10-27T06:54:52Z",
+      "side": 1,
+      "message": "data-\u003elength comes from the local caller, not the wire, and the msgbuf insert already bounds-checks. Please correct the comment, and add a test for the SIZE_MAX branch if it stays.",
+      "revId": "8ab8ce4ec70f03f1536728de8d893c07bc2700a9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
