@@ -1,0 +1,78 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "80a40c59_95aa039a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-10-28T06:09:42Z",
+      "side": 1,
+      "message": "Nit: Can we switch this to just `fd:`? Matt used `firmware fd:`, which feels a bit redundant. `fd:` conveys what\u0027s affected.",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 15
+      },
+      "revId": "0367c7cacf09b85d7208523004971655ad10904e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3908a897_c582c52a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-10-28T06:09:42Z",
+      "side": 1,
+      "message": "Can you please add a `Fixes:` tag?\n\nhttps://github.com/openbmc/libpldm/blob/efebb013ba21ac6d34d667694d4845df8422c899/CONTRIBUTING.md#L64-L68",
+      "revId": "0367c7cacf09b85d7208523004971655ad10904e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a408d08d_256bb954",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-10-28T06:09:42Z",
+      "side": 1,
+      "message": "Hi Praveen, thanks for the fix.\n\nCan you please add a changelog entry? See https://github.com/openbmc/libpldm/blob/efebb013ba21ac6d34d667694d4845df8422c899/CONTRIBUTING.md#L44-L49\n\nHave you considered adding unit tests to prevent regressions? I recognise that the fd code is entirely tested by fuzzing right now, however: https://github.com/openbmc/libpldm/blob/efebb013ba21ac6d34d667694d4845df8422c899/CONTRIBUTING.md#L70-L71",
+      "revId": "0367c7cacf09b85d7208523004971655ad10904e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "95e6eba4_7a161429",
+        "filename": "src/firmware_device/fd.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 535,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-10-28T06:09:42Z",
+      "side": 1,
+      "message": "So in my understanding it\u0027s not necessary to set `fd-\u003ereq.state` to `PLDM_FD_REQ_UNUSED` here as it is an invariant that it\u0027s already set as such. Is that fair? Perhaps we can document that invariant with an `assert()`?",
+      "revId": "0367c7cacf09b85d7208523004971655ad10904e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
