@@ -48,6 +48,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7a5cb3da_85aa600a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1003102
+      },
+      "writtenOn": "2026-10-28T12:21:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eda2560b_a39022d5",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 15
+      },
+      "revId": "0367c7cacf09b85d7208523004971655ad10904e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3908a897_c582c52a",
@@ -79,6 +103,24 @@
       "side": 1,
       "message": "Updated the subject to use fd: and added a Fixes: tag referencing the original firmware update FD responder change.",
       "parentUuid": "3908a897_c582c52a",
+      "revId": "0367c7cacf09b85d7208523004971655ad10904e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e3d9f46c_9f3575a6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1003102
+      },
+      "writtenOn": "2026-10-28T12:21:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5a0a7c93_be9eec77",
       "revId": "0367c7cacf09b85d7208523004971655ad10904e",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -118,6 +160,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "54f1a6f2_e87f4262",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003102
+      },
+      "writtenOn": "2026-10-28T12:21:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a52902b4_ee49471f",
+      "revId": "0367c7cacf09b85d7208523004971655ad10904e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "95e6eba4_7a161429",
@@ -149,6 +209,24 @@
       "side": 1,
       "message": "Added an assertion before the PassComponentTable transition to READY_XFER to document that req.state is PLDM_FD_REQ_UNUSED on this path.",
       "parentUuid": "95e6eba4_7a161429",
+      "revId": "0367c7cacf09b85d7208523004971655ad10904e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "399eb91d_3ba8924b",
+        "filename": "src/firmware_device/fd.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 535,
+      "author": {
+        "id": 1003102
+      },
+      "writtenOn": "2026-10-28T12:21:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "954c9e5e_3fd9c371",
       "revId": "0367c7cacf09b85d7208523004971655ad10904e",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
