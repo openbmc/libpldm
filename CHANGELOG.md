@@ -19,6 +19,20 @@ Change categories:
 
 ### Added
 
+### Changed
+
+### Deprecated
+
+### Removed
+
+### Fixed
+
+### Security
+
+## [v0.18.0] - 2026-10-29
+
+### Added
+
 - fru: New constants for additional bound on GetFRURecordTable payload size
 - libpldm++ support for fw update pkg v1.1.0
 - libpldm++ support for fw update pkg v1.2.0
@@ -34,8 +48,6 @@ Change categories:
   Many header files were modified to fix issues identified in the documentation.
   There is no change in behaviour.
 
-### Deprecated
-
 ### Removed
 
 - dsp: base: Remove `{en,de}code_get_tid_resp()` and associated types
@@ -45,21 +57,26 @@ Change categories:
 
 - bindings: cpp: PackageParser: Reject trailing bytes after counted descriptors
 - bindings: cpp: PackageParser: Reject descriptor types not in DSP0267 Table 8
+
 - bindings: cpp: PackageParser: Restrict the initial descriptor of device id
   records with vendor defined descriptors
+
 - bindings: cpp: PackageParser: Validate initial descriptor type of device id
   records
+
 - bindings: cpp: PackageParser: Check descriptor lengths against DSP0267 Table 8
 - bindings: cpp: PackageParser: Reject device id records without descriptors
+
 - bindings: cpp: Validate ApplicableComponents indices for downstream-device
   records
+
 - bindings: cpp: PackageParser: Check for ApplicableComponents OOB index
 - dsp: pdr: Bound children read in `pldm_entity_association_pdr_extract()`
-- dsp: platform: Add const modifier to the pdr argument of
-  pldm_platform_redfish_action_pdr_action_iter_init
-- platform: Fix data-field typo in PDR decoder doc comments
 
-### Security
+- dsp: platform: Add const modifier to the pdr argument of
+  `pldm_platform_redfish_action_pdr_action_iter_init()`
+
+- platform: Fix data-field typo in PDR decoder doc comments
 
 ## [v0.17.0] - 2026-07-05
 
