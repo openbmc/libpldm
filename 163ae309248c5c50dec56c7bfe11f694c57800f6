@@ -1,0 +1,107 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8c23db20_ef4b3bab",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 10
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-10-28T06:52:31Z",
+      "side": 1,
+      "message": "It\u0027s not clear to me that it\u0027s an API break? How do things break at the source level?",
+      "range": {
+        "startLine": 17,
+        "startChar": 19,
+        "endLine": 17,
+        "endChar": 23
+      },
+      "revId": "163ae309248c5c50dec56c7bfe11f694c57800f6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4374a478_a76a2328",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 10
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-10-28T06:52:31Z",
+      "side": 1,
+      "message": "I feel this is self-evident and can be removed.",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 21,
+        "endChar": 17
+      },
+      "revId": "163ae309248c5c50dec56c7bfe11f694c57800f6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "63ce2f54_16337f67",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 10
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-10-28T06:52:31Z",
+      "side": 1,
+      "message": "\"Adjust the equality comparison to account for ...\"",
+      "range": {
+        "startLine": 23,
+        "startChar": 0,
+        "endLine": 23,
+        "endChar": 46
+      },
+      "revId": "163ae309248c5c50dec56c7bfe11f694c57800f6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "86250b4d_21df9137",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 10
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-10-28T06:52:31Z",
+      "side": 1,
+      "message": "This is also self-evident and can be dropped.",
+      "revId": "163ae309248c5c50dec56c7bfe11f694c57800f6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "86a0f32f_d7f49379",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 10
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-10-28T06:52:31Z",
+      "side": 1,
+      "message": "I would rather we put this under `### Changed` with further words justifying what\u0027s going on. It deserves more than a one-liner:\n\nhttps://github.com/openbmc/libpldm/blob/efebb013ba21ac6d34d667694d4845df8422c899/CONTRIBUTING.md#L566-L588\n\nAlso if we\u0027re to emphasize \"API+ABI break\", I\u0027d rather we pick some useful markdown syntax to do that. I\u0027m not aware that `!` is meaningful there.",
+      "revId": "163ae309248c5c50dec56c7bfe11f694c57800f6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
