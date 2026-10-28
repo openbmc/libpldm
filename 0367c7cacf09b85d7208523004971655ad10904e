@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "eda2560b_a39022d5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1003102
+      },
+      "writtenOn": "2026-10-28T12:21:33Z",
+      "side": 1,
+      "message": "Done. I changed the subject prefix to fd: and added a Fixes: tag referencing . I’ve uploaded a new patchset.",
+      "parentUuid": "80a40c59_95aa039a",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 15
+      },
+      "revId": "0367c7cacf09b85d7208523004971655ad10904e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3908a897_c582c52a",
         "filename": "/COMMIT_MSG",
         "patchSetId": 8
@@ -37,6 +61,24 @@
       "writtenOn": "2026-10-28T06:09:42Z",
       "side": 1,
       "message": "Can you please add a `Fixes:` tag?\n\nhttps://github.com/openbmc/libpldm/blob/efebb013ba21ac6d34d667694d4845df8422c899/CONTRIBUTING.md#L64-L68",
+      "revId": "0367c7cacf09b85d7208523004971655ad10904e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5a0a7c93_be9eec77",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1003102
+      },
+      "writtenOn": "2026-10-28T12:21:33Z",
+      "side": 1,
+      "message": "Updated the subject to use fd: and added a Fixes: tag referencing the original firmware update FD responder change.",
+      "parentUuid": "3908a897_c582c52a",
       "revId": "0367c7cacf09b85d7208523004971655ad10904e",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -60,6 +102,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a52902b4_ee49471f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003102
+      },
+      "writtenOn": "2026-10-28T12:21:33Z",
+      "side": 1,
+      "message": "Thanks for the suggestions. I’ve added a changelog entry and regression tests covering request-state reset when returning to idle and when cancelling a component update. The cancellation test also checks that the FD_T1 timeout is refreshed.",
+      "parentUuid": "a408d08d_256bb954",
+      "revId": "0367c7cacf09b85d7208523004971655ad10904e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "95e6eba4_7a161429",
         "filename": "src/firmware_device/fd.c",
         "patchSetId": 8
@@ -71,6 +131,24 @@
       "writtenOn": "2026-10-28T06:09:42Z",
       "side": 1,
       "message": "So in my understanding it\u0027s not necessary to set `fd-\u003ereq.state` to `PLDM_FD_REQ_UNUSED` here as it is an invariant that it\u0027s already set as such. Is that fair? Perhaps we can document that invariant with an `assert()`?",
+      "revId": "0367c7cacf09b85d7208523004971655ad10904e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "954c9e5e_3fd9c371",
+        "filename": "src/firmware_device/fd.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 535,
+      "author": {
+        "id": 1003102
+      },
+      "writtenOn": "2026-10-28T12:21:33Z",
+      "side": 1,
+      "message": "Added an assertion before the PassComponentTable transition to READY_XFER to document that req.state is PLDM_FD_REQ_UNUSED on this path.",
+      "parentUuid": "95e6eba4_7a161429",
       "revId": "0367c7cacf09b85d7208523004971655ad10904e",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
