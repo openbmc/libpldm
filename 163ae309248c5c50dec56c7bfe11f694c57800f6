@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3df86f7f_24975c31",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 10
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2026-10-28T16:33:04Z",
+      "side": 1,
+      "message": "For example `std::map` has `std::map\u003cKey,T,Compare,Allocator\u003e::at`\nwhich `std::multimap` does not have.",
+      "parentUuid": "8c23db20_ef4b3bab",
+      "range": {
+        "startLine": 17,
+        "startChar": 19,
+        "endLine": 17,
+        "endChar": 23
+      },
+      "revId": "163ae309248c5c50dec56c7bfe11f694c57800f6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4374a478_a76a2328",
@@ -37,6 +61,30 @@
       "writtenOn": "2026-10-28T06:52:31Z",
       "side": 1,
       "message": "I feel this is self-evident and can be removed.",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 21,
+        "endChar": 17
+      },
+      "revId": "163ae309248c5c50dec56c7bfe11f694c57800f6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "48fe3fc3_09bcfc53",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 10
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2026-10-28T16:33:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4374a478_a76a2328",
       "range": {
         "startLine": 20,
         "startChar": 0,
@@ -70,6 +118,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "adac864d_ddae0fdf",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 10
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2026-10-28T16:33:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "63ce2f54_16337f67",
+      "range": {
+        "startLine": 23,
+        "startChar": 0,
+        "endLine": 23,
+        "endChar": 46
+      },
+      "revId": "163ae309248c5c50dec56c7bfe11f694c57800f6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "86250b4d_21df9137",
@@ -87,6 +159,41 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "98973b88_ee2756b4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 10
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2026-10-28T16:33:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "86250b4d_21df9137",
+      "revId": "163ae309248c5c50dec56c7bfe11f694c57800f6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "393fdf1a_f9e86c4e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2026-10-28T16:33:04Z",
+      "side": 1,
+      "message": "Thanks for your review 👍",
+      "revId": "163ae309248c5c50dec56c7bfe11f694c57800f6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "86a0f32f_d7f49379",
@@ -100,6 +207,24 @@
       "writtenOn": "2026-10-28T06:52:31Z",
       "side": 1,
       "message": "I would rather we put this under `### Changed` with further words justifying what\u0027s going on. It deserves more than a one-liner:\n\nhttps://github.com/openbmc/libpldm/blob/efebb013ba21ac6d34d667694d4845df8422c899/CONTRIBUTING.md#L566-L588\n\nAlso if we\u0027re to emphasize \"API+ABI break\", I\u0027d rather we pick some useful markdown syntax to do that. I\u0027m not aware that `!` is meaningful there.",
+      "revId": "163ae309248c5c50dec56c7bfe11f694c57800f6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c110f033_121bcf55",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 10
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2026-10-28T16:33:04Z",
+      "side": 1,
+      "message": "right, i should have expanded more on that and also checked the output with a markdown viewer.\n\nmoved it to `### Changed` and checked the output with https://markdownlivepreview.com/ to confirm formatting results.\n\nAlso added a mention about the struct members which are impacted by this change.",
+      "parentUuid": "86a0f32f_d7f49379",
       "revId": "163ae309248c5c50dec56c7bfe11f694c57800f6",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
