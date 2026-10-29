@@ -40,6 +40,7 @@ Change categories:
 
 ### Fixed
 
+- dsp: firmware_update: Reject reserved downstream package-data flags
 - dsp: firmware_update: Fix RequestDownstreamDeviceUpdate response lengths
 
 - firmware-update: Reject component images overlapping the package header in the

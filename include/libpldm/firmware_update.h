@@ -1643,7 +1643,8 @@ int decode_request_downstream_device_update_req(
  *  @return 0 on success,
  *		-EINVAL if any argument is invalid,
  *		-ENOMSG if the message type is incorrect,
- *		-EOVERFLOW if the payload length is invalid
+ *		-EOVERFLOW if the payload length is invalid,
+ *		-EPROTO if the package-data flag is reserved
  *
  *  @note  Caller is responsible for memory alloc and dealloc of param
  *		   'msg.payload'
@@ -1668,6 +1669,7 @@ int encode_request_downstream_device_update_resp(
  *		-EINVAL if any argument is invalid,
  *		-ENOMSG if the message type is incorrect,
  *		-EOVERFLOW if the payload length is invalid,
+ *		-EPROTO if the package-data flag is reserved,
  *		-EBADMSG if the message buffer was not fully consumed
  */
 int decode_request_downstream_device_update_resp(
