@@ -21,6 +21,10 @@ Change categories:
 
 ### Changed
 
+- dsp: firmware_update: Stabilise RequestDownstreamDeviceUpdate requester APIs
+  - `encode_request_downstream_device_update_req`
+  - `decode_request_downstream_device_update_resp`
+
 - libpldm++: Preserve multiple descriptors of the same type
 
   This breaks API and ABI compatibility; consumers must rebuild

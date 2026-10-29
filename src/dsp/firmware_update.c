@@ -1913,7 +1913,7 @@ int decode_pldm_downstream_device_parameters_entry_from_iter(
 	return pldm_msgbuf_complete(buf);
 }
 
-LIBPLDM_ABI_TESTING
+LIBPLDM_ABI_STABLE
 int encode_request_downstream_device_update_req(
 	uint8_t instance_id,
 	const struct pldm_request_downstream_device_update_req *req_data,
@@ -2020,7 +2020,7 @@ int encode_request_downstream_device_update_resp(
 	return pldm_msgbuf_complete_used(buf, *payload_length, payload_length);
 }
 
-LIBPLDM_ABI_TESTING
+LIBPLDM_ABI_STABLE
 int decode_request_downstream_device_update_resp(
 	const struct pldm_msg *msg, size_t payload_length,
 	struct pldm_request_downstream_device_update_resp *resp_data)
