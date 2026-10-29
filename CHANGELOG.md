@@ -40,6 +40,9 @@ Change categories:
 
 ### Fixed
 
+- dsp: firmware_update: Handle the optional transfer limit in
+  RequestDownstreamDeviceUpdate responses and reject empty response payloads
+
 ### Security
 
 ## [v0.18.0] - 2026-10-29
