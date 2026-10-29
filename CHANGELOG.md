@@ -40,6 +40,7 @@ Change categories:
 
 ### Fixed
 
+- dsp: firmware_update: Fix RequestDownstreamDeviceUpdate response lengths
 - bindings: cpp: Preserve downstream device ID records when copying and
   comparing packages
 
