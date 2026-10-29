@@ -934,7 +934,10 @@ struct pldm_request_downstream_device_update_resp {
 	uint8_t downstream_device_will_send_get_package_data;
 	uint16_t get_package_data_maximum_transfer_size;
 };
-#define PLDM_DOWNSTREAM_DEVICE_UPDATE_RESPONSE_BYTES 6
+#define PLDM_DOWNSTREAM_DEVICE_UPDATE_RESPONSE_MIN_BYTES 4
+/* Maximum successful response size, including the optional transfer limit. */
+#define PLDM_DOWNSTREAM_DEVICE_UPDATE_RESPONSE_BYTES		     6
+#define PLDM_DOWNSTREAM_DEVICE_WILL_SEND_GET_PACKAGE_DATA_WITH_LIMIT 2
 
 /** @struct pldm_pass_component_table_req
  *
@@ -1628,6 +1631,10 @@ int decode_request_downstream_device_update_req(
 
 /** @brief Create PLDM response message for RequestDownstreamDeviceUpdate
  *
+ *  @note get_package_data_maximum_transfer_size is only encoded when
+ *        downstream_device_will_send_get_package_data is
+ *        PLDM_DOWNSTREAM_DEVICE_WILL_SEND_GET_PACKAGE_DATA_WITH_LIMIT.
+ *
  *  @param[in] instance_id - Message's instance id
  *  @param[in] resp_data - Response data
  *  @param[out] msg - Message will be written to this
@@ -1647,6 +1654,11 @@ int encode_request_downstream_device_update_resp(
 	struct pldm_msg *msg, size_t *payload_length);
 
 /** @brief Decode a RequestDownstreamDeviceUpdate response message
+ *
+ *  @note get_package_data_maximum_transfer_size is only decoded when
+ *        downstream_device_will_send_get_package_data is
+ *        PLDM_DOWNSTREAM_DEVICE_WILL_SEND_GET_PACKAGE_DATA_WITH_LIMIT.
+ *        The output member is left unmodified otherwise.
  *
  *  @param[in] msg - Response message
  *  @param[in] payload_length - Length of response message payload

@@ -42,6 +42,9 @@ Change categories:
 
 - bindings: cpp: Preserve downstream device ID records when copying and
   comparing packages
+- dsp: firmware_update: Handle the optional transfer limit in
+  RequestDownstreamDeviceUpdate responses, encode error responses as the
+  completion code only and reject empty response payloads
 
 ### Security
 
