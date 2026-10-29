@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0143a67d_50ced27a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 21
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1002838
+      },
+      "writtenOn": "2026-10-29T12:41:24Z",
+      "side": 1,
+      "message": "Done thanks",
+      "parentUuid": "882efbc4_438dd40c",
+      "revId": "8ab8ce4ec70f03f1536728de8d893c07bc2700a9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0844e0e8_0807064a",
@@ -35,6 +53,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "82188154_7f7aaf30",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 21
+      },
+      "lineNbr": 3779,
+      "author": {
+        "id": 1002838
+      },
+      "writtenOn": "2026-10-29T12:41:24Z",
+      "side": 1,
+      "message": "Yes, GetMetaData is part of this series and is the next change: 92292\n  GetPackageData, then 92293 GetMetaData, then 92294 GetDeviceMetaData.\n  92293 adds the second caller of each helper, because DSP0267 Table 28\n  (GetPackageData) and Table 38 (GetMetaData) define the same fields.",
+      "parentUuid": "0844e0e8_0807064a",
+      "revId": "8ab8ce4ec70f03f1536728de8d893c07bc2700a9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "08222314_f163e86e",
@@ -48,6 +84,24 @@
       "writtenOn": "2026-10-27T06:54:52Z",
       "side": 1,
       "message": "data-\u003elength comes from the local caller, not the wire, and the msgbuf insert already bounds-checks. Please correct the comment, and add a test for the SIZE_MAX branch if it stays.",
+      "revId": "8ab8ce4ec70f03f1536728de8d893c07bc2700a9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2db4ceda_6b12d961",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 21
+      },
+      "lineNbr": 3829,
+      "author": {
+        "id": 1002838
+      },
+      "writtenOn": "2026-10-29T12:41:24Z",
+      "side": 1,
+      "message": "Done thanks",
+      "parentUuid": "08222314_f163e86e",
       "revId": "8ab8ce4ec70f03f1536728de8d893c07bc2700a9",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
