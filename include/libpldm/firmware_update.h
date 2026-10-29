@@ -1668,7 +1668,8 @@ int encode_request_downstream_device_update_resp(
  *		-EINVAL if any argument is invalid,
  *		-ENOMSG if the message type is incorrect,
  *		-EOVERFLOW if the payload length is invalid,
- *		-EBADMSG if the message buffer was not fully consumed
+ *		-EBADMSG if the package-data flag is reserved or the message
+ *		buffer was not fully consumed
  */
 int decode_request_downstream_device_update_resp(
 	const struct pldm_msg *msg, size_t payload_length,
