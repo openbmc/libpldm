@@ -40,6 +40,8 @@ Change categories:
 
 ### Fixed
 
+- dsp: firmware_update: Fix RequestDownstreamDeviceUpdate response lengths
+
 - firmware-update: Reject component images overlapping the package header in the
   C decoder, also covering the C++ bindings
 

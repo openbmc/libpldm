@@ -1993,6 +1993,10 @@ int encode_request_downstream_device_update_resp(
 		return -EINVAL;
 	}
 
+	if (*payload_length < 1) {
+		return -EOVERFLOW;
+	}
+
 	rc = encode_pldm_header_only_errno(
 		PLDM_RESPONSE, instance_id, PLDM_FWUP,
 		PLDM_REQUEST_DOWNSTREAM_DEVICE_UPDATE, msg);
@@ -2000,9 +2004,15 @@ int encode_request_downstream_device_update_resp(
 		return rc;
 	}
 
+	if (resp_data->completion_code != PLDM_SUCCESS) {
+		msg->payload[0] = resp_data->completion_code;
+		*payload_length = 1;
+		return 0;
+	}
+
 	rc = pldm_msgbuf_init_errno(
-		buf, PLDM_DOWNSTREAM_DEVICE_UPDATE_RESPONSE_BYTES, msg->payload,
-		*payload_length);
+		buf, PLDM_DOWNSTREAM_DEVICE_UPDATE_RESPONSE_MIN_BYTES,
+		msg->payload, *payload_length);
 	if (rc) {
 		return rc;
 	}
@@ -2011,8 +2021,11 @@ int encode_request_downstream_device_update_resp(
 	pldm_msgbuf_insert(buf, resp_data->downstream_device_meta_data_length);
 	pldm_msgbuf_insert(
 		buf, resp_data->downstream_device_will_send_get_package_data);
-	pldm_msgbuf_insert(buf,
-			   resp_data->get_package_data_maximum_transfer_size);
+	if (resp_data->downstream_device_will_send_get_package_data ==
+	    PLDM_DOWNSTREAM_DEVICE_WILL_SEND_GET_PACKAGE_DATA_WITH_LIMIT) {
+		pldm_msgbuf_insert(
+			buf, resp_data->get_package_data_maximum_transfer_size);
+	}
 
 	return pldm_msgbuf_complete_used(buf, *payload_length, payload_length);
 }
@@ -2029,16 +2042,15 @@ int decode_request_downstream_device_update_resp(
 		return -EINVAL;
 	}
 
-	rc = pldm_msg_has_error(msg,
-				PLDM_DOWNSTREAM_DEVICE_UPDATE_RESPONSE_BYTES);
+	rc = pldm_msg_has_error(msg, payload_length);
 	if (rc) {
 		resp_data->completion_code = rc;
 		return 0;
 	}
 
 	rc = pldm_msgbuf_init_errno(
-		buf, PLDM_DOWNSTREAM_DEVICE_UPDATE_RESPONSE_BYTES, msg->payload,
-		payload_length);
+		buf, PLDM_DOWNSTREAM_DEVICE_UPDATE_RESPONSE_MIN_BYTES,
+		msg->payload, payload_length);
 	if (rc) {
 		return rc;
 	}
@@ -2047,8 +2059,11 @@ int decode_request_downstream_device_update_resp(
 	pldm_msgbuf_extract(buf, resp_data->downstream_device_meta_data_length);
 	pldm_msgbuf_extract(
 		buf, resp_data->downstream_device_will_send_get_package_data);
-	pldm_msgbuf_extract(buf,
-			    resp_data->get_package_data_maximum_transfer_size);
+	if (resp_data->downstream_device_will_send_get_package_data ==
+	    PLDM_DOWNSTREAM_DEVICE_WILL_SEND_GET_PACKAGE_DATA_WITH_LIMIT) {
+		pldm_msgbuf_extract(
+			buf, resp_data->get_package_data_maximum_transfer_size);
+	}
 
 	return pldm_msgbuf_complete_consumed(buf);
 }
