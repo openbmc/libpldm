@@ -3558,6 +3558,20 @@ TEST(RequestDownstreamDeviceUpdate, decodeResponseEmptyPayload)
         -EOVERFLOW);
 }
 
+TEST(RequestDownstreamDeviceUpdate, decodeResponseReservedPackageDataFlag)
+{
+    std::array<uint8_t,
+               hdrSize + PLDM_DOWNSTREAM_DEVICE_UPDATE_RESPONSE_MIN_BYTES>
+        response{};
+    auto msg = new (response.data()) pldm_msg;
+    response = {0x00, 0x00, 0x00, PLDM_SUCCESS, 0x00, 0x04, 0x03};
+    pldm_request_downstream_device_update_resp decoded{};
+
+    EXPECT_EQ(decode_request_downstream_device_update_resp(
+                  msg, response.size() - hdrSize, &decoded),
+              -EBADMSG);
+}
+
 TEST(RequestDownstreamDeviceUpdate, encodeResponseWithoutTransferLimit)
 {
     const pldm_request_downstream_device_update_resp resp{
