@@ -3328,7 +3328,6 @@ TEST(RequestUpdate, errorPathDecodeResponse)
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_LENGTH);
 }
 
-#if HAVE_LIBPLDM_API_TESTING
 TEST(RequestDownstreamDeviceUpdate, goodPathEncodeRequest)
 {
     constexpr uint8_t instanceId = 1;
@@ -3357,9 +3356,7 @@ TEST(RequestDownstreamDeviceUpdate, goodPathEncodeRequest)
         outRequest{0x81, 0x05, 0x20, 0x00, 0x02, 0x00, 0x00, 0x02, 0x34, 0x12};
     EXPECT_EQ(request, outRequest);
 }
-#endif // LIBPLDM_API_TESTING
 
-#if HAVE_LIBPLDM_API_TESTING
 TEST(RequestDownstreamDeviceUpdate, errorPathEncodeRequest)
 {
     constexpr uint8_t instanceId = 1;
@@ -3428,9 +3425,7 @@ TEST(RequestDownstreamDeviceUpdate, errorPathEncodeRequest)
         instanceId, &req_data, requestMsg, &enc_payload_len);
     EXPECT_EQ(rc, 0);
 }
-#endif // LIBPLDM_API_TESTING
 
-#if HAVE_LIBPLDM_API_TESTING
 TEST(RequestDownstreamDeviceUpdate, goodPathDecodeResponse)
 {
     /* Test a success completion code */
@@ -3477,9 +3472,7 @@ TEST(RequestDownstreamDeviceUpdate, goodPathDecodeResponse)
     EXPECT_EQ(rc, 0);
     EXPECT_EQ(resp_data2.completion_code, PLDM_FWUP_ALREADY_IN_UPDATE_MODE);
 }
-#endif // LIBPLDM_API_TESTING
 
-#if HAVE_LIBPLDM_API_TESTING
 TEST(RequestDownstreamDeviceUpdate, errorPathDecodeResponse)
 {
     std::array<uint8_t,
@@ -3592,6 +3585,7 @@ TEST(RequestDownstreamDeviceUpdate, decodeResponseReservedPackageDataFlag)
               -EPROTO);
 }
 
+#if HAVE_LIBPLDM_API_TESTING
 TEST(RequestDownstreamDeviceUpdate, encodeResponseWithoutTransferLimit)
 {
     const pldm_fwup_request_downstream_device_update_resp resp{
