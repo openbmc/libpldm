@@ -1,0 +1,261 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "84409f14_befef5b8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 11
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-10-29T02:14:31Z",
+      "side": 1,
+      "message": "Please remove the blank line here so the `Fixes:` tag forms part of the \u0027trailer\u0027 of the commit message.\n\nGit\u0027s manual might be illustrative here:\n\nhttps://git-scm.com/docs/git-interpret-trailers",
+      "revId": "4dd2be5518bb4887ead5954f0fa048bec582aeb6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "99e80e88_bb518d5a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-10-29T02:14:31Z",
+      "side": 1,
+      "message": "Hi Praveen, thanks for the quick turn-around. Given the new code I have some new feedback. If you don\u0027t mind, I would at least like test coverage of the code-paths invoked by the fix.",
+      "revId": "4dd2be5518bb4887ead5954f0fa048bec582aeb6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7ab04b02_aee7c685",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 11
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-10-29T02:14:31Z",
+      "side": 1,
+      "message": "Can you please rebase onto the tip of main and move this under `### Fixed` in `## [Unreleased]`?\n\nAlso, if you have a multi-line bullet point, can you please ensure it has an empty line both above and below to decrease the density and make it stand out?",
+      "revId": "4dd2be5518bb4887ead5954f0fa048bec582aeb6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "90a016e1_4b9afae4",
+        "filename": "tests/unit/responder.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-10-29T02:14:31Z",
+      "side": 1,
+      "message": "It\u0027s not clear to me why you\u0027ve put these changes in `tests/unit/responder.cpp`.\n\nCan you please rather create a new test file, e.g. `tests/unit/fd.cpp`",
+      "revId": "4dd2be5518bb4887ead5954f0fa048bec582aeb6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b68ed683_63315f69",
+        "filename": "tests/unit/responder.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-10-29T02:14:31Z",
+      "side": 1,
+      "message": "This guard is unnecessary, can you please remove it?",
+      "revId": "4dd2be5518bb4887ead5954f0fa048bec582aeb6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "06a7fc4a_7841694a",
+        "filename": "tests/unit/responder.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-10-29T02:14:31Z",
+      "side": 1,
+      "message": "Why do we need the struct? Can\u0027t `now` itself be the context?",
+      "range": {
+        "startLine": 94,
+        "startChar": 0,
+        "endLine": 97,
+        "endChar": 2
+      },
+      "revId": "4dd2be5518bb4887ead5954f0fa048bec582aeb6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2b2b0bdc_1081e15d",
+        "filename": "tests/unit/responder.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-10-29T02:14:31Z",
+      "side": 1,
+      "message": "Why do this rather than define the value at the point that it\u0027s declared?",
+      "range": {
+        "startLine": 103,
+        "startChar": 1,
+        "endLine": 108,
+        "endChar": 4
+      },
+      "revId": "4dd2be5518bb4887ead5954f0fa048bec582aeb6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9ed170f5_2af5749c",
+        "filename": "tests/unit/responder.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-10-29T02:14:31Z",
+      "side": 1,
+      "message": "Why invoke the complexity of lambdas here? This can rather be a regular function in the anonymous namespace taking `fd` as an argument by reference.",
+      "range": {
+        "startLine": 117,
+        "startChar": 0,
+        "endLine": 124,
+        "endChar": 6
+      },
+      "revId": "4dd2be5518bb4887ead5954f0fa048bec582aeb6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6d1a7940_a3d5913d",
+        "filename": "tests/unit/responder.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-10-29T02:14:31Z",
+      "side": 1,
+      "message": "... same with `cancel()`.",
+      "revId": "4dd2be5518bb4887ead5954f0fa048bec582aeb6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8ff6545d_f73a5c00",
+        "filename": "tests/unit/responder.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-10-29T02:14:31Z",
+      "side": 1,
+      "message": "This needs some care as `pldm_fd_handle_msg()` returns a negative errno value (desirable for new APIs in libpldm), but `encode_cancel_update_component_req()` and `encode_cancel_update_req()` return a PLDM completion code (old choice, undesirable for new APIs in libpldm). Can you please normalise the return value to a negative errno?",
+      "range": {
+        "startLine": 135,
+        "startChar": 0,
+        "endLine": 141,
+        "endChar": 6
+      },
+      "revId": "4dd2be5518bb4887ead5954f0fa048bec582aeb6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "37e48154_5b195c0c",
+        "filename": "tests/unit/responder.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-10-29T02:14:31Z",
+      "side": 1,
+      "message": "I feel this should be a separate test?",
+      "range": {
+        "startLine": 148,
+        "startChar": 0,
+        "endLine": 154,
+        "endChar": 54
+      },
+      "revId": "4dd2be5518bb4887ead5954f0fa048bec582aeb6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c4f49470_92adc614",
+        "filename": "tests/unit/responder.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-10-29T02:14:31Z",
+      "side": 1,
+      "message": "And this too?",
+      "range": {
+        "startLine": 156,
+        "startChar": 0,
+        "endLine": 163,
+        "endChar": 50
+      },
+      "revId": "4dd2be5518bb4887ead5954f0fa048bec582aeb6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0944c5e6_4645d554",
+        "filename": "tests/unit/responder.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-10-29T02:14:31Z",
+      "side": 1,
+      "message": "Can we please add tests for `PLDM_GET_STATUS` to exercise the change in the auxiliary state path, and `PLDM_APPLY_COMPLETE`?",
+      "revId": "4dd2be5518bb4887ead5954f0fa048bec582aeb6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
