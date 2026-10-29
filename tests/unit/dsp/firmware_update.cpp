@@ -3562,6 +3562,28 @@ TEST(RequestDownstreamDeviceUpdate, decodeEmptyPayload)
         -EOVERFLOW);
 }
 
+TEST(RequestDownstreamDeviceUpdate, decodeResponseReservedPackageDataFlag)
+{
+    for (unsigned flag = 3; flag <= UINT8_MAX; ++flag)
+    {
+        SCOPED_TRACE(flag);
+        std::array<uint8_t, hdrSize + 4> response{};
+        auto msg = new (response.data()) pldm_msg;
+        response = {0x00,
+                    0x00,
+                    0x00,
+                    PLDM_SUCCESS,
+                    0x00,
+                    0x00,
+                    static_cast<uint8_t>(flag)};
+        pldm_request_downstream_device_update_resp decoded{};
+
+        EXPECT_EQ(decode_request_downstream_device_update_resp(
+                      msg, response.size() - hdrSize, &decoded),
+                  -EBADMSG);
+    }
+}
+
 TEST(RequestDownstreamDeviceUpdate, encodeResponseLengths)
 {
     for (uint8_t flag : {0, 1, 2})

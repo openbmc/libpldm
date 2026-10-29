@@ -2049,6 +2049,10 @@ int decode_request_downstream_device_update_resp(
 	pldm_msgbuf_extract(buf, resp_data->downstream_device_meta_data_length);
 	pldm_msgbuf_extract(
 		buf, resp_data->downstream_device_will_send_get_package_data);
+	if (resp_data->downstream_device_will_send_get_package_data >
+	    PLDM_DOWNSTREAM_DEVICE_WILL_SEND_GET_PACKAGE_DATA_WITH_LIMIT) {
+		return pldm_msgbuf_discard(buf, -EBADMSG);
+	}
 	if (resp_data->downstream_device_will_send_get_package_data ==
 	    PLDM_DOWNSTREAM_DEVICE_WILL_SEND_GET_PACKAGE_DATA_WITH_LIMIT) {
 		pldm_msgbuf_extract(

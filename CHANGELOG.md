@@ -40,6 +40,9 @@ Change categories:
 
 ### Fixed
 
+- dsp: firmware_update: Reject reserved package-data flags in
+  RequestDownstreamDeviceUpdate responses
+
 - dsp: firmware_update: Handle the optional transfer limit in
   RequestDownstreamDeviceUpdate responses and reject empty response payloads
 
