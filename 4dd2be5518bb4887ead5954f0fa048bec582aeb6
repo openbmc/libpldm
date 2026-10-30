@@ -38,6 +38,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "87276c84_1c33f55c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 11
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1003102
+      },
+      "writtenOn": "2026-10-30T07:22:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b854ab6d_ce6481a3",
+      "revId": "4dd2be5518bb4887ead5954f0fa048bec582aeb6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "99e80e88_bb518d5a",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 11
@@ -88,6 +106,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5d530c44_b6b82aac",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 11
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1003102
+      },
+      "writtenOn": "2026-10-30T07:22:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f8e470a3_15863279",
+      "revId": "4dd2be5518bb4887ead5954f0fa048bec582aeb6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "90a016e1_4b9afae4",
@@ -123,6 +159,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b99dd499_8e95899e",
+        "filename": "tests/unit/responder.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003102
+      },
+      "writtenOn": "2026-10-30T07:22:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "129e6cbd_1f7eddec",
+      "revId": "4dd2be5518bb4887ead5954f0fa048bec582aeb6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b68ed683_63315f69",
@@ -154,6 +208,24 @@
       "side": 1,
       "message": "the guard is removed. The fd tests now build only when the testing ABI is enabled, controlled in tests/unit/meson.build.",
       "parentUuid": "b68ed683_63315f69",
+      "revId": "4dd2be5518bb4887ead5954f0fa048bec582aeb6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "43ed3bcb_fdbd0381",
+        "filename": "tests/unit/responder.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1003102
+      },
+      "writtenOn": "2026-10-30T07:22:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4412cfc9_460be89b",
       "revId": "4dd2be5518bb4887ead5954f0fa048bec582aeb6",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -195,6 +267,30 @@
       "side": 1,
       "message": "The struct is removed, and now is passed directly as ops_ctx.",
       "parentUuid": "06a7fc4a_7841694a",
+      "range": {
+        "startLine": 94,
+        "startChar": 0,
+        "endLine": 97,
+        "endChar": 2
+      },
+      "revId": "4dd2be5518bb4887ead5954f0fa048bec582aeb6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "290332a1_279b5272",
+        "filename": "tests/unit/responder.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1003102
+      },
+      "writtenOn": "2026-10-30T07:22:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3d7888b8_3459a9b6",
       "range": {
         "startLine": 94,
         "startChar": 0,
@@ -252,6 +348,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "690864b3_70b4bff3",
+        "filename": "tests/unit/responder.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1003102
+      },
+      "writtenOn": "2026-10-30T07:22:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "352ecd1a_419841a4",
+      "range": {
+        "startLine": 103,
+        "startChar": 1,
+        "endLine": 108,
+        "endChar": 4
+      },
+      "revId": "4dd2be5518bb4887ead5954f0fa048bec582aeb6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9ed170f5_2af5749c",
@@ -299,6 +419,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "494fba0e_8955d001",
+        "filename": "tests/unit/responder.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1003102
+      },
+      "writtenOn": "2026-10-30T07:22:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0cc0a733_c3469756",
+      "range": {
+        "startLine": 117,
+        "startChar": 0,
+        "endLine": 124,
+        "endChar": 6
+      },
+      "revId": "4dd2be5518bb4887ead5954f0fa048bec582aeb6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6d1a7940_a3d5913d",
@@ -330,6 +474,24 @@
       "side": 1,
       "message": "cancel() is now a regular function in the anonymous namespace that takes fd by reference.",
       "parentUuid": "6d1a7940_a3d5913d",
+      "revId": "4dd2be5518bb4887ead5954f0fa048bec582aeb6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8b132105_e14974af",
+        "filename": "tests/unit/responder.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1003102
+      },
+      "writtenOn": "2026-10-30T07:22:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6307a449_0e10732a",
       "revId": "4dd2be5518bb4887ead5954f0fa048bec582aeb6",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -371,6 +533,30 @@
       "side": 1,
       "message": "cancel() now converts a failed encode\u0027s completion code to -EINVAL, so it always returns 0 or a negative errno, like pldm_fd_handle_msg().",
       "parentUuid": "8ff6545d_f73a5c00",
+      "range": {
+        "startLine": 135,
+        "startChar": 0,
+        "endLine": 141,
+        "endChar": 6
+      },
+      "revId": "4dd2be5518bb4887ead5954f0fa048bec582aeb6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f4b62576_24dc96ec",
+        "filename": "tests/unit/responder.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1003102
+      },
+      "writtenOn": "2026-10-30T07:22:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7a722f05_0b75dc4e",
       "range": {
         "startLine": 135,
         "startChar": 0,
@@ -428,6 +614,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bfbf1593_cdc033cf",
+        "filename": "tests/unit/responder.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1003102
+      },
+      "writtenOn": "2026-10-30T07:22:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee9934a3_a7d4ddd3",
+      "range": {
+        "startLine": 148,
+        "startChar": 0,
+        "endLine": 154,
+        "endChar": 54
+      },
+      "revId": "4dd2be5518bb4887ead5954f0fa048bec582aeb6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c4f49470_92adc614",
@@ -475,6 +685,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8d64b3b7_59fd6134",
+        "filename": "tests/unit/responder.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1003102
+      },
+      "writtenOn": "2026-10-30T07:22:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5f20d530_d96d0613",
+      "range": {
+        "startLine": 156,
+        "startChar": 0,
+        "endLine": 163,
+        "endChar": 50
+      },
+      "revId": "4dd2be5518bb4887ead5954f0fa048bec582aeb6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0944c5e6_4645d554",
@@ -506,6 +740,24 @@
       "side": 1,
       "message": "All fd tests now check the GetStatus auxiliary state, and I added ApplyCompleteFailureThenCancelUpdateResetsAuxiliaryState to cover a failed ApplyComplete followed by CancelUpdate.",
       "parentUuid": "0944c5e6_4645d554",
+      "revId": "4dd2be5518bb4887ead5954f0fa048bec582aeb6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9722bee9_d6f21ec5",
+        "filename": "tests/unit/responder.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1003102
+      },
+      "writtenOn": "2026-10-30T07:22:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "84bf110f_1cba8ed3",
       "revId": "4dd2be5518bb4887ead5954f0fa048bec582aeb6",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
