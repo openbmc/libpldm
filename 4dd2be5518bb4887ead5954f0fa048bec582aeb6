@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "b854ab6d_ce6481a3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 11
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1003102
+      },
+      "writtenOn": "2026-10-30T07:21:38Z",
+      "side": 1,
+      "message": "I removed the blank line so Fixes: is now part of the commit trailer block, together with Signed-off-by: and Change-Id:. Thanks for the pointer to git-interpret-trailers.",
+      "parentUuid": "84409f14_befef5b8",
+      "revId": "4dd2be5518bb4887ead5954f0fa048bec582aeb6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "99e80e88_bb518d5a",
@@ -54,6 +72,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f8e470a3_15863279",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 11
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1003102
+      },
+      "writtenOn": "2026-10-30T07:21:38Z",
+      "side": 1,
+      "message": "moved the entry under ### Fixed in ## [Unreleased]. The multi-line bullet now has an empty line above and below it.",
+      "parentUuid": "7ab04b02_aee7c685",
+      "revId": "4dd2be5518bb4887ead5954f0fa048bec582aeb6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "90a016e1_4b9afae4",
         "filename": "tests/unit/responder.cpp",
         "patchSetId": 11
@@ -65,6 +101,24 @@
       "writtenOn": "2026-10-29T02:14:31Z",
       "side": 1,
       "message": "It\u0027s not clear to me why you\u0027ve put these changes in `tests/unit/responder.cpp`.\n\nCan you please rather create a new test file, e.g. `tests/unit/fd.cpp`",
+      "revId": "4dd2be5518bb4887ead5954f0fa048bec582aeb6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "129e6cbd_1f7eddec",
+        "filename": "tests/unit/responder.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003102
+      },
+      "writtenOn": "2026-10-30T07:21:38Z",
+      "side": 1,
+      "message": "I moved the firmware device tests out of tests/unit/responder.cpp into a new tests/unit/fd.cpp and added fd to the unit test list in tests/unit/meson.build. tests/unit/responder.cpp is now unchanged from main.",
+      "parentUuid": "90a016e1_4b9afae4",
       "revId": "4dd2be5518bb4887ead5954f0fa048bec582aeb6",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -88,6 +142,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4412cfc9_460be89b",
+        "filename": "tests/unit/responder.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1003102
+      },
+      "writtenOn": "2026-10-30T07:21:38Z",
+      "side": 1,
+      "message": "the guard is removed. The fd tests now build only when the testing ABI is enabled, controlled in tests/unit/meson.build.",
+      "parentUuid": "b68ed683_63315f69",
+      "revId": "4dd2be5518bb4887ead5954f0fa048bec582aeb6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "06a7fc4a_7841694a",
         "filename": "tests/unit/responder.cpp",
         "patchSetId": 11
@@ -99,6 +171,30 @@
       "writtenOn": "2026-10-29T02:14:31Z",
       "side": 1,
       "message": "Why do we need the struct? Can\u0027t `now` itself be the context?",
+      "range": {
+        "startLine": 94,
+        "startChar": 0,
+        "endLine": 97,
+        "endChar": 2
+      },
+      "revId": "4dd2be5518bb4887ead5954f0fa048bec582aeb6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3d7888b8_3459a9b6",
+        "filename": "tests/unit/responder.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1003102
+      },
+      "writtenOn": "2026-10-30T07:21:38Z",
+      "side": 1,
+      "message": "The struct is removed, and now is passed directly as ops_ctx.",
+      "parentUuid": "06a7fc4a_7841694a",
       "range": {
         "startLine": 94,
         "startChar": 0,
@@ -134,6 +230,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "352ecd1a_419841a4",
+        "filename": "tests/unit/responder.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1003102
+      },
+      "writtenOn": "2026-10-30T07:21:38Z",
+      "side": 1,
+      "message": "firmwareDeviceOps is now defined at its declaration with designated initializers.",
+      "parentUuid": "2b2b0bdc_1081e15d",
+      "range": {
+        "startLine": 103,
+        "startChar": 1,
+        "endLine": 108,
+        "endChar": 4
+      },
+      "revId": "4dd2be5518bb4887ead5954f0fa048bec582aeb6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9ed170f5_2af5749c",
         "filename": "tests/unit/responder.cpp",
         "patchSetId": 11
@@ -145,6 +265,30 @@
       "writtenOn": "2026-10-29T02:14:31Z",
       "side": 1,
       "message": "Why invoke the complexity of lambdas here? This can rather be a regular function in the anonymous namespace taking `fd` as an argument by reference.",
+      "range": {
+        "startLine": 117,
+        "startChar": 0,
+        "endLine": 124,
+        "endChar": 6
+      },
+      "revId": "4dd2be5518bb4887ead5954f0fa048bec582aeb6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0cc0a733_c3469756",
+        "filename": "tests/unit/responder.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1003102
+      },
+      "writtenOn": "2026-10-30T07:21:38Z",
+      "side": 1,
+      "message": "setApplyState() is now a regular function in the anonymous namespace that takes fd by reference.",
+      "parentUuid": "9ed170f5_2af5749c",
       "range": {
         "startLine": 117,
         "startChar": 0,
@@ -174,6 +318,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6307a449_0e10732a",
+        "filename": "tests/unit/responder.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1003102
+      },
+      "writtenOn": "2026-10-30T07:21:38Z",
+      "side": 1,
+      "message": "cancel() is now a regular function in the anonymous namespace that takes fd by reference.",
+      "parentUuid": "6d1a7940_a3d5913d",
+      "revId": "4dd2be5518bb4887ead5954f0fa048bec582aeb6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8ff6545d_f73a5c00",
         "filename": "tests/unit/responder.cpp",
         "patchSetId": 11
@@ -185,6 +347,30 @@
       "writtenOn": "2026-10-29T02:14:31Z",
       "side": 1,
       "message": "This needs some care as `pldm_fd_handle_msg()` returns a negative errno value (desirable for new APIs in libpldm), but `encode_cancel_update_component_req()` and `encode_cancel_update_req()` return a PLDM completion code (old choice, undesirable for new APIs in libpldm). Can you please normalise the return value to a negative errno?",
+      "range": {
+        "startLine": 135,
+        "startChar": 0,
+        "endLine": 141,
+        "endChar": 6
+      },
+      "revId": "4dd2be5518bb4887ead5954f0fa048bec582aeb6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7a722f05_0b75dc4e",
+        "filename": "tests/unit/responder.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1003102
+      },
+      "writtenOn": "2026-10-30T07:21:38Z",
+      "side": 1,
+      "message": "cancel() now converts a failed encode\u0027s completion code to -EINVAL, so it always returns 0 or a negative errno, like pldm_fd_handle_msg().",
+      "parentUuid": "8ff6545d_f73a5c00",
       "range": {
         "startLine": 135,
         "startChar": 0,
@@ -220,6 +406,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ee9934a3_a7d4ddd3",
+        "filename": "tests/unit/responder.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1003102
+      },
+      "writtenOn": "2026-10-30T07:21:38Z",
+      "side": 1,
+      "message": "The CancelUpdateComponent case is now its own test, CancelUpdateComponentResetsRequestStateAndRefreshesTimeout.",
+      "parentUuid": "37e48154_5b195c0c",
+      "range": {
+        "startLine": 148,
+        "startChar": 0,
+        "endLine": 154,
+        "endChar": 54
+      },
+      "revId": "4dd2be5518bb4887ead5954f0fa048bec582aeb6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c4f49470_92adc614",
         "filename": "tests/unit/responder.cpp",
         "patchSetId": 11
@@ -243,6 +453,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5f20d530_d96d0613",
+        "filename": "tests/unit/responder.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1003102
+      },
+      "writtenOn": "2026-10-30T07:21:38Z",
+      "side": 1,
+      "message": "The pldm_fd_progress() check is now its own test, CancelUpdateComponentDoesNotTimeOutOnStaleTimestamp.",
+      "parentUuid": "c4f49470_92adc614",
+      "range": {
+        "startLine": 156,
+        "startChar": 0,
+        "endLine": 163,
+        "endChar": 50
+      },
+      "revId": "4dd2be5518bb4887ead5954f0fa048bec582aeb6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0944c5e6_4645d554",
         "filename": "tests/unit/responder.cpp",
         "patchSetId": 11
@@ -254,6 +488,24 @@
       "writtenOn": "2026-10-29T02:14:31Z",
       "side": 1,
       "message": "Can we please add tests for `PLDM_GET_STATUS` to exercise the change in the auxiliary state path, and `PLDM_APPLY_COMPLETE`?",
+      "revId": "4dd2be5518bb4887ead5954f0fa048bec582aeb6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "84bf110f_1cba8ed3",
+        "filename": "tests/unit/responder.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1003102
+      },
+      "writtenOn": "2026-10-30T07:21:38Z",
+      "side": 1,
+      "message": "All fd tests now check the GetStatus auxiliary state, and I added ApplyCompleteFailureThenCancelUpdateResetsAuxiliaryState to cover a failed ApplyComplete followed by CancelUpdate.",
+      "parentUuid": "0944c5e6_4645d554",
       "revId": "4dd2be5518bb4887ead5954f0fa048bec582aeb6",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
