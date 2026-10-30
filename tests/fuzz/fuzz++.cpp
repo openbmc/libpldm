@@ -63,6 +63,11 @@ static void
     // attempt to read the returned struct to catch e.g. null pointers
     // and broken non-owning objects.
 
+    consumeCopy(parsed->packageHeaderIdentifier);
+    consumeCopy(parsed->packageHeaderFormatRevision);
+    consumeRange(parsed->packageReleaseDateTime);
+    consume(parsed->packageVersionString);
+
     for (const auto& fwdevidrecord : parsed->firmwareDeviceIdRecords)
     {
         consumeRange(fwdevidrecord.getDescriptorTypes());
