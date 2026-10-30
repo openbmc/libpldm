@@ -63,6 +63,11 @@ static void
     // attempt to read the returned struct to catch e.g. null pointers
     // and broken non-owning objects.
 
+    consumeCopy(parsed->packageHeaderIdentifier);
+    consumeCopy(parsed->packageHeaderFormatRevision);
+    consumeRange(parsed->packageReleaseDateTime);
+    consume(parsed->packageVersionString);
+
     for (const auto& fwdevidrecord : parsed->firmwareDeviceIdRecords)
     {
         consumeRange(fwdevidrecord.getDescriptorTypes());
@@ -129,7 +134,7 @@ static int fuzz_package_parser_parse(const uint8_t* data, size_t size)
     std::expected<std::unique_ptr<pldm::fw_update::Package>,
                   pldm::fw_update::PackageParserError>
         res = pldm::fw_update::PackageParser::parse(
-            p, pldm::fw_update::PackagePin::v1_3_0);
+            p, pldm::fw_update::PackagePin::v1_3_0_amend_1);
 
     if (res.has_value())
     {
