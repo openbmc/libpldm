@@ -361,6 +361,33 @@ pldm::fw_update::PackageParser::helperParseDownstreamDeviceIDRecord(
 	return {};
 }
 
+static std::expected<pldm::fw_update::PackagePin,
+		     pldm::fw_update::PackageParserError>
+packagePinFromIdentifier(const pldm_uuid &identifier)
+{
+	static constexpr std::pair<std::array<uint8_t, PLDM_FWUP_UUID_LENGTH>,
+				   pldm::fw_update::PackagePin>
+		identifiers[] = {
+			{ PLDM_PACKAGE_HEADER_IDENTIFIER_V1_0,
+			  pldm::fw_update::PackagePin::v1 },
+			{ PLDM_PACKAGE_HEADER_IDENTIFIER_V1_1,
+			  pldm::fw_update::PackagePin::v1_1_0 },
+			{ PLDM_PACKAGE_HEADER_IDENTIFIER_V1_2,
+			  pldm::fw_update::PackagePin::v1_2_0 },
+			{ PLDM_PACKAGE_HEADER_IDENTIFIER_V1_3,
+			  pldm::fw_update::PackagePin::v1_3_0 },
+		};
+
+	for (const auto &[uuid, pin] : identifiers) {
+		if (std::to_array(identifier) == uuid) {
+			return pin;
+		}
+	}
+
+	return std::unexpected(pldm::fw_update::PackageParserError(
+		"unsupported package header identifier"));
+}
+
 static uint8_t pinMap(pldm::fw_update::PackagePin pin)
 {
 	switch (pin) {
@@ -445,6 +472,13 @@ pldm::fw_update::PackageParser::parse(const std::span<const uint8_t> &pkg,
 		return std::unexpected(PackageParserError(
 			"Actual package format revision higher than passed pin",
 			rc));
+	}
+
+	auto packageHeaderIdentifier =
+		packagePinFromIdentifier(hdr.package_header_identifier);
+
+	if (!packageHeaderIdentifier.has_value()) {
+		return std::unexpected(packageHeaderIdentifier.error());
 	}
 
 	pldm_package_firmware_device_id_record deviceIdRecordData{};
@@ -642,10 +676,27 @@ pldm::fw_update::PackageParser::parse(const std::span<const uint8_t> &pkg,
 		}
 	}
 
+	std::string packageVersionString;
+
+	if (hdr.package_version_string.length) {
+		auto version = utils::toString(hdr.package_version_string_type,
+					       hdr.package_version_string);
+
+		if (!version.has_value()) {
+			return std::unexpected(
+				PackageParserError(version.error()));
+		}
+
+		packageVersionString = std::move(version.value());
+	}
+
 	// We cannot do a std::make_unique here since since the constructor is private.
 	// We are friends but the constructor is called inside the template which is not a friend.
-	return std::unique_ptr<Package>(
-		new Package(std::move(fwDeviceIDRecords),
-			    std::move(downstreamDeviceIDRecords),
-			    std::move(componentImageInfos)));
+	return std::unique_ptr<Package>(new Package(
+		std::move(fwDeviceIDRecords),
+		std::move(downstreamDeviceIDRecords),
+		std::move(componentImageInfos), packageHeaderIdentifier.value(),
+		hdr.package_header_format_revision,
+		std::to_array(hdr.package_release_date_time),
+		packageVersionString));
 }

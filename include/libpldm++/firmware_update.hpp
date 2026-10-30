@@ -4,6 +4,7 @@
 
 #include <libpldm/firmware_update.h>
 
+#include <array>
 #include <cstdint>
 #include <stdexcept>
 #include <vector>
@@ -272,7 +273,12 @@ namespace fw_update
 			const std::vector<DownstreamDeviceIDRecord>
 				&downstreamDeviceIdRecords,
 			const std::vector<ComponentImageInfo>
-				&componentImageInformation);
+				&componentImageInformation,
+			PackagePin packageHeaderIdentifier,
+			uint8_t packageHeaderFormatRevision,
+			const std::array<uint8_t, PLDM_TIMESTAMP104_SIZE>
+				&packageReleaseDateTime,
+			const std::string &packageVersionString);
 
 	    public:
 		~Package();
@@ -290,6 +296,22 @@ namespace fw_update
 		// introduced in PackagePin::v1_1_0
 		const std::vector<DownstreamDeviceIDRecord>
 			downstreamDeviceIdRecords;
+
+		// PackagePin mapped from the actual package header UUID.
+		// Added after PackagePin::v1_3_0; populated for all supported pins.
+		const PackagePin packageHeaderIdentifier;
+
+		// Added after PackagePin::v1_3_0; populated for all supported pins.
+		const uint8_t packageHeaderFormatRevision;
+
+		// Raw PLDM timestamp104 bytes, without conversion to host time.
+		// Added after PackagePin::v1_3_0; populated for all supported pins.
+		const std::array<uint8_t, PLDM_TIMESTAMP104_SIZE>
+			packageReleaseDateTime;
+
+		// ASCII PackageVersionString, or empty if no version bytes are present.
+		// Added after PackagePin::v1_3_0; populated for all supported pins.
+		const std::string packageVersionString;
 	};
 
 	class PackageParserError {

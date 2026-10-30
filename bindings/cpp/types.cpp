@@ -1,3 +1,4 @@
+#include <array>
 #include <bitset>
 #include <cstdint>
 #include <libpldm/firmware_update.h>
@@ -348,17 +349,29 @@ bool pldm::fw_update::ReferenceManifestData::operator==(
 pldm::fw_update::Package::Package(
 	const std::vector<FirmwareDeviceIDRecord> &firmwareDeviceIdRecords,
 	const std::vector<DownstreamDeviceIDRecord> &downstreamDeviceIdRecords,
-	const std::vector<ComponentImageInfo> &componentImageInformation)
+	const std::vector<ComponentImageInfo> &componentImageInformation,
+	PackagePin packageHeaderIdentifier, uint8_t packageHeaderFormatRevision,
+	const std::array<uint8_t, PLDM_TIMESTAMP104_SIZE>
+		&packageReleaseDateTime,
+	const std::string &packageVersionString)
 	: firmwareDeviceIdRecords(firmwareDeviceIdRecords),
 	  componentImageInformation(componentImageInformation),
-	  downstreamDeviceIdRecords(downstreamDeviceIdRecords)
+	  downstreamDeviceIdRecords(downstreamDeviceIdRecords),
+	  packageHeaderIdentifier(packageHeaderIdentifier),
+	  packageHeaderFormatRevision(packageHeaderFormatRevision),
+	  packageReleaseDateTime(packageReleaseDateTime),
+	  packageVersionString(packageVersionString)
 {
 }
 
 LIBPLDM_ABI_TESTING
 pldm::fw_update::Package::Package(const Package &ref)
 	: firmwareDeviceIdRecords(ref.firmwareDeviceIdRecords),
-	  componentImageInformation(ref.componentImageInformation)
+	  componentImageInformation(ref.componentImageInformation),
+	  packageHeaderIdentifier(ref.packageHeaderIdentifier),
+	  packageHeaderFormatRevision(ref.packageHeaderFormatRevision),
+	  packageReleaseDateTime(ref.packageReleaseDateTime),
+	  packageVersionString(ref.packageVersionString)
 {
 }
 
@@ -374,6 +387,18 @@ bool pldm::fw_update::Package::operator==(const Package &other) const
 		return false;
 	}
 	if (CompareNEQ(&Package::componentImageInformation, other)) {
+		return false;
+	}
+	if (CompareNEQ(&Package::packageHeaderIdentifier, other)) {
+		return false;
+	}
+	if (CompareNEQ(&Package::packageHeaderFormatRevision, other)) {
+		return false;
+	}
+	if (CompareNEQ(&Package::packageReleaseDateTime, other)) {
+		return false;
+	}
+	if (CompareNEQ(&Package::packageVersionString, other)) {
 		return false;
 	}
 	return true;
