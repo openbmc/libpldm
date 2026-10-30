@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7a048b3a_f2db22cb",
+        "filename": "tests/unit/dsp/firmware_update.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 4815,
+      "author": {
+        "id": 1003102
+      },
+      "writtenOn": "2026-10-30T08:31:41Z",
+      "side": 1,
+      "message": "Could we add positive tests for LEARN_COMPONENTS and READY_XFER with AuxState\u003d3 to ensure existing behavior remains unchanged?",
+      "revId": "33c535cb81d3c24eb2d19cbb736674129b53325b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
