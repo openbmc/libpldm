@@ -2,11 +2,15 @@
 #include "testpkg-util.hpp"
 
 #include <libpldm/api.h>
+#include <libpldm/edac.h>
 
+#include <algorithm>
+#include <array>
 #include <expected>
 #include <libpldm++/firmware_update.hpp>
 #include <libpldm++/types.hpp>
 #include <span>
+#include <string>
 
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
@@ -61,6 +65,138 @@ TEST(PackageParserTest, InvalidPkgInvalidLocationOffset)
     ASSERT_FALSE(res.has_value());
     EXPECT_EQ(res.error().msg, "could not iterate component image area");
     EXPECT_EQ(res.error().rc, -EPROTO);
+}
+
+static std::vector<uint8_t> makePkgWithHeader(const std::string& version)
+{
+    std::vector<uint8_t> pkg;
+
+    appendPackageHeaderIdentifier(pkg, PackagePin::v1);
+    const size_t headerSizeOffset = pkg.size();
+    appendLE16(pkg, PLACEHOLDER);
+    appendTimestamp104(pkg);
+    appendLE16(pkg, 0x08);
+    appendTypeLengthString(pkg, version);
+    pkg.push_back(0x01);
+    appendFirmwareDeviceIdRecord1(pkg);
+    const auto locations = appendComponentImageInfoArea1(pkg);
+    const size_t headerSize = pkg.size() + sizeof(uint32_t);
+    patchLE16(pkg, headerSizeOffset, headerSize);
+    for (const size_t location : locations)
+    {
+        patchLE32(pkg, location, headerSize);
+    }
+    appendCRC(pkg);
+    pkg.push_back(0x00); // Component Image
+    return pkg;
+}
+
+TEST(PackageHeaderTest, RetainsHeaderInformation)
+{
+    const std::array<uint8_t, PLDM_TIMESTAMP104_SIZE> timestamp{
+        0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+        0x00, 0x19, 0x0C, 0xE5, 0x07, 0x00};
+    auto pkg = makePkgWithHeader("PackageVersion");
+    auto result = PackageParser::parse(pkg, PackagePin::v1);
+
+    ASSERT_TRUE(result.has_value());
+    EXPECT_EQ(result.value()->packageHeaderInformation->packageHeaderIdentifier,
+              PackagePin::v1);
+    EXPECT_EQ(
+        result.value()->packageHeaderInformation->packageHeaderFormatRevision,
+        PLDM_PACKAGE_HEADER_FORMAT_REVISION_FR01H);
+    EXPECT_EQ(result.value()->packageHeaderInformation->packageReleaseDateTime,
+              timestamp);
+    EXPECT_EQ(result.value()->packageHeaderInformation->packageVersionString,
+              "PackageVersion");
+
+    pkg.assign(pkg.size(), 0);
+    EXPECT_EQ(result.value()->packageHeaderInformation->packageReleaseDateTime,
+              timestamp);
+    EXPECT_EQ(result.value()->packageHeaderInformation->packageVersionString,
+              "PackageVersion");
+}
+
+TEST(PackageHeaderTest, RejectsUnknownHeaderIdentifier)
+{
+    auto pkg = makePkgWithHeader("PackageVersion");
+
+    std::fill_n(pkg.begin(), PLDM_FWUP_UUID_LENGTH, 0);
+    auto result = PackageParser::parse(pkg, PackagePin::v1);
+
+    ASSERT_FALSE(result.has_value());
+    EXPECT_EQ(result.error().msg, "Failed to decode pldm package header");
+}
+
+#if HAVE_LIBPLDM_API_TESTING
+TEST(PackageHeaderTest, CopiesHeaderInformation)
+{
+    auto pkg = makePkgWithHeader("PackageVersion");
+    auto result = PackageParser::parse(pkg, PackagePin::v1);
+
+    ASSERT_TRUE(result.has_value());
+    ASSERT_NE(result.value()->packageHeaderInformation, nullptr);
+    const Package copy(*result.value());
+
+    ASSERT_NE(copy.packageHeaderInformation, nullptr);
+    EXPECT_NE(copy.packageHeaderInformation.get(),
+              result.value()->packageHeaderInformation.get());
+    EXPECT_EQ(*copy.packageHeaderInformation,
+              *result.value()->packageHeaderInformation);
+    EXPECT_EQ(copy, *result.value());
+}
+#endif
+
+#if HAVE_LIBPLDM_API_TESTING
+TEST(PackageHeaderTest, ComparesPackageVersion)
+{
+    auto first = makePkgWithHeader("Version1");
+    auto second = makePkgWithHeader("Version2");
+    auto lhs = PackageParser::parse(first, PackagePin::v1);
+    auto rhs = PackageParser::parse(second, PackagePin::v1);
+
+    ASSERT_TRUE(lhs.has_value());
+    ASSERT_TRUE(rhs.has_value());
+    EXPECT_FALSE(*lhs.value() == *rhs.value());
+}
+#endif
+
+TEST(PackageHeaderTest, PreservesEmbeddedNullInVersion)
+{
+    const std::string version("v1\0suffix", 9);
+    auto pkg = makePkgWithHeader(version);
+    auto result = PackageParser::parse(pkg, PackagePin::v1);
+
+    ASSERT_TRUE(result.has_value());
+    EXPECT_EQ(result.value()->packageHeaderInformation->packageVersionString,
+              version);
+}
+
+TEST(PackageHeaderTest, RejectsNonAsciiVersionEncoding)
+{
+    const std::string version("v\xc3\xa9rsion");
+    auto pkg = makePkgWithHeader(version);
+    const size_t checksumOffset = pkg.size() - 1 - sizeof(uint32_t);
+    const size_t stringTypeOffset = PLDM_FWUP_UUID_LENGTH + sizeof(uint8_t) +
+                                    sizeof(uint16_t) + PLDM_TIMESTAMP104_SIZE +
+                                    sizeof(uint16_t);
+
+    pkg[stringTypeOffset] = PLDM_STR_TYPE_UTF_8;
+    patchLE32(pkg, checksumOffset, pldm_edac_crc32(pkg.data(), checksumOffset));
+    auto result = PackageParser::parse(pkg, PackagePin::v1);
+
+    ASSERT_FALSE(result.has_value());
+    EXPECT_EQ(result.error().msg, "not an ascii string");
+}
+
+TEST(PackageHeaderTest, PreservesEmptyVersion)
+{
+    auto pkg = makePkgWithHeader("");
+    auto result = PackageParser::parse(pkg, PackagePin::v1);
+
+    ASSERT_TRUE(result.has_value());
+    EXPECT_TRUE(
+        result.value()->packageHeaderInformation->packageVersionString.empty());
 }
 
 TEST(PackageParserTest, ValidPkgSingleDescriptorSingleComponent)

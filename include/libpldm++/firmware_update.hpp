@@ -4,6 +4,7 @@
 
 #include <libpldm/firmware_update.h>
 
+#include <array>
 #include <cstdint>
 #include <stdexcept>
 #include <vector>
@@ -262,12 +263,48 @@ namespace fw_update
 			downstreamDeviceReferenceManifestData;
 	};
 
+	struct PackageHeaderInformation
+		: libpldm::GrowableStruct<struct PackageHeaderInformation>,
+		  private libpldm::NonCopyableNonMoveable {
+	    private:
+		friend PackageParser;
+
+		PackageHeaderInformation(
+			PackagePin packageHeaderIdentifier,
+			uint8_t packageHeaderFormatRevision,
+			const std::array<uint8_t, PLDM_TIMESTAMP104_SIZE>
+				&packageReleaseDateTime,
+			const std::string &packageVersionString);
+
+	    public:
+		~PackageHeaderInformation();
+
+		PackageHeaderInformation(const PackageHeaderInformation &ref);
+
+		bool operator==(const PackageHeaderInformation &other) const;
+
+		// data members
+
+		// PackagePin mapped from the actual package header UUID.
+		const PackagePin packageHeaderIdentifier;
+
+		const uint8_t packageHeaderFormatRevision;
+
+		// Raw PLDM timestamp104 bytes, without conversion to host time.
+		const std::array<uint8_t, PLDM_TIMESTAMP104_SIZE>
+			packageReleaseDateTime;
+
+		// ASCII PackageVersionString, or empty if no version bytes are present.
+		const std::string packageVersionString;
+	};
+
 	struct Package : libpldm::GrowableStruct<struct Package>,
 			 private libpldm::NonCopyableNonMoveable {
 	    private:
 		friend PackageParser;
 
-		Package(const std::vector<FirmwareDeviceIDRecord>
+		Package(const PackageHeaderInformation &packageHeaderInformation,
+			const std::vector<FirmwareDeviceIDRecord>
 				&firmwareDeviceIdRecords,
 			const std::vector<DownstreamDeviceIDRecord>
 				&downstreamDeviceIdRecords,
@@ -282,6 +319,9 @@ namespace fw_update
 		bool operator==(const Package &other) const;
 
 		// data members
+		const std::unique_ptr<PackageHeaderInformation>
+			packageHeaderInformation;
+
 		// introduced in PackagePin::v1
 		const std::vector<FirmwareDeviceIDRecord>
 			firmwareDeviceIdRecords;

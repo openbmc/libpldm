@@ -51,6 +51,22 @@ template <class Derived> struct GrowableStruct {
 			       address();
 	}
 
+	template <class T> static bool valuesEqual(const T &lhs, const T &rhs)
+	{
+		return lhs == rhs;
+	}
+
+	template <class T>
+	static bool valuesEqual(const std::unique_ptr<T> &lhs,
+				const std::unique_ptr<T> &rhs)
+	{
+		if (!lhs || !rhs) {
+			return !lhs && !rhs;
+		}
+
+		return *lhs == *rhs;
+	}
+
 	// checked access
 	template <class T>
 	bool CompareEQ(const T Derived::*member, const Derived &other) const
@@ -65,24 +81,14 @@ template <class Derived> struct GrowableStruct {
 			return true;
 		}
 
-		return *(GetPtr(member)) == *(other.GetPtr(member));
+		return valuesEqual(*(GetPtr(member)), *(other.GetPtr(member)));
 	}
 
 	// checked access
 	template <class T>
 	bool CompareNEQ(const T Derived::*member, const Derived &other) const
 	{
-		if (HasMember(member) && !other.HasMember(member)) {
-			return true;
-		}
-		if (!HasMember(member) && other.HasMember(member)) {
-			return true;
-		}
-		if (!HasMember(member) && !other.HasMember(member)) {
-			return false;
-		}
-
-		return *(GetPtr(member)) != *(other.GetPtr(member));
+		return !CompareEQ(member, other);
 	}
 
 	// compare K,V pairs in maps where V is a pointer
@@ -92,11 +98,7 @@ template <class Derived> struct GrowableStruct {
 			return false;
 		}
 
-		if (!a.second || !b.second) {
-			return !a.second && !b.second;
-		}
-
-		return *a.second == *b.second;
+		return valuesEqual(a.second, b.second);
 	}
 
 	// deep compare maps for equality where the values are unique_ptr.

@@ -1,3 +1,4 @@
+#include <array>
 #include <bitset>
 #include <cstdint>
 #include <libpldm/firmware_update.h>
@@ -345,11 +346,65 @@ bool pldm::fw_update::ReferenceManifestData::operator==(
 	       data == other.data;
 }
 
+pldm::fw_update::PackageHeaderInformation::PackageHeaderInformation(
+	const PackagePin packageHeaderIdentifier,
+	const uint8_t packageHeaderFormatRevision,
+	const std::array<uint8_t, PLDM_TIMESTAMP104_SIZE>
+		&packageReleaseDateTime,
+	const std::string &packageVersionString)
+	: packageHeaderIdentifier(packageHeaderIdentifier),
+	  packageHeaderFormatRevision(packageHeaderFormatRevision),
+	  packageReleaseDateTime(packageReleaseDateTime),
+	  packageVersionString(packageVersionString)
+{
+}
+
+LIBPLDM_ABI_TESTING
+pldm::fw_update::PackageHeaderInformation::PackageHeaderInformation(
+	const PackageHeaderInformation &ref)
+	: packageHeaderIdentifier(ref.packageHeaderIdentifier),
+	  packageHeaderFormatRevision(ref.packageHeaderFormatRevision),
+	  packageReleaseDateTime(ref.packageReleaseDateTime),
+	  packageVersionString(ref.packageVersionString)
+{
+}
+
+LIBPLDM_ABI_TESTING
+bool pldm::fw_update::PackageHeaderInformation::operator==(
+	const PackageHeaderInformation &other) const
+{
+	if (CompareNEQ(&PackageHeaderInformation::packageHeaderIdentifier,
+		       other)) {
+		return false;
+	}
+	if (CompareNEQ(&PackageHeaderInformation::packageHeaderFormatRevision,
+		       other)) {
+		return false;
+	}
+
+	// Package::packageReleaseDateTime does not impact comparison,
+	// packages created at different times can compare equal
+
+	if (CompareNEQ(&PackageHeaderInformation::packageVersionString,
+		       other)) {
+		return false;
+	}
+	return true;
+}
+
+LIBPLDM_ABI_TESTING
+pldm::fw_update::PackageHeaderInformation::~PackageHeaderInformation()
+{
+}
+
 pldm::fw_update::Package::Package(
+	const PackageHeaderInformation &packageHeaderInformation,
 	const std::vector<FirmwareDeviceIDRecord> &firmwareDeviceIdRecords,
 	const std::vector<DownstreamDeviceIDRecord> &downstreamDeviceIdRecords,
 	const std::vector<ComponentImageInfo> &componentImageInformation)
-	: firmwareDeviceIdRecords(firmwareDeviceIdRecords),
+	: packageHeaderInformation(std::make_unique<PackageHeaderInformation>(
+		  packageHeaderInformation)),
+	  firmwareDeviceIdRecords(firmwareDeviceIdRecords),
 	  componentImageInformation(componentImageInformation),
 	  downstreamDeviceIdRecords(downstreamDeviceIdRecords)
 {
@@ -357,7 +412,9 @@ pldm::fw_update::Package::Package(
 
 LIBPLDM_ABI_TESTING
 pldm::fw_update::Package::Package(const Package &ref)
-	: firmwareDeviceIdRecords(ref.firmwareDeviceIdRecords),
+	: packageHeaderInformation(std::make_unique<PackageHeaderInformation>(
+		  *ref.packageHeaderInformation)),
+	  firmwareDeviceIdRecords(ref.firmwareDeviceIdRecords),
 	  componentImageInformation(ref.componentImageInformation),
 	  downstreamDeviceIdRecords(ref.downstreamDeviceIdRecords)
 {
@@ -371,6 +428,9 @@ pldm::fw_update::Package::~Package()
 LIBPLDM_ABI_TESTING
 bool pldm::fw_update::Package::operator==(const Package &other) const
 {
+	if (CompareNEQ(&Package::packageHeaderInformation, other)) {
+		return false;
+	}
 	if (CompareNEQ(&Package::firmwareDeviceIdRecords, other)) {
 		return false;
 	}

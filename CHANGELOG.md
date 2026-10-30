@@ -19,6 +19,17 @@ Change categories:
 
 ### Added
 
+- libpldm++: Expose package header identifier as a `PackagePin`, header format
+  revision, release timestamp, and package version string in
+  `pldm::fw_update::PackageHeaderInformation`
+
+  This is an ABI break because there is a new field at the beginning of the
+  struct `pldm::fw_update::Package`.
+
+  Nonempty package version strings currently require ASCII encoding. Empty
+  package version strings are accepted. If you have a non-ASCII package version
+  string a previously accepted package may be rejected now.
+
 ### Changed
 
 - libpldm++: Preserve multiple descriptors of the same type

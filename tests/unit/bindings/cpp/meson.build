@@ -3,6 +3,7 @@ testscpp = [
     'firmware-update-test-v1-1-0',
     'firmware-update-test-v1-3-0',
     'firmware-update-test-descriptors',
+    'firmware-update-test-package-header-information',
 ]
 
 testpkg_util_lib = static_library(
