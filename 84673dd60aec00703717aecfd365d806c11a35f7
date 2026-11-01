@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "547daa12_50c5147c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-11-01T23:06:04Z",
+      "side": 1,
+      "message": "Why are we doing this though?",
+      "revId": "84673dd60aec00703717aecfd365d806c11a35f7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b2ddd87e_6248c51f",
+        "filename": "include/libpldm++/firmware_update.hpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 314,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-11-01T23:06:04Z",
+      "side": 1,
+      "message": "This update to the structure needs its own pin value.",
+      "revId": "84673dd60aec00703717aecfd365d806c11a35f7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
