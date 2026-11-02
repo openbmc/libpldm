@@ -37,6 +37,11 @@ Change categories:
   longer available. Record equality ignores the ordering of descriptors with the
   same type but preserves their multiplicity.
 
+- platform: Change `decode_numeric_effecter_pdr_data()` error personality
+
+  The API has not been stabilised. It now returns negative errno values rather
+  than PLDM completion codes.
+
 ### Deprecated
 
 ### Removed

@@ -5717,7 +5717,7 @@ TEST(decodeNumericEffecterPdrData, Uint8Test)
     struct pldm_numeric_effecter_value_pdr decodedPdr;
     auto rc =
         decode_numeric_effecter_pdr_data(pdr1.data(), pdr1.size(), &decodedPdr);
-    EXPECT_EQ(PLDM_SUCCESS, rc);
+    EXPECT_EQ(0, rc);
     EXPECT_EQ(1u, decodedPdr.hdr.record_handle);
     EXPECT_EQ(1u, decodedPdr.hdr.version);
     EXPECT_EQ(PLDM_NUMERIC_EFFECTER_PDR, decodedPdr.hdr.type);
@@ -5833,7 +5833,7 @@ TEST(decodeNumericEffecterPdrData, Sint8Test)
     struct pldm_numeric_effecter_value_pdr decodedPdr;
     auto rc =
         decode_numeric_effecter_pdr_data(pdr1.data(), pdr1.size(), &decodedPdr);
-    EXPECT_EQ(PLDM_SUCCESS, rc);
+    EXPECT_EQ(0, rc);
 
     EXPECT_EQ(PLDM_EFFECTER_DATA_SIZE_SINT8, decodedPdr.effecter_data_size);
     EXPECT_EQ(100, decodedPdr.max_settable.value_s8);
@@ -5930,7 +5930,7 @@ TEST(decodeNumericEffecterPdrData, Uint16Test)
     struct pldm_numeric_effecter_value_pdr decodedPdr;
     auto rc =
         decode_numeric_effecter_pdr_data(pdr1.data(), pdr1.size(), &decodedPdr);
-    EXPECT_EQ(PLDM_SUCCESS, rc);
+    EXPECT_EQ(0, rc);
 
     EXPECT_EQ(PLDM_EFFECTER_DATA_SIZE_UINT16, decodedPdr.effecter_data_size);
     EXPECT_EQ(4096u, decodedPdr.max_settable.value_u16);
@@ -6027,7 +6027,7 @@ TEST(decodeNumericEffecterPdrData, Sint16Test)
     struct pldm_numeric_effecter_value_pdr decodedPdr;
     auto rc =
         decode_numeric_effecter_pdr_data(pdr1.data(), pdr1.size(), &decodedPdr);
-    EXPECT_EQ(PLDM_SUCCESS, rc);
+    EXPECT_EQ(0, rc);
 
     EXPECT_EQ(PLDM_EFFECTER_DATA_SIZE_SINT16, decodedPdr.effecter_data_size);
     EXPECT_EQ(1000, decodedPdr.max_settable.value_s16);
@@ -6138,7 +6138,7 @@ TEST(decodeNumericEffecterPdrData, Uint32Test)
     struct pldm_numeric_effecter_value_pdr decodedPdr;
     auto rc =
         decode_numeric_effecter_pdr_data(pdr1.data(), pdr1.size(), &decodedPdr);
-    EXPECT_EQ(PLDM_SUCCESS, rc);
+    EXPECT_EQ(0, rc);
 
     EXPECT_EQ(PLDM_EFFECTER_DATA_SIZE_UINT32, decodedPdr.effecter_data_size);
 
@@ -6258,7 +6258,7 @@ TEST(decodeNumericEffecterPdrData, Sint32Test)
     struct pldm_numeric_effecter_value_pdr decodedPdr;
     auto rc =
         decode_numeric_effecter_pdr_data(pdr1.data(), pdr1.size(), &decodedPdr);
-    EXPECT_EQ(PLDM_SUCCESS, rc);
+    EXPECT_EQ(0, rc);
     EXPECT_EQ(PLDM_EFFECTER_DATA_SIZE_SINT32, decodedPdr.effecter_data_size);
 
     {
@@ -6378,7 +6378,7 @@ TEST(decodeNumericEffecterPdrData, Real32Test)
     struct pldm_numeric_effecter_value_pdr decodedPdr;
     auto rc =
         decode_numeric_effecter_pdr_data(pdr1.data(), pdr1.size(), &decodedPdr);
-    EXPECT_EQ(PLDM_SUCCESS, rc);
+    EXPECT_EQ(0, rc);
 
     EXPECT_EQ(PLDM_EFFECTER_DATA_SIZE_SINT32, decodedPdr.effecter_data_size);
     EXPECT_FLOAT_EQ(1.0f, decodedPdr.state_transition_interval);
