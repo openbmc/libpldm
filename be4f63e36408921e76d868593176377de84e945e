@@ -16,6 +16,24 @@
       "message": "could the encoder emit only the completion code for error responses? A valid one-byte error buffer currently returns -EOVERFLOW.",
       "revId": "be4f63e36408921e76d868593176377de84e945e",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "833e4162_9a5bfa38",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2004,
+      "author": {
+        "id": 1002297
+      },
+      "writtenOn": "2026-11-03T22:25:38Z",
+      "side": 0,
+      "message": "Acknowledged",
+      "parentUuid": "212b0887_cd04c5aa",
+      "revId": "be4f63e36408921e76d868593176377de84e945e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
