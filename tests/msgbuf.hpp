@@ -43,7 +43,7 @@ LIBPLDM_CC_ALWAYS_INLINE int pldm_msgbuf_init_errno(struct pldm_msgbuf_ro* ctx,
 
 LIBPLDM_CC_ALWAYS_INLINE int pldm_msgbuf_init_errno(struct pldm_msgbuf_rw* ctx,
                                                     size_t minsize,
-                                                    const void* buf, size_t len)
+                                                    void* buf, size_t len)
 {
     return pldm_msgbuf_rw_init_errno(ctx, minsize, buf, len);
 }
