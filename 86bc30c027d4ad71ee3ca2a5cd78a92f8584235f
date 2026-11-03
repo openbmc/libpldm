@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7ffa4624_ff56d7d0",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 3010,
+      "author": {
+        "id": 1003102
+      },
+      "writtenOn": "2026-11-03T13:51:04Z",
+      "side": 1,
+      "message": "The decoder can return -EBADMSG for trailing unconsumed bytes via pldm_msgbuf_complete_consumed(), but the new return documentation lists only -EINVAL and -EOVERFLOW. Please include -EBADMSG or describe the error return more generally",
+      "revId": "86bc30c027d4ad71ee3ca2a5cd78a92f8584235f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
