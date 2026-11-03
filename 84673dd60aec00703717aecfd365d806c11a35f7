@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1ae8483a_ad7ffdea",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2026-11-03T18:20:28Z",
+      "side": 1,
+      "message": "if we end up losing information while parsing, some use-cases could be forced into lower-level APIs. I don\u0027t claim to be able to estimate all the things someone could do with these packages or which information could be omitted, therefore trying to fill in the gaps.\n\nI noticed this issue in my patch integrating libpldm++ into `pldm` repesitory where they rely on package version string for logging.\n\nhttps://github.com/search?q\u003drepo%3Aopenbmc/pldm%20pkgVersion\u0026type\u003dcode\n\nCompletely agree on the need to explain why this change should be done and added a link to the relevant pldm code making use of the package version string to the commit message along with explanation.\n\nSo that field definitely needs added, for the others it could also be delayed and done with further ABI revisions and extra pins as-needed by user code. Let me know if you want this alternative instead.",
+      "parentUuid": "547daa12_50c5147c",
+      "revId": "84673dd60aec00703717aecfd365d806c11a35f7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b2ddd87e_6248c51f",
@@ -31,6 +49,24 @@
       "writtenOn": "2026-11-01T23:06:04Z",
       "side": 1,
       "message": "This update to the structure needs its own pin value.",
+      "revId": "84673dd60aec00703717aecfd365d806c11a35f7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6669691a_79602d02",
+        "filename": "include/libpldm++/firmware_update.hpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 314,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2026-11-03T18:20:28Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "b2ddd87e_6248c51f",
       "revId": "84673dd60aec00703717aecfd365d806c11a35f7",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
