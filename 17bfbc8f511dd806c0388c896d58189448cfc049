@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dc837009_7de93832",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 44
+      },
+      "lineNbr": 996,
+      "author": {
+        "id": 1003102
+      },
+      "writtenOn": "2026-11-03T08:24:37Z",
+      "side": 1,
+      "message": "If decoding a name string fails, the inner iterator leaves rc set. The outer loop then runs its increment and attempts another decode, which can overwrite the original error (for example, -EOVERFLOW becomes -EINVAL when the field pointer is null). Consider stopping the outer loop when rc is already nonzero, and test a malformed first effecter when the PDR declares multiple effecters.",
+      "revId": "17bfbc8f511dd806c0388c896d58189448cfc049",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
