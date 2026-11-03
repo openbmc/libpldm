@@ -173,8 +173,13 @@ int
 pldm_msgbuf_rw_init_errno(struct pldm_msgbuf_rw *ctx, size_t minsize,
 			  const void *buf, size_t len)
 {
-	return pldm__msgbuf_init_errno((const uint8_t **)&ctx->cursor,
-				       &ctx->remaining, minsize, buf, len);
+	const uint8_t *cursor;
+	int rc = pldm__msgbuf_init_errno(&cursor, &ctx->remaining, minsize, buf,
+					 len);
+
+	ctx->cursor = (uint8_t *)cursor;
+
+	return rc;
 }
 
 /**
