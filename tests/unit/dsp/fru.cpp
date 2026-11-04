@@ -3,6 +3,7 @@
 #include <libpldm/fru.h>
 
 #include <array>
+#include <cerrno>
 #include <cstdint>
 #include <cstring>
 #include <vector>
@@ -989,6 +990,179 @@ TEST(SetFRURecordTable, testBadDecodeRequest)
         &retTransferHandle, &retTransferFlag, &table);
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_LENGTH);
 }
+
+#if HAVE_LIBPLDM_API_TESTING
+TEST(EncodePldmFruSetFruRecordTableReq, GoodTest)
+{
+    constexpr uint8_t instanceId = 2;
+    constexpr uint32_t dataTransferHandle = 0x11223344;
+    std::array<uint8_t, 9> fruTableData = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+    constexpr size_t requestMsgLength =
+        PLDM_SET_FRU_RECORD_TABLE_MIN_REQ_BYTES + fruTableData.size();
+    const std::array<uint8_t, requestMsgLength> expected = {
+        0x44, 0x33, 0x22, 0x11, PLDM_START_AND_END, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+    struct pldm_fru_set_fru_record_table_req req = {
+        dataTransferHandle,
+        PLDM_START_AND_END,
+        {fruTableData.data(), fruTableData.size()},
+    };
+    size_t payloadLength = requestMsgLength;
+    PLDM_MSG_DEFINE_P(request, requestMsgLength);
+
+    auto rc = encode_pldm_fru_set_fru_record_table_req(instanceId, &req,
+                                                       request, &payloadLength);
+
+    ASSERT_EQ(rc, 0);
+    EXPECT_EQ(payloadLength, requestMsgLength);
+    EXPECT_EQ(request->hdr.request, PLDM_REQUEST);
+    EXPECT_EQ(request->hdr.instance_id, instanceId);
+    EXPECT_EQ(request->hdr.type, PLDM_FRU);
+    EXPECT_EQ(request->hdr.command, PLDM_SET_FRU_RECORD_TABLE);
+    EXPECT_EQ(0, memcmp(request->payload, expected.data(), expected.size()));
+}
+#endif
+
+#if HAVE_LIBPLDM_API_TESTING
+TEST(EncodePldmFruSetFruRecordTableReq, InvalidArgs)
+{
+    std::array<uint8_t, 4> fruTableData = {1, 2, 3, 4};
+    constexpr size_t requestMsgLength =
+        PLDM_SET_FRU_RECORD_TABLE_MIN_REQ_BYTES + fruTableData.size();
+    struct pldm_fru_set_fru_record_table_req req = {
+        0,
+        PLDM_START_AND_END,
+        {fruTableData.data(), fruTableData.size()},
+    };
+    size_t payloadLength = requestMsgLength;
+    PLDM_MSG_DEFINE_P(request, requestMsgLength);
+
+    EXPECT_EQ(encode_pldm_fru_set_fru_record_table_req(0, nullptr, request,
+                                                       &payloadLength),
+              -EINVAL);
+    EXPECT_EQ(encode_pldm_fru_set_fru_record_table_req(0, &req, nullptr,
+                                                       &payloadLength),
+              -EINVAL);
+    EXPECT_EQ(
+        encode_pldm_fru_set_fru_record_table_req(0, &req, request, nullptr),
+        -EINVAL);
+
+    req.fru_record_table_data.ptr = nullptr;
+    EXPECT_EQ(encode_pldm_fru_set_fru_record_table_req(0, &req, request,
+                                                       &payloadLength),
+              -EINVAL);
+}
+#endif
+
+#if HAVE_LIBPLDM_API_TESTING
+TEST(EncodePldmFruSetFruRecordTableReq, EmptyFruRecordTableData)
+{
+    std::array<uint8_t, 1> fruTableData = {1};
+    struct pldm_fru_set_fru_record_table_req req = {
+        0,
+        PLDM_START_AND_END,
+        {fruTableData.data(), 0},
+    };
+    size_t payloadLength = PLDM_SET_FRU_RECORD_TABLE_MIN_REQ_BYTES;
+    PLDM_MSG_DEFINE_P(request, PLDM_SET_FRU_RECORD_TABLE_MIN_REQ_BYTES);
+
+    EXPECT_EQ(encode_pldm_fru_set_fru_record_table_req(0, &req, request,
+                                                       &payloadLength),
+              -EINVAL);
+}
+#endif
+
+#if HAVE_LIBPLDM_API_TESTING
+TEST(EncodePldmFruSetFruRecordTableReq, PayloadTooSmall)
+{
+    std::array<uint8_t, 4> fruTableData = {1, 2, 3, 4};
+    constexpr size_t requestMsgLength =
+        PLDM_SET_FRU_RECORD_TABLE_MIN_REQ_BYTES + fruTableData.size();
+    struct pldm_fru_set_fru_record_table_req req = {
+        0,
+        PLDM_START_AND_END,
+        {fruTableData.data(), fruTableData.size()},
+    };
+    PLDM_MSG_DEFINE_P(request, requestMsgLength);
+
+    size_t payloadLength = requestMsgLength - 1;
+    EXPECT_EQ(encode_pldm_fru_set_fru_record_table_req(0, &req, request,
+                                                       &payloadLength),
+              -EOVERFLOW);
+
+    payloadLength = PLDM_SET_FRU_RECORD_TABLE_MIN_REQ_BYTES - 1;
+    EXPECT_EQ(encode_pldm_fru_set_fru_record_table_req(0, &req, request,
+                                                       &payloadLength),
+              -EOVERFLOW);
+}
+#endif
+
+#if HAVE_LIBPLDM_API_TESTING
+TEST(DecodePldmFruSetFruRecordTableResp, GoodTest)
+{
+    constexpr uint32_t nextDataTransferHandle = 0x11223344;
+    const std::array<uint8_t, PLDM_SET_FRU_RECORD_TABLE_RESP_BYTES> payload = {
+        PLDM_SUCCESS, 0x44, 0x33, 0x22, 0x11};
+    struct pldm_fru_set_fru_record_table_resp resp = {};
+    PLDM_MSG_DEFINE_P(response, PLDM_SET_FRU_RECORD_TABLE_RESP_BYTES);
+    memcpy(response->payload, payload.data(), payload.size());
+
+    auto rc = decode_pldm_fru_set_fru_record_table_resp(response,
+                                                        payload.size(), &resp);
+
+    ASSERT_EQ(rc, 0);
+    EXPECT_EQ(resp.completion_code, PLDM_SUCCESS);
+    EXPECT_EQ(resp.next_data_transfer_handle, nextDataTransferHandle);
+}
+#endif
+
+#if HAVE_LIBPLDM_API_TESTING
+TEST(DecodePldmFruSetFruRecordTableResp, ErrorResponse)
+{
+    struct pldm_fru_set_fru_record_table_resp resp = {};
+    PLDM_MSG_DEFINE_P(response, 1);
+
+    response->payload[0] = PLDM_FRU_INVALID_TRANSFER_FLAG;
+    auto rc = decode_pldm_fru_set_fru_record_table_resp(response, 1, &resp);
+
+    ASSERT_EQ(rc, 0);
+    EXPECT_EQ(resp.completion_code, PLDM_FRU_INVALID_TRANSFER_FLAG);
+}
+#endif
+
+#if HAVE_LIBPLDM_API_TESTING
+TEST(DecodePldmFruSetFruRecordTableResp, InvalidArgs)
+{
+    struct pldm_fru_set_fru_record_table_resp resp = {};
+    PLDM_MSG_DEFINE_P(response, PLDM_SET_FRU_RECORD_TABLE_RESP_BYTES);
+
+    EXPECT_EQ(decode_pldm_fru_set_fru_record_table_resp(
+                  nullptr, PLDM_SET_FRU_RECORD_TABLE_RESP_BYTES, &resp),
+              -EINVAL);
+    EXPECT_EQ(decode_pldm_fru_set_fru_record_table_resp(
+                  response, PLDM_SET_FRU_RECORD_TABLE_RESP_BYTES, nullptr),
+              -EINVAL);
+}
+#endif
+
+#if HAVE_LIBPLDM_API_TESTING
+TEST(DecodePldmFruSetFruRecordTableResp, InvalidLength)
+{
+    struct pldm_fru_set_fru_record_table_resp resp = {};
+    PLDM_MSG_DEFINE_P(response, PLDM_SET_FRU_RECORD_TABLE_RESP_BYTES + 1);
+
+    memset(response, 0,
+           PLDM_MSG_SIZE(PLDM_SET_FRU_RECORD_TABLE_RESP_BYTES + 1));
+
+    EXPECT_EQ(decode_pldm_fru_set_fru_record_table_resp(response, 0, &resp),
+              -EOVERFLOW);
+    EXPECT_EQ(decode_pldm_fru_set_fru_record_table_resp(
+                  response, PLDM_SET_FRU_RECORD_TABLE_RESP_BYTES - 1, &resp),
+              -EOVERFLOW);
+    EXPECT_EQ(decode_pldm_fru_set_fru_record_table_resp(
+                  response, PLDM_SET_FRU_RECORD_TABLE_RESP_BYTES + 1, &resp),
+              -EBADMSG);
+}
+#endif
 
 TEST(GetFruRecordByOption, badArgs)
 {

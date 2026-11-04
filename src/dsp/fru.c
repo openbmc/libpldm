@@ -1,4 +1,8 @@
 /* SPDX-License-Identifier: Apache-2.0 OR GPL-2.0-or-later */
+#include "dsp/base.h"
+#include "environ/errno.h"
+#include "msgbuf.h"
+
 #include <libpldm/base.h>
 #include <libpldm/fru.h>
 
@@ -593,6 +597,54 @@ int decode_get_fru_record_table_resp(const struct pldm_msg *msg,
 		(size_t)-1);
 }
 
+LIBPLDM_ABI_TESTING
+int encode_pldm_fru_set_fru_record_table_req(
+	uint8_t instance_id,
+	const struct pldm_fru_set_fru_record_table_req *req,
+	struct pldm_msg *msg, size_t *payload_length)
+{
+	struct pldm_header_info header = { 0 };
+	PLDM_MSGBUF_RW_DEFINE_P(buf);
+	int rc;
+
+	if (!req || !msg || !payload_length) {
+		return -EINVAL;
+	}
+
+	if (!req->fru_record_table_data.ptr ||
+	    !req->fru_record_table_data.length) {
+		return -EINVAL;
+	}
+
+	header.instance = instance_id;
+	header.msg_type = PLDM_REQUEST;
+	header.pldm_type = PLDM_FRU;
+	header.command = PLDM_SET_FRU_RECORD_TABLE;
+
+	rc = pack_pldm_header_errno(&header, &msg->hdr);
+	if (rc) {
+		return rc;
+	}
+
+	rc = pldm_msgbuf_init_errno(buf,
+				    PLDM_SET_FRU_RECORD_TABLE_MIN_REQ_BYTES,
+				    msg->payload, *payload_length);
+	if (rc) {
+		return rc;
+	}
+
+	pldm_msgbuf_insert(buf, req->data_transfer_handle);
+	pldm_msgbuf_insert(buf, req->transfer_flag);
+	rc = pldm_msgbuf_insert_array(buf, req->fru_record_table_data.length,
+				      req->fru_record_table_data.ptr,
+				      req->fru_record_table_data.length);
+	if (rc) {
+		return pldm_msgbuf_discard(buf, rc);
+	}
+
+	return pldm_msgbuf_complete_used(buf, *payload_length, payload_length);
+}
+
 LIBPLDM_ABI_STABLE
 int decode_set_fru_record_table_req(const struct pldm_msg *msg,
 				    size_t payload_length,
@@ -654,4 +706,34 @@ int encode_set_fru_record_table_resp(uint8_t instance_id,
 		htole32(next_data_transfer_handle);
 
 	return PLDM_SUCCESS;
+}
+
+LIBPLDM_ABI_TESTING
+int decode_pldm_fru_set_fru_record_table_resp(
+	const struct pldm_msg *msg, size_t payload_length,
+	struct pldm_fru_set_fru_record_table_resp *resp)
+{
+	PLDM_MSGBUF_RO_DEFINE_P(buf);
+	int rc;
+
+	if (!msg || !resp) {
+		return -EINVAL;
+	}
+
+	rc = pldm_msg_has_error(msg, payload_length);
+	if (rc) {
+		resp->completion_code = rc;
+		return 0;
+	}
+
+	rc = pldm_msgbuf_init_errno(buf, PLDM_SET_FRU_RECORD_TABLE_RESP_BYTES,
+				    msg->payload, payload_length);
+	if (rc) {
+		return rc;
+	}
+
+	pldm_msgbuf_extract(buf, resp->completion_code);
+	pldm_msgbuf_extract(buf, resp->next_data_transfer_handle);
+
+	return pldm_msgbuf_complete_consumed(buf);
 }

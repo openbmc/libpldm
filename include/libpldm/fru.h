@@ -482,6 +482,35 @@ int get_fru_record_by_option(const uint8_t *table, size_t table_size,
 
 /* SetFruRecordTable */
 
+/** @struct pldm_fru_set_fru_record_table_req
+ *
+ *  Structure representing a SetFRURecordTable request, DSP0257 Table 11
+ */
+struct pldm_fru_set_fru_record_table_req {
+	uint32_t data_transfer_handle;
+	uint8_t transfer_flag;
+	struct variable_field fru_record_table_data;
+};
+
+/** @brief Encode a SetFRURecordTable request message
+ *
+ *  @param[in] instance_id - Message's instance id
+ *  @param[in] req - The request to encode
+ *  @param[out] msg - Message will be written to this
+ *  @param[in,out] payload_length - Size of the payload buffer on input, length
+ *                 of the encoded payload on output
+ *  @return 0 on success
+ *          -EINVAL if the arguments are invalid, or the portion of the FRU
+ *          Record Table is empty
+ *          -EOVERFLOW if the payload buffer is too small for the request
+ *  @note  Caller is responsible for memory alloc and dealloc of param
+ *         'msg.payload'
+ */
+int encode_pldm_fru_set_fru_record_table_req(
+	uint8_t instance_id,
+	const struct pldm_fru_set_fru_record_table_req *req,
+	struct pldm_msg *msg, size_t *payload_length);
+
 /** @brief Decode SetFruRecordTable request data
  *
  *  @param[in] msg - PLDM request message payload
@@ -515,6 +544,32 @@ int encode_set_fru_record_table_resp(uint8_t instance_id,
 				     uint32_t next_data_transfer_handle,
 				     size_t payload_length,
 				     struct pldm_msg *msg);
+
+/** @struct pldm_fru_set_fru_record_table_resp
+ *
+ *  Structure representing a SetFRURecordTable response, DSP0257 Table 11
+ */
+struct pldm_fru_set_fru_record_table_resp {
+	uint8_t completion_code;
+	uint32_t next_data_transfer_handle;
+};
+
+/** @brief Decode a SetFRURecordTable response message
+ *
+ *  @param[in] msg - Response message
+ *  @param[in] payload_length - Length of response message payload
+ *  @param[out] resp - The decoded response
+ *  @return 0 on success
+ *          -EINVAL if the arguments are invalid
+ *          -EOVERFLOW if the response message is too short
+ *          -EBADMSG if the response message is too long
+ *
+ *  @note Only the value of resp->completion_code is defined if its value is not
+ *        PLDM_SUCCESS.
+ */
+int decode_pldm_fru_set_fru_record_table_resp(
+	const struct pldm_msg *msg, size_t payload_length,
+	struct pldm_fru_set_fru_record_table_resp *resp);
 
 #ifdef __cplusplus
 }

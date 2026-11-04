@@ -19,6 +19,9 @@ Change categories:
 
 ### Added
 
+- dsp: fru: Introduce `encode_pldm_fru_set_fru_record_table_req()`
+- dsp: fru: Introduce `decode_pldm_fru_set_fru_record_table_resp()`
+
 ### Changed
 
 - libpldm++: Preserve multiple descriptors of the same type
