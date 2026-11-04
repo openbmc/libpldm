@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "e0d84ed4_3b8b1119",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 38
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-11-04T04:22:38Z",
+      "side": 1,
+      "message": "Nit: this should be `dsp: platform: ...`",
+      "revId": "1a74bf4bc50d75db291b0c1facea7de7bcb5d779",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "cb07e11a_cd47a0f1",
@@ -14,6 +31,40 @@
       "writtenOn": "2026-11-04T03:50:48Z",
       "side": 1,
       "message": "Hi Aditya, this looks okay. I have some relatively minor comments.",
+      "revId": "1a74bf4bc50d75db291b0c1facea7de7bcb5d779",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "142de861_9f01fe33",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 38
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-11-04T04:22:38Z",
+      "side": 1,
+      "message": "Hi Aditya, sorry, I submitted my previous batch of comments a little hastily before. I have several more.\n\nFor the patch as a whole: can you please add fuzz tests for each new API? See:\n\nhttps://github.com/openbmc/libpldm/blob/main/tests/fuzz/fuzz.c",
+      "revId": "1a74bf4bc50d75db291b0c1facea7de7bcb5d779",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "329d2f47_c7356f95",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 38
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-11-04T04:22:38Z",
+      "side": 1,
+      "message": "Update this to match the commit message subject once you\u0027ve changed it.",
       "revId": "1a74bf4bc50d75db291b0c1facea7de7bcb5d779",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
