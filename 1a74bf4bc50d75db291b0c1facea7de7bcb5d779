@@ -1,0 +1,147 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cb07e11a_cd47a0f1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 38
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-11-04T03:50:48Z",
+      "side": 1,
+      "message": "Hi Aditya, this looks okay. I have some relatively minor comments.",
+      "revId": "1a74bf4bc50d75db291b0c1facea7de7bcb5d779",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0cb7c96a_df0ee53f",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 38
+      },
+      "lineNbr": 1488,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-11-04T03:50:48Z",
+      "side": 1,
+      "message": "This should be symmetric on `encode_pldm_platform_set_numeric_effecter_enable_req()`.",
+      "revId": "1a74bf4bc50d75db291b0c1facea7de7bcb5d779",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "da64c033_d85328d7",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 38
+      },
+      "lineNbr": 4154,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-11-04T03:50:48Z",
+      "side": 1,
+      "message": "This comment is covered in the header. Can you please just refer to that from here rather than duplicate it?",
+      "range": {
+        "startLine": 4143,
+        "startChar": 1,
+        "endLine": 4154,
+        "endChar": 4
+      },
+      "revId": "1a74bf4bc50d75db291b0c1facea7de7bcb5d779",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "079c6df1_77d92c74",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 38
+      },
+      "lineNbr": 4211,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-11-04T03:50:48Z",
+      "side": 1,
+      "message": "This is redundant as the use of `req-\u003eeffecter_operational_state` is protected by `pldm_msgbuf_complete_consumed()` below (i.e. any error here will be surfaced there also).",
+      "range": {
+        "startLine": 4209,
+        "startChar": 1,
+        "endLine": 4211,
+        "endChar": 2
+      },
+      "revId": "1a74bf4bc50d75db291b0c1facea7de7bcb5d779",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9928feb7_55a87093",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 38
+      },
+      "lineNbr": 4236,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-11-04T03:50:48Z",
+      "side": 1,
+      "message": "This implementation could instead be a call to `encode_cc_only_resp()`. I prefer that you keep the API itself though (for consistency).",
+      "revId": "1a74bf4bc50d75db291b0c1facea7de7bcb5d779",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5ca637a6_4d056bd8",
+        "filename": "tests/unit/dsp/platform.cpp",
+        "patchSetId": 38
+      },
+      "lineNbr": 1035,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-11-04T03:50:48Z",
+      "side": 1,
+      "message": "Can rather default initialise it to reduce noise?",
+      "range": {
+        "startLine": 1032,
+        "startChar": 64,
+        "endLine": 1035,
+        "endChar": 55
+      },
+      "revId": "1a74bf4bc50d75db291b0c1facea7de7bcb5d779",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "343b6da8_96d5cfcd",
+        "filename": "tests/unit/dsp/platform.cpp",
+        "patchSetId": 38
+      },
+      "lineNbr": 1087,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-11-04T03:50:48Z",
+      "side": 1,
+      "message": "Should this not be `-EPROTO`?",
+      "range": {
+        "startLine": 1087,
+        "startChar": 18,
+        "endLine": 1087,
+        "endChar": 25
+      },
+      "revId": "1a74bf4bc50d75db291b0c1facea7de7bcb5d779",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
