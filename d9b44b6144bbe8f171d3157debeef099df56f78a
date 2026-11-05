@@ -1,4 +1,68 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0eaddbdb_207dc321",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2026-11-05T23:10:59Z",
+      "side": 1,
+      "message": "sorry for late review",
+      "revId": "d9b44b6144bbe8f171d3157debeef099df56f78a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a84b4def_d355308e",
+        "filename": "CONTRIBUTING.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2026-11-05T23:10:59Z",
+      "side": 1,
+      "message": "i wonder why we need to document it?",
+      "range": {
+        "startLine": 4,
+        "startChar": 1,
+        "endLine": 8,
+        "endChar": 70
+      },
+      "revId": "d9b44b6144bbe8f171d3157debeef099df56f78a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ae27b658_195dd05f",
+        "filename": "CONTRIBUTING.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2026-11-05T23:10:59Z",
+      "side": 1,
+      "message": "What is the documented reason why people should follow this workflow?\n\nIs it like a linux kernel policy, do we have a link? Is it a new idea?\n\nPlease either provide a link or some reasoning.\n\nI believe this workflow is **worse in many cases**\n\n- increases maintainer workload due to solving trivial merge conflicts\n- increases timeline delay for rework.\n  If maintainers cannot solve nontrivial merge conflicts\n  quickly, they may have to ask a contributor to do work they could have\n  done earlier\n- authorship becomes less clear, does the maintainer always add their signoff?\n  If not, where is the line, solving a nontrivial conflict could\n  *significantly* change the patch.\n- increases timeline delay due to maintainers needing to wait for CI to pass\n  before submitting on patches they rebased themselves\n\n\nOverall i agree there should not be random changes done to a patch without feedback\n(potentially resetting review progress / not converging)\nbut this reads different.",
+      "range": {
+        "startLine": 9,
+        "startChar": 1,
+        "endLine": 29,
+        "endChar": 60
+      },
+      "revId": "d9b44b6144bbe8f171d3157debeef099df56f78a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ],
   "submitRequirementResults": []
 }
