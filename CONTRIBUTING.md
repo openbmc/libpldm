@@ -1,5 +1,33 @@
 # Checklist for making changes to `libpldm`
 
+## Review etiquette
+
+PLDM is defined by a set of relatively complex specifications. libpldm is a
+library implemented in C. Some regard C as a simple language, but that perceived
+simplicity comes with many sharp edges. Taken together, this means review can
+take some time, and the volume of patches needing review can be large.
+
+Despite the requirement that submitting patches to libpldm currently requires
+they be based on the tip of `main`:
+
+<!-- prettier-ignore-start -->
+> [!IMPORTANT]
+> Please do not rebase your patch series unless:
+>
+> 1. You were asked to do so explicitly, or
+> 2. You have reworked your series in response to maintainer review
+<!-- prettier-ignore-end -->
+
+Particularly:
+
+<!-- prettier-ignore-start -->
+> [!IMPORTANT]
+> Please do not rebase your series in Gerrit if it is only in response to the
+> merging of unrelated patches.
+<!-- prettier-ignore-end -->
+
+Maintainers may rebase your patches themselves if necessary.
+
 ## General practices
 
 ### Organise your work
