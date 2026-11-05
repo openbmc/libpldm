@@ -7,12 +7,12 @@ library implemented in C. Some regard C as a simple language, but that perceived
 simplicity comes with many sharp edges. Taken together, this means review can
 take some time, and the volume of patches needing review can be large.
 
-Despite the requirement that submitting patches to libpldm currently requires
-they be based on the tip of `main`:
+Despite the current requirement that patches to be submitted are based on the
+tip of `main`:
 
 <!-- prettier-ignore-start -->
 > [!IMPORTANT]
-> Please do not rebase your patch series unless:
+> Please do not rebase your series in review unless:
 >
 > 1. You were asked to do so explicitly, or
 > 2. You have reworked your series in response to maintainer review
