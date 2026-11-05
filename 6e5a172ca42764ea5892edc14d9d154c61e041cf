@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9bcb296c_7502fb64",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002877
+      },
+      "writtenOn": "2026-11-05T23:00:34Z",
+      "side": 1,
+      "message": "I ended up failing to ask this on the original CS, but out of curiousity, why? What does rebasing breaks? I know that on github it breaks the comparison with previous versions of the patch, but gerrit seems immune to this.",
+      "revId": "6e5a172ca42764ea5892edc14d9d154c61e041cf",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
