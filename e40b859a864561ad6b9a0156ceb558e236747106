@@ -16,6 +16,24 @@
       "message": "operation_status is serialized without checking that it is a defined enum value, and the decoder likewise accepts any byte. Please validate it against PLDM_RDE_OPERATION_STATUS_ABANDONED in both encode and decode, and add tests for an out-of-range value. Otherwise, a reserved status such as 0xFF is accepted as a valid response.",
       "revId": "e40b859a864561ad6b9a0156ceb558e236747106",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a6e08763_9304f0c3",
+        "filename": "src/dsp/rde.c",
+        "patchSetId": 36
+      },
+      "lineNbr": 1037,
+      "author": {
+        "id": 1002838
+      },
+      "writtenOn": "2026-11-05T03:17:58Z",
+      "side": 1,
+      "message": "Done thanks",
+      "parentUuid": "35519660_3eeaf648",
+      "revId": "e40b859a864561ad6b9a0156ceb558e236747106",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
