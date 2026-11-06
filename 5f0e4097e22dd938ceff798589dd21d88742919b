@@ -16,6 +16,24 @@
       "message": "The change looks correct.One request: the new check isn’t covered by a test.\n\ndecode_get_fru_record_table_metadata_resp and \u0027decode_get_fru_record_by_option_resp\u0027 have no zero-length case.\n\u0027decode_get_fru_record_table_resp\u0027 already passes length 0, but only incidentally.\n\nPlease add explicit payload_length \u003d\u003d 0 cases for all three decoders in tests.",
       "revId": "5f0e4097e22dd938ceff798589dd21d88742919b",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3b1e6fa5_7e5ebac8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-11-06T05:22:34Z",
+      "side": 1,
+      "message": "Before we get too far here, I prefer we don\u0027t carry on with this change as it is, as `struct pldm_msg` is defined to contain at least 1 payload byte. `payload_length` must therefore always be at least 1, otherwise the caller has created a typed pointer to an object of incorrect size, and that\u0027s a bug in the caller.\n\nNow, `struct pldm_msg` shouldn\u0027t be defined the way that it is, as it\u0027s attempting to describe a flexible array, but the method chosen isn\u0027t the one that\u0027s blessed by the C standard. I need to think about addressing the type problem in the long-term, but in the short-term I\u0027d actually rather the code `assert()` so the callers get fixed, and we don\u0027t add any tests.",
+      "parentUuid": "70c667c0_5e8ba02a",
+      "revId": "5f0e4097e22dd938ceff798589dd21d88742919b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
