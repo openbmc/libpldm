@@ -16,6 +16,24 @@
       "message": "What is the code change that this test covers?",
       "revId": "bec86ca264aee23a16c1eabd4bbc8395880b49a9",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c007a077_5e14b955",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003102
+      },
+      "writtenOn": "2026-11-06T08:51:24Z",
+      "side": 1,
+      "message": "This test covers the exact payload-length validation in decode_rw_file_memory_resp(). It verifies that responses shorter or longer than PLDM_RW_FILE_MEM_RESP_BYTES are rejected with PLDM_ERROR_INVALID_LENGTH.",
+      "parentUuid": "0e27fcf0_57a45a97",
+      "revId": "bec86ca264aee23a16c1eabd4bbc8395880b49a9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
