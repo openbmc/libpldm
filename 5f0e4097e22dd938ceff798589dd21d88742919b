@@ -52,6 +52,24 @@
       "parentUuid": "3b1e6fa5_7e5ebac8",
       "revId": "5f0e4097e22dd938ceff798589dd21d88742919b",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b81924ef_d89f6d94",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003102
+      },
+      "writtenOn": "2026-11-06T10:41:37Z",
+      "side": 1,
+      "message": "Updated the patch as suggested: the decoders now assert that payload_length is at least one before reading the completion code, and I removed the zero-length tests. The FRU unit tests pass.",
+      "parentUuid": "58877dae_835f4409",
+      "revId": "5f0e4097e22dd938ceff798589dd21d88742919b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
