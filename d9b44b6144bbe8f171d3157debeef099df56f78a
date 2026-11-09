@@ -67,6 +67,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "26af2f9e_c1830d13",
+        "filename": "CONTRIBUTING.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2026-11-09T17:59:51Z",
+      "side": 1,
+      "message": "That section (line 5 through 8) is not about rebasing at all.\nIt\u0027s just stating facts about libpldm that should be obvious\n(thus not need written down)\n\nWhat do contributors learn that they did not know before reading that section?",
+      "parentUuid": "1fb57f5a_206463ce",
+      "range": {
+        "startLine": 4,
+        "startChar": 1,
+        "endLine": 8,
+        "endChar": 70
+      },
+      "revId": "d9b44b6144bbe8f171d3157debeef099df56f78a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ae27b658_195dd05f",
         "filename": "CONTRIBUTING.md",
         "patchSetId": 1
@@ -102,6 +126,30 @@
       "side": 1,
       "message": "\u003e What is the documented reason why people should follow this workflow?\n\nIt\u0027s not a question of whether people should follow it, the workflow is the one I\u0027ve currently enforced in gerrit. Could we chose differently? Yes. However, in the past we had chosen differently, and that resulted in bugs being merged via patches that weren\u0027t based on `main` having a V+1, when if they had been rebased the errors would have been picked up through improvements in CI.\n\nSo the current workflow choice is an extended experiment. If the pain exceeds the utility then we should re-evaluate. However, rebasing patches constantly is busy-work that is unnecessary to start with. As the merged documentation suggests, if you rework a patch then it\u0027s fine to rebase them, as you\u0027ll be pushing the reworked PS anyway. Rebasing when we wish to merge something is the other point that makes sense.\n\n\u003e increases maintainer workload due to solving trivial merge conflicts\n\nI don\u0027t see this as a huge hurdle, but if it is, ask the contributor to do it?\n\n\u003e increases timeline delay for rework.\n\nIf contributors want to get ahead of the curve they can perform the rebase and *not* push the result. If they find conflicts, then it\u0027s reasonable to push a new PS that resolves them.\n\n\u003e authorship becomes less clear, does the maintainer always add their signoff?\n\nI don\u0027t think this is particularly hard: If you change a commit, add your signoff. Whether rebasing a change is considered modifying a commit is a choice left to the maintainer. I\u0027d lean towards no if it was a clean rebase.\n\n\u003e increases timeline delay due to maintainers needing to wait for CI to pass\nbefore submitting on patches they rebased themselves\n\nI don\u0027t think CI is that burdensome compared to the delay currently present in the review queue.",
       "parentUuid": "ae27b658_195dd05f",
+      "range": {
+        "startLine": 9,
+        "startChar": 1,
+        "endLine": 29,
+        "endChar": 60
+      },
+      "revId": "d9b44b6144bbe8f171d3157debeef099df56f78a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e3bf9214_431f7409",
+        "filename": "CONTRIBUTING.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2026-11-09T17:59:51Z",
+      "side": 1,
+      "message": "i posted some links to #infrastructure channel in hopes of technical solutions that should reduce the email flood.",
+      "parentUuid": "77603518_baa52a8d",
       "range": {
         "startLine": 9,
         "startChar": 1,
