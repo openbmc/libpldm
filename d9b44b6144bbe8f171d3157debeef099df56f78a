@@ -91,6 +91,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e0bb4520_a2d9139a",
+        "filename": "CONTRIBUTING.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-11-09T23:24:44Z",
+      "side": 1,
+      "message": "\u003e It\u0027s just stating facts about libpldm that should be obvious (thus not need written down)\n\n\n\nThe entirety of this document contains things I consider obvious, but I\u0027ve written them down because quite clearly not all of them are obvious for many other contributors.\n\nIt\u0027s building a case for the position below.\n\nMy impression is you have quite some energy for the removal of these three relatively short sentences. I find your energy for that position moderately baffling. I feel I may be missing your fundamental opposition to them. What\u0027s the go?",
+      "parentUuid": "26af2f9e_c1830d13",
+      "range": {
+        "startLine": 4,
+        "startChar": 1,
+        "endLine": 8,
+        "endChar": 70
+      },
+      "revId": "d9b44b6144bbe8f171d3157debeef099df56f78a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ae27b658_195dd05f",
         "filename": "CONTRIBUTING.md",
         "patchSetId": 1
@@ -150,6 +174,30 @@
       "side": 1,
       "message": "i posted some links to #infrastructure channel in hopes of technical solutions that should reduce the email flood.",
       "parentUuid": "77603518_baa52a8d",
+      "range": {
+        "startLine": 9,
+        "startChar": 1,
+        "endLine": 29,
+        "endChar": 60
+      },
+      "revId": "d9b44b6144bbe8f171d3157debeef099df56f78a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ca8e43e3_b934202a",
+        "filename": "CONTRIBUTING.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-11-09T23:24:44Z",
+      "side": 1,
+      "message": "There are various options in gerrit to control notifications, however, I would rather not disable notifications for new patchsets. CI posting comments is a consequence of the problem but not the ultimate source of concern.\n\nYou have some arguments above on why you think what I\u0027ve put forward is worse, but I don\u0027t see your explanation for why you feel frequent rebasing is the best course of action. Do you feel it is necessary? If so, why?",
+      "parentUuid": "e3bf9214_431f7409",
       "range": {
         "startLine": 9,
         "startChar": 1,
