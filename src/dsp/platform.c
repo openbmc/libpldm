@@ -3127,7 +3127,7 @@ int decode_numeric_effecter_pdr_data(
 	return PLDM_SUCCESS;
 }
 
-LIBPLDM_ABI_TESTING
+LIBPLDM_ABI_STABLE
 int encode_pldm_platform_state_effecter_pdr(
 	const struct pldm_platform_state_effecter_pdr *pdr, void *data,
 	size_t *data_len)
@@ -3186,7 +3186,7 @@ int encode_pldm_platform_state_effecter_pdr(
 	return pldm_msgbuf_complete_used(buf, *data_len, data_len);
 }
 
-LIBPLDM_ABI_TESTING
+LIBPLDM_ABI_STABLE
 int encode_pldm_platform_state_effecter_possible_states(
 	const struct pldm_platform_state_effecter_possible_states *states,
 	const struct variable_field *possible_states, void *data,
@@ -3236,7 +3236,7 @@ int encode_pldm_platform_state_effecter_possible_states(
 	return pldm_msgbuf_complete_used(buf, *data_len, data_len);
 }
 
-LIBPLDM_ABI_TESTING
+LIBPLDM_ABI_STABLE
 int decode_pldm_platform_state_effecter_pdr(
 	const void *data, size_t data_len,
 	struct pldm_platform_state_effecter_pdr *pdr,
@@ -3306,7 +3306,7 @@ int decode_pldm_platform_state_effecter_pdr(
 	return pldm_msgbuf_complete(buf);
 }
 
-LIBPLDM_ABI_TESTING
+LIBPLDM_ABI_STABLE
 int decode_pldm_platform_state_effecter_possible_states(
 	const void *data, size_t *data_len,
 	struct pldm_platform_state_effecter_possible_states *states,
