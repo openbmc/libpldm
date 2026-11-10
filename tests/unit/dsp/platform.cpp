@@ -5170,7 +5170,6 @@ TEST(decodeNumericSensorPdrDataDeathTest, InvalidSizeTest)
     EXPECT_EQ(rc, PLDM_ERROR_INVALID_LENGTH);
 }
 
-#if HAVE_LIBPLDM_API_TESTING
 TEST(encodePldmPlatformStateEffecterPdr, GoodTest)
 {
     const std::vector<uint8_t> expected{
@@ -5679,7 +5678,6 @@ TEST(decodePldmPlatformStateEffecterPossibleStates, ShortBufferTest)
     EXPECT_EQ(-EOVERFLOW, decode_pldm_platform_state_effecter_possible_states(
                               encoded.data(), &len, &states, &bits));
 }
-#endif
 
 #if HAVE_LIBPLDM_API_TESTING
 TEST(decodeNumericEffecterPdrData, Uint8Test)

@@ -27,6 +27,10 @@ Change categories:
 
 ### Changed
 
+- dsp: platform: Stabilise `encode_pldm_platform_state_effecter_pdr()` and
+  `encode_pldm_platform_state_effecter_possible_states()`
+- dsp: platform: Stabilise `decode_pldm_platform_state_effecter_pdr()` and
+  `decode_pldm_platform_state_effecter_possible_states()`
 - libpldm++: Preserve multiple descriptors of the same type
 
   This breaks API and ABI compatibility; consumers must rebuild
