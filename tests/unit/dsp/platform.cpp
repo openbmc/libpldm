@@ -5444,6 +5444,241 @@ TEST(encodePldmPlatformStateEffecterPossibleStates, ShortBufferTest)
     EXPECT_EQ(-EOVERFLOW, encode_pldm_platform_state_effecter_possible_states(
                               &states, &bits, encoded.data(), &len));
 }
+
+TEST(decodePldmPlatformStateEffecterPdr, GoodTest)
+{
+    const std::vector<uint8_t> encoded{
+        0x1,
+        0x0,
+        0x0,
+        0x0,                     // record handle = 1
+        0x1,                     // PDRHeaderVersion
+        PLDM_STATE_EFFECTER_PDR, // PDRType
+        0x0,
+        0x0, // recordChangeNumber
+        0x17,
+        0x0, // dataLength = 23 (bytes after the 10-byte header)
+        0x2,
+        0x0, // PLDMTerminusHandle = 2
+        0x3,
+        0x0, // effecterID = 3
+        PLDM_ENTITY_POWER_SUPPLY,
+        0x0, // entityType = Power Supply(120)
+        0x1,
+        0x0, // entityInstanceNumber = 1
+        0x4,
+        0x0, // containerID = 4
+        0x5,
+        0x0,          // effecterSemanticID = 5
+        PLDM_NO_INIT, // effecterInit
+        true,         // effecterDescriptionPDR
+        0x2,          // compositeEffecterCount = 2
+        // composite effecter 0: stateSetID=1, 1 byte of states
+        0x1,
+        0x0,
+        0x1,
+        0x0e,
+        // composite effecter 1: stateSetID=192, unavailable
+        0xc0,
+        0x0,
+        0x0,
+    };
+
+    struct pldm_platform_state_effecter_pdr pdr = {};
+    struct variable_field entries = {};
+
+    ASSERT_EQ(0, decode_pldm_platform_state_effecter_pdr(
+                     encoded.data(), encoded.size(), &pdr, &entries));
+    EXPECT_EQ(1u, pdr.hdr.record_handle);
+    EXPECT_EQ(1, pdr.hdr.version);
+    EXPECT_EQ(PLDM_STATE_EFFECTER_PDR, pdr.hdr.type);
+    EXPECT_EQ(0, pdr.hdr.record_change_num);
+    EXPECT_EQ(23, pdr.hdr.length);
+    EXPECT_EQ(2, pdr.terminus_handle);
+    EXPECT_EQ(3, pdr.effecter_id);
+    EXPECT_EQ(PLDM_ENTITY_POWER_SUPPLY, pdr.entity_type);
+    EXPECT_EQ(1, pdr.entity_instance_number);
+    EXPECT_EQ(4, pdr.container_id);
+    EXPECT_EQ(5, pdr.effecter_semantic_id);
+    EXPECT_EQ(PLDM_NO_INIT, pdr.effecter_init);
+    EXPECT_EQ(true, pdr.effecter_description_pdr);
+    EXPECT_EQ(2, pdr.composite_effecter_count);
+    EXPECT_EQ(encoded.data() + PLDM_PLATFORM_STATE_EFFECTER_PDR_MIN_LENGTH,
+              entries.ptr);
+    EXPECT_EQ(encoded.size() - PLDM_PLATFORM_STATE_EFFECTER_PDR_MIN_LENGTH,
+              entries.length);
+
+    struct pldm_platform_state_effecter_possible_states states = {};
+    struct variable_field bits = {};
+    size_t len = entries.length;
+
+    ASSERT_EQ(0, decode_pldm_platform_state_effecter_possible_states(
+                     entries.ptr, &len, &states, &bits));
+    EXPECT_EQ(PLDM_PLATFORM_STATE_EFFECTER_POSSIBLE_STATES_MIN_LENGTH + 1u,
+              len);
+    EXPECT_EQ(1, states.state_set_id);
+    EXPECT_EQ(1, states.possible_states_size);
+    ASSERT_EQ(1u, bits.length);
+    EXPECT_EQ(0x0e, bits.ptr[0]);
+    entries.ptr += len;
+    entries.length -= len;
+
+    len = entries.length;
+    ASSERT_EQ(0, decode_pldm_platform_state_effecter_possible_states(
+                     entries.ptr, &len, &states, &bits));
+    EXPECT_EQ(PLDM_PLATFORM_STATE_EFFECTER_POSSIBLE_STATES_MIN_LENGTH, len);
+    EXPECT_EQ(192, states.state_set_id);
+    EXPECT_EQ(0, states.possible_states_size);
+    EXPECT_EQ(0u, bits.length);
+    EXPECT_EQ(entries.length, len);
+}
+
+TEST(decodePldmPlatformStateEffecterPdr, InvalidArgTest)
+{
+    std::vector<uint8_t> encoded(
+        PLDM_PLATFORM_STATE_EFFECTER_PDR_MIN_LENGTH +
+        PLDM_PLATFORM_STATE_EFFECTER_POSSIBLE_STATES_MIN_LENGTH);
+    struct pldm_platform_state_effecter_pdr pdr = {};
+    struct variable_field entries = {};
+
+    EXPECT_EQ(-EINVAL, decode_pldm_platform_state_effecter_pdr(
+                           nullptr, encoded.size(), &pdr, &entries));
+    EXPECT_EQ(-EINVAL, decode_pldm_platform_state_effecter_pdr(
+                           encoded.data(), encoded.size(), nullptr, &entries));
+    EXPECT_EQ(-EINVAL, decode_pldm_platform_state_effecter_pdr(
+                           encoded.data(), encoded.size(), &pdr, nullptr));
+}
+
+TEST(decodePldmPlatformStateEffecterPdr, InvalidCompositeEffecterCountTest)
+{
+    std::vector<uint8_t> encoded(
+        PLDM_PLATFORM_STATE_EFFECTER_PDR_MIN_LENGTH +
+        PLDM_PLATFORM_STATE_EFFECTER_POSSIBLE_STATES_MIN_LENGTH);
+    struct pldm_platform_state_effecter_pdr pdr = {};
+    struct variable_field entries = {};
+
+    encoded[8] = encoded.size() - sizeof(struct pldm_pdr_hdr);
+
+    encoded[PLDM_PLATFORM_STATE_EFFECTER_PDR_MIN_LENGTH - 1] = 0;
+    EXPECT_EQ(-EBADMSG, decode_pldm_platform_state_effecter_pdr(
+                            encoded.data(), encoded.size(), &pdr, &entries));
+
+    encoded[PLDM_PLATFORM_STATE_EFFECTER_PDR_MIN_LENGTH - 1] =
+        PLDM_PLATFORM_STATE_EFFECTER_MAX_COMPOSITE_COUNT + 1;
+    EXPECT_EQ(-EBADMSG, decode_pldm_platform_state_effecter_pdr(
+                            encoded.data(), encoded.size(), &pdr, &entries));
+}
+
+TEST(decodePldmPlatformStateEffecterPdr, InvalidDataLengthTest)
+{
+    std::vector<uint8_t> encoded(
+        PLDM_PLATFORM_STATE_EFFECTER_PDR_MIN_LENGTH +
+        2 * (PLDM_PLATFORM_STATE_EFFECTER_POSSIBLE_STATES_MIN_LENGTH +
+             PLDM_PLATFORM_STATE_EFFECTER_POSSIBLE_STATES_MAX_SIZE));
+    struct pldm_platform_state_effecter_pdr pdr = {};
+    struct variable_field entries = {};
+
+    encoded[PLDM_PLATFORM_STATE_EFFECTER_PDR_MIN_LENGTH - 1] = 2;
+
+    encoded[8] = 20;
+    EXPECT_EQ(-EBADMSG, decode_pldm_platform_state_effecter_pdr(
+                            encoded.data(), encoded.size(), &pdr, &entries));
+
+    encoded[8] = 86;
+    EXPECT_EQ(-EBADMSG, decode_pldm_platform_state_effecter_pdr(
+                            encoded.data(), encoded.size(), &pdr, &entries));
+}
+
+TEST(decodePldmPlatformStateEffecterPdr, ShortBufferTest)
+{
+    std::vector<uint8_t> encoded(
+        PLDM_PLATFORM_STATE_EFFECTER_PDR_MIN_LENGTH +
+        PLDM_PLATFORM_STATE_EFFECTER_POSSIBLE_STATES_MIN_LENGTH);
+    struct pldm_platform_state_effecter_pdr pdr = {};
+    struct variable_field entries = {};
+
+    encoded[8] = encoded.size() - sizeof(struct pldm_pdr_hdr);
+    encoded[PLDM_PLATFORM_STATE_EFFECTER_PDR_MIN_LENGTH - 1] = 1;
+
+    EXPECT_EQ(-EOVERFLOW, decode_pldm_platform_state_effecter_pdr(
+                              encoded.data(),
+                              PLDM_PLATFORM_STATE_EFFECTER_PDR_MIN_LENGTH - 1,
+                              &pdr, &entries));
+    EXPECT_EQ(-EOVERFLOW,
+              decode_pldm_platform_state_effecter_pdr(
+                  encoded.data(), encoded.size() - 1, &pdr, &entries));
+}
+
+TEST(decodePldmPlatformStateEffecterPossibleStates, GoodTest)
+{
+    const std::vector<uint8_t> encoded{
+        0xc0,
+        0x0, // stateSetID = 192
+        0x2, // possibleStatesSize = 2
+        0x06,
+        0x01, // possibleStates
+    };
+
+    struct pldm_platform_state_effecter_possible_states states = {};
+    struct variable_field bits = {};
+    size_t len = encoded.size();
+
+    ASSERT_EQ(0, decode_pldm_platform_state_effecter_possible_states(
+                     encoded.data(), &len, &states, &bits));
+    EXPECT_EQ(encoded.size(), len);
+    EXPECT_EQ(192, states.state_set_id);
+    EXPECT_EQ(2, states.possible_states_size);
+    ASSERT_EQ(2u, bits.length);
+    EXPECT_EQ(0x06, bits.ptr[0]);
+    EXPECT_EQ(0x01, bits.ptr[1]);
+}
+
+TEST(decodePldmPlatformStateEffecterPossibleStates, InvalidArgTest)
+{
+    const std::vector<uint8_t> encoded{0x1, 0x0, 0x1, 0x0e};
+    struct pldm_platform_state_effecter_possible_states states = {};
+    struct variable_field bits = {};
+    size_t len = encoded.size();
+
+    EXPECT_EQ(-EINVAL, decode_pldm_platform_state_effecter_possible_states(
+                           nullptr, &len, &states, &bits));
+    EXPECT_EQ(-EINVAL, decode_pldm_platform_state_effecter_possible_states(
+                           encoded.data(), nullptr, &states, &bits));
+    EXPECT_EQ(-EINVAL, decode_pldm_platform_state_effecter_possible_states(
+                           encoded.data(), &len, nullptr, &bits));
+    EXPECT_EQ(-EINVAL, decode_pldm_platform_state_effecter_possible_states(
+                           encoded.data(), &len, &states, nullptr));
+}
+
+TEST(decodePldmPlatformStateEffecterPossibleStates, OversizeTest)
+{
+    std::vector<uint8_t> encoded(
+        PLDM_PLATFORM_STATE_EFFECTER_POSSIBLE_STATES_MIN_LENGTH +
+        PLDM_PLATFORM_STATE_EFFECTER_POSSIBLE_STATES_MAX_SIZE + 1);
+    struct pldm_platform_state_effecter_possible_states states = {};
+    struct variable_field bits = {};
+    size_t len = encoded.size();
+
+    encoded[2] = PLDM_PLATFORM_STATE_EFFECTER_POSSIBLE_STATES_MAX_SIZE + 1;
+
+    EXPECT_EQ(-EBADMSG, decode_pldm_platform_state_effecter_possible_states(
+                            encoded.data(), &len, &states, &bits));
+}
+
+TEST(decodePldmPlatformStateEffecterPossibleStates, ShortBufferTest)
+{
+    const std::vector<uint8_t> encoded{0x1, 0x0, 0x2, 0x0e};
+    struct pldm_platform_state_effecter_possible_states states = {};
+    struct variable_field bits = {};
+    size_t len = PLDM_PLATFORM_STATE_EFFECTER_POSSIBLE_STATES_MIN_LENGTH - 1;
+
+    EXPECT_EQ(-EOVERFLOW, decode_pldm_platform_state_effecter_possible_states(
+                              encoded.data(), &len, &states, &bits));
+
+    len = encoded.size();
+    EXPECT_EQ(-EOVERFLOW, decode_pldm_platform_state_effecter_possible_states(
+                              encoded.data(), &len, &states, &bits));
+}
 #endif
 
 #if HAVE_LIBPLDM_API_TESTING

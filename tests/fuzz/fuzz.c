@@ -623,6 +623,35 @@ static int fuzz_encode_pldm_platform_state_effecter_possible_states(
     return 0;
 }
 
+static int fuzz_decode_pldm_platform_state_effecter_pdr(const uint8_t* data,
+                                                        size_t size)
+{
+    struct pldm_platform_state_effecter_possible_states states;
+    struct pldm_platform_state_effecter_pdr pdr;
+    struct variable_field possible_states;
+    struct variable_field entries;
+    size_t len;
+
+    if (decode_pldm_platform_state_effecter_pdr(data, size, &pdr, &entries))
+    {
+        return 0;
+    }
+
+    for (uint8_t i = 0; i < pdr.composite_effecter_count; i++)
+    {
+        len = entries.length;
+        if (decode_pldm_platform_state_effecter_possible_states(
+                entries.ptr, &len, &states, &possible_states))
+        {
+            break;
+        }
+        entries.ptr += len;
+        entries.length -= len;
+    }
+
+    return 0;
+}
+
 static int (*const fuzz_tests[])(const uint8_t*, size_t) = {
     fuzz_decode_pldm_firmware_update_package,
     fuzz_get_fru_record_by_option,
@@ -631,6 +660,7 @@ static int (*const fuzz_tests[])(const uint8_t*, size_t) = {
     fuzz_pldm_state_effecter_pdr,
     fuzz_encode_pldm_platform_state_effecter_pdr,
     fuzz_encode_pldm_platform_state_effecter_possible_states,
+    fuzz_decode_pldm_platform_state_effecter_pdr,
     libpldm_decode_one_pldm_msg,
     libpldm_encode_one_pldm_msg,
 };
