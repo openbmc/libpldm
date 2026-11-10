@@ -19,6 +19,10 @@ Change categories:
 
 ### Added
 
+- dsp: platform: Add `encode_pldm_platform_state_effecter_pdr()`,
+  `encode_pldm_platform_state_effecter_possible_states()` and their PDR structs
+  (DSP0248 v1.3.0)
+
 ### Changed
 
 - libpldm++: Preserve multiple descriptors of the same type
