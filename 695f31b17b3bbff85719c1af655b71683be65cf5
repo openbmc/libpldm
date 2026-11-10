@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eb6a67f6_4b60e50b",
+        "filename": "bindings/cpp/firmware_update.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 364,
+      "author": {
+        "id": 1002297
+      },
+      "writtenOn": "2026-11-10T15:28:06Z",
+      "side": 1,
+      "message": "Can you consider removing the function altogether along with `packageHeaderIdentifier`? There\u0027s no current use case for the UUID and its also a trivial 1:1 mapping",
+      "revId": "695f31b17b3bbff85719c1af655b71683be65cf5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "031d7026_e6ff3f76",
+        "filename": "bindings/cpp/firmware_update.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 385,
+      "author": {
+        "id": 1002297
+      },
+      "writtenOn": "2026-11-10T15:28:06Z",
+      "side": 1,
+      "message": "```suggestion\nif (std::ranges::equal(identifier, uuid)) {\n```",
+      "range": {
+        "startLine": 381,
+        "startChar": 0,
+        "endLine": 385,
+        "endChar": 2
+      },
+      "revId": "695f31b17b3bbff85719c1af655b71683be65cf5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a926a501_d1bc69a0",
+        "filename": "bindings/cpp/types.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 402,
+      "author": {
+        "id": 1002297
+      },
+      "writtenOn": "2026-11-10T15:28:06Z",
+      "side": 1,
+      "message": "Do you think we can drop this check? Two packages with identical records now mismatch because they were created at different times",
+      "revId": "695f31b17b3bbff85719c1af655b71683be65cf5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
