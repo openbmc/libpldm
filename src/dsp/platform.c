@@ -15,7 +15,7 @@
 #include <string.h>
 #include <uchar.h>
 
-LIBPLDM_ABI_STABLE
+LIBPLDM_ABI_DEPRECATED
 int encode_state_effecter_pdr(
 	struct pldm_state_effecter_pdr *const effecter,
 	const size_t allocation_size,

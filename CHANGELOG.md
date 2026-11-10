@@ -46,6 +46,11 @@ Change categories:
 
 ### Deprecated
 
+- dsp: platform: Deprecate `encode_state_effecter_pdr()`
+
+  Users should switch to `encode_pldm_platform_state_effecter_pdr()` and
+  `encode_pldm_platform_state_effecter_possible_states()`
+
 ### Removed
 
 ### Fixed

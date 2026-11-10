@@ -1080,6 +1080,9 @@ struct pldm_platform_file_descriptor_pdr {
  *       must allocate enough space for the base structure and the
  *       effecter->possible_states array, otherwise the function will fail.
  * @note effecter->hdr.length, .type, and .version will be set appropriately.
+ *
+ * @deprecated Use encode_pldm_platform_state_effecter_pdr() and
+ *             encode_pldm_platform_state_effecter_possible_states() instead.
  */
 int encode_state_effecter_pdr(
 	struct pldm_state_effecter_pdr *effecter, size_t allocation_size,
