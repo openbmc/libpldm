@@ -53,6 +53,8 @@ Change categories:
 
 ### Removed
 
+- dsp: platform: Remove `encode_state_effecter_pdr()`
+
 ### Fixed
 
 - bindings: cpp: Preserve downstream device ID records when copying and

@@ -1060,35 +1060,6 @@ struct pldm_platform_file_descriptor_pdr {
 	struct variable_field oem_file_classification_name;
 };
 
-/** @brief Encode PLDM state effecter PDR
- *
- * @param[in,out] effecter               Structure to encode. All members of
- *                                       effecter, except those mentioned in
- *                                       the @note below, should be initialized
- *                                       by the caller.
- * @param[in]     allocation_size        Size of effecter allocation in bytes
- * @param[in]     possible_states        Possible effecter states
- * @param[in]     possible_states_size   Size of possible effecter states in
- *                                       bytes
- * @param[out]    actual_size            Size of effecter PDR. Set to 0 on
- *                                       error.
- * @return int    pldm_completion_codes
- *                PLDM_SUCCESS/PLDM_ERROR/PLDM_ERROR_INVALID_LENGTH
- *
- * @note The effecter parameter will be encoded in place.
- * @note Caller is responsible for allocation of the effecter parameter. Caller
- *       must allocate enough space for the base structure and the
- *       effecter->possible_states array, otherwise the function will fail.
- * @note effecter->hdr.length, .type, and .version will be set appropriately.
- *
- * @deprecated Use encode_pldm_platform_state_effecter_pdr() and
- *             encode_pldm_platform_state_effecter_possible_states() instead.
- */
-int encode_state_effecter_pdr(
-	struct pldm_state_effecter_pdr *effecter, size_t allocation_size,
-	const struct state_effecter_possible_states *possible_states,
-	size_t possible_states_size, size_t *actual_size);
-
 /** @struct set_effecter_state_field
  *
  *  Structure representing a stateField in SetStateEffecterStates command */
