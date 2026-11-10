@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ed51dde9_041f9231",
+        "filename": "src/dsp/fru.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 637,
+      "author": {
+        "id": 1003102
+      },
+      "writtenOn": "2026-11-10T06:53:21Z",
+      "side": 1,
+      "message": "Could this validate `transfer_flag` with `is_transfer_flag_valid()` before encoding? That helper accepts only `PLDM_START`, `PLDM_MIDDLE`, `PLDM_END`, and `PLDM_START_AND_END`, but this encoder appears to serialize arbitrary values.",
+      "revId": "fc99de96601f02acac879cd3031d3bfa9aafa4bb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
