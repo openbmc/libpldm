@@ -3236,6 +3236,125 @@ int encode_pldm_platform_state_effecter_possible_states(
 	return pldm_msgbuf_complete_used(buf, *data_len, data_len);
 }
 
+LIBPLDM_ABI_TESTING
+int decode_pldm_platform_state_effecter_pdr(
+	const void *data, size_t data_len,
+	struct pldm_platform_state_effecter_pdr *pdr,
+	struct variable_field *possible_states)
+{
+	PLDM_MSGBUF_RO_DEFINE_P(buf);
+	size_t entry_min;
+	size_t entry_max;
+	size_t fixed;
+	int rc;
+
+	if (!data || !pdr || !possible_states) {
+		return -EINVAL;
+	}
+
+	rc = pldm_msgbuf_init_errno(buf,
+				    PLDM_PLATFORM_STATE_EFFECTER_PDR_MIN_LENGTH,
+				    data, data_len);
+	if (rc) {
+		return rc;
+	}
+
+	pldm_msgbuf_extract(buf, pdr->hdr.record_handle);
+	pldm_msgbuf_extract(buf, pdr->hdr.version);
+	pldm_msgbuf_extract(buf, pdr->hdr.type);
+	pldm_msgbuf_extract(buf, pdr->hdr.record_change_num);
+	pldm_msgbuf_extract(buf, pdr->hdr.length);
+	pldm_msgbuf_extract(buf, pdr->terminus_handle);
+	pldm_msgbuf_extract(buf, pdr->effecter_id);
+	pldm_msgbuf_extract(buf, pdr->entity_type);
+	pldm_msgbuf_extract(buf, pdr->entity_instance_number);
+	pldm_msgbuf_extract(buf, pdr->container_id);
+	pldm_msgbuf_extract(buf, pdr->effecter_semantic_id);
+	pldm_msgbuf_extract(buf, pdr->effecter_init);
+	pldm_msgbuf_extract(buf, pdr->effecter_description_pdr);
+	rc = pldm_msgbuf_extract(buf, pdr->composite_effecter_count);
+	if (rc) {
+		return pldm_msgbuf_discard(buf, rc);
+	}
+
+	if (!pdr->composite_effecter_count ||
+	    pdr->composite_effecter_count >
+		    PLDM_PLATFORM_STATE_EFFECTER_MAX_COMPOSITE_COUNT) {
+		return pldm_msgbuf_discard(buf, -EBADMSG);
+	}
+
+	fixed = PLDM_PLATFORM_STATE_EFFECTER_PDR_MIN_LENGTH -
+		sizeof(struct pldm_pdr_hdr);
+	entry_min = PLDM_PLATFORM_STATE_EFFECTER_POSSIBLE_STATES_MIN_LENGTH;
+	entry_max = PLDM_PLATFORM_STATE_EFFECTER_POSSIBLE_STATES_MIN_LENGTH +
+		    PLDM_PLATFORM_STATE_EFFECTER_POSSIBLE_STATES_MAX_SIZE;
+
+	if (pdr->hdr.length <
+		    fixed + pdr->composite_effecter_count * entry_min ||
+	    pdr->hdr.length >
+		    fixed + pdr->composite_effecter_count * entry_max) {
+		return pldm_msgbuf_discard(buf, -EBADMSG);
+	}
+
+	rc = pldm_msgbuf_span_required(buf, pdr->hdr.length - fixed,
+				       (const void **)&possible_states->ptr);
+	if (rc) {
+		return pldm_msgbuf_discard(buf, rc);
+	}
+	possible_states->length = pdr->hdr.length - fixed;
+
+	return pldm_msgbuf_complete(buf);
+}
+
+LIBPLDM_ABI_TESTING
+int decode_pldm_platform_state_effecter_possible_states(
+	const void *data, size_t *data_len,
+	struct pldm_platform_state_effecter_possible_states *states,
+	struct variable_field *possible_states)
+{
+	PLDM_MSGBUF_RO_DEFINE_P(buf);
+	int rc;
+
+	if (!data || !data_len || !states || !possible_states) {
+		return -EINVAL;
+	}
+
+	rc = pldm_msgbuf_init_errno(
+		buf, PLDM_PLATFORM_STATE_EFFECTER_POSSIBLE_STATES_MIN_LENGTH,
+		data, *data_len);
+	if (rc) {
+		return rc;
+	}
+
+	pldm_msgbuf_extract(buf, states->state_set_id);
+	rc = pldm_msgbuf_extract(buf, states->possible_states_size);
+	if (rc) {
+		return pldm_msgbuf_discard(buf, rc);
+	}
+
+	if (states->possible_states_size >
+	    PLDM_PLATFORM_STATE_EFFECTER_POSSIBLE_STATES_MAX_SIZE) {
+		return pldm_msgbuf_discard(buf, -EBADMSG);
+	}
+
+	rc = pldm_msgbuf_span_required(buf, states->possible_states_size,
+				       (const void **)&possible_states->ptr);
+	if (rc) {
+		return pldm_msgbuf_discard(buf, rc);
+	}
+	possible_states->length = states->possible_states_size;
+
+	rc = pldm_msgbuf_complete(buf);
+	if (rc) {
+		return rc;
+	}
+
+	*data_len = PLDM_PLATFORM_STATE_EFFECTER_POSSIBLE_STATES_MIN_LENGTH +
+		    states->possible_states_size;
+
+	return 0;
+}
+
 LIBPLDM_ABI_STABLE
 int encode_get_state_effecter_states_req(uint8_t instance_id,
 					 uint16_t effecter_id,

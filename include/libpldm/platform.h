@@ -2831,6 +2831,65 @@ int encode_pldm_platform_state_effecter_possible_states(
 	const struct variable_field *possible_states, void *data,
 	size_t *data_len);
 
+/** @brief Decode State Effecter PDR data
+ *
+ *  Decodes the fixed portion of a State Effecter PDR as defined in
+ *  `Table 90 - State Effecter PDR format` of DSP0248 v1.3.0, up to and
+ *  including compositeEffecterCount, into
+ *  @ref pldm_platform_state_effecter_pdr. The possible_states[] array that
+ *  follows is returned in @p possible_states; decode one entry per composite
+ *  effecter from it with
+ *  decode_pldm_platform_state_effecter_possible_states().
+ *
+ *  @param[in] data - buffer holding the encoded PDR data
+ *  @param[in] data_len - length of @p data
+ *  @param[out] pdr - unpacked state effecter PDR struct (fixed fields)
+ *  @param[out] possible_states - the possible_states[] region of @p data, as
+ *                                bounded by hdr.length
+ *  @return 0 on success, otherwise a negative errno value:
+ *          -EINVAL - @p data, @p pdr or @p possible_states is NULL
+ *          -EOVERFLOW - @p data is shorter than the fixed portion or than
+ *                       hdr.length implies
+ *          -EBADMSG - compositeEffecterCount is outside
+ *                     1..PLDM_PLATFORM_STATE_EFFECTER_MAX_COMPOSITE_COUNT, or
+ *                     hdr.length cannot hold that many possible_states[]
+ *                     entries
+ */
+int decode_pldm_platform_state_effecter_pdr(
+	const void *data, size_t data_len,
+	struct pldm_platform_state_effecter_pdr *pdr,
+	struct variable_field *possible_states);
+
+/**
+ * @brief Decode one possible_states entry of a State Effecter PDR
+ *
+ * Decodes stateSetID, possibleStatesSize and the possibleStates bitfield of
+ * one composite effecter entry of
+ * `Table 91 - State Effecter Possible States fields format` of DSP0248 v1.3.0.
+ * Call once per composite effecter, advancing @p data by the returned
+ * @p data_len.
+ *
+ * @param[in]     data            - Buffer holding the encoded entry.
+ * @param[in,out] data_len        - On entry the length of @p data, on success
+ *                                  the number of bytes consumed.
+ * @param[out]    states          - Fixed fields of the entry.
+ * @param[out]    possible_states - The possibleStates bitfield within
+ *                                  @p data. Its length is
+ *                                  states->possible_states_size, which is
+ *                                  zero for an unavailable or disabled
+ *                                  composite effecter.
+ *
+ * @retval  0          - Success.
+ * @retval -EINVAL     - Invalid input pointers.
+ * @retval -EOVERFLOW  - Buffer too small for entry.
+ * @retval -EBADMSG    - possibleStatesSize is greater than
+ *                       PLDM_PLATFORM_STATE_EFFECTER_POSSIBLE_STATES_MAX_SIZE.
+ */
+int decode_pldm_platform_state_effecter_possible_states(
+	const void *data, size_t *data_len,
+	struct pldm_platform_state_effecter_possible_states *states,
+	struct variable_field *possible_states);
+
 /** @brief Decode data fields from Entity Auxiliary name PDR
  *
  *  @note Use case:
