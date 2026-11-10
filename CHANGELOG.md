@@ -40,6 +40,7 @@ Change categories:
 
 ### Fixed
 
+- dsp: firmware_update: Reject downstream devices without descriptors
 - bindings: cpp: Preserve downstream device ID records when copying and
   comparing packages
 

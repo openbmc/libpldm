@@ -1718,7 +1718,13 @@ int decode_pldm_downstream_device_from_iter(
 	}
 
 	pldm_msgbuf_extract(buf, dev->downstream_device_index);
-	pldm_msgbuf_extract(buf, dev->downstream_descriptor_count);
+	rc = pldm_msgbuf_extract(buf, dev->downstream_descriptor_count);
+	if (rc) {
+		return pldm_msgbuf_discard(buf, rc);
+	}
+	if (!dev->downstream_descriptor_count) {
+		return pldm_msgbuf_discard(buf, -EPROTO);
+	}
 	pldm_msgbuf_span_remaining(buf, (const void **)&iter->field.ptr,
 				   &iter->field.length);
 

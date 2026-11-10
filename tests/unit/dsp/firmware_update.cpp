@@ -2257,6 +2257,45 @@ TEST(QueryDownstreamIdentifiers, decodeResponseOneDeviceOneDescriptor)
     ASSERT_EQ(rc, 0);
 }
 
+TEST(QueryDownstreamIdentifiers, decodeResponseOneDeviceNoDescriptors)
+{
+    constexpr uint32_t downstreamDevicesLen = 3;
+    constexpr size_t payloadLen =
+        PLDM_QUERY_DOWNSTREAM_IDENTIFIERS_RESP_MIN_LEN + downstreamDevicesLen;
+
+    struct pldm_query_downstream_identifiers_resp resp_data = {};
+    PLDM_MSG_DEFINE_P(response, payloadLen);
+    struct pldm_downstream_device_iter devs;
+    struct pldm_downstream_device dev;
+    PLDM_MSGBUF_RW_DEFINE_P(buf);
+    int rc = 0;
+
+    rc = pldm_msgbuf_init_errno(buf, 0, response->payload, payloadLen);
+    ASSERT_EQ(rc, 0);
+
+    pldm_msgbuf_insert_uint8(buf, PLDM_SUCCESS);
+    pldm_msgbuf_insert_uint32(buf, 0);
+    pldm_msgbuf_insert_uint8(buf, PLDM_START_AND_END);
+    pldm_msgbuf_insert_uint32(buf, downstreamDevicesLen);
+    pldm_msgbuf_insert_uint16(buf, 1);
+
+    /* Downstream device without the mandatory descriptor */
+    pldm_msgbuf_insert_uint16(buf, 1);
+    pldm_msgbuf_insert_uint8(buf, 0);
+
+    ASSERT_EQ(pldm_msgbuf_complete_consumed(buf), 0);
+
+    rc = decode_query_downstream_identifiers_resp(response, payloadLen,
+                                                  &resp_data, &devs);
+    ASSERT_EQ(rc, 0);
+
+    foreach_pldm_downstream_device(devs, dev, rc)
+    {
+        FAIL();
+    }
+    EXPECT_EQ(rc, -EPROTO);
+}
+
 constexpr const uint16_t descriptor_id_type_iana_pen = 0x1;
 constexpr const uint16_t descriptor_id_len_iana_pen = 0x4;
 const uint32_t iana_pen_openbmc = htole16(49871u);
