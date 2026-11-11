@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d484bebf_89499379",
+        "filename": "include/libpldm/fru.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1003102
+      },
+      "writtenOn": "2026-11-11T08:16:00Z",
+      "side": 1,
+      "message": "LGTM, since 0x01 matches DSP0257 Table 6.",
+      "revId": "fa6aaacad70e808bf4501075b290292c764047f5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
