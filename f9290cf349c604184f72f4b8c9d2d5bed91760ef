@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6f1ec16f_971792ba",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2026-11-11T16:58:45Z",
+      "side": 1,
+      "message": "Sure, moved it there.\n\nWe will lose the specific error message as to what exactly went wrong (receive generic `-EPROTO`).",
+      "parentUuid": "3547085e_65721c88",
+      "revId": "f9290cf349c604184f72f4b8c9d2d5bed91760ef",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1bdc4743_dec36aaa",
@@ -31,6 +49,24 @@
       "writtenOn": "2026-11-11T08:18:19Z",
       "side": 1,
       "message": "this only checks the lower bound (imageOffset \u003c headerSize). Please confirm the upper bound (offset plus size within the package) is validated elsewhere.",
+      "revId": "f9290cf349c604184f72f4b8c9d2d5bed91760ef",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ea1e1653_32f7b0e4",
+        "filename": "bindings/cpp/firmware_update.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 377,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2026-11-11T16:58:45Z",
+      "side": 1,
+      "message": "Yes, the upper bound is checked via msgbuf APIs and returns `EOVERFLOW`.\n\nAdded a testcase for that and clarified it in the commit message.",
+      "parentUuid": "1bdc4743_dec36aaa",
       "revId": "f9290cf349c604184f72f4b8c9d2d5bed91760ef",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
