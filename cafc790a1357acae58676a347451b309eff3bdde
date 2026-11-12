@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ca5932aa_1e854b18",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2026-11-12T13:10:25Z",
+      "side": 1,
+      "message": "fixed the spacing but now it goes beyond 50/72.",
+      "parentUuid": "5da47d7c_15905008",
+      "range": {
+        "startLine": 7,
+        "startChar": 20,
+        "endLine": 7,
+        "endChar": 22
+      },
+      "revId": "cafc790a1357acae58676a347451b309eff3bdde",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d368fe74_45cd0156",
@@ -37,6 +61,30 @@
       "writtenOn": "2026-11-12T03:08:11Z",
       "side": 1,
       "message": "A few things:\n\n1. I doubt that component images intersecting the header are intended, however\n2. I doubt that Figure 4 there is normative, and\n3. The text for `ComponentLocationOffset` in Table 5 of DSP0267 v1.0.0 doesn\u0027t describe this constraint, which is where I would expect to find it\n\n\nI rather think we need some flags to control opinionated things like this.\n\nAs an aside, something I had in mind when writing the initial implementation of the parser was to have a flag that disallowed any intersection of components with other package elements (including other components). I didn\u0027t end up implementing the idea because I had already spent a lot of time on developing it as it was.",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 54
+      },
+      "revId": "cafc790a1357acae58676a347451b309eff3bdde",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6be0e62f_3c94dfb3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2026-11-12T13:10:25Z",
+      "side": 1,
+      "message": "DSP0267 v1.0.0 page 22,24:\n\n\u003e A firmware update package that complies with the structure and requirements within this clause shall be\nprovided to the UA for processing\n\n\u003e The firmware package payload contains the individual component images that can be transferred to the\nfirmware devices. \n\nAs per https://www.iso.org/sites/directives/current/part2/index.xhtml#_idTextAnchor212\n\n\u003e 16.2 Normative or informative?\nThe Terms and definitions clause is a normative element. It defines the way in which the listed terms shall be interpreted.\n\nAnd in the `Terms and Definitions Clause`\n\n\u003e 3.20 firmware update package\n\n\u003e a firmware package header describing the contents concatenated with one or more component images for one or more firmware devices\n\nMy interpretation here is that `concatenated` means they are back-to-back adjacent without padding or overlap and `contains` meaning there is no part of it that\u0027s outside the payload section.",
+      "parentUuid": "d368fe74_45cd0156",
       "range": {
         "startLine": 12,
         "startChar": 0,
@@ -110,6 +158,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a86a4194_7c3f6fe1",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 3674,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2026-11-12T13:10:25Z",
+      "side": 1,
+      "message": "Sure, reworked it as separate declaration and assignment, it now only adds up the lengths without subtraction or pointer arithmetic.\n\n\u003e Can we derive this from the package version instead?\n\nThe header size is not constant so we cannot derive it based on the package version alone.",
+      "parentUuid": "0fe61f15_2cbdd3b7",
+      "range": {
+        "startLine": 3673,
+        "startChar": 1,
+        "endLine": 3674,
+        "endChar": 45
+      },
+      "revId": "cafc790a1357acae58676a347451b309eff3bdde",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ac344329_9bec0e2f",
@@ -123,6 +195,30 @@
       "writtenOn": "2026-11-12T03:08:11Z",
       "side": 1,
       "message": "Under the comment above this special case should not be necessary.",
+      "range": {
+        "startLine": 3679,
+        "startChar": 1,
+        "endLine": 3682,
+        "endChar": 2
+      },
+      "revId": "cafc790a1357acae58676a347451b309eff3bdde",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c56219af_8c7b02ce",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 3682,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2026-11-12T13:10:25Z",
+      "side": 1,
+      "message": "removed the special case and integrated the calculation into the expression.",
+      "parentUuid": "ac344329_9bec0e2f",
       "range": {
         "startLine": 3679,
         "startChar": 1,
