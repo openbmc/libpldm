@@ -3,6 +3,98 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fde850b8_7009b8c1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-11-12T04:15:06Z",
+      "side": 1,
+      "message": "Can you please add the earliest spec version that defines this?\n\n\nhttps://github.com/openbmc/libpldm/blob/6e5a172ca42764ea5892edc14d9d154c61e041cf/CONTRIBUTING.md#L49\n\nCan you please also be more specific in describing relevant clauses?",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 35
+      },
+      "revId": "552b3aee1da0d718aa3118438e70bb55f2e355b8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5b3163e7_e04e6e70",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-11-12T04:15:06Z",
+      "side": 1,
+      "message": "Can you append `()` here to indicate the function symbol?",
+      "range": {
+        "startLine": 11,
+        "startChar": 33,
+        "endLine": 11,
+        "endChar": 55
+      },
+      "revId": "552b3aee1da0d718aa3118438e70bb55f2e355b8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "60c1731b_7760cf36",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-11-12T04:15:06Z",
+      "side": 1,
+      "message": "This restates what\u0027s evident from the patch itself, please remove it. The commit message should rather describe why the change is being made.",
+      "range": {
+        "startLine": 14,
+        "startChar": 0,
+        "endLine": 19,
+        "endChar": 5
+      },
+      "revId": "552b3aee1da0d718aa3118438e70bb55f2e355b8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c96fcdc2_1b3d4f44",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-11-12T04:15:06Z",
+      "side": 1,
+      "message": "Please remove this:\n\nhttps://github.com/openbmc/libpldm/blob/main/CONTRIBUTING.md?plain\u003d1#L62-L68",
+      "range": {
+        "startLine": 21,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 34
+      },
+      "revId": "552b3aee1da0d718aa3118438e70bb55f2e355b8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "71714884_b889585f",
         "filename": "src/dsp/firmware_update.c",
         "patchSetId": 6
@@ -44,6 +136,63 @@
         "endLine": 3090,
         "endChar": 34
       },
+      "revId": "552b3aee1da0d718aa3118438e70bb55f2e355b8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e8ae3959_589c2d13",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 3095,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-11-12T04:15:06Z",
+      "side": 1,
+      "message": "This formatting is unsightly. Can you extract this to a static function?",
+      "range": {
+        "startLine": 3092,
+        "startChar": 12,
+        "endLine": 3095,
+        "endChar": 58
+      },
+      "revId": "552b3aee1da0d718aa3118438e70bb55f2e355b8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3d5182b8_6bfd0dc7",
+        "filename": "tests/unit/dsp/firmware_update.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 4912,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-11-12T04:15:06Z",
+      "side": 1,
+      "message": "Please, separate test functions for each test case.",
+      "revId": "552b3aee1da0d718aa3118438e70bb55f2e355b8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d6e9db37_9691e1bb",
+        "filename": "tests/unit/dsp/firmware_update.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 5165,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-11-12T04:15:06Z",
+      "side": 1,
+      "message": "As above.",
       "revId": "552b3aee1da0d718aa3118438e70bb55f2e355b8",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
