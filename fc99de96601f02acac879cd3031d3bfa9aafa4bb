@@ -1,6 +1,252 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "38297c1a_eb49e7a1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-11-12T04:38:18Z",
+      "side": 1,
+      "message": "See the comments in the header: I propose that we deprecate the existing APIs and add new implementations of them that conform to the current best practices outlined in CONTRIBUTING.",
+      "revId": "fc99de96601f02acac879cd3031d3bfa9aafa4bb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b654b213_14c325bb",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-11-12T04:38:18Z",
+      "side": 1,
+      "message": "Maybe remove this one. I think it\u0027s self-evident.",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 27
+      },
+      "revId": "fc99de96601f02acac879cd3031d3bfa9aafa4bb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ea18bbd4_7ea532e0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-11-12T04:38:18Z",
+      "side": 1,
+      "message": "This is a good motivation. Can you please build the commit message around this \"why\" instead of the \"what\" below?",
+      "range": {
+        "startLine": 10,
+        "startChar": 27,
+        "endLine": 11,
+        "endChar": 30
+      },
+      "revId": "fc99de96601f02acac879cd3031d3bfa9aafa4bb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "76fa12c4_07f6929b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-11-12T04:38:18Z",
+      "side": 1,
+      "message": "This just describes the implementation in prose. Please remove.",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 47
+      },
+      "revId": "fc99de96601f02acac879cd3031d3bfa9aafa4bb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7442d86e_dc67b690",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-11-12T04:38:18Z",
+      "side": 1,
+      "message": "Yes, this is all expected. Please remove.",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 1
+      },
+      "revId": "fc99de96601f02acac879cd3031d3bfa9aafa4bb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e2f3b875_4c120e06",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-11-12T04:38:18Z",
+      "side": 1,
+      "message": "https://github.com/openbmc/libpldm/blob/main/CONTRIBUTING.md?plain\u003d1#L62-L68",
+      "range": {
+        "startLine": 23,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 8
+      },
+      "revId": "fc99de96601f02acac879cd3031d3bfa9aafa4bb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f8595af_7d616d6f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-11-12T04:38:18Z",
+      "side": 1,
+      "message": "Same query regarding the representation of your name as I had on another patch.",
+      "range": {
+        "startLine": 29,
+        "startChar": 15,
+        "endLine": 30,
+        "endChar": 1
+      },
+      "revId": "fc99de96601f02acac879cd3031d3bfa9aafa4bb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2fc4e0f6_97e4f351",
+        "filename": "CHANGELOG.md",
+        "patchSetId": 8
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-11-12T04:38:18Z",
+      "side": 1,
+      "message": "One entry per commit please. A bullet-list entry may span multiple lines and contain nested bullet-lists.",
+      "range": {
+        "startLine": 22,
+        "startChar": 0,
+        "endLine": 23,
+        "endChar": 67
+      },
+      "revId": "fc99de96601f02acac879cd3031d3bfa9aafa4bb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "086e0519_4e31c0b4",
+        "filename": "include/libpldm/fru.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-11-12T04:38:18Z",
+      "side": 1,
+      "message": "Can you please mark this as `LIBPLDM_API_DEPRECATED`?",
+      "revId": "fc99de96601f02acac879cd3031d3bfa9aafa4bb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f378c117_b0bdbdb7",
+        "filename": "include/libpldm/fru.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-11-12T04:38:18Z",
+      "side": 1,
+      "message": "Can you please mark this as `LIBPLDM_API_DEPRECATED`?",
+      "revId": "fc99de96601f02acac879cd3031d3bfa9aafa4bb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c79937ef_aa9c1c68",
+        "filename": "include/libpldm/fru.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 531,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-11-12T04:38:18Z",
+      "side": 1,
+      "message": "Can you please also reimplement the req decode function so we can remove the old implementation?",
+      "revId": "fc99de96601f02acac879cd3031d3bfa9aafa4bb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "af06c8ea_82ab74be",
+        "filename": "include/libpldm/fru.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 546,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-11-12T04:38:18Z",
+      "side": 1,
+      "message": "Can you please also reimplement the resp encode function so we can remove this old API?",
+      "revId": "fc99de96601f02acac879cd3031d3bfa9aafa4bb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "ed51dde9_041f9231",
@@ -14,6 +260,40 @@
       "writtenOn": "2026-11-10T06:53:21Z",
       "side": 1,
       "message": "Could this validate `transfer_flag` with `is_transfer_flag_valid()` before encoding? That helper accepts only `PLDM_START`, `PLDM_MIDDLE`, `PLDM_END`, and `PLDM_START_AND_END`, but this encoder appears to serialize arbitrary values.",
+      "revId": "fc99de96601f02acac879cd3031d3bfa9aafa4bb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e0d66f0f_93ed92ba",
+        "filename": "src/dsp/fru.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 648,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-11-12T04:38:18Z",
+      "side": 1,
+      "message": "Please switch this to `LIBPLDM_ABI_DEPRECATED` and add the new implementation conforming to best-practices in CONTRIBUTING",
+      "revId": "fc99de96601f02acac879cd3031d3bfa9aafa4bb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d8a4cd7d_9bf359c7",
+        "filename": "src/dsp/fru.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 677,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-11-12T04:38:18Z",
+      "side": 1,
+      "message": "Please switch this to `LIBPLDM_ABI_DEPRECATED` and add the new implementation conforming to best-practices in CONTRIBUTING",
       "revId": "fc99de96601f02acac879cd3031d3bfa9aafa4bb",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
