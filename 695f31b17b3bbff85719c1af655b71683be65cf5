@@ -90,6 +90,46 @@
       "message": "Do you think we can drop this check? Two packages with identical records now mismatch because they were created at different times",
       "revId": "695f31b17b3bbff85719c1af655b71683be65cf5",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9ba21e67_c4209a7a",
+        "filename": "include/libpldm++/firmware_update.hpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-11-12T03:30:24Z",
+      "side": 1,
+      "message": "This may be a case of breaking the ABI again, but I don\u0027t know that we need to carry the information around. What are your thoughts on adding APIs to retrieve the info from the (unparsed) package data buffer?",
+      "revId": "695f31b17b3bbff85719c1af655b71683be65cf5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "33d18aba_e62230e1",
+        "filename": "include/libpldm++/firmware_update.hpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 315,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-11-12T03:30:24Z",
+      "side": 1,
+      "message": "Why are you proposing this only in the C++ binding? This is a problem for the C parser and related structures.",
+      "range": {
+        "startLine": 301,
+        "startChar": 1,
+        "endLine": 315,
+        "endChar": 41
+      },
+      "revId": "695f31b17b3bbff85719c1af655b71683be65cf5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
