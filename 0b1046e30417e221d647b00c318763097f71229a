@@ -139,6 +139,24 @@
       "message": "Can I ask a question @andrew@codeconstruct.com.au ? From the libpldm code it looks like it doesn\u0027t use enums as types in structs.\n\nBut can I ask, why we can\u0027t use `enum pldm_rde_schema_type` here?",
       "revId": "0b1046e30417e221d647b00c318763097f71229a",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "740fd841_2ef4057c",
+        "filename": "include/libpldm/rde.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 275,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-11-12T04:53:11Z",
+      "side": 1,
+      "message": "See:\n\n- https://github.com/openbmc/libpldm/blob/6e5a172ca42764ea5892edc14d9d154c61e041cf/CONTRIBUTING.md#L233-L238 and\n- https://github.com/openbmc/libpldm/blob/6e5a172ca42764ea5892edc14d9d154c61e041cf/CONTRIBUTING.md#L618-L627",
+      "parentUuid": "cf436c0d_d0c64199",
+      "revId": "0b1046e30417e221d647b00c318763097f71229a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
