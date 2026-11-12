@@ -1,6 +1,75 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "5da47d7c_15905008",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-11-12T03:08:11Z",
+      "side": 1,
+      "message": "Nit: spacing.",
+      "range": {
+        "startLine": 7,
+        "startChar": 20,
+        "endLine": 7,
+        "endChar": 22
+      },
+      "revId": "cafc790a1357acae58676a347451b309eff3bdde",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d368fe74_45cd0156",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-11-12T03:08:11Z",
+      "side": 1,
+      "message": "A few things:\n\n1. I doubt that component images intersecting the header are intended, however\n2. I doubt that Figure 4 there is normative, and\n3. The text for `ComponentLocationOffset` in Table 5 of DSP0267 v1.0.0 doesn\u0027t describe this constraint, which is where I would expect to find it\n\n\nI rather think we need some flags to control opinionated things like this.\n\nAs an aside, something I had in mind when writing the initial implementation of the parser was to have a flag that disallowed any intersection of components with other package elements (including other components). I didn\u0027t end up implementing the idea because I had already spent a lot of time on developing it as it was.",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 54
+      },
+      "revId": "cafc790a1357acae58676a347451b309eff3bdde",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f8f52e23_f1e811d7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-11-12T03:08:11Z",
+      "side": 1,
+      "message": "This is clearly impossible to satisfy with defined behaviour so it\u0027s sensible to not require a flag here.",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 57
+      },
+      "revId": "cafc790a1357acae58676a347451b309eff3bdde",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "d18a353b_731347e1",
@@ -14,6 +83,52 @@
       "writtenOn": "2026-11-11T16:58:45Z",
       "side": 1,
       "message": "Thanks for your review 👍",
+      "revId": "cafc790a1357acae58676a347451b309eff3bdde",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0fe61f15_2cbdd3b7",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 3674,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-11-12T03:08:11Z",
+      "side": 1,
+      "message": "Can we derive this from the package version instead? Avoiding pointer arithmetic is preferable to avoid the exposure to UB. Certainly more commentary here about assumptions would be required if we retain this implementation.\n\nAlso, can you split the assignment from the declaration? It\u0027s fairly messy as is.",
+      "range": {
+        "startLine": 3673,
+        "startChar": 1,
+        "endLine": 3674,
+        "endChar": 45
+      },
+      "revId": "cafc790a1357acae58676a347451b309eff3bdde",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ac344329_9bec0e2f",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 3682,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-11-12T03:08:11Z",
+      "side": 1,
+      "message": "Under the comment above this special case should not be necessary.",
+      "range": {
+        "startLine": 3679,
+        "startChar": 1,
+        "endLine": 3682,
+        "endChar": 2
+      },
       "revId": "cafc790a1357acae58676a347451b309eff3bdde",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
