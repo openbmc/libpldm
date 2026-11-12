@@ -3,6 +3,75 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8269faf8_fdf0ccfd",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-11-12T03:25:27Z",
+      "side": 1,
+      "message": "Why this version? It might be best to list the earliest version it\u0027s defined in, which is v1.0.0.",
+      "range": {
+        "startLine": 9,
+        "startChar": 8,
+        "endLine": 9,
+        "endChar": 14
+      },
+      "revId": "fa6aaacad70e808bf4501075b290292c764047f5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2e13abdf_a593a598",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-11-12T03:25:27Z",
+      "side": 1,
+      "message": "@manojkiran.eda@gmail.com can we mark the enum members in the IBM header as deprecated? I rather we don\u0027t continue to maintain multiple definitions, and it\u0027s not really appropriate that they\u0027re defined in the IBM-specific header.",
+      "range": {
+        "startLine": 10,
+        "startChar": 52,
+        "endLine": 11,
+        "endChar": 70
+      },
+      "revId": "fa6aaacad70e808bf4501075b290292c764047f5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "02c03754_a2d901af",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-11-12T03:25:27Z",
+      "side": 1,
+      "message": "Just checking that your name must be spelled entirely in caps? If not, do you mind fixing this?",
+      "range": {
+        "startLine": 15,
+        "startChar": 15,
+        "endLine": 15,
+        "endChar": 29
+      },
+      "revId": "fa6aaacad70e808bf4501075b290292c764047f5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d484bebf_89499379",
         "filename": "include/libpldm/fru.h",
         "patchSetId": 6
