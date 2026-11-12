@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a429649a_89797655",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2026-11-12T14:15:04Z",
+      "side": 1,
+      "message": "Thanks for your review 😊",
+      "parentUuid": "9feac09b_4323c7ec",
+      "revId": "695f31b17b3bbff85719c1af655b71683be65cf5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "eb6a67f6_4b60e50b",
@@ -31,6 +49,24 @@
       "writtenOn": "2026-11-10T15:28:06Z",
       "side": 1,
       "message": "Can you consider removing the function altogether along with `packageHeaderIdentifier`? There\u0027s no current use case for the UUID and its also a trivial 1:1 mapping",
+      "revId": "695f31b17b3bbff85719c1af655b71683be65cf5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fb0f0f20_44828068",
+        "filename": "bindings/cpp/firmware_update.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 364,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2026-11-12T14:15:04Z",
+      "side": 1,
+      "message": "Currently it maps 1:1\n\nMy understanding is that `PackageHeaderIdentifier` and `PackageHeaderFormatRevision` represent spec behavior and the data structure revision respectively.\n\nSo theoretically `PackageHeaderIdentifier` could increment while `PackageHeaderFormatRevision` does not ?\n\nIf it\u0027s entirely useless (always will map 1:1) why did they add it to the spec?\n\nThere is not much of a use-case for a field that can be derived from another field so I\u0027m suspecting possible future use-case.",
+      "parentUuid": "eb6a67f6_4b60e50b",
       "revId": "695f31b17b3bbff85719c1af655b71683be65cf5",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -58,6 +94,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4ac6a9a8_8aa93083",
+        "filename": "bindings/cpp/firmware_update.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 385,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2026-11-12T14:15:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "031d7026_e6ff3f76",
+      "range": {
+        "startLine": 381,
+        "startChar": 0,
+        "endLine": 385,
+        "endChar": 2
+      },
+      "revId": "695f31b17b3bbff85719c1af655b71683be65cf5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "96a380c3_b92b27b1",
@@ -75,6 +135,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ec2c4aa2_3099ba5b",
+        "filename": "bindings/cpp/firmware_update.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 685,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2026-11-12T14:15:04Z",
+      "side": 1,
+      "message": "It\u0027s intentional, for example `ComponentVersionString` is similarly only accepting ASCII strings.\n\nIf there is a request from a developer to support other string types i am happy to add that support in a separate change as it would probably be an ABI break. It would be good to have the supported string types consistent between all the strings in the package.\n\nBut worth pointing out in the CHANGELOG that this regression could happen for some users, i will add some note there 👍",
+      "parentUuid": "96a380c3_b92b27b1",
+      "revId": "695f31b17b3bbff85719c1af655b71683be65cf5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a926a501_d1bc69a0",
@@ -88,6 +166,24 @@
       "writtenOn": "2026-11-10T15:28:06Z",
       "side": 1,
       "message": "Do you think we can drop this check? Two packages with identical records now mismatch because they were created at different times",
+      "revId": "695f31b17b3bbff85719c1af655b71683be65cf5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7f49326d_68a79bf5",
+        "filename": "bindings/cpp/types.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 402,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2026-11-12T14:15:04Z",
+      "side": 1,
+      "message": "Sure, removed it. I do not have much of a preference here.",
+      "parentUuid": "a926a501_d1bc69a0",
       "revId": "695f31b17b3bbff85719c1af655b71683be65cf5",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -111,6 +207,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d9ae00ae_3c55f55c",
+        "filename": "include/libpldm++/firmware_update.hpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2026-11-12T14:15:04Z",
+      "side": 1,
+      "message": "\u003e What are your thoughts on adding APIs to retrieve the info from the (unparsed) package data buffer?\n\nYou specifically required a growable struct based design to minimize the number of function symbols.\n\nAdding separate APIs to retrieve information that can be represented inside the struct violates the original design constraints for this part of the library.\n\nIt\u0027s also inconsistent, why would we need to access these members differently than the others?",
+      "parentUuid": "9ba21e67_c4209a7a",
+      "revId": "695f31b17b3bbff85719c1af655b71683be65cf5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "33d18aba_e62230e1",
         "filename": "include/libpldm++/firmware_update.hpp",
         "patchSetId": 4
@@ -122,6 +236,30 @@
       "writtenOn": "2026-11-12T03:30:24Z",
       "side": 1,
       "message": "Why are you proposing this only in the C++ binding? This is a problem for the C parser and related structures.",
+      "range": {
+        "startLine": 301,
+        "startChar": 1,
+        "endLine": 315,
+        "endChar": 41
+      },
+      "revId": "695f31b17b3bbff85719c1af655b71683be65cf5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "304d2d23_315a5729",
+        "filename": "include/libpldm++/firmware_update.hpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 315,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2026-11-12T14:15:04Z",
+      "side": 1,
+      "message": "i am directly getting all these fields from the C library.\n\n```\npldm_package_header_information_pad hdr\n\nhdr.package_version_string\nhdr.package_header_format_revision\nhdr.package_release_date_time\nhdr.package_header_identifier\n```\n\nis there any C API where it\u0027s currently missing?",
+      "parentUuid": "33d18aba_e62230e1",
       "range": {
         "startLine": 301,
         "startChar": 1,
