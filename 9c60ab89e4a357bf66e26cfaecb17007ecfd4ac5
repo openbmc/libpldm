@@ -1,0 +1,107 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9312b1f1_4221729d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-11-13T05:43:40Z",
+      "side": 1,
+      "message": "Please add an empty line here to separate the paragraphs.",
+      "revId": "9c60ab89e4a357bf66e26cfaecb17007ecfd4ac5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5d4a0e3f_c5c57d59",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 1671,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-11-13T05:43:40Z",
+      "side": 1,
+      "message": "This condition should rather be `-EPROTO` as it\u0027s a protocol violation.",
+      "range": {
+        "startLine": 1671,
+        "startChar": 20,
+        "endLine": 1671,
+        "endChar": 49
+      },
+      "revId": "9c60ab89e4a357bf66e26cfaecb17007ecfd4ac5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5c1365c6_5da7c9e7",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2011,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-11-13T05:43:40Z",
+      "side": 1,
+      "message": "Please add a symmetric test for valid values of `get_package_data_maximum_transfer_size` here, and reject reserved values with `-EPROTO`. Header documentation and unit tests will also need an update.",
+      "revId": "9c60ab89e4a357bf66e26cfaecb17007ecfd4ac5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "afa881b3_73a6e0ff",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2064,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-11-13T05:43:40Z",
+      "side": 1,
+      "message": "`-EPROTO` - see comment on header.",
+      "range": {
+        "startLine": 2064,
+        "startChar": 34,
+        "endLine": 2064,
+        "endChar": 42
+      },
+      "revId": "9c60ab89e4a357bf66e26cfaecb17007ecfd4ac5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "706bb6b9_1da7a3b9",
+        "filename": "tests/unit/dsp/firmware_update.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 3566,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-11-13T05:43:40Z",
+      "side": 1,
+      "message": "`PLDM_MSG_DEFINE_P()`.",
+      "range": {
+        "startLine": 3563,
+        "startChar": 4,
+        "endLine": 3566,
+        "endChar": 46
+      },
+      "revId": "9c60ab89e4a357bf66e26cfaecb17007ecfd4ac5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
