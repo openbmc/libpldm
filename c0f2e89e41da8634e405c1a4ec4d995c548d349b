@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "00c8d598_52c045e8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002297
+      },
+      "writtenOn": "2026-11-13T13:32:46Z",
+      "side": 1,
+      "message": "Thanks for the review! I\u0027ve addressed all comments and raised two patches - one for renaming and the other for fuzz tests",
+      "parentUuid": "5227692f_8a68a4d2",
+      "revId": "c0f2e89e41da8634e405c1a4ec4d995c548d349b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "883e200d_11eab976",
@@ -31,6 +49,30 @@
       "writtenOn": "2026-11-13T05:23:33Z",
       "side": 1,
       "message": "Please rename this to `encode_pldm_fwup_request_downstream_device_update_req`:\n\nhttps://github.com/openbmc/libpldm/blob/a99b43a57645dd8abde6628f6e0c9ce23fc70efb/CONTRIBUTING.md#L134-L139",
+      "range": {
+        "startLine": 1917,
+        "startChar": 4,
+        "endLine": 1917,
+        "endChar": 47
+      },
+      "revId": "c0f2e89e41da8634e405c1a4ec4d995c548d349b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "77309383_739508b5",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1917,
+      "author": {
+        "id": 1002297
+      },
+      "writtenOn": "2026-11-13T13:32:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "883e200d_11eab976",
       "range": {
         "startLine": 1917,
         "startChar": 4,
@@ -64,6 +106,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d5946cde_2bb53bd9",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1919,
+      "author": {
+        "id": 1002297
+      },
+      "writtenOn": "2026-11-13T13:32:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "aea57584_83f53269",
+      "range": {
+        "startLine": 1919,
+        "startChar": 14,
+        "endLine": 1919,
+        "endChar": 55
+      },
+      "revId": "c0f2e89e41da8634e405c1a4ec4d995c548d349b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5f6d8e8e_9980f4d5",
@@ -77,6 +143,30 @@
       "writtenOn": "2026-11-13T05:23:33Z",
       "side": 1,
       "message": "Please rename this one to match the struct also.",
+      "range": {
+        "startLine": 1958,
+        "startChar": 4,
+        "endLine": 1958,
+        "endChar": 47
+      },
+      "revId": "c0f2e89e41da8634e405c1a4ec4d995c548d349b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7b246f27_8914a7d7",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1958,
+      "author": {
+        "id": 1002297
+      },
+      "writtenOn": "2026-11-13T13:32:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5f6d8e8e_9980f4d5",
       "range": {
         "startLine": 1958,
         "startChar": 4,
@@ -110,6 +200,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "365ef0f5_0a42f761",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1970,
+      "author": {
+        "id": 1002297
+      },
+      "writtenOn": "2026-11-13T13:32:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "db387944_87914412",
+      "range": {
+        "startLine": 1970,
+        "startChar": 8,
+        "endLine": 1970,
+        "endChar": 51
+      },
+      "revId": "c0f2e89e41da8634e405c1a4ec4d995c548d349b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0fcd925e_faf80ee6",
@@ -123,6 +237,30 @@
       "writtenOn": "2026-11-13T05:23:33Z",
       "side": 1,
       "message": "Please rename this one to match the struct also.",
+      "range": {
+        "startLine": 1984,
+        "startChar": 4,
+        "endLine": 1984,
+        "endChar": 48
+      },
+      "revId": "c0f2e89e41da8634e405c1a4ec4d995c548d349b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8594b41d_7a47e847",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1984,
+      "author": {
+        "id": 1002297
+      },
+      "writtenOn": "2026-11-13T13:32:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0fcd925e_faf80ee6",
       "range": {
         "startLine": 1984,
         "startChar": 4,
@@ -156,6 +294,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c8997632_3bf4fcb1",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2034,
+      "author": {
+        "id": 1002297
+      },
+      "writtenOn": "2026-11-13T13:32:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "18f15a71_b9525af1",
+      "range": {
+        "startLine": 2034,
+        "startChar": 4,
+        "endLine": 2034,
+        "endChar": 48
+      },
+      "revId": "c0f2e89e41da8634e405c1a4ec4d995c548d349b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "efb15120_222b80cf",
@@ -179,6 +341,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ccddee1d_f889e354",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2036,
+      "author": {
+        "id": 1002297
+      },
+      "writtenOn": "2026-11-13T13:32:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "efb15120_222b80cf",
+      "range": {
+        "startLine": 2036,
+        "startChar": 8,
+        "endLine": 2036,
+        "endChar": 50
+      },
+      "revId": "c0f2e89e41da8634e405c1a4ec4d995c548d349b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9cc5f9dc_e8efe4ed",
@@ -192,6 +378,30 @@
       "writtenOn": "2026-11-13T05:23:33Z",
       "side": 1,
       "message": "Please rename the related macros to match the struct name.",
+      "range": {
+        "startLine": 2052,
+        "startChar": 7,
+        "endLine": 2052,
+        "endChar": 55
+      },
+      "revId": "c0f2e89e41da8634e405c1a4ec4d995c548d349b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "20c8f4fc_430b16df",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2052,
+      "author": {
+        "id": 1002297
+      },
+      "writtenOn": "2026-11-13T13:32:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9cc5f9dc_e8efe4ed",
       "range": {
         "startLine": 2052,
         "startChar": 7,
