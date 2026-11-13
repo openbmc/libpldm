@@ -48,6 +48,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4798d457_a39c3012",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-11-13T03:18:55Z",
+      "side": 1,
+      "message": "Yeah, look, I\u0027d rather we violate the guideline than treat it as a unbreakable rule and produce hacks like this.",
+      "parentUuid": "ca5932aa_1e854b18",
+      "range": {
+        "startLine": 7,
+        "startChar": 20,
+        "endLine": 7,
+        "endChar": 22
+      },
+      "revId": "cafc790a1357acae58676a347451b309eff3bdde",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d368fe74_45cd0156",
