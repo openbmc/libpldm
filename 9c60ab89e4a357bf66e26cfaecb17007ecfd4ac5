@@ -18,6 +18,41 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "027768cd_d7d5e138",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1002297
+      },
+      "writtenOn": "2026-11-13T12:05:34Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "9312b1f1_4221729d",
+      "revId": "9c60ab89e4a357bf66e26cfaecb17007ecfd4ac5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "59df1ffd_ffd3e92b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002297
+      },
+      "writtenOn": "2026-11-13T12:05:34Z",
+      "side": 1,
+      "message": "Thanks for the review!",
+      "revId": "9c60ab89e4a357bf66e26cfaecb17007ecfd4ac5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5d4a0e3f_c5c57d59",
@@ -31,6 +66,30 @@
       "writtenOn": "2026-11-13T05:43:40Z",
       "side": 1,
       "message": "This condition should rather be `-EPROTO` as it\u0027s a protocol violation.",
+      "range": {
+        "startLine": 1671,
+        "startChar": 20,
+        "endLine": 1671,
+        "endChar": 49
+      },
+      "revId": "9c60ab89e4a357bf66e26cfaecb17007ecfd4ac5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "88bf012e_22ece33c",
+        "filename": "include/libpldm/firmware_update.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 1671,
+      "author": {
+        "id": 1002297
+      },
+      "writtenOn": "2026-11-13T12:05:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5d4a0e3f_c5c57d59",
       "range": {
         "startLine": 1671,
         "startChar": 20,
@@ -58,6 +117,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3c079024_46d7b805",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2011,
+      "author": {
+        "id": 1002297
+      },
+      "writtenOn": "2026-11-13T12:05:34Z",
+      "side": 1,
+      "message": "Ack, I\u0027ve added a test for DDWillSendGetPackageDataCommand which actually has reserved values",
+      "parentUuid": "5c1365c6_5da7c9e7",
+      "revId": "9c60ab89e4a357bf66e26cfaecb17007ecfd4ac5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "afa881b3_73a6e0ff",
@@ -81,6 +158,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8ffc796c_61eea6ff",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2064,
+      "author": {
+        "id": 1002297
+      },
+      "writtenOn": "2026-11-13T12:05:34Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "afa881b3_73a6e0ff",
+      "range": {
+        "startLine": 2064,
+        "startChar": 34,
+        "endLine": 2064,
+        "endChar": 42
+      },
+      "revId": "9c60ab89e4a357bf66e26cfaecb17007ecfd4ac5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "706bb6b9_1da7a3b9",
@@ -94,6 +195,30 @@
       "writtenOn": "2026-11-13T05:43:40Z",
       "side": 1,
       "message": "`PLDM_MSG_DEFINE_P()`.",
+      "range": {
+        "startLine": 3563,
+        "startChar": 4,
+        "endLine": 3566,
+        "endChar": 46
+      },
+      "revId": "9c60ab89e4a357bf66e26cfaecb17007ecfd4ac5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "14cb8da2_20017277",
+        "filename": "tests/unit/dsp/firmware_update.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 3566,
+      "author": {
+        "id": 1002297
+      },
+      "writtenOn": "2026-11-13T12:05:34Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "706bb6b9_1da7a3b9",
       "range": {
         "startLine": 3563,
         "startChar": 4,
