@@ -225,6 +225,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "cde200a6_3c5e98bc",
+        "filename": "include/libpldm++/firmware_update.hpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-11-13T03:08:43Z",
+      "side": 1,
+      "message": "\u003e You specifically required a growable struct based design to minimize the number of function symbols.\n\n\nThat wasn\u0027t really the intent, in my view the argument about function symbols was a side-discussion. The intent of the growable structs was to acknowledge that the spec will likely continue to grow, and that we should anticipate that and not break consumers when we implement the new revisions, but also not have a function for every struct member whose only job is to access the struct member, when the struct member could just be access directly.\n\u003e It\u0027s also inconsistent, why would we need to access these members differently than the others?\n\n\nFirstly, it was a tentative thought, not a directive, so I hope this doesn\u0027t get too heated. The tentative thought was motivated by my instinct that it probably is for purposes like logging that you\u0027d want to access the information to begin with, in which case it\u0027s a bit ancillary and maybe not necessary to carry the info in the core class.\n\nAnyway, given this information is present for all revisions, if we are to carry it in the core class I\u0027d rather we break the ABI again to include it than need the `_amend_1` business. Again, the pinning and extensible struct were to cope with evolution of the spec, not to address defects in the implementation design. If we aren\u0027t to have the separate accessors for this header data, then I view not including it as a defect.",
+      "parentUuid": "d9ae00ae_3c55f55c",
+      "revId": "695f31b17b3bbff85719c1af655b71683be65cf5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "33d18aba_e62230e1",
         "filename": "include/libpldm++/firmware_update.hpp",
         "patchSetId": 4
@@ -260,6 +278,30 @@
       "side": 1,
       "message": "i am directly getting all these fields from the C library.\n\n```\npldm_package_header_information_pad hdr\n\nhdr.package_version_string\nhdr.package_header_format_revision\nhdr.package_release_date_time\nhdr.package_header_identifier\n```\n\nis there any C API where it\u0027s currently missing?",
       "parentUuid": "33d18aba_e62230e1",
+      "range": {
+        "startLine": 301,
+        "startChar": 1,
+        "endLine": 315,
+        "endChar": 41
+      },
+      "revId": "695f31b17b3bbff85719c1af655b71683be65cf5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d5d1649b_660a74dc",
+        "filename": "include/libpldm++/firmware_update.hpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 315,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-11-13T03:08:43Z",
+      "side": 1,
+      "message": "My apologies, lapse of memory there. I had recollections about not including this in the main package struct, though clearly it was because of the split header arrangement. I should have checked rather than guessed.",
+      "parentUuid": "304d2d23_315a5729",
       "range": {
         "startLine": 301,
         "startChar": 1,
