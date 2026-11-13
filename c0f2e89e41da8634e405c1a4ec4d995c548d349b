@@ -1,0 +1,205 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5227692f_8a68a4d2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-11-13T05:23:33Z",
+      "side": 1,
+      "message": "Hi Arun,\n\nThanks for the change. I have some requests before we stabilise this, both inline in the patch and the following. These changes should be done in a separate patch that\u0027s a dependency of this stabilisation patch.\n\nCan you please add fuzz tests for each of the stabilised functions?",
+      "revId": "c0f2e89e41da8634e405c1a4ec4d995c548d349b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "883e200d_11eab976",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1917,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-11-13T05:23:33Z",
+      "side": 1,
+      "message": "Please rename this to `encode_pldm_fwup_request_downstream_device_update_req`:\n\nhttps://github.com/openbmc/libpldm/blob/a99b43a57645dd8abde6628f6e0c9ce23fc70efb/CONTRIBUTING.md#L134-L139",
+      "range": {
+        "startLine": 1917,
+        "startChar": 4,
+        "endLine": 1917,
+        "endChar": 47
+      },
+      "revId": "c0f2e89e41da8634e405c1a4ec4d995c548d349b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aea57584_83f53269",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1919,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-11-13T05:23:33Z",
+      "side": 1,
+      "message": "Please rename this to `pldm_fwup_request_downstream_device_update_req`:\n\nhttps://github.com/openbmc/libpldm/blob/a99b43a57645dd8abde6628f6e0c9ce23fc70efb/CONTRIBUTING.md#L141-L143",
+      "range": {
+        "startLine": 1919,
+        "startChar": 14,
+        "endLine": 1919,
+        "endChar": 55
+      },
+      "revId": "c0f2e89e41da8634e405c1a4ec4d995c548d349b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5f6d8e8e_9980f4d5",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1958,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-11-13T05:23:33Z",
+      "side": 1,
+      "message": "Please rename this one to match the struct also.",
+      "range": {
+        "startLine": 1958,
+        "startChar": 4,
+        "endLine": 1958,
+        "endChar": 47
+      },
+      "revId": "c0f2e89e41da8634e405c1a4ec4d995c548d349b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "db387944_87914412",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1970,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-11-13T05:23:33Z",
+      "side": 1,
+      "message": "Please rename the related macros to match the struct name.",
+      "range": {
+        "startLine": 1970,
+        "startChar": 8,
+        "endLine": 1970,
+        "endChar": 51
+      },
+      "revId": "c0f2e89e41da8634e405c1a4ec4d995c548d349b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0fcd925e_faf80ee6",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1984,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-11-13T05:23:33Z",
+      "side": 1,
+      "message": "Please rename this one to match the struct also.",
+      "range": {
+        "startLine": 1984,
+        "startChar": 4,
+        "endLine": 1984,
+        "endChar": 48
+      },
+      "revId": "c0f2e89e41da8634e405c1a4ec4d995c548d349b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "18f15a71_b9525af1",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2034,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-11-13T05:23:33Z",
+      "side": 1,
+      "message": "Please rename this to `pldm_fwup_request_downstream_device_update_resp`:\n\nhttps://github.com/openbmc/libpldm/blob/a99b43a57645dd8abde6628f6e0c9ce23fc70efb/CONTRIBUTING.md#L134-L139",
+      "range": {
+        "startLine": 2034,
+        "startChar": 4,
+        "endLine": 2034,
+        "endChar": 48
+      },
+      "revId": "c0f2e89e41da8634e405c1a4ec4d995c548d349b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "efb15120_222b80cf",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2036,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-11-13T05:23:33Z",
+      "side": 1,
+      "message": "Please rename this to `pldm_fwup_request_downstream_device_update_resp`:\n\nhttps://github.com/openbmc/libpldm/blob/a99b43a57645dd8abde6628f6e0c9ce23fc70efb/CONTRIBUTING.md#L141-L143",
+      "range": {
+        "startLine": 2036,
+        "startChar": 8,
+        "endLine": 2036,
+        "endChar": 50
+      },
+      "revId": "c0f2e89e41da8634e405c1a4ec4d995c548d349b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9cc5f9dc_e8efe4ed",
+        "filename": "src/dsp/firmware_update.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2052,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2026-11-13T05:23:33Z",
+      "side": 1,
+      "message": "Please rename the related macros to match the struct name.",
+      "range": {
+        "startLine": 2052,
+        "startChar": 7,
+        "endLine": 2052,
+        "endChar": 55
+      },
+      "revId": "c0f2e89e41da8634e405c1a4ec4d995c548d349b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
