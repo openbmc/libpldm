@@ -892,6 +892,25 @@ TEST(EncodeDfHeartbeatResp, GoodTestCompletionCode)
 #endif
 
 #if HAVE_LIBPLDM_API_TESTING
+TEST(EncodeDfHeartbeatResp, CompletionCodeOnlyCapacity)
+{
+    PLDM_MSG_DEFINE_P(msg, 1);
+    const struct pldm_file_df_heartbeat_resp resp = {
+        PLDM_FILE_CC_INVALID_FILE_DESCRIPTOR, 0};
+    size_t payload_length = 0;
+
+    EXPECT_EQ(encode_pldm_file_df_heartbeat_resp(0, &resp, msg, &payload_length),
+              -EOVERFLOW);
+
+    payload_length = 1;
+    ASSERT_EQ(encode_pldm_file_df_heartbeat_resp(0, &resp, msg, &payload_length),
+              0);
+    EXPECT_EQ(payload_length, 1ul);
+    EXPECT_EQ(msg->payload[0], resp.completion_code);
+}
+#endif
+
+#if HAVE_LIBPLDM_API_TESTING
 TEST(EncodeDfHeartbeatResp, BadTestUnAllocatedPtrParams)
 {
     uint8_t instance_id = 0;

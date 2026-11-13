@@ -40,6 +40,8 @@ Change categories:
 
 ### Fixed
 
+- file: Allow completion-code-only buffers for DfHeartbeat error responses
+
 - firmware-update: Reject component images overlapping the package header in the
   C decoder, also covering the C++ bindings
 
