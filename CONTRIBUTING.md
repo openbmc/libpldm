@@ -46,7 +46,7 @@ Maintainers may rebase your patches themselves if necessary.
 - [ ] If the change adds support for a new message type, then the commit message
       specifies all of:
   - [ ] The relevant DMTF specification by its DSP number and title
-  - [ ] The relevant version of the specification
+  - [ ] The earliest relevant version of the specification
   - [ ] The section of the specification that defines the message type
 
 - [ ] The commit message is [written in imperative
