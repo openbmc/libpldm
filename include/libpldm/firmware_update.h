@@ -913,31 +913,31 @@ struct pldm_request_update_resp {
 	uint8_t fd_will_send_pkg_data;
 } __attribute__((packed));
 
-/** @struct pldm_request_downstream_dev_update_req
+/** @struct pldm_fwup_request_downstream_device_update_req
  *
  *  Structure representing Request Downstream Device Update request
  */
-struct pldm_request_downstream_device_update_req {
+struct pldm_fwup_request_downstream_device_update_req {
 	uint32_t maximum_downstream_device_transfer_size;
 	uint8_t maximum_outstanding_transfer_requests;
 	uint16_t downstream_device_package_data_length;
 };
-#define PLDM_DOWNSTREAM_DEVICE_UPDATE_REQUEST_BYTES 7
+#define PLDM_FWUP_REQUEST_DOWNSTREAM_DEVICE_UPDATE_REQ_BYTES 7
 
-/** @struct pldm_request_downstream_dev_update_resp
+/** @struct pldm_fwup_request_downstream_device_update_resp
  *
  *  Structure representing Request Downstream Device Update response
  */
-struct pldm_request_downstream_device_update_resp {
+struct pldm_fwup_request_downstream_device_update_resp {
 	uint8_t completion_code;
 	uint16_t downstream_device_meta_data_length;
 	uint8_t downstream_device_will_send_get_package_data;
 	uint16_t get_package_data_maximum_transfer_size;
 };
-#define PLDM_DOWNSTREAM_DEVICE_UPDATE_RESPONSE_MIN_BYTES 4
+#define PLDM_FWUP_REQUEST_DOWNSTREAM_DEVICE_UPDATE_RESP_MIN_BYTES 4
 /* Maximum successful response size, including the optional transfer limit. */
-#define PLDM_DOWNSTREAM_DEVICE_UPDATE_RESPONSE_BYTES		     6
-#define PLDM_DOWNSTREAM_DEVICE_WILL_SEND_GET_PACKAGE_DATA_WITH_LIMIT 2
+#define PLDM_FWUP_REQUEST_DOWNSTREAM_DEVICE_UPDATE_RESP_BYTES		  6
+#define PLDM_FWUP_DOWNSTREAM_DEVICE_WILL_SEND_GET_PACKAGE_DATA_WITH_LIMIT 2
 
 /** @struct pldm_pass_component_table_req
  *
@@ -1605,9 +1605,9 @@ int encode_request_update_resp(uint8_t instance_id,
  *  @note Caller is responsible for memory alloc and dealloc of param
  *        'msg.payload'
  */
-int encode_request_downstream_device_update_req(
+int encode_pldm_fwup_request_downstream_device_update_req(
 	uint8_t instance_id,
-	const struct pldm_request_downstream_device_update_req *req_data,
+	const struct pldm_fwup_request_downstream_device_update_req *req_data,
 	struct pldm_msg *msg, size_t *payload_length);
 
 /** @brief Decode PLDM request message for RequestDownstreamDeviceUpdate
@@ -1625,15 +1625,15 @@ int encode_request_downstream_device_update_req(
  *  @note Caller is responsible for memory alloc and dealloc of param
  *        'msg.payload'
  */
-int decode_request_downstream_device_update_req(
+int decode_pldm_fwup_request_downstream_device_update_req(
 	const struct pldm_msg *msg, size_t payload_length,
-	struct pldm_request_downstream_device_update_req *req_data);
+	struct pldm_fwup_request_downstream_device_update_req *req_data);
 
 /** @brief Create PLDM response message for RequestDownstreamDeviceUpdate
  *
  *  @note get_package_data_maximum_transfer_size is only encoded when
  *        downstream_device_will_send_get_package_data is
- *        PLDM_DOWNSTREAM_DEVICE_WILL_SEND_GET_PACKAGE_DATA_WITH_LIMIT.
+ *        PLDM_FWUP_DOWNSTREAM_DEVICE_WILL_SEND_GET_PACKAGE_DATA_WITH_LIMIT.
  *
  *  @param[in] instance_id - Message's instance id
  *  @param[in] resp_data - Response data
@@ -1649,16 +1649,16 @@ int decode_request_downstream_device_update_req(
  *  @note  Caller is responsible for memory alloc and dealloc of param
  *		   'msg.payload'
  */
-int encode_request_downstream_device_update_resp(
+int encode_pldm_fwup_request_downstream_device_update_resp(
 	uint8_t instance_id,
-	const struct pldm_request_downstream_device_update_resp *resp_data,
+	const struct pldm_fwup_request_downstream_device_update_resp *resp_data,
 	struct pldm_msg *msg, size_t *payload_length);
 
 /** @brief Decode a RequestDownstreamDeviceUpdate response message
  *
  *  @note get_package_data_maximum_transfer_size is only decoded when
  *        downstream_device_will_send_get_package_data is
- *        PLDM_DOWNSTREAM_DEVICE_WILL_SEND_GET_PACKAGE_DATA_WITH_LIMIT.
+ *        PLDM_FWUP_DOWNSTREAM_DEVICE_WILL_SEND_GET_PACKAGE_DATA_WITH_LIMIT.
  *        The output member is left unmodified otherwise.
  *
  *  @param[in] msg - Response message
@@ -1672,9 +1672,9 @@ int encode_request_downstream_device_update_resp(
  *		-EPROTO if the package-data flag is reserved,
  *		-EBADMSG if the message buffer was not fully consumed
  */
-int decode_request_downstream_device_update_resp(
+int decode_pldm_fwup_request_downstream_device_update_resp(
 	const struct pldm_msg *msg, size_t payload_length,
-	struct pldm_request_downstream_device_update_resp *resp_data);
+	struct pldm_fwup_request_downstream_device_update_resp *resp_data);
 
 /** @brief Create PLDM request message for PassComponentTable
  *

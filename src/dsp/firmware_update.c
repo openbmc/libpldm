@@ -1914,9 +1914,9 @@ int decode_pldm_downstream_device_parameters_entry_from_iter(
 }
 
 LIBPLDM_ABI_TESTING
-int encode_request_downstream_device_update_req(
+int encode_pldm_fwup_request_downstream_device_update_req(
 	uint8_t instance_id,
-	const struct pldm_request_downstream_device_update_req *req_data,
+	const struct pldm_fwup_request_downstream_device_update_req *req_data,
 	struct pldm_msg *msg, size_t *payload_length)
 {
 	PLDM_MSGBUF_RW_DEFINE_P(buf);
@@ -1937,9 +1937,9 @@ int encode_request_downstream_device_update_req(
 		return rc;
 	}
 
-	rc = pldm_msgbuf_init_errno(buf,
-				    PLDM_DOWNSTREAM_DEVICE_UPDATE_REQUEST_BYTES,
-				    msg->payload, *payload_length);
+	rc = pldm_msgbuf_init_errno(
+		buf, PLDM_FWUP_REQUEST_DOWNSTREAM_DEVICE_UPDATE_REQ_BYTES,
+		msg->payload, *payload_length);
 	if (rc) {
 		return rc;
 	}
@@ -1955,9 +1955,9 @@ int encode_request_downstream_device_update_req(
 }
 
 LIBPLDM_ABI_TESTING
-int decode_request_downstream_device_update_req(
+int decode_pldm_fwup_request_downstream_device_update_req(
 	const struct pldm_msg *msg, size_t payload_length,
-	struct pldm_request_downstream_device_update_req *req)
+	struct pldm_fwup_request_downstream_device_update_req *req)
 {
 	int rc;
 	PLDM_MSGBUF_RO_DEFINE_P(buf);
@@ -1966,9 +1966,9 @@ int decode_request_downstream_device_update_req(
 		return -EINVAL;
 	}
 
-	rc = pldm_msgbuf_init_errno(buf,
-				    PLDM_DOWNSTREAM_DEVICE_UPDATE_REQUEST_BYTES,
-				    msg->payload, payload_length);
+	rc = pldm_msgbuf_init_errno(
+		buf, PLDM_FWUP_REQUEST_DOWNSTREAM_DEVICE_UPDATE_REQ_BYTES,
+		msg->payload, payload_length);
 	if (rc) {
 		return rc;
 	}
@@ -1981,9 +1981,9 @@ int decode_request_downstream_device_update_req(
 }
 
 LIBPLDM_ABI_TESTING
-int encode_request_downstream_device_update_resp(
+int encode_pldm_fwup_request_downstream_device_update_resp(
 	uint8_t instance_id,
-	const struct pldm_request_downstream_device_update_resp *resp_data,
+	const struct pldm_fwup_request_downstream_device_update_resp *resp_data,
 	struct pldm_msg *msg, size_t *payload_length)
 {
 	PLDM_MSGBUF_RW_DEFINE_P(buf);
@@ -2011,12 +2011,12 @@ int encode_request_downstream_device_update_resp(
 	}
 
 	if (resp_data->downstream_device_will_send_get_package_data >
-	    PLDM_DOWNSTREAM_DEVICE_WILL_SEND_GET_PACKAGE_DATA_WITH_LIMIT) {
+	    PLDM_FWUP_DOWNSTREAM_DEVICE_WILL_SEND_GET_PACKAGE_DATA_WITH_LIMIT) {
 		return -EPROTO;
 	}
 
 	rc = pldm_msgbuf_init_errno(
-		buf, PLDM_DOWNSTREAM_DEVICE_UPDATE_RESPONSE_MIN_BYTES,
+		buf, PLDM_FWUP_REQUEST_DOWNSTREAM_DEVICE_UPDATE_RESP_MIN_BYTES,
 		msg->payload, *payload_length);
 	if (rc) {
 		return rc;
@@ -2027,7 +2027,7 @@ int encode_request_downstream_device_update_resp(
 	pldm_msgbuf_insert(
 		buf, resp_data->downstream_device_will_send_get_package_data);
 	if (resp_data->downstream_device_will_send_get_package_data ==
-	    PLDM_DOWNSTREAM_DEVICE_WILL_SEND_GET_PACKAGE_DATA_WITH_LIMIT) {
+	    PLDM_FWUP_DOWNSTREAM_DEVICE_WILL_SEND_GET_PACKAGE_DATA_WITH_LIMIT) {
 		pldm_msgbuf_insert(
 			buf, resp_data->get_package_data_maximum_transfer_size);
 	}
@@ -2036,9 +2036,9 @@ int encode_request_downstream_device_update_resp(
 }
 
 LIBPLDM_ABI_TESTING
-int decode_request_downstream_device_update_resp(
+int decode_pldm_fwup_request_downstream_device_update_resp(
 	const struct pldm_msg *msg, size_t payload_length,
-	struct pldm_request_downstream_device_update_resp *resp_data)
+	struct pldm_fwup_request_downstream_device_update_resp *resp_data)
 {
 	PLDM_MSGBUF_RO_DEFINE_P(buf);
 	int rc;
@@ -2054,7 +2054,7 @@ int decode_request_downstream_device_update_resp(
 	}
 
 	rc = pldm_msgbuf_init_errno(
-		buf, PLDM_DOWNSTREAM_DEVICE_UPDATE_RESPONSE_MIN_BYTES,
+		buf, PLDM_FWUP_REQUEST_DOWNSTREAM_DEVICE_UPDATE_RESP_MIN_BYTES,
 		msg->payload, payload_length);
 	if (rc) {
 		return rc;
@@ -2065,11 +2065,11 @@ int decode_request_downstream_device_update_resp(
 	pldm_msgbuf_extract(
 		buf, resp_data->downstream_device_will_send_get_package_data);
 	if (resp_data->downstream_device_will_send_get_package_data >
-	    PLDM_DOWNSTREAM_DEVICE_WILL_SEND_GET_PACKAGE_DATA_WITH_LIMIT) {
+	    PLDM_FWUP_DOWNSTREAM_DEVICE_WILL_SEND_GET_PACKAGE_DATA_WITH_LIMIT) {
 		return pldm_msgbuf_discard(buf, -EPROTO);
 	}
 	if (resp_data->downstream_device_will_send_get_package_data ==
-	    PLDM_DOWNSTREAM_DEVICE_WILL_SEND_GET_PACKAGE_DATA_WITH_LIMIT) {
+	    PLDM_FWUP_DOWNSTREAM_DEVICE_WILL_SEND_GET_PACKAGE_DATA_WITH_LIMIT) {
 		pldm_msgbuf_extract(
 			buf, resp_data->get_package_data_maximum_transfer_size);
 	}

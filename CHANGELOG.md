@@ -21,6 +21,7 @@ Change categories:
 
 ### Changed
 
+- dsp: firmware_update: Rename downstream device update symbols
 - libpldm++: Preserve multiple descriptors of the same type
 
   This breaks API and ABI compatibility; consumers must rebuild
