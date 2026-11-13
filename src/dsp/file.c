@@ -362,7 +362,11 @@ int encode_pldm_file_df_heartbeat_resp(
 		return rc;
 	}
 
-	rc = pldm_msgbuf_init_errno(buf, PLDM_DF_HEARTBEAT_RESP_BYTES,
+	const size_t min_length = resp->completion_code == PLDM_SUCCESS ?
+					  PLDM_DF_HEARTBEAT_RESP_BYTES :
+					  sizeof(resp->completion_code);
+
+	rc = pldm_msgbuf_init_errno(buf, min_length,
 				    msg->payload, *payload_length);
 	if (rc) {
 		return rc;
