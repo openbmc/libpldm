@@ -280,6 +280,23 @@ TEST(DecodeDfCloseResp, GoodTest)
 #endif
 
 #if HAVE_LIBPLDM_API_TESTING
+TEST(DecodeDfCloseResp, EmptyPayload)
+{
+    PLDM_MSG_DEFINE_P(msg, PLDM_DF_CLOSE_RESP_BYTES);
+    struct pldm_file_df_close_resp resp = {};
+
+    for (const uint8_t cc : std::array<uint8_t, 2>{
+             PLDM_SUCCESS, PLDM_FILE_CC_INVALID_FILE_DESCRIPTOR})
+    {
+        msg->payload[0] = cc;
+        EXPECT_EQ(decode_pldm_file_df_close_resp(msg, 0, &resp), -EOVERFLOW);
+        ASSERT_EQ(decode_pldm_file_df_close_resp(msg, 1, &resp), 0);
+        EXPECT_EQ(resp.completion_code, cc);
+    }
+}
+#endif
+
+#if HAVE_LIBPLDM_API_TESTING
 TEST(DecodeDfCloseResp, BadTestUnAllocatedPtrParams)
 {
     uint8_t completion_code = PLDM_SUCCESS;

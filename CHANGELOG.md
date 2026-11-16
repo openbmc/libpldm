@@ -40,6 +40,7 @@ Change categories:
 
 ### Fixed
 
+- file: Reject empty DfClose responses
 - firmware-update: Reject component images overlapping the package header in the
   C decoder, also covering the C++ bindings
 

@@ -224,6 +224,7 @@ int encode_pldm_file_df_close_resp(uint8_t instance_id,
  *  @param[out] resp - pointer to the decoded response message
  *  @return 0 on success
  *          -EINVAL if the input parameters' memory are not allocated
+ *          -EOVERFLOW if the response payload is empty
  */
 int decode_pldm_file_df_close_resp(const struct pldm_msg *msg,
 				   size_t payload_length,
