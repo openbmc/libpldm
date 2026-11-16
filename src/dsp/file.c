@@ -245,6 +245,10 @@ int decode_pldm_file_df_close_resp(const struct pldm_msg *msg,
 		return -EINVAL;
 	}
 
+	if (payload_length < PLDM_DF_CLOSE_RESP_BYTES) {
+		return -EOVERFLOW;
+	}
+
 	resp->completion_code = pldm_msg_has_error(msg, payload_length);
 
 	return 0;
