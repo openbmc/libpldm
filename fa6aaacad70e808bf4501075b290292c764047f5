@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "bb7b8b8c_d128dd75",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1002771
+      },
+      "writtenOn": "2026-11-17T10:07:32Z",
+      "side": 1,
+      "message": "No particular reason, v1.0.1 was just the copy I was working from. Now cites v1.0.0. I also added the version to the fru.h comment, since v2.0.0 renumbers this table to Table 5.",
+      "parentUuid": "8269faf8_fdf0ccfd",
+      "range": {
+        "startLine": 9,
+        "startChar": 8,
+        "endLine": 9,
+        "endChar": 14
+      },
+      "revId": "fa6aaacad70e808bf4501075b290292c764047f5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2e13abdf_a593a598",
         "filename": "/COMMIT_MSG",
         "patchSetId": 6
@@ -49,6 +73,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "dfe7cadd_010af0ca",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1002771
+      },
+      "writtenOn": "2026-11-17T10:07:32Z",
+      "side": 1,
+      "message": "Happy to send a follow-up that deprecates PLDM_OEM_FRU_FIELD_TYPE_IANA and PLDM_OEM_IBM_FRU_FIELD_TYPE_IANA in favour of this constant, once Manoj confirms.",
+      "parentUuid": "2e13abdf_a593a598",
+      "range": {
+        "startLine": 10,
+        "startChar": 52,
+        "endLine": 11,
+        "endChar": 70
+      },
+      "revId": "fa6aaacad70e808bf4501075b290292c764047f5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "02c03754_a2d901af",
         "filename": "/COMMIT_MSG",
         "patchSetId": 6
@@ -60,6 +108,30 @@
       "writtenOn": "2026-11-12T03:25:27Z",
       "side": 1,
       "message": "Just checking that your name must be spelled entirely in caps? If not, do you mind fixing this?",
+      "range": {
+        "startLine": 15,
+        "startChar": 15,
+        "endLine": 15,
+        "endChar": 29
+      },
+      "revId": "fa6aaacad70e808bf4501075b290292c764047f5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3281fd05_7e653976",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1002771
+      },
+      "writtenOn": "2026-11-17T10:07:32Z",
+      "side": 1,
+      "message": "No, it doesn\u0027t need to be. Fixed in this patch set.",
+      "parentUuid": "02c03754_a2d901af",
       "range": {
         "startLine": 15,
         "startChar": 15,
