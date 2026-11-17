@@ -259,6 +259,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4e9960b3_b593ef2e",
+        "filename": "include/libpldm++/firmware_update.hpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1001712
+      },
+      "writtenOn": "2026-11-17T15:55:37Z",
+      "side": 1,
+      "message": "\u003e Firstly, it was a tentative thought, not a directive, so I hope this doesn\u0027t get too heated\n\nNo worries, i am happy you are taking the time to review these changes 😊.\n\n\u003e  The tentative thought was motivated by my instinct that it probably is for purposes like logging that you\u0027d want to access the information to begin with, in which case it\u0027s a bit ancillary and maybe not necessary to carry the info in the core class.\n\nAnother user code could rely on the timestamp just as much as it relies on the descriptors or on the component info section. It is unclear to me how we would derive this classification into core/extra.\n\nSeparately, introducing another code pattern into the mix would increase the complexity of the whole thing.\n\n\u003e Anyway, given this information is present for all revisions, if we are to carry it in the core class I\u0027d rather we break the ABI again to include it than need the _amend_1 business.\n\nSounds good to me 👍. Aligned the order of struct members with the spec and removed the extra package pin.\n\nThe Package Header Information now gets it\u0027s own struct to cope with future spec evolution and it\u0027s growth is decoupled via `unique_ptr`. I missed this earlier but conceptually it\u0027s it\u0027s own section in Table 3 and Figure 4 of DSP0267 v1.0.0",
+      "parentUuid": "cde200a6_3c5e98bc",
+      "revId": "695f31b17b3bbff85719c1af655b71683be65cf5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "33d18aba_e62230e1",
