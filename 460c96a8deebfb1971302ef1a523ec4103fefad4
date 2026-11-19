@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b3910c6a_c6308140",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 1473,
+      "author": {
+        "id": 1002885
+      },
+      "writtenOn": "2026-11-19T07:11:02Z",
+      "side": 1,
+      "message": "According to DSP0248, Table 5.1, I found only `enabled` for `setStateEffecterEnables`\u0027s `opState`. \nhttps://www.dmtf.org/sites/default/files/standards/documents/DSP0248_1.3.0.pdf\n\nQ: Please explain how are these defined.",
+      "range": {
+        "startLine": 1472,
+        "startChar": 0,
+        "endLine": 1473,
+        "endChar": 74
+      },
+      "revId": "460c96a8deebfb1971302ef1a523ec4103fefad4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5cc0c685_b32ed4b4",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1002885
+      },
+      "writtenOn": "2026-11-19T07:11:02Z",
+      "side": 1,
+      "message": "If seems like you are folding the error of invalid ID with the other error, which the responder couldn\u0027t tell the differences.\n\nFor example, the responder for `setStateEffecterEnables` should return completion code of `PLDM_BASE_CODES` defined in DSP0240, table 5, and `INVALID_EFFECTER_ID\u003d0x80` for the case of invalid ID.",
+      "range": {
+        "startLine": 179,
+        "startChar": 1,
+        "endLine": 184,
+        "endChar": 2
+      },
+      "revId": "460c96a8deebfb1971302ef1a523ec4103fefad4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "08b4e7f9_3c8c6315",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 1002885
+      },
+      "writtenOn": "2026-11-19T07:11:02Z",
+      "side": 1,
+      "message": "This as well.",
+      "range": {
+        "startLine": 191,
+        "startChar": 2,
+        "endLine": 192,
+        "endChar": 72
+      },
+      "revId": "460c96a8deebfb1971302ef1a523ec4103fefad4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
