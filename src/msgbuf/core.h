@@ -167,8 +167,8 @@ LIBPLDM_CC_ALWAYS_INLINE
 LIBPLDM_CC_WARN_UNUSED_RESULT
 int
 // NOLINTNEXTLINE(bugprone-reserved-identifier,cert-dcl37-c,cert-dcl51-cpp)
-pldm_msgbuf_rw_init_errno(struct pldm_msgbuf_rw *ctx, size_t minsize,
-			  void *buf, size_t len)
+pldm_msgbuf_rw_init_errno(struct pldm_msgbuf_rw *ctx, size_t minsize, void *buf,
+			  size_t len)
 {
 	int rc = pldm__msgbuf_init_errno(&ctx->remaining, minsize, buf, len);
 
