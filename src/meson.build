@@ -1,4 +1,10 @@
-libpldm_sources = files('bcd.c', 'control.c', 'edac.c', 'responder.c', 'utils.c')
+libpldm_sources = files(
+    'bcd.c',
+    'control.c',
+    'edac.c',
+    'responder.c',
+    'utils.c',
+)
 
 subdir('dsp')
 

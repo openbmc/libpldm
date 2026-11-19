@@ -40,6 +40,14 @@ Change categories:
 
 ### Fixed
 
+- msgbuf: Avoid pointer-to-pointer aliasing in `pldm__msgbuf_init_errno()`
+
+  Refactored the inline function implementation to avoid casting pointer
+  addresses to incompatible types. The cursor parameter is now initialized
+  to NULL before validation, then conditionally set to the buffer address
+  if validation succeeds. This eliminates the aliasing concern while
+  maintaining the same behavior and performance characteristics.
+
 - firmware-update: Reject component images overlapping the package header in the
   C decoder, also covering the C++ bindings
 

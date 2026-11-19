@@ -82,6 +82,16 @@ TEST(DecodeOemMetaFileIoWriteReq, testInvalidDataRequest)
     EXPECT_EQ(rc, -EOVERFLOW);
 }
 
+TEST(DecodeOemMetaFileIoWriteReq, testMsgbufInitFailure)
+{
+    PLDM_MSGBUF_RW_DEFINE_P(ctx);
+    uint8_t buf[1] = {};
+
+    auto rc = pldm_msgbuf_init_errno(ctx, 2, buf, sizeof(buf));
+    EXPECT_EQ(rc, -EOVERFLOW);
+    EXPECT_EQ(ctx->cursor, nullptr);
+}
+
 TEST(DecodeOemMetaFileIoReadReq, testGoodDecodeRequest)
 {
     PLDM_MSGBUF_RW_DEFINE_P(ctx);
