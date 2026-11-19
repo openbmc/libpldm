@@ -35,15 +35,15 @@
 #define PLDM_MSGBUF_RW_DEFINE_P(name) PLDM__MSGBUF_DEFINE_P(name, rw)
 
 LIBPLDM_CC_ALWAYS_INLINE int pldm_msgbuf_init_errno(struct pldm_msgbuf_ro* ctx,
-                                                    size_t minsize,
-                                                    const void* buf, size_t len)
+                                                    size_t minsize, const void* buf,
+                                                    size_t len)
 {
     return pldm_msgbuf_ro_init_errno(ctx, minsize, buf, len);
 }
 
 LIBPLDM_CC_ALWAYS_INLINE int pldm_msgbuf_init_errno(struct pldm_msgbuf_rw* ctx,
-                                                    size_t minsize,
-                                                    void* buf, size_t len)
+                                                    size_t minsize, void* buf,
+                                                    size_t len)
 {
     return pldm_msgbuf_rw_init_errno(ctx, minsize, buf, len);
 }
