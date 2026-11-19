@@ -129,11 +129,9 @@ LIBPLDM_CC_ALWAYS_INLINE
 LIBPLDM_CC_WARN_UNUSED_RESULT
 int
 // NOLINTNEXTLINE(bugprone-reserved-identifier,cert-dcl37-c,cert-dcl51-cpp)
-pldm__msgbuf_init_errno(const uint8_t **cursor, intmax_t *remaining,
-			size_t minsize, const void *buf, size_t len)
+pldm__msgbuf_init_errno(intmax_t *remaining, size_t minsize, const void *buf,
+			size_t len)
 {
-	*cursor = NULL;
-
 	if ((minsize > len)) {
 		return pldm__msgbuf_set_invalid(remaining);
 	}
@@ -148,18 +146,29 @@ pldm__msgbuf_init_errno(const uint8_t **cursor, intmax_t *remaining,
 		return pldm__msgbuf_set_invalid(remaining);
 	}
 
-	*cursor = (const uint8_t *)buf;
 	*remaining = (intmax_t)len;
 
 	return 0;
 }
 
+/* Backward compatibility wrapper for old function signature */
+// NOLINTNEXTLINE(bugprone-reserved-identifier,cert-dcl37-c,cert-dcl51-cpp)
+static inline int pldm__msgbuf_init_errno_compat(const uint8_t **cursor,
+						 intmax_t *remaining,
+						 size_t minsize,
+						 const void *buf, size_t len)
+{
+	int rc = pldm__msgbuf_init_errno(remaining, minsize, buf, len);
+	*cursor = rc == 0 ? (const uint8_t *)buf : NULL;
+	return rc;
+}
+
 /**
- * @brief Initialize pldm buf struct for buf extractor
+ * @brief Initialize pldm buffer context for writable access
  *
- * @param[out] ctx - pldm_msgbuf_rw context for extractor
+ * @param[out] ctx - pldm_msgbuf_rw context for writable access
  * @param[in] minsize - The minimum required length of buffer `buf`
- * @param[in] buf - buffer to be extracted
+ * @param[in] buf - writable buffer to be extracted
  * @param[in] len - size of buffer
  *
  * @return 0 on success, otherwise an error code appropriate for the current
@@ -170,11 +179,14 @@ LIBPLDM_CC_ALWAYS_INLINE
 LIBPLDM_CC_WARN_UNUSED_RESULT
 int
 // NOLINTNEXTLINE(bugprone-reserved-identifier,cert-dcl37-c,cert-dcl51-cpp)
-pldm_msgbuf_rw_init_errno(struct pldm_msgbuf_rw *ctx, size_t minsize,
-			  const void *buf, size_t len)
+pldm_msgbuf_rw_init_errno(struct pldm_msgbuf_rw *ctx, size_t minsize, void *buf,
+			  size_t len)
 {
-	return pldm__msgbuf_init_errno((const uint8_t **)&ctx->cursor,
-				       &ctx->remaining, minsize, buf, len);
+	int rc = pldm__msgbuf_init_errno(&ctx->remaining, minsize, buf, len);
+
+	ctx->cursor = rc == 0 ? (uint8_t *)buf : NULL;
+
+	return rc;
 }
 
 /**
@@ -196,8 +208,11 @@ int
 pldm_msgbuf_ro_init_errno(struct pldm_msgbuf_ro *ctx, size_t minsize,
 			  const void *buf, size_t len)
 {
-	return pldm__msgbuf_init_errno(&ctx->cursor, &ctx->remaining, minsize,
-				       buf, len);
+	int rc = pldm__msgbuf_init_errno(&ctx->remaining, minsize, buf, len);
+
+	ctx->cursor = rc == 0 ? (const uint8_t *)buf : NULL;
+
+	return rc;
 }
 
 /**

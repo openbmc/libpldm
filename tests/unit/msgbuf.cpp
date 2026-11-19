@@ -1400,17 +1400,26 @@ TEST(msgbuf, pldm_msgbuf_copy_bad)
     struct pldm_msgbuf_ro* src = &_src;
     struct pldm_msgbuf_rw _dst;
     struct pldm_msgbuf_rw* dst = &_dst;
-    uint8_t buf[1] = {sizeof(uint8_t)};
-    uint8_t buf1[1] = {sizeof(uint16_t)};
     uint16_t value = 8;
+    uint8_t buf[sizeof(value)] = {1, 0xa5};
+    uint8_t buf1[sizeof(value)] = {2, 0x5a};
+    const size_t len = sizeof(uint8_t);
 
-    ASSERT_EQ(pldm_msgbuf_init_errno(src, 0, buf, sizeof(buf)), 0);
-    ASSERT_EQ(pldm_msgbuf_init_errno(dst, 0, buf1, sizeof(buf1)), 0);
+    ASSERT_EQ(pldm_msgbuf_init_errno(src, 0, buf, len), 0);
+    ASSERT_EQ(pldm_msgbuf_init_errno(dst, 0, buf1, len), 0);
     EXPECT_EQ(pldm_msgbuf_copy(dst, src, value, name), -EOVERFLOW);
+    EXPECT_EQ(dst->cursor, buf1);
+    EXPECT_EQ(src->cursor, buf);
+    EXPECT_EQ(buf1[0], 2);
+    EXPECT_EQ(buf1[1], 0x5a);
 
-    ASSERT_EQ(pldm_msgbuf_init_errno(src, 0, buf1, sizeof(buf1)), 0);
-    ASSERT_EQ(pldm_msgbuf_init_errno(dst, 0, buf, sizeof(buf)), 0);
+    ASSERT_EQ(pldm_msgbuf_init_errno(src, 0, buf1, len), 0);
+    ASSERT_EQ(pldm_msgbuf_init_errno(dst, 0, buf, len), 0);
     EXPECT_EQ(pldm_msgbuf_copy(dst, src, value, name), -EOVERFLOW);
+    EXPECT_EQ(dst->cursor, buf);
+    EXPECT_EQ(src->cursor, buf1);
+    EXPECT_EQ(buf[0], 1);
+    EXPECT_EQ(buf[1], 0xa5);
 }
 
 TEST(msgbuf, pldm_msgbuf_copy_string_ascii_exact)
