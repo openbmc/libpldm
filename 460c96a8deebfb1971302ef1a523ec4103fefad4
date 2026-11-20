@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "764c049b_a5e42149",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 1473,
+      "author": {
+        "id": 1003057
+      },
+      "writtenOn": "2026-11-20T05:33:06Z",
+      "side": 1,
+      "message": "Thanks for catching this. Table 51 defines the effecterOperationalState values as { enabled, disabled\u003d2, unavailable }, a subset of the GetStateEffecterStates values, so 1 (enabled-noUpdatePending) is not valid for this command. I had reused the GetStateEffecterStates enumeration. In the latest patch set I replaced the two enabled macros with a single PLDM_PLATFORM_SET_STATE_EFFECTER_ENABLES_ENABLED (0), and only 0, 2 and 3 are accepted now.",
+      "parentUuid": "b3910c6a_c6308140",
+      "range": {
+        "startLine": 1472,
+        "startChar": 0,
+        "endLine": 1473,
+        "endChar": 74
+      },
+      "revId": "460c96a8deebfb1971302ef1a523ec4103fefad4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5cc0c685_b32ed4b4",
         "filename": "src/dsp/platform.c",
         "patchSetId": 10
@@ -49,6 +73,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "867f64d6_90063f97",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1003057
+      },
+      "writtenOn": "2026-11-20T05:33:06Z",
+      "side": 1,
+      "message": "Agreed. The decoder no longer validates the effecter ID (similar to decode_set_state_sensor_enables_req()), so the responder can return INVALID_EFFECTER_ID (0x80) for an invalid ID and ERROR_INVALID_DATA for the other invalid fields (-EPROTO). The encoder still rejects the reserved IDs 0 and 0xFFFF. This is documented in the header. Let me know if you would prefer the decoder to report an invalid ID with a distinct error code instead.",
+      "parentUuid": "5cc0c685_b32ed4b4",
+      "range": {
+        "startLine": 179,
+        "startChar": 1,
+        "endLine": 184,
+        "endChar": 2
+      },
+      "revId": "460c96a8deebfb1971302ef1a523ec4103fefad4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "08b4e7f9_3c8c6315",
         "filename": "src/dsp/platform.c",
         "patchSetId": 10
@@ -60,6 +108,30 @@
       "writtenOn": "2026-11-19T07:11:02Z",
       "side": 1,
       "message": "This as well.",
+      "range": {
+        "startLine": 191,
+        "startChar": 2,
+        "endLine": 192,
+        "endChar": 72
+      },
+      "revId": "460c96a8deebfb1971302ef1a523ec4103fefad4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c1caa679_3999b99e",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 1003057
+      },
+      "writtenOn": "2026-11-20T05:33:06Z",
+      "side": 1,
+      "message": "Same as the previous comment on the operational state: only enabled (0), disabled (2) and unavailable (3) are accepted now.",
+      "parentUuid": "08b4e7f9_3c8c6315",
       "range": {
         "startLine": 191,
         "startChar": 2,
