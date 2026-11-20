@@ -48,6 +48,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "02f120ef_9a414f0b",
+        "filename": "include/libpldm/platform.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 1473,
+      "author": {
+        "id": 1002885
+      },
+      "writtenOn": "2026-11-20T06:28:43Z",
+      "side": 1,
+      "message": "Thanks, matched Table 51 now.",
+      "parentUuid": "764c049b_a5e42149",
+      "range": {
+        "startLine": 1472,
+        "startChar": 0,
+        "endLine": 1473,
+        "endChar": 74
+      },
+      "revId": "460c96a8deebfb1971302ef1a523ec4103fefad4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5cc0c685_b32ed4b4",
@@ -95,6 +119,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "55a376cb_174164b7",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1002885
+      },
+      "writtenOn": "2026-11-20T06:28:43Z",
+      "side": 1,
+      "message": "Looks good.",
+      "parentUuid": "867f64d6_90063f97",
+      "range": {
+        "startLine": 179,
+        "startChar": 1,
+        "endLine": 184,
+        "endChar": 2
+      },
+      "revId": "460c96a8deebfb1971302ef1a523ec4103fefad4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "08b4e7f9_3c8c6315",
@@ -132,6 +180,30 @@
       "side": 1,
       "message": "Same as the previous comment on the operational state: only enabled (0), disabled (2) and unavailable (3) are accepted now.",
       "parentUuid": "08b4e7f9_3c8c6315",
+      "range": {
+        "startLine": 191,
+        "startChar": 2,
+        "endLine": 192,
+        "endChar": 72
+      },
+      "revId": "460c96a8deebfb1971302ef1a523ec4103fefad4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4fa06d95_c6a48358",
+        "filename": "src/dsp/platform.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 1002885
+      },
+      "writtenOn": "2026-11-20T06:28:43Z",
+      "side": 1,
+      "message": "Thanks.",
+      "parentUuid": "c1caa679_3999b99e",
       "range": {
         "startLine": 191,
         "startChar": 2,
